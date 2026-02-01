@@ -1,0 +1,530 @@
+// =========================================================
+// FORELIMB DATA MODULE
+// Contains: Osteology, Myology, Arthrology, Neurology, Angiology
+// Status: Osteology [Complete], Neurology [Complete], Others [Pending]
+// =========================================================
+
+if (typeof atlasData === 'undefined') {
+    var atlasData = {};
+}
+
+atlasData["Forelimb"] = {
+    "Osteology": [
+        {
+            title: "Scapula",
+            desc: "Triangular flat bone (os planum). <br><br><b>Ox Standard:</b><br>- Spine is sinuous and divides lateral surface into 1:3 ratio (Supra:Infra).<br>- Acromion process is pointed and distinct.<br>- Subscapular fossa is shallow.<br>- Glenoid cavity is circular without a notch.",
+            eliteDesc: "",
+            comparative: [
+                { species: "Horse", note: "Acromion ABSENT. Spine fades distally. Prominent 'Tuber Spinae' present. Glenoid notch present." },
+                { species: "Dog", note: "Acromion prominent with 'Hamate Process'. Spine high, 1:1 fossa ratio." },
+                { species: "Pig", note: "Tuber spinae is very prominent and recurved caudally." },
+                { species: "Fowl", note: "Saber-like blade. No spine/fossae. Parallel to vertebrae." }
+            ],
+            clinical: "<b>Sweeney Shoulder (Horse):</b> Atrophy of supra/infraspinatus muscles due to suprascapular nerve damage as it crosses the neck of the scapula.",
+            imgCode: "scapula"
+        },
+        {
+            title: "Humerus",
+            desc: "Robust, short, twisted long bone.<br><br><b>Ox Standard:</b><br>- Massive Greater Tubercle (overhangs groove).<br>- Intertubercular (Bicipital) Groove is undivided.<br>- Musculospiral groove is distinct.<br>- NO Supratrochlear foramen.",
+            eliteDesc: "",
+            comparative: [
+                { species: "Horse", note: "Intermediate Tubercle present (divides bicipital groove). Greater Tubercle forms 'Point of Shoulder'." },
+                { species: "Dog", note: "Supratrochlear Foramen present (hole between condyles). Greater tubercle is lower than head." },
+                { species: "Pig", note: "Greater tubercle almost closes the groove into a foramen." },
+                { species: "Fowl", note: "Pneumatic bone (air-filled). Pectoral crest replaces deltoid tuberosity." }
+            ],
+            clinical: "<b>Radial Nerve Paralysis:</b> Vulnerable in the musculospiral groove. Causes dropped elbow and inability to extend the carpus.",
+            imgCode: "humerus"
+        },
+        {
+            title: "Radius & Ulna",
+            desc: "Weight-bearing column.<br><br><b>Ox Standard:</b><br>- Fused bones (No pronation/supination).<br>- Ulna is complete (reaches carpus).<br>- 2 Interosseous spaces (Proximal & Distal).<br>- Lateral Styloid process belongs to ULNA.",
+            eliteDesc: "",
+            comparative: [
+                { species: "Horse", note: "Ulna fuses mid-shaft (Distal half is vestigial). Lateral Styloid belongs to RADIUS. Only 1 proximal space." },
+                { species: "Dog", note: "Separate bones. Mobile (allows pronation). Ulna has trochlear notch." },
+                { species: "Fowl", note: "Ulna is larger than Radius. 'Quill Knobs' present on Ulna for feather attachment." }
+            ],
+            clinical: "<b>Fractures:</b> In horses, ulnar fractures usually involve the olecranon (dropped elbow) as the distal ulna is fused.",
+            imgCode: "radius_ulna"
+        },
+        {
+            title: "Carpus (Knee)",
+            desc: "Complex hinge joint.<br><br><b>Ox Standard (6 Bones):</b><br>- Proximal: Radial, Intermediate, Ulnar, Accessory.<br>- Distal: C1 Absent, C2+C3 Fused, C4 present.",
+            eliteDesc: "",
+            comparative: [
+                { species: "Horse", note: "7-8 Bones. C3 is massive (load bearing). C1 vestigial/variable." },
+                { species: "Dog", note: "7 Bones. Radial + Intermediate fused into 'Intermedioradial' bone." },
+                { species: "Pig", note: "8 Bones (Primitive pattern retained)." }
+            ],
+            clinical: "<b>Slab Fractures (Horse):</b> Common in C3 due to race fatigue.",
+            imgCode: "carpus"
+        },
+        {
+            title: "Metacarpus (Cannon)",
+            desc: "<b>Ox Standard:</b><br>- Fused Mc III & IV (Cannon Bone).<br>- Dorsal longitudinal groove.<br>- Two distal trochleae for digits.<br>- Mc V is a vestigial lateral 'button'.",
+            eliteDesc: "",
+            comparative: [
+                { species: "Horse", note: "Mc III is the Cannon. Mc II & IV are 'Splint Bones' (vestigial, non-weight bearing)." },
+                { species: "Dog", note: "5 Separate Metacarpals. Mc I is dewclaw." },
+                { species: "Fowl", note: "Carpometacarpus (Fused carpus + metacarpus)." }
+            ],
+            clinical: "<b>Splints (Horse):</b> Inflammation of the interosseous ligament between Cannon and Splint bones.",
+            imgCode: "metacarpus"
+        },
+        {
+            title: "Digits",
+            desc: "<b>Ox Standard (Artiodactyl):</b><br>- 2 Functional Digits (III & IV).<br>- 2 Accessory Digits (Dewclaws).<br>- P3 is Cloven (coffin bone).<br>- 2 Proximal Sesamoids per digit (4 total).",
+            eliteDesc: "",
+            comparative: [
+                { species: "Horse", note: "1 Functional Digit (III). P3 is Coffin Bone with Retrossal processes. Navicular bone present." },
+                { species: "Dog", note: "Digits II-V functional. P3 is Ungual Crest (Claw)." },
+                { species: "Pig", note: "4 Digits. III & IV main, II & V also functional on soft ground." }
+            ],
+            clinical: "<b>Laminitis:</b> Separation of P3 from hoof wall. In cattle, mostly 'Coriosis' or sole ulcers."
+        }
+    ],
+    
+    "Myology": [
+    // ==================== EXTRINSIC SUPERFICIAL LAYER ====================
+    {
+        title: "Trapezius Muscle",
+        desc: "<b>Type:</b> Extrinsic, Superficial Layer<br><br><b>Origin:</b> Nuchal ligament (C2-Thoracic inlet) [Cervical part]; Supraspinous ligament (T2-T10/12) [Thoracic part]<br><br><b>Insertion:</b> Scapular spine (cervical part along dorsal length; thoracic part on dorsal third)<br><br><b>Function:</b> Elevates shoulder; cervical part protracts (draws craniodorsally), thoracic part retracts (draws caudodorsally).",
+        eliteDesc: "<b>SUPERFICIAL SHOULDER SUSPENSION SYSTEM</b><br><br>The trapezius is a broad triangular sheet classified as the primary extrinsic elevator and abductor of the scapula. Unlike equines where the separation is more distinct, the bovine trapezius is divided into two parts by a tendinous aponeurosis.<br><br><b>FIBER ARCHITECTURE:</b><br>• <b>Pars Cervicalis (Cranial):</b> Originates from the funicular nuchal ligament extending from the axis (C2) to the thoracic inlet. Fibers run caudoventrally.<br>• <b>Pars Thoracica (Caudal):</b> Originates from the supraspinous ligament of thoracic vertebrae (T2 to T10 or T12). Fibers run cranioventrally.<br>• Both parts converge on the scapular spine, creating a force-coupling mechanism for multidirectional control.<br><br><b>BIOMECHANICAL DYNAMICS:</b><br>When acting unilaterally in the non-weight-bearing limb, the cervical component draws the scapula craniodorsally (protraction), assisting the forward swing phase. The thoracic component draws the scapula caudodorsally (retraction). When acting bilaterally, they fix the scapula against the trunk, providing stability during weight bearing and shock absorption.<br><br><b>NEURAL SUPPLY:</b> Dorsal branch of the Accessory nerve (Cranial Nerve XI). Damage leads to shoulder drooping and atrophy, though true clinical 'Sweeny' typically involves the suprascapular nerve.",
+        comparative: [
+            { species: "Horse", note: "Separation between cervical and thoracic parts is much more distinct; cervical part originates from C2-C7." },
+            { species: "Dog", note: "Divided into cervical, thoracic, and lumbar parts; more extensive origin." }
+        ],
+        clinical: "<b>Accessory Nerve Injury:</b> Damage in the cervical region leads to shoulder atrophy and depression, though less common than suprascapular neuropathy for instability.",
+        imgCode: "trapezius"
+    },
+    {
+        title: "Omotransversarius",
+        desc: "<b>Type:</b> Extrinsic, Superficial Layer<br><br><b>Origin:</b> Transverse processes (wings) of Atlas (C1) and Axis (C2)<br><br><b>Insertion:</b> Distal end of scapular spine and acromion process<br><br><b>Function:</b> Advances limb (protraction); unilateral contraction flexes neck laterally; bilateral contraction extends head/neck.",
+        eliteDesc: "<b>THE CRANIAL DRAW BRIDGE</b><br><br>The omotransversarius is a strap-like muscle representing a critical distinction in bovine anatomy: it is a <b>separate muscle from the brachiocephalicus</b>, unlike the horse where it is fused with the cleidocephalicus component.<br><br><b>TOPOGRAPHIC COURSE:</b> Extends obliquely from the cranial cervical vertebrae to the shoulder, passing over the cranial border of the scapula deep to the trapezius. It forms a functional unit connecting the head/neck directly to the limb.<br><br><b>FUNCTIONAL SYNTHESIS:</b> When the limb is fixed (stance phase), contraction pulls the neck toward the limb; when the limb is free (swing phase), it draws the limb cranially. This reciprocity is essential for coordinating head position with limb advancement during grazing locomotion.<br><br><b>SURGICAL LANDMARK:</b> The muscle serves as a critical landmark for the <b>superficial cervical lymph nodes (prescapular lymph nodes)</b>, located deep to this muscle and cranial to the supraspinatus. Essential landmark for palpation/biopsy in cattle suspected of lymphosarcoma or tuberculosis.",
+        comparative: [
+            { species: "Horse", note: "Fused with cleidocephalicus (forming cleidocephalicus obliquus); not separate." },
+            { species: "Dog", note: "Similar to ox as a distinct muscle; larger relative to body size." }
+        ],
+        clinical: "<b>Prescapular Lymph Node Access:</b> Surgical approach for lymph node biopsy requires knowledge of omotransversarius position to avoid hemorrhage.",
+        imgCode: "omotransversarius"
+    },
+    {
+        title: "Brachiocephalicus",
+        desc: "<b>Type:</b> Extrinsic, Superficial Layer<br><br><b>Origin:</b> Mastoid process of temporal bone [Cleidocephalicus pars mastoidea]; Nuchal crest/ ligament [Cleidocephalicus pars occipitalis]<br><br><b>Insertion:</b> Deltoid tuberosity and crest of humerus<br><br><b>Function:</b> Principal protractor of the limb; flexes neck laterally (unilateral) or extends head/neck (bilateral).",
+        eliteDesc: "<b>THE PRIMARY PROTRACTOR</b><br><br>This compound muscle forms the dorsal border of the jugular groove and represents the principal engine for limb advancement (protraction). It is divided by a <b>vestigial clavicular intersection</b> (remnant of reduced clavicle) into two distinct parts.<br><br><b>ANATOMICAL SUBDIVISIONS:</b><br>• <b>Cleidocephalicus:</b> Proximal segment attaching head to limb, further divided into:<br>  - <b>Pars Mastoidea:</b> Attaches to mastoid process of temporal bone—powerful neck flexor<br>  - <b>Pars Occipitalis:</b> Attaches to nuchal crest and ligament—head extensor<br>• <b>Cleidobrachialis:</b> Distal segment from clavicular intersection to deltoid tuberosity and humeral crest—direct limb puller<br><br><b>CLAVICULAR VESTIGE:</b> The subdivision represents the vestigial clavicle (intersection), reminding us that cattle have no bony girdle attachment—this muscle IS the strut replacing the clavicle found in primates.<br><br><b>FUNCTIONAL MECHANICS:</b> Most powerful protractor of the free limb. Its line of pull from the head/neck to the humerus allows the animal to swing the heavy limb forward using trunk momentum rather than intrinsic shoulder power alone.",
+        comparative: [
+            { species: "Horse", note: "Divides into cleidocephalicus and cleidobrachialis; omotransversarius is fused to it." },
+            { species: "Human", note: "Evolutionary equivalent to sternocleidomastoid and deltoid connections." }
+        ],
+        clinical: "<b>Jugular Vein Landmark:</b> Forms dorsal border of jugular groove—critical for venipuncture landmarks.",
+        imgCode: "brachiocephalicus"
+    },
+    
+    // ==================== EXTRINSIC DEEP LAYER ====================
+    {
+        title: "Rhomboideus",
+        desc: "<b>Type:</b> Extrinsic, Deep Layer<br><br><b>Origin:</b> Funicular nuchal ligament [Cervicis]; Spinous processes T2-T7 [Thoracis]<br><br><b>Insertion:</b> Medial surface of dorsal scapular cartilage<br><br><b>Function:</b> Elevates scapula and draws it medially toward trunk; stabilizes dorsal apex during stance phase.",
+        eliteDesc: "<b>THE SCAPULAR ANCHOR</b><br><br>Lying deep to the trapezius, the rhomboideus provides the medial stabilizing force for the scapular girdle, anchoring the dorsal border to the axial skeleton.<br><br><b>SUBDIVISIONS:</b><br>• <b>Rhomboideus Cervicis:</b> Arises from the funicular nuchal ligament (larmier)<br>• <b>Rhomboideus Thoracis:</b> Arises from spinous processes of cranial thoracic vertebrae (T2-T7)<br>• <b>Rhomboideus Capitis:</b> <b>ABSENT or vestigial in ox</b> (critical distinction from carnivores where it reaches the occiput)<br><br><b>INSERTION SPECIFICS:</b> Muscle inserts on the medial surface of the dorsal scapular cartilage (cartilago scapulae), amplifying the surface area for thoracic attachment and shock dissipation.<br><br><b>BIOMECHANICAL ROLE:</b> Presses the cartilage against the trunk, preventing lateral deviation of the scapula during the stance phase. This medial pull is vital for maintaining the rigid column needed for weight support, counteracting the lateral abduction forces generated during weight bearing.",
+        comparative: [
+            { species: "Dog", note: "Possesses prominent rhomboideus capitis attaching to occiput; absent in ox." },
+            { species: "Horse", note: "Similar division but attaches more extensively to cervical vertebrae." }
+        ],
+        clinical: "<b>Atrophy Indicators:</b> Wasting creates instability at the shoulder dorsal angle, contributing to lateral 'popping' in conjunction with sweeney.",
+        imgCode: "rhomboideus"
+    },
+    {
+        title: "Serratus Ventralis",
+        desc: "<b>Type:</b> Extrinsic, Deep Layer (Synsarcosis Core)<br><br><b>Origin:</b> Transverse processes of last 4-5 cervical vertebrae [Cervicis]; Lateral surfaces of ribs 1-9 [Thoracis]<br><br><b>Insertion:</b> Facies serrata on proximal medial surface of scapula<br><br><b>Function:</b> Suspends trunk between forelimbs (primary shock absorber); elevates thorax during inspiration.",
+        eliteDesc: "<b>THE SUSPENSORY SLING</b><br><br>The most critical muscle of the synsarcosis, forming a muscular 'sling' or 'hammock' that suspends the entire thorax between the two forelimbs. Bears approximately 55-60% of body weight during static posture.<br><br><b>ARCHITECTURAL DIVISION:</b><br>• <b>Serratus Ventralis Cervicis:</b>Originates from transverse processes of last 4-5 cervical vertebrae (C3-C7 equivalent)<br>• <b>Serratus Ventralis Thoracis:</b> Originates from lateral surfaces of first 8-9 ribs with prominent muscular interdigitations with the external oblique muscle (interdigitating digitations visible on thoracic wall)<br><br><b>INSERTION MECHANICS:</b> Both parts converge on the facies serrata—a distinct roughened area on the proximal medial scapular surface. This broad insertion distributes weight evenly across the scapula.<br><br><b>ELASTIC HAMMOCK FUNCTION:</b> Acts as the primary shock absorber during locomotion. During weight bearing, it stretches elastically, damping concussive forces. Unilateral contraction shifts weight to the opposite limb (compensatory weight shifting during lameness); bilateral contraction assists in elevating the thorax during deep inspiration.<br><br><b>NEURAL INNERVATION:</b> Cervical part by ventral branches of cervical spinal nerves; Thoracic part by Long Thoracic nerve.<br><br><b>PATHOPHYSIOLOGY:</b> Serratus ventralis atrophy (neurogenic from long thoracic nerve damage) results in 'sagging' of the trunk between the scapulae and inability to support weight effectively—clinically devastating.",
+        comparative: [
+            { species: "Horse", note: "Similar architecture but less dominant digitations with external oblique." },
+            { species: "Dog", note: "Less robust; supports less body weight percentage due to quadrupedal weight distribution." }
+        ],
+        clinical: "<b>Sweeney vs. Serratus Paralysis:</b> Unlike suprascapular nerve injury (Sweeney), long thoracic nerve damage causes trunk sagging between scapulae—key differential. <b>Avulsion Injury:</b> Forceful upward pulling on limb can avulse origin from ribs, causing fatal thoracic collapse.",
+        imgCode: "serratus_ventralis"
+    },
+    {
+        title: "Latissimus Dorsi",
+        desc: "<b>Type:</b> Extrinsic, Deep Layer<br><br><b>Origin:</b> Thoracolumbar fascia, spinous processes of lumbar/caudal thoracic vertebrae, last few ribs<br><br><b>Insertion:</b> Teres major tuberosity on medial humerus (common tendon with teres major)<br><br><b>Function:</b> Primary retractor of free limb; power stroke of propulsion (draws trunk forward when limb fixed); antagonist to brachiocephalicus.",
+        eliteDesc: "<b>THE POWER STROKE ENGINE</b><br><br>A broad, triangular sheet covering the dorsal trunk, representing the primary caudal pulling force (retractor) of the forelimb and the essential 'power stroke' muscle for propulsion.<br><br><b>ORIGIN COMPLEX:</b> Extensive origin from thoracolumbar fascia (lumbodorsal fascia), spinous processes of lumbar vertebrae and caudal thoracic vertebrae, plus the last 2-3 ribs. This wide origin allows it to harness power from the entire caudal trunk.<br><br><b>TENDON INSERTION:</b> Inserts via a strong tendon common with the teres major on the teres major tuberosity (medial aspect of humeral shaft). This shared insertion creates a powerful adductor/retractor complex.<br><br><b>FUNCTIONAL biomechanics:</b> When the limb is not bearing weight, it pulls the humerus (and thus the limb) caudally (retraction). When the limb is fixed during the stance phase, it draws the trunk forward over the planted limb—this is the fundamental propulsive mechanism for forward movement. It is the direct antagonist to the brachiocephalicus.<br><br><b>CARDINAL IMPORTANCE:</b> Without this muscle, the animal cannot generate forward momentum from the forelimb, though it can still bear weight.",
+        comparative: [
+            { species: "Horse", note: "Similar origin and insertion; equally crucial for propulsion." },
+            { species: "Dog", note: "Insertion varies slightly; less dominant due to weight distribution differences." }
+        ],
+        clinical: "<b>Thoracodorsal Nerve Injury:</b> Results in inability to pull trunk forward effectively, causing a shortened stride and trunk 'lurching' on affected side during motion.",
+        imgCode: "latissimus_dorsi"
+    },
+    {
+        title: "Pectoral Muscles",
+        desc: "<b>Type:</b> Extrinsic, Deep Layer<br><br><b>Subtypes:</b> Descending (manubrium), Transverse (sternal), Deep/Ascending (sternum/xiphoid)<br><br><b>Insertion:</b> Greater/lesser tubercles of humerus; deltoid crest<br><br><b>Function:</b> Adduct limb; prevent abduction during weight bearing; assist in advancing trunk (deep part) or limb (superficial).",
+        eliteDesc: "<b>THE BRISKET STABILIZERS</b><br><br>The pectoral complex anchors the limb to the sternum, preventing limb abduction (splaying) during weight bearing and assisting in propulsion.<br><br><b>SUPERFICIAL PECTORAL (PECTORALIS SUPERFICIALIS):</b><br>• <b>Descending Part:</b> Originates from manubrium of sternum; inserts on humeral crest<br>• <b>Transverse Part:</b> Originates from ventral sternum (sternebrae 1-6); inserts on deltoid fascia<br>• <b>Function:</b> Adduct the limb and assist in protraction<br><br><b>DEEP PECTORAL (PECTORALIS PROFUNDUS/ASCENDENS):</b><br>• <b>Origin:</b> Ventral surface of sternum, xiphoid cartilage, abdominal fascia—extensive caudal origin<br>• <b>Insertion:</b> Lesser and greater tubercles of humerus plus medial tubercle via aponeurosis<br>• <b>Function:</b> Strong retractor of the non-weight-bearing limb; when limb is fixed, advances the trunk (propulsion)<br><br><b>ANTI-ABDUCTION CRITICAL FUNCTION:</b> Prevents the limb from abducting (moving laterally away from body) during the stance phase. In a heavy bovine, failure via deep pectoral tear results in 'splayed' leg appearance.<br><br><b>SUBCLAVIUS:</b> In ox, this is a reduced narrow band from first costal cartilage blending into brachiocephalicus; unlike the robust equine version, it is vestigial and considered functionally part of the deep pectoral complex.",
+        comparative: [
+            { species: "Horse", note: "Deep pectoral (ascending) is massive; subclavius is distinct and robust." },
+            { species: "Dog", note: "Deep pectoral has distinct abdominal attachment; accessory head common." }
+        ],
+        clinical: "<b>Deep Pectoral Tear:</b> Rare but causes limb abduction inability, 'sprawling' gait. <b>Mastitis Extension:</b> Infections can track along pectoral fascia to forelimb lymphatics.",
+        imgCode: "pectoral_muscles"
+    },
+
+    // ==================== INTRINSIC SCAPULAR (LATERAL) ====================
+    {
+        title: "Supraspinatus",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral<br><br><b>Origin:</b> Supraspinous fossa of scapula<br><br><b>Insertion:</b> Greater and lesser tubercles of humerus (bridges intertubercular groove)<br><br><b>Function:</b> Extends shoulder joint; prevents shoulder flexion/collapse during weight bearing (cranial collateral ligament equivalent).",
+        eliteDesc: "<b>THE ANTI-GRAVITY STABILIZER</b><br><br>Filling the supraspinous fossa, this muscle is the primary extensor of the shoulder and prevents the joint from collapsing into flexion during the weight-bearing phase. It effectively functions as the <b>cranial collateral ligament</b> of the shoulder joint.<br><br><b>TENDON ARCHITECTURE:</b> The tendon divides to attach to both the greater and lesser tubercles, effectively bridging across the intertubercular (bicipital) groove. This creates a tense band preventing flexion collapse.<br><br><b>BIOMECHANICAL IMPERATIVE:</b> During the stance phase, the weight of the cranial trunk creates a flexion moment at the shoulder. The supraspinatus provides the constant tonic contraction (and passive tension in the tendon) to oppose this, locking the shoulder in extension so the limb acts as a rigid column.<br><br><b>NEURAL SUPPLY:</b> Suprascapular nerve (C6-C7).<br><br><b>SWEENEY PATHOLOGY:</b> When the suprascapular nerve is damaged at the scapular neck, this muscle atrophies rapidly (neurogenic atrophy), leading to loss of shoulder extension capability and the characteristic 'shoulder slip' when infraspinatus also fails.",
+        comparative: [
+            { species: "Horse", note: "Similar function; prone to direct trauma during neck of scapula passage." },
+            { species: "Dog", note: "Smaller relative to body size; less critical for weight bearing due to quadrupedal mechanics." }
+        ],
+        clinical: "<b>Sweeny (Suprascapular Paralysis):</b> Atrophy results in prominent scapular spine; loss of shoulder extension stability causes 'dropped' shoulder during weight bearing.",
+        imgCode: "supraspinatus"
+    },
+    {
+        title: "Infraspinatus",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral<br><br><b>Origin:</b> Infraspinous fossa of scapula<br><br><b>Insertion:</b> Lateral aspect of greater tubercle of humerus<br><br><b>Function:</b> Flexes/abducts shoulder; acts as lateral collateral ligament (prevents abduction).",
+        eliteDesc: "<b>THE LATERAL COLLATERAL LIGAMENT</b><br><br>Filling the infraspinous fossa, this muscle provides the lateral stabilization of the shoulder joint, functioning as the <b>lateral collateral ligament</b>.<br><br><b>TENDON PROTECTION:</b> The tendon of insertion passes over the caudal part of the greater tubercle, protected by a synovial bursa (<b>bursa subtendinea m. infraspinati</b>). This bursa prevents friction but is prone to inflammation.<br><br><b>FUNCTIONAL DUALITY:</b> Acts to flex or abduct the shoulder joint (non-weight bearing), but its critical role is preventing abduction (lateral deviation) of the humerus during weight bearing. When the supraspinatus and infraspinatus contract together, they create a force couple compressing the humeral head into the glenoid cavity.<br><br><b>SWEENEY SIGNIFICANCE:</b> In suprascapular nerve injury (Sweeny), atrophy of infraspinatus removes lateral support, causing the shoulder to 'pop' laterally (abduct) when weight is placed on the limb—a pathognomonic sign visible when watching the animal walk toward the examiner.",
+        comparative: [
+            { species: "Horse", note: "Similar position and function; same vulnerability to suprascapular nerve injury." },
+            { species: "Dog", note: "Rotator cuff equivalent; similar vulnerability." }
+        ],
+        clinical: "<b>Infraspinatus Bursitis:</b> Inflammation of the subtendinous bursa causes lameness. <b>Sweeny Diagnosis:</b> Atrophy causes lateral shoulder subluxation ('popping') during weight bearing—pathognomonic for suprascapular nerve injury.",
+        imgCode: "infraspinatus"
+    },
+    {
+        title: "Deltoideus",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral<br><br><b>Parts:</b> Pars Scapularis (scapular spine/infraspinatus fascia) & Pars Acromialis (acromion process)<br><br><b>Insertion:</b> Deltoid tuberosity on lateral humeral shaft<br><br><b>Function:</b> Flexes shoulder joint and abducts arm.",
+        eliteDesc: "<b>THE LATERAL SHOULDER FLEXOR</b><br><br>Located lateral to the shoulder joint, this muscle flexes the shoulder and provides limited abduction.<br><br><b>TWO-PART ORIGIN:</b><br>• <b>Pars Scapularis:</b> Arises from the spine of the scapula and the aponeurosis covering the infraspinatus<br>• <b>Pars Acromialis:</b> Arises from the distinct acromion process of the scapula (which is prominent in ox unlike horse)<br><br><b>DELTOID TUBEROSITY:</b> Inserts on this distinct lateral humeral prominences—key landmark for surgical approaches and palpation.<br><br><b>FUNCTIONAL ROLE:</b> Acts during the swing phase to flex the shoulder (advance the limb) and provides minor abduction. Not primarily a weight-bearing stabilizer but assists in positioning the limb for landing.",
+        comparative: [
+            { species: "Horse", note: "Horse lacks distinct acromion; deltoid arises from clavicular intersection and scapular spine only." },
+            { species: "Dog", note: "Has additional spinal and acromial heads." }
+        ],
+        clinical: "<b>Cleobrachialis Association:</b> Often works in conjunction with distal brachiocephalicus; both insert near deltoid tuberosity.",
+        imgCode: "deltoideus"
+    },
+    {
+        title: "Teres Minor",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral<br><br><b>Origin:</b> Distal third of caudal border of scapula<br><br><b>Insertion:</b> Teres minor tuberosity of humerus (proximal to deltoid tuberosity)<br><br><b>Function:</b> Flexes shoulder joint and laterally rotates humerus.",
+        eliteDesc: "<b>THE ROTATOR CUFF ASSISTANT</b><br><br>A small muscle located deep to the deltoid and lateral head of the triceps, part of the functional 'rotator cuff' analog in cattle.<br><br><b>PRECISE LOCATION:</b> Originates from the distal third of the caudal scapular border (caudal angle region), threading deep between larger lateral muscles.<br><br><b>FUNCTIONAL MECHANICS:</b> Flexes the shoulder joint and laterally rotates the humerus. This rotation is subtle in cattle due to fused elbow joints but assists in positioning the hoof during landing.",
+        comparative: [
+            { species: "Dog", note: "More significant for shoulder rotation; larger relative size." },
+            { species: "Horse", note: "Similar small size; often fused with infraspinatus fascia in part." }
+        ],
+        clinical: "<b>Quadrangular Space:</b> Teres minor helps form the caudal border of the quadrangular space (with subscapularis cranially, teres major caudally)—axillary nerve passes through here.",
+        imgCode: "teres_minor"
+    },
+
+    // ==================== INTRINSIC SCAPULAR (MEDIAL) ====================
+    {
+        title: "Subscapularis",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral (Medial)<br><br><b>Origin:</b> Subscapular fossa (entire medial scapular surface)<br><br><b>Insertion:</b> Medial (lesser) tubercle of humerus<br><br><b>Function:</b> Adducts arm; extends shoulder; functions as medial collateral ligament.",
+        eliteDesc: "<b>THE MEDIAL COLLATERAL LIGAMENT</b><br><br>A massive multipennate muscle filling the entire subscapular fossa on the medial aspect of the scapula. It is the largest and most powerful medial stabilizer of the shoulder.<br><br><b>PENNATE ARCHITECTURE:</b> Multipennate structure allows for powerful contraction over short distances—ideal for stabilizing rather than sweeping movements.<br><br><b>FUNCTIONAL ANALOGY:</b> Functions as the <b>medial collateral ligament</b> of the shoulder joint, preventing abduction (movement away from midline) while also being capable of active adduction (pulling toward midline).<br><br><b>MEDIAL STABILIZATION:</b> Provides the essential counterforce to the infraspinatus laterally. Together, these muscles cradle the humeral head within the glenoid cavity during weight bearing.<br><br><b>NEURAL SUPPLY:</b> Subscapular nerve.",
+        comparative: [
+            { species: "Horse", note: "Similar massive size and function; critical for weight bearing." },
+            { species: "Dog", note: "Part of true 'rotator cuff' foursome." }
+        ],
+        clinical: "<b>Medial Instability:</b> Unlikely to be injured alone; usually involved in complete brachial plexus avulsions.",
+        imgCode: "subscapularis"
+    },
+    {
+        title: "Teres Major",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral (Medial)<br><br><b>Origin:</b> Caudal angle and caudal border of scapula<br><br><b>Insertion:</b> Teres major tuberosity on medial humerus (common with latissimus dorsi)<br><br><b>Function:</b> Flexes shoulder joint and adducts limb.",
+        eliteDesc: "<b>THE CAUDAL MEDIAL FLEXOR</b><br><br>Located on the medial aspect just caudal to the shoulder joint, forming a functional unit with the latissimus dorsi (shared insertion).<br><br><b>ORIGIN SITES:</b> Arises from the caudal angle (distal tip) and caudal border of the scapula, giving it a caudal line of pull compared to other shoulder flexors.<br><br><b>SYNERGISTIC INSERTION:</b> Inserts via common tendon with latissimus dorsi on the teres major tuberosity. This combined insertion creates one of the most powerful retractor/adductor complexes in the body.<br><br><b>QUADRANGULAR SPACE:</b> Forms the caudal boundary of the quadrangular space through which the axillary nerve passes. Surgical approaches to the axillary nerve or shoulder must account for teres major position.<br><br><b>FUNCTION:</b> Flexes the shoulder (drawing limb forward/upward) and adducts the limb toward the body wall.",
+        comparative: [
+            { species: "Horse", note: "Similar position; also shares tendon with latissimus." },
+            { species: "Dog", note: "More distinct separation from latissimus insertion." }
+        ],
+        clinical: "<b>Caudal Dislocation:</b> Helps resist caudal displacement of humeral head; injury allows caudal 'slipping'.",
+        imgCode: "teres_major"
+    },
+    {
+        title: "Coracobrachialis",
+        desc: "<b>Type:</b> Intrinsic, Scapulohumeral (Medial)<br><br><b>Origin:</b> Coracoid process of scapula (medial to supraglenoid tubercle)<br><br><b>Insertion:</b> Medial surface of humeral shaft, distal to lesser tubercle<br><br><b>Function:</b> Adducts arm and flexes shoulder.",
+        eliteDesc: "<b>THE MEDIAL STABILIZER</b><br><br>Arises from the coracoid process (a medial bony prominence of the scapula), giving it a medial-anterior line of pull.<br><br><b>COURSE:</b> Runs along the medial aspect of the humerus, deep to the pectoral muscles but superficial to the brachial vessels and nerves in the proximal arm region.<br><br><b>FUNCTIONAL ROLE:</b> Primarily adducts the arm (prevents abduction) and assists in shoulder flexion. Acts as a medial bracing muscle during the stance phase, preventing lateral deviation of the limb.<br><br><b>NERVOUS RELATIONSHIP:</b> Innervated by the musculocutaneous nerve; often used as a surgical landmark to locate this nerve during axillary approaches.",
+        comparative: [
+            { species: "Dog", note: "Two heads common; more significant for shoulder flexion." },
+            { species: "Horse", note: "Similar single head anatomy; less bulky than in ox." }
+        ],
+        clinical: "<b>Axillary Approach:</b> Retracted laterally during approaches to axillary vessels; protects brachial plexus roots.",
+        imgCode: "coracobrachialis"
+    },
+
+    // ==================== BRACHIUM MUSCLES ====================
+    {
+        title: "Biceps Brachii",
+        desc: "<b>Type:</b> Intrinsic, Brachial (Biarticular)<br><br><b>Origin:</b> Supraglenoid tubercle of scapula<br><br><b>Insertion:</b> Radial tuberosity (proximal medial radius) and medial collateral ligament of elbow<br><br><b>Function:</b> Flexes elbow; extends shoulder via reciprocal tension.<br><br><b>Stay Apparatus:</b> Lacertus fibrosus connects to Extensor Carpi Radialis (passive carpal extension).",
+        eliteDesc: "<b>THE STAY APPARATUS ANCHOR</b><br><br>Despite its name, the bovine biceps brachii has only one head (unlike the two-headed human version). It is a powerful biarticular muscle crossing both shoulder and elbow joints.<br><br><b>SUPRAGLENOID ORIGIN:</b> Originates from the supraglenoid tubercle (cranial margin of glenoid cavity), placing it cranial to the shoulder joint axis.<br><br><b>PASSIVE STAY MECHANISM:</b> The muscle sends a fibrous band called the <b>lacertus fibrosus</b> to the tendon of the Extensor Carpi Radialis. While less developed than in the horse, this structure contributes to the passive stay apparatus by preventing flexion of the carpus while standing without muscular effort.<br><br><b>BIO-TENDINOUS COMPLEX:</b> The tendon bridges the cranial aspect of the shoulder and passes through the intertubercular groove (bicipital groove), where it is protected by the transverse humeral retinaculum.<br><br><b>DUAL JOINT ACTION:</b> Flexes the elbow joint (primary action) and extends the shoulder joint via its cranial position relative to shoulder center of rotation. The biceps brachii 'tension band' principle helps stabilize the shoulder during weight bearing.",
+        comparative: [
+            { species: "Horse", note: "Lacertus fibrosus is massive and primary stay apparatus component; biceps tendon is larger." },
+            { species: "Dog", note: "True two heads; no significant stay apparatus contribution." }
+        ],
+        clinical: "<b>Bicipital Bursitis:</b> Inflammation of bicipital bursa in the intertubercular groove causes lameness. <b>Radial Nerve Association:</b> Proximal radial nerve injury affects elbow extension, but biceps flexion is unopposed, creating imbalance.",
+        imgCode: "biceps_brachii"
+    },
+    {
+        title: "Brachialis",
+        desc: "<b>Type:</b> Intrinsic, Brachial<br><br><b>Origin:</b> Proximal caudal aspect of humerus<br><br><b>Insertion:</b> Medial aspect of proximal radius and medial coronoid process of ulna<br><br><b>Function:</b> Pure and powerful flexor of the elbow joint.",
+        eliteDesc: "<b>THE ELBOW FLEXOR PURIST</b><br><br>Located within the musculospiral groove of the humerus, deep to the biceps and adjacent to the radial nerve.<br><br><b>COURSE MECHANICS:</b> Originates from the proximal caudal humerus, wraps around the medial aspect, and passes deep to the biceps tendon near the elbow to insert on the proximal radius and ulna.<br><br><b>PURE FLEXOR:</b> Unlike the biarticular biceps, the brachialis acts only on the elbow joint, making it the 'pure' elbow flexor. It provides the actual power for rapid flexion during the swing phase of locomotion.<br><br><b>NEURAL SUPPLY:</b> Primarily musculocutaneous nerve, but receives branches from the radial nerve in cattle (dual innervation pattern in some specimens).<br><br><b>SURGICAL CORRIDOR:</b> Directly deep to the biceps; must be retracted to access the elbow joint capsule medially.",
+        comparative: [
+            { species: "Dog", note: "Exclusively musculocutaneous innervation; no radial contribution." },
+            { species: "Horse", note: "Similar position; less bulky than biceps." }
+        ],
+        clinical: "<b>Radial Nerve Compression:</b> Located adjacent to radial nerve in musculospiral groove; hematomas here affect both structures.",
+        imgCode: "brachialis"
+    },
+    {
+        title: "Triceps Brachii",
+        desc: "<b>Type:</b> Intrinsic, Brachial (Extensor)<br><br><b>Heads:</b> Long (scapula), Lateral (humerus), Medial (humerus), Accessory (neck of humerus)<br><br><b>Insertion:</b> Olecranon tuber of ulna<br><br><b>Function:</b> Extends elbow (primary weight-bearing extensor); long head flexes shoulder.",
+        eliteDesc: "<b>THE ANTI-GRAVITY EXTENSOR</b><br><br>The primary extensor of the elbow joint, essential for weight-bearing. Distinguished by possessing <b>four heads</b> in ox (vs. three in humans/dogs).<br><br><b>FOUR-HEADED ARCHITECTURE:</b><br>• <b>Long Head (Caput Longum):</b> Largest head; originates from caudal scapular border (biarticular—flexes shoulder, extends elbow)<br>• <b>Lateral Head (Caput Laterale):</b> Originates from lateral humeral shaft (tricipital line)<br>• <b>Medial Head (Caput Mediale):</b> Originates from medial humeral shaft (crest of lesser tubercle region)<br>• <b>Accessory Head (Caput Accessorium):</b> Unique to ruminants; originates from caudal aspect of neck of humerus; lies between lateral and medial heads—provides additional mass for heavy weight extension<br><br><b>MECHANICAL ADVANTAGE:</b> All heads converge on the massive olecranon tuber of the ulna, providing a long lever arm for powerful elbow extension against ground reaction forces.<br><br><b>RADIAL NERVE DEPENDENCY:</b> Solely innervated by the radial nerve. High radial nerve paralysis results in complete triceps failure and 'dropped elbow'—inability to bear weight.<br><br><b>CLINICAL EXAMINATION:</b> Triceps tone maintains the elbow in extension during standing; loss of this tone is the immediate sign of radial nerve injury proximal to the elbow.",
+        comparative: [
+            { species: "Dog", note: "Only three heads (no accessory); olecranon smaller relative to body." },
+            { species: "Horse", note: "Three heads; different split of lateral and medial heads." }
+        ],
+        clinical: "<b>Capped Elbow (Olecranon Bursitis):</b> Subcutaneous bursa over olecranon becomes inflamed from trauma (lying on hard surfaces). <b>Radial Paralysis:</b> Loss of triceps tone causes 'dropped elbow' and inability to support weight; most critical muscle for standing.",
+        imgCode: "triceps_brachii"
+    },
+    {
+        title: "Tensor Fasciae Antebrachii",
+        desc: "<b>Type:</b> Intrinsic, Brachial (Accessory)<br><br><b>Origin:</b> Caudal border of scapula and latissimus dorsi fascia<br><br><b>Insertion:</b> Olecranon and antebrachial fascia<br><br><b>Function:</b> Extends elbow; tenses antebrachial fascia.",
+        eliteDesc: "<b>THE FASCIAL TENSIONER</b><br><br>An auxiliary extensor of the elbow that plays a critical role in fascial compartment stabilization.<br><br><b>ORIGIN COMPLEX:</b> Arises from the caudal scapular border (near teres major origin) and via a broad aponeurosis from the latissimus dorsi fascia—linking elbow extension to trunk musculature.<br><br><b>ANTEBRACHIAL FASCIA:</b> Inserts on the olecranon but also fans extensively into the antebrachial fascia. This tensioning action compartmentalizes the forearm muscles, preventing muscle herniation and improving contractile efficiency via hydrostatic pressure.<br><br><b>SYNERGISTIC ROLE:</b> Assists the triceps in elbow extension, particularly during the initial loading phase of stance when maximum stability is required.",
+        comparative: [
+            { species: "Horse", note: "Similar origin and function; clinically significant for fascial closure." },
+            { species: "Dog", note: "Less developed; less fascial integration." }
+        ],
+        clinical: "<b>Forearm Compartment Syndrome:</b> Swelling within tight fascia can compress nerves; this muscle's tension contributes to compartment pressure.",
+        imgCode: "tensor_fasciae_antebrachii"
+    },
+    {
+        title: "Anconeus",
+        desc: "<b>Type:</b> Intrinsic, Brachial (Synthetic)<br><br><b>Origin:</b> Lateral supracondylar crest of humerus<br><br><b>Insertion:</b> Lateral aspect of olecranon<br><br><b>Function:</b> Extends elbow; prevents joint capsule pinching during extension.",
+        eliteDesc: "<b>THE JOINT PROTECTOR</b><br><br>A small muscle located deep to the lateral head of the triceps, serving a specialized protective function.<br><br><b>STABILIZOR FUNCTION:</b> While it assists in elbow extension, its primary role is mechanical protection. During terminal elbow extension, the anconeus provides caudolateral support preventing the olecranon from displacing medially while simultaneously keeping the joint capsule taut.<br><br><b>CAPSULAR PROTECTION:</b> Prevents the joint capsule from being pinched between the olecranon and the humeral condyle during full extension—a common source of pain and synovitis if not mechanically protected.<br><br><b>RELATIONSHIPS:</b> Lies directly deep to the lateral head of triceps; identified during deep dissections of the lateral elbow approaches.",
+        comparative: [
+            { species: "Dog", note: "Similar function; more distinct separation from triceps." },
+            { species: "Horse", note: "Present but less distinct; often considered part of triceps complex." }
+        ],
+        clinical: "<b>El Joint Approach:</b> Must be identified and preserved during lateral arthrotomy approaches to prevent post-operative capsular entrapment.",
+        imgCode: "anconeus"
+    },
+
+    // ==================== ANTEBRACHIUM EXTENSORS ====================
+    {
+        title: "Extensor Carpi Radialis",
+        desc: "<b>Type:</b> Intrinsic, Antebrachial (Craniolateral/Extensor Group)<br><br><b>Origin:</b> Lateral supracondylar crest of humerus<br><br><b>Insertion:</b> Metacarpal tuberosity on proximal dorsal aspect of Mc III/IV<br><br><b>Function:</b> Extends the carpus; assists in elbow flexion via reciprocal apparatus.",
+        eliteDesc: "<b>THE CARPAL EXTENSOR PILLAR</b><br><br>The most cranial and largest extensor muscle of the forearm, critical for maintaining the carpus in extension during weight bearing and the swing phase.<br><br><b>TOPOGRAPHIC POSITION:</b> Lies directly beneath the skin on the craniolateral aspect of the forearm, immediately lateral to the radius. Its tendon is palpable and visible over the dorsal carpus.<br><br><b>STAY APPARATUS CONNECTION:</b> Receives the <b>lacertus fibrosus</b> from the biceps brachii tendon. This fibrous connection allows passive transfer of tension from shoulder to carpus, assisting in keeping the carpus extended without muscular effort during standing—a key component of the bovine stay apparatus.<br><br><b>BIPENNATE STRUCTURE:</b> Highly organized fascicles allow for sustained tonic contraction suitable for weight bearing rather than just rapid movement.<br><br><b>INSERTION:</b> The stout tendon inserts on the large metacarpal tuberosity of the fused third and fourth metacarpal (cannon bone), providing direct extension of the carpo-metacarpal joint.",
+        comparative: [
+            { species: "Dog", note: "Divided into longus and brevis; ox has single belly." },
+            { species: "Horse", note: "Similar single belly; lacertus fibrosus connection is massive and primary stay mechanism." }
+        ],
+        clinical: "<b>Radial Nerve Paralysis:</b> Low lesions spare triceps but paralyze ECR, causing the carpus to knuckle during weight bearing. <b>Tenosynovitis:</b> Tendon may swell within synovial sheath at carpus.",
+        imgCode: "extensor_carpi_radialis"
+    },
+    {
+        title: "Common Digital Extensor",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Bidactyl Extensor)<br><br><b>Structure:</b> Two distinct muscular bellies (Medial & Lateral)<br><br><b>Origin:</b> Lateral epicondyle of humerus<br><br><b>Insertion:</b> Extensor processes of distal phalanges (P3) of Digits III & IV<br><br><b>Function:</b> Extends carpus and digital joints of both digits.",
+        eliteDesc: "<b>THE DORSAL DIGITAL EXTENSOR COMPLEX</b><br><br>More complex than the equine version due to the bidactyl (cloven hoof) anatomy, consisting of two distinct muscular bellies serving the two functional digits.<br><br><b>DUAL BELLY ARCHITECTURE:</b><br>• <b>Medial Belly:</b> Tendon bifurcates to insert on extensor process of distal phalanx (P3) of medial digit (III) and middle phalanx (P2) of same digit<br>• <b>Lateral Belly:</b> Tendon splits to serve extensor processes of P3 of BOTH digits (III and IV)<br><br><b>BIDACTYL FUNCTIONAL COMPROMISE:</b> This bifurcation pattern reflects the evolutionary adaptation to two weight-bearing digits. The medial belly focuses on digit III; the lateral belly serves both, creating a complex coordination mechanism for even hoof placement.<br><br><b>SURGICAL ACCESSIBILITY:</b> Tendons are palpable on the dorsal surface of the cannon bone (Mc III/IV), allowing easy evaluation of tendon integrity and synovial sheath distension. Critical landmark for distal limb nerve block evaluation.",
+        comparative: [
+            { species: "Horse", note: "Single functional digit; single belly serving digit III only." },
+            { species: "Dog", note: "Separate tendons to digits III-V; different branching pattern." }
+        ],
+        clinical: "<b>Radial Nerve Paralysis (Distal):</b> Inability to extend digits causes 'knuckling over' at fetlock; animal steps on dorsum of hoof. <b>Tendon Laceration:</b> Complete digital extension loss requires immediate surgical repair.",
+        imgCode: "common_digital_extensor"
+    },
+    {
+        title: "Lateral Digital Extensor",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Digit 4 Specialist)<br><br><b>Origin:</b> Lateral collateral ligament of elbow and lateral epicondyle<br><br><b>Insertion:</b> Middle (P2) and distal (P3) phalanges of lateral digit (IV) only<br><br><b>Function:</b> Extends lateral digit (Digit IV) specifically; allows independent movement.",
+        eliteDesc: "<b>THE LATERAL DIGIT AUTONOMY SYSTEM</b><br><br>A smaller extensor specifically serving the lateral digit (Digit IV), allowing independent extension and some abduction of the lateral claw.<br><br><b>EGINAL COMPLEXITY:</b> Originates not just from the lateral epicondyle but also from the lateral collateral ligament of the elbow, embedding it in the lateral stability system of the elbow joint.<br><br><b>DISTINCT TENDON PATH:</b> The tendon passes through the lateral collateral ligament of the carpus (staying lateral) to insert specifically on P2 and P3 of digit IV only. This maintains separate control of the lateral claw.<br><br><b>COMPARATIVE SIGNIFICANCE:</b> Unlike the horse where the LDE tendon joins the CDE tendon distally, in the ox they remain distinct throughout their course, allowing cattle to manipulate the lateral claw somewhat independently—useful for traction on uneven terrain or when one claw is injured.",
+        comparative: [
+            { species: "Horse", note: "Tendon joins CDE tendon distally; no independent extension possible." },
+            { species: "Dog", note: "Often fused with CDE or absent as distinct entity." }
+        ],
+        clinical: "<b>Independent Claw Extension:</b> Lesions here explain why cattle can extend one claw but not the other in some neuropathies.",
+        imgCode: "lateral_digital_extensor"
+    },
+    {
+        title: "Ulnaris Lateralis",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Extensor Group by nerve, Flexor by action)<br><br><b>Origin:</b> Lateral epicondyle of humerus<br><br><b>Insertion:</b> Accessory carpal bone and proximal vestigial fifth metacarpal (Mc V)<br><br><b>Function:</b> Flexes carpus (despite radial innervation); abducts limb minimally.",
+        eliteDesc: "<b>THE CARPAL FLEXOR PARADOX</b><br><br>Morphologically classified as an extensor (supplied by radial nerve) but positioned caudal to the axis of rotation, making it functionally a <b>carpal flexor</b>.<br><br><b>ACCESS CARPAL ANCHOR:</b> Inserts on the prominent accessory carpal bone, the pulley-like bone on the caudolateral carpus. This insertion provides mechanical advantage for flexion and lateral stability.<br><br><b>VESTIGIAL DIGIT CONNECTION:</b> Also inserts on the vestigial fifth metacarpal (dewclaw bone), representing the evolutionary remnant of digit V.<br><br><b>LATERAL STABILITY:</b> Provides lateral support to the carpus during weight bearing, preventing excessive medial deviation of the carpus.<br><br><b>NEURAL BLOCK LANDMARK:</b> The groove between Ulnaris Lateralis and Flexor Carpi Ulnaris is the critical landmark for performing the <b>Ulnar Nerve Block</b> at the distal forearm level.",
+        comparative: [
+            { species: "Horse", note: "Similar paradoxical flexor function; same landmark usage." },
+            { species: "Dog", note: "Separate tendon slips to digit V when present." }
+        ],
+        clinical: "<b>Ulnar Nerve Block Site:</b> Palpable groove ~10cm proximal to accessory carpal bone between this muscle and FCU is THE landmark for ulnar block. <b>Carpal Flexion Weakness:</b> Rarely injured alone but contributes to carpal drop in severe flexor deficits.",
+        imgCode: "ulnaris_lateralis"
+    },
+    {
+        title: "Extensor Carpi Obliquus",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Accessory Extensor)<br><br><b>Origin:</b> Lateral surface of radius<br><br><b>Insertion:</b> Head of medial splint bone (Mc II) or proximal medial aspect of Mc III<br><br><b>Function:</b> Extends carpus; stabilizes medial aspect.",
+        eliteDesc: "<b>THE MEDIAL CARPAL STABILIZER</b><br><br>Also known as Abductor Digiti I Longus (though digit I is absent), this smaller muscle runs obliquely across the dorsal carpus.<br><br><b>OBLIQUE COURSE:</b> Originates from the lateral radius but courses mediodistally to insert on the medial splint bone (Mc II) or medial aspect of the cannon bone. This oblique line of pull provides medial stabilization to the carpus during extension.<br><br><b>FUNCTION:</b> Assists in carpal extension but with medial vector component, preventing lateral drift of the carpus during loading. Also referenced as the 'medial collateral extensor.'<br><br><b>SURGICAL NOTE:</b> Often encountered during dorsal approaches to the carpal joints; smaller than main ECR but distinct.",
+        comparative: [
+            { species: "Horse", note: "Similar; often called Abductor Digiti I Longus." },
+            { species: "Dog", note: "True abductor of digit II when present." }
+        ],
+        clinical: "<b>Carpal Sheath Tenosynovitis:</b> Tendon lies within the same synovial sheath as ECR; disease processes involve both.",
+        imgCode: "extensor_carpi_obliquus"
+    },
+
+    // ==================== ANTEBRACHIUM FLEXORS ====================
+    {
+        title: "Flexor Carpi Radialis",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Caudomedial/Flexor Group)<br><br><b>Origin:</b> Medial epicondyle of humerus<br><br><b>Insertion:</b> Palmar aspect of proximal metacarpus (Mc III)<br><br><b>Function:</b> Flexes the carpus (primary flexor).",
+        eliteDesc: "<b>THE CARPAL FLEXOR LEADER</b><br><br>The most cranial of the caudal (flexor) group muscles, lying directly medial on the forearm deep to the pectoral retinacula.<br><br><b>STRAIGHT LINE PULL:</b> Originates from the medial epicondyle and runs straight down the medial forearm to insert on the palmar aspect of the proximal cannon bone (Mc III). This direct line provides maximum mechanical advantage for carpal flexion.<br><br><b>CARPAL CANAL RELATIONSHIP:</b> Passes over the palmar carpus but outside the carpal canal proper (which contains the digital flexors). Covered by the flexor retinaculum at the carpus.<br><br><b>FUNCTIONAL DUALITY:</b> While primarily a flexor, it provides active check against hyperextension during the weight-bearing phase, working in concert with the passive stay apparatus.<br><br><b>MEDIAN NERVE RELATIONSHIP:</b> The median nerve runs deep to this muscle in the proximal forearm; the muscle serves as a landmark for median nerve blocks (inject just cranial to FCR tendon at carpus).",
+        comparative: [
+            { species: "Horse", note: "Similar position and function; larger for support." },
+            { species: "Dog", note: "Splits into superficial and deep parts in some breeds." }
+        ],
+        clinical: "<b>Median Nerve Block:</b> Landmark for 'High Volar' block—inject just distal to elbow, cranial to palpable FCR tendon. <b>Carpal Hyperextension:</b> Transection allows carpal over-flexion.",
+        imgCode: "flexor_carpi_radialis"
+    },
+    {
+        title: "Flexor Carpi Ulnaris",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Caudomedial/Ulnar Group)<br><br><b>Heads:</b> Humeral head (medial epicondyle) & Ulnar head (olecranon)<br><br><b>Insertion:</b> Accessory carpal bone<br><br><b>Function:</b> Flexes carpus (ulnar aspect).",
+        eliteDesc: "<b>THE ULNAR CARPAL FLEXOR</b><br><br>Located caudal/medial in the forearm, providing ulnar-sided flexion and stabilization.<br><br><b>DUAL-HEADED ORIGIN:</b> Unique among flexors in having two origins:<br>• <b>Humeral Head:</b> Arises from medial epicondyle (with other flexors)<br>• <b>Ulnar Head:</b> Arises from medial surface of the olecranon (ulna), giving it origin from the forearm itself<br><br><b>ACCESSORY CARPAL INSERTION:</b> Inserts on the prominent accessory carpal bone on the caudolateral carpus—the same bone receiving the Ulnaris Lateralis but from the flexor side.<br><br><b>ULNAR STABILITY:</b> Provides the flexor counterbalance to the Ulnaris Lateralis, creating a force couple stabilizing the carpus in the frontal plane during weight bearing. Prevents excessive abduction/adduction of the carpus.<br><br><b>ULNAR NERVE BLOCK LANDMARK:</b> Forms the medial border of the groove (with Ulnaris Lateralis forming the lateral border) used for ulnar nerve blocks.",
+        comparative: [
+            { species: "Horse", note: "Similar dual heads; ulnar head larger in horse." },
+            { species: "Dog", note: "Ulnar head may be absent or fused in some individuals." }
+        ],
+        clinical: "<b>Ulnar Nerve Block Landmark:</b> Palpate groove between FCU (medial) and Ulnaris Lateralis (lateral) ~10cm proximal to accessory carpal bone. <b>Carpal Valgus/Varus:</b> Asymmetry between left/right FCU tone contributes to angular limb deformities.",
+        imgCode: "flexor_carpi_ulnaris"
+    },
+    {
+        title: "Superficial Digital Flexor",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Flexor Group)<br><br><b>Origin:</b> Medial epicondyle of humerus<br><br><b>Insertion:</b> Palmar surface of Middle Phalanx (P2) of Digits III & IV (via manica flexoria)<br><br><b>Function:</b> Flexes proximal/middle phalangeal joints (fetlock/pastern) and carpus.",
+        eliteDesc: "<b>THE MANICA FLEXORIA CONTAINER</b><br><br>A key component of the reciprocal apparatus and digital support system, distinct in bovines due to the bidactyl arrangement.<br><br><b>SYNOVIAL SHEATH COURSE:</b> Tendon passes through the carpal canal (carpal sheath) deep to the flexor retinaculum alongside the DDF. At the carpus, it is covered by synovial membrane—prone to tenosynovitis.<br><br><b>MANICA FLEXORIA ARCHITECTURE:</b> At the fetlock level, the tendon bifurcates (one branch per digit). Each branch forms a ring-like structure called the <b>Manica Flexoria</b> ('flexor sleeve') that wraps around the Deep Digital Flexor tendon. This allows the DDF to pass through to the distal phalanx while the SDF inserts on the middle phalanx (P2).<br><br><b>BIDACTYL DIVISION:</b> Unlike the horse where the SDF splits to surround the DDF in the pattern of a U, in cattle the two separate digit branches allow independent suspension of each claw.<br><br><b>INSERTION:</b> Terminal branches insert on the palmar surface of P2 (middle phalanx/pastern bone) of both digits III and IV.",
+        comparative: [
+            { species: "Horse", note: "Single manica flexoria arrangement around single DDF tendon; inserts on P1 and P2." },
+            { species: "Dog", note: "Single tendon to each digit; similar P2 insertion." }
+        ],
+        clinical: "<b>Manica Flexoria Syndrome:</b> Damage to the manica allows SDF tendon displacement. <b>Tenosynovitis:</b> SDF tendon within digital sheath commonly affected in 'septic arthritis' extension.",
+        imgCode: "superficial_digital_flexor"
+    },
+    {
+        title: "Deep Digital Flexor",
+        desc: "<b>Type:</b> Intrinsic, Forearm (Flexor Group)<br><br><b>Heads:</b> Humeral (medial epicondyle), Radial (caudal radius), Ulnar (caudal ulna)<br><br><b>Insertion:</b> Flexor tubercle of Distal Phalanx (P3/coffin bone) of Digits III & IV<br><br><b>Function:</b> Flexes distal phalanx (coffin joint) and all proximal joints.",
+        eliteDesc: "<b>THE ULTIMATE DIGITAL FLEXOR</b><br><br>The powerhouse of digital flexion, originating from three heads (unlike the two heads in simpler species) and terminating on the coffin bone.<br><br><b>TRI-HEADED COMPLEXITY:</b><br>• <b>Humeral Head:</b> Largest; from medial epicondyle<br>• <b>Radial Head:</b> From caudal surface of radius<br>• <b>Ulnar Head:</b> From caudal surface of ulna<br>The three heads fuse proximal to the carpus into a single massive tendon.<br><br><b>CARPAL CANAL PASSAGE:</b> Passes through the carpal canal <b>deep to the SDF tendon</b>—the most dorsal structure in the flexor group at the carpus, most palmar at the digit.<br><br><b>DISTAL COURSE:</b> Single massive tendon passes to fetlock, then splits into two tendons (one per digit), each passing through the manica flexoria of the SDF, then continuing to insert on the flexor tubercle of P3 (coffin bone/distal phalanx).<br><br><b>FUNCTIONAL ROLE:</b> Flexes the coffin joint (DIP) primarily, but due to its passage through the fetlock and pastern regions, it secondarily flexes all proximal joints. Essential for gripping and traction.",
+        comparative: [
+            { species: "Horse", note: "Two heads (humeral/ulnar); massive DDF tendon; no radial head." },
+            { species: "Dog", note: "Variable presence of radial head." }
+        ],
+        clinical: "<b>Ascending Tenosynovitis:</b> Puncture wounds to sole can infect digital sheath, leading to life-threatening ascending infection. <b>Deep Flexor Tendonitis:</b> 'Sole bruising' often reflects DDF stress.",
+        imgCode: "deep_digital_flexor"
+    },
+
+    // ==================== MANUS (DISTAL LIMB) ====================
+    {
+        title: "Interosseous Muscle (Suspensory)",
+        desc: "<b>Type:</b> Intrinsic, Manus<br><br><b>Origin:</b> Proximal metacarpus and distal carpal bones<br><br><b>Insertion:</b> Proximal sesamoid bones (4 total—2 per digit) and extensor tendons (via extensor branches)<br><br><b>Function:</b> Suspensory apparatus preventing fetlock hyperextension; supports fetlock during stance.",
+        eliteDesc: "<b>THE ACTIVE SUSPENSORY LIGAMENT</b><br><br>Unlike the horse where the Interosseous Medius is entirely tendinous and purely 'ligamentous,' the bovine Interosseous III & IV (fused) retains significant <b>fleshy, contractile muscular tissue</b> throughout life, making it both muscle and ligament.<br><br><b>METACARPAL GROOVE POSITION:</b> Lies in the palmar groove of the fused Mc III/IV (cannon bone), deep to the DDF tendon but superficial to the bone.<br><br><b>SESAMODEAN BRANCHES:</b> At the fetlock, divides into tendinous bands attaching to:<br>• Two axial proximal sesamoids (interdigital side)<br>• Two abaxial proximal sesamoids (outer sides of each digit)<br><br><b>EXTENSOR BRANCHES (CRITICAL):</b> Sends five total branches. Most importantly, sends tendinous slips dorsally to join the Common Digital Extensor and Lateral Digital Extensor tendons. Also sends an axial band through the interdigital space to join extensor apparatus.<br><br><b>ACTIVE VS. PASSIVE ROLE:</b> Because it retains muscular components, the bovine interosseous provides <b>active contractile support</b> to the fetlock, not just passive suspension. This suggests cattle rely more on tonic muscle contraction than horses do for prolonged standing, explaining why cattle tire more quickly from prolonged standing on hard surfaces.<br><br><b>CHECK LIGAMENT FUNCTION:</b> Acts as the proximal check ligament, limiting fetlock hyperextension (sinking) during the stance phase when the animal bears 60% of body weight on the forelimbs.",
+        comparative: [
+            { species: "Horse", note: "Entirely tendinous ('Suspensory Ligament'); purely passive function." },
+            { species: "Dog", note: "True interosseous muscles between metacarpals; different architecture entirely." }
+        ],
+        clinical: "<b>Suspensory Desmitis:</b> Inflammation of the tendinous portions causes 'sinking' fetlock. <b>Claw Amputation:</b> Axial branches must be severed during digit amputation along with interdigital ligaments. <b>Passive Stay Difference:</b> Less efficient than equine passive stay; explains cattle fatigue when standing long periods.",
+        imgCode: "interosseous_muscle"
+    },
+    {
+        title: "Distal Annular Ligaments & Interdigital",
+        desc: "<b>Type:</b> Fascial/Muscular remnants<br><br><b>Components:</b> Lumbricals, Interdigital muscles<br><br><b>Function:</b> Adduction of claws (prevent splaying); minor proprioceptive roles.",
+        eliteDesc: "<b>THE CLAW STABILIZERS</b><br><br>Small vestigial structures between the flexor tendons and digits, distinct from the major muscles proximal to the carpus.<br><br><b>LUMBRICALS:</b> Small muscles originating from the DDF tendon and inserting on proximal phalanges. Serve minor proprioceptive and weak flexor roles, helping coordinate flexor tendon tension between the two digits.<br><br><b>INTERDIGITAL MUSCLES:</b> Small bands connecting the proximal phalanges of digits III and IV, aiding in adduction of the claws (pulling them together during placement) to prevent excessive splaying. This maintains the 'cloven' appearance and functional integrity.<br><br><b>ANNULAR LIGAMENTS:</b> Fibrous bands (superficial and deep digital annular ligaments) hold flexor tendons against the palmar aspect of phalanges, maintaining mechanical advantage and preventing bowstringing during flexion.<br><br><b>FASCIAL RETAINERS:</b> Dense connective tissue bands maintaining digital tendon position—critical for surgery to prevent tendon displacement.",
+        comparative: [
+            { species: "Horse", note: "No interdigital muscles (single digit); different annular system." },
+            { species: "Dog", note: "Multiple interossei and lumbricals corresponding to 4-5 digits." }
+        ],
+        clinical: "<b>Interdigital Fibroma:</b> Hyperplasia of interdigital skin into a 'corn.' <b>Tendon Displacement:</b> Annular ligament rupture causes bowstringing of flexor tendons. <b>Claw Integrity:</b> Loss of adduction function leads to splayed toes and hoof wear abnormalities.",
+        imgCode: "lumbricals_interdigital"
+    }
+],      // READY FOR YOUR MUSCLE DATA
+    
+    "Arthrology": [],   // READY FOR YOUR JOINT/LIGAMENT DATA
+    
+    "Neurology": [
+        {
+            title: "Brachial Plexus Architecture",
+            desc: "<b>Formation:</b> Ventral rami of C6, C7, C8, T1, and T2 (Post-fixed arrangement).<br><br><b>Key Features:</b><br>- Located deep in axillary space<br>- Forms broad 'plexus sheet' around axillary artery<br>- C6-C7: Cranial roots (shoulder/stabilization)<br>- C8-T2: Caudal roots (flexors/foot)<br><br><b>Clinical Significance:</b><br>T2 inclusion serves massive pectoral muscles and cutaneous trunci (fly swatting reflex).",
+            eliteDesc: "<b>NEURO-ARCHITECTURAL MASTERPIECE</b><br><br>The Brachial Plexus (Plexus brachialis) is the somatic nerve network serving as the command center for the thoracic limb. In the Ox, it exhibits a 'post-fixed' arrangement compared to the 'pre-fixed' plexus of canines, reliably incorporating T2 to serve the massive pectoral girdle required for supporting ~60% of body weight.<br><br><b>SEGMENTAL FORMATION:</b><br><br>1. <b>C6 (Cranial Driver):</b> Primary contributor to shoulder stabilization (Suprascapular, Subscapular nerves). Sets tone for shoulder advancement.<br><br>2. <b>C7 (Keystone Root):</b> The central pillar providing massive contribution to the Radial nerve. Without C7, extensor tone is fundamentally compromised.<br><br>3. <b>C8 (Transitional Bridge):</b> Connects extensor functions of Radial with flexor functions of Median/Ulnar nerves.<br><br>4. <b>T1 (Thoracic Power):</b> Heavy investment supplying intrinsic foot muscles and powerful flexors of carpus/digits.<br><br>5. <b>T2 (Ruminant Signature):</b> The distinguishing feature contributing to caudal pectoral nerves and lateral thoracic wall innervation. Serves the panniculus reflex and massive brisket musculature.<br><br><b>SCALENE EMERGENCE:</b> Unlike humans, ventral rami of C6, C7, C8 emerge through muscular separations of Scalenus dorsalis and ventralis, utilizing them as protective grommets. The plexus acts as a sorting house where fibers intermingle—an evolutionary safeguard ensuring damage to a single root (e.g., C7) results in paresis rather than total paralysis.<br><br><b>ANSA AXILLARIS:</b> Musculocutaneous and Median nerves form a loop around the axillary artery, anchoring the neurovascular bundle to prevent kinking during extreme limb excursions.",
+            comparative: [
+                { species: "Dog", note: "Pre-fixed plexus (C5-T1). Smaller pectoral contribution, lacks T2 incorporation." },
+                { species: "Horse", note: "Similar to Ox with heavy pectoral development. C6-T2 roots with robust radial contribution." }
+            ],
+            clinical: "<b>Root Avulsion:</b> Traction injuries can avulse C6-T1 roots from spinal cord. <b>Axillary Trauma:</b> Deep penetration wounds or hematomas can compress entire plexus causing complete forelimb paresis.",
+            imgCode: "brachial_plexus"
+        },
+        {
+            title: "Radial Nerve",
+            desc: "<b>The Extensor King</b><br>- <b>Origin:</b> C7, C8, T1, T2 (caudal plexus)<br>- <b>Vulnerable Zone:</b> Musculospiral groove (caudal humerus)<br>- <b>Motor:</b> Triceps (elbow extension), all carpal/digital extensors<br>- <b>Sensory:</b> Craniolateral forearm, dorsal manus, digits III & IV<br><br><b>Lesion Patterns:</b><br><b>High (Proximal):</b> Dropped elbow (triceps paralysis), cannot bear weight<br><b>Low (Distal):</b> Knuckled fetlock only (triceps spared), can bear weight if manually placed",
+            eliteDesc: "<b>THE ANTI-GRAVITY BATTERY</b><br><br>The Radial nerve is clinically the most significant nerve in the forelimb—the primary defense against gravity, powering anti-gravity muscles that convert the limb into a rigid column supporting half a ton of mass.<br><br><b>ORIGIN & PATHWAY:</b><br>Arises from caudal plexus (C7-T2), separates between subscapularis and teres major, then enters its defining anatomical feature: the <b>Musculospiral Groove</b>.<br><br><b>THE GROOVE - CRITICAL VULNERABILITY:</b><br>The nerve winds spirally around caudal/lateral humeral shaft, lying directly against periosteum, covered only by lateral head of triceps. This creates the 'perfect storm' for compressive neuropathy:<br><br>• <b>Recumbency Trauma:</b> When heavy cows lie on hard concrete or are strapped to tilt tables, ribcage weight compresses triceps → crushes radial nerve against bone<br>• <b>Fractures:</b> Humeral shaft fractures commonly injure the nerve in this groove<br><br><b>MOTOR SUPPLY:</b><br><br><b>Proximal Branches (Before Groove):</b><br>• Triceps Brachii (Long, Lateral, Medial, Accessory heads)<br>• Tensor Fasciae Antebrachii<br>• Anconeus<br><i>Function:</i> Extension of elbow—the single most critical movement for standing. If the elbow cannot extend, the limb collapses.<br><br><b>Distal Deep Branches (After Groove):</b><br>• Extensor Carpi Radialis<br>• Common Digital Extensor<br>• Lateral Digital Extensor<br>• Ulnaris Lateralis (carpal extensor in flexed position)<br><i>Function:</i> Extension of carpus and digits—prepares hoof to land flat and bear weight.<br><br><b>SENSORY DISTRIBUTION:</b><br>Superficial branch provides cutaneous sensation to craniolateral forearm and dorsal surface of manus, specifically digits III and IV. Vital for sensing 'knuckling' or dorsal placement.<br><br><b>LESION HIERARCHY:</b><br><br><b>High (Proximal) Lesion:</b> Above triceps branches. <i>Sign:</i> 'Dropped Elbow'—olecranon drops ventrally. Carpus and fetlock flex due to reciprocal tension. Toe drags. Cannot bear weight. Limb appears 'too long.'<br><br><b>Low (Distal) Lesion:</b> In musculospiral groove. <i>Sign:</i> 'Knuckled Fetlock'—triceps spared (can lock shoulder), but distal extensors paralyzed. Animal stands with carpus/fetlock partially flexed. <i>Crucial Distinction:</i> If examiner manually places hoof flat and pushes knee back, cow CAN bear weight because triceps maintains column.",
+            comparative: [
+                { species: "Dog", note: "More susceptible to complete radial paralysis due to less redundant innervation. Different gait compensation." },
+                { species: "Horse", note: "Radial nerve paralysis similar presentation but nerve emerges from groove more cranially. Recumbency neuropathy common in anesthesia." }
+            ],
+            clinical: "<b>Compression Neuropathy:</b> 'Saturday Night Paralysis' in cattle from lying on hard surfaces. <b>Fracture Prognosis:</b> Humeral fractures involving the groove carry guarded prognosis for radial recovery. <b>Diagnostic Test:</b> Manual extension test distinguishes high vs low lesions—if triceps functional, manual placement allows weight bearing.",
+            imgCode: "radial_nerve"
+        },
+        {
+            title: "Median Nerve",
+            desc: "<b>The Flexor Chief</b><br>- <b>Origin:</b> C8, T1, T2 (caudal roots)<br>- <b>Path:</b> Medial arm → Carpal canal → Palmar foot<br>- <b>Motor:</b> Flexor Carpi Radialis, Flexor Digitorum Superficialis, FDP (radial/humeral heads)<br>- <b>Sensory:</b> Medial and palmar aspect of foot<br><br><b>Key Relationships:</b><br>Forms Ansa Axillaris with musculocutaneous nerve around axillary artery. Passes deep to Pronator Teres (fibrous band in cattle) and through Carpal Canal.<br><br><b>Paralysis Signs:</b> Loss of flexion, 'sinking' fetlock (hyperextension), 'slapping' gait (hoof not lifted crisply), NO withdrawal on medial heel bulb.",
+            eliteDesc: "<b>THE GRIPPING MECHANISM OPERATOR</b><br><br>While the Radial nerve provides structural support, the Median nerve operates the gripping mechanism—essential for traction, propulsion, and navigating uneven terrain.<br><br><b>ORIGIN & FORMATION:</b><br>Formed by C8, T1, and T2 roots. Usually arises from common trunk with Ulnar nerve, separating in mid-arm region. Forms the <b>Ansa Axillaris</b> (loop) with musculocutaneous nerve wrapping around axillary artery—intimate relationship means arterial aneurysms or trauma directly produce median neuropathy.<br><br><b>TOPOGRAPHIC COURSE:</b><br><br>1. <b>Axillary/Brachial:</b> Descends medial aspect of arm, cranial to brachial artery. Palpable on medial elbow, protected only by sparse musculature and skin.<br><br>2. <b>Antebrachial:</b> Passes deep to Pronator Teres (fibrous band in cattle—rudimentary muscle) and runs deep to Flexor Carpi Radialis.<br><br>3. <b>Carpal Canal:</b> Passes through Carpal Tunnel deep to flexor retinaculum alongside massive flexor tendons. <b>Vulnerable to compression</b> from carpal synovitis or tenosynovitis.<br><br><b>MOTOR SUPPLY:</b><br>• Flexor Carpi Radialis (FCR): Carpal flexion<br>• Flexor Digitorum Superficialis (FDS): Flexes digit at proximal interphalangeal joint (pasture joint)<br>• Flexor Digitorum Profundus (FDP) - Radial and Humeral heads: Powerhouse of digital flexion, flexing distal interphalangeal joint (coffin joint)<br>• Pronator Teres: Rudimentary in cattle<br><br><i>Functional Rationale:</i> Strong flexion required to pull hoof off ground (swing phase) and dig toes for propulsion (stance phase).<br><br><b>SENSORY DISTRIBUTION:</b><br>Supplies medial and palmar aspect of the foot. Most clinically evident deficit area.<br><br><b>CLINICAL PRESENTATION:</b><br><br><b>Motor Deficit:</b><br>• Loss of flexion power<br>• Slight 'sinking' of fetlock during weight bearing (hyperextension) due to loss of muscular tone on flexor tendons<br>• 'Slapping' gait—hoof not lifted crisply in swing phase<br><br><b>Sensory Deficit (Definitive):</b><br>Anesthesia of medial and palmar foot. <b>Key Test:</b> Cow will NOT withdraw limb when medial bulb of heel is pinched (crossed with lateral/Ulnar territory).<br><br><b>NERVE BLOCK PROTOCOL:</b><br><b>Site:</b> Medial proximal forearm<br><b>Landmark:</b> Just distal to elbow joint, cranial to brachial artery<br><b>Technique:</b> 20-gauge, 1.5-inch needle. <b>Aspiration mandatory</b> to avoid intravascular injection. Deposit 10-15mL Lidocaine.<br><b>Result:</b> Anesthesia of palmar foot majority (except lateral aspect supplied by Ulnar).",
+            comparative: [
+                { species: "Dog", note: "Passes between two heads of pronator teres (fleshy muscle). Carpal tunnel syndrome documented." },
+                { species: "Horse", note: "Similar course but larger carpal canal. Used for 'High 4-point' block at medial aspect." }
+            ],
+            clinical: "<b>Carpal Tunnel Syndrome:</b> Rare in cattle but possible with severe carpal hygroma/synovitis compressing nerve in canal. <b>Traction Neuropathy:</b> Avulsion from C8-T1 roots in breeding injuries. <b>Anesthetic Use:</b> Median block combined with Ulnar block = 'High Volar' block for complete palmar desensitization.",
+            imgCode: "median_nerve"
+        },
+        {
+            title: "Ulnar Nerve",
+            desc: "<b>The Flexor Assistant</b><br>- <b>Origin:</b> C8, T1, T2 (most caudal roots)<br>- <b>Path:</b> Diverges caudally from median → passes caudal to medial epicondyle ('funny bone') → groove between FCU and Ulnaris Lateralis<br>- <b>Motor:</b> Flexor Carpi Ulnaris, FDP (ulnar head), Interosseous muscles (fetlock support)<br>- <b>Sensory:</b> Lateral foot, caudal forearm<br><br><b>Clinical Signs:</b> 'Knuckling' (fetlock sinking due to suspensory weakness), anesthesia lateral foot.",
+            eliteDesc: "<b>THE LATERAL SPECIALIST</b><br><br>The Ulnar nerve is the partner to the Median, handling the 'outer' (lateral) duties of the limb—carpal flexion via ulnar side and critical fetlock support via intrinsic muscles.<br><br><b>ORIGIN & SEPARATION:</b><br>Derived from most caudal roots (C8-T2). Separates from median nerve in arm and diverges caudally toward elbow.<br><br><b>TOPOGRAPHIC LANDMARKS:</b><br><br>1. <b>Medial Epicondyle:</b> Passes caudal to this bony prominence—bovine equivalent of the 'funny bone.' Here it is superficial and can be palpated/rolled against bone.<br><br>2. <b>Antebrachial Groove:</b> Enters forearm between two heads of Flexor Carpi Ulnaris (FCU), descending in groove between FCU and Ulnaris Lateralis.<br><br>3. <b>Division:</b> Just proximal to accessory carpal bone, splits into:<br>• <b>Dorsal Branch:</b> Cutaneous to lateral carpus/metacarpus<br>• <b>Palmar Branch:</b> Joins median nerve branches in digital nerves<br><br><b>MOTOR SUPPLY:</b><br>• <b>Flexor Carpi Ulnaris (FCU):</b> Powerful ulnar flexor of carpus, counterbalancing FCR<br>• <b>Flexor Digitorum Profundus (FDP) - Ulnar head:</b> Assists median-supplied heads in digital flexion<br>• <b>Interosseous Muscles:</b> <b>Critical suspensory function</b>—these are the suspensory muscles of the fetlock providing passive support via check ligaments<br><br><i>Functional Synthesis:</i> Provides fine-tuning of flexion and crucial intrinsic support of the fetlock.<br><br><b>SENSORY DISTRIBUTION:</b><br>• Dorsal branch: Lateral aspect of carpus and forearm<br>• Palmar branch: Lateral aspect of the foot and caudal forearm<br><br><b>CLINICAL PRESENTATION:</b><br><br><b>Motor Deficit:</b><br>'Knuckling' of the fetlock—subtle compared to radial paralysis. Because Ulnar innervates the interossei (suspensory apparatus), paralysis weakens suspensory tone causing the fetlock to sink or knuckle slightly during weight bearing.<br><br><b>Sensory Deficit (Diagnostic):</b><br>Anesthesia of lateral aspect of foot and caudal forearm—distinctive signature differentiating from median paralysis (medial anesthesia).<br><br><b>NERVE BLOCK PROTOCOL:</b><br><b>Site:</b> Caudal distal forearm, ~10cm proximal to accessory carpal bone<br><b>Landmark:</b> Palpable groove between FCU and Ulnaris Lateralis<br><b>Technique:</b> Superficial injection (5-10mL). Needle placed in groove.<br><b>Standard Practice:</b> Rarely performed alone—almost always paired with Median block for complete palmar foot desensitization ('High Volar' equivalent).",
+            comparative: [
+                { species: "Dog", note: "Dorsal branch larger, supplies 5th digit heavily. 'Claw paralysis' from ulnar lesion described." },
+                { species: "Horse", note: "Similar groove location. Used in 'Low 4-point' block at button of splint bone level." }
+            ],
+            clinical: "<b>Suspensory Failure:</b> Combined median/ulnar lesions cause complete loss of deep flexor function and suspensory collapse—fetlock drops to ground. <b>Chronic Neuropathy:</b> cattle with chronic ulnar damage develop asymmetric hoof wear on lateral digit (IV) due to proprioceptive loss and abnormal landing.",
+            imgCode: "ulnar_nerve"
+        },
+        {
+            title: "Suprascapular Nerve",
+            desc: "<b>Shoulder Stabilizer</b><br>- <b>Origin:</b> Strictly C6 and C7 (most cranial)<br>- <b>Course:</b> Short, direct path between supraspinatus/subscapularis → crosses neck of scapula at scapular notch<br>- <b>Motor ONLY:</b> No sensory fibers<br>- <b>Targets:</b> Supraspinatus (extends shoulder), Infraspinatus (prevents abduction)<br><br><b>Vulnerability:</b> Winding around neck of scapula like rope over pulley—direct blows or traction crush nerve against bone.",
+            eliteDesc: "<b>THE DYNAMIC LIGAMENT</b><br><br>The Suprascapular nerve is unique among the 'large six' as being purely motor (no cutaneous distribution). It serves as the primary stabilizer of the shoulder joint through its two target muscles.<br><br><b>STRICT ORIGIN:</b><br>Arises ONLY from C6 and C7. Most cranial major nerve of plexus. Short, direct course minimizes stretch but creates compression vulnerability.<br><br><b>ANATOMICAL COURSE:</b><br>Courses between supraspinatus and subscapularis muscles, crosses cranial border of scapula at the <b>scapular notch</b> (vestment for passage).<br><br><b>MOTOR FUNCTIONS:</b><br><br>1. <b>Supraspinatus:</b><br>• <b>Action:</b> Extends shoulder joint<br>• <b>Functional Role:</b> Initiates advancement of limb in protraction<br><br>2. <b>Infraspinatus:</b><br>• <b>Action:</b> Flexes shoulder, laterally rotates humerus<br>• <b>Critical Secondary Function:</b> Acts as <b>lateral collateral ligament of the shoulder</b>. The massive tendon blends with joint capsule to prevent the humeral head from popping outward (abduction) during weight bearing.<br><br><b>THE PULLEY MECHANISM:</b><br>As the nerve winds around the 'neck' of the scapula, it acts like a rope over a pulley. This creates the primary vulnerability:<br><br>• <b>Direct Trauma:</b> Blows from gates, hitting chute sides<br>• <b>Traction Injury:</b> Excessive backward pulling of limb (calving assistance, falls)<br>• <b>Proximal Humeral Fractures:</b> Displacement at neck of scapula<br><br><b>SWEENEY (Suprascapular Neuropathy):</b><br><br><b>Pathophysiology:</b> Crush injury → Wallerian degeneration → rapid, profound neurogenic atrophy of both muscles.<br><br><b>Clinical Signs:</b><br>• <b>Prominent Spine:</b> Within 1-2 weeks, scapular spine becomes dramatically visible due to supraspinatus/infraspinatus wasting<br>• <b>'Shoulder Slip':</b> When placing weight on limb, the shoulder joint exhibits visible lateral excursion (subluxation). The humeral head 'pops' outward because the infraspinatus no longer acts as the dynamic lateral collateral ligament.<br>• <b>Gait:</b> Circumduction to avoid adduction stress on unstable joint<br><br><b>Prognosis:</b> If axons only stretched (neuropraxia), recovery possible in 2-3 months. If axonotmesis (crush), permanent muscle atrophy results in cosmetic defect though animal may remain functional for breeding.",
+            comparative: [
+                { species: "Dog", note: "Sweeney rare. Different gait compensation (weight shifted to front). Acromion anatomy different." },
+                { species: "Horse", note: "Classic Sweeney well-documented. Nerve more accessible for surgical decompression at notch." }
+            ],
+            clinical: "<b>Sweeney Diagnosis:</b> Key differentiator from brachial plexus injury is PRESERVATION OF SENSATION (pure motor nerve) and ability to bear weight (limb doesn't drag). <b>Atrophy Pattern:</b> Muscle wasting makes spine appear more prominent—classic 'shark fin' appearance on lateral scapula. <b>Pain:</b> Usually non-painful unless acute neuritis present.",
+            imgCode: "suprascapular_nerve"
+        },
+        {
+            title: "Musculocutaneous Nerve",
+            desc: "<b>Elbow Flexor & Medial Sensory</b><br>- <b>Origin:</b> C6, C7<br>- <b>Path:</b> Runs fused with median nerve proximally (Ansa Axillaris), then dives between biceps and brachialis<br>- <b>Motor:</b> Biceps Brachii, Brachialis (primary elbow flexors)<br>- <b>Sensory:</b> Medial Cutaneous Antebrachial Nerve → medial forearm skin<br><br><b>Clinical:</b> Injury weakens elbow flexion (often masked by extensor tone), causes medial forearm anesthesia.",
+            eliteDesc: "<b>THE ELBOW FLEXOR & MEDIAL SENSORY SUPPLIER</b><br><br>The Musculocutaneous nerve serves dual roles: motor control of the primary elbow flexors and sensory innervation of the medial forearm.<br><br><b>ORIGIN & FUSION:</b><br>Arises from C6-C7. Unlike other species where it separates early, in cattle it runs distally <b>fused with the median nerve in the proximal arm</b> forming the Ansa Axillaris loop around the axillary artery. This is both a landmark and a surgical hazard.<br><br><b>MOTOR COURSE:</b><br>Separates from median nerve and dives deep between:<br>• Biceps Brachii (cranial)<br>• Brachialis (caudal)<br><br><b>MOTOR TARGETS:</b><br>• <b>Biceps Brachii:</b> Primary elbow flexor, also stabilizes shoulder via its tendon<br>• <b>Brachialis:</b> Synergistic elbow flexor, powerful in cattle for pulling limb forward during recovery<br><br><i>Functional Note:</i> These muscles are essential for the 'recovery stroke'—pulling the advanced limb back toward the body during the stride.<br><br><b>SENSORY DISTRIBUTION:</b><br>Distal continuation becomes the <b>Medial Cutaneous Antebrachial Nerve</b>:<br>• Exits between biceps and brachialis<br>• Supplies skin on medial aspect of forearm from elbow to carpus<br>• Used to test C6-C7 integrity<br><br><b>CLINICAL SIGNIFICANCE:</b><br><br><b>Motor Deficit:</b> Weakens elbow flexion but often <b>clinically masked</b> because:<br>1. Extensor tone (triceps/radial) often dominates in standing cattle<br>2. Gravity assists flexion during swing phase<br>3. Weight bearing appears normal<br><br>Deficit only apparent during attempts at rapid flexion or climbing.<br><br><b>Sensory Deficit:</b> Anesthesia of medial forearm skin. Useful for neuroanatomic localization (differentiates from C8-T1 lesions which spare this area).<br><br><b>ASSOCIATION WITH AXILLARY ARTERY:</b><br>Because of the Ansa Axillaris relationship, hematoma or thrombosis of axillary artery frequently affects both median AND musculocutaneous nerves simultaneously.",
+            comparative: [
+                { species: "Dog", note: "Separates earlier from median nerve. Innervates brachialis more extensively." },
+                { species: "Horse", note: "Similar ansa axillaris formation. Critical for 'cubitators' (elbow flexors)." }
+            ],
+            clinical: "<b>Axillary Space Masses:</b> Lymphosarcoma or abscesses in axillary lymph nodes commonly compress this nerve with median nerve, causing 'dropped elbow' mimicking radial paralysis but with different sensory deficits. <b>Dehorning Trauma:</b> Rarely injured during improper dehorning if entry too caudal and deep.",
+            imgCode: "musculocutaneous_nerve"
+        },
+        {
+            title: "Axillary Nerve",
+            desc: "<b>Lateral Shoulder Controller</b><br>- <b>Origin:</b> C6, C7<br>- <b>Path:</b> Dives into quadrangular space (between subscapularis and teres major) to reach lateral shoulder<br>- <b>Motor:</b> Deltoid, Teres Major, Teres Minor (shoulder flexors)<br>- <b>Sensory:</b> Cranial Lateral Cutaneous Brachial Nerve → lateral shoulder skin<br><br><b>Clinical:</b> Atrophy of deltoid, small patch of anesthesia over lateral shoulder. Less debilitating than suprascapular injury.",
+            eliteDesc: "<b>THE LATERAL SHOULDER CONTROLLER</b><br><br>The Axillary nerve supplies the 'meat' muscles of the lateral shoulder—the flexors and rotators that fine-tune shoulder position during the stride.<br><br><b>ORIGIN & PATHWAY:</b><br>Arises from C6-C7 roots. Takes characteristic deep course through the <b>quadrangular space</b>—an anatomical interval bounded by:<br>• Cranial: Subscapularis<br>• Caudal: Teres Major<br>• Lateral: Humeral shaft<br><br>Emerges into lateral shoulder region to innervate the deltoid complex.<br><br><b>MOTOR SUPPLY:</b><br>• <b>Deltoid (Deltoideus):</b> Shoulder flexion and abduction<br>• <b>Teres Major:</b> Shoulder extension and adduction (assists latissimus dorsi)<br>• <b>Teres Minor:</b> Lateral stabilization and rotation<br><br><i>Functional Role:</b> These muscles provide the 'shock absorption' and positioning control for the shoulder joint during impact phase of stride.<br><br><b>SENSORY DISTRIBUTION:</b><br>Continues as the <b>Cranial Lateral Cutaneous Brachial Nerve</b>:<br>• Emerges at cranial border of deltoid or through muscle belly<br>• Supplies skin over point of the shoulder and lateral brachium<br>• Overlaps with radial nerve territory<br><br><b>CLINICAL PRESENTATION:</b><br><br><b>Motor Deficits:</b> Less functionally debilitating than suprascapular nerve injury because infraspinatus (radial stabilization) remains intact.<br>• Subtle atrophy of deltoid—flattening of lateral shoulder contour<br>• Weakness in shoulder flexion and abduction<br>• Normal weight bearing maintained<br><br><b>Sensory Deficits:</b> Small patch of anesthesia over lateral shoulder (often missed unless specifically tested).<br><br><b>INJURY MECHANISMS:</b><br>• <b>Cranial dislocations of humerus:</b> Humeral head compresses nerve against caudal border of subscapularis<br>• <b>Deep shoulder wounds:</b> Penetrating trauma to quadrangular space<br>• <b>Fractures:</b> Proximal humeral fractures involving surgical neck",
+            comparative: [
+                { species: "Dog", note: "More susceptible to injury due to mobility of shoulder joint. Quadrangular space smaller." },
+                { species: "Horse", note: "Deltoid complex less developed. Similar quadrangular space anatomy." }
+            ],
+            clinical: "<b>Differential Diagnosis:</b> Isolated axillary injury rarely causes lameness visible at walk. Recognized by deltoid atrophy + intact sensation over lateral forearm (radial territory) combined with small sensory patch deficit. <b>Prognosis:</b> Better than suprascapular injury—often recovers with rest as shoulder position less critical for weight bearing.",
+            imgCode: "axillary_nerve"
+        },
+        {
+            title: "Regional Anesthesia - Nerve Blocks",
+            desc: "<b>Clinical Blocking Protocols</b><br><br><b>1. Bier Block (IVRA):</b> Gold standard for foot surgery. Tourniquet at mid-metacarpus, 20-30mL lidocaine in dorsal common digital vein. Max 90 mins.<br><br><b>2. High Volar Block:</b> Median (medial elbow, cranial to brachial artery + Ulnar (caudal forearm, groove between FCU/Ulnaris Lateralis).<br><br><b>3. Four-Point Block:</b> Blocks dorsal (radial) and palmar (median/ulnar) coverage at fetlock level.<br><br><b>4. Ring Block:</b> Circumferential at mid-metacarpus—simple but fails for deep bone pain.",
+            eliteDesc: "<b>REGIONAL ANESTHESIA IN BOVINE FORELIMB</b><br><br>Regional anesthesia is critical for digit surgery (amputation, corn removal, septic arthritis lavage). Unlike equine practice (diagnostic lameness localization), bovine blocks are primarily therapeutic—to allow standing surgery.<br><br><b>ANATOMICAL CONSIDERATION:</b><br>Cattle stand on TWO digits (III and IV) vs one in horses. Each digit has:<br>• <b>Axial side:</b> Facing interdigital cleft<br>• <b>Abaxial side:</b> Facing outward<br><br><b>NERVE DISTRIBUTION TO DIGITS:</b><br>• <b>Median:</b> Axial sides of BOTH digits + Abaxial side of medial digit (III)<br>• <b>Ulnar:</b> Abaxial side of lateral digit (IV)<br><br><i>Implication:</i> Simple ring block insufficient for deep structures—must target specific nerves.<br><br><b>BLOCK TECHNIQUES:</b><br><br><b>1. INTRAVENOUS REGIONAL ANESTHESIA (IVRA / Bier Block) - GOLD STANDARD</b><br>• <b>Target:</b> All distal nerves via vascular delivery<br>• <b>Landmark:</b> Dorsal Common Digital Vein or any accessible distal vein<br>• <b>Equipment:</b> Rubber tourniquet (ESmarch bandage or wide rubber tubing) at mid-metacarpus<br>• <b>Agent:</b> 20-30mL 2% Lidocaine (avoid epinephrine)<br>• <b>Mechanism:</b> Anesthetic diffuses from vessels to perivascular nerves<br>• <b>Advantages:</b> Complete desensitization distal to tourniquet, bilateral, reliable<br>• <b>Limitations:</b> <b>90-minute maximum</b> (ischemia risk), proximal sites unsafe<br><br><b>2. HIGH VOLAR BLOCK (Proximal Palmar)</b><br><b>Median Block:</b><br>• Site: Medial proximal forearm, just distal to elbow<br>• Landmark: Cranial to brachial artery (palpable pulse)<br>• Needle: 20G x 1.5 inch<br>• Volume: 15-20mL<br>• <b>Critical:</b> ASPIRATE before injection (avoid intra-arterial)<br>• Effect: Medial digit (III), axial aspects both digits, flexor muscles<br><br><b>Ulnar Block:</b><br>• Site: Caudal distal forearm, ~10cm proximal to accessory carpal<br>• Landmark: Palpable groove between Flexor Carpi Ulnaris and Ulnaris Lateralis<br>• Volume: 10mL<br>• Effect: Lateral digit (IV) abaxial aspect, lateral skin<br><br><b>3. FOUR-POINT BLOCK (Bovine Modification)</b><br>For complete desensitization at fetlock:<br>1. <b>Dorsal Metacarpal:</b> Radial branches—subcutaneous infiltration across dorsal fetlock<br>2. <b>Axial Palmar:</b> Median branches—deep injection in interdigital space/axial groove<br>3. <b>Abaxial Sesamoid (Medial):</b> Median nerve—abaxial aspect medial proximal sesamoid<br>4. <b>Abaxial Sesamoid (Lateral):</b> Ulnar nerve—abaxial aspect lateral proximal sesamoid<br><br><b>4. RING BLOCK</b><br>• Technique: Circumferential subcutaneous infiltration at mid-metacarpus<br>• Volume: 30-40mL<br>• Limitations: Blocks only superficial radial, ulnar, median cutaneous branches. <b>Often fails for deep bone/joint pain.</b> High volume required.<br><br><b>5. SPECIFIC NERVE TARGET BLOCKS</b><br><b>Abaxial Sesamoid Block:</b><br>• Single digit procedures (claw amputation)<br>• Targets: Palmar Digital Nerves (median/ulnar distal continuations)<br>• Site: Abaxial surface of proximal sesamoid bones at fetlock level<br>• Volume: 5mL per site<br>• Effect: Complete anesthesia of specific digit distal to block",
+            comparative: [
+                { species: "Horse", note: "IVRA similar but volumes adjusted for size. 'Low 4-point' uses different landmarks (buttons of splint bones)." },
+                { species: "Dog", note: "Regional blocks less common; general anesthesia preferred. Similar median/ulnar anatomy but different landmarks." }
+            ],
+            clinical: "<b>Safety Protocols:</b> IVRA tourniquet must be released SLOWLY to prevent lidocaine toxicity (seizures). Never exceed 4mg/kg lidocaine total dose. <b>Troubleshooting:</b> If block fails, usually due to insufficient volume (bovine tissues require MORE than equine) or injection too proximal (tourniquet effect blocks diffusion). <b>Alternative:</b> When tourniquet contraindicated (infection, dermatitis), use specific nerve blocks rather than IVRA.",
+            imgCode: "nerve_blocks"
+        }
+    ],
+    
+    "Angiology": []  // READY FOR YOUR BLOOD VESSEL DATA
+};
