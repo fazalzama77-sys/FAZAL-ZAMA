@@ -1,357 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IVRI | Exploring Anatomy through Technology</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS - Link to external stylesheet -->
-    <link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVRI | Exploring Anatomy through Technology</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS - Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhanced-quiz.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <base target="_blank">
 </head>
+
 <body>
 
-    <!-- ================= THEME TOGGLE (Moved to Top-Left to avoid overlap) ================= -->
-    <button id="theme-toggle" class="theme-toggle-btn" onclick="app.toggleTheme()" title="Switch to Professional Mode">
-        <i class="fas fa-user-md"></i> <span id="theme-text">Professional Mode</span>
-    </button>
+  <!-- ================= THEME TOGGLE (Moved to Top-Left to avoid overlap) ================= -->
+  <button id="theme-toggle" class="theme-toggle-btn" onclick="app.toggleTheme()" title="Switch to Professional Mode">
+    <i class="fas fa-user-md"></i> <span id="theme-text">Professional Mode</span>
+  </button>
 
-    <!-- ================= VIEW 1: LANDING ================= -->
-    <section id="landing-view" class="view-section active">
-        <div class="badge">IVRI BAREILLY • ANATOMY DEPARTMENT</div>
-        <h1 class="hero-title">EXPLORING ANATOMY<br>THROUGH TECHNOLOGY</h1>
-        
-        <div class="portal-grid">
-            
-            <!-- OPTION A: THE ATLAS -->
-            <div class="portal-card card-atlas" onclick="app.loadView('atlas')">
-                <i class="fas fa-star orb-icon" style="color: var(--atlas-gold);"></i>
-                <div class="card-label">THE ATLAS</div>
-                <div class="card-sub">
-                    REGIONAL ANATOMY<br>
-                    HIGH-RESOLUTION DATABASE<br>
-                    QUIZ & VISUALS
-                </div>
-            </div>
+  <!-- ================= SEARCH BUTTON ================= -->
+  <button id="search-toggle" class="search-toggle-btn" onclick="searchEngine.toggle()" title="Search (Ctrl+K)">
+    <i class="fas fa-search"></i>
+  </button>
 
-            <!-- OPTION B: THE WHY -->
-            <div class="portal-card card-why" onclick="app.loadView('why')">
-                <i class="fas fa-question orb-icon" style="color: var(--why-cyan);"></i>
-                <div class="card-label">THE WHY</div>
-                <div class="card-sub">
-                    BIOMECHANICAL ENGINE<br>
-                    FUNCTIONAL LOGIC<br>
-                    ENGINEERING ANALOGIES
-                </div>
-            </div>
-
+  <!-- ================= SEARCH OVERLAY ================= -->
+  <div id="search-overlay" class="search-overlay" onclick="if(event.target===this) searchEngine.closeOverlay()">
+    <div class="search-container">
+      <div class="search-header">
+        <div class="search-input-wrapper">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="search-input" class="search-input"
+            placeholder="Search anatomy... (bones, muscles, structures)" oninput="searchEngine.onInput(event)"
+            autocomplete="off">
+          <kbd class="search-kbd">ESC</kbd>
         </div>
-
-        <!-- FOOTER -->
-        <footer class="footer">
-            <div class="footer-logo-space">
-                <i class="fas fa-image"></i> LOGO
-            </div>
-            <div class="footer-text">
-                Created By - <b>Fazal Zama (B0-350-2025)</b> IVRI, BAREILLY<br>
-                Under The Guidance Of - <b>Senior Scientist Dr. Abhinov Verma Sir</b><br>
-                (Anatomy Department), IVRI, BAREILLY
-            </div>
-        </footer>
-    </section>
-
-    <!-- ================= VIEW 2: ATLAS ================= -->
-    <section id="atlas-view" class="view-section">
-        <div style="max-width: 1400px; margin: 0 auto;">
-            
-            <div class="nav-bar">
-                <button class="nav-btn" onclick="app.atlasBack()">
-                    <i class="fas fa-arrow-left"></i> BACK
-                </button>
-                <div class="badge" id="atlas-crumb" style="border-color: var(--atlas-gold); color: var(--atlas-gold);">ATLAS DATABASE</div>
-                
-                <!-- Right side: Elite Toggle + Quiz -->
-                <div style="display: flex; gap: 10px; align-items: center;">
-                    <!-- ELITE TOGGLE (Only visible when viewing content) -->
-                    <button class="nav-btn elite-toggle-btn" id="elite-toggle" onclick="app.toggleElite()" style="display:none;">
-                        <i class="fas fa-graduation-cap"></i> <span id="elite-text">Elite View</span>
-                    </button>
-                    <button class="nav-btn" style="border-color: var(--atlas-gold); color: var(--atlas-gold);" onclick="quizApp.openMenu()">
-                        <i class="fas fa-brain"></i> QUIZ MODE
-                    </button>
-                </div>
-            </div>
-
-            <!-- SELECTOR GRID (Region/System) -->
-            <div id="atlas-selector" class="portal-grid" style="gap: 30px;">
-                <!-- Injected by JavaScript -->
-            </div>
-
-            <!-- CONTENT WORKSPACE -->
-            <div id="atlas-content" class="workspace" style="display:none;">
-                <div class="sidebar" id="topic-list">
-                    <!-- Topics injected by JavaScript -->
-                </div>
-                <div class="content-area" id="detail-panel">
-                    <div style="height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0.3; color: var(--text-mute);">
-                        <i class="fas fa-crosshairs" style="font-size:3rem; margin-bottom:20px;"></i>
-                        <div>AWAITING INPUT SELECTION</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ================= VIEW 3: THE WHY ================= -->
-    <section id="why-view" class="view-section">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div class="nav-bar">
-                <button class="nav-btn" onclick="app.loadView('landing')">
-                    <i class="fas fa-home"></i> HOME
-                </button>
-                <div class="badge" style="border-color: var(--why-cyan); color: var(--why-cyan);">BIOMECHANICS ENGINE</div>
-            </div>
-
-            <!-- WHY CONTENT START -->
-            <header>
-                <div class="container">
-                    <div class="subtitle">Veterinary Biomechanics</div>
-                    <h1>The Why of Anatomy</h1>
-                    <p style="color: var(--text-mute); max-width: 600px; margin: 0 auto;">
-                        A functional comparison of domestic species. Understanding the engineering behind the structure.
-                    </p>
-                </div>
-            </header>
-
-            <div class="container">
-                <!-- Controls -->
-                <section class="controls">
-                    <div class="search-wrapper">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search structure, species, or function...">
-                    </div>
-                    <div class="filters">
-                        <button class="filter-btn active" data-filter="all">All Systems</button>
-                        <button class="filter-btn" data-filter="forelimb">Forelimb</button>
-                        <button class="filter-btn" data-filter="hindlimb">Hindlimb</button>
-                        <button class="filter-btn" data-filter="axial">Axial & Visceral</button>
-                    </div>
-                    <!-- AI Button -->
-                    <button class="ai-btn" onclick="startQuiz()">
-                        <i class="fas fa-brain"></i> ✨ Challenge Me
-                    </button>
-                </section>
-
-                <!-- Grid -->
-                <main class="anatomy-grid" id="anatomyGrid">
-                    <!-- Cards injected via JavaScript -->
-                </main>
-
-                <!-- Footer -->
-                <footer class="site-footer">
-                    CREATED BY FAZAL ZAMA (B0-350-2025) IVRI UG
-                </footer>
-            </div>
-
-            <!-- Modal Overlay -->
-            <div class="modal-overlay" id="modalOverlay">
-                <div class="modal-content">
-                    <button class="modal-close" onclick="closeModal()">&times;</button>
-                    
-                    <div class="modal-image-col">
-                        <img src="" alt="Anatomy Diagram" id="modalImg" class="modal-img">
-                    </div>
-                    
-                    <div class="modal-text-col">
-                        <span class="modal-category" id="modalCategory">Category</span>
-                        <h2 class="modal-title" id="modalTitle">Structure Name</h2>
-                        <div class="modal-comparison-tag" id="modalComparison">Vs. Tag</div>
-                        
-                        <div class="modal-section">
-                            <div class="modal-section-header">
-                                <h3><i class="fas fa-microchip"></i> The Biomechanical "Why"</h3>
-                                <button class="sm-btn" id="simplifyBtn" onclick="explainLikeEngineer()">✨ Bio-Engineer Analogy</button>
-                            </div>
-                            <p class="modal-desc" id="modalWhy">Explanation goes here.</p>
-                            <!-- AI Response Area -->
-                            <div id="aiResponseBox" class="ai-response-box">
-                                <i class="fas fa-robot"></i> <span id="aiResponseText"></span>
-                            </div>
-                        </div>
-
-                        <div class="modal-section">
-                            <div class="modal-section-header">
-                                <h3><i class="fas fa-stethoscope"></i> Clinical Relevance</h3>
-                            </div>
-                            <div class="modal-clinical" id="modalClinical">
-                                Clinical notes go here.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quiz Overlay -->
-            <div class="quiz-overlay" id="quizOverlay">
-                <div class="quiz-card">
-                    <button class="modal-close" onclick="closeQuiz()">&times;</button>
-                    <div style="margin-bottom: 20px; color: var(--why-cyan); font-family: var(--font-code);">
-                        <i class="fas fa-sparkles"></i> ENGINEERING CHALLENGE
-                    </div>
-                    <div id="quizContent">
-                        <div class="quiz-question" id="quizQuestion">Loading challenge...</div>
-                        <div class="quiz-options" id="quizOptions">
-                            <!-- Options injected here -->
-                        </div>
-                        <div class="quiz-feedback" id="quizFeedback"></div>
-                        <button class="ai-btn" id="nextQuizBtn" style="margin: 20px auto; display:none;" onclick="generateQuiz()">Next Question</button>
-                    </div>
-                </div>
-            </div>
-            <!-- WHY CONTENT END -->
-        </div>
-    </section>
-
-    <!-- ================= ULTIMATE QUIZ OVERLAY ================= -->
-<div id="quiz-overlay">
-  <div class="quiz-modal">
-    
-    <button onclick="quizApp.close()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:var(--text-mute); cursor:pointer; z-index:10;"><i class="fas fa-times"></i></button>
-
-    <!-- STEP 1: REGION SELECTION -->
-    <div id="quiz-region-view" style="height:100%; display:block;">
-      <div style="text-align:center; margin-bottom:30px;">
-        <h2 style="color: var(--atlas-gold); margin-bottom:10px;">SELECT REGIONAL ANATOMY</h2>
-        <div style="font-family:var(--font-code); color:var(--text-mute); font-size:0.8rem;">STEP 1 OF 3</div>
       </div>
-      
-      <div class="quiz-menu-grid" id="region-grid">
-        <!-- Injected by JS -->
-      </div>
-    </div>
-
-    <!-- STEP 2: SYSTEM SELECTION -->
-    <div id="quiz-system-view" style="height:100%; display:none;">
-      <div style="text-align:center; margin-bottom:30px;">
-        <h2 style="color: var(--why-cyan); margin-bottom:10px;">SELECT SYSTEM</h2>
-        <div style="font-family:var(--font-code); color:var(--text-mute); font-size:0.8rem; margin-bottom:10px;" id="system-breadcrumb">REGION > SYSTEM</div>
-        <button onclick="quizApp.backToRegions()" class="nav-btn" style="padding:5px 15px; font-size:0.8rem;">
-          <i class="fas fa-arrow-left"></i> Back to Regions
-        </button>
-      </div>
-      
-      <div class="quiz-menu-grid" id="system-grid">
-        <!-- Injected by JS -->
-      </div>
-    </div>
-
-    <!-- STEP 3: FORMAT SELECTION -->
-    <div id="quiz-menu-view" style="height:100%; display:none;">
-      <div style="text-align:center; margin-bottom:30px;">
-        <h2 style="color: var(--atlas-gold); margin-bottom:10px;">SELECT CHALLENGE FORMAT</h2>
-        <div style="font-family:var(--font-code); color:var(--text-mute); font-size:0.8rem; margin-bottom:10px;" id="mode-breadcrumb">REGION > SYSTEM > FORMAT</div>
-        <button onclick="quizApp.backToSystems()" class="nav-btn" style="padding:5px 15px; font-size:0.8rem;">
-          <i class="fas fa-arrow-left"></i> Back to Systems
-        </button>
-      </div>
-      
-      <div class="quiz-menu-grid">
-        <div class="quiz-mode-card" onclick="quizApp.start('mcq')" id="mcq-card">
-          <i class="fas fa-list-ul" style="font-size:3rem; color:var(--why-cyan); margin-bottom:20px;"></i>
-          <h3>MULTIPLE CHOICE</h3>
-          <p style="color:var(--text-mute); font-size:0.8rem; margin-top:10px;" id="mcq-count">0 questions</p>
-        </div>
-        <div class="quiz-mode-card" onclick="quizApp.start('tf')" id="tf-card">
-          <i class="fas fa-check-circle" style="font-size:3rem; color:var(--atlas-gold); margin-bottom:20px;"></i>
-          <h3>TRUE / FALSE</h3>
-          <p style="color:var(--text-mute); font-size:0.8rem; margin-top:10px;" id="tf-count">0 questions</p>
-        </div>
-        <div class="quiz-mode-card" onclick="quizApp.start('fib')" id="fib-card">
-          <i class="fas fa-keyboard" style="font-size:3rem; color:#bd93f9; margin-bottom:20px;"></i>
-          <h3>FILL IN BLANKS</h3>
-          <p style="color:var(--text-mute); font-size:0.8rem; margin-top:10px;" id="fib-count">0 questions</p>
+      <div id="search-results" class="search-results">
+        <div class="search-empty">
+          <i class="fas fa-search" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.3;"></i>
+          <p>Search for bones, muscles, structures, quiz questions...</p>
+          <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 8px;"><kbd>Ctrl</kbd> + <kbd>K</kbd> to toggle search
+          </p>
         </div>
       </div>
     </div>
-    
-    <!-- QUIZ ACTIVE VIEW -->
-    <div id="quiz-active-view" style="display:none;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-family:var(--font-code); color:var(--text-mute); font-size:0.8rem;">
-        <span id="quiz-counter">Q 1/10</span>
-        <button onclick="quizApp.showAnalysis()" style="background:none; border:none; color:var(--why-cyan); cursor:pointer;">SUBMIT <i class="fas fa-chart-bar"></i></button>
-      </div>
-      
-      <div class="progress-container">
-        <div class="progress-bar" id="quiz-progress"></div>
-      </div>
-
-      <div style="flex-grow:1; overflow-y:auto; padding-right:10px;">
-        <div id="quiz-question" class="quiz-question-text">Loading...</div>
-        <div id="quiz-interaction-area"></div>
-      </div>
-
-      <div id="quiz-feedback" class="feedback-panel"></div>
-      
-      <div style="margin-top:20px; display:flex; justify-content:flex-end;">
-        <button class="nav-btn" id="next-q-btn" style="border-color: var(--atlas-gold); color: var(--atlas-gold); display:none;" onclick="quizApp.next()">
-          NEXT OPERATION <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- ANALYSIS VIEW -->
-    <div id="quiz-analysis-view" style="display:none; text-align:center; padding:20px; overflow-y:auto;">
-      <h2 style="color: var(--why-cyan); margin-bottom: 10px;">PERFORMANCE ANALYSIS</h2>
-      <div style="font-family:var(--font-code); color:var(--text-mute); margin-bottom:30px;">SESSION REPORT</div>
-      
-      <div class="stat-grid">
-        <div class="stat-box">
-          <span class="stat-val" id="score-val" style="color: #00ff9d;">0</span>
-          <span class="stat-label">CORRECT</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-val" id="wrong-val" style="color: #ff6b6b;">0</span>
-          <span class="stat-label">INCORRECT</span>
-        </div>
-      </div>
-
-      <div style="margin-bottom:30px;">
-        <div style="font-size:3rem; font-weight:800; color:var(--text-main);" id="accuracy-val">0%</div>
-        <div style="font-family:var(--font-code); color:var(--text-mute);">ACCURACY RATING</div>
-      </div>
-
-      <div style="background:rgba(255,215,0,0.1); border:1px solid var(--atlas-gold); padding:20px; border-radius:10px; margin-bottom:30px; text-align:left;">
-        <strong style="color:var(--atlas-gold); display:block; margin-bottom:10px;">PROFESSIONAL RECOMMENDATION:</strong>
-        <p id="analysis-text" style="color:var(--text-main); line-height:1.5;">...</p>
-      </div>
-
-      <button class="nav-btn" style="margin:0 auto; border-color:var(--text-main); color:var(--text-main);" onclick="quizApp.openMenu()">RETURN TO MENU</button>
-    </div>
-
   </div>
-</div>
 
-    <!-- Load JavaScript files - data first, then app logic -->
-    <!-- Regional Data -->
-<script src="data-forelimb.JS"></script>
-<script src="data-hindlimb.JS"></script>
-<script src="data-thorax.JS"></script>
-<script src="data-abdomen.JS"></script>
-<script src="data-head-neck.JS"></script>
-<script src="data-pelvis.JS"></script>
+  <!-- ================= VIEW 1: LANDING ================= -->
+  <section id="landing-view" class="view-section active">
+    <div class="badge">IVRI BAREILLY • ANATOMY DEPARTMENT</div>
+    <h1 class="hero-title">EXPLORING ANATOMY<br>THROUGH TECHNOLOGY</h1>
 
-<!-- Quiz & Why Sections -->
-<script src="data-quiz.JS"></script>
-<script src="data-why.JS"></script>
+    <div class="portal-grid">
 
-<!-- App Logic -->
-<script src="app.js"></script>
+      <!-- OPTION A: THE ATLAS -->
+      <div class="portal-card card-atlas" onclick="app.loadView('atlas')">
+        <i class="fas fa-star orb-icon" style="color: var(--atlas-gold);"></i>
+        <div class="card-label">THE ATLAS</div>
+        <div class="card-sub">
+          REGIONAL ANATOMY<br>
+          HIGH-RESOLUTION DATABASE<br>
+          QUIZ & VISUALS
+        </div>
+      </div>
+
+      <!-- OPTION B: THE WHY -->
+      <div class="portal-card card-why" onclick="app.loadView('why')">
+        <i class="fas fa-question orb-icon" style="color: var(--why-cyan);"></i>
+        <div class="card-label">THE WHY</div>
+        <div class="card-sub">
+          BIOMECHANICAL ENGINE<br>
+          FUNCTIONAL LOGIC<br>
+          ENGINEERING ANALOGIES
+        </div>
+      </div>
+
+      <!-- OPTION C: DASHBOARD -->
+      <div class="portal-card card-dashboard" onclick="app.loadView('dashboard')">
+        <i class="fas fa-chart-line orb-icon" style="color: #bd93f9;"></i>
+        <div class="card-label">DASHBOARD</div>
+        <div class="card-sub">
+          PERFORMANCE TRACKER<br>
+          QUIZ HISTORY<br>
+          TOPIC STRENGTHS
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-logo-space">
+        <i class="fas fa-image"></i> LOGO
+      </div>
+      <div class="footer-text">
+        Created By - <b>Fazal Zama (B0-350-2025)</b> IVRI, BAREILLY<br>
+        Under The Guidance Of - <b>Senior Scientist Dr. Abhinov Verma Sir</b><br>
+        (Anatomy Department), IVRI, BAREILLY
+      </div>
+    </footer>
+  </section>
+
+  <!-- ================= VIEW 2: ATLAS ================= -->
+  <section id="atlas-view" class="view-section">
+    <div style="max-width: 1400px; margin: 0 auto;">
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="app.atlasBack()">
+          <i class="fas fa-arrow-left"></i> BACK
+        </button>
+        <div class="badge" id="atlas-crumb" style="border-color: var(--atlas-gold); color: var(--atlas-gold);">ATLAS
+          DATABASE</div>
+
+        <!-- Right side: Elite Toggle + Quiz -->
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <!-- ELITE TOGGLE (Only visible when viewing content) -->
+          <button class="nav-btn elite-toggle-btn" id="elite-toggle" onclick="app.toggleElite()" style="display:none;">
+            <i class="fas fa-graduation-cap"></i> <span id="elite-text">Elite View</span>
+          </button>
+          <button class="nav-btn" style="border-color: var(--atlas-gold); color: var(--atlas-gold);"
+            onclick="quizApp.openMenu()">
+            <i class="fas fa-brain"></i> QUIZ MODE
+          </button>
+        </div>
+      </div>
+
+      <!-- SELECTOR GRID (Region/System) -->
+      <div id="atlas-selector" class="portal-grid" style="gap: 30px;">
+        <!-- Injected by JavaScript -->
+      </div>
+
+      <!-- CONTENT WORKSPACE -->
+      <div id="atlas-content" class="workspace" style="display:none;">
+        <div class="sidebar" id="topic-list">
+          <!-- Topics injected by JavaScript -->
+        </div>
+        <div class="content-area" id="detail-panel">
+          <div
+            style="height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0.3; color: var(--text-mute);">
+            <i class="fas fa-crosshairs" style="font-size:3rem; margin-bottom:20px;"></i>
+            <div>AWAITING INPUT SELECTION</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= VIEW 3: THE WHY ================= -->
+  <section id="why-view" class="view-section">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="app.loadView('landing')">
+          <i class="fas fa-home"></i> HOME
+        </button>
+        <div class="badge" style="border-color: var(--why-cyan); color: var(--why-cyan);">BIOMECHANICS ENGINE</div>
+      </div>
+
+      <!-- WHY CONTENT START -->
+      <header>
+        <div class="container">
+          <div class="subtitle">Veterinary Biomechanics</div>
+          <h1>The Why of Anatomy</h1>
+          <p style="color: var(--text-mute); max-width: 600px; margin: 0 auto;">
+            A functional comparison of domestic species. Understanding the engineering behind the structure.
+          </p>
+        </div>
+      </header>
+
+      <div class="container">
+        <!-- Controls -->
+        <section class="controls">
+          <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search structure, species, or function...">
+          </div>
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Systems</button>
+            <button class="filter-btn" data-filter="forelimb">Forelimb</button>
+            <button class="filter-btn" data-filter="hindlimb">Hindlimb</button>
+            <button class="filter-btn" data-filter="axial">Axial & Visceral</button>
+          </div>
+          <!-- AI Button -->
+          <button class="ai-btn" onclick="startQuiz()">
+            <i class="fas fa-brain"></i> ✨ Challenge Me
+          </button>
+        </section>
+
+        <!-- Grid -->
+        <main class="anatomy-grid" id="anatomyGrid">
+          <!-- Cards injected via JavaScript -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+          CREATED BY FAZAL ZAMA (B0-350-2025) IVRI UG
+        </footer>
+      </div>
+
+      <!-- Modal Overlay -->
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+
+          <div class="modal-image-col">
+            <img src="" alt="Anatomy Diagram" id="modalImg" class="modal-img">
+          </div>
+
+          <div class="modal-text-col">
+            <span class="modal-category" id="modalCategory">Category</span>
+            <h2 class="modal-title" id="modalTitle">Structure Name</h2>
+            <div class="modal-comparison-tag" id="modalComparison">Vs. Tag</div>
+
+            <div class="modal-section">
+              <div class="modal-section-header">
+                <h3><i class="fas fa-microchip"></i> The Biomechanical "Why"</h3>
+                <button class="sm-btn" id="simplifyBtn" onclick="explainLikeEngineer()">✨ Bio-Engineer Analogy</button>
+              </div>
+              <p class="modal-desc" id="modalWhy">Explanation goes here.</p>
+              <!-- AI Response Area -->
+              <div id="aiResponseBox" class="ai-response-box">
+                <i class="fas fa-robot"></i> <span id="aiResponseText"></span>
+              </div>
+            </div>
+
+            <div class="modal-section">
+              <div class="modal-section-header">
+                <h3><i class="fas fa-stethoscope"></i> Clinical Relevance</h3>
+              </div>
+              <div class="modal-clinical" id="modalClinical">
+                Clinical notes go here.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Overlay -->
+      <div class="quiz-overlay" id="quizOverlay">
+        <div class="quiz-card">
+          <button class="modal-close" onclick="closeQuiz()">&times;</button>
+          <div style="margin-bottom: 20px; color: var(--why-cyan); font-family: var(--font-code);">
+            <i class="fas fa-sparkles"></i> ENGINEERING CHALLENGE
+          </div>
+          <div id="quizContent">
+            <div class="quiz-question" id="quizQuestion">Loading challenge...</div>
+            <div class="quiz-options" id="quizOptions">
+              <!-- Options injected here -->
+            </div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+            <button class="ai-btn" id="nextQuizBtn" style="margin: 20px auto; display:none;"
+              onclick="generateQuiz()">Next Question</button>
+          </div>
+        </div>
+      </div>
+      <!-- WHY CONTENT END -->
+    </div>
+  </section>
+
+  <!-- ================= POWERHOUSE QUIZ OVERLAY ================= -->
+  <div id="quiz-overlay">
+    <div class="quiz-modal">
+
+      <button onclick="quizApp.close()" class="quiz-close-btn"><i class="fas fa-times"></i></button>
+
+      <!-- STEP 1: REGION SELECTION -->
+      <div id="quiz-region-view" class="quiz-view">
+        <div class="quiz-view-header">
+          <h2 style="color: var(--atlas-gold); margin-bottom:10px;">SELECT REGIONAL ANATOMY</h2>
+          <div class="quiz-step-indicator">STEP 1 OF 3</div>
+        </div>
+
+        <div class="quiz-menu-grid" id="region-grid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- STEP 2: SYSTEM SELECTION -->
+      <div id="quiz-system-view" class="quiz-view" style="display:none;">
+        <div class="quiz-view-header">
+          <h2 style="color: var(--why-cyan); margin-bottom:10px;">SELECT SYSTEM</h2>
+          <div class="quiz-breadcrumb" id="system-breadcrumb">REGION > SYSTEM</div>
+          <button onclick="quizApp.backToRegions()" class="nav-btn back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Regions
+          </button>
+        </div>
+
+        <div class="quiz-menu-grid" id="system-grid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- STEP 3: FORMAT SELECTION -->
+      <div id="quiz-menu-view" class="quiz-view" style="display:none;">
+        <div class="quiz-view-header">
+          <h2 style="color: var(--atlas-gold); margin-bottom:10px;">SELECT CHALLENGE FORMAT</h2>
+          <div class="quiz-breadcrumb" id="mode-breadcrumb">REGION > SYSTEM > FORMAT</div>
+          <button onclick="quizApp.backToSystems()" class="nav-btn back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Systems
+          </button>
+        </div>
+
+        <div class="quiz-menu-grid">
+          <div class="quiz-mode-card" onclick="quizApp.start('mcq')" id="mcq-card">
+            <i class="fas fa-list-ul mode-icon mcq-icon"></i>
+            <h3>MULTIPLE CHOICE</h3>
+            <p class="mode-count" id="mcq-count">0 questions</p>
+            <div class="mode-desc">Select the best answer from options</div>
+          </div>
+          <div class="quiz-mode-card" onclick="quizApp.start('tf')" id="tf-card">
+            <i class="fas fa-check-circle mode-icon tf-icon"></i>
+            <h3>TRUE / FALSE</h3>
+            <p class="mode-count" id="tf-count">0 questions</p>
+            <div class="mode-desc">Test your knowledge with binary choices</div>
+          </div>
+          <div class="quiz-mode-card" onclick="quizApp.start('fib')" id="fib-card">
+            <i class="fas fa-keyboard mode-icon fib-icon"></i>
+            <h3>FILL IN BLANKS</h3>
+            <p class="mode-count" id="fib-count">0 questions</p>
+            <div class="mode-desc">Type the correct answer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUIZ ACTIVE VIEW - ENHANCED -->
+      <div id="quiz-active-view" style="display:none;">
+        <!-- Quiz Header with Timer and Navigation -->
+        <div class="quiz-active-header">
+          <div class="quiz-info-left">
+            <span id="quiz-counter" class="quiz-counter">Q 1/10</span>
+            <div class="quiz-tags">
+              <span id="quiz-region-tag" class="quiz-tag region">Region</span>
+              <span id="quiz-system-tag" class="quiz-tag system">System</span>
+            </div>
+          </div>
+          <div class="quiz-info-center">
+            <div id="quiz-timer" class="quiz-timer">
+              <i class="fas fa-clock"></i> 00:00
+            </div>
+          </div>
+          <div class="quiz-info-right">
+            <button onclick="quizApp.toggleQuestionGrid()" class="quiz-icon-btn" title="Question Grid (G)">
+              <i class="fas fa-th"></i>
+            </button>
+            <button onclick="quizApp.showAnalysis()" class="quiz-submit-btn">
+              <i class="fas fa-chart-bar"></i> SUBMIT
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+
+        <!-- Question Content -->
+        <div class="quiz-content-area">
+          <div id="quiz-question" class="quiz-question-text">Loading...</div>
+          <div id="quiz-interaction-area"></div>
+        </div>
+
+        <!-- Feedback Panel -->
+        <div id="quiz-feedback" class="feedback-panel"></div>
+
+        <!-- Action Buttons (Bookmark/Flag) -->
+        <div class="quiz-action-bar">
+          <button id="bookmark-btn" onclick="quizApp.toggleBookmark()" class="quiz-action-btn" title="Bookmark (B)">
+            <i class="far fa-bookmark"></i> Bookmark
+          </button>
+          <button id="flag-btn" onclick="quizApp.toggleFlag()" class="quiz-action-btn" title="Flag for Review (F)">
+            <i class="far fa-flag"></i> Flag
+          </button>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="quiz-navigation">
+          <button class="nav-btn nav-prev" id="prev-q-btn" onclick="quizApp.prev()">
+            <i class="fas fa-chevron-left"></i> PREVIOUS
+          </button>
+          <div class="quiz-nav-hint">
+            <span><i class="fas fa-arrow-left"></i> Prev</span>
+            <span>Next <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <button class="nav-btn nav-next" id="next-q-btn" onclick="quizApp.next()">
+            NEXT <i class="fas fa-chevron-right"></i>
+          </button>
+          <button class="nav-btn nav-submit" id="submit-quiz-btn" onclick="quizApp.showAnalysis()">
+            FINISH <i class="fas fa-check"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- QUESTION GRID PANEL (Slide-out) -->
+      <div id="question-grid-panel" class="question-grid-panel">
+        <div class="question-grid-header">
+          <h3><i class="fas fa-th"></i> Question Navigator</h3>
+          <button onclick="quizApp.toggleQuestionGrid()" class="quiz-close-btn small">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="question-grid-legend">
+          <span><span class="legend-dot current"></span> Current</span>
+          <span><span class="legend-dot correct"></span> Correct</span>
+          <span><span class="legend-dot incorrect"></span> Incorrect</span>
+          <span><span class="legend-dot unanswered"></span> Unanswered</span>
+          <span><span class="legend-dot bookmarked"></span> Bookmarked</span>
+        </div>
+        <div id="question-grid" class="question-grid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- ANALYSIS VIEW - ENHANCED -->
+      <div id="quiz-analysis-view" class="quiz-view" style="display:none;">
+        <div class="analysis-header">
+          <h2><i class="fas fa-chart-pie"></i> PERFORMANCE ANALYSIS</h2>
+          <div class="quiz-step-indicator">SESSION REPORT</div>
+        </div>
+
+        <!-- Main Stats -->
+        <div class="analysis-stats-grid">
+          <div class="stat-box accuracy-box">
+            <div class="stat-val" id="accuracy-val">0%</div>
+            <div class="stat-label">ACCURACY</div>
+          </div>
+          <div class="stat-box correct-box">
+            <div class="stat-val" id="score-val">0</div>
+            <div class="stat-label">CORRECT</div>
+          </div>
+          <div class="stat-box wrong-box">
+            <div class="stat-val" id="wrong-val">0</div>
+            <div class="stat-label">INCORRECT</div>
+          </div>
+          <div class="stat-box unanswered-box">
+            <div class="stat-val" id="unanswered-val">0</div>
+            <div class="stat-label">UNANSWERED</div>
+          </div>
+          <div class="stat-box time-box">
+            <div class="stat-val" id="time-val">0m 0s</div>
+            <div class="stat-label">TIME TAKEN</div>
+          </div>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="analysis-recommendation">
+          <strong><i class="fas fa-user-md"></i> PROFESSIONAL RECOMMENDATION:</strong>
+          <p id="analysis-text">...</p>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="category-breakdown-section">
+          <h3><i class="fas fa-sitemap"></i> Category Breakdown</h3>
+          <div id="category-breakdown" class="category-breakdown">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="analysis-actions">
+          <button class="nav-btn btn-review" onclick="quizApp.showReview()">
+            <i class="fas fa-search"></i> REVIEW ANSWERS
+          </button>
+          <button class="nav-btn btn-retry" onclick="quizApp.start(quizApp.mode)">
+            <i class="fas fa-redo"></i> RETRY QUIZ
+          </button>
+          <button class="nav-btn btn-menu" onclick="quizApp.openMenu()">
+            <i class="fas fa-home"></i> RETURN TO MENU
+          </button>
+        </div>
+      </div>
+
+      <!-- REVIEW VIEW - DETAILED ANSWER REVIEW -->
+      <div id="quiz-review-view" class="quiz-view" style="display:none;">
+        <div class="review-header">
+          <h2><i class="fas fa-search"></i> DETAILED REVIEW</h2>
+          <div class="review-controls">
+            <select id="review-filter" onchange="quizApp.filterReview()" class="review-filter">
+              <option value="all">All Questions</option>
+              <option value="correct">Correct</option>
+              <option value="incorrect">Incorrect</option>
+              <option value="unanswered">Unanswered</option>
+              <option value="bookmarked">Bookmarked</option>
+              <option value="flagged">Flagged</option>
+            </select>
+            <button onclick="quizApp.showAnalysis()" class="nav-btn">
+              <i class="fas fa-arrow-left"></i> Back to Analysis
+            </button>
+          </div>
+        </div>
+
+        <div id="review-list" class="review-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= VIEW 4: DASHBOARD ================= -->
+  <section id="dashboard-view" class="view-section">
+    <div style="max-width: 1400px; margin: 0 auto;">
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="app.loadView('landing')">
+          <i class="fas fa-arrow-left"></i> HOME
+        </button>
+        <div class="badge" style="border-color: #bd93f9; color: #bd93f9;">PERFORMANCE DASHBOARD</div>
+        <button class="nav-btn" onclick="dashboard.clearData()" style="border-color: #ff6b6b; color: #ff6b6b;">
+          <i class="fas fa-trash"></i> RESET DATA
+        </button>
+      </div>
+
+      <!-- Overview Stats -->
+      <div class="dash-stats-row" id="dash-overview-stats">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dash-grid">
+        <!-- Accuracy Trend -->
+        <div class="dash-card dash-card-wide">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-chart-line"></i> Accuracy Trend</h3>
+            <span class="dash-card-subtitle">Last 20 sessions</span>
+          </div>
+          <div id="dash-accuracy-chart" class="dash-chart">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Topic Strength Heatmap -->
+        <div class="dash-card dash-card-wide">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-th"></i> Topic Strength Map</h3>
+            <span class="dash-card-subtitle">Accuracy by Region × System</span>
+          </div>
+          <div id="dash-heatmap" class="dash-heatmap">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Recent Quiz History -->
+        <div class="dash-card dash-card-full">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-history"></i> Recent Quiz History</h3>
+            <span class="dash-card-subtitle">Your last sessions</span>
+          </div>
+          <div id="dash-history" class="dash-history">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Load JavaScript files - data first, then app logic -->
+  <!-- Regional Data -->
+  <script src="data-forelimb.JS"></script>
+  <script src="data-hindlimb.JS"></script>
+  <script src="data-thorax.JS"></script>
+  <script src="data-abdomen.JS"></script>
+  <script src="data-head-neck.JS"></script>
+  <script src="data-pelvis.JS"></script>
+
+  <!-- Quiz & Why Sections -->
+  <script src="data-quiz.JS"></script>
+  <script src="data-why.JS"></script>
+
+  <!-- App Logic -->
+  <script src="app.js"></script>
+  <script src="enhanced-quiz.js"></script>
+  <script src="search.js"></script>
+  <script src="dashboard.js"></script>
 </body>
+
 </html>
