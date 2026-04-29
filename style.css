@@ -693,6 +693,122 @@ body {
     line-height: 1.6;
 }
 
+/* --- TWO-COLUMN CREDITS (Scientific Staff | Platform Developer) --- */
+.footer-credits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+    align-items: start;
+}
+
+.credit-col {
+    padding: 24px 28px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.credit-col:hover {
+    border-color: var(--atlas-gold);
+    transform: translateY(-2px);
+}
+.credit-col:nth-child(2):hover {
+    border-color: var(--why-cyan);
+}
+
+.credit-heading {
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--atlas-gold);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.credit-col:nth-child(2) .credit-heading {
+    color: var(--why-cyan);
+}
+.credit-heading i {
+    font-size: 1rem;
+    opacity: 0.85;
+}
+
+.credit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+.credit-list li {
+    padding: 10px 0;
+    font-family: var(--font-body, var(--font-code));
+    font-size: 0.95rem;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.credit-list li:last-child { border-bottom: none; }
+.credit-list li b {
+    font-size: 1rem;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.credit-role {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    color: var(--text-mute);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.credit-foot {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    color: var(--text-mute);
+    text-align: right;
+    margin-top: 8px;
+    opacity: 0.75;
+}
+
+/* Stack columns on small screens */
+@media (max-width: 760px) {
+    .footer-credits {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .credit-col { padding: 20px 22px; }
+}
+
+/* Professional (light) mode tuning */
+body.professional-mode .credit-col {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+body.professional-mode .credit-heading {
+    color: #1565c0;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+body.professional-mode .credit-col:nth-child(2) .credit-heading {
+    color: #00897b;
+}
+body.professional-mode .credit-list li {
+    color: #263238;
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+body.professional-mode .credit-list li b { color: #102a43; }
+body.professional-mode .credit-role { color: #607d8b; }
+body.professional-mode .credit-foot { color: #607d8b; }
+
 /* ================= WHY SECTION STYLES ================= */
 #why-view {
     background: radial-gradient(circle at 50% -20%, rgba(0, 242, 255, 0.05), transparent 50%);
