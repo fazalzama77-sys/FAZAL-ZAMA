@@ -88,7 +88,7 @@ atlasData["Hindlimb & Pelvis"] = {
             comparative: [
                 { species: "Horse", note: "<b>6 bones</b> — talus, calcaneus, central, 1st, 2nd+3rd fused, 4th. Single trochlea on talus." },
                 { species: "Dog", note: "<b>7 bones</b> — talus, calcaneus, central, 1st, 2nd, 3rd, 4th (all separate)." },
-                { species: "Pig", note: "<b>7 bones</b> (like dog) — primitive pattern." },
+                { species: "Pig", note: "<b>7 bones</b> (like dog) — complete pattern." },
                 { species: "Fowl", note: "Proximal tarsals fuse with TIBIA → <b>tibiotarsus</b>. Distal tarsals fuse with metatarsals → <b>tarsometatarsus</b>. NO separate ankle joint — the joint is intratarsal." }
             ],
             clinical: "<b>Capped Hock:</b> Bursitis over the tuber calcanei from kicks against walls or trailers — visible swelling on the back of the hock.<br><b>Bone Spavin:</b> Osteoarthritis of the lower hock joints (between distal tarsals and metatarsus) — common cause of hindlimb lameness in horses.<br><b>Curb:</b> Strain of the long plantar ligament behind the hock.",
@@ -344,5 +344,10 @@ atlasData["Hindlimb & Pelvis"] = {
             clinical: "<b>Mastitis:</b> Always palpate the supramammary (mammary) lymph nodes — enlargement & pain confirm udder infection.<br><b>Bovine Lymphosarcoma (BLV):</b> Generalized LN enlargement — subiliac and supramammary often the first noticed.<br><b>Foot Rot:</b> Popliteal LN enlarged on the affected limb side.",
             imgCode: "lymph_nodes_hindlimb"
         }
-    ]
+    ],
+
+    // =====================================================
+    // SPLANCHNOLOGY (pelvic viscera populated in data-splanchnology.JS)
+    // =====================================================
+    "Splanchnology": []
 };

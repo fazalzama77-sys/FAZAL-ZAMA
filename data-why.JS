@@ -337,7 +337,7 @@ anatomyData = [
         title: "Cheetah Spine",
         category: "wildlife",
         comparison: "Cheetah vs. Horse",
-        why: "The Cheetah possesses an extremely flexible thoracolumbar spine that flexes and extends like a coiled spring during the gallop, adding ~40% to stride length and propelling speeds of 110 km/h. The Horse evolved a near-rigid back (locked withers, strong supraspinous ligament) for energy-efficient sustained galloping but loses the explosive spinal-spring boost.",
+        why: "The Cheetah possesses an extremely flexible thoracolumbar spine that flexes and extends like a coiled spring during the gallop, adding ~40% to stride length and propelling speeds of 110 km/h. The Horse possesses a near-rigid back (locked withers, strong supraspinous ligament) for energy-efficient sustained galloping but loses the explosive spinal-spring boost.",
         clinical: "Cheetah autopsies show extreme wear of intervertebral discs by mid-life. In horses, hyperflexible 'roach' or 'sway' backs are pathological — the equine design demands rigidity.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/TheCheethcat.jpg/640px-TheCheethcat.jpg",
         analogy: "The Cheetah's spine is a bow-and-arrow — it loads and releases elastic energy with each stride. The Horse's spine is a steel I-beam — it doesn't bend, it just transmits the engine's power directly to the wheels.",
@@ -466,7 +466,7 @@ anatomyData = [
         category: "wildlife",
         comparison: "Whale/Dolphin vs. Dog",
         why: "Cetaceans (whales, dolphins) have lost their hindlimbs entirely and retain only a pair of small 'floating' pelvic bones suspended in muscle, with NO connection to the vertebral column. They serve only as anchor points for reproductive musculature. The dog pelvis, in contrast, is the fixed weight-bearing platform of the hindlimb.",
-        clinical: "Vestigial pelvic bones can be felt on dissection of stranded cetaceans. Their existence is a textbook proof of evolutionary descent from land mammals.",
+        clinical: "Vestigial pelvic bones can be felt on dissection of stranded cetaceans. These bones serve as anchor points for reproductive musculature and are a notable example of structural variation across species.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Bottlenose_Dolphin_KSC04pd0178.jpg/640px-Bottlenose_Dolphin_KSC04pd0178.jpg",
         analogy: "The Dog's pelvis is the chassis of a car. The Whale kept the chassis bolts but threw away the wheels, axle and frame — leaving just two stubs floating uselessly inside the body.",
         quiz: {
@@ -530,7 +530,7 @@ anatomyData = [
         category: "wildlife",
         comparison: "Bear vs. Dog",
         why: "Bears are PLANTIGRADE — they walk on the entire sole of the foot (carpus to digit), like humans. This gives stability for standing upright and digging but limits running speed. Dogs are DIGITIGRADE — they walk only on their toes, raising the heel — gaining stride length and speed at the cost of stability.",
-        clinical: "Bears develop sole pad lesions and arthritis on hard zoo flooring. Dog footpads are evolved for repeated impact.",
+        clinical: "Bears develop sole pad lesions and arthritis on hard zoo flooring. Dog footpads are designed for repeated impact.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/2010-kodiak-bear-1.jpg/640px-2010-kodiak-bear-1.jpg",
         analogy: "Bear walking = wearing flat sandals — comfortable, stable, but slow. Dog walking = wearing high-heels (toe-walking) — fast and graceful, but less stable on rough ground.",
         quiz: {
@@ -564,7 +564,7 @@ anatomyData = [
         why: "Unlike most reptiles, crocodilians can switch from a sprawling 'belly-slide' posture to a fully UPRIGHT 'high walk' where the limbs are positioned vertically beneath the body — like a mammal. This allows them to walk overland with elevated trunk clearance. Lizards remain sprawling, with limbs splayed laterally.",
         clinical: "In crocodile veterinary handling, the high-walk capability means escape speed on land is significantly higher than expected (~17 km/h short bursts).",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Saltwater_crocodile.jpg/640px-Saltwater_crocodile.jpg",
-        analogy: "Lizards crawl like a sliding push-up. Crocodiles can stand UP and walk like a dog when needed — they're a reptile that figured out the mammalian secret of putting the legs underneath.",
+        analogy: "Lizards crawl like a sliding push-up. Crocodiles can stand UP and walk like a dog when needed — they're a reptile capable of the mammalian stance of putting the legs underneath.",
         quiz: {
             question: "What is the crocodilian 'high walk'?",
             options: ["A swimming motion", "A fully upright limb posture similar to mammals", "A defensive display", "Climbing using forelimbs only"],
@@ -641,7 +641,7 @@ anatomyData = [
         title: "Rhinoceros Tridactyl Foot",
         category: "wildlife",
         comparison: "Rhinoceros vs. Horse",
-        why: "Despite its 2-tonne weight, the Rhinoceros walks on THREE toes per foot (digits II, III, IV) — the ancestral perissodactyl plan. The Horse, evolutionarily related (same order Perissodactyla), reduced this to a SINGLE toe (digit III) for high-speed running. The rhino kept three toes for stability under massive load on soft ground.",
+        why: "Despite its 2-tonne weight, the Rhinoceros walks on THREE toes per foot (digits II, III, IV) — the standard perissodactyl configuration. The Horse, classified in the same order (Perissodactyla), has a SINGLE toe (digit III) optimized for high-speed running. The rhino retains three toes for stability under massive load on soft ground.",
         clinical: "Rhino foot disease (cracked nails, abscesses) typically affects the central digit III — the largest weight-bearer — but the lateral toes can compensate temporarily, unlike a horse where catastrophic lameness follows.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Rhinoceros-Wilhelma-2.jpg/640px-Rhinoceros-Wilhelma-2.jpg",
         analogy: "The Horse is a sports car on a single high-performance tyre — fast but fragile. The Rhino is a forklift on a triple-tyre cluster — slow, stable, and built to carry the load without sinking.",
@@ -649,7 +649,7 @@ anatomyData = [
             question: "How many functional toes does a rhinoceros have on each foot?",
             options: ["1 (like the horse)", "2 (cloven, like the ox)", "3 (digits II, III, IV)", "5"],
             correctIndex: 2,
-            explanation: "Rhinos retain the primitive perissodactyl 3-toe foot. The Horse — same order — reduced to a single digit. The Rhino's 3 toes spread the enormous weight."
+            explanation: "Rhinos have the standard perissodactyl 3-toe foot. The Horse — same order — has a single digit. The Rhino's 3 toes spread the enormous weight."
         }
     }
 ];

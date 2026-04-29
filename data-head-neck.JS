@@ -21,7 +21,7 @@ atlasData["Head & Neck"] = {
             • Clinical relevance: Surgical approaches for dehorning, sinus drainage, nerve blocks`,
 
             eliteDesc: `<h3>Architectural Dynamics of the Bovine Cranium</h3>
-            <p>The osteology of the bovine skull (cranium) represents a pinnacle of artiodactyl evolution, characterized by a pyramidal architecture designed to support a massive masticatory apparatus while affording protection to the central nervous system and special sensory organs. Unlike the carnivorous skull, which prioritizes temporal muscle mass and jaw shear, the bovine skull is engineered for the ceaseless lateral grinding of herbivorous occlusion and the support of defensive cranial appendages.</p>
+            <p>The osteology of the bovine skull (cranium) represents a pinnacle of artiodactyl design, characterized by a pyramidal architecture designed to support a massive masticatory apparatus while affording protection to the central nervous system and special sensory organs. Unlike the carnivorous skull, which prioritizes temporal muscle mass and jaw shear, the bovine skull is engineered for the ceaseless lateral grinding of herbivorous occlusion and the support of defensive cranial appendages.</p>
             
             <p>The skull is anatomically divisible into two primary functional units: the <b>Neurocranium</b> (braincase), comprising the caudal and dorsal protective plates, and the <b>Splanchnocranium</b> (viscerocranium or facial skeleton), which houses the respiratory and digestive portals. In the adult Bos taurus, these divisions are integrated via complex sutural, synchondrotic, and synostotic articulations, forming a rigid unit of approximately 32 individual bones, though fusion often obscures these boundaries in mature specimens.</p>
             
@@ -62,7 +62,7 @@ atlasData["Head & Neck"] = {
                 { species: "Fowl (Gallus domesticus)", note: "Single median condyle located ventral to foramen magnum allows wide rotation (near 180°). Temporal crests replace nuchal crest. Represented by paraoccipital processes. Transversely oval foramen magnum with dorsal notch common in toy breeds. Less prominent, fuses with sphenoid early." }
             ],
 
-            clinical: "<b>Clinical Insight:</b> The single occipital condyle in Gallus domesticus is a phylogenetically significant retention of the reptilian (sauropsid) condition. This ball-and-socket configuration with the atlas allows birds to rotate their heads with extreme dexterity for preening and predator detection, a range of motion physically impossible for the bi-condylar mammalian skull."
+            clinical: "<b>Clinical Insight:</b> The single occipital condyle in Gallus domesticus is a structurally significant feature shared with the reptilian (sauropsid) body plan. This ball-and-socket configuration with the atlas allows birds to rotate their heads with extreme dexterity for preening and predator detection, a range of motion physically impossible for the bi-condylar mammalian skull."
         },
         {
             title: "Sphenoid Bone (Os sphenoidale)",
