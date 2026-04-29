@@ -62,7 +62,7 @@ atlasData["Head & Neck"] = {
                 { species: "Fowl (Gallus domesticus)", note: "Single median condyle located ventral to foramen magnum allows wide rotation (near 180°). Temporal crests replace nuchal crest. Represented by paraoccipital processes. Transversely oval foramen magnum with dorsal notch common in toy breeds. Less prominent, fuses with sphenoid early." }
             ],
 
-            clinical: "<b>Clinical Insight:</b> The single occipital condyle in Gallus domesticus is a structurally significant feature shared with the reptilian (sauropsid) body plan. This ball-and-socket configuration with the atlas allows birds to rotate their heads with extreme dexterity for preening and predator detection, a range of motion physically impossible for the bi-condylar mammalian skull."
+            clinical: "<b>Clinical Insight:</b> In Gallus domesticus, the presence of a single occipital condyle forms a highly mobile articulation with the atlas, permitting an extensive range of head rotation. This enhanced mobility is essential for preening, rapid environmental surveillance, precise visual alignment, and predator detection. In contrast, the bi-condylar arrangement of the mammalian skull generally provides greater stability but a comparatively reduced range of rotational movement."
         },
         {
             title: "Sphenoid Bone (Os sphenoidale)",
