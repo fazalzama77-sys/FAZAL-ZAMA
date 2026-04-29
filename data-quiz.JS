@@ -382,8 +382,48 @@ const quizBank = {
     "Angiology": { mcq: [], tf: [], fib: [] }
   },
   
-  "Hindlimb": {
-    "Osteology": { mcq: [], tf: [], fib: [] },
+  "Hindlimb & Pelvis": {
+    "Osteology": {
+      mcq: [
+        { q: "Which domestic species has a Third (Lesser) Trochanter on the femur?", o: ["Ox", "Dog", "Horse", "Pig"], a: 2, e: "The Third Trochanter is a distinct bony prominence on the lateral shaft of the equine femur. It serves as the insertion point for the Superficial Gluteal muscle. It is absent in all other common domestic species." },
+        { q: "In the bovine hindlimb, how many tarsal bones are present?", o: ["6", "7", "5", "4"], a: 2, e: "The ox has 5 tarsal bones because Tarsal Bones 1 and 2 (T1+T2) are fused into a single bone. The horse has 6 tarsal bones and the dog has 7 (none fused)." },
+        { q: "The 'Point of the Hock' is formed by the tuber (calcanean tuberosity) of which bone?", o: ["Talus", "Central Tarsal Bone", "Calcaneus", "Metatarsal III"], a: 2, e: "The calcaneus is the largest tarsal bone. Its tuber calcanei (calcanean tuberosity) projects caudally and is the attachment point for the Common Calcanean Tendon (Achilles tendon equivalent). It is palpable as the 'point of the hock'." },
+        { q: "The bovine hindlimb cannon bone is formed by the fusion of which metatarsals?", o: ["Mt II + III", "Mt III + IV", "Mt II + IV", "Mt III + V"], a: 1, e: "In the Ox (and other ruminants), Metatarsal III and Metatarsal IV fuse to form the cannon bone (Os metatarsale III+IV). This is the same logic as the forelimb where Mc III+IV fuse. Dewclaws (vestigial digits) correspond to Mt II and Mt V." },
+        { q: "Which ligament is found ONLY in the horse and reinforces the hip joint by connecting from the prepubic tendon to the femoral head?", o: ["Ligamentum Teres (Round Ligament)", "Accessory Ligament of the Hip", "Iliofemoral Ligament", "Ischiofemoral Ligament"], a: 1, e: "The Accessory Ligament of the Hip Joint is unique to the horse. It originates from the prepubic tendon (an extension of the abdominal muscles) and inserts on the femoral head, supplementing the round ligament. It prevents excessive abduction." },
+        { q: "Which muscle of the hindlimb is considered the most powerful abductor and extensor of the hip, and is the recommended intramuscular injection site in cattle?", o: ["Superficial Gluteal", "Middle Gluteal (Gluteus Medius)", "Biceps Femoris", "Semitendinosus"], a: 1, e: "The Middle Gluteal (Gluteus Medius) is the largest and most powerful of the gluteal muscles. It is the preferred IM injection site in cattle because of its bulk. It inserts on the greater trochanter of the femur." },
+        { q: "The equine Peroneus Tertius (Fibularis Tertius) is unique because it is:", o: ["Absent in horses", "A purely tendinous structure with no muscle belly", "The main flexor of the hock", "Homologous to the gastrocnemius"], a: 1, e: "In the horse, the Peroneus Tertius is entirely tendinous — it has no muscle belly at all. It runs from the extensor fossa of the femur to the front of the hock/tarsus, forming the cranial component of the Reciprocal Apparatus that links stifle and hock movement." },
+        { q: "What is the name of the mechanical system unique to horses that links stifle and hock movement so both joints flex and extend simultaneously?", o: ["Stay Apparatus", "Reciprocal Apparatus", "Suspensory Apparatus", "Passive Stay System"], a: 1, e: "The Reciprocal Apparatus consists of two tendons: the Peroneus Tertius (cranially) and the Superficial Digital Flexor (caudally). When the stifle flexes, the hock must flex; when the stifle extends, the hock must extend. This is energy-efficient for standing." },
+        { q: "In the equine stifle, the patella locks on which feature of the femur to allow passive weight-bearing without muscle fatigue?", o: ["Lateral Trochlear Ridge", "Trochlear Groove", "Medial Trochlear Ridge", "Supracondylar Fossa"], a: 2, e: "The horse can hook the medial patellar fibrocartilage (attached to the medial patellar ligament) over the prominent Medial Trochlear Ridge of the femur. This locks the stifle in extension, allowing the horse to 'rest' without muscle effort — part of the Stay Apparatus." },
+        { q: "Rupture of which ligament is the most common orthopedic surgical condition in the dog?", o: ["Medial Collateral Ligament", "Cranial Cruciate Ligament (CCL)", "Caudal Cruciate Ligament", "Patellar Ligament"], a: 1, e: "Cranial Cruciate Ligament (CCL) rupture is the most commonly surgically treated orthopedic problem in dogs. It is equivalent to the ACL in humans. It prevents cranial drawer movement of the tibia relative to the femur. Tibial Plateau Leveling Osteotomy (TPLO) is a common repair." },
+        { q: "Obturator nerve paralysis in cattle most commonly occurs as a complication of:", o: ["Femoral fracture", "Difficult parturition (dystocia/calving)", "Injection into the sciatic nerve", "Tibial fracture"], a: 1, e: "The Obturator Nerve exits through the obturator foramen and innervates the adductor muscles of the hindlimb. During difficult calving (dystocia), the nerve is compressed between the fetal head and the maternal pelvis, causing adductor paralysis — the cow cannot adduct the hindlimbs and 'does the splits' (spreadeagling)." },
+        { q: "Bog Spavin in the horse refers to effusion (distension) of which joint?", o: ["Medial Femorotibial Joint", "Intertarsal (Distal) Joints", "Tarsocrural (Tibiotarsal) Joint", "Tarsometatarsal Joint"], a: 2, e: "Bog Spavin is chronic synovial effusion (fluid accumulation) in the Tarsocrural (Tibiotarsal) joint — the most proximal and mobile hock joint. It appears as a soft, fluctuant swelling on the medial aspect of the hock. Bone Spavin, by contrast, affects the lower (intertarsal/tarsometatarsal) joints with periarticular new bone." },
+        { q: "The bovine fibula is best described as:", o: ["A complete, full-length bone similar to the tibia", "A vestigial bone — present only as a proximal fragment fused to the tibia", "Entirely absent in cattle", "A floating sesamoid in the stifle"], a: 1, e: "In cattle, the fibula is vestigial: there is a small proximal fragment that fuses with the tibia early in life, and the distal fibula is absent. In horses it is a thin 'splint' bone (fibular tarsal bone). In dogs and cats the fibula is complete and functional, though slender." },
+        { q: "Which nerve is tested by the Patellar Reflex (Knee Jerk Reflex) in veterinary neurological examination?", o: ["Sciatic Nerve", "Tibial Nerve", "Obturator Nerve", "Femoral Nerve"], a: 3, e: "The Patellar Reflex tests the Femoral Nerve (L4-L6). Tapping the patellar ligament stretches the Quadriceps Femoris, which is innervated by the femoral nerve. Loss of the patellar reflex indicates femoral nerve damage or L4-L6 spinal cord lesion." },
+        { q: "The Os Coxae (Hip Bone) is formed by the fusion of which three bones?", o: ["Ilium, Femur, Ischium", "Ilium, Ischium, Pubis", "Sacrum, Ilium, Pubis", "Pubis, Femur, Ischium"], a: 1, e: "The Os Coxae (innominate bone/hip bone) is formed by the fusion of three bones: Ilium, Ischium, and Pubis. They meet at the Acetabulum — the cup-shaped socket of the hip joint. The Tuber coxae is on the ilium; Tuber ischiadicum on the ischium." }
+      ],
+      tf: [
+        { q: "The bovine fibula is a complete, full-length bone comparable to the radius in the forelimb.", a: false, e: "False. In cattle the fibula is vestigial — only a small proximal fragment exists, fused to the tibia. The distal fibula is entirely absent." },
+        { q: "The horse has a Third Trochanter on the lateral shaft of the femur.", a: true, e: "True. The Third Trochanter (also called Lesser Trochanter in some texts, though that term is also used differently) is a distinct ridge on the equine femur serving as insertion for the Superficial Gluteal muscle. It is unique to equids among domestic species." },
+        { q: "In the equine stifle, the medial femorotibial joint sac and the femoropatellar joint sac always communicate with each other.", a: true, e: "True in horses (and usually in cattle). In the horse, the medial femorotibial and femoropatellar synovial compartments communicate via an opening in the medial femoropatellar ligament. The lateral femorotibial sac is separate." },
+        { q: "The Obturator Nerve innervates the Quadriceps Femoris muscle.", a: false, e: "False. The Quadriceps Femoris is innervated by the Femoral Nerve (L4-L6). The Obturator Nerve innervates the adductor muscles of the hindlimb (Gracilis, Adductor, Pectineus)." },
+        { q: "The Peroneus Tertius in the horse is entirely tendinous and contains no muscle belly.", a: true, e: "True. This is what makes the horse's Reciprocal Apparatus a passive mechanical system — the Peroneus Tertius has no contractile tissue, yet it obligates the hock to flex whenever the stifle flexes." },
+        { q: "The Tuber Ischiadicum (Pin Bone) is the origin of all three hamstring muscles in domestic animals.", a: true, e: "True. The Biceps Femoris, Semitendinosus, and Semimembranosus all originate from the Tuber Ischiadicum (Ischial Tuberosity). This is why they are collectively called 'hamstrings' and why tuber ischii fractures cause profound lameness." },
+        { q: "The bovine hindlimb cannon bone is a fusion of Metatarsals III and IV.", a: true, e: "True. In ruminants (cattle, sheep, goats), Metatarsal III and Metatarsal IV fuse into a single cannon bone — identical logic to the forelimb (Mc III+IV). Dewclaws represent remnants of Mc/Mt II and V." },
+        { q: "The Sciatic Nerve is the largest peripheral nerve in the body and is vulnerable to injection injury in cattle.", a: true, e: "True. The Sciatic Nerve is the largest peripheral nerve. In cattle, injections given too far caudally in the gluteal region risk hitting the nerve, causing 'dropped hock' or knuckling — a peroneal/tibial nerve palsy." },
+        { q: "Bone Spavin in the horse involves effusion of the tarsocrural (tibiotarsal) joint.", a: false, e: "False. Bone Spavin involves periarticular new bone formation (osteophytes) on the distal hock joints — the proximal and distal intertarsal joints and the tarsometatarsal joint. It is distinct from Bog Spavin (which IS fluid in the tarsocrural joint)." },
+        { q: "The fabellae are sesamoid bones found caudal to the femoral condyles in the dog's stifle.", a: true, e: "True. Dogs (and cats) have paired fabellae — small sesamoid bones embedded in the heads of the Gastrocnemius muscle, lying caudal to the medial and lateral femoral condyles. They are visible on lateral stifle radiographs and can fracture." }
+      ],
+      fib: [
+        { q: "The 'Point of the Hock' is the tuber calcanei of the ______ bone.", a: ["calcaneus", "calcaneum"], e: "The calcaneus (fibular tarsal bone) is the largest tarsal bone. Its caudally projecting tuber calcanei is the attachment point for the Common Calcanean Tendon and is palpable as the point of the hock." },
+        { q: "The ______ apparatus in the horse mechanically couples stifle and hock movement through purely tendinous structures.", a: ["reciprocal", "reciprocal apparatus"], e: "The Reciprocal Apparatus (Peroneus Tertius cranially + SDF caudally) forces simultaneous flexion-extension of the stifle and hock. It is a defining feature of equine hindlimb biomechanics." },
+        { q: "In the ox, tarsal bones T1 and T2 are ______ into a single bone, reducing the total tarsal count to five.", a: ["fused", "fused together"], e: "Bovine tarsus has 5 bones because T1 and T2 are fused. Horse has 6 (T1 and T2 separate). Dog has 7 (no fusion)." },
+        { q: "The accessory ligament of the hip joint, which is unique to the horse, originates from the ______ tendon.", a: ["prepubic", "prepubic tendon"], e: "The Accessory Ligament of the Coxofemoral Joint is horse-specific. It originates from the prepubic tendon (formed by the caudal abdominal muscles) and inserts on the femoral head alongside the Round Ligament (Ligamentum Teres)." },
+        { q: "The ______ nerve supplies the Quadriceps Femoris and is evaluated by the patellar (knee jerk) reflex.", a: ["femoral", "femoral nerve"], e: "The Femoral Nerve (L4-L6) is the motor supply to the Quadriceps Femoris. Femoral nerve damage causes inability to extend the stifle — the animal cannot weight-bear and 'dog-sits' (dogs) or buckles forward (horses)." },
+        { q: "Obturator nerve paralysis in calvving cattle causes the cow to ______ because the adductor muscles are paralyzed.", a: ["splay", "do the splits", "spreadleag", "straddle", "abduct"], e: "Without adductor muscle function (innervated by obturator nerve), the hindlimbs slide laterally on slippery surfaces — the classic 'spreadeagling' or 'doing the splits' seen in post-calving cows with obturator paralysis." },
+        { q: "The bovine cannon bone of the hindlimb is formed by the fusion of Metatarsals ______ and ______.", a: ["III and IV", "3 and 4", "III+IV"], e: "Mt III + Mt IV fuse in ruminants to form the hindlimb cannon bone. Dewclaws represent vestigial Mt II and Mt V." },
+        { q: "The ______ trochanter on the equine femur is the insertion point of the Superficial Gluteal muscle and is absent in all other domestic species.", a: ["third", "3rd"], e: "The Third Trochanter is a lateral bony prominence on the equine femur shaft. It is unique to Equidae. The Superficial Gluteal muscle, which is quite small in the horse compared to the Middle Gluteal, inserts here." }
+      ]
+    },
     "Myology": { mcq: [], tf: [], fib: [] },
     "Arthrology": { mcq: [], tf: [], fib: [] },
     "Neurology": { mcq: [], tf: [], fib: [] },
@@ -399,11 +439,225 @@ const quizBank = {
   },
   
   "Thorax": {
-    "Osteology": { mcq: [], tf: [], fib: [] },
-    "Myology": { mcq: [], tf: [], fib: [] },
-    "Arthrology": { mcq: [], tf: [], fib: [] },
-    "Neurology": { mcq: [], tf: [], fib: [] },
-    "Angiology": { mcq: [], tf: [], fib: [] }
+    "Osteology": {
+      mcq: [
+        { q: "The number of thoracic vertebrae in ox is:", o: ["12", "13", "14", "18"], a: 1, e: "Ox has 13 thoracic vertebrae (T1-T13), equal to the number of rib pairs." },
+        { q: "The anticlinal vertebra in the ox is:", o: ["T11", "T12", "T13", "L1"], a: 2, e: "T13 in ox is anticlinal — its spine is vertical; spines cranial slope back, caudal slope forward." },
+        { q: "Which species has the highest number of thoracic vertebrae?", o: ["Ox", "Horse", "Dog", "Pig"], a: 1, e: "Horse has 18 thoracic vertebrae." },
+        { q: "The 'withers' of an animal is formed by the long spinous processes of which vertebrae?", o: ["C5-C7", "T2-T5", "T10-T13", "L1-L3"], a: 1, e: "T2-T5 spines are tallest and form the withers." },
+        { q: "The total number of ribs in ox is:", o: ["12 pairs", "13 pairs", "14 pairs", "18 pairs"], a: 1, e: "Ox has 13 pairs of ribs." },
+        { q: "The number of sternal (true) ribs in ox is:", o: ["7 pairs", "8 pairs", "9 pairs", "10 pairs"], a: 1, e: "8 pairs of sternal ribs reach the sternum directly in ox." },
+        { q: "The costal groove on a rib runs along its:", o: ["Cranial border", "Caudal border", "Lateral surface", "Medial surface"], a: 1, e: "The costal groove is on the caudal border and carries the V-A-N (vein-artery-nerve)." },
+        { q: "When inserting a needle into the chest wall, it should be placed along the:", o: ["Caudal border of rib", "Cranial border of rib", "Mid-shaft of rib", "Costochondral junction"], a: 1, e: "Cranial border avoids the V-A-N bundle in the costal groove of the rib above." },
+        { q: "The number of sternebrae in the ox is:", o: ["6", "7", "8", "9"], a: 1, e: "Ox sternum has 7 sternebrae." },
+        { q: "The cranial-most segment of the sternum is called the:", o: ["Xiphoid", "Manubrium", "Mesosternum", "Body"], a: 1, e: "Manubrium (presternum) is the cranial part — forms the brisket in cattle." },
+        { q: "The shape of the bovine sternum is:", o: ["Medially compressed", "Dorso-ventrally flattened (T-SHAPED)", "Cylindrical and rod-like", "Single fused plate with carina"], a: 1, e: "Ruminant sternum is flat from above to below — wide brisket." },
+        { q: "The carina (ventral keel) of the sternum is characteristic of:", o: ["Ox", "Horse", "Pig", "Fowl"], a: 3, e: "Fowl has a deep ventral keel/carina for flight muscle attachment." },
+        { q: "The number of asternal (false) ribs in ox is:", o: ["3 pairs", "4 pairs", "5 pairs", "8 pairs"], a: 2, e: "5 pairs are asternal — last 4-5 form the costal arch." },
+        { q: "Uncinate processes of ribs are characteristic of:", o: ["Ox", "Pig", "Dog", "Fowl"], a: 3, e: "Avian ribs have backward-pointing uncinate processes that overlap the next rib." },
+        { q: "The notarium of fowl is formed by fusion of:", o: ["Cervical vertebrae", "Cranial thoracic vertebrae (T1-T5)", "Lumbar vertebrae", "Sacral vertebrae"], a: 1, e: "T1-T5 fuse to form the notarium in fowl, providing rigidity for flight." }
+      ],
+      tf: [
+        { q: "The ox has 13 thoracic vertebrae and 13 pairs of ribs.", a: true, e: "True. Number of T-vertebrae = number of rib pairs." },
+        { q: "The horse has 18 thoracic vertebrae.", a: true, e: "True. Most among domestic mammals." },
+        { q: "The intercostal vein, artery and nerve run along the cranial border of the rib.", a: false, e: "False. They run along the CAUDAL border in the costal groove." },
+        { q: "The sternum of fowl bears a prominent carina for flight muscle attachment.", a: true, e: "True. The keel anchors the pectoralis muscles." },
+        { q: "The bovine sternum is laterally compressed.", a: false, e: "False. It is dorso-ventrally flattened (boat-shaped)." },
+        { q: "The first rib forms the bony border of the thoracic inlet.", a: true, e: "True. It is short, strong and almost vertical." },
+        { q: "The last rib in ox is usually a floating rib.", a: true, e: "True. Its cartilage ends free in muscle." },
+        { q: "The anticlinal vertebra in the ox is T16.", a: false, e: "False. It is T13 in ox; T16 is in horse." }
+      ],
+      fib: [
+        { q: "Ox has _____ pairs of ribs.", a: ["13"], e: "Equal to thoracic vertebrae number." },
+        { q: "Out of the 13 pairs of ribs in ox, _____ pairs are sternal (true) ribs.", a: ["8"], e: "True ribs reach the sternum directly." },
+        { q: "The vertebra whose spine stands vertical is called the _____ vertebra.", a: ["anticlinal"], e: "T13 in ox; T16 in horse." },
+        { q: "The cranial-most part of the sternum is called the _____.", a: ["manubrium", "presternum"], e: "Forms the brisket in cattle." },
+        { q: "The ox sternum is composed of _____ sternebrae.", a: ["7"], e: "Seven segments joined by cartilage." },
+        { q: "Backward-projecting bony processes on avian ribs are called _____ processes.", a: ["uncinate"], e: "They overlap the next rib for chest wall strength." },
+        { q: "The ventral keel of the avian sternum is called the _____.", a: ["carina", "keel"], e: "Anchor for huge flight muscles." },
+        { q: "Fusion of T1-T5 in fowl forms the _____.", a: ["notarium"], e: "Provides rigid back during flight." }
+      ]
+    },
+    "Myology": {
+      mcq: [
+        { q: "The chief muscle of inspiration is the:", o: ["External intercostal", "Diaphragm", "Serratus dorsalis cranialis", "Scalenus"], a: 1, e: "Diaphragm performs ~75% of inspiratory work." },
+        { q: "The fibre direction of external intercostal muscles is:", o: ["Cranio-ventral", "Caudo-ventral", "Vertical", "Horizontal"], a: 1, e: "External intercostals run caudo-ventrally — like a hand in a pocket." },
+        { q: "The internal intercostal muscles function as:", o: ["Inspiratory", "Expiratory", "Adductors", "Rotators"], a: 1, e: "They pull ribs backward → expiration." },
+        { q: "The diaphragm is innervated by which nerve?", o: ["Vagus", "Phrenic", "Intercostal", "Sympathetic trunk"], a: 1, e: "Phrenic nerve from C5-C7 is the SOLE motor supply." },
+        { q: "The phrenic nerve arises from spinal nerves:", o: ["C1-C3", "C3-C5 / C5-C7", "T1-T3", "T5-T7"], a: 1, e: "Phrenic nerve roots are C5-C7 in ox (C3-C5 in some species)." },
+        { q: "Which structure passes through the caval foramen of the diaphragm?", o: ["Aorta", "Oesophagus", "Caudal vena cava", "Thoracic duct"], a: 2, e: "Caval foramen lies in the tendinous centre and transmits only the caudal vena cava." },
+        { q: "The aortic hiatus of the diaphragm transmits all EXCEPT:", o: ["Aorta", "Azygos vein", "Thoracic duct", "Oesophagus"], a: 3, e: "Oesophagus passes through the oesophageal hiatus, not the aortic." },
+        { q: "The vagal trunks pass through which opening of the diaphragm?", o: ["Aortic hiatus", "Oesophageal hiatus", "Caval foramen", "Sternal hiatus"], a: 1, e: "Dorsal and ventral vagal trunks travel with the oesophagus." },
+        { q: "Serratus dorsalis cranialis acts as a/an:", o: ["Inspiratory muscle", "Expiratory muscle", "Adductor", "Trunk rotator"], a: 0, e: "Pulls cranial ribs forward → inspiration." },
+        { q: "Which muscle is absent in fowl (no true diaphragm)?", o: ["Pectoralis", "Diaphragm", "Intercostal", "Scalenus"], a: 1, e: "Birds lack a true muscular diaphragm — replaced by a thin pulmonary aponeurosis." },
+        { q: "The right crus of the diaphragm is larger than the left in:", o: ["All species", "Ox only", "Horse", "Dog only"], a: 2, e: "Right crus is much larger in horse — helps locomotion rhythm." },
+        { q: "The transversus thoracis muscle lies on the:", o: ["Outer surface of ribs", "Inside of sternum", "Lateral chest wall", "Diaphragm"], a: 1, e: "Lies on the inner surface of sternum and costal cartilages — depresses ribs in expiration." }
+      ],
+      tf: [
+        { q: "The diaphragm contracts and flattens during inspiration.", a: true, e: "True. Flattening enlarges the thoracic cavity." },
+        { q: "External intercostal fibres run cranio-ventrally.", a: false, e: "False. They run caudo-ventrally; internals run cranio-ventrally." },
+        { q: "Fowl has a true muscular diaphragm.", a: false, e: "False. Birds have no diaphragm; they breathe via air sacs and rib movement." },
+        { q: "The phrenic nerve is the sole motor supply to the diaphragm.", a: true, e: "True. Damage causes diaphragmatic paralysis." },
+        { q: "The caudal vena cava passes through the oesophageal hiatus.", a: false, e: "False. It passes through the caval foramen in the tendinous centre." },
+        { q: "Hiccups are due to sudden involuntary contractions of the diaphragm.", a: true, e: "True. Caused by phrenic nerve irritation." }
+      ],
+      fib: [
+        { q: "The chief muscle of inspiration is the _____.", a: ["diaphragm"], e: "Performs most of breathing work." },
+        { q: "The motor nerve to the diaphragm is the _____ nerve.", a: ["phrenic"], e: "Originates from cervical spinal nerves." },
+        { q: "The aortic hiatus of the diaphragm transmits the aorta, _____ vein and thoracic duct.", a: ["azygos"], e: "Three structures cross at the most dorsal opening." },
+        { q: "The Y-shaped central tendon of the diaphragm is called the _____.", a: ["centrum tendineum", "tendinous centre"], e: "Cannot contract; forms roof of dome." },
+        { q: "Internal intercostal muscles assist in _____ (inspiration/expiration).", a: ["expiration"], e: "Pull ribs backward and inward." },
+        { q: "Serratus dorsalis _____ is an inspiratory muscle (cranialis/caudalis).", a: ["cranialis"], e: "Pulls cranial ribs forward." }
+      ]
+    },
+    "Arthrology": {
+      mcq: [
+        { q: "The intercapital ligament connects:", o: ["Two adjacent vertebrae", "Heads of right and left ribs of the same pair through the disc", "Rib to sternum", "Sternebrae together"], a: 1, e: "The intercapital ligament joins both rib heads of a pair across the floor of vertebral canal — prevents disc protrusion in mid-thoracic region." },
+        { q: "The head of a typical rib articulates with:", o: ["One vertebra only", "Two consecutive vertebrae", "Three vertebrae", "Sternum directly"], a: 1, e: "Capitular joint involves head of rib + two consecutive vertebral bodies (across the disc)." },
+        { q: "The intercapital ligament is typically present from:", o: ["1st to 8th rib", "2nd to 10th-11th rib", "All 13 ribs", "Last 3 ribs only"], a: 1, e: "Present from 2nd to about 10th-11th rib — protects the disc here." },
+        { q: "Which type of joint is found between the head of a rib and the vertebral body?", o: ["Synchondrosis", "Synovial (plane)", "Symphysis", "Suture"], a: 1, e: "Capitular joint is a synovial plane joint." },
+        { q: "The intervertebral disc consists of:", o: ["Annulus fibrosus + nucleus pulposus", "Hyaline cartilage only", "Fibrous tissue only", "Synovial fluid"], a: 0, e: "Outer annulus fibrosus (tough rings) + inner nucleus pulposus (jelly-like)." },
+        { q: "Costochondral joints are best described as:", o: ["Synovial", "Synchondrosis (cartilaginous)", "Suture", "Symphysis"], a: 1, e: "Bone-to-cartilage union with no joint cavity." },
+        { q: "The number of sternocostal joints on each side in ox is:", o: ["6", "7", "8", "9"], a: 2, e: "8 sternal ribs × 1 sternocostal joint per side." },
+        { q: "The supraspinous ligament in the thoracic region is a continuation of which neck ligament?", o: ["Funicular nuchal ligament", "Lamellar ligament", "Ligamentum flavum", "Cruciate ligament"], a: 0, e: "It continues the funicular part of the nuchal ligament caudally." },
+        { q: "The yellow elastic ligament between vertebral arches is called:", o: ["Supraspinous ligament", "Interspinous ligament", "Ligamentum flavum", "Longitudinal ligament"], a: 2, e: "Ligamentum flavum (yellow ligament) closes gaps between vertebral arches." },
+        { q: "The costal arch is formed by:", o: ["First 8 sternal ribs", "Cartilages of asternal ribs joining each other", "Manubrium and clavicle", "Sternum and last rib"], a: 1, e: "Asternal rib cartilages link to the rib in front, forming the palpable costal arch." },
+        { q: "The tubercle of a rib articulates with the:", o: ["Body of own vertebra", "Body of preceding vertebra", "Transverse process of own vertebra", "Spinous process"], a: 2, e: "Costotransverse joint is between rib tubercle and transverse process." },
+        { q: "Movements at the thoracic vertebral column are:", o: ["Free in all directions", "Very limited (mainly stable)", "Rotational only", "Only flexion"], a: 1, e: "Thoracic spine is rigid to protect heart and lungs." }
+      ],
+      tf: [
+        { q: "Disc protrusions are common between T2 and T10 due to weak intercapital ligament.", a: false, e: "False. They are RARE here because the intercapital ligament protects the disc." },
+        { q: "The head of a rib articulates with two consecutive vertebrae.", a: true, e: "True. Across the intervertebral disc." },
+        { q: "Costochondral joints are synovial joints with cavity.", a: false, e: "False. They are synchondroses (cartilaginous, no cavity)." },
+        { q: "The intercapital ligament is absent in the last 2-3 thoracic vertebrae.", a: true, e: "True. That is why caudal thoracic disc disease is more common." },
+        { q: "The ligamentum flavum is yellow and elastic.", a: true, e: "True. Allows slight stretch between vertebrae." },
+        { q: "Sternocostal joints in ox are synovial joints.", a: true, e: "True. Allow rib movement during breathing." }
+      ],
+      fib: [
+        { q: "The ligament that connects right and left rib heads of the same pair across the disc is the _____ ligament.", a: ["intercapital", "conjugal"], e: "A unique thoracic-region ligament." },
+        { q: "The outer fibrous ring of an intervertebral disc is called the _____.", a: ["annulus fibrosus"], e: "Surrounds the soft nucleus pulposus." },
+        { q: "Costochondral joints are of the _____ type (synovial / synchondrosis).", a: ["synchondrosis", "cartilaginous"], e: "Bone-to-cartilage continuity." },
+        { q: "The yellow elastic ligament between vertebral arches is the _____.", a: ["ligamentum flavum", "yellow ligament"], e: "Used as needle landmark in epidurals." },
+        { q: "The costal arch is formed by cartilages of the _____ ribs.", a: ["asternal", "false"], e: "False ribs join via interchondral connections." },
+        { q: "The articulation between rib tubercle and transverse process is called the _____ joint.", a: ["costotransverse"], e: "One of the two costovertebral articulations." }
+      ]
+    },
+    "Neurology": {
+      mcq: [
+        { q: "The intercostal nerves are ventral branches of:", o: ["Cervical spinal nerves", "Thoracic spinal nerves", "Lumbar spinal nerves", "Vagus nerve"], a: 1, e: "Ventral rami of T1-T13." },
+        { q: "In the costal groove, the order of structures (top to bottom) is:", o: ["Nerve-Artery-Vein", "Vein-Artery-Nerve", "Artery-Vein-Nerve", "Vein-Nerve-Artery"], a: 1, e: "VAN: Vein superior, Artery middle, Nerve inferior." },
+        { q: "Roaring (laryngeal hemiplegia) in horses is due to paralysis of the:", o: ["Right recurrent laryngeal", "Left recurrent laryngeal", "Phrenic", "Vagus"], a: 1, e: "Left recurrent laryngeal has the longest course (around aortic arch) — most vulnerable." },
+        { q: "The left recurrent laryngeal nerve hooks around the:", o: ["Right subclavian artery", "Aortic arch", "Pulmonary trunk", "Brachiocephalic trunk"], a: 1, e: "Left RLN loops under the aortic arch." },
+        { q: "The right recurrent laryngeal nerve hooks around the:", o: ["Aortic arch", "Right subclavian artery", "Pulmonary artery", "Coronary artery"], a: 1, e: "Right RLN loops under the right subclavian artery." },
+        { q: "The dorsal and ventral vagal trunks pass into the abdomen through the:", o: ["Aortic hiatus", "Caval foramen", "Oesophageal hiatus", "Sternal hiatus"], a: 2, e: "Vagal trunks travel with the oesophagus." },
+        { q: "The phrenic nerve supplies:", o: ["Intercostal muscles", "Diaphragm", "Pleura", "Heart"], a: 1, e: "Sole motor supply to diaphragm." },
+        { q: "The phrenic nerve in ox originates from:", o: ["C1-C3", "C5-C7", "T1-T3", "L4-L6"], a: 1, e: "Cervical spinal nerves C5-C7." },
+        { q: "Hardware disease in cattle damages which thoracic nerve component?", o: ["Phrenic nerve", "Ventral vagal branches", "Sympathetic trunk", "Intercostal nerves"], a: 1, e: "A swallowed wire pierces the reticulum and damages ventral vagal branches → vagal indigestion." },
+        { q: "An intercostal nerve block is performed at the:", o: ["Cranial border of rib", "Caudal border of rib", "Mid-shaft of rib", "Costochondral junction"], a: 1, e: "At the caudal border (where the nerve runs in the costal groove), near the spine." },
+        { q: "The greater splanchnic nerve carries which fibres into the abdomen?", o: ["Parasympathetic", "Sympathetic", "Somatic motor", "Sensory only"], a: 1, e: "Sympathetic preganglionic fibres to coeliac ganglion." },
+        { q: "The cardiac plexus is formed mainly by branches of:", o: ["Phrenic and intercostal nerves", "Vagus and sympathetic trunk", "Brachial plexus", "Lumbar plexus"], a: 1, e: "Cardiac plexus = parasympathetic (vagus) + sympathetic at heart base." },
+        { q: "Vagus stimulation has which effect on the heart?", o: ["Speeds the rate", "Slows the rate", "No effect", "Constricts coronary arteries"], a: 1, e: "Vagus = parasympathetic = slows heart." },
+        { q: "Sympathetic stimulation in the thorax produces:", o: ["Bronchoconstriction", "Bronchodilation and increased heart rate", "Slowed heart and bronchoconstriction", "No effect on bronchi"], a: 1, e: "Dilates bronchi and increases heart rate — opposite to vagus." }
+      ],
+      tf: [
+        { q: "Roaring is most commonly due to paralysis of the LEFT recurrent laryngeal nerve.", a: true, e: "True. Long course around aortic arch makes it vulnerable in horses." },
+        { q: "The phrenic nerve arises from thoracic spinal nerves.", a: false, e: "False. It arises from cervical spinal nerves (C5-C7 in ox)." },
+        { q: "In the costal groove, the nerve lies above the artery and vein.", a: false, e: "False. Order from top is Vein-Artery-Nerve (V-A-N)." },
+        { q: "The vagus nerve carries parasympathetic fibres to the thoracic and abdominal viscera.", a: true, e: "True. Vagus = main parasympathetic nerve of thorax and abdomen." },
+        { q: "Hardware disease in cattle commonly damages the phrenic nerve.", a: false, e: "False. It damages ventral vagal branches near the reticulum." },
+        { q: "Intercostal nerve blocks are performed at the cranial border of the rib.", a: false, e: "False. They are performed at the CAUDAL border, where the nerve lies." },
+        { q: "Sympathetic stimulation dilates bronchi.", a: true, e: "True. Useful in asthma-type conditions; opposite of vagus action." }
+      ],
+      fib: [
+        { q: "The left recurrent laryngeal nerve loops around the _____.", a: ["aortic arch", "arch of aorta"], e: "Long course makes it vulnerable in horses." },
+        { q: "The motor nerve to the diaphragm is the _____ nerve.", a: ["phrenic"], e: "Cervical origin (C5-C7 in ox)." },
+        { q: "Inflammation/damage of the left recurrent laryngeal nerve in horses causes _____.", a: ["roaring", "laryngeal hemiplegia"], e: "Whistling noise during exercise." },
+        { q: "The order of structures in the costal groove from top to bottom is _____.", a: ["v-a-n", "vein-artery-nerve", "vein artery nerve"], e: "Mnemonic: VAN." },
+        { q: "Both vagal trunks enter the abdomen through the _____ hiatus.", a: ["oesophageal", "esophageal"], e: "Travel with the oesophagus." },
+        { q: "The chain of sympathetic ganglia in the thorax lies along the necks of the _____.", a: ["ribs"], e: "Sympathetic trunk under parietal pleura." },
+        { q: "Vagal stimulation _____ heart rate (speeds/slows).", a: ["slows"], e: "Parasympathetic effect." }
+      ]
+    },
+    "Angiology": {
+      mcq: [
+        { q: "The number of chambers in the mammalian heart is:", o: ["2", "3", "4", "5"], a: 2, e: "Two atria + two ventricles." },
+        { q: "The heart of ox lies between which ribs?", o: ["1st-3rd", "3rd-6th", "6th-9th", "9th-13th"], a: 1, e: "Heart of ox extends from 3rd to 6th rib, slightly to the left." },
+        { q: "The left atrioventricular valve is also called the:", o: ["Tricuspid valve", "Bicuspid (Mitral) valve", "Pulmonary valve", "Aortic valve"], a: 1, e: "Left AV valve = Mitral/Bicuspid (2 cusps)." },
+        { q: "Ossa cordis (bones of heart) are characteristic of:", o: ["Horse", "Dog", "Ruminants (Ox)", "Pig"], a: 2, e: "Ruminants have ossa cordis at the base of the aorta in adult animals." },
+        { q: "In the ox, the only branch from the aortic arch is the:", o: ["Brachiocephalic trunk", "Left subclavian", "Bicarotid trunk", "Right subclavian"], a: 0, e: "Single brachiocephalic trunk arises from the arch in ox; it gives off all other branches." },
+        { q: "The bicarotid trunk in ox arises from the:", o: ["Aortic arch directly", "Brachiocephalic trunk", "Right subclavian", "Left subclavian"], a: 1, e: "Bicarotid trunk arises from brachiocephalic and divides into right and left common carotids." },
+        { q: "The azygos vein in ox/horse is the _____ azygos:", o: ["Left", "Right", "Both", "Absent"], a: 1, e: "Right azygos drains intercostal spaces in ox and horse." },
+        { q: "In dog and pig, the azygos vein present is the _____ azygos:", o: ["Left (hemiazygos)", "Right", "Both", "Absent"], a: 0, e: "Left azygos (hemiazygos) is found in dog, pig and cat — drains into coronary sinus." },
+        { q: "Pulmonary veins carry _____ blood to the left atrium:", o: ["Deoxygenated", "Oxygenated", "Mixed", "Lymph"], a: 1, e: "Pulmonary veins are unique — they carry oxygenated blood." },
+        { q: "The thoracic duct begins as a sac-like dilation called:", o: ["Cisterna magna", "Cisterna chyli", "Coronary sinus", "Aortic sinus"], a: 1, e: "Cisterna chyli lies dorsal to the aorta in the abdomen." },
+        { q: "The thoracic duct opens into the:", o: ["Aorta", "Caudal vena cava", "Cranial vena cava", "Right atrium directly"], a: 2, e: "Drains into cranial vena cava (or jugular) at thoracic inlet." },
+        { q: "Lymph nodes located at the bifurcation of the trachea are called:", o: ["Mediastinal nodes", "Tracheobronchial (bronchial) nodes", "Sternal nodes", "Intercostal nodes"], a: 1, e: "Bronchial LNs are key sites for bovine TB inspection." },
+        { q: "Traumatic reticulopericarditis (hardware disease) in cattle is caused by:", o: ["A virus", "A swallowed nail/wire piercing through the reticulum into the pericardium", "Mineral deficiency", "High-altitude exposure"], a: 1, e: "Sharp metal pierces the reticulum and diaphragm and lodges in the pericardium → infection." },
+        { q: "Persistent right aortic arch (PRAA) typically affects which species?", o: ["Cattle", "Sheep", "Dog", "Fowl"], a: 2, e: "PRAA forms a vascular ring around the oesophagus in dogs → puppies regurgitate solid food." }
+      ],
+      tf: [
+        { q: "The heart of ox lies more on the right side of the median plane.", a: false, e: "False. About 60% of the heart lies on the LEFT side." },
+        { q: "Ruminants have two small bones (ossa cordis) at the base of the aorta in the heart.", a: true, e: "True. They support valve fibrous skeleton." },
+        { q: "The brachiocephalic trunk in ox gives off the bicarotid trunk and both subclavian arteries.", a: true, e: "True. Single trunk pattern is unique to ox/pig." },
+        { q: "The right azygos vein is found in dogs and cats.", a: false, e: "False. Dogs/cats have LEFT azygos (hemiazygos)." },
+        { q: "The thoracic duct opens into the right atrium directly.", a: false, e: "False. It opens into the cranial vena cava (or jugular) at the thoracic inlet." },
+        { q: "Bronchial lymph nodes are routinely inspected in cattle for tuberculosis.", a: true, e: "True. Standard meat inspection sites." },
+        { q: "Pulmonary veins carry deoxygenated blood.", a: false, e: "False. They carry OXYGENATED blood (unique among veins)." }
+      ],
+      fib: [
+        { q: "The number of chambers in the mammalian heart is _____.", a: ["four", "4"], e: "Two atria, two ventricles." },
+        { q: "Bones present in the fibrous skeleton of the ruminant heart are called _____.", a: ["ossa cordis", "bones of heart"], e: "Two bones at the base of aorta." },
+        { q: "Ox and horse have a _____ azygos vein.", a: ["right"], e: "Drains right intercostal spaces." },
+        { q: "The thoracic duct begins from the _____ in the abdomen.", a: ["cisterna chyli"], e: "Sac-like swelling dorsal to aorta." },
+        { q: "Lymph nodes located between the oesophagus and aorta near the diaphragm in ox are called the _____ mediastinal lymph nodes.", a: ["caudal"], e: "Largest mediastinal LN in cattle." },
+        { q: "The disease in cattle caused by a swallowed sharp object piercing the pericardium is called _____.", a: ["hardware disease", "traumatic reticulopericarditis"], e: "Common in cattle." },
+        { q: "The left atrioventricular valve has _____ cusps.", a: ["two", "2"], e: "Bicuspid/Mitral valve." }
+      ]
+    },
+    "Splanchnology": {
+      mcq: [
+        { q: "The trachea is supported by:", o: ["Complete bony rings", "C-shaped cartilage rings open dorsally", "O-shaped cartilage rings", "Soft tissue only"], a: 1, e: "C-shaped cartilage rings; the open dorsal part is closed by trachealis muscle." },
+        { q: "The bovine trachea bifurcates approximately at the level of:", o: ["1st rib", "5th-6th rib (T5)", "9th rib", "Last rib"], a: 1, e: "Bifurcates around T5-T6 vertebra in ox." },
+        { q: "The tracheal bronchus (eparterial bronchus) supplies the:", o: ["Cranial part of right cranial lobe of lung", "Left cranial lobe", "Accessory lobe", "All lobes"], a: 0, e: "It is unique to ox, sheep, and pig and goes to the right cranial lobe." },
+        { q: "The tracheal bronchus is found in:", o: ["Horse only", "Dog only", "Ox and Pig", "All species"], a: 2, e: "Present in ruminants and pig, ABSENT in horse and dog." },
+        { q: "In ox, the muscular layer of the oesophagus is:", o: ["Smooth throughout", "Striated in upper 1/3 only", "Striated throughout", "Cardiac muscle"], a: 2, e: "Entirely striated in ox — allows voluntary cud regurgitation." },
+        { q: "The oesophagus deviates to which side of the trachea in the mid-cervical region?", o: ["Right", "Left", "Dorsal", "Remains midline"], a: 1, e: "Deviates to the LEFT side of the trachea." },
+        { q: "Common sites of choke in domestic animals are:", o: ["Cardia of stomach only", "Thoracic inlet and base of heart", "Pharynx only", "Oesophageal hiatus only"], a: 1, e: "Most common at thoracic inlet and heart base." },
+        { q: "The thymus regresses (involutes) after:", o: ["Birth", "Puberty", "Old age only", "Never"], a: 1, e: "Largest at puberty, then steadily shrinks and is replaced by fat." },
+        { q: "The total number of lobes in the right lung of ox is:", o: ["3", "4", "5", "6"], a: 2, e: "Right lung has 5 lobes: cranial (2 parts), middle, caudal, accessory." },
+        { q: "The 'tile-like' lobulation visible on lung surface is most pronounced in:", o: ["Horse", "Dog", "Ox and Pig", "Cat"], a: 2, e: "Heavy interlobular connective tissue gives lobulated appearance in ox and pig." },
+        { q: "The mediastinum in ox is:", o: ["Fenestrated (incomplete)", "Complete", "Absent", "Only present cranially"], a: 1, e: "Complete in ox, sheep, goat and pig — pleural cavities don't communicate." },
+        { q: "The mediastinum in horse and dog is:", o: ["Complete", "Fenestrated (incomplete)", "Doubled", "Calcified"], a: 1, e: "Fenestrated → unilateral pneumothorax becomes bilateral." },
+        { q: "Pneumothorax in horse and dog tends to be:", o: ["Always unilateral", "Bilateral and severe", "Self-limiting", "Asymptomatic"], a: 1, e: "Because of fenestrated mediastinum, both pleural sacs collapse together." },
+        { q: "The pleural cavity normally contains:", o: ["Air at atmospheric pressure", "A small amount of serous fluid at slightly negative pressure", "Bile", "Lymph"], a: 1, e: "Tiny film of pleural fluid; pressure slightly below atmospheric to keep lungs expanded." },
+        { q: "The site for paracentesis thoracis in cattle is the:", o: ["3rd-4th intercostal space, high on chest", "7th-8th intercostal space, low on chest, cranial border of rib", "11th intercostal space, dorsal", "Last intercostal space, caudal border"], a: 1, e: "7th-8th ICS, low, cranial border (avoids V-A-N)." },
+        { q: "The cardiac auscultation of the mitral valve is best heard on:", o: ["Right side, 3rd ICS", "Left side, 4th-5th ICS, low", "Right side, 6th ICS", "Above the spine"], a: 1, e: "Mitral valve = left, 4th-5th ICS, low chest wall." },
+        { q: "The order P-A-M-T (Pulmonary-Aortic-Mitral-Tricuspid) refers to:", o: ["Heart valve auscultation sites", "Lung percussion sites", "Lymph nodes", "Heart chambers"], a: 0, e: "Memory aid for valve listening sites in order." },
+        { q: "The crop is a dilation of the oesophagus found in:", o: ["Horse", "Ox", "Dog", "Fowl"], a: 3, e: "Crop is a food-storage dilation of cervical oesophagus in birds." }
+      ],
+      tf: [
+        { q: "The trachea has C-shaped cartilage rings open dorsally.", a: true, e: "True. The gap is closed by trachealis muscle and fibrous membrane." },
+        { q: "The tracheal bronchus is present in horse and dog.", a: false, e: "False. Found in ox and pig; ABSENT in horse and dog." },
+        { q: "The oesophagus of ox has striated muscle throughout its length.", a: true, e: "True. Allows voluntary cud regurgitation in ruminants." },
+        { q: "The right lung of ox has 5 lobes including an accessory lobe.", a: true, e: "True. Cranial (2 parts), middle, caudal and accessory lobes." },
+        { q: "The mediastinum in ox is fenestrated.", a: false, e: "False. It is COMPLETE in ox; fenestrated in horse and dog." },
+        { q: "Choke commonly occurs at the thoracic inlet and base of heart.", a: true, e: "True. These are the natural narrow points." },
+        { q: "Birds have a thymus only in the thoracic cavity.", a: false, e: "False. Birds have multiple paired thymic lobes along the neck (cervical) only." },
+        { q: "The pulmonary plexus around the lung hilus contains both vagal and sympathetic fibres.", a: true, e: "True. Vagus constricts; sympathetic dilates bronchi." },
+        { q: "Paracentesis thoracis in ox is performed at the caudal border of the rib.", a: false, e: "False. Always cranial border to avoid V-A-N." }
+      ],
+      fib: [
+        { q: "The bovine trachea has _____-shaped cartilage rings open dorsally.", a: ["c"], e: "Closed dorsally by trachealis muscle." },
+        { q: "The extra bronchus arising from the right side of trachea before bifurcation in ox is called the _____ bronchus.", a: ["tracheal", "eparterial"], e: "Supplies cranial part of right cranial lobe." },
+        { q: "Oesophageal obstruction is clinically known as _____.", a: ["choke"], e: "Common in cattle and horses." },
+        { q: "The right lung of ox has _____ lobes.", a: ["five", "5"], e: "Cranial (2 parts), middle, caudal, accessory." },
+        { q: "The thin median wall between the two pleural sacs is called the _____.", a: ["mediastinum"], e: "Houses heart, trachea, oesophagus." },
+        { q: "Paracentesis thoracis in cattle is performed in the _____ or _____ intercostal space.", a: ["7th and 8th", "7 and 8", "seventh and eighth"], e: "Low on chest, cranial border of rib." },
+        { q: "The mediastinum is _____ (complete/fenestrated) in ox.", a: ["complete"], e: "Hence unilateral pneumothorax is possible." },
+        { q: "The food-storage dilation of the oesophagus in fowl is called the _____.", a: ["crop"], e: "Stores food before passing to proventriculus." },
+        { q: "Inflammation of the pleura is called _____.", a: ["pleurisy", "pleuritis"], e: "Produces friction rub on auscultation." }
+      ]
+    }
   },
   
   "Abdomen": {
@@ -414,13 +668,7 @@ const quizBank = {
     "Angiology": { mcq: [], tf: [], fib: [] }
   },
   
-  "Pelvis": {
-    "Osteology": { mcq: [], tf: [], fib: [] },
-    "Myology": { mcq: [], tf: [], fib: [] },
-    "Arthrology": { mcq: [], tf: [], fib: [] },
-    "Neurology": { mcq: [], tf: [], fib: [] },
-    "Angiology": { mcq: [], tf: [], fib: [] }
-  }
+  // "Pelvis" merged into "Hindlimb & Pelvis" above
 };
 
 // Legacy compatibility (optional - can be removed once fully transitioned)

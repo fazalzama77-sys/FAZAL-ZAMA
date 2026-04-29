@@ -13,5 +13,6 @@ atlasData["Abdomen"] = {
     "Myology": [],
     "Arthrology": [],
     "Neurology": [],
-    "Angiology": []
+    "Angiology": [],
+    "Splanchnology": []
 };

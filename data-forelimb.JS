@@ -593,5 +593,6 @@ atlasData["Forelimb"] = {
         }
     ],
     
-    "Angiology": []  // READY FOR YOUR BLOOD VESSEL DATA
+    "Angiology": [],  // READY FOR YOUR BLOOD VESSEL DATA
+    "Splanchnology": []
 };

@@ -327,5 +327,329 @@ anatomyData = [
             correctIndex: 1,
             explanation: "Gall bladders store bile for distinct meals. Since horses eat continuously, they do not need to store bile; they secrete it constantly."
         }
+    },
+
+    // ==========================================================
+    // WILDLIFE vs DOMESTIC ANIMAL — BIOMECHANICAL COMPARISONS
+    // ==========================================================
+    {
+        id: 21,
+        title: "Cheetah Spine",
+        category: "wildlife",
+        comparison: "Cheetah vs. Horse",
+        why: "The Cheetah possesses an extremely flexible thoracolumbar spine that flexes and extends like a coiled spring during the gallop, adding ~40% to stride length and propelling speeds of 110 km/h. The Horse evolved a near-rigid back (locked withers, strong supraspinous ligament) for energy-efficient sustained galloping but loses the explosive spinal-spring boost.",
+        clinical: "Cheetah autopsies show extreme wear of intervertebral discs by mid-life. In horses, hyperflexible 'roach' or 'sway' backs are pathological — the equine design demands rigidity.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/TheCheethcat.jpg/640px-TheCheethcat.jpg",
+        analogy: "The Cheetah's spine is a bow-and-arrow — it loads and releases elastic energy with each stride. The Horse's spine is a steel I-beam — it doesn't bend, it just transmits the engine's power directly to the wheels.",
+        quiz: {
+            question: "How does the cheetah achieve its extraordinary stride length?",
+            options: ["Longer leg bones than the horse", "Extreme flexion-extension of the thoracolumbar spine", "Hollow pneumatic bones", "Shorter neck for forward thrust"],
+            correctIndex: 1,
+            explanation: "Each gallop cycle involves dramatic spinal flexion (compression) and extension (recoil), adding nearly half a stride length per bound."
+        }
+    },
+    {
+        id: 22,
+        title: "Giraffe Neck & Rete Mirabile",
+        category: "wildlife",
+        comparison: "Giraffe vs. Horse/Ox",
+        why: "Despite a 2-metre neck, the Giraffe has only 7 cervical vertebrae — the same as horse, ox and human — but each is hugely elongated. To prevent blackouts when the head drops 5 m to drink, it has a thickened left ventricle, valves in the jugular vein, and a 'rete mirabile' (vascular sponge) at the skull base that buffers cerebral blood pressure swings.",
+        clinical: "Anaesthesia of giraffes is high-risk: positional changes cause dramatic BP shifts. No comparable vascular braking system exists in horse or ox.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_standing.jpg/480px-Giraffe_standing.jpg",
+        analogy: "The Giraffe is a tower crane with a built-in pressure-relief valve at the top. The Horse is a normal car — bring its head up and down quickly and it gets a head-rush. The Giraffe's rete mirabile is the surge protector that lets it operate over a 5-metre vertical range without fainting.",
+        quiz: {
+            question: "How many cervical vertebrae does a giraffe have?",
+            options: ["7 (same as most mammals)", "12", "20", "It varies between individuals"],
+            correctIndex: 0,
+            explanation: "Almost all mammals — mouse, human, horse, giraffe — have exactly 7 cervical vertebrae. The giraffe simply has VERY LONG ones."
+        }
+    },
+    {
+        id: 23,
+        title: "Elephant Foot Pad",
+        category: "wildlife",
+        comparison: "Elephant vs. Horse",
+        why: "The Elephant stands on the tips of its toes (digitigrade-unguligrade hybrid) supported by a massive subcutaneous fibro-fatty 'cushion' that distributes 5+ tonnes of body weight. There are no springs or stay apparatus — it is a pure hydraulic column. The Horse uses the suspensory ligament and frog as elastic shock absorbers.",
+        clinical: "Captive elephants on hard concrete develop foot abscesses and chronic arthritis because the fat pad cannot compensate for unnatural surfaces. The horse hoof is, by contrast, designed for impact.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/640px-African_Bush_Elephant.jpg",
+        analogy: "The Horse's hoof is a high-tech sneaker with airbags. The Elephant's foot is a stack of telephone books inside a leather slipper — it doesn't bounce, it just absorbs and squashes flat under enormous load.",
+        quiz: {
+            question: "What absorbs concussive force in the elephant foot?",
+            options: ["Frog and digital cushion", "A massive fibro-fatty subcutaneous pad", "Hollow pneumatic bones", "Long synovial bursae"],
+            correctIndex: 1,
+            explanation: "Elephants have no spring system. A thick fat-and-fibre cushion under the bones spreads the weight. They walk on tiptoes resting on this pad."
+        }
+    },
+    {
+        id: 24,
+        title: "Kangaroo Hindlimb Tendons",
+        category: "wildlife",
+        comparison: "Kangaroo vs. Dog",
+        why: "The Kangaroo's gastrocnemius and plantaris tendons are massively elongated and elastic, storing 70% of the energy of each hop and releasing it on the next bound — the most efficient gait in mammals. The thick muscular tail acts as a fifth limb and counterbalance during pentapedal walking. The Dog uses muscle-driven flexor-extensor cycles instead.",
+        clinical: "Achilles tendon ruptures in kangaroos are immediately fatal. In dogs, surgical repair is feasible because the system is muscle-redundant.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Kangaroo_and_joey03.jpg/640px-Kangaroo_and_joey03.jpg",
+        analogy: "The Kangaroo's leg is a pogo stick — the spring (tendon) does most of the work and the muscle just resets it. The Dog's leg is a regular piston engine that has to fire muscle every step.",
+        quiz: {
+            question: "What makes the kangaroo's hop so energy-efficient?",
+            options: ["Strong hip extensors only", "Elastic energy stored in the gastrocnemius and plantaris tendons", "Light hollow bones", "Backward-pointing hindlimbs"],
+            correctIndex: 1,
+            explanation: "The huge spring-like tendons capture 70% of landing energy and release it on the next bound — like a pogo stick."
+        }
+    },
+    {
+        id: 25,
+        title: "Retractable Claws",
+        category: "wildlife",
+        comparison: "Tiger/Lion vs. Dog",
+        why: "Big cats (Felidae) possess elastic dorsal ligaments that hold the distal phalanx (P3) bearing the claw RETRACTED at rest, sparing the claw point from wear. Active flexor tendons protrude the claws for grappling prey. The Dog's claw is non-retractable and always exposed, blunting on the ground — a trade-off for traction during pursuit.",
+        clinical: "Onychectomy ('declawing') in cats severs P3 itself — biomechanically equivalent to amputating a human fingertip. Dogs only need claw trimming.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Walking_tiger_female.jpg/640px-Walking_tiger_female.jpg",
+        analogy: "Cat claws are switchblades — sharp, hidden until needed, deployed by a flick of mechanism. Dog claws are like the cleats on football boots — always out, providing grip but blunted by every step.",
+        quiz: {
+            question: "What mechanism keeps a tiger's claws retracted?",
+            options: ["Active muscle contraction", "Elastic dorsal ligaments pulling P3 back", "Skin folds covering the claw", "Bone fusion locking the joint"],
+            correctIndex: 1,
+            explanation: "At rest, elastic dorsal ligaments hold P3 retracted. Active flexor tendons override this to deploy claws for hunting."
+        }
+    },
+    {
+        id: 26,
+        title: "Camel Foot Pad",
+        category: "wildlife",
+        comparison: "Camel vs. Horse",
+        why: "The Camel walks on a broad, soft, splayed footpad shared between two digits — extremely wide surface area to prevent sinking into sand. The horn is reduced; weight is borne by the dermal pad. The Horse hoof is a hard, narrow capsule built for hard ground impact, useless on dunes.",
+        clinical: "Camels in stony terrain wear pad ulcers (hoof rot equivalent). Horse hooves crack and chip on soft sandy ground because they need a firm base.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg/640px-07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg",
+        analogy: "The Horse hoof is a stiletto heel — concentrates force, perfect on a hardwood floor (savanna). The Camel foot is a snowshoe — spreads load wide, perfect for soft sand.",
+        quiz: {
+            question: "Why does the camel have a wide soft footpad instead of a hoof?",
+            options: ["It cannot grow horn", "To distribute weight on soft sand without sinking", "To regulate temperature", "To allow swimming"],
+            correctIndex: 1,
+            explanation: "Wide, splayed digits with a fibro-fatty pad spread the body weight over a large surface — the same principle as a snowshoe."
+        }
+    },
+    {
+        id: 27,
+        title: "Antlers vs. Horns",
+        category: "wildlife",
+        comparison: "Deer vs. Ox/Goat",
+        why: "Antlers (deer family — Cervidae) are pure BONE, branched, shed and regrown ANNUALLY, and grow encased in nourishing 'velvet' skin. Horns (cattle, sheep, goats — Bovidae) are PERMANENT bony cores covered in keratin sheath that grows continuously. Antlers are the fastest growing bone known (up to 2.5 cm/day).",
+        clinical: "Dehorning (cattle) cuts living horn-and-bone — bleeding and pain. Velvet harvesting from deer is also invasive; antlers later shed naturally without any wound.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Hjort_p%C3%A5_Dyrehaven.jpg/640px-Hjort_p%C3%A5_Dyrehaven.jpg",
+        analogy: "Horns are like a permanent steel helmet — slow, permanent, always on. Antlers are like seasonal tournament armour — grown for one rutting season, then discarded and rebuilt fresh next year.",
+        quiz: {
+            question: "What is the key biological difference between antlers and horns?",
+            options: ["Antlers are keratin, horns are bone", "Antlers are bone shed annually; horns are bony cores covered in permanent keratin", "Antlers grow only in females", "Horns are made of cartilage"],
+            correctIndex: 1,
+            explanation: "Antlers (deer) = pure bone, branched, shed every year. Horns (cattle, goat) = permanent bone core with a keratin sheath."
+        }
+    },
+    {
+        id: 28,
+        title: "Bat Wing Skeleton",
+        category: "wildlife",
+        comparison: "Bat vs. Dog",
+        why: "The Bat's forelimb is radically modified for flight: digits II–V are massively elongated to support a thin double-layered skin membrane (patagium) that forms the wing. The thumb (digit I) remains short with a claw. The dog forelimb retains the standard 5 short digits for ground locomotion.",
+        clinical: "Wing-membrane tears in bats compromise thermoregulation and flight; healing is poor. Canine paw injuries are routine to repair.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Pteropus_giganteus_-Kolkata%2C_West_Bengal%2C_India-8.jpg/640px-Pteropus_giganteus_-Kolkata%2C_West_Bengal%2C_India-8.jpg",
+        analogy: "The Dog's forelimb is a normal hand. The Bat took the same hand, stretched the fingers to umbrella-spoke length, and pulled a kite skin between them. Same parts — radically different function.",
+        quiz: {
+            question: "Which structures of the bat forelimb are most modified for flight?",
+            options: ["The radius and ulna only", "The carpal bones", "Digits II to V (greatly elongated)", "The clavicle"],
+            correctIndex: 2,
+            explanation: "Digits II–V are stretched to many times their original length to support the patagium (wing membrane). The thumb stays short and clawed."
+        }
+    },
+    {
+        id: 29,
+        title: "Whale Vestigial Pelvis",
+        category: "wildlife",
+        comparison: "Whale/Dolphin vs. Dog",
+        why: "Cetaceans (whales, dolphins) have lost their hindlimbs entirely and retain only a pair of small 'floating' pelvic bones suspended in muscle, with NO connection to the vertebral column. They serve only as anchor points for reproductive musculature. The dog pelvis, in contrast, is the fixed weight-bearing platform of the hindlimb.",
+        clinical: "Vestigial pelvic bones can be felt on dissection of stranded cetaceans. Their existence is a textbook proof of evolutionary descent from land mammals.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Bottlenose_Dolphin_KSC04pd0178.jpg/640px-Bottlenose_Dolphin_KSC04pd0178.jpg",
+        analogy: "The Dog's pelvis is the chassis of a car. The Whale kept the chassis bolts but threw away the wheels, axle and frame — leaving just two stubs floating uselessly inside the body.",
+        quiz: {
+            question: "What is the role of the cetacean pelvic bone?",
+            options: ["It supports the tail flukes", "It is fused to the spine for stability", "It floats free in muscle and anchors reproductive muscles only", "It supports vestigial limbs that emerge in old age"],
+            correctIndex: 2,
+            explanation: "The whale pelvis is non-articulated — completely free-floating in soft tissue — and serves only as muscle attachment for reproductive structures."
+        }
+    },
+    {
+        id: 30,
+        title: "Ostrich Two-Toed Foot",
+        category: "wildlife",
+        comparison: "Ostrich vs. Fowl",
+        why: "The Ostrich is the ONLY living bird with just 2 toes (digits III and IV) — digit III bears most of the weight on a thick keratin pad, like a hoof. Reduced toe number means lower distal limb mass, lower swing inertia, and top running speeds of 70 km/h. Common fowl retain 4 toes for perching and grasping.",
+        clinical: "Ostriches in captivity are prone to nail and footpad injuries because all weight passes through one digit. A nail crack is a major welfare concern.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ostrich_Ngorongoro_05.jpg/640px-Ostrich_Ngorongoro_05.jpg",
+        analogy: "Fowl have a typical four-prong garden fork foot — good grip on a perch. The Ostrich shaved that down to a hoof-like 2-prong claw foot — useless for perching, but sprints across the savanna like a feathered horse.",
+        quiz: {
+            question: "How many toes does an ostrich have on each foot?",
+            options: ["1", "2", "3", "4"],
+            correctIndex: 1,
+            explanation: "Ostriches are uniquely DIDACTYL among birds. Digit III bears most weight (with a hoof-like nail); digit IV is small and lateral."
+        }
+    },
+    {
+        id: 31,
+        title: "Snake Skull Kinesis",
+        category: "wildlife",
+        comparison: "Python vs. Lizard",
+        why: "Snake skulls have multiple movable joints between the bones (cranial kinesis) and the lower jaw halves are joined ONLY by an elastic ligament — not a fused symphysis. This lets a snake swallow prey wider than its head. Lizards (and most reptiles) have rigid jaw symphyses limiting gape.",
+        clinical: "When examining a snake post-mortem, the loose mandibular symphysis allows easy oral examination but also makes jaw fractures common when handled roughly.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Boa_constrictor_in_zoo_Cameron_Park_in_Waco%2C_TX_2024.jpg/640px-Boa_constrictor_in_zoo_Cameron_Park_in_Waco%2C_TX_2024.jpg",
+        analogy: "A Lizard's jaw is a one-piece nutcracker. A Snake's jaw is a stretchy sock-puppet — every joint can pop, slide and walk independently around the prey, dragging it inward bit by bit.",
+        quiz: {
+            question: "Why can a snake swallow prey wider than its head?",
+            options: ["The skull is made of cartilage", "The lower jaw halves are joined by elastic ligament, not fused bone", "The skull stretches like rubber", "Snakes regurgitate and re-swallow"],
+            correctIndex: 1,
+            explanation: "Snake mandibles are joined ventrally only by an elastic ligament — they spread apart, allowing each side to 'walk' the prey down separately."
+        }
+    },
+    {
+        id: 32,
+        title: "Frog Urostyle",
+        category: "wildlife",
+        comparison: "Frog vs. Dog",
+        why: "Frogs have fused all their post-sacral vertebrae into a single rigid rod called the UROSTYLE that extends caudally from the sacrum. Together with the elongated ilia and fused tibiofibula, this turns the entire body into a launch catapult, transferring all hindlimb thrust into a single forward leap. The dog has separate caudal vertebrae for tail flexibility.",
+        clinical: "Urostyle fractures in pet frogs (calcium deficiency / metabolic bone disease) cause complete loss of jumping ability — a guarded prognosis.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Litoria_chloris02.jpg/640px-Litoria_chloris02.jpg",
+        analogy: "The Dog has a flexible chain of tail vertebrae for steering. The Frog welded them all into a single steel push-rod that channels every drop of leg power forward, like the spear behind a slingshot.",
+        quiz: {
+            question: "What is the urostyle in frogs?",
+            options: ["A jaw bone", "A fused rod of post-sacral vertebrae", "An ear ossicle", "A skin gland"],
+            correctIndex: 1,
+            explanation: "All post-sacral (caudal) vertebrae fuse into one rigid bony rod that channels hindlimb power into the jump."
+        }
+    },
+    {
+        id: 33,
+        title: "Bear Plantigrade Stance",
+        category: "wildlife",
+        comparison: "Bear vs. Dog",
+        why: "Bears are PLANTIGRADE — they walk on the entire sole of the foot (carpus to digit), like humans. This gives stability for standing upright and digging but limits running speed. Dogs are DIGITIGRADE — they walk only on their toes, raising the heel — gaining stride length and speed at the cost of stability.",
+        clinical: "Bears develop sole pad lesions and arthritis on hard zoo flooring. Dog footpads are evolved for repeated impact.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/2010-kodiak-bear-1.jpg/640px-2010-kodiak-bear-1.jpg",
+        analogy: "Bear walking = wearing flat sandals — comfortable, stable, but slow. Dog walking = wearing high-heels (toe-walking) — fast and graceful, but less stable on rough ground.",
+        quiz: {
+            question: "How do bears walk compared to dogs?",
+            options: ["Bears are digitigrade like dogs", "Bears are plantigrade — using the whole sole of the foot", "Bears are unguligrade — walking on hoof tips", "Bears walk on knuckles"],
+            correctIndex: 1,
+            explanation: "Bears press the entire sole (heel + foot + toes) on the ground — plantigrade. This trades speed for stability and is what lets them stand upright easily."
+        }
+    },
+    {
+        id: 34,
+        title: "Hare/Rabbit Tibiofibula Fusion",
+        category: "wildlife",
+        comparison: "Hare vs. Dog",
+        why: "Hares and rabbits have a FUSED tibia + fibula in the lower leg, like a horse — eliminating rotation but locking the limb into a stiff, lightweight, energy-efficient column for explosive sprinting and zig-zag escape. Dogs retain separate tibia and fibula for some rotation.",
+        clinical: "Tibial fractures in rabbits often involve the fused fibular spike, complicating repair. Pet rabbits also have very thin cortical bone — easily fractured during rough handling.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Lepus_californicus_2.jpg/640px-Lepus_californicus_2.jpg",
+        analogy: "The Dog's lower leg is two separate sticks — flexible, can rotate. The Hare's lower leg is a single welded pole — rigid, light, ready to fire like an arrow when the predator strikes.",
+        quiz: {
+            question: "Why is the rabbit/hare tibia and fibula fused?",
+            options: ["For better fat storage", "To create a rigid lightweight column for sprinting", "To allow rotation of the foot", "To house the bone marrow"],
+            correctIndex: 1,
+            explanation: "Fusion produces a stiff, light leg that won't twist or absorb energy uselessly — perfect for explosive escape sprints."
+        }
+    },
+    {
+        id: 35,
+        title: "Crocodile 'High Walk'",
+        category: "wildlife",
+        comparison: "Crocodile vs. Lizard",
+        why: "Unlike most reptiles, crocodilians can switch from a sprawling 'belly-slide' posture to a fully UPRIGHT 'high walk' where the limbs are positioned vertically beneath the body — like a mammal. This allows them to walk overland with elevated trunk clearance. Lizards remain sprawling, with limbs splayed laterally.",
+        clinical: "In crocodile veterinary handling, the high-walk capability means escape speed on land is significantly higher than expected (~17 km/h short bursts).",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Saltwater_crocodile.jpg/640px-Saltwater_crocodile.jpg",
+        analogy: "Lizards crawl like a sliding push-up. Crocodiles can stand UP and walk like a dog when needed — they're a reptile that figured out the mammalian secret of putting the legs underneath.",
+        quiz: {
+            question: "What is the crocodilian 'high walk'?",
+            options: ["A swimming motion", "A fully upright limb posture similar to mammals", "A defensive display", "Climbing using forelimbs only"],
+            correctIndex: 1,
+            explanation: "Crocodiles can rotate their limbs to a parasagittal (vertical, under-the-body) posture for fast overland travel — unique among living reptiles."
+        }
+    },
+    {
+        id: 36,
+        title: "Hippopotamus Bone Density",
+        category: "wildlife",
+        comparison: "Hippopotamus vs. Pig",
+        why: "Hippos have PACHYOSTOTIC bones — abnormally dense, heavy cortical bone — that act as natural ballast, allowing them to walk along riverbeds underwater (negative buoyancy) instead of swimming. The Pig (their closest terrestrial relative biomechanically) has normal-density bones and floats easily.",
+        clinical: "Hippo skeletons are unusually heavy in dissection. The dense bone means fractures are uncommon but, if they occur, are devastating because of poor bone vascularity.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Hipopotame.JPG/640px-Hipopotame.JPG",
+        analogy: "Most animals are like inflatable rafts — they float. The Hippo is a submarine with lead in its hull — naturally heavy enough to walk along the river bottom without effort.",
+        quiz: {
+            question: "Why do hippos walk along riverbeds rather than swim?",
+            options: ["They cannot swim", "Pachyostotic (abnormally dense) bones make them negatively buoyant", "Their lungs are very small", "They breathe through their skin"],
+            correctIndex: 1,
+            explanation: "Their bones are unusually dense — natural ballast that makes them sink and walk underwater rather than float."
+        }
+    },
+    {
+        id: 37,
+        title: "Owl Silent Flight",
+        category: "wildlife",
+        comparison: "Owl vs. Fowl",
+        why: "Owls have SERRATED (comb-like) leading edges on their primary flight feathers and a soft velvety surface that breaks up the airflow into micro-turbulence — silencing wing-flap noise so prey cannot hear them coming. Domestic fowl have smooth-edged feathers; their flight is loud and inefficient.",
+        clinical: "Damage to the leading-edge serrations (e.g. captive owls hitting cage wire) impairs hunting success significantly.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Bubo_virginianus_06.jpg/640px-Bubo_virginianus_06.jpg",
+        analogy: "Fowl wings are like a sheet of paper flapped through the air — noisy buffeting. Owl wings are like that paper with a frilly comb glued onto the edge — the comb breaks the airflow into tiny silent eddies. Stealth bombers borrowed this design.",
+        quiz: {
+            question: "What makes owl flight nearly silent?",
+            options: ["Smaller wing area", "Serrated leading edge feathers and velvety wing surface", "Hollow feather shafts", "Flapping in slow motion only"],
+            correctIndex: 1,
+            explanation: "The serrated leading edge plus velvety surface texture eliminates the turbulent whoosh that other birds make in flight — letting owls hunt by stealth."
+        }
+    },
+    {
+        id: 38,
+        title: "Squirrel Reversible Hindfoot",
+        category: "wildlife",
+        comparison: "Squirrel vs. Dog",
+        why: "Tree squirrels can rotate their HINDFEET 180° at the ankle joint, gripping a tree trunk with the toes pointing UPWARD. This lets them descend headfirst — feet act like grappling hooks. The Dog's ankle is a hinge joint with no rotation, so dogs cannot climb down a tree headfirst.",
+        clinical: "Pet squirrels with arthritis of the ankle lose the ability to descend trees and must be re-housed at ground level.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Sciurus-vulgaris_hernandeangelis_stockholm_2008-06-04.jpg/480px-Sciurus-vulgaris_hernandeangelis_stockholm_2008-06-04.jpg",
+        analogy: "The Dog's ankle is a hinge — it only flexes-extends. The Squirrel's ankle is a swivel mount — the foot can rotate completely backward, so the toes point UP the trunk while the body climbs DOWN. Like climbing crampons that flip over on demand.",
+        quiz: {
+            question: "How can a squirrel descend a tree headfirst?",
+            options: ["It uses its tail as a grip", "It rotates its hindfeet 180° at the ankle so toes point upward", "It glides down with skin flaps", "It hops down in jumps"],
+            correctIndex: 1,
+            explanation: "Tree squirrels have a uniquely mobile tarsal joint — the foot rotates 180°, so claws can grip the bark while the body points downward."
+        }
+    },
+    {
+        id: 39,
+        title: "Bison Thoracic Hump",
+        category: "wildlife",
+        comparison: "Bison vs. Ox",
+        why: "The American/Indian Bison has dramatically ELONGATED spinous processes on T2–T8 (some over 30 cm long), forming the famous shoulder hump. They serve as a long lever arm for the powerful nuchal-supraspinous ligament that supports the massive head used to plough snow for grazing. Domestic ox has short, normal-length spines.",
+        clinical: "In bison, head-injury / wither-region trauma is more dangerous because of the extensive ligamentous attachments along these tall spines.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/American_bison_k5680-1.jpg/640px-American_bison_k5680-1.jpg",
+        analogy: "The Ox has a regular roof beam over its shoulders. The Bison has a CRANE TOWER built up there — the long spines provide the leverage needed to swing a massive head through deep snow without exhausting the neck muscles.",
+        quiz: {
+            question: "What forms the bison's prominent shoulder hump?",
+            options: ["Fat deposit only", "Greatly elongated thoracic spinous processes (T2–T8)", "Hypertrophied muscle alone", "Fused thoracic vertebrae"],
+            correctIndex: 1,
+            explanation: "The hump is built on a scaffold of dramatically tall T2–T8 spinous processes — needed to anchor the powerful neck ligaments that swing the heavy head."
+        }
+    },
+    {
+        id: 40,
+        title: "Rhinoceros Tridactyl Foot",
+        category: "wildlife",
+        comparison: "Rhinoceros vs. Horse",
+        why: "Despite its 2-tonne weight, the Rhinoceros walks on THREE toes per foot (digits II, III, IV) — the ancestral perissodactyl plan. The Horse, evolutionarily related (same order Perissodactyla), reduced this to a SINGLE toe (digit III) for high-speed running. The rhino kept three toes for stability under massive load on soft ground.",
+        clinical: "Rhino foot disease (cracked nails, abscesses) typically affects the central digit III — the largest weight-bearer — but the lateral toes can compensate temporarily, unlike a horse where catastrophic lameness follows.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Rhinoceros-Wilhelma-2.jpg/640px-Rhinoceros-Wilhelma-2.jpg",
+        analogy: "The Horse is a sports car on a single high-performance tyre — fast but fragile. The Rhino is a forklift on a triple-tyre cluster — slow, stable, and built to carry the load without sinking.",
+        quiz: {
+            question: "How many functional toes does a rhinoceros have on each foot?",
+            options: ["1 (like the horse)", "2 (cloven, like the ox)", "3 (digits II, III, IV)", "5"],
+            correctIndex: 2,
+            explanation: "Rhinos retain the primitive perissodactyl 3-toe foot. The Horse — same order — reduced to a single digit. The Rhino's 3 toes spread the enormous weight."
+        }
     }
 ];

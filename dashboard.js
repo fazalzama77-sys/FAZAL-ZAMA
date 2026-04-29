@@ -4,128 +4,128 @@
 // =========================================================
 
 const dashboard = {
-    STORAGE_KEY: 'ivri-quiz-history',
-    regions: ["Forelimb", "Hindlimb", "Head & Neck", "Thorax", "Abdomen", "Pelvis"],
-    systems: ["Osteology", "Myology", "Arthrology", "Neurology", "Angiology"],
+  STORAGE_KEY: 'ivri-quiz-history',
+  regions: ["Forelimb", "Hindlimb & Pelvis", "Head & Neck", "Thorax", "Abdomen"],
+  systems: ["Osteology", "Myology", "Arthrology", "Neurology", "Angiology", "Splanchnology"],
 
-    // ==================== DATA PERSISTENCE ====================
+  // ==================== DATA PERSISTENCE ====================
 
-    saveQuizResult: (data) => {
-        const history = dashboard.getHistory();
-        history.push({
-            region: data.region || 'Unknown',
-            system: data.system || 'Unknown',
-            mode: data.mode || 'mcq',
-            score: data.score || 0,
-            total: data.total || 0,
-            accuracy: data.total > 0 ? Math.round((data.score / data.total) * 100) : 0,
-            timestamp: Date.now(),
-            date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-        });
-        localStorage.setItem(dashboard.STORAGE_KEY, JSON.stringify(history));
-    },
+  saveQuizResult: (data) => {
+    const history = dashboard.getHistory();
+    history.push({
+      region: data.region || 'Unknown',
+      system: data.system || 'Unknown',
+      mode: data.mode || 'mcq',
+      score: data.score || 0,
+      total: data.total || 0,
+      accuracy: data.total > 0 ? Math.round((data.score / data.total) * 100) : 0,
+      timestamp: Date.now(),
+      date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    });
+    localStorage.setItem(dashboard.STORAGE_KEY, JSON.stringify(history));
+  },
 
-    getHistory: () => {
-        try {
-            return JSON.parse(localStorage.getItem(dashboard.STORAGE_KEY)) || [];
-        } catch {
-            return [];
-        }
-    },
+  getHistory: () => {
+    try {
+      return JSON.parse(localStorage.getItem(dashboard.STORAGE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  },
 
-    clearData: () => {
-        if (confirm('Are you sure you want to clear all performance data? This cannot be undone.')) {
-            localStorage.removeItem(dashboard.STORAGE_KEY);
-            dashboard.render();
-        }
-    },
+  clearData: () => {
+    if (confirm('Are you sure you want to clear all performance data? This cannot be undone.')) {
+      localStorage.removeItem(dashboard.STORAGE_KEY);
+      dashboard.render();
+    }
+  },
 
-    // ==================== CALCULATIONS ====================
+  // ==================== CALCULATIONS ====================
 
-    getOverviewStats: () => {
-        const history = dashboard.getHistory();
-        if (history.length === 0) {
-            return { totalQuizzes: 0, totalQuestions: 0, avgAccuracy: 0, bestAccuracy: 0, studyStreak: 0, totalCorrect: 0 };
-        }
+  getOverviewStats: () => {
+    const history = dashboard.getHistory();
+    if (history.length === 0) {
+      return { totalQuizzes: 0, totalQuestions: 0, avgAccuracy: 0, bestAccuracy: 0, studyStreak: 0, totalCorrect: 0 };
+    }
 
-        const totalQuizzes = history.length;
-        const totalQuestions = history.reduce((sum, h) => sum + h.total, 0);
-        const totalCorrect = history.reduce((sum, h) => sum + h.score, 0);
-        const avgAccuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
-        const bestAccuracy = Math.max(...history.map(h => h.accuracy));
+    const totalQuizzes = history.length;
+    const totalQuestions = history.reduce((sum, h) => sum + h.total, 0);
+    const totalCorrect = history.reduce((sum, h) => sum + h.score, 0);
+    const avgAccuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+    const bestAccuracy = Math.max(...history.map(h => h.accuracy));
 
-        // Calculate study streak (consecutive days)
-        let streak = 0;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const dates = [...new Set(history.map(h => {
-            const d = new Date(h.timestamp);
-            d.setHours(0, 0, 0, 0);
-            return d.getTime();
-        }))].sort((a, b) => b - a);
+    // Calculate study streak (consecutive days)
+    let streak = 0;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dates = [...new Set(history.map(h => {
+      const d = new Date(h.timestamp);
+      d.setHours(0, 0, 0, 0);
+      return d.getTime();
+    }))].sort((a, b) => b - a);
 
-        for (let i = 0; i < dates.length; i++) {
-            const expected = new Date(today);
-            expected.setDate(expected.getDate() - i);
-            expected.setHours(0, 0, 0, 0);
-            if (dates[i] === expected.getTime()) {
-                streak++;
-            } else {
-                break;
-            }
-        }
+    for (let i = 0; i < dates.length; i++) {
+      const expected = new Date(today);
+      expected.setDate(expected.getDate() - i);
+      expected.setHours(0, 0, 0, 0);
+      if (dates[i] === expected.getTime()) {
+        streak++;
+      } else {
+        break;
+      }
+    }
 
-        return { totalQuizzes, totalQuestions, avgAccuracy, bestAccuracy, studyStreak: streak, totalCorrect };
-    },
+    return { totalQuizzes, totalQuestions, avgAccuracy, bestAccuracy, studyStreak: streak, totalCorrect };
+  },
 
-    getTopicStrengths: () => {
-        const history = dashboard.getHistory();
-        const map = {};
+  getTopicStrengths: () => {
+    const history = dashboard.getHistory();
+    const map = {};
 
-        history.forEach(h => {
-            const key = `${h.region}|${h.system}`;
-            if (!map[key]) {
-                map[key] = { region: h.region, system: h.system, totalScore: 0, totalQuestions: 0, attempts: 0 };
-            }
-            map[key].totalScore += h.score;
-            map[key].totalQuestions += h.total;
-            map[key].attempts++;
-        });
+    history.forEach(h => {
+      const key = `${h.region}|${h.system}`;
+      if (!map[key]) {
+        map[key] = { region: h.region, system: h.system, totalScore: 0, totalQuestions: 0, attempts: 0 };
+      }
+      map[key].totalScore += h.score;
+      map[key].totalQuestions += h.total;
+      map[key].attempts++;
+    });
 
-        Object.values(map).forEach(entry => {
-            entry.accuracy = entry.totalQuestions > 0
-                ? Math.round((entry.totalScore / entry.totalQuestions) * 100)
-                : 0;
-        });
+    Object.values(map).forEach(entry => {
+      entry.accuracy = entry.totalQuestions > 0
+        ? Math.round((entry.totalScore / entry.totalQuestions) * 100)
+        : 0;
+    });
 
-        return map;
-    },
+    return map;
+  },
 
-    // ==================== RENDERING ====================
+  // ==================== RENDERING ====================
 
-    render: () => {
-        dashboard.renderOverviewStats();
-        dashboard.renderAccuracyChart();
-        dashboard.renderHeatmap();
-        dashboard.renderHistory();
-    },
+  render: () => {
+    dashboard.renderOverviewStats();
+    dashboard.renderAccuracyChart();
+    dashboard.renderHeatmap();
+    dashboard.renderHistory();
+  },
 
-    renderOverviewStats: () => {
-        const container = document.getElementById('dash-overview-stats');
-        if (!container) return;
+  renderOverviewStats: () => {
+    const container = document.getElementById('dash-overview-stats');
+    if (!container) return;
 
-        const stats = dashboard.getOverviewStats();
+    const stats = dashboard.getOverviewStats();
 
-        const cards = [
-            { icon: 'fa-clipboard-check', label: 'Quizzes Taken', value: stats.totalQuizzes, color: '#bd93f9' },
-            { icon: 'fa-question-circle', label: 'Questions Answered', value: stats.totalQuestions, color: 'var(--why-cyan)' },
-            { icon: 'fa-bullseye', label: 'Average Accuracy', value: stats.avgAccuracy + '%', color: dashboard.getAccuracyColor(stats.avgAccuracy) },
-            { icon: 'fa-trophy', label: 'Best Score', value: stats.bestAccuracy + '%', color: 'var(--atlas-gold)' },
-            { icon: 'fa-fire', label: 'Study Streak', value: stats.studyStreak + ' days', color: '#ff7043' },
-            { icon: 'fa-check', label: 'Correct Answers', value: stats.totalCorrect, color: '#00ff9d' }
-        ];
+    const cards = [
+      { icon: 'fa-clipboard-check', label: 'Quizzes Taken', value: stats.totalQuizzes, color: '#bd93f9' },
+      { icon: 'fa-question-circle', label: 'Questions Answered', value: stats.totalQuestions, color: 'var(--why-cyan)' },
+      { icon: 'fa-bullseye', label: 'Average Accuracy', value: stats.avgAccuracy + '%', color: dashboard.getAccuracyColor(stats.avgAccuracy) },
+      { icon: 'fa-trophy', label: 'Best Score', value: stats.bestAccuracy + '%', color: 'var(--atlas-gold)' },
+      { icon: 'fa-fire', label: 'Study Streak', value: stats.studyStreak + ' days', color: '#ff7043' },
+      { icon: 'fa-check', label: 'Correct Answers', value: stats.totalCorrect, color: '#00ff9d' }
+    ];
 
-        container.innerHTML = cards.map(card => `
+    container.innerHTML = cards.map(card => `
       <div class="dash-stat-card">
         <div class="dash-stat-icon" style="color: ${card.color};">
           <i class="fas ${card.icon}"></i>
@@ -134,111 +134,156 @@ const dashboard = {
         <div class="dash-stat-label">${card.label}</div>
       </div>
     `).join('');
-    },
+  },
 
-    renderAccuracyChart: () => {
-        const container = document.getElementById('dash-accuracy-chart');
-        if (!container) return;
+  renderAccuracyChart: () => {
+    const container = document.getElementById('dash-accuracy-chart');
+    if (!container) return;
 
-        const history = dashboard.getHistory();
+    const history = dashboard.getHistory();
 
-        if (history.length === 0) {
-            container.innerHTML = `
+    if (history.length === 0) {
+      container.innerHTML = `
         <div class="dash-empty">
           <i class="fas fa-chart-line" style="font-size:2rem; margin-bottom:10px; opacity:0.3;"></i>
           <p>Complete quizzes to see your accuracy trend</p>
         </div>
       `;
-            return;
+      return;
+    }
+
+    // Destroy previous Chart instance to prevent memory leak on re-render
+    if (dashboard._accuracyChart) {
+      dashboard._accuracyChart.destroy();
+      dashboard._accuracyChart = null;
+    }
+
+    const recent = history.slice(-20);
+    const labels = recent.map((_, i) => `#${i + 1}`);
+    const accuracies = recent.map(h => h.accuracy);
+    const bgColors = recent.map(h => dashboard.getAccuracyColor(h.accuracy) + 'cc'); // 80% opacity
+    const borderColors = recent.map(h => dashboard.getAccuracyColor(h.accuracy));
+
+    const isPro = document.body.classList.contains('professional-mode');
+    const gridColor = isPro ? 'rgba(0,0,0,0.08)' : 'rgba(100,120,160,0.25)';
+    const tickColor = isPro ? '#546e7a' : '#8892b0';
+    const labelColor = isPro ? '#37474f' : '#ccd6f6';
+
+    container.innerHTML = '<div class="dash-canvas-wrapper"><canvas id="dash-accuracy-canvas"></canvas></div>';
+    const ctx = document.getElementById('dash-accuracy-canvas').getContext('2d');
+
+    dashboard._accuracyChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Accuracy %',
+          data: accuracies,
+          backgroundColor: bgColors,
+          borderColor: borderColors,
+          borderWidth: 2,
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 800, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: (items) => {
+                const h = recent[items[0].dataIndex];
+                return `${h.region} — ${h.system}`;
+              },
+              label: (item) => ` Accuracy: ${item.raw}%`
+            },
+            backgroundColor: isPro ? 'rgba(255,255,255,0.97)' : 'rgba(10,20,45,0.95)',
+            titleColor: isPro ? '#1565c0' : '#00f2ff',
+            bodyColor: isPro ? '#263238' : '#ccd6f6',
+            borderColor: isPro ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.15)',
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 8
+          }
+        },
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            grid: { color: gridColor },
+            ticks: {
+              color: tickColor,
+              callback: val => val + '%',
+              font: { family: 'Inter', size: 11 }
+            },
+            title: { display: true, text: 'Accuracy (%)', color: labelColor, font: { family: 'Inter', size: 12 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: tickColor, font: { family: 'Inter', size: 11 } },
+            title: { display: true, text: 'Quiz Attempt', color: labelColor, font: { family: 'Inter', size: 12 } }
+          }
         }
+      }
+    });
+  },
 
-        const recent = history.slice(-20);
-        const maxVal = 100;
-        const chartHeight = 200;
-        const barWidth = Math.max(20, Math.floor((100 / recent.length) * 3));
+  renderHeatmap: () => {
+    const container = document.getElementById('dash-heatmap');
+    if (!container) return;
 
-        const barsHtml = recent.map((h, i) => {
-            const height = (h.accuracy / maxVal) * chartHeight;
-            const color = dashboard.getAccuracyColor(h.accuracy);
-            return `
-        <div class="dash-bar-wrapper" style="flex: 1; min-width: ${barWidth}px;">
-          <div class="dash-bar-tooltip">${h.accuracy}%<br><span style="font-size:0.65rem;opacity:0.7;">${h.region}</span></div>
-          <div class="dash-bar" style="height: ${height}px; background: ${color};" title="${h.accuracy}% - ${h.region} ${h.system}"></div>
-          <div class="dash-bar-label">${i + 1}</div>
-        </div>
-      `;
-        }).join('');
+    const strengths = dashboard.getTopicStrengths();
+    const history = dashboard.getHistory();
 
-        // Grid lines
-        const gridLines = [100, 75, 50, 25, 0].map(val => `
-      <div class="dash-grid-line" style="bottom: ${(val / maxVal) * chartHeight}px;">
-        <span class="dash-grid-label">${val}%</span>
-      </div>
-    `).join('');
-
-        container.innerHTML = `
-      <div class="dash-chart-area" style="height: ${chartHeight + 40}px;">
-        <div class="dash-grid-lines" style="height: ${chartHeight}px;">
-          ${gridLines}
-        </div>
-        <div class="dash-bars-row">
-          ${barsHtml}
-        </div>
-      </div>
-    `;
-    },
-
-    renderHeatmap: () => {
-        const container = document.getElementById('dash-heatmap');
-        if (!container) return;
-
-        const strengths = dashboard.getTopicStrengths();
-        const history = dashboard.getHistory();
-
-        if (history.length === 0) {
-            container.innerHTML = `
+    if (history.length === 0) {
+      container.innerHTML = `
         <div class="dash-empty">
           <i class="fas fa-th" style="font-size:2rem; margin-bottom:10px; opacity:0.3;"></i>
           <p>Complete quizzes to see your topic strengths</p>
         </div>
       `;
-            return;
-        }
+      return;
+    }
 
-        // Build heatmap grid
-        let html = '<div class="dash-heatmap-grid">';
+    // Build heatmap grid
+    let html = '<div class="dash-heatmap-grid">';
 
-        // Header row
-        html += '<div class="dash-hm-corner"></div>';
-        dashboard.systems.forEach(sys => {
-            html += `<div class="dash-hm-header">${sys.substring(0, 5)}</div>`;
-        });
+    // Header row
+    html += '<div class="dash-hm-corner"></div>';
+    dashboard.systems.forEach(sys => {
+      html += `<div class="dash-hm-header">${sys.substring(0, 5)}</div>`;
+    });
 
-        // Data rows
-        dashboard.regions.forEach(region => {
-            html += `<div class="dash-hm-row-label">${region}</div>`;
-            dashboard.systems.forEach(sys => {
-                const key = `${region}|${sys}`;
-                const data = strengths[key];
-                if (data) {
-                    const color = dashboard.getAccuracyColor(data.accuracy);
-                    const opacity = Math.max(0.3, data.accuracy / 100);
-                    html += `
-            <div class="dash-hm-cell" title="${region} - ${sys}: ${data.accuracy}% (${data.attempts} attempts)"
-                 style="background: ${color}; opacity: ${opacity};">
+    // Data rows
+    dashboard.regions.forEach(region => {
+      html += `<div class="dash-hm-row-label">${region}</div>`;
+      dashboard.systems.forEach(sys => {
+        const key = `${region}|${sys}`;
+        const data = strengths[key];
+        if (data) {
+          const hex = dashboard.getAccuracyColor(data.accuracy);
+          // Convert hex → rgba with opacity so text remains readable
+          const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+          const opacity = Math.max(0.25, data.accuracy / 100);
+          html += `
+            <div class="dash-hm-cell" data-tip="${region} — ${sys}: ${data.accuracy}% (${data.attempts} attempt${data.attempts !== 1 ? 's' : ''})"
+                 style="background: rgba(${r},${g},${b},${opacity}); border-color: rgba(${r},${g},${b},0.5);">
               <span>${data.accuracy}%</span>
             </div>
           `;
-                } else {
-                    html += `<div class="dash-hm-cell empty" title="${region} - ${sys}: Not attempted">—</div>`;
-                }
-            });
-        });
+        } else {
+          html += `<div class="dash-hm-cell empty" data-tip="${region} — ${sys}: Not attempted">—</div>`;
+        }
+      });
+    });
 
-        html += '</div>';
+    html += '</div>';
 
-        // Legend
-        html += `
+    // Legend
+    html += `
       <div class="dash-hm-legend">
         <span><span class="dash-hm-legend-dot" style="background:#ff6b6b;"></span> &lt;60%</span>
         <span><span class="dash-hm-legend-dot" style="background:#ffd700;"></span> 60-79%</span>
@@ -247,28 +292,28 @@ const dashboard = {
       </div>
     `;
 
-        container.innerHTML = html;
-    },
+    container.innerHTML = html;
+  },
 
-    renderHistory: () => {
-        const container = document.getElementById('dash-history');
-        if (!container) return;
+  renderHistory: () => {
+    const container = document.getElementById('dash-history');
+    if (!container) return;
 
-        const history = dashboard.getHistory();
+    const history = dashboard.getHistory();
 
-        if (history.length === 0) {
-            container.innerHTML = `
+    if (history.length === 0) {
+      container.innerHTML = `
         <div class="dash-empty">
           <i class="fas fa-history" style="font-size:2rem; margin-bottom:10px; opacity:0.3;"></i>
           <p>Your quiz sessions will appear here</p>
         </div>
       `;
-            return;
-        }
+      return;
+    }
 
-        const recent = history.slice().reverse().slice(0, 25);
+    const recent = history.slice().reverse().slice(0, 25);
 
-        container.innerHTML = `
+    container.innerHTML = `
       <div class="dash-history-table">
         <div class="dash-ht-header">
           <div class="dash-ht-col">#</div>
@@ -280,8 +325,8 @@ const dashboard = {
           <div class="dash-ht-col">Date</div>
         </div>
         ${recent.map((h, i) => {
-            const color = dashboard.getAccuracyColor(h.accuracy);
-            return `
+      const color = dashboard.getAccuracyColor(h.accuracy);
+      return `
             <div class="dash-ht-row" style="animation-delay: ${i * 0.03}s;">
               <div class="dash-ht-col">${history.length - i}</div>
               <div class="dash-ht-col wide">${h.region}</div>
@@ -292,37 +337,37 @@ const dashboard = {
               <div class="dash-ht-col">${h.date}</div>
             </div>
           `;
-        }).join('')}
+    }).join('')}
       </div>
     `;
-    },
+  },
 
-    // ==================== UTILITIES ====================
+  // ==================== UTILITIES ====================
 
-    getAccuracyColor: (accuracy) => {
-        if (accuracy >= 80) return '#00ff9d';
-        if (accuracy >= 60) return '#ffd700';
-        return '#ff6b6b';
-    }
+  getAccuracyColor: (accuracy) => {
+    if (accuracy >= 80) return '#00ff9d';
+    if (accuracy >= 60) return '#ffd700';
+    return '#ff6b6b';
+  }
 };
 
 // ==================== HOOK INTO QUIZ ENGINE ====================
 // Override showAnalysis to save quiz results to dashboard
 (function () {
-    const originalShowAnalysis = quizApp.showAnalysis;
-    quizApp.showAnalysis = () => {
-        originalShowAnalysis();
+  const originalShowAnalysis = quizApp.showAnalysis;
+  quizApp.showAnalysis = () => {
+    originalShowAnalysis();
 
-        // Save result to dashboard
-        const attempted = quizApp.score + quizApp.wrong;
-        if (attempted > 0) {
-            dashboard.saveQuizResult({
-                region: quizApp.selectedRegion || 'Combined',
-                system: quizApp.selectedSystem || 'Combined',
-                mode: quizApp.mode || 'mcq',
-                score: quizApp.score,
-                total: attempted
-            });
-        }
-    };
+    // Save result to dashboard
+    const attempted = quizApp.score + quizApp.wrong;
+    if (attempted > 0) {
+      dashboard.saveQuizResult({
+        region: quizApp.selectedRegion || 'Combined',
+        system: quizApp.selectedSystem || 'Combined',
+        mode: quizApp.mode || 'mcq',
+        score: quizApp.score,
+        total: attempted
+      });
+    }
+  };
 })();

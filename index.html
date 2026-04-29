@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="enhanced-quiz.css">
   <link rel="stylesheet" href="dashboard.css">
-  <base target="_blank">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a14">
 </head>
 
 <body>
@@ -123,11 +124,15 @@
         <div class="badge" id="atlas-crumb" style="border-color: var(--atlas-gold); color: var(--atlas-gold);">ATLAS
           DATABASE</div>
 
-        <!-- Right side: Elite Toggle + Quiz -->
-        <div style="display: flex; gap: 10px; align-items: center;">
+        <!-- Right side: Elite Toggle + Bookmarks + Quiz -->
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
           <!-- ELITE TOGGLE (Only visible when viewing content) -->
           <button class="nav-btn elite-toggle-btn" id="elite-toggle" onclick="app.toggleElite()" style="display:none;">
             <i class="fas fa-graduation-cap"></i> <span id="elite-text">Elite View</span>
+          </button>
+          <button class="nav-btn" onclick="app.showBookmarks(); app.setHash('#/bookmarks');"
+            title="View bookmarked topics" aria-label="My Bookmarks">
+            <i class="fas fa-star"></i> BOOKMARKS
           </button>
           <button class="nav-btn" style="border-color: var(--atlas-gold); color: var(--atlas-gold);"
             onclick="quizApp.openMenu()">
@@ -191,10 +196,11 @@
             <button class="filter-btn" data-filter="forelimb">Forelimb</button>
             <button class="filter-btn" data-filter="hindlimb">Hindlimb</button>
             <button class="filter-btn" data-filter="axial">Axial & Visceral</button>
+            <button class="filter-btn" data-filter="wildlife">Wildlife vs Domestic</button>
           </div>
           <!-- AI Button -->
           <button class="ai-btn" onclick="startQuiz()">
-            <i class="fas fa-brain"></i> ✨ Challenge Me
+            <i class="fas fa-brain"></i> Challenge Me
           </button>
         </section>
 
@@ -252,7 +258,7 @@
         <div class="quiz-card">
           <button class="modal-close" onclick="closeQuiz()">&times;</button>
           <div style="margin-bottom: 20px; color: var(--why-cyan); font-family: var(--font-code);">
-            <i class="fas fa-sparkles"></i> ENGINEERING CHALLENGE
+            <i class="fas fa-magic"></i> ENGINEERING CHALLENGE
           </div>
           <div id="quizContent">
             <div class="quiz-question" id="quizQuestion">Loading challenge...</div>
@@ -571,17 +577,39 @@
   <script src="data-thorax.JS"></script>
   <script src="data-abdomen.JS"></script>
   <script src="data-head-neck.JS"></script>
-  <script src="data-pelvis.JS"></script>
+  <script src="data-splanchnology.JS"></script>
 
   <!-- Quiz & Why Sections -->
   <script src="data-quiz.JS"></script>
   <script src="data-why.JS"></script>
+
+  <!-- Study Tools (load BEFORE app.js so they're available) -->
+  <script src="glossary.js"></script>
+  <script src="srs.js"></script>
 
   <!-- App Logic -->
   <script src="app.js"></script>
   <script src="enhanced-quiz.js"></script>
   <script src="search.js"></script>
   <script src="dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Toast & shared utilities -->
+  <script>
+    function showToast(message, type = 'info', icon = null) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const defaultIcons = { success: 'fa-check-circle', info: 'fa-info-circle', warning: 'fa-exclamation-triangle' };
+      const iconClass = icon || defaultIcons[type] || 'fa-info-circle';
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<i class="fas ${iconClass}"></i> ${message}`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
+
+  <div id="toast-container"></div>
 </body>
 
 </html>

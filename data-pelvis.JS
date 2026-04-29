@@ -1,17 +1,5 @@
 // =========================================================
 // PELVIS DATA MODULE
-// Contains: Osteology, Myology, Arthrology, Neurology, Angiology
-// Status: [All Empty - Ready for Data]
+// Content merged into data-hindlimb.JS under "Hindlimb & Pelvis"
+// This file is kept as a placeholder but no longer loaded.
 // =========================================================
-
-if (typeof atlasData === 'undefined') {
-    var atlasData = {};
-}
-
-atlasData["Pelvis"] = {
-    "Osteology": [],
-    "Myology": [],
-    "Arthrology": [],
-    "Neurology": [],
-    "Angiology": []
-};
