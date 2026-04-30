@@ -24,11 +24,45 @@ const app = {
             app.state.eliteMode = true;
         }
 
-        // ---- Service worker registration (offline / PWA) ----
+        // ---- Service worker registration (offline / PWA + auto-update) ----
         if ('serviceWorker' in navigator && location.protocol !== 'file:') {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./service-worker.js')
+                    .then((registration) => {
+                        // Force an immediate check for a new SW
+                        registration.update().catch(() => { });
+
+                        // If a SW is ALREADY waiting when we arrive (rare but possible)
+                        if (registration.waiting && navigator.serviceWorker.controller) {
+                            app.showUpdateBanner(registration.waiting);
+                        }
+
+                        // Listen for new SW being found (an update is on the way)
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            if (!newWorker) return;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // A previous SW exists → this is a TRUE update, not first install
+                                    app.showUpdateBanner(newWorker);
+                                }
+                            });
+                        });
+
+                        // Re-check for updates every 60 minutes while tab is open
+                        setInterval(() => {
+                            registration.update().catch(() => { });
+                        }, 60 * 60 * 1000);
+                    })
                     .catch((err) => console.warn('SW registration failed:', err.message));
+
+                // When the new SW takes control, reload exactly once
+                let _reloaded = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (_reloaded) return;
+                    _reloaded = true;
+                    window.location.reload();
+                });
             });
         }
 
@@ -509,6 +543,56 @@ const app = {
             const btn = document.querySelector(`.topic-btn[data-index="${idx}"]`);
             if (btn) app.renderDetail(idx, btn);
         }, 30);
+    },
+
+    // ============== PWA UPDATE FLOW ==============
+    _waitingWorker: null,
+
+    showUpdateBanner: (worker) => {
+        app._waitingWorker = worker;
+        const banner = document.getElementById('update-banner');
+        if (banner) {
+            banner.hidden = false;
+            // Trigger CSS slide-down
+            requestAnimationFrame(() => banner.classList.add('show'));
+        }
+    },
+
+    dismissUpdateBanner: () => {
+        const banner = document.getElementById('update-banner');
+        if (banner) {
+            banner.classList.remove('show');
+            setTimeout(() => { banner.hidden = true; }, 350);
+        }
+    },
+
+    // Called when the user clicks "Refresh now" on the update banner
+    applyUpdate: () => {
+        if (app._waitingWorker) {
+            app._waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+            // controllerchange listener (set in init) will reload the page automatically
+        } else {
+            window.location.reload();
+        }
+    },
+
+    // Nuclear option — wipe all caches + unregister all SWs + reload
+    forceClearCacheAndReload: async () => {
+        if (!confirm('Reset cached site data and reload? Your bookmarks, quiz history, and progress are kept safe — only the cached app files will be cleared.')) return;
+        try {
+            if ('caches' in window) {
+                const keys = await caches.keys();
+                await Promise.all(keys.map((k) => caches.delete(k)));
+            }
+            if ('serviceWorker' in navigator) {
+                const regs = await navigator.serviceWorker.getRegistrations();
+                await Promise.all(regs.map((r) => r.unregister()));
+            }
+        } catch (e) {
+            console.warn('Cache reset issue:', e.message);
+        }
+        // Hard reload bypassing browser HTTP cache too
+        window.location.reload();
     }
 };
 

@@ -788,6 +788,149 @@ body {
     .credit-col { padding: 20px 22px; }
 }
 
+
+/* =========================================================
+   PWA UPDATE BANNER + RESET CACHE BUTTON
+   ========================================================= */
+.update-banner {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    background: #14141f;
+    color: #e8e8f0;
+    border: 1px solid var(--why-cyan, #00f2ff);
+    border-radius: 10px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.92rem;
+    transition: transform 0.35s cubic-bezier(.2,.9,.3,1.4), opacity 0.25s ease;
+    opacity: 0;
+    max-width: calc(100% - 32px);
+}
+.update-banner.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+.update-banner > i.fa-cloud-arrow-down {
+    color: var(--why-cyan, #00f2ff);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+.update-banner-text {
+    font-weight: 500;
+}
+.update-btn {
+    background: transparent;
+    border: 1px solid var(--why-cyan, #00f2ff);
+    color: var(--why-cyan, #00f2ff);
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-code, monospace);
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.update-btn.primary {
+    background: var(--why-cyan, #00f2ff);
+    color: #0a0a14;
+}
+.update-btn.primary:hover {
+    background: #fff;
+    color: #0a0a14;
+}
+.update-btn.dismiss {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #aaa;
+    padding: 4px 10px;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+.update-btn.dismiss:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+/* Stack vertically on small screens */
+@media (max-width: 560px) {
+    .update-banner {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        padding: 14px 16px;
+    }
+    .update-banner-text { width: 100%; order: 0; }
+    .update-banner > i.fa-cloud-arrow-down { order: -1; }
+}
+
+/* Footer tools row (Reset App Cache button etc.) */
+.footer-tools {
+    margin-top: 28px;
+    text-align: center;
+}
+.footer-tool-btn {
+    background: transparent;
+    border: 1px solid var(--border, rgba(255,255,255,0.15));
+    color: var(--text-mute, #888);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-code, monospace);
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.footer-tool-btn:hover {
+    border-color: var(--why-cyan, #00f2ff);
+    color: var(--why-cyan, #00f2ff);
+}
+
+/* Professional (light) theme variants */
+body.professional-mode .update-banner {
+    background: #ffffff;
+    color: #102a43;
+    border-color: #1565c0;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+body.professional-mode .update-banner > i.fa-cloud-arrow-down { color: #1565c0; }
+body.professional-mode .update-btn {
+    border-color: #1565c0;
+    color: #1565c0;
+}
+body.professional-mode .update-btn.primary {
+    background: #1565c0;
+    color: #fff;
+}
+body.professional-mode .update-btn.primary:hover {
+    background: #0d47a1;
+    color: #fff;
+}
+body.professional-mode .update-btn.dismiss {
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #607d8b;
+}
+body.professional-mode .footer-tool-btn {
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #607d8b;
+}
+body.professional-mode .footer-tool-btn:hover {
+    border-color: #1565c0;
+    color: #1565c0;
+}
+
 /* Professional (light) mode tuning */
 body.professional-mode .credit-col {
     background: #ffffff;
