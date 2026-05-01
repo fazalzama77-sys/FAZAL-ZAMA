@@ -27,8 +27,296 @@ atlasData["Head & Neck"]["Splanchnology"].push(
             { species: "Dog", note: "Has both upper and lower incisors. Soft palate is short. Vomiting reflex is well developed." }
         ],
         clinical: "<b>Pharyngeal Paralysis:</b> Can lead to dysphagia and aspiration pneumonia. <b>Actinobacillosis (Wooden Tongue):</b> Actinobacillus lignieresii causes granulomatous glossitis in cattle — tongue becomes hard and swollen. <b>Calf Diphtheria:</b> Fusobacterium necrophorum causes necrotic stomatitis/pharyngitis in calves."
+    },
+    {
+        title: "Teeth & Age Determination by Dentition",
+        desc: `<b>High-Yield Points:</b><br>
+        • <b>Heterodont</b> (different shaped teeth) and <b>diphyodont</b> (deciduous + permanent).<br>
+        • Dental formula (Permanent Ox): <b>I 0/3, C 0/1, P 3/3, M 3/3 = 32 teeth</b>.<br>
+        • Ox has NO upper incisors or canines — replaced by dental pad. The lower 'canine' is incisiform, so 4 lower 'incisors' = I1, I2, I3, C.<br>
+        • Horse: I 3/3, C 1/1 (rudimentary in mare), P 3-4/3, M 3/3 = 36-44.<br>
+        • Dog: I 3/3, C 1/1, P 4/4, M 2/3 = 42.<br>
+        • <b>Age determination by dentition</b>: based on eruption + wear of incisors.`,
+        eliteDesc: `<h3>TEETH OF DOMESTIC ANIMALS</h3>
+        <p><b>Tooth Structure:</b> Crown (above gum) + Root (in alveolus). Tissues: enamel (hardest), dentine, cementum, pulp (with vessels & nerves).</p>
+        <p><b>Types of Teeth:</b> Incisors (I) for cutting; Canines (C) for tearing; Premolars (P) + Molars (M) for grinding (cheek teeth).</p>
+        <p><b>Hypsodont vs Brachydont:</b><br>
+        • <b>Hypsodont</b> (high-crowned, continuous eruption) — horse, ruminants, rabbit. Adapted to abrasive plant diet.<br>
+        • <b>Brachydont</b> (low-crowned, no continuous eruption) — dog, cat, pig, human.</p>
+        <p><b>OX DENTAL FORMULA:</b><br>
+        Deciduous: 2(Di 0/4, Dc 0/0, Dp 3/3) = 20 teeth.<br>
+        Permanent: 2(I 0/3, C 0/1, P 3/3, M 3/3) = 32 teeth.<br>
+        Note: lower canine in ox is INCISIFORM (looks like an incisor) → so 4 lower 'incisor-like teeth' on each side.</p>
+        <p><b>HORSE DENTAL FORMULA:</b><br>
+        Permanent: 2(I 3/3, C 1/1, P 3-4/3, M 3/3) = 36-44 teeth.<br>
+        Mare often lacks canines; may have 'wolf tooth' (vestigial P1).</p>
+        <p><b>DOG DENTAL FORMULA:</b> 2(I 3/3, C 1/1, P 4/4, M 2/3) = 42.</p>
+        <p><b>AGE DETERMINATION BY DENTITION (Cattle):</b><br>
+        Examines eruption and wear of permanent lower incisors:<br>
+        • Birth — incisors not erupted (deciduous appear in days).<br>
+        • 1.5-2 years — central permanent I1 erupt.<br>
+        • 2.5-3 years — I2 erupt.<br>
+        • 3-3.5 years — I3 erupt.<br>
+        • 3.5-4 years — corner 'canine' erupts ('full mouth').<br>
+        • Beyond 5 years — wear pattern of incisors used; 'leveling' progresses from medial to lateral with age.</p>
+        <p><b>AGE DETERMINATION BY DENTITION (Horse) — 'Galvayne's groove' on the upper corner incisor + cup wear pattern:</b><br>
+        • Cups disappear from lower I1 at ~6 yrs, I2 at ~7, I3 at ~8 ('smooth mouth' at 9).<br>
+        • Galvayne's groove appears at corner of upper I3 at 10 yrs, halfway down at 15, all the way down at 20, fades by 30.</p>
+        <p><b>AGE DETERMINATION (Dog):</b><br>
+        Deciduous teeth erupt 3-6 weeks. Permanent: incisors at 3-5 months, canines at 5-6 months, premolars 4-6 months, molars 5-7 months. After 1 year — wear pattern of incisor cusps (cusps level by 4-5 yrs).</p>`,
+        comparative: [
+            { species: "Ox", note: "32 permanent teeth. NO upper incisors. Hypsodont cheek teeth. 'Full mouth' at ~4 years." },
+            { species: "Horse", note: "36-44 teeth (variable). All hypsodont. Galvayne's groove for age." },
+            { species: "Dog", note: "42 teeth, brachydont. Carnassial teeth = upper P4 + lower M1 (shearing pair)." },
+            { species: "Pig", note: "44 teeth. Tusks = canines (continuous growth in boar). 'Needle teeth' in piglets often clipped." }
+        ],
+        clinical: "<b>Floating (Horse):</b> Filing sharp enamel points off cheek teeth — routine equine dental care. <b>Wolf Tooth Removal (Horse):</b> Standard before bitting. <b>Dental Tartar / Periodontal Disease (Dog):</b> Common in small breeds — leads to systemic illness. <b>Age Verification:</b> Required for many sales/insurance — 'mouthing' in cattle/horse."
+    },
+    {
+        title: "Hard & Soft Palate, Tongue, Pharynx",
+        desc: `<b>Hard Palate:</b> Bony roof of mouth, formed by palatine processes of incisive + maxillary + palatine bones. Covered with mucosa with transverse ridges (rugae palatinae).<br>
+        <b>Soft Palate:</b> Muscular continuation behind hard palate; separates nasopharynx from oropharynx. Long in horse → cannot mouth-breathe.<br>
+        <b>Tongue:</b> Muscular organ; Ox has prominent <b>torus linguae</b> (lingual torus). Three types of papillae: filiform (rough surface), fungiform (taste), vallate (large, taste).<br>
+        <b>Pharynx:</b> Muscular tube — common to digestive + respiratory. 3 parts: nasopharynx, oropharynx, laryngopharynx.`,
+        eliteDesc: `<h3>HARD PALATE, SOFT PALATE, TONGUE & PHARYNX</h3>
+        <p><b>HARD PALATE (Palatum durum):</b><br>
+        • Bony plate forming the roof of the oral cavity.<br>
+        • Formed by palatine processes of incisive (rostral), maxillary (middle), palatine bones (caudal).<br>
+        • Covered with thick keratinized mucosa with transverse ridges = <b>rugae palatinae</b> — help direct food back during chewing.<br>
+        • Anteriorly (rostrally) has the <b>incisive (palatine) papilla</b> with the openings of the <b>incisive ducts</b> connecting oral cavity to vomeronasal organ (Flehmen behavior).</p>
+        <p><b>SOFT PALATE (Palatum molle / Velum palatinum):</b><br>
+        • Muscular curtain extending caudally from the hard palate.<br>
+        • Separates nasopharynx (above) from oropharynx (below).<br>
+        • Free caudal edge has the <b>uvula</b> (small in domestic species) and palatoglossal/palatopharyngeal arches.<br>
+        • Muscles: tensor veli palatini, levator veli palatini, palatinus, palatoglossus, palatopharyngeus.<br>
+        • <b>Length matters!</b> Horse soft palate is very long → reaches epiglottis caudally → palate seals the oropharynx, making horse an obligate nasal breather (cannot mouth-breathe even during exercise).</p>
+        <p><b>TONGUE (Lingua):</b><br>
+        • Muscular organ — 3 parts: <b>apex (free tip), body, root</b>.<br>
+        • Lingual frenulum — ventral attachment.<br>
+        • <b>OX TORUS LINGUAE</b> = firm dorsal swelling on the body of the tongue — pad of muscle + connective tissue used to grasp grass against the dental pad.<br>
+        • Mucosal papillae:<br>
+          – <b>Filiform</b> — rough, conical, all over dorsal surface; mechanical (cat's tongue is sandpaper because of these).<br>
+          – <b>Fungiform</b> — mushroom-shaped; few; contain taste buds.<br>
+          – <b>Vallate (Circumvallate)</b> — large, flat-topped, surrounded by a moat; few (4-8); contain numerous taste buds. At root.<br>
+          – <b>Foliate</b> — leaf-like; on lateral root.<br>
+          – <b>Lenticular</b> — only in ruminants; on torus linguae; mechanical.<br>
+        • Innervation: motor — CN XII (hypoglossal); sensory — CN V (general, anterior 2/3) + CN VII (taste, anterior 2/3) + CN IX (general & taste, posterior 1/3) + CN X (epiglottic).</p>
+        <p><b>PHARYNX:</b><br>
+        • Muscular tube — common to digestive + respiratory; ~10-15 cm in cow.<br>
+        • <b>3 parts</b>:<br>
+          – <b>Nasopharynx</b> — above soft palate; communicates with nasal cavity (via choanae) and middle ear (via Eustachian tube).<br>
+          – <b>Oropharynx</b> — behind soft palate; bounded by tongue + soft palate; communicates with oral cavity (via fauces).<br>
+          – <b>Laryngopharynx</b> — caudal to oropharynx; opens into oesophagus + larynx.<br>
+        • Pharyngeal recess is dorso-caudal extension above the oesophageal opening.<br>
+        • <b>Crossing of pathways</b>: respiratory tract crosses the digestive tract at the pharynx — the epiglottis covers the larynx during swallowing.</p>`,
+        comparative: [
+            { species: "Ox", note: "Torus linguae present. Lenticular papillae on torus. Soft palate short." },
+            { species: "Horse", note: "Very long soft palate — locked over the epiglottis → obligate nasal breather. Soft palate displacement (DDSP) is a performance-limiting condition." },
+            { species: "Dog", note: "Sensitive cooling tongue (panting). Brachycephalics have elongated soft palate → BOAS." },
+            { species: "Cat", note: "Filiform papillae heavily keratinized → sandpaper tongue for grooming and stripping flesh." }
+        ],
+        clinical: "<b>Cleft Palate:</b> Congenital — milk regurgitates from nostrils in calf/foal. <b>Pharyngeal Paralysis:</b> CN IX/X lesions → dysphagia. <b>Actinobacillosis (Wooden Tongue):</b> Hard, swollen tongue in cattle. <b>Sublingual Sialocele (Ranula):</b> Obstruction of sublingual duct → cyst under tongue."
+    },
+    {
+        title: "Salivary Glands (Parotid, Mandibular, Sublingual)",
+        desc: `<b>3 Major Pairs:</b><br>
+        • <b>Parotid Gland</b> — largest in horse and ox; lies caudal to mandibular ramus; serous secretion.<br>
+          – Duct: <b>Stensen's (Parotid) duct</b> — opens opposite upper P3-P4 in oral vestibule.<br>
+        • <b>Mandibular Gland</b> — under the angle of jaw; mixed seromucous.<br>
+          – Duct: <b>Wharton's duct</b> — opens at sublingual caruncle.<br>
+        • <b>Sublingual Gland</b> — under tongue; mucous.<br>
+          – Polystomatic + monostomatic parts; multiple ducts (rivinian) opening on sublingual fold.<br>
+        <br>
+        <b>Function:</b> Produce saliva (lubrication, starch digestion in some species, alkaline buffer in ruminants).<br>
+        <b>Ruminant salivary output:</b> ~150 L/day in adult cow — buffers rumen pH.`,
+        eliteDesc: `<h3>SALIVARY GLANDS</h3>
+        <p>Three pairs of major salivary glands + many minor (buccal, lingual, palatine, pharyngeal) glands embedded in the oral mucosa.</p>
+        <p><b>1. PAROTID GLAND (Glandula parotis):</b><br>
+        • Largest salivary gland in horse and ox.<br>
+        • Located in the parotid region — caudal & ventral to the ear, behind the ramus of mandible.<br>
+        • Type: <b>Serous</b> (watery, enzyme-poor in ox; rich in amylase in horse).<br>
+        • <b>Stenson's duct (Parotid duct, ductus parotideus)</b>:<br>
+          – Crosses ventral border of mandible alongside facial artery & vein.<br>
+          – Ascends on lateral surface of masseter.<br>
+          – Pierces buccinator muscle to open into oral vestibule opposite the <b>upper 3rd-4th cheek tooth (P3-P4 in ox)</b>.<br>
+        • <b>Surgical importance:</b> Stenson's duct can be ligated for parotid fistula. Course passes facial nerve & vessels at mandible — risk during dehorning.<br><br>
+        <b>2. MANDIBULAR GLAND (Glandula mandibularis):</b><br>
+        • Located ventral to parotid, in intermandibular space.<br>
+        • Type: <b>Seromucous</b> (mixed).<br>
+        • <b>Wharton's duct (Mandibular duct)</b>:<br>
+          – Runs on the floor of the mouth.<br>
+          – Opens at the <b>sublingual caruncle</b> beside frenulum, just behind lower incisors.<br>
+        • Common site for <b>sialocele/ranula</b> if duct ruptures.<br><br>
+        <b>3. SUBLINGUAL GLAND (Glandula sublingualis):</b><br>
+        • Lies under the floor of mouth, below mucosa.<br>
+        • Two parts:<br>
+          – <b>Monostomatic part</b> — single duct (Bartholin's duct).<br>
+          – <b>Polystomatic part</b> — multiple small ducts (Rivinian ducts) opening directly on the sublingual fold.<br>
+        • Type: <b>Mucous</b> (thick, viscous secretion).<br><br>
+        <b>SALIVARY OUTPUT:</b><br>
+        • Ox: ~100-150 L/day (mostly parotid, alkaline, buffers rumen).<br>
+        • Horse: ~10-12 L/day.<br>
+        • Dog: ~1 L/day.<br>
+        • Saliva = water (99%) + bicarbonate (buffer) + amylase + mucin + lysozyme + immunoglobulins.</p>
+        <p><b>FUNCTIONS:</b><br>
+        1. Lubrication of food → easier swallowing.<br>
+        2. Digestion (amylase in horse/dog; minimal in ox).<br>
+        3. Buffering — bicarbonate stabilises rumen pH.<br>
+        4. Antibacterial (lysozyme + IgA).<br>
+        5. Cooling (panting in dog evaporates saliva).<br>
+        6. Taste (dissolves food → reaches taste buds).</p>`,
+        comparative: [
+            { species: "Ox", note: "Parotid huge — ~400 g; major rumen buffer source." },
+            { species: "Horse", note: "Parotid largest of single horse glands; produces saliva only when chewing (NOT continuously like cattle)." },
+            { species: "Dog", note: "Mandibular and sublingual most prominent on examination. Sialocele common — Wharton or sublingual duct rupture." },
+            { species: "Cat", note: "Smaller glands; cat saliva contains Fel d 1 (allergen for humans)." }
+        ],
+        clinical: "<b>Parotid Fistula:</b> Wound on Stenson's duct → constant leakage of saliva onto cheek; treat by duct ligation. <b>Sialocele/Ranula (Dog):</b> Mucus accumulation under tongue from ruptured sublingual or mandibular duct. <b>Salivary Calculi:</b> Stones in duct → swelling, pain. <b>Sialography:</b> Contrast study of duct system."
+    },
+    {
+        title: "Larynx, Trachea & Oesophagus",
+        desc: `<b>Larynx</b> = voice box; controls airflow + protects airway during swallowing.<br>
+        <b>Cartilages (Ox, 5):</b> Thyroid, Cricoid, Arytenoid (paired), Epiglottis. (Horse adds corniculate + cuneiform).<br>
+        <b>Vocal folds</b> stretched between thyroid + arytenoid cartilages.<br>
+        <b>Innervation:</b> Recurrent laryngeal nerve (CN X) — except cricothyroideus = cranial laryngeal.<br>
+        <br>
+        <b>Trachea:</b> Cartilaginous tube; in ox ~50 incomplete C-rings; runs in mid-line of neck. <b>Tracheotomy</b> site = mid-cervical region between 3rd & 5th tracheal rings.<br>
+        <br>
+        <b>Oesophagus:</b> Muscular tube; lies on left of trachea in neck, then crosses to right. Cervical → thoracic → abdominal parts; pierces oesophageal hiatus of diaphragm.`,
+        eliteDesc: `<h3>LARYNX, TRACHEA & OESOPHAGUS</h3>
+        <p><b>I. LARYNX (Box of Voice):</b><br>
+        Located at the entrance of the lower respiratory tract, in the throat. Functions: airway, voice production (phonation), protection of airway during swallowing (cough reflex).</p>
+        <p><b>Cartilages of the Larynx (Ox = 5; Horse = up to 7):</b><br>
+        • <b>Thyroid cartilage</b> — largest; shield-shaped; forms ventral & lateral walls; in male horse forms 'laryngeal prominence'.<br>
+        • <b>Cricoid cartilage</b> — only complete ring of larynx; signet-ring shape (broad part dorsal).<br>
+        • <b>Arytenoid cartilages</b> (paired) — pyramid-shaped; carry vocal processes; key for vocal fold movement.<br>
+        • <b>Epiglottis</b> — leaf-shaped; covers entrance to larynx during swallowing.<br>
+        • <b>Corniculate + Cuneiform cartilages</b> (in horse) — small accessory.</p>
+        <p><b>Laryngeal Cavity Subdivisions:</b><br>
+        • <b>Vestibule</b> (above vocal folds) — entry from pharynx.<br>
+        • <b>Glottis</b> (rima glottidis) — narrow space between vocal folds.<br>
+        • <b>Infraglottic cavity</b> — below vocal folds, continuous with trachea.</p>
+        <p><b>Innervation:</b><br>
+        • <b>Cranial laryngeal nerve</b> (CN X) — sensory + motor to cricothyroideus.<br>
+        • <b>Recurrent laryngeal nerve</b> (CN X) — motor to all OTHER intrinsic laryngeal muscles + sensory below vocal folds.<br>
+        Damage to recurrent laryngeal → <b>laryngeal hemiplegia ('Roaring')</b> — most common on LEFT (longer nerve loops around aorta).</p>
+        <p><b>II. TRACHEA:</b><br>
+        Tube carrying air from larynx to bronchi. Walls = ~50 incomplete cartilage C-rings (open dorsally, closed by tracheal muscle), connected by annular ligaments.<br>
+        • Lined by ciliated pseudostratified columnar epithelium with goblet cells (mucociliary clearance).<br>
+        • Course: cervical (palpable in jugular furrow) → thoracic (mediastinum) → bifurcation at carina (T5-T6).<br>
+        • Bovine + porcine specialty: <b>Tracheal bronchus</b> — extra bronchus from trachea to right cranial lobe (proximal to bifurcation).<br>
+        • <b>Tracheotomy / Tracheostomy</b>: Mid-cervical region, ventral midline, between 3rd and 5th tracheal rings — emergency airway.</p>
+        <p><b>III. OESOPHAGUS:</b><br>
+        Muscular tube from pharynx to stomach. Begins dorsal to larynx, descends initially DORSAL to trachea, then crosses to the LEFT side of trachea in the neck, returns to mid-line in the thorax (above heart), pierces the diaphragm at the <b>oesophageal hiatus</b>.<br>
+        • <b>Wall layers</b>: Mucosa (stratified squamous epithelium) + submucosa + tunica muscularis (skeletal muscle in cervical part — voluntary; smooth muscle in thoracic part of horse but SKELETAL throughout in ox/dog) + adventitia/serosa.<br>
+        • <b>Esophagotomy</b>: Surgery to remove choke (foreign body); cervical region, ventral or lateral approach.<br>
+        • <b>Choke:</b> Bolus stuck in cervical oesophagus — common in cattle (potatoes, apples) and horse (pelleted feed).</p>`,
+        comparative: [
+            { species: "Ox", note: "Tracheal bronchus present; oesophageal muscle skeletal throughout (allows rumination)." },
+            { species: "Horse", note: "Long soft palate seals oropharynx → obligate nasal breather. Recurrent laryngeal neuropathy → 'roaring'. Oesophagus muscle becomes smooth in distal third." },
+            { species: "Dog", note: "Skeletal muscle throughout; allows voluntary control (regurgitation reflex). Megaesophagus = idiopathic dilatation common in young dogs." }
+        ],
+        clinical: "<b>Tracheotomy (Cattle):</b> Emergency airway between 3rd-5th rings. <b>Roaring (Horse):</b> Laryngoplasty ('tieback' of left arytenoid). <b>Choke (Ox/Horse):</b> Pass stomach tube + lubricate; surgical oesophagotomy if not relieved. <b>Megaoesophagus (Dog):</b> Aspiration pneumonia + regurgitation."
+    },
+    {
+        title: "Endocrine of Head & Neck: Thyroid & Parathyroid",
+        desc: `<b>Thyroid Gland:</b><br>
+        • Two lateral lobes (right + left) connected by isthmus, located on either side of trachea, just caudal to larynx (5th-6th tracheal ring in ox).<br>
+        • Produces <b>T3 (triiodothyronine), T4 (thyroxine)</b> — regulate metabolism. Calcitonin (from C-cells) lowers blood Ca²⁺.<br>
+        <br>
+        <b>Parathyroid Glands:</b><br>
+        • Small (rice-grain sized); paired; secrete <b>PTH (parathormone)</b> — raises blood Ca²⁺.<br>
+        • <b>External parathyroid (Cranial):</b> usually outside thyroid capsule, near common carotid.<br>
+        • <b>Internal parathyroid (Caudal):</b> embedded in thyroid tissue.<br>
+        <br>
+        <b>Clinical:</b> Iodine deficiency → goiter (visible enlargement). Parathyroid tumours → hyperparathyroidism → hypercalcaemia.`,
+        eliteDesc: `<h3>THYROID & PARATHYROID GLANDS</h3>
+        <p><b>THYROID GLAND (Glandula thyreoidea):</b><br>
+        Located on both sides of the trachea, just caudal to the larynx (at the level of the first few tracheal rings — typically 5th-6th in ox). Two lateral lobes connected ventrally by a thin isthmus (well-developed in dog, narrow in horse, may be cord-like in ox).</p>
+        <p><b>Histology:</b> Built of follicles — spherical structures lined by follicular cells (synthesise T3/T4 stored as thyroglobulin in colloid lumen). Between follicles: parafollicular ('C') cells secreting calcitonin.</p>
+        <p><b>Hormones:</b><br>
+        • <b>T4 (thyroxine)</b> + <b>T3 (triiodothyronine)</b> — regulate basal metabolic rate, growth, development. Iodine essential.<br>
+        • <b>Calcitonin</b> — from C-cells; lowers blood Ca²⁺ by inhibiting osteoclasts.</p>
+        <p><b>Vasculature:</b> Cranial thyroid artery (from common carotid) + caudal thyroid artery (often inconstant).<br>
+        Innervation: cervical sympathetic + parasympathetic via vagus.</p>
+        <p><b>PARATHYROID GLANDS:</b><br>
+        Tiny, paired glands (~grain of rice). Two pairs in domestic species:<br>
+        • <b>External (cranial) parathyroid</b> — usually OUTSIDE thyroid capsule, in carotid sheath area, lateral to common carotid; the more accessible.<br>
+        • <b>Internal (caudal) parathyroid</b> — usually EMBEDDED in thyroid tissue.</p>
+        <p><b>Hormone:</b> Parathormone (PTH) — RAISES blood Ca²⁺ by:<br>
+        1. Mobilising Ca²⁺ from bone (osteoclast activation).<br>
+        2. Increasing Ca²⁺ reabsorption in kidney.<br>
+        3. Activating vitamin D → increases gut Ca²⁺ absorption.<br>
+        Antagonist of calcitonin.</p>`,
+        comparative: [
+            { species: "Ox", note: "Thyroid lobes elongated. Iodine-deficient pastures cause endemic goiter in calves." },
+            { species: "Horse", note: "Thyroid easily palpable in some horses. Equine thyroid neoplasia common in geriatric." },
+            { species: "Dog", note: "Hypothyroidism = #1 endocrinopathy in dogs (Golden Retriever, Doberman). Hyperthyroidism extremely rare in dog (common in cat)." },
+            { species: "Cat", note: "<b>Hyperthyroidism</b> from thyroid adenoma — most common feline endocrine disease in old cats." }
+        ],
+        clinical: "<b>Goiter (Iodine deficiency):</b> Compensatory thyroid enlargement; congenital in calves born to deficient cows. <b>Hypothyroidism (Dog):</b> Lethargy, weight gain, alopecia, 'tragic facial expression'. <b>Hyperthyroidism (Cat):</b> Weight loss despite polyphagia, tachycardia, hyperactivity. <b>Hypoparathyroidism:</b> Tetany (low Ca²⁺), seizures."
+    },
+    {
+        title: "Sense Organs of Head: Eye, Ear",
+        desc: `<b>EYE (Bulbus oculi):</b><br>
+        • 3 tunics — fibrous (sclera + cornea), vascular (uvea: choroid + ciliary body + iris), nervous (retina).<br>
+        • Lens, vitreous + aqueous humour.<br>
+        • <b>Tapetum lucidum</b> — reflective layer in choroid → eye-shine in domestic animals (NOT in pig/human).<br>
+        • Eyelids (upper, lower, third) + lacrimal apparatus + extra-ocular muscles (CN III, IV, VI).<br>
+        <br>
+        <b>EAR:</b><br>
+        • <b>External ear</b> — pinna + auditory canal + tympanic membrane.<br>
+        • <b>Middle ear</b> — air-filled tympanic cavity, 3 ossicles (malleus, incus, stapes), Eustachian tube.<br>
+        • <b>Internal ear</b> — bony + membranous labyrinth: cochlea (hearing) + vestibule + 3 semicircular canals (balance).<br>
+        • Innervation: CN VIII (vestibulocochlear).`,
+        eliteDesc: `<h3>EYE & EAR</h3>
+        <p><b>I. EYE — THREE TUNICS:</b></p>
+        <p><b>1. Fibrous Tunic (outer):</b><br>
+        • <b>Sclera</b> — opaque white, posterior 5/6.<br>
+        • <b>Cornea</b> — transparent, anterior 1/6; main refractive surface.<br>
+        • Limbus = junction between sclera and cornea.</p>
+        <p><b>2. Vascular Tunic (Uvea, middle):</b><br>
+        • <b>Choroid</b> — pigmented, vascular layer; contains <b>tapetum lucidum</b> (a reflecting iridescent area at the dorsal fundus, made of crystals — gives 'eye shine' in domestic animals at night). Tapetum is ABSENT in pig and human.<br>
+        • <b>Ciliary body</b> — produces aqueous humour; ciliary muscle controls lens shape (accommodation).<br>
+        • <b>Iris</b> — pigmented diaphragm; central pupil. Sphincter pupillae (CN III/parasympathetic) = constricts; dilator pupillae (sympathetic) = dilates.</p>
+        <p><b>3. Nervous Tunic (Retina):</b><br>
+        • Photoreceptors: <b>Rods</b> (low light, night vision) + <b>Cones</b> (colour, daylight; very few in cattle, more in primates).<br>
+        • Bipolar cells → ganglion cells → optic nerve (CN II) → optic chiasma → optic tract → lateral geniculate → visual cortex.<br>
+        • <b>Optic disc (blind spot)</b> = where optic nerve exits; no photoreceptors.</p>
+        <p><b>OTHER EYE STRUCTURES:</b><br>
+        • <b>Lens</b> — transparent biconvex; held by zonular fibres of ciliary body.<br>
+        • <b>Aqueous humour</b> (anterior + posterior chambers) — produced by ciliary body, drained at iridocorneal angle.<br>
+        • <b>Vitreous body</b> — gel filling the space between lens and retina.<br>
+        • <b>Eyelids</b> — upper, lower, and a <b>third eyelid (nictitating membrane)</b> at medial canthus.<br>
+        • <b>Lacrimal apparatus</b> — lacrimal gland (above eye) → tears → lacrimal puncta (medial canthus) → nasolacrimal duct → nasal cavity.<br>
+        • <b>Extraocular muscles</b> — 4 recti (dorsal, ventral, medial, lateral), 2 obliques, retractor bulbi (only in domestic animals — pulls eye into orbit).<br>
+        Innervation: CN III (oculomotor — most), CN IV (trochlear — dorsal oblique only), CN VI (abducens — lateral rectus + retractor bulbi).</p>
+        <p><b>II. EAR — THREE PARTS:</b></p>
+        <p><b>1. External Ear (Auris externa):</b><br>
+        • <b>Pinna (auricle)</b> — funnel; supported by auricular cartilage. Erect/floppy/movable depending on species.<br>
+        • <b>External auditory canal</b> — vertical part + horizontal part in dogs.<br>
+        • <b>Tympanic membrane (eardrum)</b> — thin oval membrane separating outer from middle ear.</p>
+        <p><b>2. Middle Ear (Auris media):</b><br>
+        • Air-filled <b>tympanic cavity</b> in petrous temporal bone.<br>
+        • <b>Three auditory ossicles</b> (malleus, incus, stapes) form a chain transmitting vibrations from tympanic membrane to oval window.<br>
+        • <b>Eustachian (auditory) tube</b> — connects middle ear to nasopharynx; equalises pressure. <b>Diverticulum of this tube = guttural pouch in horse</b>.<br>
+        • <b>Tympanic bulla</b> — bony enclosure of middle ear.</p>
+        <p><b>3. Internal Ear (Auris interna):</b><br>
+        • Bony labyrinth (in petrous temporal) + Membranous labyrinth (inside).<br>
+        • <b>Cochlea</b> — spiral, snail-shaped; contains organ of Corti (hearing receptor).<br>
+        • <b>Vestibule</b> — central chamber; contains utricle + saccule (linear acceleration + gravity sensors).<br>
+        • <b>3 Semicircular canals</b> (perpendicular planes) — angular acceleration / rotation sensors.<br>
+        • Innervation: <b>CN VIII (Vestibulocochlear)</b> — cochlear branch (hearing), vestibular branch (balance).</p>`,
+        comparative: [
+            { species: "Cattle", note: "Tapetum present (golden-yellow). Eyes lateral → wide field of view (~330°)." },
+            { species: "Horse", note: "Largest eye of any land mammal. 'Visual streak' on retina. Two blind spots — directly in front and directly behind." },
+            { species: "Dog/Cat", note: "Tapetum highly developed (yellow-green). Cone-rich area centralis but no human-like fovea." },
+            { species: "Fowl", note: "Pecten oculi — vascular structure projecting into vitreous (avascular retina). Highest visual acuity in raptors (4× human)." }
+        ],
+        clinical: "<b>Conjunctivitis & Keratitis</b> (cornea inflammation) — common with foreign bodies, IBR (cattle). <b>Cataract</b> (lens opacity) — common in old dogs, diabetic dogs. <b>Glaucoma</b> — increased intraocular pressure → blindness. <b>Otitis externa</b> — common in floppy-eared dogs. <b>Vestibular disease</b> — head tilt, nystagmus."
     }
 );
+
 
 // ---- THORAX > SPLANCHNOLOGY ----
 atlasData["Thorax"]["Splanchnology"].push(
