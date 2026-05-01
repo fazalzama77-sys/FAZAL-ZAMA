@@ -297,21 +297,70 @@
         </div>
       </div>
 
-      <!-- Quiz Overlay -->
+      <!-- Quiz Overlay (Engineering Challenge - Session Mode) -->
       <div class="quiz-overlay" id="quizOverlay">
         <div class="quiz-card">
           <button class="modal-close" onclick="closeQuiz()">&times;</button>
-          <div style="margin-bottom: 20px; color: var(--why-cyan); font-family: var(--font-code);">
-            <i class="fas fa-magic"></i> ENGINEERING CHALLENGE
-          </div>
-          <div id="quizContent">
-            <div class="quiz-question" id="quizQuestion">Loading challenge...</div>
-            <div class="quiz-options" id="quizOptions">
-              <!-- Options injected here -->
+
+          <!-- ===== SETUP SCREEN ===== -->
+          <div id="quizSetup">
+            <div style="margin-bottom: 14px; color: var(--why-cyan); font-family: var(--font-code); letter-spacing:2px;">
+              <i class="fas fa-magic"></i> ENGINEERING CHALLENGE
             </div>
+            <div class="quiz-setup-title">Choose your arena</div>
+            <div class="quiz-chips" id="quizChips">
+              <button class="quiz-chip active" data-cat="all">All Topics</button>
+              <button class="quiz-chip" data-cat="forelimb">Forelimb</button>
+              <button class="quiz-chip" data-cat="hindlimb">Hindlimb</button>
+              <button class="quiz-chip" data-cat="axial">Axial & Visceral</button>
+              <button class="quiz-chip" data-cat="wildlife">Wildlife</button>
+            </div>
+            <div class="quiz-setup-title" style="margin-top:18px;">How many questions?</div>
+            <div class="quiz-chips" id="quizCountChips">
+              <button class="quiz-chip" data-count="5">5</button>
+              <button class="quiz-chip active" data-count="10">10</button>
+              <button class="quiz-chip" data-count="15">15</button>
+              <button class="quiz-chip" data-count="0">Endless</button>
+            </div>
+            <button class="ai-btn quiz-start-btn" onclick="quizSession.start()">
+              <i class="fas fa-bolt"></i> Begin Challenge
+            </button>
+          </div>
+
+          <!-- ===== ACTIVE SESSION SCREEN ===== -->
+          <div id="quizContent" style="display:none;">
+            <div class="quiz-hud">
+              <div class="quiz-hud-cell"><span class="quiz-hud-lbl">Q</span><span id="hudProgress">1/10</span></div>
+              <div class="quiz-hud-cell"><span class="quiz-hud-lbl">Score</span><span id="hudScore">0</span></div>
+              <div class="quiz-hud-cell"><span class="quiz-hud-lbl">Streak</span><span id="hudStreak">0&nbsp;<i class="fas fa-fire" style="color:#ff7a00;"></i></span></div>
+            </div>
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+            <div class="quiz-topic-tag" id="quizTopicTag">Topic</div>
+            <div class="quiz-question" id="quizQuestion">Loading challenge...</div>
+            <div class="quiz-options" id="quizOptions"></div>
             <div class="quiz-feedback" id="quizFeedback"></div>
-            <button class="ai-btn" id="nextQuizBtn" style="margin: 20px auto; display:none;"
-              onclick="generateQuiz()">Next Question</button>
+            <button class="ai-btn" id="nextQuizBtn" style="margin: 18px auto; display:none;"
+              onclick="quizSession.next()">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
+
+          <!-- ===== RESULTS SCREEN ===== -->
+          <div id="quizResults" style="display:none;">
+            <div class="quiz-result-badge" id="quizResultBadge">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="quiz-result-title" id="quizResultTitle">Session Complete</div>
+            <div class="quiz-result-score" id="quizResultScore">8 / 10</div>
+            <div class="quiz-result-grade" id="quizResultGrade">Excellent</div>
+            <div class="quiz-result-stats">
+              <div><span class="quiz-hud-lbl">Best streak</span><span id="resBestStreak">0</span></div>
+              <div><span class="quiz-hud-lbl">Accuracy</span><span id="resAccuracy">0%</span></div>
+              <div><span class="quiz-hud-lbl">Topic</span><span id="resTopic">All</span></div>
+            </div>
+            <div id="quizReviewBox" class="quiz-review-box"></div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:16px;">
+              <button class="ai-btn" onclick="quizSession.restart()"><i class="fas fa-redo"></i> Try Again</button>
+              <button class="ai-btn ai-btn-ghost" onclick="quizSession.toSetup()"><i class="fas fa-cog"></i> Change Topic</button>
+            </div>
           </div>
         </div>
       </div>

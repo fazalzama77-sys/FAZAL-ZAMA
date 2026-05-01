@@ -21,7 +21,10 @@ atlasData["Forelimb"] = {
                 { species: "Fowl", note: "Saber-like blade. No spine/fossae. Parallel to vertebrae." }
             ],
             clinical: "<b>Sweeney Shoulder (Horse):</b> Atrophy of supra/infraspinatus muscles due to suprascapular nerve damage as it crosses the neck of the scapula.",
-            imgCode: "scapula"
+            imgCode: "scapula",
+            img: "images/scapula-ox-horse-dog-annotated.png",
+            imgAlt: "Annotated comparative scapula image showing ox, horse, and dog landmarks",
+            imgCaption: "Comparative scapula landmarks: ox, horse, and dog."
         },
         {
             title: "Humerus",
@@ -593,6 +596,32 @@ atlasData["Forelimb"] = {
         }
     ],
     
-    "Angiology": [],  // READY FOR YOUR BLOOD VESSEL DATA
-    "Splanchnology": []
+    "Angiology": [
+        {
+            title: "Arterial Tree of the Forelimb (Subclavian → Digital)",
+            desc: "<b>Sequence (Ox):</b><br>Subclavian → <b>Axillary</b> → <b>Brachial</b> → <b>Median</b> → <b>Palmar Common Digital II/III/IV</b> → <b>Proper Palmar Digital</b> arteries.<br><br>• <b>Axillary a.</b> begins at first rib, lies in axillary space — <b>chief vessel of the forelimb</b>.<br>• <b>Brachial a.</b> = continuation along medial arm; gives off Deep Brachial → musculospiral groove.<br>• <b>Median a.</b> is the main continuation in the forearm (NOT radial like in humans!) — runs through carpal canal.<br>• Distally splits into common digital arteries that supply the cloven hoof.<br><br><b>Cephalic vein</b> on cranial forearm = <b>standard IV site in dog</b>.<br><b>Jugular vein</b> = main IV site in cattle/horse (not a forelimb vein, but commonly grouped clinically).",
+            eliteDesc: "<b>FORELIMB ARTERIAL HIGHWAY</b><br><br><b>Origin:</b> The right forelimb artery arises from the <b>brachiocephalic trunk</b> (which also gives the right common carotid). The left forelimb artery arises directly from the aortic arch as the <b>left subclavian artery</b>.<br><br><b>1. Subclavian artery</b><br>Curves cranially over the first rib. <b>Branches</b>:<br>• <b>Costocervical trunk</b> (deep cervical + dorsal intercostal — to neck/withers)<br>• <b>Vertebral artery</b> (ascends through transverse foramina of cervical vertebrae to the brain)<br>• <b>Internal thoracic artery</b> (ventral chest wall, mammary chain)<br>• <b>Superficial cervical artery</b> (to shoulder muscles)<br><br><b>2. Axillary artery</b> (continuation past first rib): chief vessel of limb. Branches: external thoracic, lateral thoracic (panniculus), <b>subscapular</b> (largest branch in cattle — supplies caudal shoulder & has the circumflex humeri).<br><br><b>3. Brachial artery</b> on medial arm: gives off the <b>deep brachial</b> entering the musculospiral groove (with radial nerve), <b>bicipital</b>, <b>collateral ulnar</b>, and <b>common interosseous</b>.<br><br><b>4. Median artery</b> = direct continuation in the forearm. Lies medial in the proximal forearm with the median nerve, then traverses the <b>carpal canal</b> deep to the flexor retinaculum.<br><br><b>5. Distal split:</b> The median artery becomes the <b>palmar common digital arteries (II, III, IV)</b>. These finally split at the fetlock into <b>proper palmar (axial + abaxial) digital arteries</b> that descend on each side of each claw and meet at the <b>solar arch</b> within P3 → supplies the corium of the hoof.<br><br><b>RADIAL ARTERY</b> in cattle is small (vestigial) — opposite to humans where radial is dominant.<br><br><b>VENOUS RETURN:</b> Mostly mirrors arteries (deep system) + a superficial system that includes:<br>• <b>Cephalic vein</b> — runs on the craniomedial forearm, crosses elbow medially, used for venepuncture in the <b>dog</b> (standard IV in puppies and small animals).<br>• <b>Median cubital vein</b> — bridges cephalic to brachial in the cubital fossa.<br>• <b>Accessory cephalic vein</b> dorsally over carpus.",
+            comparative: [
+                { species: "Ox", note: "Median artery dominant; radial vestigial. Cephalic + accessory cephalic prominent. Hoof corium fed by solar arch from proper palmar digitals." },
+                { species: "Horse", note: "Median artery is also dominant. Pulse routinely taken at <b>facial artery</b> at mandible (not forelimb). Distal limb: medial palmar digital artery used for diagnostic 'palmar digital block' pulse check." },
+                { species: "Dog", note: "Cephalic vein is the routine IV site. Brachial pulse felt on medial elbow. Femoral pulse (hindlimb) commonly used for cardiac assessment." },
+                { species: "Fowl", note: "Brachial artery main vessel. Wing veins (basilic / ulnar) used for venepuncture in birds (radiometacarpal anastomosis)." }
+            ],
+            clinical: "<b>Cephalic Venepuncture (Dog):</b> Distal cranial forearm — most common IV site in small animal practice.<br><b>Jugular vein</b> in large animals — clinically the practical 'forelimb-region' IV.<br><b>Hoof Pulse Examination (Horse):</b> Increased digital pulse at the abaxial sesamoid → laminitis warning.<br><b>Aneurysm/Thrombosis of Brachial/Axillary Artery:</b> Compression neuropathy of the median + musculocutaneous nerves due to Ansa Axillaris relationship.",
+            imgCode: "forelimb_arteries"
+        },
+        {
+            title: "Forelimb Lymph Nodes & Surface Veins",
+            desc: "<b>Key Lymph Nodes (Ox):</b><br>• <b>Superficial Cervical (Prescapular) LN</b> — cranial to shoulder, deep to brachiocephalicus. Drains skin of neck, shoulder, cranial forelimb. <b>Routine palpation in clinical exam + meat inspection.</b><br>• <b>Axillary LN</b> — in axillary space; drains deep structures of forelimb.<br>• <b>Cubital LN</b> — at medial elbow (small, inconstant).<br><br><b>Surface Veins for Venepuncture:</b><br>• <b>Cephalic vein</b> — dog/cat (cranial forearm).<br>• <b>Jugular vein</b> — cattle, horse, sheep (large animals).<br>• <b>Milk vein (subcutaneous abdominal)</b> — only in lactating cows when others fail.",
+            eliteDesc: "<b>LYMPH NODES OF THE FORELIMB & THORACIC INLET</b><br><br><b>1. Superficial Cervical (Prescapular) Lymph Centre:</b> A long chain of 4-20 nodes lying on the cranial border of the supraspinatus, deep to the brachiocephalicus and omotransversarius. <b>Afferents</b>: skin of cranial half of body, neck, shoulder. <b>Efferents</b>: tracheal duct → venous angle. Routinely palpated during the <b>physical exam in cattle</b> and <b>required for ante-mortem inspection</b> in the abattoir.<br><br><b>2. Axillary Lymph Centre</b>: deep to the proximal pectorals; drain deep structures of the forelimb. <b>Efferents</b> → caudal cervical or thoracic duct. Inaccessible to palpation in life — relevant only at necropsy/meat inspection.<br><br><b>3. Cubital (Brachial) LN</b>: small, inconstant; medial elbow.<br><br><b>SURFACE VEINS FOR VENEPUNCTURE:</b><br>• <b>Cephalic vein</b> (Vena cephalica): runs on craniomedial aspect of forearm. Standard IV in dog and cat (catheter placement, sample collection, induction). Easily distended by occluding above the elbow.<br>• <b>Median cubital vein</b>: bridges cephalic to brachial — used for blood collection in dogs.<br>• <b>Jugular vein</b>: although technically a neck vein, it is the routine large-animal IV access (cattle, horse, sheep, camelid). Located in the jugular furrow between brachiocephalicus and sternomandibularis.<br>• <b>Subcutaneous abdominal ('milk') vein</b>: prominent under the ventral abdomen of high-producing dairy cows. <b>Last resort</b> when jugulars are scarred/thrombosed — risk of severe haematoma.",
+            comparative: [
+                { species: "Cattle", note: "Prescapular LN routinely palpated and used for meat inspection. Jugular = standard IV." },
+                { species: "Dog/Cat", note: "Prescapular LN palpable in slim animals — generalized enlargement = lymphoma. Cephalic vein = first IV choice." },
+                { species: "Horse", note: "Jugular venepuncture in upper third of jugular furrow. Avoid lower third (close to common carotid)." }
+            ],
+            clinical: "<b>Bovine Lymphosarcoma:</b> Persistent enlargement of prescapular LN is a key clinical sign.<br><b>Jugular Thrombophlebitis:</b> Common after repeated rough venepuncture — leads to abscess and reduced venous return.<br><b>'Milk Vein' Bleeding:</b> Severe haematomas occur if not properly compressed — avoid unless absolutely necessary.",
+            imgCode: "forelimb_lymph"
+        }
+    ],
+    "Splanchnology": []  // No visceral organs in the forelimb (intentionally empty per VCI Unit-2)
 };
