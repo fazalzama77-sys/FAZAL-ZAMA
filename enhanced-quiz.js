@@ -84,7 +84,7 @@ const quizApp = {
     grid.innerHTML = '';
 
     // Individual regions
-    quizApp.regions.forEach(region => {
+    quizApp.getAvailableRegions().forEach(region => {
       const count = quizApp.getTotalQuestionsForRegion(region);
       const card = quizApp.createSelectionCard(
         region,
@@ -147,7 +147,7 @@ const quizApp = {
     grid.innerHTML = '';
 
     // Individual systems
-    quizApp.systems.forEach(system => {
+    quizApp.getSystemsForRegion(quizApp.selectedRegion).forEach(system => {
       const count = quizApp.getQuestionCount(quizApp.selectedRegion, system);
       const card = quizApp.createSelectionCard(
         system,
@@ -265,11 +265,11 @@ const quizApp = {
 
   buildQuestionPool: (mode) => {
     let pool = [];
-    const regions = quizApp.selectedRegion === 'Combined' ? quizApp.regions : [quizApp.selectedRegion];
+    const regions = quizApp.selectedRegion === 'Combined' ? quizApp.getAvailableRegions() : [quizApp.selectedRegion];
 
     regions.forEach(region => {
       if (!quizBank[region]) return;
-      const systems = quizApp.selectedSystem === 'Combined' ? quizApp.systems : [quizApp.selectedSystem];
+      const systems = quizApp.selectedSystem === 'Combined' ? quizApp.getSystemsForRegion(region) : [quizApp.selectedSystem];
 
       systems.forEach(system => {
         if (!quizBank[region][system]) return;
@@ -1245,13 +1245,37 @@ const quizApp = {
 
   // ==================== UTILITY METHODS ====================
 
+  getAvailableRegions: () => {
+    if (typeof quizBank === 'undefined') return quizApp.regions;
+    const uploadedRegions = Object.keys(quizBank);
+    const configuredRegions = quizApp.regions.filter(region => uploadedRegions.includes(region));
+    const extraRegions = uploadedRegions.filter(region => !quizApp.regions.includes(region));
+    return [...configuredRegions, ...extraRegions];
+  },
+
+  getSystemsForRegion: (region) => {
+    if (typeof quizBank === 'undefined') return quizApp.systems;
+
+    if (region === 'Combined') {
+      const orderedSystems = [];
+      quizApp.getAvailableRegions().forEach(r => {
+        Object.keys(quizBank[r] || {}).forEach(system => {
+          if (!orderedSystems.includes(system)) orderedSystems.push(system);
+        });
+      });
+      return orderedSystems;
+    }
+
+    return Object.keys(quizBank[region] || {});
+  },
+
   getQuestionCount: (region, system, mode = null) => {
-    const regions = region === 'Combined' ? quizApp.regions : [region];
+    const regions = region === 'Combined' ? quizApp.getAvailableRegions() : [region];
     let count = 0;
 
     regions.forEach(r => {
       if (!quizBank[r]) return;
-      const systems = system === 'Combined' ? quizApp.systems : [system];
+      const systems = system === 'Combined' ? quizApp.getSystemsForRegion(r) : [system];
 
       systems.forEach(s => {
         if (!quizBank[r][s]) return;
@@ -1267,7 +1291,7 @@ const quizApp = {
 
   getTotalQuestionsForRegion: (region) => {
     if (region === 'Combined') {
-      return quizApp.regions.reduce((sum, r) => sum + quizApp.getQuestionCount(r, 'Combined'), 0);
+      return quizApp.getAvailableRegions().reduce((sum, r) => sum + quizApp.getQuestionCount(r, 'Combined'), 0);
     }
     return quizApp.getQuestionCount(region, 'Combined');
   },
@@ -1300,7 +1324,10 @@ const quizApp = {
       "Hindlimb & Pelvis": "fa-shoe-prints",
       "Thorax": "fa-lungs",
       "Abdomen": "fa-prescription-bottle-alt",
-      "Head & Neck": "fa-head-side-virus"
+      "Head & Neck": "fa-head-side-virus",
+      "Introduction": "fa-compass",
+      "Histology": "fa-microscope",
+      "Embryology": "fa-seedling"
     };
     return icons[region] || "fa-book-medical";
   },
@@ -1311,9 +1338,19 @@ const quizApp = {
       "Myology": "fa-running",
       "Arthrology": "fa-link",
       "Neurology": "fa-brain",
-      "Angiology": "fa-heartbeat"
+      "Angiology": "fa-heartbeat",
+      "Splanchnology": "fa-stomach",
+      "Clinical Anatomy": "fa-stethoscope"
     };
-    return icons[system] || "fa-book-medical";
+    if (icons[system]) return icons[system];
+    if (system.includes("Osteology")) return "fa-bone";
+    if (system.includes("Myology")) return "fa-running";
+    if (system.includes("Arthrology")) return "fa-link";
+    if (system.includes("Neurology")) return "fa-brain";
+    if (system.includes("Angiology")) return "fa-heartbeat";
+    if (system.includes("Splanchnology")) return "fa-stomach";
+    if (system.includes("Clinical")) return "fa-stethoscope";
+    return "fa-book-medical";
   }
 };
 

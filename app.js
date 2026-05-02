@@ -266,7 +266,9 @@ const app = {
             "Hindlimb & Pelvis": "fa-shoe-prints",
             "Thorax": "fa-lungs",
             "Abdomen": "fa-prescription-bottle-alt",
-            "Head & Neck": "fa-head-side-virus"
+            "Head & Neck": "fa-head-side-virus",
+            "Histology": "fa-microscope",
+            "Embryology": "fa-baby"
         };
         return icons[region] || "fa-bone";
     },
@@ -288,7 +290,18 @@ const app = {
             "General Aesthesiology": "fa-eye",
             "General Splanchnology": "fa-lungs",
             "Surface Anatomy": "fa-male",
-            "Imaging Principles": "fa-x-ray"
+            "Imaging Principles": "fa-x-ray",
+            "Cytology": "fa-atom",
+            "Basic Tissues": "fa-th",
+            "Blood & Bone Marrow": "fa-tint",
+            "Digestive System": "fa-utensils",
+            "Other Systems": "fa-project-diagram",
+            "Gametogenesis & Fertilization": "fa-egg",
+            "Cleavage, Blastulation & Gastrulation": "fa-circle-notch",
+            "Foetal Membranes & Placenta": "fa-baby-carriage",
+            "Germ Layers & Derivatives": "fa-layer-group",
+            "Organ Development": "fa-seedling",
+            "Twinning & Anomalies": "fa-clone"
         };
         return icons[system] || "fa-book-medical";
     },

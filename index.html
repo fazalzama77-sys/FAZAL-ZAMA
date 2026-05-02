@@ -665,14 +665,16 @@
 
   <!-- Load JavaScript files - data first, then app logic -->
   <!-- Regional Data -->
-  <script src="data-introduction.JS"></script>
-  <script src="data-histology.JS"></script>
-  <script src="data-forelimb.JS"></script>
-  <script src="data-hindlimb.JS"></script>
-  <script src="data-thorax.JS"></script>
-  <script src="data-abdomen.JS"></script>
-  <script src="data-head-neck.JS"></script>
-  <script src="data-splanchnology.JS"></script>
+  <!-- Regional anatomy modules loaded in VCI syllabus order -->
+  <script src="data-introduction.JS"></script>      <!-- Unit 1 -->
+  <script src="data-forelimb.JS"></script>          <!-- Unit 2 -->
+  <script src="data-head-neck.JS"></script>         <!-- Unit 3 -->
+  <script src="data-thorax.JS"></script>            <!-- Unit 4 -->
+  <script src="data-abdomen.JS"></script>           <!-- Unit 5 -->
+  <script src="data-hindlimb.JS"></script>          <!-- Unit 6 -->
+  <script src="data-splanchnology.JS"></script>     <!-- Splanchnology pushes into above regions -->
+  <script src="data-histology.JS"></script>         <!-- Unit 7 -->
+  <script src="data-embryology.JS"></script>        <!-- Unit 8 -->
 
   <!-- Quiz & Why Sections -->
   <script src="data-quiz.JS"></script>
