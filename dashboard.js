@@ -5,8 +5,28 @@
 
 const dashboard = {
   STORAGE_KEY: 'ivri-quiz-history',
-  regions: ["Forelimb", "Hindlimb & Pelvis", "Head & Neck", "Thorax", "Abdomen"],
-  systems: ["Osteology", "Myology", "Arthrology", "Neurology", "Angiology", "Splanchnology"],
+  regions: [
+    "Introduction",
+    "Forelimb",
+    "Head & Neck",
+    "Thorax",
+    "Abdomen",
+    "Hindlimb & Pelvis",
+    "Histology",
+    "Embryology"
+  ],
+  systems: [
+    { id: "General", label: "General", aliases: ["General Anatomy", "General Anatomy & Osteology"] },
+    { id: "Osteology", label: "Osteo", aliases: ["Osteology", "Osteology & Arthrology", "General Anatomy & Osteology"] },
+    { id: "Myology", label: "Myolo", aliases: ["Myology", "Myology & Arthrology", "Myology & Neurology", "Myology & Splanchnology"] },
+    { id: "Arthrology", label: "Arthr", aliases: ["Arthrology", "Osteology & Arthrology", "Myology & Arthrology"] },
+    { id: "Neurology", label: "Neuro", aliases: ["Neurology", "Neurology & Angiology", "Myology & Neurology", "Angiology & Neurology", "Neurology, Angiology & Clinical"] },
+    { id: "Angiology", label: "Angio", aliases: ["Angiology", "Neurology & Angiology", "Angiology & Neurology", "Angiology & Splanchnology", "Neurology, Angiology & Clinical"] },
+    { id: "Splanchnology", label: "Splan", aliases: ["Splanchnology", "Splanchnology & Clinical", "Splanchnology (Digestive)", "Splanchnology (Urogenital & Mammary)", "Myology & Splanchnology", "Angiology & Splanchnology"] },
+    { id: "Clinical", label: "Clinical", aliases: ["Clinical Anatomy", "Splanchnology & Clinical", "Neurology, Angiology & Clinical"] },
+    { id: "Histology", label: "Histo", regions: ["Histology"] },
+    { id: "Embryology", label: "Embryo", regions: ["Embryology"] }
+  ],
 
   // ==================== DATA PERSISTENCE ====================
 
@@ -83,19 +103,24 @@ const dashboard = {
     const map = {};
 
     history.forEach(h => {
-      const key = `${h.region}|${h.system}`;
-      if (!map[key]) {
-        map[key] = { region: h.region, system: h.system, totalScore: 0, totalQuestions: 0, attempts: 0 };
-      }
-      map[key].totalScore += h.score;
-      map[key].totalQuestions += h.total;
-      map[key].attempts++;
+      const systemIds = dashboard.getSystemIdsForEntry(h.region, h.system);
+      systemIds.forEach(systemId => {
+        const key = `${h.region}|${systemId}`;
+        if (!map[key]) {
+          map[key] = { region: h.region, system: systemId, sources: new Set(), totalScore: 0, totalQuestions: 0, attempts: 0 };
+        }
+        map[key].sources.add(h.system);
+        map[key].totalScore += h.score;
+        map[key].totalQuestions += h.total;
+        map[key].attempts++;
+      });
     });
 
     Object.values(map).forEach(entry => {
       entry.accuracy = entry.totalQuestions > 0
         ? Math.round((entry.totalScore / entry.totalQuestions) * 100)
         : 0;
+      entry.sources = Array.from(entry.sources);
     });
 
     return map;
@@ -169,22 +194,47 @@ const dashboard = {
     const tickColor = isPro ? '#546e7a' : '#8892b0';
     const labelColor = isPro ? '#37474f' : '#ccd6f6';
 
-    container.innerHTML = '<div class="dash-canvas-wrapper"><canvas id="dash-accuracy-canvas"></canvas></div>';
+    // Calculate insights
+    const recent5 = recent.slice(-5);
+    const recentAvg = recent5.length > 0 ? Math.round(recent5.reduce((sum, h) => sum + h.accuracy, 0) / recent5.length) : 0;
+    const bestRecent = recent.length > 0 ? Math.max(...recent.map(h => h.accuracy)) : 0;
+
+    container.innerHTML = `
+      <div class="dash-canvas-wrapper">
+        <canvas id="dash-accuracy-canvas"></canvas>
+      </div>
+      <div class="dash-trend-insights">
+        <div class="insight-box">
+           <div class="insight-label">Recent Avg (Last 5)</div>
+           <div class="insight-value" style="color: ${dashboard.getAccuracyColor(recentAvg)}">${recentAvg}%</div>
+        </div>
+        <div class="insight-box">
+           <div class="insight-label">Best Recent Score</div>
+           <div class="insight-value" style="color: ${dashboard.getAccuracyColor(bestRecent)}">${bestRecent}%</div>
+        </div>
+        <div class="insight-box">
+           <div class="insight-label">Sessions Tracked</div>
+           <div class="insight-value" style="color: var(--why-cyan)">${recent.length}</div>
+        </div>
+      </div>
+    `;
     const ctx = document.getElementById('dash-accuracy-canvas').getContext('2d');
 
     dashboard._accuracyChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels,
-        datasets: [{
-          label: 'Accuracy %',
-          data: accuracies,
-          backgroundColor: bgColors,
-          borderColor: borderColors,
-          borderWidth: 2,
-          borderRadius: 6,
-          borderSkipped: false
-        }]
+        datasets: [
+          {
+            label: 'Accuracy %',
+            data: accuracies,
+            backgroundColor: bgColors,
+            borderColor: borderColors,
+            borderWidth: 2,
+            borderRadius: 6,
+            borderSkipped: false
+          }
+        ]
       },
       options: {
         responsive: true,
@@ -248,34 +298,38 @@ const dashboard = {
       return;
     }
 
+    const systems = dashboard.systems;
+    const gridColumns = `150px repeat(${systems.length}, minmax(88px, 1fr))`;
+
     // Build heatmap grid
     let html = '<div class="dash-heatmap-grid">';
 
     // Header row
     html += '<div class="dash-hm-corner"></div>';
-    dashboard.systems.forEach(sys => {
-      html += `<div class="dash-hm-header">${sys.substring(0, 5)}</div>`;
+    systems.forEach(sys => {
+      html += `<div class="dash-hm-header">${sys.label}</div>`;
     });
 
     // Data rows
     dashboard.regions.forEach(region => {
       html += `<div class="dash-hm-row-label">${region}</div>`;
-      dashboard.systems.forEach(sys => {
-        const key = `${region}|${sys}`;
+      systems.forEach(sys => {
+        const key = `${region}|${sys.id}`;
         const data = strengths[key];
         if (data) {
           const hex = dashboard.getAccuracyColor(data.accuracy);
           // Convert hex → rgba with opacity so text remains readable
           const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
           const opacity = Math.max(0.25, data.accuracy / 100);
+          const sourceText = data.sources?.length ? ` (${data.sources.join(', ')})` : '';
           html += `
-            <div class="dash-hm-cell" data-tip="${region} — ${sys}: ${data.accuracy}% (${data.attempts} attempt${data.attempts !== 1 ? 's' : ''})"
+            <div class="dash-hm-cell" data-tip="${region} - ${sys.label}${sourceText}: ${data.accuracy}% (${data.attempts} attempt${data.attempts !== 1 ? 's' : ''})"
                  style="background: rgba(${r},${g},${b},${opacity}); border-color: rgba(${r},${g},${b},0.5);">
               <span>${data.accuracy}%</span>
             </div>
           `;
         } else {
-          html += `<div class="dash-hm-cell empty" data-tip="${region} — ${sys}: Not attempted">—</div>`;
+          html += `<div class="dash-hm-cell empty" data-tip="${region} - ${sys.label}: Not attempted">-</div>`;
         }
       });
     });
@@ -293,6 +347,8 @@ const dashboard = {
     `;
 
     container.innerHTML = html;
+    const grid = container.querySelector('.dash-heatmap-grid');
+    if (grid) grid.style.gridTemplateColumns = gridColumns;
   },
 
   renderHistory: () => {
@@ -348,6 +404,30 @@ const dashboard = {
     if (accuracy >= 80) return '#00ff9d';
     if (accuracy >= 60) return '#ffd700';
     return '#ff6b6b';
+  },
+
+  getSystemIdsForEntry: (region, system) => {
+    if (!region || region === 'Combined') return [];
+    if (!system || system === 'Unknown') return [];
+    if (system === 'Combined') return ['Combined'];
+
+    const exactMatches = dashboard.systems
+      .filter(sys => {
+        if (sys.regions?.includes(region)) return true;
+        return sys.aliases?.includes(system);
+      })
+      .map(sys => sys.id);
+
+    if (exactMatches.length > 0) return [...new Set(exactMatches)];
+
+    const normalized = String(system).toLowerCase();
+    return dashboard.systems
+      .filter(sys => {
+        if (sys.regions?.includes(region)) return true;
+        if (normalized.includes(sys.id.toLowerCase())) return true;
+        return sys.aliases?.some(alias => normalized.includes(alias.toLowerCase()));
+      })
+      .map(sys => sys.id);
   }
 };
 

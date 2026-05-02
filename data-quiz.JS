@@ -1897,3 +1897,338 @@ const quizBank = {
 const mcqDB = quizBank.Forelimb.Osteology.mcq;
 const tfDB = quizBank.Forelimb.Osteology.tf;
 const fibDB = quizBank.Forelimb.Osteology.fib;
+
+// =========================================================
+// First-year BVSc & AH anatomy additions.
+// These additions are appended programmatically so uploaded Gemini data is preserved.
+// =========================================================
+
+(function addUGExamQuestionAdditions() {
+  if (typeof quizBank === "undefined") return;
+
+  const q = (text, answer, distractors, explanation) => ({
+    q: text,
+    o: [answer, ...distractors],
+    a: 0,
+    e: explanation
+  });
+
+  const distractors = (items, idx, field) => {
+    const values = [];
+    for (let step = 1; values.length < 3 && step <= items.length + 3; step++) {
+      const value = items[(idx + step) % items.length][field];
+      if (value && value !== items[idx][field] && !values.includes(value)) values.push(value);
+    }
+    return values;
+  };
+
+  const fromTopics = (items) => items.flatMap((item, idx) => [
+    {
+      mcq: q(`Which structure is best described as ${item.identity}?`, item.name, distractors(items, idx, "name"), `${item.name}: ${item.identity}.`),
+      fib: { q: `The structure described as ${item.identity} is _____.`, a: [item.name], e: `${item.name}: ${item.identity}.` },
+      tf: { q: `${item.name} is best described as ${item.identity}.`, a: true, e: `${item.name}: ${item.identity}.` }
+    },
+    {
+      mcq: q(`Where is ${item.name} located or most closely related?`, item.location, distractors(items, idx, "location"), `${item.name}: ${item.location}.`),
+      fib: { q: `_____ has this anatomical location or relationship: ${item.location}.`, a: [item.name], e: `${item.name}: ${item.location}.` },
+      tf: { q: `${item.name}: ${distractors(items, idx, "location")[0]}.`, a: false, e: `False. Correct: ${item.name}: ${item.location}.` }
+    },
+    {
+      mcq: q(`Which statement is correct for ${item.name}?`, item.exam, distractors(items, idx, "exam"), `${item.name}: ${item.exam}.`),
+      fib: { q: `The structure for which this statement is correct is _____: ${item.exam}.`, a: [item.name], e: `${item.name}: ${item.exam}.` },
+      tf: { q: `${item.name}: ${item.exam}.`, a: true, e: `${item.name}: ${item.exam}.` }
+    },
+    {
+      mcq: q(`Which clinical point is linked with ${item.name}?`, item.clinical, distractors(items, idx, "clinical"), `${item.name}: ${item.clinical}.`),
+      fib: { q: `_____ is linked with ${item.clinical}.`, a: [item.name], e: `${item.name}: ${item.clinical}.` },
+      tf: { q: `${item.name}: ${distractors(items, idx, "clinical")[0]}.`, a: false, e: `False. Correct: ${item.name}: ${item.clinical}.` }
+    },
+    {
+      mcq: q(`Which practical point is correct for ${item.name}?`, item.compare, distractors(items, idx, "compare"), `${item.name}: ${item.compare}.`),
+      fib: { q: `_____ has this practical point: ${item.compare}.`, a: [item.name], e: `${item.name}: ${item.compare}.` },
+      tf: { q: `${item.name}: ${item.compare}.`, a: true, e: `${item.name}: ${item.compare}.` }
+    }
+  ]);
+
+  const addExamQuestions = (region, system, topicQuestions, mcqCount, fibCount, tfCount) => {
+    quizBank[region] = quizBank[region] || {};
+    quizBank[region][system] = quizBank[region][system] || { mcq: [], tf: [], fib: [] };
+    quizBank[region][system].mcq = quizBank[region][system].mcq || [];
+    quizBank[region][system].fib = quizBank[region][system].fib || [];
+    quizBank[region][system].tf = quizBank[region][system].tf || [];
+
+    quizBank[region][system].mcq.push(...topicQuestions.slice(0, mcqCount).map(item => item.mcq));
+    quizBank[region][system].fib.push(...topicQuestions.slice(mcqCount, mcqCount + fibCount).map(item => item.fib));
+    quizBank[region][system].tf.push(...topicQuestions.slice(mcqCount + fibCount, mcqCount + fibCount + tfCount).map(item => item.tf));
+  };
+
+  const forelimbAngiology = [
+    { name: "Axillary artery", identity: "main arterial trunk entering the forelimb from the thoracic limb root", location: "medial axillary region before continuing as the brachial artery", exam: "continues as the brachial artery distal to the teres major region", clinical: "important landmark during deep dissection of the brachial plexus and axilla", compare: "supplies shoulder and proximal forelimb through subscapular and circumflex humeral branches", why: "Forelimb angiology questions commonly ask the sequence axillary artery to brachial artery." },
+    { name: "Brachial artery", identity: "principal artery of the arm supplying distal forelimb structures", location: "medial aspect of arm with the median nerve and brachial vein", exam: "gives collateral ulnar and common interosseous branches before dividing distally", clinical: "pulse and hemorrhage control are clinically important in the medial arm", compare: "continues distally toward the median artery in large animals", why: "The brachial artery is the main continuation after the axillary artery." },
+    { name: "Median artery", identity: "major arterial continuation in the forearm of domestic mammals", location: "caudomedial forearm close to the median nerve", exam: "is the main artery of the distal forelimb in the horse and ox", clinical: "vulnerable during deep medial forearm surgery and nerve block approaches", compare: "more dominant in ungulates than the radial artery", why: "The median artery is a favorite comparative forelimb vessel." },
+    { name: "Cephalic vein", identity: "large superficial vein routinely used for forelimb venipuncture", location: "cranial or craniomedial aspect of the antebrachium in the dog", exam: "is the common intravenous injection site in the canine forelimb", clinical: "used for catheterization and blood collection in dogs and cats", compare: "more clinically accessible in small animals than in large ruminants", why: "Cephalic vein use is specifically named in the practical syllabus." },
+    { name: "Accessory cephalic vein", identity: "superficial tributary running over the dorsum of the carpus/metacarpus", location: "dorsolateral distal forelimb joining the cephalic vein", exam: "helps drain the dorsal paw or distal forelimb", clinical: "may be visible during catheter placement or distal limb swelling", compare: "well demonstrated in carnivore superficial venous patterns", why: "Accessory cephalic vein is a common practical identification vessel." },
+    { name: "Brachial vein", identity: "deep companion vein of the brachial artery", location: "medial arm accompanying the brachial artery", exam: "drains deep tissues of the arm and continues proximally toward the axillary vein", clinical: "important in dissection because it accompanies the arterial and nerve bundle", compare: "deep veins usually accompany arteries, unlike many superficial veins", why: "Deep companion vessels are a standard angiology principle." },
+    { name: "Superficial cervical lymph node", identity: "palpable lymph node related to drainage of neck, shoulder, and forelimb", location: "cranial to the shoulder, deep to brachiocephalicus/omotransversarius region", exam: "also called the prescapular lymph node", clinical: "palpated during clinical examination and meat inspection", compare: "large and clinically palpable in ruminants and horses", why: "Palpable lymph nodes are highlighted in the syllabus." },
+    { name: "Cubital lymph nodes", identity: "small lymph nodes associated with the elbow region in some species", location: "near the medial side of the elbow or distal arm", exam: "receive lymph from parts of the distal forelimb", clinical: "may enlarge with distal limb inflammation", compare: "not consistently prominent in all domestic species", why: "Regional lymph drainage is paired with forelimb blood vessels in exams." },
+    { name: "Dorsal common digital vein III", identity: "distal limb vein used for regional intravenous anesthesia in cattle", location: "dorsal aspect of the bovine digit/pastern region", exam: "is a preferred vessel for bovine Bier block of the foot", clinical: "used before claw surgery and painful digital procedures", compare: "more important clinically in cattle than in the horse", why: "Bier block vessel questions are high-yield for bovine forelimb clinical anatomy." },
+    { name: "Palmar digital arteries", identity: "terminal vessels supplying the digit and hoof", location: "palmar aspect of the distal metacarpus and digit", exam: "run with palmar digital nerves toward the hoof", clinical: "important in laminitis, hoof trauma, and distal limb surgery", compare: "paired medial and lateral vessels accompany the digital nerves", why: "Distal digital vessels are repeatedly examined with hoof and nerve blocks." }
+  ];
+
+  const hindOsteoArth = [
+    { name: "Os coxae", identity: "hip bone formed by ilium, ischium, and pubis", location: "lateral wall and floor of the pelvis", exam: "all three parts meet at the acetabulum", clinical: "pelvic fractures can narrow the birth canal", compare: "large obturator foramen lightens the pelvic floor", why: "Os coxae formation is a core hindlimb osteology fact." },
+    { name: "Acetabulum", identity: "deep socket for the head of the femur", location: "lateral aspect of the os coxae", exam: "formed by ilium, ischium, and pubis", clinical: "site involved in hip luxation and coxofemoral dysplasia", compare: "equivalent to the glenoid cavity of the shoulder but deeper", why: "Hip joint anatomy is a frequent exam and viva topic." },
+    { name: "Tuber coxae", identity: "point of hip used as a palpable bony prominence", location: "craniolateral angle of the ilium", exam: "forms the caudal boundary landmark for the paralumbar fossa", clinical: "used for body condition and pelvic landmark assessment", compare: "very prominent in cattle and horses", why: "Surface landmarks are specifically listed in the syllabus." },
+    { name: "Tuber ischii", identity: "pin bone of cattle and caudal pelvic prominence", location: "caudal end of the ischium", exam: "forms the caudal limit of the pelvic floor", clinical: "important in pelvic measurements and recumbency injuries", compare: "called pin bone in dairy cattle judging", why: "Pin bone identification is high-yield practical anatomy." }
+  ];
+
+  const hindMyoNeuro = [
+    { name: "Quadriceps femoris", identity: "four-headed muscle that extends the stifle", location: "cranial thigh with insertion on the patella/tibial tuberosity via patellar ligaments", exam: "rectus femoris is the head arising from the ilium", clinical: "femoral nerve paralysis prevents weight bearing", compare: "vastus heads arise from femur while rectus femoris crosses the hip", why: "Quadriceps and femoral nerve are classic hindlimb exam pairings." },
+    { name: "Biceps femoris", identity: "large caudolateral thigh muscle of the hamstring group", location: "lateral thigh from sacrotuberous/ischial region to patella, tibia, and calcaneus", exam: "extends hip, stifle, and hock but can flex stifle depending on limb phase", clinical: "important in propulsion and intramuscular injection caution", compare: "part of the caudal thigh group with semitendinosus and semimembranosus", why: "Hamstring actions are commonly tested." },
+    { name: "Sciatic nerve", identity: "largest nerve of the body supplying most structures distal to the stifle", location: "passes through greater sciatic foramen and caudal thigh", exam: "divides into tibial and common peroneal nerves", clinical: "injury causes major distal limb paralysis", compare: "does not supply quadriceps; femoral nerve does", why: "Sciatic versus femoral nerve is a high-probability distinction." },
+    { name: "Obturator nerve", identity: "nerve to medial thigh adductor muscles", location: "passes through the obturator foramen", exam: "supplies adductor, gracilis, and obturator muscles", clinical: "damage during calving causes inability to adduct hindlimbs", compare: "calving paralysis is classically obturator nerve injury", why: "Obturator nerve paralysis is a classic bovine clinical question." }
+  ];
+
+  const hindAngioSplanch = [
+    { name: "Femoral artery", identity: "main arterial supply of the hindlimb after external iliac continuation", location: "femoral triangle on the medial thigh", exam: "palpable pulse point in dog and cat", clinical: "used for pulse, catheterization, and hemorrhage control", compare: "becomes popliteal distally after giving major thigh branches", why: "Femoral artery pulse is explicitly named in practical anatomy." },
+    { name: "Pudendal nerve", identity: "somatic nerve supplying perineum and external genital structures", location: "pelvic cavity and pudendal canal region", exam: "target for pudic nerve block", clinical: "important in obstetrical and urogenital procedures", compare: "separate from sciatic supply of the limb proper", why: "Pudic nerve block is listed in the hindlimb and pelvis syllabus." }
+  ];
+
+  const headOsteoArth = [
+    { name: "Atlas", identity: "first cervical vertebra supporting the skull", location: "between occipital condyles and axis", exam: "has wings and lacks a typical vertebral body", clinical: "cisterna magna puncture is near the atlanto-occipital region", compare: "forms the nodding yes joint with the occipital bone", why: "Atlas and axis differences are fundamental head and neck osteology." },
+    { name: "Axis", identity: "second cervical vertebra bearing the dens", location: "between atlas and C3", exam: "dens acts as the pivot for atlanto-axial rotation", clinical: "atlanto-axial instability can compress the spinal cord", compare: "forms the no movement with the atlas", why: "The dens of axis is a frequent MCQ answer." },
+    { name: "Paranasal sinuses", identity: "air-filled cavities within skull bones communicating with the nasal cavity", location: "frontal, maxillary and related skull bones depending on species", exam: "frontal and maxillary sinuses are especially important in ox and horse", clinical: "horn amputation and sinusitis are applied anatomy topics", compare: "sinus arrangement differs markedly among ox, horse, dog, and pig", why: "The syllabus directly emphasizes paranasal sinuses by species." }
+  ];
+
+  const headMyoSplanch = [
+    { name: "Masseter muscle", identity: "powerful muscle of mastication closing the jaw", location: "lateral surface of the mandibular ramus", exam: "innervated by mandibular division of trigeminal nerve", clinical: "atrophy suggests trigeminal motor involvement", compare: "well developed in herbivores for grinding", why: "Muscles of mastication and their nerve supply are common exam points." },
+    { name: "Tongue", identity: "muscular organ involved in prehension, taste, mastication, and swallowing", location: "floor of oral cavity attached to hyoid apparatus", exam: "hypoglossal nerve is motor to tongue muscles", clinical: "lingual paralysis affects prehension and swallowing", compare: "ruminant tongue is important for prehension; feline tongue has sharp papillae", why: "Tongue anatomy is explicitly included under head and neck splanchnology." },
+    { name: "Larynx", identity: "cartilaginous organ guarding the airway and producing voice", location: "between pharynx and trachea", exam: "recurrent laryngeal nerve supplies most intrinsic laryngeal muscles", clinical: "left recurrent laryngeal paralysis causes roaring in horses", compare: "thyroid, cricoid, arytenoid, and epiglottic cartilages are core parts", why: "Larynx and recurrent laryngeal nerve are high-yield clinical anatomy." }
+  ];
+
+  const headNeuroClinical = [
+    { name: "Jugular furrow", identity: "surface groove used for venipuncture in large animals", location: "between brachiocephalicus dorsally and sternocephalicus ventrally", exam: "external jugular vein lies in the furrow", clinical: "main site for intravenous injection in cattle and horses", compare: "more clinically important in large animals than the cephalic vein", why: "Jugular furrow boundaries are directly named in the syllabus." },
+    { name: "Carotid sheath", identity: "deep cervical fascial sheath containing major neurovascular structures", location: "deep in the neck beside trachea and oesophagus", exam: "contains common carotid artery and vagosympathetic trunk", clinical: "avoid accidental carotid puncture during jugular venipuncture", compare: "internal jugular is prominent in some species but not the main venipuncture vessel in large animals", why: "Carotid sheath structures are a favorite short-answer topic." },
+    { name: "Cornual nerve", identity: "sensory nerve to the horn region in cattle", location: "runs along the frontal crest toward the horn base", exam: "branch of the zygomaticotemporal nerve from maxillary division of trigeminal", clinical: "blocked for dehorning or horn amputation", compare: "superficial temporal artery must also be considered during horn surgery", why: "Cornual nerve and superficial temporal artery are explicitly named in the syllabus." },
+    { name: "Mental nerve", identity: "terminal branch emerging at the mental foramen", location: "rostral mandible near lower incisors/lip", exam: "desensitizes lower lip and incisive region", clinical: "mental nerve block is used for lower lip and incisor procedures", compare: "related to mandibular alveolar nerve pathway", why: "Mental nerve block is listed among expected head nerve blocks." }
+  ];
+
+  const introGeneral = [
+    { name: "Median plane", identity: "plane dividing the body into equal right and left halves", location: "vertical plane passing through the midline", exam: "sagittal planes parallel to it are paramedian", clinical: "used for precise description of lesions and incisions", compare: "different from transverse plane which divides cranial and caudal parts", why: "Anatomical planes are Unit 1 essentials." },
+    { name: "Dorsal direction", identity: "direction toward the back or vertebral column", location: "opposite of ventral in trunk anatomy", exam: "on limbs, cranial/caudal terms change to palmar or plantar distally", clinical: "prevents ambiguity in radiographic positioning", compare: "in the head, rostral replaces cranial toward the nose", why: "Directional terminology is always examined early." },
+    { name: "Axial skeleton", identity: "skeleton of skull, vertebral column, ribs, and sternum", location: "central long axis of the body", exam: "contrasted with appendicular skeleton of limbs", clinical: "vertebral fractures and rib fractures belong to axial skeleton", compare: "appendicular skeleton includes pectoral and pelvic limbs", why: "Classification of skeleton is a direct syllabus item." },
+    { name: "Long bone", identity: "bone with shaft and two extremities acting as a lever", location: "limbs such as humerus, femur, radius, tibia", exam: "has diaphysis, metaphysis, epiphysis, compact and cancellous bone", clinical: "common fracture sites and marrow cavity are clinically important", compare: "different from flat bones such as scapula and skull bones", why: "Bone classification with examples is high-yield." },
+    { name: "Synovial joint", identity: "freely movable joint with cavity, cartilage, capsule, and synovia", location: "limb joints such as shoulder, hip, elbow, stifle", exam: "also called diarthrodial joint", clinical: "site of arthritis, luxation, and intra-articular injection", compare: "more mobile than fibrous or cartilaginous joints", why: "Structure of diarthrodial joints is explicitly in Unit 1." }
+  ];
+
+  const introMyoArth = [
+    { name: "Tendon", identity: "dense connective tissue attaching muscle to bone", location: "at muscle ends crossing joints", exam: "transmits force of muscle contraction", clinical: "tendon injury severely affects locomotion", compare: "ligament connects bone to bone", why: "Tendon versus ligament is a common introductory MCQ." },
+    { name: "Ligament", identity: "fibrous band connecting bone to bone", location: "around joints or between bones", exam: "stabilizes joints and limits excessive movement", clinical: "sprain or rupture leads to joint instability", compare: "can be capsular, extracapsular, or intracapsular", why: "Ligaments are listed with arthrology basics." },
+    { name: "Aponeurosis", identity: "flat sheet-like tendon", location: "broad muscular attachments such as abdominal wall", exam: "forms part of rectus sheath and linea alba", clinical: "important in abdominal incisions and hernia repair", compare: "broader than a cord-like tendon", why: "Aponeurosis is named in Unit 1." },
+    { name: "Synovial bursa", identity: "fluid-filled sac reducing friction", location: "between tendon/skin/muscle and bony prominence", exam: "lined by synovial membrane", clinical: "inflammation is bursitis such as capped elbow", compare: "synovial sheath surrounds tendons over a longer course", why: "Bursa and sheath distinctions are common practical questions." },
+    { name: "Synovial sheath", identity: "tubular synovial structure surrounding a tendon", location: "where tendons pass through confined canals", exam: "reduces friction during tendon movement", clinical: "tenosynovitis causes pain and swelling", compare: "unlike a bursa, it wraps around the tendon", why: "Synovial sheath is specifically included in the syllabus." }
+  ];
+
+  const introAngioNeuro = [
+    { name: "Systemic circulation", identity: "blood route from left ventricle through body to right atrium", location: "aorta to systemic veins and venae cavae", exam: "carries oxygenated blood in systemic arteries", clinical: "shock and hemorrhage compromise systemic perfusion", compare: "contrasts with pulmonary circulation to the lungs", why: "General plan of circulation is a Unit 1 item." },
+    { name: "Spinal nerve", identity: "mixed nerve formed by union of dorsal and ventral roots", location: "emerges through intervertebral foramina", exam: "dorsal root is sensory and ventral root is motor", clinical: "nerve root injury causes segmental deficits", compare: "contains somatic and autonomic fibers after formation", why: "Formation of spinal nerve is directly named in the syllabus." },
+    { name: "Meninges", identity: "protective coverings of brain and spinal cord", location: "around central nervous system", exam: "dura mater, arachnoid mater, and pia mater are the three layers", clinical: "CSF lies in the subarachnoid space", compare: "epidural anesthesia is outside dura mater", why: "Meninges are an introductory neurology favorite." }
+  ];
+
+  const introSplanchClinical = [
+    { name: "Thoracic cavity", identity: "body cavity containing lungs, heart, thymus, and thoracic vessels", location: "bounded by ribs, sternum, thoracic vertebrae, and diaphragm", exam: "divided into pleural cavities and mediastinum", clinical: "auscultation and percussion use thoracic topography", compare: "separated from abdomen by diaphragm", why: "Cavity boundaries are central to Unit 1 and practicals." },
+    { name: "Abdominal cavity", identity: "cavity containing most digestive organs, kidneys, spleen, and glands", location: "between diaphragm and pelvic inlet", exam: "lined by peritoneum and related to omenta and mesenteries", clinical: "laparotomy and rumenotomy depend on abdominal topography", compare: "continues caudally into pelvic cavity without a complete wall", why: "Abdominal topography is repeatedly examined." },
+    { name: "Bone marrow collection", identity: "procedure using accessible marrow-containing bones", location: "sternum, ribs, iliac crest, or proximal long bones depending on species and age", exam: "red marrow is hematopoietic", clinical: "used for diagnosis of blood and marrow disorders", compare: "young animals have more active red marrow than adults", why: "Bone marrow collection sites are specifically in the syllabus." }
+  ];
+
+  const histCytology = [
+    { name: "Simple squamous epithelium", identity: "single layer of flat cells", location: "endothelium, mesothelium, alveoli, and Bowman's capsule", exam: "adapted for diffusion and filtration", clinical: "thin barrier allows rapid exchange but poor protection", compare: "flat nuclei make it easy to identify on slides", why: "Basic epithelium identification is high-yield histology." },
+    { name: "Simple cuboidal epithelium", identity: "single layer of cube-shaped cells with round central nuclei", location: "kidney tubules and small ducts", exam: "specialized for secretion and absorption", clinical: "renal tubular damage affects filtration and reabsorption", compare: "cell height roughly equals cell width", why: "Kidney tubule epithelium is a common slide question." },
+    { name: "Pseudostratified ciliated columnar epithelium", identity: "appears multilayered but all cells touch basement membrane", location: "trachea and larger conducting airways", exam: "goblet cells and cilia form the mucociliary apparatus", clinical: "ciliary damage impairs airway clearance", compare: "nuclei lie at different levels", why: "Respiratory epithelium is a classic practical spotter." },
+    { name: "Stratified squamous epithelium", identity: "multiple layers with flattened surface cells", location: "skin, oral cavity, oesophagus, and rumen mucosa", exam: "protects against abrasion", clinical: "keratinization increases protection in skin and rumen papillae", compare: "surface cells distinguish it from transitional epithelium", why: "Protective epithelium is a repeated histology MCQ." },
+    { name: "Transitional epithelium", identity: "distensible multilayered epithelium with dome-shaped umbrella cells", location: "renal pelvis, ureter, urinary bladder, proximal urethra", exam: "permits stretching without leakage of urine", clinical: "important barrier against urine toxicity", compare: "umbrella cells flatten when stretched", why: "Urothelium is a high-yield slide clue." },
+    { name: "Hyaline cartilage", identity: "glassy cartilage with chondrocytes in lacunae", location: "tracheal rings, articular cartilage, costal cartilage, fetal skeleton", exam: "type II collagen is typical", clinical: "articular cartilage has poor repair capacity", compare: "more homogeneous matrix than elastic or fibrocartilage", why: "Cartilage types are core connective tissue topics." },
+    { name: "Compact bone", identity: "dense lamellar bone organized into osteons", location: "diaphysis of long bones", exam: "Haversian canals carry vessels and nerves", clinical: "remodels under mechanical stress and fracture repair", compare: "concentric lamellae distinguish it from cancellous bone", why: "Bone histology is examined with osteology." },
+    { name: "Skeletal muscle", identity: "striated voluntary muscle with peripheral nuclei", location: "limb and body wall muscles", exam: "long multinucleated fibers show cross striations", clinical: "denervation leads to muscle atrophy", compare: "differs from cardiac muscle by lack of intercalated discs", why: "Muscle tissue comparison is a basic histology favorite." }
+  ];
+
+  const histBlood = [
+    { name: "Erythrocyte", identity: "anucleate biconcave red blood cell in mammals", location: "circulating blood", exam: "transports oxygen using hemoglobin", clinical: "anemia reduces oxygen carrying capacity", compare: "avian erythrocytes are nucleated and oval", why: "Species difference in blood cells is frequently asked." },
+    { name: "Neutrophil", identity: "granulocyte with segmented nucleus", location: "blood and acute inflammatory exudates", exam: "main leukocyte in acute bacterial inflammation", clinical: "neutrophilia suggests acute infection or inflammation", compare: "heterophils are avian equivalents", why: "Leukocyte identification is high-yield." },
+    { name: "Eosinophil", identity: "granulocyte with eosinophilic cytoplasmic granules", location: "blood, mucosa, and parasitic/allergic lesions", exam: "increases in parasitic infestation and allergy", clinical: "eosinophilia is important in veterinary diagnostics", compare: "granule appearance varies between species", why: "Eosinophil function is a common MCQ." },
+    { name: "Megakaryocyte", identity: "large marrow cell that produces platelets", location: "bone marrow sinusoids", exam: "cytoplasmic fragments become thrombocytes/platelets", clinical: "marrow disease can cause thrombocytopenia", compare: "much larger than surrounding hematopoietic cells", why: "Bone marrow is specifically included in Unit 7." }
+  ];
+
+  const histSystems = [
+    { name: "Liver lobule", identity: "hexagonal functional unit centered on a central vein", location: "hepatic parenchyma", exam: "portal triads lie at lobule corners", clinical: "hepatocyte injury alters liver enzymes and bile flow", compare: "sinusoids carry mixed portal and arterial blood toward central vein", why: "Liver microscopic structure is a major system histology topic." },
+    { name: "Kidney glomerulus", identity: "capillary tuft within Bowman's capsule", location: "renal cortex", exam: "forms the filtration barrier with podocytes and basement membrane", clinical: "glomerular damage causes proteinuria", compare: "renal corpuscles are absent from medulla", why: "Urinary histology spotters often focus on glomeruli." },
+    { name: "Trachea", identity: "conducting airway with ciliated mucosa and hyaline cartilage", location: "neck and thorax before bifurcation", exam: "has pseudostratified ciliated epithelium with goblet cells", clinical: "mucociliary clearance protects lower airways", compare: "C-shaped cartilage rings are mammalian tracheal features", why: "Respiratory system histology is directly in Unit 7." },
+    { name: "Lymph node", identity: "encapsulated lymphoid organ with cortex, paracortex, and medulla", location: "along lymphatic drainage pathways", exam: "afferent lymphatics enter capsule and efferent leaves hilus", clinical: "enlargement indicates drainage-area inflammation or neoplasia", compare: "unlike spleen, it filters lymph rather than blood", why: "Lymphatic organs are high-yield histology." },
+    { name: "Thyroid gland", identity: "endocrine gland made of colloid-filled follicles", location: "neck beside trachea", exam: "follicular cells produce thyroid hormones", clinical: "thyroid dysfunction alters metabolism", compare: "parafollicular C cells secrete calcitonin", why: "Endocrine histology commonly asks follicle identification." },
+    { name: "Testis seminiferous tubule", identity: "coiled tubule where spermatogenesis occurs", location: "testicular parenchyma", exam: "Sertoli cells support developing germ cells", clinical: "cryptorchidism impairs spermatogenesis", compare: "Leydig cells lie between tubules and produce testosterone", why: "Male genital histology is frequently examined." },
+    { name: "Ovary follicle", identity: "oocyte surrounded by follicular/granulosa cells", location: "ovarian cortex", exam: "Graafian follicle contains an antrum", clinical: "follicular waves underlie estrous cycle physiology", compare: "corpus luteum forms after ovulation", why: "Female genital histology is a standard practical topic." },
+    { name: "Mammary gland", identity: "compound tubuloalveolar gland producing milk", location: "udder or mammary chain depending on species", exam: "secretory alveoli drain through ducts to teat sinus", clinical: "mastitis alters gland structure and milk", compare: "active gland has larger alveoli and less connective tissue than inactive gland", why: "Mammary gland is specifically in Unit 7." }
+  ];
+
+  const embryoGeneral = [
+    { name: "Gametogenesis", identity: "formation of male and female gametes by meiosis and maturation", location: "testis and ovary", exam: "reduces chromosome number from diploid to haploid", clinical: "errors can cause infertility or chromosomal anomalies", compare: "spermatogenesis is continuous; oogenesis is cyclic and arrested", why: "Embryology begins with gametogenesis in the syllabus." },
+    { name: "Fertilization", identity: "fusion of sperm and oocyte to form a zygote", location: "usually ampulla of uterine tube in mammals", exam: "restores diploid chromosome number", clinical: "failure prevents embryo formation", compare: "requires capacitation and acrosome reaction", why: "Fertilization is a core early embryology topic." },
+    { name: "Cleavage", identity: "rapid mitotic divisions without growth of the embryo", location: "within zona pellucida during early tubal transport", exam: "produces blastomeres", clinical: "poor cleavage indicates poor embryo viability", compare: "differs from ordinary growth because total size does not increase", why: "Cleavage definitions are common MCQs." },
+    { name: "Morula", identity: "solid ball of blastomeres resembling a mulberry", location: "early embryo before blastocyst cavity forms", exam: "usually around 16 to 32 cells", clinical: "embryo transfer staging may identify morulae", compare: "precedes blastulation", why: "Morula versus blastula is high-yield." },
+    { name: "Blastocyst", identity: "embryo with trophoblast, inner cell mass, and blastocoel", location: "uterus before implantation/attachment", exam: "trophoblast contributes to fetal membranes and placenta", clinical: "hatching from zona pellucida is needed before attachment", compare: "inner cell mass forms the embryo proper", why: "Blastocyst components are repeatedly examined." },
+    { name: "Gastrulation", identity: "formation of three germ layers from embryonic disc", location: "embryonic disc through primitive streak", exam: "produces ectoderm, mesoderm, and endoderm", clinical: "major developmental defects can arise at this stage", compare: "follows blastulation and precedes organogenesis", why: "Gastrulation is explicitly listed in Unit 8." },
+    { name: "Implantation", identity: "attachment of conceptus to uterine lining", location: "uterine endometrium", exam: "domestic animals usually have superficial/central attachment rather than deeply invasive implantation", clinical: "failure causes early embryonic loss", compare: "humans have interstitial invasive implantation", why: "Types of implantation are named in the syllabus." },
+    { name: "Twinning", identity: "development of two fetuses in one pregnancy", location: "uterus", exam: "monozygotic twins arise from one zygote; dizygotic from two ova", clinical: "freemartinism is important in cattle", compare: "twin pregnancy is less desirable in mares than in many polytocous species", why: "Twinning is directly included in Unit 8." },
+    { name: "Amnion", identity: "fetal membrane enclosing embryo in fluid", location: "immediately around fetus", exam: "provides a shock-absorbing protective cavity", clinical: "amnion abnormalities affect fetal protection", compare: "not the main exchange membrane of the placenta", why: "Fetal membranes are a core Unit 8 topic." },
+    { name: "Allantois", identity: "fetal membrane associated with waste storage and vascular placenta formation", location: "expands from hindgut region into extraembryonic coelom", exam: "fuses with chorion to form chorioallantoic placenta", clinical: "urachus remnant may persist as patent urachus", compare: "very important in birds as a respiratory and waste membrane", why: "Allantois is a frequent fetal membrane MCQ." }
+  ];
+
+  const embryoSystems = [
+    { name: "Ectoderm derivatives", identity: "germ layer forming epidermis and nervous system components", location: "outer germ layer", exam: "forms epidermis, hair, hoof, enamel, brain and spinal cord via neural ectoderm", clinical: "neural tube defects involve ectodermal development", compare: "neural crest contributes to peripheral nerves and melanocytes", why: "Germ-layer derivatives are high-probability exam questions." },
+    { name: "Mesoderm derivatives", identity: "middle germ layer forming muscle, bone, connective tissue and urogenital structures", location: "between ectoderm and endoderm", exam: "paraxial mesoderm forms somites", clinical: "limb and vertebral anomalies involve mesodermal derivatives", compare: "intermediate mesoderm forms much of urinary and genital systems", why: "Mesoderm derivatives are a central embryology table." },
+    { name: "Endoderm derivatives", identity: "inner germ layer forming epithelial lining of gut and respiratory tract", location: "lining of primitive gut tube", exam: "forms liver and pancreas parenchyma", clinical: "atresia and duct anomalies involve endodermal organ development", compare: "connective tissue and muscle of gut wall are mesodermal", why: "Endoderm is repeatedly tested with digestive development." },
+    { name: "Neurulation", identity: "formation of neural tube from neural plate", location: "dorsal embryonic ectoderm over notochord", exam: "neural tube forms brain and spinal cord", clinical: "failure of closure causes spina bifida or anencephaly", compare: "neural crest cells migrate away from neural folds", why: "Nervous system development is listed in Unit 8." },
+    { name: "Heart tube looping", identity: "early folding of primitive heart tube", location: "cardiogenic region of embryo", exam: "straight tube bends to establish chamber relationships", clinical: "abnormal looping contributes to congenital heart defects", compare: "heart begins function very early in development", why: "Circulatory development is high-yield." },
+    { name: "Metanephros", identity: "definitive permanent kidney of mammals", location: "develops from ureteric bud and metanephric blastema", exam: "replaces pronephros and mesonephros as adult kidney", clinical: "developmental failure can cause renal agenesis", compare: "mesonephric duct persists in male reproductive tract", why: "Urinary system development is specifically named." },
+    { name: "Placenta classification", identity: "classification by gross villus distribution and histological barrier", location: "maternal-fetal interface", exam: "ruminants are cotyledonary; mare and sow are diffuse; dog and cat are zonary", clinical: "placental type affects maternal antibody transfer", compare: "epitheliochorial placenta has more tissue layers than endotheliochorial", why: "Placenta and classification are explicit Unit 8 topics." },
+    { name: "Umbilical cord", identity: "connection carrying fetal vessels between fetus and placenta", location: "between fetal abdomen and placenta", exam: "normally contains two umbilical arteries and one umbilical vein in mammals", clinical: "navel infection can track along umbilical remnants", compare: "umbilical arteries carry deoxygenated blood from fetus", why: "Umbilical cord is a common practical demonstration item." },
+    { name: "Pharyngeal arches", identity: "embryonic arches contributing to face, jaw, hyoid, and laryngeal structures", location: "cranial embryonic pharyngeal region", exam: "first arch is associated with mandibular and maxillary processes", clinical: "cleft palate and jaw anomalies relate to craniofacial development", compare: "each arch has cartilage, muscle, artery, and nerve components", why: "Head organ development often tests pharyngeal arch basics." },
+    { name: "Mammary gland development", identity: "development of milk-producing gland from ectodermal mammary line", location: "ventral body wall along milk line", exam: "epithelial buds grow into underlying mesenchyme", clinical: "supernumerary teats result from mammary line remnants", compare: "number and position of glands differ by species", why: "Mammary gland development is included with system development." }
+  ];
+
+  const thoraxCore = [
+    { name: "Thoracic vertebra", identity: "vertebra bearing costal facets for ribs", location: "dorsal wall of thorax", exam: "ox and dog usually have 13 thoracic vertebrae, horse has 18", clinical: "thoracic spine supports rib cage and protects spinal cord", compare: "only thoracic vertebrae articulate with ribs", why: "Thoracic vertebrae and species differences are Unit 4 essentials." },
+    { name: "Rib", identity: "curved bone forming lateral thoracic wall", location: "between thoracic vertebrae and sternum/costal cartilage", exam: "true ribs attach directly to sternum through costal cartilage", clinical: "rib fracture can damage pleura or lung", compare: "horse has 18 pairs, ox and dog usually 13 pairs", why: "Rib number and classification are common MCQs." },
+    { name: "Sternum", identity: "ventral midline bone of thoracic cage", location: "floor of thorax", exam: "composed of sternebrae with manubrium cranially and xiphoid caudally", clinical: "sternal recumbency and marrow collection relate to sternum", compare: "birds have a large keeled sternum for flight muscles", why: "Sternum differences are a basic thorax osteology question." },
+    { name: "Pleura", identity: "serous membrane of thoracic cavity and lungs", location: "parietal pleura lines wall; visceral pleura covers lungs", exam: "pleural cavity contains a thin film of serous fluid", clinical: "pneumothorax occurs when air enters pleural cavity", compare: "mediastinum separates right and left pleural sacs", why: "Pleural reflections are emphasized in practical Unit 4." },
+    { name: "Recurrent laryngeal nerve", identity: "branch of vagus returning to larynx after looping in thorax", location: "left side loops around aortic arch; right around subclavian artery", exam: "supplies intrinsic laryngeal muscles except cricothyroid", clinical: "left paralysis causes roaring in horses", compare: "its long thoracic course makes left side more vulnerable", why: "Roaring is specifically named in practical thorax." },
+    { name: "Heart", identity: "muscular pump within pericardium", location: "middle mediastinum between lungs", exam: "right side pumps to pulmonary circulation and left side to systemic circulation", clinical: "auscultation areas depend on topography", compare: "os cordis occurs in ox and buffalo", why: "Heart structure and thoracic topography are high-yield." }
+  ];
+
+  addExamQuestions("Forelimb", "Angiology", fromTopics(forelimbAngiology), 25, 13, 12); // 50
+  addExamQuestions("Hindlimb & Pelvis", "Osteology & Arthrology", fromTopics(hindOsteoArth), 10, 5, 5); // 20
+  addExamQuestions("Hindlimb & Pelvis", "Myology & Neurology", fromTopics(hindMyoNeuro), 10, 5, 5); // 20
+  addExamQuestions("Hindlimb & Pelvis", "Angiology & Splanchnology", fromTopics(hindAngioSplanch), 5, 3, 2); // 10
+  addExamQuestions("Head & Neck", "Osteology & Arthrology", fromTopics(headOsteoArth), 8, 4, 3); // 15
+  addExamQuestions("Head & Neck", "Myology & Splanchnology", fromTopics(headMyoSplanch), 7, 4, 4); // 15
+  addExamQuestions("Head & Neck", "Neurology, Angiology & Clinical", fromTopics(headNeuroClinical), 10, 5, 5); // 20
+  addExamQuestions("Introduction", "General Anatomy & Osteology", fromTopics(introGeneral), 13, 6, 6); // 25
+  addExamQuestions("Introduction", "Myology & Arthrology", fromTopics(introMyoArth), 12, 7, 6); // 25
+  addExamQuestions("Introduction", "Angiology & Neurology", fromTopics(introAngioNeuro), 8, 3, 4); // 15
+  addExamQuestions("Introduction", "Splanchnology & Clinical", fromTopics(introSplanchClinical), 7, 4, 4); // 15
+  addExamQuestions("Histology", "Cytology & Basic Tissues", fromTopics(histCytology), 20, 10, 10); // 40
+  addExamQuestions("Histology", "Blood & Bone Marrow", fromTopics(histBlood), 10, 5, 5); // 20
+  addExamQuestions("Histology", "Digestive & Other Systems", fromTopics(histSystems), 20, 10, 10); // 40
+  addExamQuestions("Embryology", "General Embryology (Gametogenesis to Gastrulation)", fromTopics(embryoGeneral), 25, 13, 12); // 50
+  addExamQuestions("Embryology", "Systemic Embryology & Placentation", fromTopics(embryoSystems), 25, 12, 13); // 50
+  addExamQuestions("Thorax", "Osteology", fromTopics(thoraxCore.slice(0, 2)), 5, 3, 2); // 10
+  addExamQuestions("Thorax", "Arthrology", fromTopics(thoraxCore.slice(2, 3)), 3, 1, 1); // 5
+  addExamQuestions("Thorax", "Splanchnology", fromTopics(thoraxCore.slice(3, 6)).slice(0, 14), 7, 3, 4); // 14
+})();
+
+// Additional Unit 1 introduction questions.
+(function addIntroductionUnit1SetTwo() {
+  if (typeof quizBank === "undefined" || !quizBank.Introduction) return;
+
+  const add = (system, mode, items) => {
+    quizBank.Introduction[system] = quizBank.Introduction[system] || { mcq: [], tf: [], fib: [] };
+    quizBank.Introduction[system][mode] = quizBank.Introduction[system][mode] || [];
+    quizBank.Introduction[system][mode].push(...items);
+  };
+
+  add("General Anatomy & Osteology", "mcq", [
+    { q: "Which branch of anatomy deals with structures visible to the naked eye?", o: ["Gross anatomy", "Histology", "Cytology", "Embryology"], a: 0, e: "Gross anatomy studies body structures that can be seen without a microscope." },
+    { q: "The plane that divides the body into equal right and left halves is the:", o: ["Median plane", "Transverse plane", "Dorsal plane", "Oblique plane"], a: 0, e: "The median plane passes through the midline and divides the body into equal right and left halves." },
+    { q: "A plane parallel to the median plane is called a:", o: ["Sagittal plane", "Transverse plane", "Horizontal plane", "Frontal plane"], a: 0, e: "Sagittal planes run parallel to the median plane." },
+    { q: "In the head, the term used for direction toward the nose is:", o: ["Rostral", "Cranial", "Caudal", "Palmar"], a: 0, e: "Rostral means toward the nose or beak in the head region." },
+    { q: "The skeleton of the limbs is called the:", o: ["Appendicular skeleton", "Axial skeleton", "Visceral skeleton", "Pneumatic skeleton"], a: 0, e: "The appendicular skeleton includes the bones of the forelimbs and hindlimbs." },
+    { q: "Which of the following is a flat bone?", o: ["Scapula", "Carpus", "Femur", "Patella"], a: 0, e: "The scapula is a flat bone with broad surfaces for muscle attachment." },
+    { q: "The shaft of a long bone is called the:", o: ["Diaphysis", "Epiphysis", "Metaphysis", "Apophysis"], a: 0, e: "The diaphysis is the shaft of a long bone." },
+    { q: "The ends of a long bone are called:", o: ["Epiphyses", "Diaphyses", "Processes", "Foramina"], a: 0, e: "The epiphyses form the proximal and distal ends of a long bone." },
+    { q: "A small hole in a bone for passage of vessels or nerves is a:", o: ["Foramen", "Fossa", "Condyle", "Tuberosity"], a: 0, e: "A foramen is an opening in bone." },
+    { q: "A smooth rounded articular projection on a bone is called a:", o: ["Condyle", "Spine", "Crest", "Sulcus"], a: 0, e: "A condyle is a rounded projection that usually takes part in a joint." }
+  ]);
+
+  add("Myology & Arthrology", "mcq", [
+    { q: "A freely movable joint is called a:", o: ["Diarthrosis", "Synarthrosis", "Synchondrosis", "Syndesmosis"], a: 0, e: "Diarthroses are freely movable synovial joints." },
+    { q: "The fluid present in a synovial joint is:", o: ["Synovia", "Lymph", "Cerebrospinal fluid", "Serum"], a: 0, e: "Synovia or synovial fluid lubricates the joint cavity." },
+    { q: "The articular ends of bones in a synovial joint are covered by:", o: ["Hyaline cartilage", "Elastic cartilage", "Fibrocartilage only", "Periosteum"], a: 0, e: "Articular surfaces are usually covered by hyaline cartilage." },
+    { q: "A hinge joint mainly permits:", o: ["Flexion and extension", "Rotation only", "Circumduction only", "Gliding only"], a: 0, e: "Hinge joints mainly allow flexion and extension." },
+    { q: "The shoulder and hip joints are examples of:", o: ["Ball and socket joints", "Pivot joints", "Suture joints", "Plane joints"], a: 0, e: "The shoulder and hip are ball and socket joints." },
+    { q: "A fibrous band connecting bone to bone is a:", o: ["Ligament", "Tendon", "Aponeurosis", "Fascia"], a: 0, e: "Ligaments connect bones and support joints." },
+    { q: "A tendon connects:", o: ["Muscle to bone", "Bone to bone", "Nerve to muscle", "Skin to bone"], a: 0, e: "Tendons attach muscles to bones." },
+    { q: "A broad flat tendon is called an:", o: ["Aponeurosis", "Bursa", "Retinaculum", "Cartilage"], a: 0, e: "An aponeurosis is a sheet-like tendon." }
+  ]);
+
+  add("Angiology & Neurology", "mcq", [
+    { q: "The chamber of the heart that pumps blood into the aorta is the:", o: ["Left ventricle", "Right ventricle", "Left atrium", "Right atrium"], a: 0, e: "The left ventricle pumps oxygenated blood into the aorta." },
+    { q: "The vessel carrying blood from the right ventricle to the lungs is the:", o: ["Pulmonary trunk", "Aorta", "Cranial vena cava", "Pulmonary vein"], a: 0, e: "The pulmonary trunk carries deoxygenated blood from the right ventricle to the lungs." },
+    { q: "The vessels that carry blood toward the heart are:", o: ["Veins", "Arteries", "Capillaries", "Lacteals"], a: 0, e: "Veins carry blood toward the heart." },
+    { q: "The vessels that usually carry blood away from the heart are:", o: ["Arteries", "Veins", "Lymph ducts", "Venules"], a: 0, e: "Arteries carry blood away from the heart." },
+    { q: "The lymphatic system finally drains mainly into the:", o: ["Venous system", "Arterial system", "Pleural cavity", "Peritoneal cavity"], a: 0, e: "Lymph returns to the blood through large veins near the venous angles." },
+    { q: "The brain and spinal cord form the:", o: ["Central nervous system", "Peripheral nervous system", "Autonomic nervous system", "Somatic nervous system only"], a: 0, e: "The central nervous system consists of the brain and spinal cord." },
+    { q: "The dorsal root of a spinal nerve is mainly:", o: ["Sensory", "Motor", "Sympathetic only", "Parasympathetic only"], a: 0, e: "The dorsal root carries sensory fibers toward the spinal cord." },
+    { q: "The ventral root of a spinal nerve is mainly:", o: ["Motor", "Sensory", "Lymphatic", "Venous"], a: 0, e: "The ventral root carries motor fibers away from the spinal cord." }
+  ]);
+
+  add("Splanchnology & Clinical", "mcq", [
+    { q: "The cavity containing the lungs and heart is the:", o: ["Thoracic cavity", "Abdominal cavity", "Pelvic cavity", "Cranial cavity"], a: 0, e: "The thoracic cavity contains the lungs, heart, and associated structures." },
+    { q: "The muscular partition between thorax and abdomen is the:", o: ["Diaphragm", "Mediastinum", "Pleura", "Peritoneum"], a: 0, e: "The diaphragm separates the thoracic and abdominal cavities." },
+    { q: "The serous membrane lining the abdominal cavity is the:", o: ["Peritoneum", "Pleura", "Pericardium", "Meninges"], a: 0, e: "The peritoneum lines the abdominal cavity and covers many abdominal organs." },
+    { q: "The main vein used for venipuncture in large animals is the:", o: ["Jugular vein", "Cephalic vein", "Femoral vein", "Portal vein"], a: 0, e: "The jugular vein is the main venipuncture site in large animals." }
+  ]);
+
+  add("General Anatomy & Osteology", "fib", [
+    { q: "The plane dividing the body into equal right and left halves is the _____ plane.", a: ["median"], e: "The median plane passes through the midline." },
+    { q: "A direction toward the nose in the head is called _____.", a: ["rostral"], e: "Rostral is used in the head for direction toward the nose." },
+    { q: "The skeleton of the skull, vertebral column, ribs and sternum is the _____ skeleton.", a: ["axial"], e: "The axial skeleton forms the central axis of the body." },
+    { q: "The shaft of a long bone is the _____.", a: ["diaphysis"], e: "The diaphysis is the shaft of a long bone." },
+    { q: "A hole in a bone for passage of vessels or nerves is a _____.", a: ["foramen"], e: "A foramen is an opening in bone." }
+  ]);
+
+  add("Myology & Arthrology", "fib", [
+    { q: "A freely movable synovial joint is called a _____.", a: ["diarthrosis"], e: "Diarthroses are freely movable joints." },
+    { q: "The fluid in a synovial joint is called _____.", a: ["synovia", "synovial fluid"], e: "Synovia lubricates the joint." },
+    { q: "A fibrous band connecting bone to bone is a _____.", a: ["ligament"], e: "Ligaments connect bones to bones." },
+    { q: "A tendon connects muscle to _____.", a: ["bone"], e: "Tendons attach muscles to bones." }
+  ]);
+
+  add("Angiology & Neurology", "fib", [
+    { q: "The heart chamber that pumps blood into the aorta is the left _____.", a: ["ventricle"], e: "The left ventricle pumps blood into the aorta." },
+    { q: "The vessels that carry blood toward the heart are _____.", a: ["veins"], e: "Veins carry blood toward the heart." },
+    { q: "The outermost meninx is the _____ mater.", a: ["dura"], e: "Dura mater is the tough outer meningeal layer." },
+    { q: "The dorsal root of a spinal nerve is mainly _____.", a: ["sensory"], e: "The dorsal root carries sensory fibers." }
+  ]);
+
+  add("Splanchnology & Clinical", "fib", [
+    { q: "The muscular partition between thorax and abdomen is the _____.", a: ["diaphragm"], e: "The diaphragm separates thoracic and abdominal cavities." },
+    { q: "The serous membrane of the abdominal cavity is the _____.", a: ["peritoneum"], e: "The peritoneum lines the abdominal cavity." }
+  ]);
+
+  add("General Anatomy & Osteology", "tf", [
+    { q: "The median plane divides the body into equal right and left halves.", a: true, e: "True. The median plane passes through the midline." },
+    { q: "Palmar is used for the caudal surface of the hindlimb distal to the tarsus.", a: false, e: "False. Palmar is used in the forelimb; plantar is used in the hindlimb distal to the tarsus." },
+    { q: "The patella is a sesamoid bone.", a: true, e: "True. The patella develops in the tendon of quadriceps femoris." },
+    { q: "The appendicular skeleton includes the skull and vertebral column.", a: false, e: "False. Skull and vertebral column belong to the axial skeleton." },
+    { q: "A fossa is a depression on a bone.", a: true, e: "True. A fossa is a hollow or depression." }
+  ]);
+
+  add("Myology & Arthrology", "tf", [
+    { q: "Synovial joints have a joint cavity.", a: true, e: "True. A joint cavity is a feature of synovial joints." },
+    { q: "A tendon connects bone to bone.", a: false, e: "False. A tendon connects muscle to bone; a ligament connects bone to bone." },
+    { q: "A hinge joint mainly permits flexion and extension.", a: true, e: "True. Hinge joints mainly allow flexion and extension." },
+    { q: "An aponeurosis is a rounded articular surface.", a: false, e: "False. An aponeurosis is a broad flat tendon." }
+  ]);
+
+  add("Angiology & Neurology", "tf", [
+    { q: "The pulmonary trunk carries blood from the right ventricle to the lungs.", a: true, e: "True. It carries deoxygenated blood to the lungs." },
+    { q: "The dorsal root of a spinal nerve is mainly motor.", a: false, e: "False. The dorsal root is sensory; the ventral root is motor." },
+    { q: "Dura mater is the outermost meningeal layer.", a: true, e: "True. Dura mater is the tough outer covering." },
+    { q: "The brain and spinal cord form the peripheral nervous system.", a: false, e: "False. They form the central nervous system." }
+  ]);
+
+  add("Splanchnology & Clinical", "tf", [
+    { q: "The diaphragm separates the thoracic and abdominal cavities.", a: true, e: "True. It forms the partition between thorax and abdomen." },
+    { q: "The jugular vein is commonly used for venipuncture in large animals.", a: true, e: "True. It is the main accessible vein in cattle and horses." }
+  ]);
+})();
