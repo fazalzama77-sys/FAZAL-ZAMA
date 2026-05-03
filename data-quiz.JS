@@ -379,7 +379,74 @@ const quizBank = {
         { q: "The ______ nerve is formed by the union of ventral branches of C8 and T1 (varies by species).", a: ["ulnar", "median", "ulnar and median"], e: "The ulnar and median nerves share roots from C8 and T1." }
       ]
     },
-    "Angiology": { mcq: [], tf: [], fib: [] }
+    "Angiology": {
+      mcq: [
+        { q: "The main arterial supply to the forelimb arises from the:", o: ["Common carotid artery", "Axillary artery", "Brachiocephalic trunk", "Internal thoracic artery"], a: 1, e: "The axillary artery is the continuation of the subclavian artery past the first rib and is the parent vessel for the entire forelimb." },
+        { q: "The axillary artery becomes the brachial artery at the level of the:", o: ["Shoulder joint", "Tendon of the teres major muscle", "Elbow joint", "Mid-humerus"], a: 1, e: "The name changes to brachial artery as it passes the distal border of the teres major." },
+        { q: "In the dog, the brachial artery lies on the medial aspect of the arm, accompanied by the:", o: ["Radial nerve", "Ulnar nerve", "Median nerve", "Suprascapular nerve"], a: 2, e: "The median nerve and brachial artery travel together down the medial arm and forearm." },
+        { q: "The first major branch of the axillary artery is the:", o: ["Subscapular artery", "External thoracic artery", "Suprascapular artery", "Brachial artery"], a: 1, e: "The external thoracic artery supplies the superficial pectoral muscle and mammary gland." },
+        { q: "The subscapular artery is a large branch of the axillary artery that supplies the:", o: ["Shoulder joint and caudal scapular muscles", "Biceps brachii only", "Digital pad", "Thoracic wall only"], a: 0, e: "It is the largest branch of the axillary artery and gives off the thoracodorsal and caudal circumflex humeral arteries." },
+        { q: "The cranial circumflex humeral artery supplies structures around the:", o: ["Elbow joint", "Proximal cranial aspect of the humerus", "Distal metacarpus", "Scapular spine"], a: 1, e: "It wraps around the cranial surface of the surgical neck of the humerus." },
+        { q: "In the horse, the main artery continuing down the forearm is the:", o: ["Radial artery", "Ulnar artery", "Median artery", "Interosseous artery"], a: 2, e: "The median artery is the dominant vessel in the equine forearm, running with the median nerve." },
+        { q: "Which artery is the direct continuation of the brachial artery in the dog?", o: ["Median artery", "Radial artery", "Ulnar artery", "Common interosseous artery"], a: 0, e: "The brachial artery continues as the median artery past the elbow in dogs." },
+        { q: "The common interosseous artery typically arises from the:", o: ["Axillary artery", "Brachial or median artery", "Radial artery", "Ulnar artery"], a: 1, e: "It passes through the interosseous space between the radius and ulna to supply the caudal forearm." },
+        { q: "In the horse, the digital arteries that supply the hoof run alongside the:", o: ["Dorsal surface of the digit", "Palmar surface of the digit, on either side of the flexor tendons", "Inside the cannon bone", "Under the suspensory ligament"], a: 1, e: "The medial and lateral palmar digital arteries descend on the abaxial surfaces of the sesamoid bones." },
+        { q: "The transverse cubital artery (rete cubiti) is a network of vessels around the:", o: ["Shoulder joint", "Elbow joint", "Carpal joint", "Fetlock joint"], a: 1, e: "This arterial network provides collateral circulation around the elbow." },
+        { q: "The nutrient artery of the humerus most commonly arises from the:", o: ["Axillary artery", "Brachial artery", "Subscapular artery", "Median artery"], a: 1, e: "The nutrient artery enters the humeral diaphysis through the nutrient foramen." },
+        { q: "The palmar metacarpal arteries in the horse are branches of the:", o: ["Radial artery", "Median artery (via palmar arch)", "Ulnar artery only", "Axillary artery"], a: 1, e: "They run on the palmar surface of the cannon bone alongside the splint bones." },
+        { q: "In cattle, the dorsal common digital artery III is a branch of the:", o: ["Ulnar artery", "Median artery", "Radial artery", "Axillary artery"], a: 2, e: "The radial artery gives off the dorsal metacarpal/digital branches in cattle." },
+        { q: "The cephalic vein in the dog originates from the:", o: ["Palmar venous arch", "Dorsal venous network of the paw", "Deep palmar veins", "Jugular vein"], a: 1, e: "It collects blood from the dorsal surface of the paw and ascends the craniolateral forearm." },
+        { q: "The cephalic vein ascends on which surface of the forearm?", o: ["Caudal (palmar)", "Craniolateral (dorsal)", "Medial", "Deep (between radius and ulna)"], a: 1, e: "It is easily visible on the cranial/dorsal surface of the antebrachium." },
+        { q: "At the proximal forearm, the cephalic vein connects to the external jugular vein via the:", o: ["Omobrachial vein", "Axillobrachial vein", "Brachial vein", "Median cubital vein"], a: 0, e: "The omobrachial (or cephalic-jugular) connection runs across the shoulder." },
+        { q: "The brachial vein is a satellite vein (vena comitans) that accompanies the:", o: ["Cephalic vein", "Brachial artery", "Radial nerve", "Subclavian artery"], a: 1, e: "Satellite veins run alongside their companion arteries in the deep vascular bundle." },
+        { q: "The median cubital vein connects the:", o: ["Cephalic and brachial veins at the elbow", "Jugular and cephalic veins", "Saphenous and femoral veins", "Dorsal and palmar digital veins"], a: 0, e: "This oblique anastomosis on the medial elbow links the superficial and deep venous systems." },
+        { q: "The accessory cephalic vein in the dog arises from:", o: ["The dorsal metacarpal veins", "The palmar arch", "The brachial vein", "The axillary vein"], a: 0, e: "It joins the cephalic vein at approximately mid-forearm level." },
+        { q: "Which lymph node group is located in the axilla and drains most of the forelimb?", o: ["Superficial cervical lymph nodes", "Axillary lymph nodes", "Mandibular lymph nodes", "Popliteal lymph nodes"], a: 1, e: "The axillary lymph node sits in the armpit region and drains the entire limb." },
+        { q: "The superficial cervical (prescapular) lymph nodes are located:", o: ["In the axilla", "Cranial to the shoulder joint, deep to the brachiocephalicus", "Behind the ear", "In the intermandibular space"], a: 1, e: "They are easily palpable in cattle and drain the lateral neck, shoulder, and cranial forelimb." },
+        { q: "In the horse, the pulse can be taken from the digital arteries at the level of the:", o: ["Elbow", "Proximal sesamoid bones (fetlock)", "Carpal joint", "Shoulder joint"], a: 1, e: "The palmar digital arteries are palpable on the abaxial surface of the sesamoid bones." },
+        { q: "The lateral palmar digital artery in the horse is a terminal branch of the:", o: ["Medial palmar artery", "Lateral palmar artery", "Radial artery", "Dorsal metacarpal artery"], a: 1, e: "The lateral palmar artery (from the ulnar side) continues as the lateral palmar digital artery." },
+        { q: "The deep palmar arch in the horse is formed by anastomosis of branches from the:", o: ["Medial and lateral palmar metacarpal arteries", "Cephalic and brachial veins", "Radial and ulnar veins", "Digital veins only"], a: 0, e: "The deep palmar arch provides collateral blood supply to the digit." },
+        { q: "In the ox, the main vein used for IV injection on the forelimb (especially for Bier block) is the:", o: ["Cephalic vein", "Dorsal common digital vein III", "Jugular vein", "Brachial vein"], a: 1, e: "This prominent vein on the dorsal pastern is used for intravenous regional anesthesia (IVRA/Bier block)." },
+        { q: "The thoracodorsal artery is a branch of the:", o: ["Brachial artery", "Median artery", "Subscapular artery", "External thoracic artery"], a: 2, e: "It accompanies the thoracodorsal nerve to supply the latissimus dorsi muscle." },
+        { q: "Which vessel provides the main blood supply to the supraspinatus and infraspinatus muscles?", o: ["Suprascapular artery", "Subscapular artery", "Brachial artery", "External thoracic artery"], a: 0, e: "The suprascapular artery accompanies the suprascapular nerve around the neck of the scapula." },
+        { q: "In the horse, engorgement of the digital veins and a bounding digital pulse are clinical signs of:", o: ["Navicular disease only", "Laminitis (founder)", "Fracture of P1", "Shoulder abscess"], a: 1, e: "Increased digital blood flow and pulsation are hallmarks of acute laminitis." },
+        { q: "The caudal circumflex humeral artery passes through which space to reach the lateral arm?", o: ["Axillary space (quadrilateral space)", "Supracondylar foramen", "Interosseous space", "Carpal canal"], a: 0, e: "It travels with the axillary nerve through the quadrilateral space between the teres major, long head of triceps, and humerus." }
+      ],
+      tf: [
+        { q: "The axillary artery is a direct continuation of the subclavian artery.", a: true, e: "True. The name changes to axillary as it crosses the first rib." },
+        { q: "The cephalic vein is a deep vein that runs alongside the brachial artery.", a: false, e: "False. The cephalic vein is a SUPERFICIAL vein on the craniolateral forearm. The brachial vein is the deep satellite vein." },
+        { q: "In the horse, the median artery is the dominant artery of the forearm.", a: true, e: "True. It is the main continuation of the brachial artery in equines." },
+        { q: "The axillary lymph node drains the hindlimb.", a: false, e: "False. It drains the forelimb. The popliteal and inguinal nodes drain the hindlimb." },
+        { q: "The brachial artery can be palpated on the medial aspect of the arm in the dog.", a: true, e: "True. It runs alongside the median nerve on the medial arm." },
+        { q: "The superficial cervical lymph nodes are also called the prescapular lymph nodes.", a: true, e: "True. They are cranial to the scapula and easily palpable in cattle." },
+        { q: "The subscapular artery is a small, insignificant branch of the axillary artery.", a: false, e: "False. It is the LARGEST branch of the axillary artery." },
+        { q: "A bounding digital pulse in a horse is normal and requires no clinical attention.", a: false, e: "False. It indicates increased digital blood flow and is a key sign of laminitis." },
+        { q: "The cephalic vein connects to the jugular system via the omobrachial vein.", a: true, e: "True. This connection runs across the shoulder between the superficial systems." },
+        { q: "The palmar digital arteries run on the dorsal surface of the digit.", a: false, e: "False. They run on the PALMAR (caudal/plantar) aspect, alongside the flexor tendons." },
+        { q: "The median cubital vein is an anastomosis between the cephalic and brachial veins at the elbow.", a: true, e: "True. It is clinically important as it connects the superficial and deep venous drainage." },
+        { q: "The nutrient artery of the humerus typically arises from the axillary artery.", a: false, e: "False. It usually arises from the brachial artery." },
+        { q: "The caudal circumflex humeral artery travels with the axillary nerve.", a: true, e: "True. Both pass through the quadrilateral space to reach the lateral arm." },
+        { q: "In cattle, the dorsal common digital vein III is used for the Bier block.", a: true, e: "True. It is the standard site for intravenous regional anesthesia of the bovine digit." },
+        { q: "The deep palmar arch provides the only blood supply to the equine digit.", a: false, e: "False. The digit receives blood from both the superficial palmar digital arteries and the deep palmar arch." }
+      ],
+      fib: [
+        { q: "The main artery supplying the entire forelimb, originating as a continuation of the subclavian, is the _____ artery.", a: ["axillary"], e: "It crosses the first rib and enters the axilla." },
+        { q: "The axillary artery becomes the _____ artery at the level of the teres major tendon.", a: ["brachial"], e: "The main artery of the arm." },
+        { q: "The largest branch of the axillary artery, which supplies the caudal scapular region, is the _____ artery.", a: ["subscapular"], e: "Gives off the thoracodorsal and caudal circumflex humeral arteries." },
+        { q: "In the horse, the dominant artery of the forearm that accompanies the median nerve is the _____ artery.", a: ["median"], e: "Continuation of the brachial artery in equines." },
+        { q: "The superficial vein on the craniolateral forearm commonly used for IV injection in dogs is the _____ vein.", a: ["cephalic"], e: "The most accessible vein in the canine forelimb." },
+        { q: "The vein that connects the cephalic vein to the jugular system across the shoulder is the _____ vein.", a: ["omobrachial"], e: "Also called the cephalic-jugular connection." },
+        { q: "The deep vein that accompanies the brachial artery as a satellite vessel is the _____ vein.", a: ["brachial"], e: "Runs alongside the artery in the neurovascular bundle." },
+        { q: "The oblique vein connecting the cephalic and brachial veins at the elbow is the median _____ vein.", a: ["cubital"], e: "Links the superficial and deep venous systems." },
+        { q: "The lymph node located in the axilla that drains most of the forelimb is the _____ lymph node.", a: ["axillary"], e: "Located deep in the armpit region." },
+        { q: "The easily palpable lymph node cranial to the shoulder in cattle is the superficial _____ lymph node.", a: ["cervical"], e: "Also called the prescapular lymph node." },
+        { q: "In the horse, the pulse is commonly taken from the palmar _____ arteries at the fetlock.", a: ["digital"], e: "Palpable on the abaxial surface of the sesamoid bones." },
+        { q: "A bounding digital pulse and engorged digital veins in the horse are signs of _____.", a: ["laminitis", "founder"], e: "Indicates acute inflammation of the laminae of the hoof." },
+        { q: "The artery that passes through the quadrilateral space with the axillary nerve is the caudal circumflex _____ artery.", a: ["humeral"], e: "Supplies the lateral arm and deltoid region." },
+        { q: "The _____ artery supplies the supraspinatus and infraspinatus muscles alongside the suprascapular nerve.", a: ["suprascapular"], e: "Wraps around the neck of the scapula." },
+        { q: "In cattle, the vein used for intravenous regional anesthesia (Bier block) on the digit is the dorsal common digital vein _____.", a: ["III", "3", "three"], e: "Located on the dorsal pastern region." }
+      ]
+    }
   },
   "Abdomen": {
     "Osteology & Arthrology": {
@@ -676,6 +743,43 @@ const quizBank = {
   
   
   "Thorax": {
+    "General Thorax": {
+      mcq: [
+        { q: "How many pairs of ribs does the ox typically have?", o: ["12", "13", "14", "18"], a: 1, e: "The ox has 13 pairs of ribs corresponding to 13 thoracic vertebrae." },
+        { q: "The horse has how many pairs of ribs?", o: ["13", "15", "18", "20"], a: 2, e: "The horse has 18 pairs of ribs, the most among common domestic mammals." },
+        { q: "Ribs that articulate directly with the sternum via their own costal cartilage are called:", o: ["Asternal ribs", "Floating ribs", "Sternal (true) ribs", "Vertebral ribs"], a: 2, e: "They form the ventral thoracic wall. In the ox, ribs 1-8 are sternal." },
+        { q: "Ribs whose costal cartilages join the costal arch rather than the sternum directly are called:", o: ["Sternal ribs", "Asternal (false) ribs", "Floating ribs", "Accessory ribs"], a: 1, e: "They connect to the cartilage of the rib ahead, forming the costal arch." },
+        { q: "Which segment of the sternum is the most cranial?", o: ["Xiphoid process", "Sternebra", "Manubrium", "Body of the sternum"], a: 2, e: "The manubrium is the cranial-most part of the sternum." },
+        { q: "The thoracic inlet is bounded ventrally by the:", o: ["Last rib", "Manubrium of the sternum", "Xiphoid process", "Costal arch"], a: 1, e: "The thoracic inlet is formed by T1 dorsally, the first pair of ribs laterally, and the manubrium ventrally." },
+        { q: "The diaphragm separates the:", o: ["Left and right pleural cavities", "Thoracic and abdominal cavities", "Dorsal and ventral mediastina", "Pericardial and pleural cavities"], a: 1, e: "It is the primary muscle of inspiration and forms the caudal boundary of the thorax." },
+        { q: "The space between the two pleural sacs that contains the heart, trachea, esophagus, and great vessels is the:", o: ["Pleural cavity", "Pericardial cavity", "Mediastinum", "Peritoneal cavity"], a: 2, e: "The mediastinum is the central partition of the thorax." },
+        { q: "The serous membrane lining the thoracic wall is the:", o: ["Visceral pleura", "Parietal pleura", "Peritoneum", "Epicardium"], a: 1, e: "The parietal pleura lines the inner surface of the thoracic wall and diaphragm." },
+        { q: "The trachea bifurcates into the two principal bronchi at a point called the:", o: ["Larynx", "Carina", "Hilus", "Thoracic inlet"], a: 1, e: "The carina (tracheal bifurcation) is located at approximately the level of the 5th-6th rib in the dog." },
+        { q: "The heart is enclosed in a double-walled sac called the:", o: ["Pleura", "Peritoneum", "Pericardium", "Meninges"], a: 2, e: "The pericardium consists of a fibrous outer layer and a serous inner layer." },
+        { q: "The site of auscultation (listening) for heart sounds in large animals is best performed on which side?", o: ["Right side only", "Left side (3rd-5th intercostal space)", "Dorsal midline", "Ventral midline"], a: 1, e: "The left side provides the best access because most of the heart lies left of the median plane." },
+        { q: "Paralysis of the left recurrent laryngeal nerve in the horse causes a condition commonly known as:", o: ["Choke", "Roaring (laryngeal hemiplegia)", "Heaves", "Broken wind"], a: 1, e: "The left arytenoid cartilage collapses into the airway causing a roaring sound during exercise." },
+        { q: "An esophageal obstruction causing food or a foreign body to lodge in the esophagus is called:", o: ["Roaring", "Choke", "Colic", "Bloat"], a: 1, e: "Commonly seen in cattle eating large pieces of root vegetables like turnips." },
+        { q: "The cupula pleurae is the dome of pleura that projects cranially beyond the first rib. Its clinical significance is that it can be damaged during:", o: ["Abdominal surgery", "Jugular venipuncture or cranial thoracic procedures", "Tail docking", "Dehorning"], a: 1, e: "Accidental puncture during neck surgery can cause pneumothorax." }
+      ],
+      tf: [
+        { q: "The ox has 13 pairs of ribs.", a: true, e: "True. Corresponding to 13 thoracic vertebrae." },
+        { q: "The horse has 13 pairs of ribs, the same as the ox.", a: false, e: "False. The horse has 18 pairs of ribs." },
+        { q: "The diaphragm is the most important muscle of expiration.", a: false, e: "False. It is the primary muscle of INSPIRATION. Expiration is largely passive." },
+        { q: "The mediastinum divides the thoracic cavity into left and right pleural cavities.", a: true, e: "True. It is the central partition containing the heart, trachea, and esophagus." },
+        { q: "The left recurrent laryngeal nerve loops around the aortic arch.", a: true, e: "True. Its long course makes it vulnerable to stretching or damage, leading to roaring in horses." },
+        { q: "The pericardium is the serous membrane lining the abdominal cavity.", a: false, e: "False. The pericardium encloses the heart. The peritoneum lines the abdominal cavity." },
+        { q: "The esophagus passes through the diaphragm via the esophageal hiatus.", a: true, e: "True. It pierces the diaphragm to enter the abdominal cavity." }
+      ],
+      fib: [
+        { q: "The ox has _____ pairs of ribs.", a: ["13", "thirteen"], e: "Corresponding to 13 thoracic vertebrae." },
+        { q: "The caudal boundary of the thoracic cavity is formed by the muscular _____.", a: ["diaphragm"], e: "Separates the thorax from the abdomen." },
+        { q: "The central compartment of the thorax containing the heart and great vessels is the _____.", a: ["mediastinum"], e: "Lies between the two pleural cavities." },
+        { q: "The point where the trachea divides into the two main bronchi is called the _____.", a: ["carina", "tracheal bifurcation"], e: "A key landmark in thoracic anatomy." },
+        { q: "The sac enclosing the heart is called the _____.", a: ["pericardium"], e: "Contains a small amount of serous fluid." },
+        { q: "Paralysis of the left recurrent laryngeal nerve in horses causes _____.", a: ["roaring", "laryngeal hemiplegia"], e: "The arytenoid cartilage collapses into the airway." },
+        { q: "The most cranial segment of the sternum is called the _____.", a: ["manubrium"], e: "Forms the ventral boundary of the thoracic inlet." }
+      ]
+    },
     "Osteology": {
       mcq: [
         { q: "The number of thoracic vertebrae in ox is:", o: ["12", "13", "14", "18"], a: 1, e: "Ox has 13 thoracic vertebrae (T1-T13), equal to the number of rib pairs." },
@@ -1037,7 +1141,32 @@ const quizBank = {
         { q: "The pharynx is divided into how many parts?", o: ["2", "3", "4", "5"], a: 1, e: "Nasopharynx, oropharynx, and laryngopharynx." },
         { q: "Which muscle is NOT an extrinsic muscle of the tongue?", o: ["Genioglossus", "Styloglossus", "Hyoglossus", "Mylohyoideus"], a: 3, e: "Mylohyoideus forms the floor of the mouth but does not insert into the tongue." },
         { q: "The soft palate is exceptionally long in which species, preventing them from breathing through their mouth?", o: ["Dog", "Ox", "Horse", "Pig"], a: 2, e: "Horses are obligate nasal breathers because the soft palate locks under the epiglottis." },
-        { q: "The cavity of the larynx between the vocal folds and the cricoid cartilage is the:", o: ["Vestibule", "Infraglottic cavity", "Glottis", "Pharynx"], a: 1, e: "It leads directly into the trachea." }
+        { q: "The cavity of the larynx between the vocal folds and the cricoid cartilage is the:", o: ["Vestibule", "Infraglottic cavity", "Glottis", "Pharynx"], a: 1, e: "It leads directly into the trachea." },
+        { q: "The frontal bone in cattle is characterized by:", o: ["Being very thin", "Containing extensive frontal sinuses and supporting the horn cores", "Lacking any sinuses", "Being fused with the parietal bone"], a: 1, e: "The bovine frontal bone is massive and houses the cornual process (horn core) and large frontal sinuses." },
+        { q: "The foramen magnum, through which the spinal cord passes, is located in the:", o: ["Frontal bone", "Parietal bone", "Occipital bone", "Temporal bone"], a: 2, e: "The occipital bone forms the caudal wall of the cranium." },
+        { q: "The zygomatic arch is formed by the union of the:", o: ["Frontal and parietal bones", "Temporal and zygomatic bones", "Maxilla and mandible", "Nasal and lacrimal bones"], a: 1, e: "The zygomatic process of the temporal bone meets the temporal process of the zygomatic bone." },
+        { q: "The mandibular fossa, which articulates with the condylar process of the mandible to form the TMJ, is located on the:", o: ["Maxilla", "Frontal bone", "Temporal bone", "Sphenoid bone"], a: 2, e: "The temporomandibular joint (TMJ) allows jaw movement." },
+        { q: "The infraorbital foramen, through which the infraorbital nerve emerges, is located on the:", o: ["Mandible", "Maxilla", "Frontal bone", "Zygomatic bone"], a: 1, e: "It is an important landmark for the infraorbital nerve block on the face." },
+        { q: "The mental foramen is located on the:", o: ["Maxilla", "Mandible", "Zygomatic bone", "Nasal bone"], a: 1, e: "The mental nerve exits here to supply the lower lip and chin." },
+        { q: "The bony orbit in the dog is:", o: ["Completely enclosed by bone", "Open caudally with an orbital ligament completing the rim", "Absent", "Formed entirely by the frontal bone"], a: 1, e: "Dogs (and cats) have an incomplete bony orbit; a fibrous orbital ligament completes the lateral wall." },
+        { q: "In ruminants and horses, the bony orbit is:", o: ["Incomplete (open caudally)", "Complete (fully enclosed by bone)", "Absent", "Located ventral to the brain"], a: 1, e: "Cattle and horses have a complete bony orbital ring, providing more protection to the eye." },
+        { q: "Teeth that grow continuously throughout life are called:", o: ["Brachydont", "Hypsodont", "Bunodont", "Secodont"], a: 1, e: "Horses and ruminants have hypsodont cheek teeth to compensate for the constant wear from grinding." },
+        { q: "Teeth with short, well-defined crowns (like dog and human teeth) are called:", o: ["Hypsodont", "Brachydont", "Lophodont", "Selenodont"], a: 1, e: "Brachydont teeth have a distinct neck separating the crown from the root." },
+        { q: "The dental formula for the permanent teeth of the ox is:", o: ["I 0/3, C 0/1, PM 3/3, M 3/3", "I 3/3, C 1/1, PM 3/3, M 3/3", "I 0/4, C 0/0, PM 3/3, M 3/3", "I 3/3, C 1/1, PM 4/4, M 2/3"], a: 2, e: "Cattle lack upper incisors and canines; they have a dental pad instead." },
+        { q: "The hard structure on the upper jaw of ruminants that replaces the upper incisors is the:", o: ["Torus linguae", "Dental pad", "Hard palate", "Gingiva"], a: 1, e: "Ruminants use the dental pad against the lower incisors to tear grass." },
+        { q: "The largest paranasal sinus in the horse is the:", o: ["Frontal sinus", "Maxillary sinus", "Sphenoid sinus", "Ethmoidal sinus"], a: 1, e: "The equine maxillary sinus is very large and communicates with the roots of the upper cheek teeth." },
+        { q: "Trephination (drilling a hole into the sinus) of the frontal sinus in cattle is commonly performed for:", o: ["Dehorning only", "Sinusitis treatment and drainage", "Brain surgery", "Dental extraction"], a: 1, e: "The large bovine frontal sinus can fill with pus (empyema) requiring surgical drainage." },
+        { q: "The hyoid apparatus in domestic animals:", o: ["Supports the tongue, larynx, and pharynx", "Connects the mandible to the sternum", "Forms the hard palate", "Is absent in ruminants"], a: 0, e: "It is a chain of small bones and cartilages suspending the tongue and larynx from the skull." },
+        { q: "The parotid salivary gland duct (Stenson's duct) opens into the mouth opposite which tooth in horses and cattle?", o: ["Lower canine", "Upper 4th premolar (carnassial)", "Upper 3rd or 4th cheek tooth", "Lower incisor"], a: 2, e: "The parotid duct opens on a papilla in the cheek opposite the upper premolars." },
+        { q: "The mandibular salivary gland in the dog is closely associated with which lymph node?", o: ["Parotid lymph node", "Retropharyngeal lymph node", "Mandibular lymph node", "Superficial cervical lymph node"], a: 2, e: "They are often palpated together in the intermandibular space." },
+        { q: "Viborg's triangle is a surgical landmark for accessing the:", o: ["Frontal sinus", "Guttural pouch", "Thyroid gland", "Parotid gland"], a: 1, e: "Bounded by the mandible, linguofacial vein, and sternocephalicus muscle." },
+        { q: "The nasolacrimal duct drains tears from the eye to the:", o: ["Pharynx", "Middle ear", "Nostril (nasal vestibule)", "Frontal sinus"], a: 2, e: "Blockage can cause excessive tearing (epiphora)." },
+        { q: "The auriculopalpebral nerve block in cattle desensitizes the:", o: ["Horn", "Eyelids (motor block causing drooping)", "Lower jaw", "Tongue"], a: 1, e: "It blocks the motor supply to the orbicularis oculi, preventing the animal from closing its eye during examination." },
+        { q: "The number of cervical vertebrae in ALL domestic mammals is:", o: ["5", "6", "7", "8"], a: 2, e: "All mammals (including the giraffe) have exactly 7 cervical vertebrae." },
+        { q: "The atlas (C1) is unique because it:", o: ["Has a large spinous process", "Lacks a body and spinous process, having wide transverse wings", "Is fused to the axis", "Supports the horn cores"], a: 1, e: "The atlas allows the nodding (yes) movement of the head." },
+        { q: "The axis (C2) is characterized by its:", o: ["Wide wings", "Dens (odontoid process) projecting cranially", "Absence of transverse processes", "Pneumatic structure"], a: 1, e: "The dens is a peg-like projection that pivots inside the atlas, allowing the head to rotate (shake 'no')." },
+        { q: "The species in which the transverse processes of C6 are especially large and plate-like (ventral lamina) is the:", o: ["Dog", "Horse", "Ox", "Cat"], a: 1, e: "The ventral lamina of C6 in the horse is a broad plate that overlaps C7." },
+        { q: "The facial artery pulse is clinically useful in which species?", o: ["Dog", "Cat", "Horse", "Pig"], a: 2, e: "The facial artery (or transverse facial artery) is palpable on the ventral border of the masseter in horses." }
       ],
       tf: [
         { q: "The orbicularis oris muscle is responsible for opening the mouth.", a: false, e: "False. It acts as a sphincter to close the lips." },
@@ -1064,6 +1193,18 @@ const quizBank = {
         { q: "The intrinsic muscles of the tongue run in three different directions to alter its shape.", a: true, e: "True. They run longitudinally, transversely, and vertically." },
         { q: "The soft palate separates the nasopharynx from the oropharynx.", a: true, e: "True. It acts as a flap valve directing air or food." },
         { q: "The sublingual salivary gland empties directly into the pharynx.", a: false, e: "False. It empties into the floor of the oral cavity under the tongue." },
+        { q: "The bony orbit is complete (fully enclosed) in dogs and cats.", a: false, e: "False. In dogs and cats the orbit is incomplete; an orbital ligament completes the lateral wall." },
+        { q: "All domestic mammals have 7 cervical vertebrae.", a: true, e: "True. This is a constant feature across all mammals." },
+        { q: "The atlas allows the rotational (side-to-side) movement of the head.", a: false, e: "False. The atlas allows the nodding (yes) movement. The axis (C2) allows rotation." },
+        { q: "The dens (odontoid process) is a unique feature of the atlas (C1).", a: false, e: "False. The dens belongs to the axis (C2) and projects cranially into the atlas." },
+        { q: "Cattle have upper incisors for biting grass.", a: false, e: "False. Cattle lack upper incisors; they have a dental pad instead." },
+        { q: "Hypsodont teeth grow continuously to compensate for constant grinding wear.", a: true, e: "True. Typical of horses and ruminant cheek teeth." },
+        { q: "The maxillary sinus in the horse communicates with the roots of the upper cheek teeth.", a: true, e: "True. Dental disease can cause secondary sinusitis." },
+        { q: "The nasolacrimal duct opens into the pharynx.", a: false, e: "False. It opens at the nostril (nasal vestibule)." },
+        { q: "Viborg's triangle is used to access the guttural pouch surgically.", a: true, e: "True. Bounded by the mandible, linguofacial vein, and sternocephalicus." },
+        { q: "The auriculopalpebral nerve block desensitizes the horn area.", a: false, e: "False. It blocks motor supply to the eyelid muscles. The cornual nerve block is for the horn." },
+        { q: "The parotid duct (Stenson's duct) is surgically important as it crosses the lateral surface of the masseter.", a: true, e: "True. It is vulnerable to lacerations in this exposed position." },
+        { q: "The frontal sinus of cattle is very small and clinically insignificant.", a: false, e: "False. The bovine frontal sinus is extensive and commonly affected by sinusitis and horn core infections." },
         { q: "The larynx is lined by a mucous membrane.", a: true, e: "True. Like the rest of the respiratory tract, it is lined by mucosa." }
       ],
       fib: [
@@ -1091,6 +1232,19 @@ const quizBank = {
         { q: "The endocrine gland located on the trachea just below the larynx is the _____ gland.", a: ["thyroid"], e: "Regulates basal metabolic rate." },
         { q: "The large, round papillae at the back of the tongue that contain taste buds are the _____ papillae.", a: ["vallate", "circumvallate"], e: "Surrounded by a moat." },
         { q: "The prominent raised area on the back of the bovine tongue is the _____ linguae.", a: ["torus"], e: "Characteristic of ruminants." },
+        { q: "The bone forming the caudal wall of the cranium, containing the foramen magnum, is the _____ bone.", a: ["occipital"], e: "Where the spinal cord exits the skull." },
+        { q: "The arch of bone formed by the temporal and zygomatic bones is the _____ arch.", a: ["zygomatic"], e: "Provides attachment for the masseter muscle." },
+        { q: "The foramen on the maxilla through which the infraorbital nerve exits is the _____ foramen.", a: ["infraorbital"], e: "Used for nerve blocks of the upper lip." },
+        { q: "Teeth that grow continuously throughout life, like equine cheek teeth, are called _____ teeth.", a: ["hypsodont"], e: "Compensates for constant wear from grinding." },
+        { q: "Teeth with short crowns and well-defined roots, like canine teeth in dogs, are called _____ teeth.", a: ["brachydont"], e: "Do not continue to erupt." },
+        { q: "In ruminants, the hard structure on the upper jaw replacing the upper incisors is the dental _____.", a: ["pad"], e: "Used against the lower incisors to tear vegetation." },
+        { q: "The first cervical vertebra is called the _____.", a: ["atlas", "C1"], e: "Allows the nodding movement of the head." },
+        { q: "The peg-like projection on C2 that allows the head to rotate is the _____ (odontoid process).", a: ["dens"], e: "Pivots within the ring of the atlas." },
+        { q: "The duct of the parotid salivary gland is called _____ duct.", a: ["Stenson's", "parotid"], e: "Opens opposite the upper cheek teeth." },
+        { q: "The triangular surgical landmark for accessing the equine guttural pouch is called _____ triangle.", a: ["Viborg's"], e: "Bounded by mandible, linguofacial vein, and sternocephalicus." },
+        { q: "The tear-drainage tube that runs from the eye to the nostril is the _____ duct.", a: ["nasolacrimal"], e: "Blockage causes epiphora (excessive tearing)." },
+        { q: "The nerve block that paralyzes the eyelid muscles to prevent eye closure during examination is the _____ nerve block.", a: ["auriculopalpebral"], e: "Motor block of the facial nerve branch." },
+        { q: "The pulse in the horse can be taken from the _____ artery on the ventral border of the masseter.", a: ["facial", "transverse facial"], e: "A palpable landmark for clinical examination." },
         { q: "The gap between the incisors and premolars is called the _____.", a: ["diastema", "interdental space"], e: "A toothless space." }
       ]
     },
@@ -1225,7 +1379,7 @@ const quizBank = {
   },
 
   "Hindlimb & Pelvis": {
-    "Osteology & Arthrology": {
+    "Osteology": {
       mcq: [
         { q: "The largest bone of the pelvis is the:", o: ["Ischium", "Pubis", "Ilium", "Sacrum"], a: 2, e: "The ilium is the largest, most cranial part of the os coxae." },
         { q: "The prominent 'Point of the Hip' or 'Hook Bone' in cattle is anatomically the:", o: ["Tuber ischii", "Tuber sacrale", "Tuber coxae", "Greater trochanter"], a: 2, e: "The tuber coxae is the prominent lateral angle of the ilium." },
@@ -1233,7 +1387,6 @@ const quizBank = {
         { q: "The deep socket of the pelvis that articulates with the head of the femur is the:", o: ["Glenoid cavity", "Acetabulum", "Obturator foramen", "Sciatic notch"], a: 1, e: "The acetabulum is formed by the fusion of the ilium, ischium, and pubis." },
         { q: "Which bone forms the cranial floor of the pelvic cavity?", o: ["Ilium", "Ischium", "Pubis", "Sacrum"], a: 2, e: "The pubis is the smallest of the three pelvic bones, forming the cranial part of the pelvic floor." },
         { q: "The large hole in the floor of the pelvis through which the obturator nerve passes is the:", o: ["Acetabulum", "Sciatic foramen", "Obturator foramen", "Pelvic inlet"], a: 2, e: "It lightens the pelvis and provides a passageway for nerves/vessels." },
-        { q: "The cartilaginous joint where the two halves of the pelvis meet ventrally is the:", o: ["Sacroiliac joint", "Pelvic symphysis", "Coxofemoral joint", "Ischial arch"], a: 1, e: "It consists of the pubic symphysis cranially and the ischial symphysis caudally." },
         { q: "In the horse, the highest point of the rump (the croup) is formed by the:", o: ["Tuber coxae", "Tuber ischii", "Tuber sacrale", "Sacral crest"], a: 2, e: "The tuber sacrale forms the prominent dorsal peak of the pelvis." },
         { q: "The femur articulates distally with the:", o: ["Tibia and fibula", "Tibia and patella", "Patella only", "Tarsal bones"], a: 1, e: "It forms the stifle joint with the tibia and the patella." },
         { q: "The largest sesamoid bone in the body, located in the tendon of the quadriceps femoris muscle, is the:", o: ["Fabella", "Navicular bone", "Patella", "Proximal sesamoid"], a: 2, e: "The patella acts as a pulley to redirect the pull of the quadriceps." },
@@ -1242,7 +1395,6 @@ const quizBank = {
         { q: "The deep depression on the head of the femur for the attachment of the ligament of the head of the femur is the:", o: ["Trochanteric fossa", "Fovea capitis", "Intercondylar fossa", "Extensor fossa"], a: 1, e: "The fovea capitis allows the round ligament to anchor the head into the acetabulum." },
         { q: "In the ox, the patella has how many ligaments connecting it to the tibial tuberosity?", o: ["One", "Two", "Three", "Four"], a: 2, e: "The ox (and horse) has medial, middle, and lateral patellar ligaments." },
         { q: "The 'Stay Apparatus' in the equine hindlimb locks the stifle joint by hooking the medial patellar ligament over the:", o: ["Lateral trochlear ridge of the femur", "Medial trochlear ridge of the femur", "Tibial tuberosity", "Greater trochanter"], a: 1, e: "This allows the horse to rest standing up with minimal muscular effort." },
-        { q: "The condition where the medial patellar ligament remains hooked over the medial trochlear ridge in the horse, preventing flexion of the stifle, is called:", o: ["Stringhalt", "Upward fixation of the patella", "Bone spavin", "Capped hock"], a: 1, e: "The leg gets locked in extension." },
         { q: "The main weight-bearing bone of the crus (true leg) is the:", o: ["Femur", "Fibula", "Tibia", "Tarsus"], a: 2, e: "The tibia transmits weight from the femur to the hock." },
         { q: "In the ox, the fibula is:", o: ["Complete and separate from the tibia", "Absent", "Reduced to a proximal head and a distal malleolar bone", "Fused to the tibia along its entire length"], a: 2, e: "The shaft of the fibula is absent in the ox." },
         { q: "The distal end of the fibula in the ox forms a separate small bone articulating with the hock, called the:", o: ["Accessory carpal bone", "Os malleolare (lateral malleolus)", "Calcaneus", "Talus"], a: 1, e: "It provides the lateral border for the hock joint." },
@@ -1253,49 +1405,38 @@ const quizBank = {
         { q: "The bovine metatarsus (cannon bone) is formed by the fusion of which bones?", o: ["Mt II and III", "Mt III and IV", "Mt IV and V", "Mt II and IV"], a: 1, e: "Just like the forelimb cannon bone." },
         { q: "Compared to the metacarpal cannon bone, the metatarsal cannon bone in the ox is:", o: ["Shorter and flatter", "Longer and more square in cross-section", "Identical in shape", "Missing a distal trochlea"], a: 1, e: "A key way to differentiate front from hind limbs." },
         { q: "The bovine hindlimb has how many functional weight-bearing digits?", o: ["One", "Two", "Three", "Four"], a: 1, e: "Digits III and IV form the cloven hoof." },
-        { q: "The sacroiliac joint is classified as a:", o: ["Synovial hinge joint", "Synovial ball-and-socket joint", "Fibrous suture", "Part synovial, part cartilaginous joint"], a: 3, e: "It is a combined joint designed more for stability and shock absorption than movement." },
         { q: "The powerful ligament connecting the sacrum to the ischial tuberosity, forming the lateral wall of the pelvic cavity in the ox, is the:", o: ["Sacroiliac ligament", "Prepubic tendon", "Sacrotuberous ligament", "Broad sacrotuberal ligament"], a: 3, e: "It is a broad, sheet-like ligament in cattle and horses." },
-        { q: "Which species lacks a sacrotuberous ligament completely?", o: ["Horse", "Ox", "Dog", "Cat"], a: 3, e: "Cats lack it, dogs have a cord-like one, ungulates have a broad sheet." },
-        { q: "The hip joint (coxofemoral joint) is a:", o: ["Hinge joint", "Pivot joint", "Ball-and-socket joint", "Gliding joint"], a: 2, e: "Allows wide range of motion: flexion, extension, abduction, adduction, and rotation." },
         { q: "In addition to the ligament of the head of the femur, the horse has an extra ligament anchoring the femur to the pelvis called the:", o: ["Transverse acetabular ligament", "Accessory ligament of the femur", "Sacrotuberous ligament", "Cruciate ligament"], a: 1, e: "It arises from the prepubic tendon, preventing horses from 'kicking out' sideways." },
         { q: "The stifle joint corresponds to the human:", o: ["Ankle", "Hip", "Knee", "Elbow"], a: 2, e: "It is the complex joint between the femur, patella, and tibia." },
-        { q: "The fibrocartilage discs in the stifle joint that provide shock absorption and improve the fit between the femur and tibia are the:", o: ["Cruciate ligaments", "Collateral ligaments", "Menisci", "Patellar ligaments"], a: 2, e: "Medial and lateral menisci." },
-        { q: "The ligaments inside the stifle joint that cross each other and prevent cranial-caudal sliding of the tibia are the:", o: ["Meniscofemoral ligaments", "Cruciate ligaments", "Collateral ligaments", "Patellar ligaments"], a: 1, e: "Cranial and caudal cruciate ligaments." },
-        { q: "The hock joint is properly known as the:", o: ["Stifle joint", "Tarsal joint", "Fetlock joint", "Pastern joint"], a: 1, e: "It is the equivalent of the human ankle." },
-        { q: "The angle of the hock is maintained by the:", o: ["Patellar ligaments", "Common calcaneal tendon (Achilles)", "Cruciate ligaments", "Suspensory ligament"], a: 1, e: "The massive tendon attaching to the tuber calcanei." },
-        { q: "The 'chestnut' on the equine hindlimb is located:", o: ["On the medial aspect of the stifle", "On the medial aspect of the tarsus (hock)", "On the lateral aspect of the metatarsus", "On the palmar fetlock"], a: 1, e: "It is lower down than the forelimb chestnut." },
-        { q: "The 'ergot' in horses is located:", o: ["At the base of the ear", "On the plantar/palmar aspect of the fetlock joint", "Inside the hoof", "On the tuber calcanei"], a: 1, e: "Hidden in the hair (feathering) of the fetlock." },
         { q: "In the dog, the tarsus consists of how many bones?", o: ["5", "6", "7", "8"], a: 2, e: "Talus, calcaneus, central, and tarsals 1, 2, 3, and 4. All separate." },
         { q: "The 'calcaneal tuber' serves as the insertion point for which major muscle group?", o: ["Quadriceps femoris", "Hamstrings and Gastrocnemius", "Gluteals", "Digital flexors"], a: 1, e: "The gastrocnemius, superficial digital flexor, and biceps femoris (partially) attach here." },
         { q: "The pelvic inlet is bounded dorsally by the:", o: ["Pubis", "Sacral promontory", "Iliac shafts", "Ischial arch"], a: 1, e: "The cranioventral edge of the sacrum." },
         { q: "The transverse ridges on the ventral surface of the sacrum indicate the:", o: ["Attachment of the gluteal muscles", "Fusion lines of the sacral vertebrae", "Path of the median sacral artery", "Origin of the sympathetic trunk"], a: 1, e: "The sacrum is a single bone formed by the fusion of several vertebrae." },
         { q: "The crest of the ilium is the:", o: ["Caudal border of the ilium", "Cranial border of the ilium between the tuber coxae and tuber sacrale", "Ventral ridge of the ilium", "Articular surface for the sacrum"], a: 1, e: "It forms the cranial margin of the pelvic bone." },
         { q: "A 'Capped Hock' is a swelling over the:", o: ["Tuber coxae", "Tibial tuberosity", "Tuber calcanei", "Lateral malleolus"], a: 2, e: "Caused by bursitis from trauma, like kicking a wall." },
-        { q: "Bone spavin in horses affects the:", o: ["Fetlock joint", "Stifle joint", "Distal intertarsal and tarsometatarsal joints", "Coxofemoral joint"], a: 2, e: "It is osteoarthritis of the lower, low-motion joints of the hock." }
+        { q: "The dewclaws of the bovine hindlimb represent digits:", o: ["I and II", "II and V", "I and V", "III and IV"], a: 1, e: "Similar to the forelimb, digits II and V are vestigial dewclaws." },
+        { q: "Which tarsal bone is the largest in the bovine hock?", o: ["Talus", "Calcaneus", "Centroquartal (fused central + T4)", "First tarsal"], a: 2, e: "The fused central and fourth tarsal forms a massive block." },
+        { q: "The suspensory ligament in the hindlimb originates from the:", o: ["Tuber calcanei", "Proximal plantar metatarsus", "Patella", "Femoral head"], a: 1, e: "Just like the forelimb, it is the modified interosseous muscle." },
+        { q: "The bovine pelvis is characterized by a pelvic axis that is:", o: ["Nearly horizontal", "Steeply inclined downward caudally", "Vertical", "Identical to the equine pelvis"], a: 0, e: "The bovine pelvis is more horizontally oriented compared to the horse." },
+        { q: "In the dog, which condition involves degeneration of the coxofemoral joint?", o: ["Bone spavin", "Hip dysplasia", "Upward fixation of patella", "Stringhalt"], a: 1, e: "Hip dysplasia is a common orthopedic condition in large breed dogs involving malformation of the acetabulum and femoral head." }
       ],
       tf: [
         { q: "The tuber coxae is the 'pin bone' in cattle.", a: false, e: "False. The tuber coxae is the 'hook bone'. The tuber ischii is the 'pin bone'." },
         { q: "The pelvic symphysis is formed by the fusion of the two ilia.", a: false, e: "False. It is formed by the pubic and ischial bones meeting on the midline." },
         { q: "The horse has a prominent third trochanter on the femur.", a: true, e: "True. It is a key distinguishing feature of the equine femur." },
-        { q: "The ox has three patellar ligaments.", a: true, e: "True. Just like the horse: medial, middle, and lateral patellar ligaments." },
         { q: "The fibula is a complete, separate bone in the ox.", a: false, e: "False. The ox fibula has no shaft; it's reduced to a proximal head and a distal malleolar bone." },
         { q: "The talus of the ox has two trochleae (pulleys).", a: true, e: "True. A proximal one for the tibia and a distal one for the central tarsal bone." },
         { q: "The canine tarsus contains 7 individual bones.", a: true, e: "True. None are fused in the dog." },
-        { q: "The sacroiliac joint is completely immovable.", a: false, e: "False. It has slight movement, especially during parturition." },
         { q: "The accessory ligament of the femur is present in all domestic species.", a: false, e: "False. It is unique to equids (horses, donkeys)." },
-        { q: "The medial meniscus is attached to the medial collateral ligament in the stifle.", a: true, e: "True. This makes it less mobile and more prone to tearing than the lateral meniscus." },
         { q: "The cranial cruciate ligament prevents the tibia from sliding caudally relative to the femur.", a: false, e: "False. It prevents the tibia from sliding CRANIALLY (anterior drawer sign)." },
         { q: "The bovine cannon bone of the hindlimb is the fused 3rd and 4th metatarsals.", a: true, e: "True. It supports the two functional digits." },
         { q: "The lateral malleolus in the horse is a separate bone.", a: false, e: "False. In the horse, it is fused to the distal tibia. In the ox, it is a separate bone (os malleolare)." },
-        { q: "The tuber calcanei is the bony basis for the point of the hock.", a: true, e: "True. The Achilles tendon inserts here." },
         { q: "The obturator foramen is located in the ilium.", a: false, e: "False. It is formed between the pubis and ischium." },
-        { q: "The horse lacks a sacrotuberous ligament.", a: false, e: "False. The horse (and ox) has a broad sacrotuberal ligament. The cat lacks it." },
-        { q: "Upward fixation of the patella in the horse involves the lateral patellar ligament.", a: false, e: "False. It involves the MEDIAL patellar ligament hooking over the medial trochlear ridge." },
         { q: "The hindlimb cannon bone is generally longer and more square than the forelimb cannon bone.", a: true, e: "True. This is a reliable way to differentiate them." },
         { q: "The fovea capitis is a depression on the head of the femur.", a: true, e: "True. The round ligament attaches here." },
         { q: "The pelvic inlet is wider in males than in females.", a: false, e: "False. It is wider in females to facilitate parturition." },
         { q: "The acetabulum is formed by the junction of the ilium, ischium, and pubis.", a: true, e: "True. All three bones contribute to the hip socket." },
-        { q: "A 'thoroughpin' is a swelling of the deep digital flexor tendon sheath above the hock.", a: true, e: "True. Seen as a fluid-filled swelling in the hollows above the hock." }
+        { q: "The bovine hindlimb has the same number of functional digits as the equine hindlimb.", a: false, e: "False. The ox has two functional digits (III and IV); the horse has only one (III)." }
       ],
       fib: [
         { q: "The three bones that fuse to form the os coxae (pelvis) are the ilium, ischium, and _____.", a: ["pubis"], e: "They meet at the acetabulum." },
@@ -1308,21 +1449,58 @@ const quizBank = {
         { q: "The horse femur has a prominent _____ trochanter on its lateral border, which is absent in ruminants.", a: ["third"], e: "Attachment for superficial gluteal." },
         { q: "The main weight-bearing bone of the lower leg (crus) is the _____.", a: ["tibia"], e: "The 'shin bone'." },
         { q: "In the ox, the distal remnant of the fibula forms a separate bone called the lateral malleolus or os _____.", a: ["malleolare"], e: "Articulates with the talus." },
-        { q: "The 'point of the hock' is formed by the tuber _____.", a: ["calcanei"], e: "Lever for the Achilles tendon." },
         { q: "The tarsal bone with two pulleys (trochleae) in the ox is the _____.", a: ["talus", "tibial tarsal"], e: "Proximal and distal pulleys." },
         { q: "In the bovine hock, the central tarsal bone is fused with the _____ tarsal bone.", a: ["fourth", "4th"], e: "Forms the centroquartal bone." },
-        { q: "The equine hindlimb 'chestnut' is located on the medial aspect of the _____ joint.", a: ["tarsus", "hock"], e: "Vestigial pad." },
-        { q: "The joint corresponding to the human knee in animals is called the _____ joint.", a: ["stifle"], e: "Femoro-patello-tibial joint." },
         { q: "The fibrocartilage pads between the femur and tibia are called the medial and lateral _____.", a: ["menisci"], e: "Shock absorbers." },
-        { q: "The ligaments crossing inside the stifle joint are the _____ ligaments.", a: ["cruciate"], e: "Cranial and caudal." },
         { q: "The unique ligament in the horse that connects the femur to the prepubic tendon is the _____ ligament of the femur.", a: ["accessory"], e: "Limits abduction." },
         { q: "The bovine metatarsal cannon bone is formed by the fusion of metatarsals _____ and _____.", a: ["III and IV", "3 and 4", "three and four"], e: "Supports the cloven hoof." },
         { q: "The joint between the sacrum and the ilium is the _____ joint.", a: ["sacroiliac"], e: "Transmits the thrust of the hindlimbs to the spine." },
         { q: "The patella in the ox and horse is anchored to the tibia by _____ (number) patellar ligaments.", a: ["three", "3"], e: "Medial, middle, lateral." },
-        { q: "The anatomical term for the hock joint is the _____ joint.", a: ["tarsal", "tarsus"], e: "Between the leg and metatarsus." }
+        { q: "The anatomical term for the hock joint is the _____ joint.", a: ["tarsal", "tarsus"], e: "Between the leg and metatarsus." },
+        { q: "In the dog, the common orthopedic condition involving malformation of the hip joint is called hip _____.", a: ["dysplasia"], e: "Affects the acetabulum and femoral head." }
       ]
     },
-    "Myology & Neurology": {
+    "Arthrology": {
+      mcq: [
+        { q: "The cartilaginous joint where the two halves of the pelvis meet ventrally is the:", o: ["Sacroiliac joint", "Pelvic symphysis", "Coxofemoral joint", "Ischial arch"], a: 1, e: "It consists of the pubic symphysis cranially and the ischial symphysis caudally." },
+        { q: "The condition where the medial patellar ligament remains hooked over the medial trochlear ridge in the horse, preventing flexion of the stifle, is called:", o: ["Stringhalt", "Upward fixation of the patella", "Bone spavin", "Capped hock"], a: 1, e: "The leg gets locked in extension." },
+        { q: "The sacroiliac joint is classified as a:", o: ["Synovial hinge joint", "Synovial ball-and-socket joint", "Fibrous suture", "Part synovial, part cartilaginous joint"], a: 3, e: "It is a combined joint designed more for stability and shock absorption than movement." },
+        { q: "Which species lacks a sacrotuberous ligament completely?", o: ["Horse", "Ox", "Dog", "Cat"], a: 3, e: "Cats lack it, dogs have a cord-like one, ungulates have a broad sheet." },
+        { q: "The hip joint (coxofemoral joint) is a:", o: ["Hinge joint", "Pivot joint", "Ball-and-socket joint", "Gliding joint"], a: 2, e: "Allows wide range of motion: flexion, extension, abduction, adduction, and rotation." },
+        { q: "The fibrocartilage discs in the stifle joint that provide shock absorption and improve the fit between the femur and tibia are the:", o: ["Cruciate ligaments", "Collateral ligaments", "Menisci", "Patellar ligaments"], a: 2, e: "Medial and lateral menisci." },
+        { q: "The ligaments inside the stifle joint that cross each other and prevent cranial-caudal sliding of the tibia are the:", o: ["Meniscofemoral ligaments", "Cruciate ligaments", "Collateral ligaments", "Patellar ligaments"], a: 1, e: "Cranial and caudal cruciate ligaments." },
+        { q: "The hock joint is properly known as the:", o: ["Stifle joint", "Tarsal joint", "Fetlock joint", "Pastern joint"], a: 1, e: "It is the equivalent of the human ankle." },
+        { q: "The angle of the hock is maintained by the:", o: ["Patellar ligaments", "Common calcaneal tendon (Achilles)", "Cruciate ligaments", "Suspensory ligament"], a: 1, e: "The massive tendon attaching to the tuber calcanei." },
+        { q: "The 'chestnut' on the equine hindlimb is located:", o: ["On the medial aspect of the stifle", "On the medial aspect of the tarsus (hock)", "On the lateral aspect of the metatarsus", "On the palmar fetlock"], a: 1, e: "It is lower down than the forelimb chestnut." },
+        { q: "The 'ergot' in horses is located:", o: ["At the base of the ear", "On the plantar/palmar aspect of the fetlock joint", "Inside the hoof", "On the tuber calcanei"], a: 1, e: "Hidden in the hair (feathering) of the fetlock." },
+        { q: "Bone spavin in horses affects the:", o: ["Fetlock joint", "Stifle joint", "Distal intertarsal and tarsometatarsal joints", "Coxofemoral joint"], a: 2, e: "It is osteoarthritis of the lower, low-motion joints of the hock." },
+        { q: "In the horse, the proximal and distal interphalangeal joints of the hindlimb are commonly called the:", o: ["Fetlock and coffin joints", "Pastern and coffin joints", "Stifle and hock joints", "Elbow and carpal joints"], a: 1, e: "P1-P2 = pastern joint; P2-P3 = coffin joint." },
+        { q: "The navicular bone (distal sesamoid) is located in the:", o: ["Stifle joint", "Hock joint", "Behind the coffin joint (P2-P3)", "In the tarsus"], a: 2, e: "It acts as a fulcrum for the DDFT behind the distal interphalangeal joint." },
+        { q: "The proximal sesamoid bones at the fetlock are embedded in the:", o: ["Cruciate ligaments", "Branches of the suspensory ligament", "Collateral ligaments", "Patellar ligaments"], a: 1, e: "The suspensory ligament bifurcates and inserts on the proximal sesamoids." }
+      ],
+      tf: [
+        { q: "The ox has three patellar ligaments.", a: true, e: "True. Just like the horse: medial, middle, and lateral patellar ligaments." },
+        { q: "The sacroiliac joint is completely immovable.", a: false, e: "False. It has slight movement, especially during parturition." },
+        { q: "The medial meniscus is attached to the medial collateral ligament in the stifle.", a: true, e: "True. This makes it less mobile and more prone to tearing than the lateral meniscus." },
+        { q: "The tuber calcanei is the bony basis for the point of the hock.", a: true, e: "True. The Achilles tendon inserts here." },
+        { q: "The horse lacks a sacrotuberous ligament.", a: false, e: "False. The horse (and ox) has a broad sacrotuberal ligament. The cat lacks it." },
+        { q: "Upward fixation of the patella in the horse involves the lateral patellar ligament.", a: false, e: "False. It involves the MEDIAL patellar ligament hooking over the medial trochlear ridge." },
+        { q: "A 'thoroughpin' is a swelling of the deep digital flexor tendon sheath above the hock.", a: true, e: "True. Seen as a fluid-filled swelling in the hollows above the hock." },
+        { q: "The navicular bone is located at the fetlock joint.", a: false, e: "False. It is located behind the coffin joint (P2-P3 junction), not the fetlock." },
+        { q: "Hip dysplasia is a common condition in large breed dogs.", a: true, e: "True. It involves malformation of the hip joint leading to osteoarthritis." },
+        { q: "The suspensory ligament in the hindlimb is identical in origin and function to that in the forelimb.", a: true, e: "True. It is the modified interosseous muscle in both limbs." }
+      ],
+      fib: [
+        { q: "The 'point of the hock' is formed by the tuber _____.", a: ["calcanei"], e: "Lever for the Achilles tendon." },
+        { q: "The equine hindlimb 'chestnut' is located on the medial aspect of the _____ joint.", a: ["tarsus", "hock"], e: "Vestigial pad." },
+        { q: "The joint corresponding to the human knee in animals is called the _____ joint.", a: ["stifle"], e: "Femoro-patello-tibial joint." },
+        { q: "The ligaments crossing inside the stifle joint are the _____ ligaments.", a: ["cruciate"], e: "Cranial and caudal." },
+        { q: "The small, non-functional digits behind the fetlock in cattle are called _____.", a: ["dewclaws"], e: "Represent vestigial digits II and V." },
+        { q: "The distal sesamoid bone behind the coffin joint is commonly called the _____ bone.", a: ["navicular"], e: "Named for its boat-like shape." },
+        { q: "The suspensory ligament is the modified _____ muscle.", a: ["interosseous"], e: "Has become tendinous in horses." }
+      ]
+    },
+    "Myology": {
       mcq: [
         { q: "The massive muscle forming the bulk of the rump and acting as the primary extensor of the hip is the:", o: ["Biceps femoris", "Middle gluteal", "Semimembranosus", "Quadriceps femoris"], a: 1, e: "The middle gluteal is the most powerful extensor of the hip, crucial for rearing and kicking." },
         { q: "Which muscle is NOT considered part of the 'Hamstrings' group on the caudal thigh?", o: ["Biceps femoris", "Semitendinosus", "Semimembranosus", "Quadriceps femoris"], a: 3, e: "The quadriceps is on the cranial thigh and extends the stifle." },
@@ -1339,26 +1517,13 @@ const quizBank = {
         { q: "The powerful muscle on the caudal aspect of the crus that forms the 'calf' and extends the hock is the:", o: ["Gastrocnemius", "Soleus", "Popliteus", "Tibialis cranialis"], a: 0, e: "It inserts on the tuber calcanei via the Achilles tendon." },
         { q: "Which muscle tendon caps the tuber calcanei and continues distally to flex the digits?", o: ["Deep digital flexor", "Superficial digital flexor", "Gastrocnemius", "Biceps femoris"], a: 1, e: "The SDF tendon wraps around the gastrocnemius tendon at the hock." },
         { q: "The deep digital flexor muscle in the hindlimb inserts on the:", o: ["Tuber calcanei", "Proximal phalanx (P1)", "Middle phalanx (P2)", "Distal phalanx (P3)"], a: 3, e: "It travels down the back of the leg and attaches to the bottom of the coffin bone." },
-        { q: "The main nerve supplying the extensor muscles of the stifle (Quadriceps femoris) is the:", o: ["Sciatic nerve", "Obturator nerve", "Femoral nerve", "Tibial nerve"], a: 2, e: "Damage to the femoral nerve prevents the animal from bearing weight on the limb." },
-        { q: "The main nerve supplying the adductor muscles of the medial thigh is the:", o: ["Femoral nerve", "Obturator nerve", "Sciatic nerve", "Peroneal nerve"], a: 1, e: "Damage during difficult calving (calving paralysis) causes the cow to do the 'splits'." },
-        { q: "The largest nerve in the body, which runs down the caudal thigh and supplies the hamstrings and lower leg, is the:", o: ["Femoral nerve", "Sciatic (Ischiatic) nerve", "Obturator nerve", "Pudendal nerve"], a: 1, e: "It exits the pelvis via the greater sciatic foramen." },
-        { q: "The sciatic nerve divides just above the stifle into the:", o: ["Femoral and Obturator nerves", "Tibial and Common Peroneal (Fibular) nerves", "Saphenous and Sural nerves", "Plantar and Dorsal digital nerves"], a: 1, e: "The tibial goes caudally, the peroneal goes cranially." },
-        { q: "Which nerve innervates the flexors of the hock and extensors of the digits (cranial crus muscles)?", o: ["Tibial nerve", "Common peroneal (fibular) nerve", "Femoral nerve", "Saphenous nerve"], a: 1, e: "Damage results in inability to extend the digits, causing 'knuckling'." },
-        { q: "Which nerve innervates the extensors of the hock and flexors of the digits (caudal crus muscles)?", o: ["Tibial nerve", "Common peroneal nerve", "Femoral nerve", "Obturator nerve"], a: 0, e: "Damage results in a dropped hock and flexed fetlock." },
-        { q: "The nerve supplying sensory innervation to the medial aspect of the thigh and crus is the:", o: ["Saphenous nerve", "Sciatic nerve", "Pudendal nerve", "Caudal gluteal nerve"], a: 0, e: "It is a sensory branch of the femoral nerve." },
         { q: "The pudendal nerve provides motor and sensory innervation to the:", o: ["Tail muscles", "Perineum, external genitalia, and anal sphincter", "Medial thigh muscles", "Gluteal muscles"], a: 1, e: "It is often blocked to relax the penis or desensitize the perineum." },
         { q: "Epidural anaesthesia in cattle is most commonly performed between which two vertebrae?", o: ["L1 and L2", "L6 and S1", "S5 and Cy1 (or Cy1 and Cy2)", "Cy5 and Cy6"], a: 2, e: "The sacrocaudal or first intercaudal space is the easiest and safest site." },
-        { q: "A 'high' epidural block differs from a 'low' epidural block because it:", o: ["Paralyzes the hindlimbs causing the animal to fall", "Only desensitizes the tail", "Requires a much smaller needle", "Is injected into the subarachnoid space"], a: 0, e: "A large volume of anesthetic moves cranially and blocks the sciatic and femoral nerves." },
         { q: "Which muscle runs through the obturator foramen?", o: ["Internal obturator", "Pectineus", "Gracilis", "Sartorius"], a: 0, e: "It covers the foramen and its tendon passes over the ischium." },
         { q: "In the horse, the muscle that makes up the bulk of the 'croup' is the:", o: ["Superficial gluteal", "Middle gluteal", "Biceps femoris", "Tensor fasciae latae"], a: 1, e: "It is immensely powerful for propulsion." },
         { q: "The 'stringhalt' condition in horses involves exaggerated, jerky flexion of the hock, often treated by surgically cutting the tendon of the:", o: ["Gastrocnemius", "Lateral digital extensor", "Superficial digital flexor", "Peroneus tertius"], a: 1, e: "A lateral digital extensor tenectomy is a common treatment." },
         { q: "The Achilles tendon (Common calcaneal tendon) does NOT include the tendon of the:", o: ["Gastrocnemius", "Superficial digital flexor", "Biceps femoris", "Deep digital flexor"], a: 3, e: "The deep digital flexor runs deep to the hock, not on the point." },
         { q: "Which muscle flexes the stifle and is considered the 'key' to unlocking the equine stifle?", o: ["Popliteus", "Gastrocnemius", "Quadriceps", "Tensor fasciae latae"], a: 0, e: "It rotates the tibia medially, helping to unhook the patellar ligament." },
-        { q: "The femoral triangle (Scarpa's triangle) in the medial thigh is a site for taking the pulse. Its cranial border is the:", o: ["Pectineus", "Gracilis", "Sartorius", "Adductor"], a: 2, e: "The triangle contains the femoral artery, vein, and saphenous nerve." },
-        { q: "Calving paralysis is most commonly caused by fetal compression of which nerve against the pelvic brim?", o: ["Femoral nerve", "Sciatic nerve", "Obturator nerve", "Pudendal nerve"], a: 2, e: "Resulting in adductor paralysis and a 'splay-legged' posture." },
-        { q: "The lumbosacral plexus is a network of nerves formed by the ventral branches of:", o: ["Thoracic and upper lumbar nerves", "Lumbar and sacral spinal nerves", "Sacral and caudal nerves", "Cervical and thoracic nerves"], a: 1, e: "It supplies the entire hindlimb and pelvis." },
-        { q: "A cow presenting with a dropped hock and resting the dorsal surface of the hoof on the ground likely has damage to the:", o: ["Femoral nerve", "Tibial nerve", "Common peroneal nerve", "Obturator nerve"], a: 1, e: "The tibial nerve innervates the gastrocnemius (keeps hock up) and DDF (keeps fetlock extended)." },
-        { q: "A horse presenting with an inability to extend the digit and the hoof knuckling over likely has damage to the:", o: ["Tibial nerve", "Common peroneal nerve", "Femoral nerve", "Sciatic nerve"], a: 1, e: "The peroneal nerve innervates the digital extensors." },
         { q: "The muscle that covers the lateral surface of the ilium is the:", o: ["Middle gluteal", "Deep gluteal", "Biceps femoris", "Iliacus"], a: 0, e: "It fills the gluteal surface of the ilium." },
         { q: "The sublumbar muscles, located ventral to the lumbar vertebrae, include the psoas major, psoas minor, and:", o: ["Longissimus dorsi", "Quadratus lumborum", "Multifidus", "Rectus abdominis"], a: 1, e: "These flex the hip and stabilize the lumbar spine." },
         { q: "Which muscle is the main flexor of the hip joint?", o: ["Middle gluteal", "Biceps femoris", "Iliopsoas", "Semitendinosus"], a: 2, e: "Formed by the fusion of the psoas major and iliacus muscles." },
@@ -1367,8 +1532,14 @@ const quizBank = {
         { q: "The fibularis (peroneus) longus muscle is PRESENT in the:", o: ["Horse", "Ox and Dog", "Horse and Ox", "None of the above"], a: 1, e: "The horse lacks the peroneus longus." },
         { q: "In the horse, the superficial gluteal muscle inserts on the:", o: ["Greater trochanter", "Third trochanter", "Lesser trochanter", "Patella"], a: 1, e: "The third trochanter is a specific equine feature for this muscle." },
         { q: "The 'hamstrings' originate primarily from the:", o: ["Tuber coxae", "Tuber sacrale", "Tuber ischii", "Sacrum"], a: 2, e: "The ischial tuberosity is the anchor for the powerful caudal thigh muscles." },
-        { q: "Which nerve innervates the gluteal muscles?", o: ["Femoral nerve", "Obturator nerve", "Gluteal nerves (Cranial and Caudal)", "Sciatic nerve"], a: 2, e: "They branch off the lumbosacral plexus before the sciatic nerve descends." },
-        { q: "Damage to the sciatic nerve at the hip will result in:", o: ["Inability to bear weight due to quadriceps paralysis", "Paralysis of all muscles distal to the stifle", "Loss of tail movement", "Inability to adduct the hindlimb"], a: 1, e: "The sciatic supplies the hamstrings and entire lower leg (crus and foot)." }
+        { q: "Damage to the sciatic nerve at the hip will result in:", o: ["Inability to bear weight due to quadriceps paralysis", "Paralysis of all muscles distal to the stifle", "Loss of tail movement", "Inability to adduct the hindlimb"], a: 1, e: "The sciatic supplies the hamstrings and entire lower leg (crus and foot)." },
+        { q: "The semitendinosus muscle inserts on the:", o: ["Greater trochanter", "Tibial tuberosity and crural fascia", "Patella", "Tuber calcanei"], a: 1, e: "It attaches to the medial tibia and blends into the crural fascia." },
+        { q: "Which muscle is responsible for adduction of the hindlimb and is a large flat sheet on the medial thigh?", o: ["Sartorius", "Gracilis", "Biceps femoris", "Tensor fasciae latae"], a: 1, e: "The gracilis covers the medial surface of the thigh." },
+        { q: "The pectineus muscle is a potential surgical target in dogs because:", o: ["It extends the stifle", "It is involved in hip dysplasia-related pain (pectineus myectomy)", "It flexes the hock", "It abducts the limb"], a: 1, e: "Cutting the pectineus can relieve pain in some cases of hip dysplasia." },
+        { q: "The tibialis cranialis muscle acts primarily to:", o: ["Extend the hock and flex the digits", "Flex the hock and extend the digits", "Extend the stifle", "Adduct the thigh"], a: 1, e: "It is an important flexor of the tarsal joint." },
+        { q: "The soleus muscle is PRESENT in the:", o: ["Horse and dog", "Ox only", "Dog and cat", "Ox and horse"], a: 2, e: "The soleus is present in carnivores but absent or vestigial in horses and cattle." },
+        { q: "The deep digital flexor in the hindlimb consists of three heads. Which head arises from the caudal tibia?", o: ["Tibialis caudalis (medial head)", "Flexor digitorum longus (lateral head)", "Flexor hallucis longus (middle head)", "Popliteus"], a: 0, e: "The tibialis caudalis arises from the proximal caudal tibia." },
+        { q: "Which structure prevents overextension of the fetlock joint in the hindlimb?", o: ["Cruciate ligaments", "Suspensory apparatus (suspensory ligament + sesamoid bones)", "Patellar ligaments", "Achilles tendon"], a: 1, e: "The suspensory apparatus supports the fetlock and prevents hyperextension." }
       ],
       tf: [
         { q: "The middle gluteal is the largest muscle of the rump.", a: true, e: "True. It provides the main propulsive force for running and jumping." },
@@ -1378,21 +1549,18 @@ const quizBank = {
         { q: "In the horse, the peroneus tertius is a fleshy, muscular structure.", a: false, e: "False. In the horse, it is entirely tendinous and acts as part of the reciprocal apparatus." },
         { q: "The reciprocal apparatus forces the hock to flex when the stifle flexes.", a: true, e: "True. A mechanical linkage unique to the horse." },
         { q: "The superficial digital flexor tendon wraps around the gastrocnemius tendon at the point of the hock.", a: true, e: "True. This forms a cap over the tuber calcanei." },
-        { q: "The femoral nerve innervates the hamstring muscles.", a: false, e: "False. The femoral nerve innervates the quadriceps. The sciatic innervates the hamstrings." },
-        { q: "Damage to the obturator nerve causes 'calving paralysis'.", a: true, e: "True. The cow cannot adduct her hindlimbs and slips on smooth floors." },
-        { q: "The sciatic nerve is the largest nerve in the body.", a: true, e: "True. It is a massive trunk exiting the greater sciatic foramen." },
         { q: "The common peroneal nerve supplies the extensors of the hock.", a: false, e: "False. It supplies the FLEXORS of the hock and EXTENSORS of the digits." },
-        { q: "Damage to the tibial nerve results in a dropped hock.", a: true, e: "True. Due to paralysis of the gastrocnemius muscle." },
         { q: "Epidural anaesthesia is routinely given between L1 and L2.", a: false, e: "False. It is given between S5 and Cy1 (or Cy1 and Cy2). L1-L2 is for paravertebral blocks." },
-        { q: "The saphenous nerve is a branch of the sciatic nerve.", a: false, e: "False. It is a sensory branch of the femoral nerve." },
-        { q: "The pudendal nerve controls the anal sphincter and perineal sensation.", a: true, e: "True. It is essential for normal defecation and mating." },
         { q: "The iliopsoas muscle is the main extensor of the hip.", a: false, e: "False. It is the main FLEXOR of the hip." },
         { q: "The popliteus muscle helps 'unlock' the stifle joint.", a: true, e: "True. It rotates the tibia to release the patellar lock." },
         { q: "The equine superficial gluteal muscle inserts on the third trochanter.", a: true, e: "True. The third trochanter is well-developed in horses for this purpose." },
         { q: "The deep digital flexor muscle inserts on the proximal phalanx.", a: false, e: "False. It inserts on the distal phalanx (P3 / coffin bone)." },
         { q: "The tensor fasciae latae muscle tightens the fascia on the lateral thigh.", a: true, e: "True. This helps brace the stifle." },
-        { q: "A 'high' epidural will paralyze the hindlimbs.", a: true, e: "True. It blocks the sciatic and femoral nerves, causing the animal to go down." },
-        { q: "Stringhalt in horses is characterized by involuntary, exaggerated flexion of the hock.", a: true, e: "True. Often treated by cutting the lateral digital extensor tendon." }
+        { q: "Stringhalt in horses is characterized by involuntary, exaggerated flexion of the hock.", a: true, e: "True. Often treated by cutting the lateral digital extensor tendon." },
+        { q: "The gracilis muscle covers the lateral surface of the thigh.", a: false, e: "False. It covers the MEDIAL surface." },
+        { q: "The soleus muscle is present in horses.", a: false, e: "False. The soleus is absent or vestigial in horses. It is present in dogs and cats." },
+        { q: "Pectineus myectomy may be performed in dogs to relieve pain associated with hip dysplasia.", a: true, e: "True. Though its effectiveness is debated." },
+        { q: "The suspensory apparatus prevents hyperextension (dropping) of the fetlock joint.", a: true, e: "True. It is crucial for weight-bearing support." }
       ],
       fib: [
         { q: "The massive muscle of the rump that extends the hip is the _____ gluteal muscle.", a: ["middle"], e: "The prime mover for kicking and rearing." },
@@ -1405,21 +1573,57 @@ const quizBank = {
         { q: "The major muscle forming the 'calf' that extends the hock is the _____.", a: ["gastrocnemius"], e: "Its tendon is the Achilles tendon." },
         { q: "The tendon of the _____ digital flexor wraps around the gastrocnemius tendon at the tuber calcanei.", a: ["superficial"], e: "Forms a cap over the point of the hock." },
         { q: "The nerve that supplies the quadriceps muscle is the _____ nerve.", a: ["femoral"], e: "Essential for bearing weight." },
+        { q: "A dropped hock indicates damage to the _____ nerve.", a: ["tibial"], e: "Because the gastrocnemius (hock extensor) is paralyzed." },
+        { q: "Epidural anaesthesia is usually injected into the epidural space between the last sacral and first _____ vertebrae.", a: ["caudal", "coccygeal"], e: "The sacrocaudal space." },
+        { q: "The _____ apparatus allows a horse to sleep standing up by locking the stifle and hock.", a: ["stay"], e: "Reduces muscular fatigue." },
+        { q: "The sublumbar muscle that is the main flexor of the hip is the _____.", a: ["iliopsoas"], e: "Formed by psoas major and iliacus." },
+        { q: "The _____ digital extensor tendon is sometimes surgically cut to treat stringhalt in horses.", a: ["lateral"], e: "Releases the abnormal tension." },
+        { q: "The _____ muscle rotates the tibia medially to unlock the equine stifle.", a: ["popliteus"], e: "Acts like a key in a lock." },
+        { q: "The large, flat muscle on the medial thigh that adducts the hindlimb is the _____.", a: ["gracilis"], e: "Covers the medial thigh surface." },
+        { q: "The three heads of the deep digital flexor in the hindlimb are the tibialis caudalis, flexor digitorum longus, and flexor _____ longus.", a: ["hallucis"], e: "The middle/deep head." },
+        { q: "The _____ muscle is a small muscle in the carnivore leg that is absent in the horse, contributing to the common calcaneal tendon.", a: ["soleus"], e: "Present in dogs and cats." }
+      ]
+    },
+    "Neurology": {
+      mcq: [
+        { q: "The main nerve supplying the extensor muscles of the stifle (Quadriceps femoris) is the:", o: ["Sciatic nerve", "Obturator nerve", "Femoral nerve", "Tibial nerve"], a: 2, e: "Damage to the femoral nerve prevents the animal from bearing weight on the limb." },
+        { q: "The main nerve supplying the adductor muscles of the medial thigh is the:", o: ["Femoral nerve", "Obturator nerve", "Sciatic nerve", "Peroneal nerve"], a: 1, e: "Damage during difficult calving (calving paralysis) causes the cow to do the 'splits'." },
+        { q: "The largest nerve in the body, which runs down the caudal thigh and supplies the hamstrings and lower leg, is the:", o: ["Femoral nerve", "Sciatic (Ischiatic) nerve", "Obturator nerve", "Pudendal nerve"], a: 1, e: "It exits the pelvis via the greater sciatic foramen." },
+        { q: "The sciatic nerve divides just above the stifle into the:", o: ["Femoral and Obturator nerves", "Tibial and Common Peroneal (Fibular) nerves", "Saphenous and Sural nerves", "Plantar and Dorsal digital nerves"], a: 1, e: "The tibial goes caudally, the peroneal goes cranially." },
+        { q: "Which nerve innervates the flexors of the hock and extensors of the digits (cranial crus muscles)?", o: ["Tibial nerve", "Common peroneal (fibular) nerve", "Femoral nerve", "Saphenous nerve"], a: 1, e: "Damage results in inability to extend the digits, causing 'knuckling'." },
+        { q: "Which nerve innervates the extensors of the hock and flexors of the digits (caudal crus muscles)?", o: ["Tibial nerve", "Common peroneal nerve", "Femoral nerve", "Obturator nerve"], a: 0, e: "Damage results in a dropped hock and flexed fetlock." },
+        { q: "The nerve supplying sensory innervation to the medial aspect of the thigh and crus is the:", o: ["Saphenous nerve", "Sciatic nerve", "Pudendal nerve", "Caudal gluteal nerve"], a: 0, e: "It is a sensory branch of the femoral nerve." },
+        { q: "A 'high' epidural block differs from a 'low' epidural block because it:", o: ["Paralyzes the hindlimbs causing the animal to fall", "Only desensitizes the tail", "Requires a much smaller needle", "Is injected into the subarachnoid space"], a: 0, e: "A large volume of anesthetic moves cranially and blocks the sciatic and femoral nerves." },
+        { q: "The femoral triangle (Scarpa's triangle) in the medial thigh is a site for taking the pulse. Its cranial border is the:", o: ["Pectineus", "Gracilis", "Sartorius", "Adductor"], a: 2, e: "The triangle contains the femoral artery, vein, and saphenous nerve." },
+        { q: "Calving paralysis is most commonly caused by fetal compression of which nerve against the pelvic brim?", o: ["Femoral nerve", "Sciatic nerve", "Obturator nerve", "Pudendal nerve"], a: 2, e: "Resulting in adductor paralysis and a 'splay-legged' posture." },
+        { q: "The lumbosacral plexus is a network of nerves formed by the ventral branches of:", o: ["Thoracic and upper lumbar nerves", "Lumbar and sacral spinal nerves", "Sacral and caudal nerves", "Cervical and thoracic nerves"], a: 1, e: "It supplies the entire hindlimb and pelvis." },
+        { q: "A cow presenting with a dropped hock and resting the dorsal surface of the hoof on the ground likely has damage to the:", o: ["Femoral nerve", "Tibial nerve", "Common peroneal nerve", "Obturator nerve"], a: 1, e: "The tibial nerve innervates the gastrocnemius (keeps hock up) and DDF (keeps fetlock extended)." },
+        { q: "A horse presenting with an inability to extend the digit and the hoof knuckling over likely has damage to the:", o: ["Tibial nerve", "Common peroneal nerve", "Femoral nerve", "Sciatic nerve"], a: 1, e: "The peroneal nerve innervates the digital extensors." },
+        { q: "Which nerve innervates the gluteal muscles?", o: ["Femoral nerve", "Obturator nerve", "Gluteal nerves (Cranial and Caudal)", "Sciatic nerve"], a: 2, e: "They branch off the lumbosacral plexus before the sciatic nerve descends." },
+        { q: "The caudal cutaneous sural nerve provides sensation to the:", o: ["Medial thigh", "Lateral and caudal surface of the crus (gaskin)", "Dorsal surface of the digit", "Perineum"], a: 1, e: "It is a branch of the tibial nerve." },
+        { q: "A cow that is unable to rise and has both hindlimbs splayed out on a smooth floor most likely has damage to the:", o: ["Femoral nerve bilaterally", "Obturator nerve bilaterally", "Sciatic nerve unilaterally", "Tibial nerve unilaterally"], a: 1, e: "Bilateral obturator nerve damage during calving causes the downer cow with splayed legs." }
+      ],
+      tf: [
+        { q: "The femoral nerve innervates the hamstring muscles.", a: false, e: "False. The femoral nerve innervates the quadriceps. The sciatic innervates the hamstrings." },
+        { q: "Damage to the obturator nerve causes 'calving paralysis'.", a: true, e: "True. The cow cannot adduct her hindlimbs and slips on smooth floors." },
+        { q: "The sciatic nerve is the largest nerve in the body.", a: true, e: "True. It is a massive trunk exiting the greater sciatic foramen." },
+        { q: "Damage to the tibial nerve results in a dropped hock.", a: true, e: "True. Due to paralysis of the gastrocnemius muscle." },
+        { q: "The saphenous nerve is a branch of the sciatic nerve.", a: false, e: "False. It is a sensory branch of the femoral nerve." },
+        { q: "The pudendal nerve controls the anal sphincter and perineal sensation.", a: true, e: "True. It is essential for normal defecation and mating." },
+        { q: "A 'high' epidural will paralyze the hindlimbs.", a: true, e: "True. It blocks the sciatic and femoral nerves, causing the animal to go down." }
+      ],
+      fib: [
         { q: "The nerve that supplies the adductor muscles of the thigh is the _____ nerve.", a: ["obturator"], e: "Vulnerable to injury during calving." },
         { q: "The largest nerve in the body, running down the back of the thigh, is the _____ nerve.", a: ["sciatic", "ischiatic"], e: "Supplies the hamstrings and lower leg." },
         { q: "The sciatic nerve divides into the common peroneal nerve and the _____ nerve.", a: ["tibial"], e: "The tibial goes down the caudal aspect of the crus." },
         { q: "Knuckling over of the fetlock is a sign of damage to the common _____ nerve.", a: ["peroneal", "fibular"], e: "Because the digital extensors are paralyzed." },
-        { q: "A dropped hock indicates damage to the _____ nerve.", a: ["tibial"], e: "Because the gastrocnemius (hock extensor) is paralyzed." },
         { q: "The _____ nerve provides sensation to the perineum and motor control to the anal sphincter.", a: ["pudendal"], e: "Blocked during perineal surgery." },
-        { q: "Epidural anaesthesia is usually injected into the epidural space between the last sacral and first _____ vertebrae.", a: ["caudal", "coccygeal"], e: "The sacrocaudal space." },
-        { q: "The _____ apparatus allows a horse to sleep standing up by locking the stifle and hock.", a: ["stay"], e: "Reduces muscular fatigue." },
         { q: "The femoral triangle contains the femoral artery, vein, and the _____ nerve.", a: ["saphenous"], e: "A sensory branch of the femoral nerve." },
-        { q: "The sublumbar muscle that is the main flexor of the hip is the _____.", a: ["iliopsoas"], e: "Formed by psoas major and iliacus." },
-        { q: "The _____ digital extensor tendon is sometimes surgically cut to treat stringhalt in horses.", a: ["lateral"], e: "Releases the abnormal tension." },
-        { q: "The _____ muscle rotates the tibia medially to unlock the equine stifle.", a: ["popliteus"], e: "Acts like a key in a lock." }
+        { q: "The sensory nerve supplying the lateral crus (gaskin) is the caudal cutaneous _____ nerve.", a: ["sural"], e: "Branch of the tibial nerve." },
+        { q: "A cow with bilateral obturator paralysis after difficult calving is known as a _____ cow.", a: ["downer"], e: "Unable to adduct the hindlimbs." }
       ]
     },
-    "Angiology & Splanchnology": {
+    "Angiology": {
       mcq: [
         { q: "The main artery supplying the hindlimb, which passes through the femoral triangle, is the:", o: ["External iliac artery", "Femoral artery", "Popliteal artery", "Internal iliac artery"], a: 1, e: "The external iliac becomes the femoral artery as it passes the inguinal ligament." },
         { q: "The femoral artery is a direct continuation of the:", o: ["Internal iliac artery", "External iliac artery", "Aorta", "Popliteal artery"], a: 1, e: "The name changes as it enters the thigh." },
@@ -1431,6 +1635,53 @@ const quizBank = {
         { q: "Which lymph nodes, located above the udder in cows, are routinely palpated during meat inspection?", o: ["Superficial inguinal (mammary) lymph nodes", "Popliteal lymph nodes", "Iliac lymph nodes", "Subiliac (prefemoral) lymph nodes"], a: 0, e: "They drain the udder and caudal abdomen." },
         { q: "The large lymph node situated just cranial to the tensor fasciae latae muscle on the flank is the:", o: ["Popliteal lymph node", "Superficial inguinal lymph node", "Subiliac (prefemoral) lymph node", "Ischiatic lymph node"], a: 2, e: "It drains the flank and is easily palpable in cattle." },
         { q: "The boundary between the abdominal cavity and the pelvic cavity is the:", o: ["Pelvic floor", "Pelvic inlet (terminal line)", "Perineum", "Pelvic outlet"], a: 1, e: "An imaginary line from the sacral promontory to the pubic brim." },
+        { q: "The stallion has a:", o: ["Fibroelastic penis with a sigmoid flexure", "Musculocavernous penis", "Bone in the penis (os penis)", "Penis directed backwards"], a: 1, e: "Erection relies entirely on massive blood engorgement, not straightening a flexure." },
+        { q: "The network of veins within the spermatic cord that cools the arterial blood entering the testis is the:", o: ["Pampiniform plexus", "Testicular artery", "Cremasteric plexus", "Pelvic plexus"], a: 0, e: "It acts as a counter-current heat exchanger." },
+        { q: "The smooth muscle in the skin of the scrotum that wrinkles it to conserve heat is the:", o: ["Cremaster muscle", "Dartos muscle", "Gubernaculum", "Tunica dartos"], a: 1, e: "It changes the surface area of the scrotum." },
+        { q: "The strong, tendinous band supporting the abdomen ventrally, attaching to the cranial border of the pubis, is the:", o: ["Prepubic tendon", "Linea alba", "Inguinal ligament", "Sacrotuberous ligament"], a: 0, e: "Rupture in heavily pregnant mares can cause dropping of the abdomen." },
+        { q: "The internal pudendal artery supplies the:", o: ["Hindlimb", "Pelvic viscera and external genitalia", "Abdominal wall", "Tail"], a: 1, e: "It runs caudally through the pelvic cavity." },
+        { q: "Sperm are stored and mature in the:", o: ["Seminiferous tubules", "Epididymis", "Prostate", "Vesicular glands"], a: 1, e: "Specifically the tail of the epididymis." },
+        { q: "A 'swollen' lymph node located just cranial to the stifle joint on the flank of a cow is the:", o: ["Popliteal", "Subiliac (prefemoral)", "Superficial inguinal", "Sacral"], a: 1, e: "Very accessible for biopsy in cattle." },
+        { q: "The obturator nerve, which is vulnerable during calving, innervates which group of muscles?", o: ["Extensors of the stifle", "Flexors of the hock", "Adductors of the thigh", "Hamstrings"], a: 2, e: "Paralysis prevents the cow from keeping her legs under her." },
+        { q: "The coccygeal (ventral tail) artery is used for taking pulse in:", o: ["Dog and cat", "Horse only", "Cattle", "Pig"], a: 2, e: "The median caudal artery on the ventral surface of the tail base is used for pulse-taking in cattle." },
+        { q: "The lateral saphenous vein in the dog is commonly used for:", o: ["Arterial blood gas sampling", "Venipuncture for blood collection", "Epidural injection", "Nerve block"], a: 1, e: "It crosses the lateral surface of the hock and is easily accessible." },
+        { q: "The recurrent tarsal vein in the dog is located:", o: ["On the lateral hock", "On the medial hock, cranial to the Achilles tendon", "On the dorsal metatarsus", "In the inguinal region"], a: 1, e: "Also used for IV injections, especially in smaller dogs." },
+        { q: "The ovarian artery in domestic animals arises from the:", o: ["Internal iliac artery", "External iliac artery", "Aorta", "Uterine artery"], a: 2, e: "The ovarian artery arises directly from the abdominal aorta near the kidneys." },
+        { q: "Castration in farm animals involves the removal of the:", o: ["Epididymis only", "Prostate gland", "Testes", "Seminal vesicles"], a: 2, e: "Removal of both testes eliminates the source of testosterone and spermatogenesis." },
+        { q: "The site for cranial epidural anaesthesia in cattle is the:", o: ["Lumbosacral space", "Sacrococcygeal space (S5-Cy1)", "Between Cy1 and Cy2", "Between L1 and L2"], a: 1, e: "The first intercoccygeal or sacrococcygeal space is identified by moving the tail up and down." }
+      ],
+      tf: [
+        { q: "The external iliac artery becomes the femoral artery.", a: true, e: "True. The name changes as it exits the abdomen." },
+        { q: "The saphenous artery is the main blood supply to the digits in the dog.", a: true, e: "True. It continues down the medial leg." },
+        { q: "The popliteal lymph node is easily palpable in the normal horse.", a: false, e: "False. It is deep and usually only palpable in dogs/cats or if severely enlarged." },
+        { q: "The bulbus glandis is responsible for the 'tie' in mating dogs.", a: true, e: "True. It engorges with blood and locks the animals together." },
+        { q: "The superficial inguinal ring is an opening in the external abdominal oblique muscle.", a: true, e: "True. It is the outer opening of the inguinal canal." },
+        { q: "The pampiniform plexus warms the blood entering the testis.", a: false, e: "False. It COOLS the arterial blood to keep the testes below body temperature." },
+        { q: "The prepubic tendon attaches to the sacrum.", a: false, e: "False. It attaches to the cranial border of the pubis." },
+        { q: "The boar has a preputial diverticulum.", a: true, e: "True. It collects urine and smegma." },
+        { q: "The medial saphenous vein is commonly used for IV access in cats.", a: true, e: "True. Located on the medial thigh." },
+        { q: "The subiliac lymph node is also called the prefemoral lymph node.", a: true, e: "True. It is located just cranial to the tensor fasciae latae." },
+        { q: "The ventral coccygeal artery is the standard site for taking the pulse in cattle.", a: true, e: "True. It is easily palpable on the ventral midline of the tail base." },
+        { q: "The lateral saphenous vein is commonly used for venipuncture in cats.", a: false, e: "False. The MEDIAL saphenous vein is preferred in cats. The lateral saphenous is used in dogs." },
+        { q: "The ovarian artery arises from the internal iliac artery.", a: false, e: "False. It arises directly from the aorta." }
+      ],
+      fib: [
+        { q: "The artery that passes through the femoral triangle and is used to take a pulse in dogs is the _____ artery.", a: ["femoral"], e: "Continuation of the external iliac." },
+        { q: "The vein on the lateral aspect of the dog's lower leg commonly used for blood draws is the lateral _____ vein.", a: ["saphenous"], e: "Crosses the crus." },
+        { q: "The lymph node located behind the stifle joint is the _____ lymph node.", a: ["popliteal"], e: "Deep in the popliteal fossa." },
+        { q: "The lymph node on the flank of the cow, cranial to the stifle, is the _____ or prefemoral lymph node.", a: ["subiliac"], e: "Easily palpable." },
+        { q: "The network of veins that cools blood entering the testis is the _____ plexus.", a: ["pampiniform"], e: "Wraps around the testicular artery." },
+        { q: "The skeletal muscle that raises and lowers the testicles for temperature control is the _____ muscle.", a: ["cremaster"], e: "Slip of the internal oblique." },
+        { q: "The strong tendinous sheet attaching the ventral abdominal muscles to the brim of the pelvis is the _____ tendon.", a: ["prepubic"], e: "Can rupture in pregnant mares." },
+        { q: "An animal with one or both testes retained in the abdomen is called a _____.", a: ["cryptorchid", "cryptorchidism"], e: "Often sterile and prone to tumors." },
+        { q: "The boar has a smelly pouch above the preputial opening called the preputial _____.", a: ["diverticulum"], e: "Collects urine." },
+        { q: "The artery used to check the pulse in cattle, located on the ventral surface of the tail, is the ventral _____ artery.", a: ["coccygeal", "caudal", "tail"], e: "Also called the median caudal artery." },
+        { q: "The vein commonly used for blood collection on the lateral hock of the dog is the lateral _____ vein.", a: ["saphenous"], e: "Crosses the lateral surface of the tarsus." },
+        { q: "The portion of the broad ligament supporting the uterine tube is the _____.", a: ["mesosalpinx"], e: "Salpinx = tube." }
+      ]
+    },
+    "Splanchnology": {
+      mcq: [
         { q: "The pelvic cavity contains the terminal parts of the digestive and urinary tracts. Dorsal to ventral, the correct order is:", o: ["Rectum, Uterus (female), Bladder", "Bladder, Rectum, Uterus", "Uterus, Bladder, Rectum", "Rectum, Bladder, Uterus"], a: 0, e: "Rectum is most dorsal, then reproductive tract, then bladder resting on the pubic bones." },
         { q: "The pouch of peritoneum between the rectum and the reproductive organs (uterus/vagina) is the:", o: ["Vesicogenital pouch", "Rectogenital pouch", "Pubovesical pouch", "Omental bursa"], a: 1, e: "It is a deep recess of the peritoneal cavity." },
         { q: "In the male, the pelvic urethra is surrounded by the:", o: ["Bulbourethral glands", "Prostate gland", "Urethralis muscle", "Retractor penis muscle"], a: 2, e: "A powerful sphincter muscle." },
@@ -1438,58 +1689,39 @@ const quizBank = {
         { q: "The boar has exceptionally large:", o: ["Prostate glands", "Ampullae", "Bulbourethral glands", "Seminal vesicles"], a: 2, e: "They run the entire length of the pelvic urethra." },
         { q: "The 'S'-shaped curve in the penis of the bull, ram, and boar that straightens during erection is the:", o: ["Crus penis", "Sigmoid flexure", "Glans penis", "Bulb of the penis"], a: 1, e: "It allows the fibroelastic penis to extend." },
         { q: "Which muscle pulls the fibroelastic penis back into the prepuce after erection?", o: ["Ischiocavernosus muscle", "Bulbospongiosus muscle", "Retractor penis muscle", "Urethralis muscle"], a: 2, e: "It attaches to the sigmoid flexure." },
-        { q: "The stallion has a:", o: ["Fibroelastic penis with a sigmoid flexure", "Musculocavernous penis", "Bone in the penis (os penis)", "Penis directed backwards"], a: 1, e: "Erection relies entirely on massive blood engorgement, not straightening a flexure." },
         { q: "The bone found within the penis of the dog and tomcat is the:", o: ["Os cordis", "Os penis (baculum)", "Os rostri", "Fabella"], a: 1, e: "It provides rigidity for intromission before full engorgement." },
         { q: "The expansion of the urethra at the base of the canine penis that 'ties' the dogs during mating is the:", o: ["Pars longa glandis", "Bulbus glandis", "Crus penis", "Sigmoid flexure"], a: 1, e: "It swells massively and gets locked in the female's vestibule." },
         { q: "The inguinal canal is a slit between the abdominal muscles. The outer opening is the:", o: ["Deep inguinal ring", "Superficial inguinal ring", "Vaginal ring", "Pelvic inlet"], a: 1, e: "It is a slit in the aponeurosis of the external abdominal oblique muscle." },
         { q: "What passes through the inguinal canal in the male?", o: ["Round ligament of the uterus", "Ureter", "Spermatic cord", "Urethra"], a: 2, e: "It contains the vas deferens, testicular vessels, and nerves." },
-        { q: "The network of veins within the spermatic cord that cools the arterial blood entering the testis is the:", o: ["Pampiniform plexus", "Testicular artery", "Cremasteric plexus", "Pelvic plexus"], a: 0, e: "It acts as a counter-current heat exchanger." },
         { q: "The muscle that can pull the testis closer to the body for temperature regulation is the:", o: ["Dartos muscle", "Cremaster muscle", "Retractor penis muscle", "Urethralis muscle"], a: 1, e: "It is a slip of the internal abdominal oblique muscle." },
-        { q: "The smooth muscle in the skin of the scrotum that wrinkles it to conserve heat is the:", o: ["Cremaster muscle", "Dartos muscle", "Gubernaculum", "Tunica dartos"], a: 1, e: "It changes the surface area of the scrotum." },
         { q: "In the female, the analogous structure to the spermatic cord that passes through the inguinal canal (especially in dogs) is the:", o: ["Broad ligament", "Suspensory ligament of the ovary", "Round ligament of the uterus", "Proper ligament of the ovary"], a: 2, e: "It attaches to the vaginal process." },
-        { q: "The strong, tendinous band supporting the abdomen ventrally, attaching to the cranial border of the pubis, is the:", o: ["Prepubic tendon", "Linea alba", "Inguinal ligament", "Sacrotuberous ligament"], a: 0, e: "Rupture in heavily pregnant mares can cause dropping of the abdomen." },
-        { q: "The internal pudendal artery supplies the:", o: ["Hindlimb", "Pelvic viscera and external genitalia", "Abdominal wall", "Tail"], a: 1, e: "It runs caudally through the pelvic cavity." },
         { q: "The structure that guides the descent of the testis from the kidney region into the scrotum during fetal development is the:", o: ["Pampiniform plexus", "Spermatic cord", "Gubernaculum", "Vaginal tunic"], a: 2, e: "It shrinks and pulls the testis through the inguinal canal." },
         { q: "Failure of one or both testes to descend into the scrotum is called:", o: ["Monorchidism", "Cryptorchidism", "Orchitis", "Phimosis"], a: 1, e: "The retained testis is usually sterile due to body heat." },
         { q: "The double-walled tube of peritoneum that encloses the spermatic cord and testis is the:", o: ["Tunica albuginea", "Vaginal tunic", "Dartos", "Fascia lata"], a: 1, e: "It is an outpouching of the parietal peritoneum." },
         { q: "The tough fibrous capsule immediately surrounding the testicular tissue is the:", o: ["Tunica albuginea", "Vaginal tunic", "Scrotum", "Epididymis"], a: 0, e: "It is a dense white connective tissue." },
-        { q: "Sperm are stored and mature in the:", o: ["Seminiferous tubules", "Epididymis", "Prostate", "Vesicular glands"], a: 1, e: "Specifically the tail of the epididymis." },
         { q: "The duct that carries sperm from the epididymis to the pelvic urethra is the:", o: ["Ureter", "Ductus (vas) deferens", "Urethra", "Seminal vesicle"], a: 1, e: "It is cut during a vasectomy." },
         { q: "The free end of the penis is called the:", o: ["Crus", "Root", "Glans", "Bulb"], a: 2, e: "Highly sensitive and varies greatly between species." },
         { q: "In the ram, the urethra extends beyond the glans penis as a thin tube called the:", o: ["Urethral process", "Sigmoid flexure", "Preputial diverticulum", "Bulbus glandis"], a: 0, e: "It can get blocked by urinary calculi (stones)." },
         { q: "The fold of skin that covers the free part of the penis is the:", o: ["Scrotum", "Prepuce", "Dartos", "Vaginal tunic"], a: 1, e: "The foreskin." },
         { q: "The boar has a blind pouch dorsal to the preputial opening that collects urine and cellular debris, causing a foul odor. It is the:", o: ["Bulbourethral gland", "Preputial diverticulum", "Sigmoid flexure", "Ampulla"], a: 1, e: "Specific to the pig." },
-        { q: "A 'swollen' lymph node located just cranial to the stifle joint on the flank of a cow is the:", o: ["Popliteal", "Subiliac (prefemoral)", "Superficial inguinal", "Sacral"], a: 1, e: "Very accessible for biopsy in cattle." },
-        { q: "The obturator nerve, which is vulnerable during calving, innervates which group of muscles?", o: ["Extensors of the stifle", "Flexors of the hock", "Adductors of the thigh", "Hamstrings"], a: 2, e: "Paralysis prevents the cow from keeping her legs under her." }
+        { q: "The broad ligament of the uterus consists of three parts. The portion supporting the uterine tube is the:", o: ["Mesometrium", "Mesosalpinx", "Mesovarium", "Proper ligament"], a: 1, e: "Meso = mesentery, salpinx = tube." },
+        { q: "The type of uterus in the cow, consisting of a short body and two long horns, is classified as:", o: ["Simplex", "Duplex", "Bipartite", "Bicornuate"], a: 3, e: "The bicornuate uterus has a small body with two prominent horns (typical of ruminants, horses, carnivores)." }
       ],
       tf: [
-        { q: "The external iliac artery becomes the femoral artery.", a: true, e: "True. The name changes as it exits the abdomen." },
-        { q: "The saphenous artery is the main blood supply to the digits in the dog.", a: true, e: "True. It continues down the medial leg." },
-        { q: "The popliteal lymph node is easily palpable in the normal horse.", a: false, e: "False. It is deep and usually only palpable in dogs/cats or if severely enlarged." },
         { q: "The rectum is located ventral to the reproductive tract in the pelvic cavity.", a: false, e: "False. The rectum is the most DORSAL organ." },
         { q: "The dog only has the prostate gland; it lacks seminal vesicles and bulbourethral glands.", a: true, e: "True. The prostate is large and surrounds the urethra." },
         { q: "The stallion has a fibroelastic penis with a sigmoid flexure.", a: false, e: "False. The stallion has a musculocavernous penis. Ruminants and pigs have a fibroelastic penis." },
         { q: "The retractor penis muscle is composed of smooth muscle.", a: true, e: "True. It maintains tonic contraction to keep the penis in the prepuce." },
-        { q: "The bulbus glandis is responsible for the 'tie' in mating dogs.", a: true, e: "True. It engorges with blood and locks the animals together." },
-        { q: "The superficial inguinal ring is an opening in the external abdominal oblique muscle.", a: true, e: "True. It is the outer opening of the inguinal canal." },
-        { q: "The pampiniform plexus warms the blood entering the testis.", a: false, e: "False. It COOLS the arterial blood to keep the testes below body temperature." },
         { q: "The cremaster muscle can pull the testis closer to the body wall.", a: true, e: "True. Used for temperature regulation and protection." },
-        { q: "The prepubic tendon attaches to the sacrum.", a: false, e: "False. It attaches to the cranial border of the pubis." },
         { q: "The gubernaculum is a fetal structure that guides testicular descent.", a: true, e: "True. It pulls the testis through the inguinal canal." },
         { q: "Cryptorchidism is a condition where the testes are exceptionally large.", a: false, e: "False. It means 'hidden testis' (undescended)." },
         { q: "The vaginal tunic is an extension of the peritoneum.", a: true, e: "True. It lines the scrotum and covers the testis." },
         { q: "The ductus deferens carries urine to the outside of the body.", a: false, e: "False. It carries SPERM from the epididymis to the urethra." },
         { q: "The urethral process is particularly long in the ram and buck.", a: true, e: "True. It extends beyond the glans." },
-        { q: "The boar has a preputial diverticulum.", a: true, e: "True. It collects urine and smegma." },
-        { q: "The medial saphenous vein is commonly used for IV access in cats.", a: true, e: "True. Located on the medial thigh." },
-        { q: "The subiliac lymph node is also called the prefemoral lymph node.", a: true, e: "True. It is located just cranial to the tensor fasciae latae." },
-        { q: "The bull has very large bulbourethral glands compared to the boar.", a: false, e: "False. The BOAR has massive bulbourethral glands." }
+        { q: "The bull has very large bulbourethral glands compared to the boar.", a: false, e: "False. The BOAR has massive bulbourethral glands." },
+        { q: "The bicornuate uterus has a short body and two long horns.", a: true, e: "True. Typical of cattle, horses, and carnivores." }
       ],
       fib: [
-        { q: "The artery that passes through the femoral triangle and is used to take a pulse in dogs is the _____ artery.", a: ["femoral"], e: "Continuation of the external iliac." },
-        { q: "The vein on the lateral aspect of the dog's lower leg commonly used for blood draws is the lateral _____ vein.", a: ["saphenous"], e: "Crosses the crus." },
-        { q: "The lymph node located behind the stifle joint is the _____ lymph node.", a: ["popliteal"], e: "Deep in the popliteal fossa." },
-        { q: "The lymph node on the flank of the cow, cranial to the stifle, is the _____ or prefemoral lymph node.", a: ["subiliac"], e: "Easily palpable." },
         { q: "The most dorsal organ in the pelvic cavity is the _____.", a: ["rectum"], e: "Lies just below the sacrum." },
         { q: "The only accessory sex gland present in the dog is the _____ gland.", a: ["prostate"], e: "Surrounds the neck of the bladder/urethra." },
         { q: "The 'S' shaped curve in the penis of ruminants and pigs is the _____ flexure.", a: ["sigmoid"], e: "Straightens during erection." },
@@ -1497,21 +1729,16 @@ const quizBank = {
         { q: "The bone found in the penis of the dog is called the os _____.", a: ["penis", "baculum"], e: "Helps with intromission." },
         { q: "The swelling at the base of the dog's penis that causes the 'tie' is the bulbus _____.", a: ["glandis"], e: "Engorges after intromission." },
         { q: "The passageway through the abdominal wall for the spermatic cord is the _____ canal.", a: ["inguinal"], e: "A frequent site of hernias." },
-        { q: "The network of veins that cools blood entering the testis is the _____ plexus.", a: ["pampiniform"], e: "Wraps around the testicular artery." },
-        { q: "The skeletal muscle that raises and lowers the testicles for temperature control is the _____ muscle.", a: ["cremaster"], e: "Slip of the internal oblique." },
-        { q: "The strong tendinous sheet attaching the ventral abdominal muscles to the brim of the pelvis is the _____ tendon.", a: ["prepubic"], e: "Can rupture in pregnant mares." },
         { q: "The fetal structure that guides the testis into the scrotum is the _____.", a: ["gubernaculum"], e: "Shrinks to pull the testis down." },
-        { q: "An animal with one or both testes retained in the abdomen is called a _____.", a: ["cryptorchid", "cryptorchidism"], e: "Often sterile and prone to tumors." },
         { q: "The tough, white fibrous capsule immediately surrounding the testis is the tunica _____.", a: ["albuginea"], e: "Maintains testicular pressure." },
         { q: "Sperm mature and are stored in the _____.", a: ["epididymis"], e: "Attached to the side of the testis." },
         { q: "The tube that transports sperm from the epididymis to the urethra is the ductus _____.", a: ["deferens"], e: "Also called the vas deferens." },
         { q: "The skin fold that covers the free end of the penis is the _____.", a: ["prepuce"], e: "The foreskin." },
-        { q: "The boar has a smelly pouch above the preputial opening called the preputial _____.", a: ["diverticulum"], e: "Collects urine." }
+        { q: "The type of uterus in ruminants with a small body and two large horns is called _____ uterus.", a: ["bicornuate"], e: "Bi = two, cornuate = horns." }
       ]
     }
   },
-
-  "Introduction": {
+"Introduction": {
     "General Anatomy & Osteology": {
       mcq: [
         { q: "The science of the structure of the body is called:", o: ["Physiology", "Anatomy", "Histology", "Pathology"], a: 1, e: "Anatomy comes from the Greek 'ana' (up) and 'tome' (cutting)." },
@@ -1528,7 +1755,25 @@ const quizBank = {
         { q: "Bones that develop within tendons to reduce friction (like the patella) are called:", o: ["Short bones", "Flat bones", "Irregular bones", "Sesamoid bones"], a: 3, e: "Named because they resemble sesame seeds." },
         { q: "The carpal and tarsal bones are examples of:", o: ["Long bones", "Short bones", "Flat bones", "Sesamoid bones"], a: 1, e: "Cuboid-shaped bones acting as shock absorbers." },
         { q: "The skull bones (e.g., frontal, parietal) are classified as:", o: ["Long bones", "Short bones", "Flat bones", "Irregular bones"], a: 2, e: "They protect the brain and provide broad areas for muscle attachment." },
-        { q: "Which type of bone cell is responsible for bone formation?", o: ["Osteoclasts", "Osteoblasts", "Osteocytes", "Chondrocytes"], a: 1, e: "'Blasts' build bone." }
+        { q: "Which type of bone cell is responsible for bone formation?", o: ["Osteoclasts", "Osteoblasts", "Osteocytes", "Chondrocytes"], a: 1, e: "'Blasts' build bone." },
+        { q: "The vertebral formula for the ox is:", o: ["C7 T13 L6 S5 Cy18-20", "C7 T18 L6 S5 Cy15-21", "C7 T13 L7 S3 Cy20-23", "C7 T14 L5 S4 Cy18"], a: 0, e: "Ox: C7, T13, L6, S5, and approximately 18-20 coccygeal vertebrae." },
+        { q: "The vertebral formula for the horse is:", o: ["C7 T13 L6 S5 Cy18-20", "C7 T18 L6 S5 Cy15-21", "C7 T13 L7 S3 Cy20", "C7 T18 L5 S5 Cy20"], a: 1, e: "Horse: C7, T18, L6, S5, and approximately 15-21 coccygeal vertebrae." },
+        { q: "The vertebral formula for the dog is:", o: ["C7 T13 L6 S5 Cy18", "C7 T13 L7 S3 Cy20-23", "C7 T18 L6 S5 Cy15", "C7 T12 L7 S4 Cy15"], a: 1, e: "Dog: C7, T13, L7, S3, and approximately 20-23 coccygeal vertebrae." },
+        { q: "A bony projection that serves as an attachment point for muscles or ligaments is called a:", o: ["Foramen", "Fossa", "Process (or tuberosity)", "Meatus"], a: 2, e: "Processes, tubercles, and tuberosities are all raised areas for attachment." },
+        { q: "A smooth, rounded articular surface on a bone is called a:", o: ["Fossa", "Condyle", "Foramen", "Crest"], a: 1, e: "Condyles are typically found at the distal end of long bones." },
+        { q: "A hole or opening through a bone for passage of nerves or vessels is a:", o: ["Fossa", "Meatus", "Foramen", "Sulcus"], a: 2, e: "E.g., the foramen magnum, obturator foramen." },
+        { q: "A shallow depression on the surface of a bone is a:", o: ["Foramen", "Fossa", "Condyle", "Trochanter"], a: 1, e: "E.g., the supraspinous fossa of the scapula." },
+        { q: "The growth plate (physis) in young animals is located at the:", o: ["Diaphysis", "Metaphysis (between diaphysis and epiphysis)", "Periosteum", "Endosteum"], a: 1, e: "It is made of hyaline cartilage and is responsible for longitudinal growth of bone." },
+        { q: "Intramembranous ossification is the process by which:", o: ["Bone forms by replacing a cartilage model", "Bone forms directly from mesenchymal tissue", "Bone is resorbed by osteoclasts", "Tendons calcify"], a: 1, e: "Typical of flat bones of the skull. No cartilage template is needed." },
+        { q: "Endochondral ossification is the process by which:", o: ["Bone forms directly from membrane", "Bone replaces a pre-existing hyaline cartilage model", "Bone marrow forms", "Periosteum thickens"], a: 1, e: "Typical of long bones and most bones in the body." },
+        { q: "Red bone marrow is primarily responsible for:", o: ["Fat storage", "Hematopoiesis (blood cell production)", "Bone growth in length", "Calcium storage"], a: 1, e: "In adults, red marrow is found in flat bones and epiphyses." },
+        { q: "The total number of bones in the bovine skeleton is approximately:", o: ["206", "207", "210", "This varies between species and texts"], a: 3, e: "The exact count varies with age (fusion) and individual variation." },
+        { q: "Pneumatic bones, containing air spaces connected to the respiratory system, are found in:", o: ["All mammals", "Birds (fowl)", "Dogs only", "Fish only"], a: 1, e: "Pneumatic bones reduce weight for flight." },
+        { q: "The compact (cortical) bone forms the:", o: ["Inner spongy network", "Dense outer shell of the bone", "Marrow cavity lining", "Growth plate"], a: 1, e: "It provides strength and rigidity to the bone." },
+        { q: "Cancellous (spongy/trabecular) bone is found:", o: ["Only in the diaphysis", "Inside the epiphyses and in flat bones", "Only in the skull", "In tendons"], a: 1, e: "It has a honeycomb structure with trabeculae." },
+        { q: "Wormian (sutural) bones are small, irregular bones found within:", o: ["Tendons", "Skull sutures", "Joints", "The vertebral canal"], a: 1, e: "They are accessory ossicles within cranial sutures." },
+        { q: "The mineral component of bone that provides hardness and rigidity is primarily:", o: ["Calcium phosphate (hydroxyapatite)", "Collagen", "Keratin", "Iron"], a: 0, e: "Hydroxyapatite crystals are deposited along collagen fibers." },
+        { q: "Mature bone cells embedded within lacunae of the bone matrix are called:", o: ["Osteoblasts", "Osteoclasts", "Osteocytes", "Chondroblasts"], a: 2, e: "Osteocytes maintain the bone matrix and communicate via canaliculi." }
       ],
       tf: [
         { q: "Gross anatomy is the study of structures visible to the naked eye.", a: true, e: "True. Also called macroscopic anatomy." },
@@ -1537,7 +1782,15 @@ const quizBank = {
         { q: "Pronation is the rotation of the limb so the palmar surface faces downward.", a: true, e: "True. Like placing your palms flat on a desk." },
         { q: "The diaphysis of a long bone contains the medullary cavity filled with bone marrow.", a: true, e: "True. Yellow marrow in adults, red marrow in young animals." },
         { q: "Flat bones primarily function as levers for movement.", a: false, e: "False. Long bones act as levers; flat bones protect organs and provide muscle attachment." },
-        { q: "Osteoclasts are bone-resorbing cells.", a: true, e: "True. They break down bone tissue for remodeling and calcium release." }
+        { q: "Osteoclasts are bone-resorbing cells.", a: true, e: "True. They break down bone tissue for remodeling and calcium release." },
+        { q: "The vertebral formula is the same for all domestic mammals.", a: false, e: "False. While all mammals have 7 cervical vertebrae, the number of thoracic, lumbar, sacral, and caudal vertebrae varies between species." },
+        { q: "Intramembranous ossification involves a cartilage template.", a: false, e: "False. It forms bone directly from mesenchymal connective tissue without a cartilage model." },
+        { q: "The growth plate (physis) is composed of hyaline cartilage.", a: true, e: "True. It allows longitudinal growth of long bones until skeletal maturity." },
+        { q: "Red bone marrow produces blood cells.", a: true, e: "True. It is the site of hematopoiesis." },
+        { q: "Cancellous bone is found in the epiphyses and provides lightweight internal support.", a: true, e: "True. Its trabecular network resists compressive forces." },
+        { q: "A foramen is a shallow depression on the surface of a bone.", a: false, e: "False. A foramen is an opening or hole; a fossa is a depression." },
+        { q: "Compact bone forms the dense outer layer of all bones.", a: true, e: "True. Also called cortical bone." },
+        { q: "Birds are the only vertebrates with pneumatic bones.", a: false, e: "False. Some dinosaurs and pterosaurs also had pneumatic bones, but among living domestic animals, only birds have them." }
       ],
       fib: [
         { q: "The study of the development of an organism from fertilization to birth is called _____ology.", a: ["embry"], e: "A key branch of anatomy." },
@@ -1546,7 +1799,16 @@ const quizBank = {
         { q: "Moving a limb toward the median plane of the body is called _____.", a: ["adduction"], e: "Adding it to the body." },
         { q: "The central, cylindrical shaft of a long bone is the _____.", a: ["diaphysis"], e: "Between the two epiphyses." },
         { q: "The thin membrane lining the medullary cavity of a bone is the _____.", a: ["endosteum"], e: "Lines the inside." },
-        { q: "The knee cap (patella) is an example of a _____ bone.", a: ["sesamoid"], e: "Develops in the tendon of the quadriceps." }
+        { q: "The knee cap (patella) is an example of a _____ bone.", a: ["sesamoid"], e: "Develops in the tendon of the quadriceps." },
+        { q: "The vertebral formula for the ox is C7 T13 L6 S5 Cy_____.", a: ["18-20", "18"], e: "Variable number of coccygeal vertebrae." },
+        { q: "The horse has _____ thoracic vertebrae.", a: ["18", "eighteen"], e: "Corresponding to 18 pairs of ribs." },
+        { q: "A smooth, rounded articular projection on a bone is called a _____.", a: ["condyle"], e: "Found at the ends of long bones." },
+        { q: "The process by which bone forms from a cartilage model is called _____ ossification.", a: ["endochondral"], e: "Typical of long bones." },
+        { q: "The process by which bone forms directly from membrane without cartilage is _____ ossification.", a: ["intramembranous"], e: "Typical of flat skull bones." },
+        { q: "The growth plate in young animals, made of hyaline cartilage, is called the _____.", a: ["physis", "epiphyseal plate", "growth plate"], e: "Located at the metaphysis." },
+        { q: "The mineral giving bone its hardness is calcium _____ (hydroxyapatite).", a: ["phosphate"], e: "Deposited along collagen fibers." },
+        { q: "Mature bone cells trapped in lacunae are called _____.", a: ["osteocytes"], e: "They maintain the bone matrix." },
+        { q: "The spongy, internal bone with a trabecular network is called _____ bone.", a: ["cancellous", "spongy", "trabecular"], e: "Found inside epiphyses." }
       ]
     },
     "Myology & Arthrology": {
@@ -1560,14 +1822,41 @@ const quizBank = {
         { q: "The study of muscles is called:", o: ["Splanchnology", "Arthrology", "Osteology", "Myology"], a: 3, e: "Myo = muscle." },
         { q: "Which type of muscle tissue is voluntary and striated?", o: ["Smooth muscle", "Cardiac muscle", "Skeletal muscle", "Visceral muscle"], a: 2, e: "Attaches to bones and causes conscious movement." },
         { q: "A strong fibrous cord that connects muscle to bone is called a:", o: ["Ligament", "Tendon", "Retinaculum", "Bursa"], a: 1, e: "Transmits the pull of the muscle to the bone." },
-        { q: "A broad, flat sheet of tendon connecting muscle to bone (e.g., in abdominal muscles) is called an:", o: ["Aponeurosis", "Fascia", "Ligament", "Meniscus"], a: 0, e: "Typical of the abdominal oblique muscles." }
+        { q: "A broad, flat sheet of tendon connecting muscle to bone (e.g., in abdominal muscles) is called an:", o: ["Aponeurosis", "Fascia", "Ligament", "Meniscus"], a: 0, e: "Typical of the abdominal oblique muscles." },
+        { q: "A joint that allows NO movement is classified as a:", o: ["Diarthrosis", "Amphiarthrosis", "Synarthrosis", "Synovial joint"], a: 2, e: "Sutures of the skull are synarthroses." },
+        { q: "A joint that allows SLIGHT movement is classified as a:", o: ["Synarthrosis", "Amphiarthrosis", "Diarthrosis", "Ball-and-socket"], a: 1, e: "E.g., the pelvic symphysis and intervertebral disc joints." },
+        { q: "Which type of joint is a gomphosis?", o: ["Tooth in its socket", "Skull suture", "Intervertebral disc", "Knee joint"], a: 0, e: "A peg-in-socket fibrous joint unique to the teeth." },
+        { q: "The synovial fluid in a diarthrodial joint is produced by the:", o: ["Articular cartilage", "Synovial membrane", "Joint capsule (fibrous layer)", "Periosteum"], a: 1, e: "The synovial membrane lines the inner surface of the joint capsule." },
+        { q: "A pivot joint allows which type of movement?", o: ["Flexion/Extension only", "Rotation around a single axis", "Gliding", "Multi-axial movement"], a: 1, e: "E.g., the atlantoaxial joint (C1-C2) allows head rotation." },
+        { q: "An ellipsoidal (condylar) joint allows movement in:", o: ["One plane only", "Two planes (biaxial)", "All planes (multi-axial)", "No planes"], a: 1, e: "E.g., the metacarpophalangeal (fetlock) joint allows flexion/extension and some side-to-side." },
+        { q: "The elbow joint is classified as a:", o: ["Ball-and-socket joint", "Hinge (ginglymus) joint", "Pivot joint", "Gliding joint"], a: 1, e: "It allows movement primarily in one plane: flexion and extension." },
+        { q: "The muscle responsible for the primary action at a joint is called the:", o: ["Antagonist", "Synergist", "Prime mover (agonist)", "Fixator"], a: 2, e: "The muscle that performs the main movement." },
+        { q: "A muscle that opposes the action of the prime mover is called an:", o: ["Agonist", "Antagonist", "Synergist", "Fixator"], a: 1, e: "E.g., the triceps is the antagonist to the biceps during elbow flexion." },
+        { q: "Skeletal muscle fibers are:", o: ["Smooth and involuntary", "Striated and voluntary", "Striated and involuntary", "Non-striated and voluntary"], a: 1, e: "Skeletal muscle has visible striations and is under conscious control." },
+        { q: "The functional unit of skeletal muscle contraction is the:", o: ["Myofibril", "Sarcomere", "Fascicle", "Motor unit"], a: 1, e: "The sarcomere is the repeating unit between two Z-lines." },
+        { q: "A synovial sheath differs from a bursa in that it:", o: ["Is solid", "Completely wraps around a tendon like a tube", "Is found only in bone", "Contains blood instead of fluid"], a: 1, e: "A sheath is a double-layered tube around a tendon; a bursa is a flat sac." },
+        { q: "The fibrous outer layer of the joint capsule provides:", o: ["Lubrication", "Nutrition to cartilage", "Mechanical stability and strength", "Shock absorption"], a: 2, e: "The fibrous capsule holds the joint together." },
+        { q: "Smooth muscle is found in the walls of:", o: ["Bones", "Tendons", "Visceral organs like intestines and blood vessels", "The brain"], a: 2, e: "It is involuntary and non-striated." },
+        { q: "The connective tissue wrapping around an individual muscle fiber is called:", o: ["Epimysium", "Perimysium", "Endomysium", "Fascia"], a: 2, e: "Endo = within, around a single fiber." },
+        { q: "The connective tissue sheath surrounding an entire muscle is the:", o: ["Endomysium", "Perimysium", "Epimysium", "Retinaculum"], a: 2, e: "Epi = upon, covering the whole muscle." },
+        { q: "A muscle with two heads of origin is called a:", o: ["Triceps", "Biceps", "Quadriceps", "Digastricus"], a: 1, e: "Bi = two, ceps = heads." },
+        { q: "The point of muscle attachment that remains relatively fixed during contraction is the:", o: ["Insertion", "Origin", "Belly", "Tendon"], a: 1, e: "Usually the more proximal attachment point." }
       ],
       tf: [
         { q: "Symphyses (like the pelvic symphysis) are freely movable synovial joints.", a: false, e: "False. They are slightly movable cartilaginous joints (amphiarthroses)." },
         { q: "The meniscus is a fibrocartilaginous disc found in joints like the stifle to improve fit.", a: true, e: "True. It acts as a shock absorber and deepens the articular surface." },
         { q: "Smooth muscle is striated and under voluntary control.", a: false, e: "False. It is non-striated and involuntary, found in organs like the intestines." },
         { q: "The origin of a muscle is its more fixed, usually proximal, attachment point.", a: true, e: "True. The insertion is the more movable, distal point." },
-        { q: "A bursa is a fluid-filled sac that reduces friction between a tendon and a bone.", a: true, e: "True. It acts like a cushion." }
+        { q: "A bursa is a fluid-filled sac that reduces friction between a tendon and a bone.", a: true, e: "True. It acts like a cushion." },
+        { q: "A gomphosis is a type of synovial joint.", a: false, e: "False. It is a fibrous joint (peg-in-socket), as seen in teeth." },
+        { q: "The synovial membrane produces synovial fluid to lubricate joints.", a: true, e: "True. It also provides nutrients to the articular cartilage." },
+        { q: "A pivot joint allows flexion and extension.", a: false, e: "False. A pivot joint allows rotation around a single axis." },
+        { q: "The sarcomere is the functional unit of muscle contraction.", a: true, e: "True. It is the repeating contractile unit between two Z-lines." },
+        { q: "Smooth muscle is striated and voluntary.", a: false, e: "False. Smooth muscle is non-striated and involuntary." },
+        { q: "The endomysium wraps around individual muscle fibers.", a: true, e: "True. Perimysium wraps fascicles; epimysium wraps the entire muscle." },
+        { q: "The insertion of a muscle is its more fixed, proximal attachment.", a: false, e: "False. The ORIGIN is the fixed point; the insertion is the movable point." },
+        { q: "A synovial sheath completely envelops a tendon like a tube.", a: true, e: "True. Unlike a bursa which is a flat cushion." },
+        { q: "Cardiac muscle is striated but involuntary.", a: true, e: "True. It has cross-striations but is not under conscious control." }
       ],
       fib: [
         { q: "A joint with no joint cavity and bones united by fibrous tissue is classified structurally as a _____ joint.", a: ["fibrous"], e: "E.g., skull sutures." },
@@ -1575,7 +1864,16 @@ const quizBank = {
         { q: "A fibrous band connecting bone to bone is a _____.", a: ["ligament"], e: "Stabilizes joints." },
         { q: "The type of muscle found only in the heart is _____ muscle.", a: ["cardiac"], e: "Striated but involuntary." },
         { q: "A flat, sheet-like tendon is called an _____.", a: ["aponeurosis"], e: "E.g., linea alba." },
-        { q: "A band of connective tissue that holds tendons in place (like a bracelet) is called a _____.", a: ["retinaculum"], e: "Found at the carpus and tarsus." }
+        { q: "A band of connective tissue that holds tendons in place (like a bracelet) is called a _____.", a: ["retinaculum"], e: "Found at the carpus and tarsus." },
+        { q: "A joint that permits no movement is classified as a _____.", a: ["synarthrosis"], e: "E.g., skull sutures." },
+        { q: "A joint that permits slight movement is an _____.", a: ["amphiarthrosis"], e: "E.g., pelvic symphysis." },
+        { q: "The type of fibrous joint attaching a tooth to its bony socket is a _____.", a: ["gomphosis"], e: "Unique to the dental alveolus." },
+        { q: "The lubricating fluid inside a synovial joint is called _____ fluid.", a: ["synovial"], e: "Produced by the synovial membrane." },
+        { q: "The contractile unit of skeletal muscle between two Z-lines is the _____.", a: ["sarcomere"], e: "Contains actin and myosin filaments." },
+        { q: "The connective tissue layer wrapping an entire muscle is the _____.", a: ["epimysium"], e: "The outermost muscle sheath." },
+        { q: "A muscle that opposes the action of the agonist is called an _____.", a: ["antagonist"], e: "Works in opposition to the prime mover." },
+        { q: "The relatively fixed attachment point of a muscle is its _____.", a: ["origin"], e: "Usually proximal." },
+        { q: "A double-layered tube of synovium wrapping around a tendon is a synovial _____.", a: ["sheath"], e: "Reduces friction where tendons pass through tight spaces." }
       ]
     },
     "Angiology & Neurology": {
@@ -1589,21 +1887,56 @@ const quizBank = {
         { q: "The basic functional unit of the nervous system is the:", o: ["Nephron", "Neuron", "Osteon", "Sarcomere"], a: 1, e: "A nerve cell." },
         { q: "A bundle of nerve fibers running together outside the CNS is called a:", o: ["Tract", "Ganglion", "Nerve", "Nucleus"], a: 2, e: "Inside the CNS, a bundle of fibers is called a tract." },
         { q: "A collection of neuronal cell bodies located outside the CNS is a:", o: ["Nucleus", "Ganglion", "Nerve", "Plexus"], a: 1, e: "E.g., dorsal root ganglia." },
-        { q: "The study of sensory organs (eye, ear, smell, taste, touch) is called:", o: ["Aesthesiology", "Splanchnology", "Neurology", "Endocrinology"], a: 0, e: "Aesthesis = sensation." }
+        { q: "The study of sensory organs (eye, ear, smell, taste, touch) is called:", o: ["Aesthesiology", "Splanchnology", "Neurology", "Endocrinology"], a: 0, e: "Aesthesis = sensation." },
+        { q: "The autonomic nervous system is divided into:", o: ["Somatic and visceral", "Sympathetic and parasympathetic divisions", "Afferent and efferent", "Central and peripheral"], a: 1, e: "The sympathetic (fight-or-flight) and parasympathetic (rest-and-digest) control visceral functions." },
+        { q: "A reflex arc consists of which minimum components?", o: ["Receptor, afferent neuron, integration center, efferent neuron, effector", "Only a sensory neuron and motor neuron", "Brain and spinal cord only", "Muscles and tendons"], a: 0, e: "All five components are needed for a complete reflex." },
+        { q: "The sympathetic nervous system prepares the body for:", o: ["Rest and digestion", "Sleep", "Fight-or-flight response", "Nutrient absorption"], a: 2, e: "It increases heart rate, dilates pupils, and redirects blood to muscles." },
+        { q: "The parasympathetic nervous system is primarily associated with:", o: ["Increased heart rate", "Pupil dilation", "Rest, digestion, and recovery", "Vasoconstriction"], a: 2, e: "It conserves energy and promotes digestive processes." },
+        { q: "The spinal cord is protected by:", o: ["The vertebral canal (formed by vertebral arches)", "The skull", "The sternum", "The ribs only"], a: 0, e: "The vertebral canal is a continuous tube formed by successive vertebral foramina." },
+        { q: "Spinal nerves exit the vertebral canal through:", o: ["The vertebral canal", "Intervertebral foramina", "The foramen magnum", "The spinal cord itself"], a: 1, e: "Each spinal nerve exits between two adjacent vertebrae." },
+        { q: "The part of the autonomic nervous system that has long preganglionic fibers and ganglia near or in the target organ is the:", o: ["Sympathetic", "Parasympathetic", "Somatic", "Enteric"], a: 1, e: "Parasympathetic has long pre- and short postganglionic fibers." },
+        { q: "The neurotransmitter released at the neuromuscular junction of skeletal muscle is:", o: ["Norepinephrine", "Acetylcholine", "Dopamine", "Serotonin"], a: 1, e: "ACh binds to nicotinic receptors on the muscle fiber." },
+        { q: "The lymphatic system returns tissue fluid to the:", o: ["Arteries", "Veins (venous system)", "Heart directly", "Kidneys"], a: 1, e: "Lymph drains into the venous system via the thoracic duct and right lymphatic duct." },
+        { q: "The largest lymphatic vessel in the body is the:", o: ["Right lymphatic duct", "Thoracic duct", "Cisterna chyli", "Jugular trunk"], a: 1, e: "The thoracic duct drains most of the body's lymph." },
+        { q: "A plexus of nerves is:", o: ["A single nerve fiber", "A network of interwoven nerve fibers", "A cluster of cell bodies", "A type of reflex"], a: 1, e: "E.g., the brachial plexus and lumbosacral plexus." },
+        { q: "The dorsal root of a spinal nerve contains:", o: ["Motor fibers only", "Sensory fibers only", "Both motor and sensory", "Autonomic fibers only"], a: 1, e: "Sensory (afferent) fibers enter the spinal cord via the dorsal root." },
+        { q: "The ventral root of a spinal nerve contains:", o: ["Sensory fibers only", "Motor fibers only", "Both motor and sensory", "Autonomic fibers only"], a: 1, e: "Motor (efferent) fibers exit the spinal cord via the ventral root." },
+        { q: "The collection of sensory cell bodies on the dorsal root is the:", o: ["Ventral horn", "Dorsal root ganglion", "Sympathetic trunk", "Motor nucleus"], a: 1, e: "Also called the spinal ganglion." },
+        { q: "The main artery of the body, receiving blood directly from the left ventricle, is the:", o: ["Pulmonary artery", "Aorta", "Vena cava", "Coronary artery"], a: 1, e: "The aorta distributes oxygenated blood to the entire body." },
+        { q: "The vessel carrying deoxygenated blood from the body back to the right atrium is the:", o: ["Aorta", "Pulmonary vein", "Vena cava", "Hepatic artery"], a: 2, e: "The cranial and caudal vena cava drain into the right atrium." },
+        { q: "The portal vein carries blood from the:", o: ["Heart to the lungs", "Gastrointestinal tract to the liver", "Kidneys to the heart", "Brain to the heart"], a: 1, e: "Nutrient-rich blood from the gut is processed by the liver before entering systemic circulation." },
+        { q: "The thoracic duct empties into the venous system at the junction of the:", o: ["Right atrium and vena cava", "Left external jugular and subclavian veins", "Hepatic veins", "Renal veins"], a: 1, e: "This is the main lymphovenous communication." }
       ],
       tf: [
         { q: "Arteries always carry oxygenated blood.", a: false, e: "False. The pulmonary artery carries deoxygenated blood to the lungs." },
         { q: "Veins generally have thinner walls than arteries of the same size.", a: true, e: "True. Because they operate under much lower pressure." },
         { q: "The peripheral nervous system (PNS) includes the brain and spinal cord.", a: false, e: "False. The PNS includes the cranial and spinal nerves outside the CNS." },
         { q: "Afferent nerve fibers carry signals from the body TO the central nervous system.", a: true, e: "True. They are sensory fibers. Efferent (motor) fibers carry signals AWAY." },
-        { q: "Aesthesiology includes the study of the eye and the ear.", a: true, e: "True. It covers all special sense organs." }
+        { q: "Aesthesiology includes the study of the eye and the ear.", a: true, e: "True. It covers all special sense organs." },
+        { q: "The sympathetic nervous system promotes digestion.", a: false, e: "False. The parasympathetic system promotes digestion; the sympathetic inhibits it." },
+        { q: "Spinal nerves exit through intervertebral foramina.", a: true, e: "True. Each pair exits between two vertebrae." },
+        { q: "The dorsal root of a spinal nerve carries motor fibers.", a: false, e: "False. It carries sensory (afferent) fibers. Motor fibers use the ventral root." },
+        { q: "The thoracic duct is the largest lymphatic vessel in the body.", a: true, e: "True. It drains lymph from most of the body." },
+        { q: "The portal vein carries blood from the liver to the intestines.", a: false, e: "False. It carries blood FROM the intestines TO the liver." },
+        { q: "A reflex arc requires conscious brain input to function.", a: false, e: "False. Reflexes are involuntary and are processed at the spinal cord level." },
+        { q: "The aorta carries deoxygenated blood to the lungs.", a: false, e: "False. The aorta carries oxygenated blood to the body. The pulmonary artery carries deoxygenated blood to the lungs." },
+        { q: "Acetylcholine is the neurotransmitter at the skeletal neuromuscular junction.", a: true, e: "True. It binds to nicotinic receptors on the motor end plate." },
+        { q: "The enteric nervous system is considered a third division of the autonomic nervous system.", a: true, e: "True. It controls the gastrointestinal tract independently." }
       ],
       fib: [
         { q: "The study of the heart and blood vessels is called _____ology.", a: ["angi"], e: "From Greek angeion." },
         { q: "The smallest blood vessels in the body where gas exchange happens are _____.", a: ["capillaries"], e: "Microscopic network." },
         { q: "The structural and functional unit of the nervous system is the nerve cell, or _____.", a: ["neuron"], e: "Generates action potentials." },
         { q: "Nerve fibers that carry motor commands AWAY from the brain are called _____ fibers.", a: ["efferent", "motor"], e: "Exiting the CNS." },
-        { q: "The study of the sensory organs is called _____ology.", a: ["aesthesi"], e: "Includes vision and hearing." }
+        { q: "The study of the sensory organs is called _____ology.", a: ["aesthesi"], e: "Includes vision and hearing." },
+        { q: "The two divisions of the autonomic nervous system are the sympathetic and _____.", a: ["parasympathetic"], e: "Rest-and-digest system." },
+        { q: "A network of interwoven nerve fibers forming a complex is called a _____.", a: ["plexus"], e: "E.g., brachial plexus." },
+        { q: "The sensory cell bodies on the dorsal root of a spinal nerve form the dorsal root _____.", a: ["ganglion"], e: "A cluster of neuron cell bodies outside the CNS." },
+        { q: "The main artery of the body arising from the left ventricle is the _____.", a: ["aorta"], e: "Distributes oxygenated blood." },
+        { q: "The vein carrying nutrient-rich blood from the gut to the liver is the _____ vein.", a: ["portal", "hepatic portal"], e: "A portal system." },
+        { q: "The largest lymphatic vessel draining most of the body is the _____ duct.", a: ["thoracic"], e: "Empties into the venous system." },
+        { q: "The neurotransmitter at the skeletal neuromuscular junction is _____.", a: ["acetylcholine", "ACh"], e: "Acts on nicotinic receptors." },
+        { q: "Sensory fibers enter the spinal cord via the _____ root.", a: ["dorsal"], e: "Afferent pathway." }
       ]
     },
     "Splanchnology & Clinical": {
@@ -1622,7 +1955,24 @@ const quizBank = {
         { q: "Which imaging technique uses a strong magnetic field and radio waves to create highly detailed images, especially of the nervous system and joints?", o: ["CT Scan", "Ultrasonography", "MRI (Magnetic Resonance Imaging)", "Fluoroscopy"], a: 2, e: "Provides superior soft tissue contrast." },
         { q: "Which imaging technique uses multiple X-rays to create cross-sectional (transverse) 'slices' of the body?", o: ["CT Scan (Computed Tomography)", "MRI", "Ultrasound", "Standard Radiograph"], a: 0, e: "Removes superimposition seen in standard X-rays." },
         { q: "A radiograph taken with the X-ray beam entering the belly and exiting the back is called:", o: ["Dorso-ventral (DV)", "Ventro-dorsal (VD)", "Lateral", "Oblique"], a: 1, e: "The name of the view is based on the direction the beam travels." },
-        { q: "The serous membrane lining the abdominal cavity and covering its organs is the:", o: ["Pleura", "Pericardium", "Peritoneum", "Meninges"], a: 2, e: "Pleura is for the thorax, pericardium for the heart." }
+        { q: "The serous membrane lining the abdominal cavity and covering its organs is the:", o: ["Pleura", "Pericardium", "Peritoneum", "Meninges"], a: 2, e: "Pleura is for the thorax, pericardium for the heart." },
+        { q: "The serous membrane covering the lungs is the:", o: ["Pericardium", "Visceral pleura", "Peritoneum", "Mesentery"], a: 1, e: "The visceral pleura directly covers the lung surface." },
+        { q: "The double fold of peritoneum that suspends the intestines from the dorsal body wall is the:", o: ["Omentum", "Mesentery", "Mesocolon", "Broad ligament"], a: 1, e: "It carries blood vessels, nerves, and lymphatics to the gut." },
+        { q: "The greater omentum is a large, fatty apron-like fold of peritoneum that hangs from the:", o: ["Liver", "Greater curvature of the stomach", "Kidneys", "Diaphragm"], a: 1, e: "It acts as a fat storage depot and helps wall off infections." },
+        { q: "The body cavities are divided into the:", o: ["Thoracic and abdominal cavities only", "Thoracic, abdominal, and pelvic cavities", "Cranial, thoracic, abdominal, and pelvic cavities", "Dorsal and ventral cavities"], a: 2, e: "The cranial cavity contains the brain, the thoracic contains the heart and lungs, and the abdominal and pelvic contain digestive and urogenital organs." },
+        { q: "Retroperitoneal organs are those located:", o: ["Within the peritoneal cavity", "Behind the peritoneum, against the dorsal body wall", "In the thoracic cavity", "In the pelvic cavity only"], a: 1, e: "E.g., the kidneys and adrenal glands are retroperitoneal." },
+        { q: "The left flank of a cow is dominated by the:", o: ["Liver", "Rumen", "Cecum", "Right kidney"], a: 1, e: "The rumen occupies most of the left side of the bovine abdomen." },
+        { q: "The number of mammary glands (teats) in the cow is:", o: ["2", "4", "6", "10"], a: 1, e: "Cows have 4 teats (quarters)." },
+        { q: "The number of mammary glands (teats) in the bitch is typically:", o: ["4", "6", "8-10", "12"], a: 2, e: "Dogs typically have 8-10 mammary glands arranged in two rows." },
+        { q: "Topographic anatomy refers to:", o: ["The study of bones", "The study of body regions and the relationships of structures within them", "The study of cells", "The study of embryonic development"], a: 1, e: "Also known as regional anatomy." },
+        { q: "The region of the body between the last rib, lumbar transverse processes, and tuber coxae is the:", o: ["Axilla", "Paralumbar fossa (flank)", "Inguinal region", "Brisket"], a: 1, e: "An important surgical site in ruminants for laparotomy and rumenotomy." },
+        { q: "The caudal border of the heart base for percussion in cattle is approximately at the:", o: ["3rd intercostal space", "5th intercostal space", "8th intercostal space", "13th intercostal space"], a: 1, e: "The cardiac area of percussion extends from the 3rd to 5th intercostal space on the left." },
+        { q: "Which imaging modality provides real-time moving images of internal structures using X-rays?", o: ["Standard radiography", "Fluoroscopy", "MRI", "Ultrasonography"], a: 1, e: "Fluoroscopy uses continuous X-rays to create a moving image." },
+        { q: "Endoscopy involves:", o: ["Using X-rays to view bones", "Inserting a camera into a body cavity to view internal surfaces", "Using sound waves", "Using magnetic fields"], a: 1, e: "Common types include arthroscopy, laparoscopy, and gastroscopy." },
+        { q: "The brisket is the ventral part of the:", o: ["Abdomen", "Pelvis", "Cranial thorax (sternal region)", "Head"], a: 2, e: "The brisket lies over the sternum in cattle." },
+        { q: "The 'withers' in the horse is the region over the:", o: ["Lumbar vertebrae", "Spinous processes of T3-T8 (approximately)", "Sacrum", "Last cervical vertebra"], a: 1, e: "The tallest spinous processes of the thoracic vertebrae form this prominent ridge." },
+        { q: "The poll of the horse is the:", o: ["Area between the ears (dorsal cranium)", "Ventral neck", "Point of the shoulder", "Muzzle"], a: 0, e: "The poll corresponds to the occipital region of the skull." },
+        { q: "The pastern region in the horse corresponds to:", o: ["The metacarpus", "The area of P1 and P2", "The hoof wall", "The carpus"], a: 1, e: "Between the fetlock and the coronet band." }
       ],
       tf: [
         { q: "The serosa is the outermost layer of an organ situated within a body cavity.", a: true, e: "True. It provides a smooth, slippery surface to prevent adhesions." },
@@ -1631,7 +1981,16 @@ const quizBank = {
         { q: "Air appears white (radiopaque) on a standard radiograph.", a: false, e: "False. It appears black (radiolucent)." },
         { q: "Ultrasonography uses ionizing radiation to create images.", a: false, e: "False. It uses harmless, high-frequency sound waves." },
         { q: "CT scans provide transverse (cross-sectional) views of the body without physically cutting it.", a: true, e: "True. Computed tomography mathematically reconstructs the slices." },
-        { q: "The study of the respiratory and digestive systems falls under Splanchnology.", a: true, e: "True. It covers all the visceral organ systems." }
+        { q: "The study of the respiratory and digestive systems falls under Splanchnology.", a: true, e: "True. It covers all the visceral organ systems." },
+        { q: "The kidneys are intraperitoneal organs.", a: false, e: "False. They are retroperitoneal, lying behind the peritoneum." },
+        { q: "The greater omentum hangs from the greater curvature of the stomach.", a: true, e: "True. It acts as an immunological organ and fat reservoir." },
+        { q: "The mesentery suspends the intestines from the ventral body wall.", a: false, e: "False. It suspends them from the DORSAL body wall." },
+        { q: "Cows have 4 mammary glands (teats/quarters).", a: true, e: "True. Arranged in two pairs." },
+        { q: "The paralumbar fossa is an important site for laparotomy in ruminants.", a: true, e: "True. Left flank laparotomy provides access to the rumen." },
+        { q: "The withers in a horse is the area over the lumbar vertebrae.", a: false, e: "False. It is over the thoracic spinous processes (approximately T3-T8)." },
+        { q: "Fluoroscopy provides real-time moving X-ray images.", a: true, e: "True. Used for dynamic studies like barium swallows." },
+        { q: "The brisket is the ventral thoracic region over the sternum.", a: true, e: "True. Prominent in cattle." },
+        { q: "Endoscopy uses magnetic fields to create images.", a: false, e: "False. Endoscopy uses a camera inserted into the body. MRI uses magnetic fields." }
       ],
       fib: [
         { q: "The study of the visceral organs of the body is called _____ology.", a: ["splanchn"], e: "Includes gut, lungs, kidneys, etc." },
@@ -1641,7 +2000,16 @@ const quizBank = {
         { q: "The prominent bone at the point of the elbow is the _____.", a: ["olecranon"], e: "Part of the ulna." },
         { q: "Structures that block X-rays and appear white on film are termed radio_____.", a: ["opaque"], e: "Like bone or metal." },
         { q: "Structures that let X-rays pass through and appear black are termed radio_____.", a: ["lucent"], e: "Like air in the lungs." },
-        { q: "_____ography uses high-frequency sound waves to image soft tissues.", a: ["ultrason", "ech"], e: "Relies on echoes." }
+        { q: "_____ography uses high-frequency sound waves to image soft tissues.", a: ["ultrason", "ech"], e: "Relies on echoes." },
+        { q: "The double fold of peritoneum suspending the intestines from the dorsal wall is the _____.", a: ["mesentery"], e: "Carries blood vessels to the gut." },
+        { q: "The large fatty fold hanging from the greater curvature of the stomach is the greater _____.", a: ["omentum"], e: "Walls off infections." },
+        { q: "Organs located behind the peritoneum, like the kidneys, are termed _____peritoneal.", a: ["retro"], e: "Not suspended within the peritoneal cavity." },
+        { q: "The region of the flank between the last rib and tuber coxae is the _____ fossa.", a: ["paralumbar"], e: "Key surgical site in cattle." },
+        { q: "The prominent ridge over the thoracic spine of the horse is called the _____.", a: ["withers"], e: "Height of the horse is measured here." },
+        { q: "The dorsal region of the head between the ears in the horse is called the _____.", a: ["poll"], e: "Overlies the occipital bone." },
+        { q: "The region of P1 and P2 in the equine limb is called the _____.", a: ["pastern"], e: "Between the fetlock and the hoof." },
+        { q: "The ventral sternal region in cattle is called the _____.", a: ["brisket"], e: "Overlies the sternum." },
+        { q: "The imaging technique using a camera inserted into the body is called _____.", a: ["endoscopy"], e: "Includes arthroscopy and laparoscopy." }
       ]
     }
   },
@@ -1672,7 +2040,24 @@ const quizBank = {
         { q: "Cartilage cells trapped within lacunae are called:", o: ["Osteocytes", "Chondrocytes", "Fibroblasts", "Macrophages"], a: 1, e: "Chondro = cartilage." },
         { q: "The most common type of cartilage in the body, found on articular surfaces and tracheal rings, is:", o: ["Elastic cartilage", "Fibrocartilage", "Hyaline cartilage", "Calcified cartilage"], a: 2, e: "Has a glassy appearance." },
         { q: "The pinna of the ear and the epiglottis are supported by which type of cartilage?", o: ["Hyaline cartilage", "Fibrocartilage", "Elastic cartilage", "Bone"], a: 2, e: "Contains abundant elastic fibers for flexibility." },
-        { q: "The fundamental structural unit of compact bone is the:", o: ["Chondron", "Osteon (Haversian system)", "Trabecula", "Lacuna"], a: 1, e: "Concentric rings of bone around a central canal." }
+        { q: "The fundamental structural unit of compact bone is the:", o: ["Chondron", "Osteon (Haversian system)", "Trabecula", "Lacuna"], a: 1, e: "Concentric rings of bone around a central canal." },
+        { q: "Simple squamous epithelium lining blood vessels is specifically called:", o: ["Mesothelium", "Endothelium", "Urothelium", "Neuroepithelium"], a: 1, e: "Endothelium provides a smooth surface for blood flow." },
+        { q: "The simple squamous epithelium lining body cavities (pleura, peritoneum) is called:", o: ["Endothelium", "Mesothelium", "Urothelium", "Epitheloid"], a: 1, e: "Mesothelium lines serous membranes." },
+        { q: "Pseudostratified columnar ciliated epithelium is found in the:", o: ["Skin", "Trachea and bronchi", "Stomach", "Urinary bladder"], a: 1, e: "It moves mucus upward (mucociliary escalator)." },
+        { q: "Stratified squamous keratinized epithelium is found in:", o: ["Oral cavity", "Skin (epidermis)", "Trachea", "Intestine"], a: 1, e: "Keratin provides a tough, waterproof barrier." },
+        { q: "Which type of connective tissue has the most rigid matrix?", o: ["Loose connective tissue", "Dense regular CT", "Bone (osseous tissue)", "Blood"], a: 2, e: "Bone matrix is calcified with hydroxyapatite crystals." },
+        { q: "Tendons are composed of which type of connective tissue?", o: ["Loose (areolar) CT", "Dense regular CT", "Dense irregular CT", "Reticular CT"], a: 1, e: "Parallel collagen fibers resist unidirectional tension." },
+        { q: "The dermis of the skin is composed of:", o: ["Dense irregular CT", "Dense regular CT", "Loose CT only", "Cartilage"], a: 0, e: "The randomly oriented collagen fibers resist multidirectional stress." },
+        { q: "Hyaline cartilage is found in:", o: ["Ear pinna", "Tracheal rings", "Intervertebral discs", "Tendons"], a: 1, e: "Also found on articular surfaces and in the fetal skeleton." },
+        { q: "Elastic cartilage, containing many elastic fibers, is found in:", o: ["Trachea", "Nasal septum", "Ear pinna (auricle) and epiglottis", "Joints"], a: 2, e: "It can bend and spring back to shape." },
+        { q: "Fibrocartilage, the toughest cartilage, is found in:", o: ["Ear pinna", "Tracheal rings", "Intervertebral discs and menisci", "Articular surfaces"], a: 2, e: "Combines the strength of dense CT with the resilience of cartilage." },
+        { q: "The cell responsible for producing cartilage matrix is the:", o: ["Osteoblast", "Chondroblast", "Fibroblast", "Osteoclast"], a: 1, e: "Once trapped in a lacuna, it becomes a chondrocyte." },
+        { q: "The cells responsible for producing collagen fibers in connective tissue are:", o: ["Mast cells", "Macrophages", "Fibroblasts", "Plasma cells"], a: 2, e: "Fibroblasts are the most common CT cell and produce the ECM." },
+        { q: "Mast cells in connective tissue release which substance during allergic reactions?", o: ["Collagen", "Histamine", "Melanin", "Keratin"], a: 1, e: "Histamine causes vasodilation and increased permeability." },
+        { q: "Cardiac muscle cells are connected end-to-end by specialized junctions called:", o: ["Desmosomes", "Tight junctions", "Intercalated discs", "Gap junctions only"], a: 2, e: "Intercalated discs contain desmosomes and gap junctions for coordinated contraction." },
+        { q: "Neurons have long cytoplasmic extensions called:", o: ["Cilia", "Microvilli", "Axons and dendrites", "Stereocilia"], a: 2, e: "Dendrites receive signals; axons transmit them away from the cell body." },
+        { q: "The supporting cells of the nervous system are collectively called:", o: ["Schwann cells only", "Neuroglia (glial cells)", "Astrocytes only", "Neurons"], a: 1, e: "Includes astrocytes, oligodendrocytes, microglia, and Schwann cells." },
+        { q: "Goblet cells are unicellular glands that secrete:", o: ["Enzymes", "Mucus", "Hormones", "Keratin"], a: 1, e: "Found in the intestinal and respiratory epithelium." }
       ],
       tf: [
         { q: "Hematoxylin is a basic dye that stains acidic structures blue.", a: true, e: "True. It is basophilic staining." },
@@ -1684,7 +2069,15 @@ const quizBank = {
         { q: "Collagen fibers are highly elastic and can stretch to twice their length.", a: false, e: "False. Elastic fibers stretch; collagen provides immense tensile strength but doesn't stretch." },
         { q: "Cartilage is highly vascularized, which allows it to heal quickly.", a: false, e: "False. Cartilage is avascular and heals very slowly." },
         { q: "Osteoblasts are mature bone cells trapped in lacunae.", a: false, e: "False. OsteoCYTES are trapped. OsteoBLASTS are actively forming bone." },
-        { q: "The Haversian canal in the center of an osteon contains blood vessels and nerves.", a: true, e: "True. This provides the blood supply for compact bone." }
+        { q: "The Haversian canal in the center of an osteon contains blood vessels and nerves.", a: true, e: "True. This provides the blood supply for compact bone." },
+        { q: "Endothelium is simple squamous epithelium lining blood vessels.", a: true, e: "True. Provides a smooth, non-thrombogenic surface." },
+        { q: "Pseudostratified epithelium is truly multi-layered.", a: false, e: "False. All cells touch the basement membrane, but not all reach the surface." },
+        { q: "Tendons are made of dense irregular connective tissue.", a: false, e: "False. Tendons are dense REGULAR CT with parallel collagen fibers." },
+        { q: "Fibrocartilage is found in intervertebral discs.", a: true, e: "True. Its combination of strength and flexibility makes it ideal for shock absorption." },
+        { q: "Fibroblasts are the most common cell type in connective tissue.", a: true, e: "True. They produce the extracellular matrix." },
+        { q: "Cardiac muscle is voluntary and non-striated.", a: false, e: "False. Cardiac muscle is involuntary and STRIATED." },
+        { q: "Intercalated discs are found in skeletal muscle.", a: false, e: "False. They are unique to cardiac muscle." },
+        { q: "Goblet cells secrete mucus in the respiratory and intestinal epithelium.", a: true, e: "True. They are unicellular glands." }
       ],
       fib: [
         { q: "The most common histological stain is _____ and eosin.", a: ["hematoxylin"], e: "Abbreviated H&E." },
@@ -1697,7 +2090,15 @@ const quizBank = {
         { q: "The dominant cell type in adipose tissue is the _____.", a: ["adipocyte", "fat cell"], e: "Stores a large lipid droplet." },
         { q: "The most abundant protein in the animal body, forming strong fibers in connective tissue, is _____.", a: ["collagen"], e: "Gives tendons their strength." },
         { q: "The cell responsible for maintaining the cartilage matrix, found in a lacuna, is a _____.", a: ["chondrocyte"], e: "Trapped in the matrix it produced." },
-        { q: "The type of cartilage found in the intervertebral discs and menisci is _____cartilage.", a: ["fibro", "fibrocartilage"], e: "Tough and resistant to compression." }
+        { q: "The type of cartilage found in the intervertebral discs and menisci is _____cartilage.", a: ["fibro", "fibrocartilage"], e: "Tough and resistant to compression." },
+        { q: "The simple squamous epithelium lining blood vessels is called _____.", a: ["endothelium"], e: "Forms the intima of vessels." },
+        { q: "The simple squamous epithelium lining body cavities is _____.", a: ["mesothelium"], e: "Lines serous membranes." },
+        { q: "The connective tissue cell that produces collagen fibers is the _____.", a: ["fibroblast"], e: "Most common CT cell." },
+        { q: "The specialized junctions connecting cardiac muscle cells are _____ discs.", a: ["intercalated"], e: "Allow synchronized contraction." },
+        { q: "Cartilage-producing cells are called _____blasts.", a: ["chondro"], e: "Become chondrocytes in lacunae." },
+        { q: "The toughest cartilage, found in intervertebral discs, is _____cartilage.", a: ["fibro"], e: "Combines dense CT and cartilage properties." },
+        { q: "Unicellular glands in the intestinal epithelium that secrete mucus are _____ cells.", a: ["goblet"], e: "Named for their goblet-like shape." },
+        { q: "The supporting cells of the nervous system are collectively called _____.", a: ["neuroglia", "glial cells", "glia"], e: "Includes astrocytes, oligodendrocytes, etc." }
       ]
     },
     "Blood & Bone Marrow": {
@@ -1707,20 +2108,55 @@ const quizBank = {
         { q: "The most numerous white blood cell (leukocyte) in the blood of dogs and cats is the:", o: ["Lymphocyte", "Monocyte", "Neutrophil", "Eosinophil"], a: 2, e: "The primary first-responder to bacterial infections." },
         { q: "The most numerous white blood cell in the blood of ruminants (ox/sheep) is the:", o: ["Neutrophil", "Lymphocyte", "Basophil", "Eosinophil"], a: 1, e: "Ruminants typically have a lymphocyte-predominant leukogram." },
         { q: "The leukocyte responsible for fighting parasitic infections and regulating allergic responses is the:", o: ["Neutrophil", "Eosinophil", "Basophil", "Monocyte"], a: 1, e: "Its granules stain bright red/pink." },
-        { q: "Platelets (thrombocytes), which are essential for blood clotting, are cell fragments derived from giant bone marrow cells called:", o: ["Osteoclasts", "Macrophages", "Megakaryocytes", "Lymphoblasts"], a: 2, e: "They pinch off bits of their cytoplasm to form platelets." }
+        { q: "Platelets (thrombocytes), which are essential for blood clotting, are cell fragments derived from giant bone marrow cells called:", o: ["Osteoclasts", "Macrophages", "Megakaryocytes", "Lymphoblasts"], a: 2, e: "They pinch off bits of their cytoplasm to form platelets." },
+        { q: "The most abundant white blood cell in the dog is the:", o: ["Lymphocyte", "Neutrophil", "Eosinophil", "Basophil"], a: 1, e: "Dogs, horses, and cats are neutrophil-dominant." },
+        { q: "Eosinophils are typically elevated in which conditions?", o: ["Bacterial infections", "Parasitic infections and allergies", "Viral infections", "Anemia"], a: 1, e: "Eosinophils contain granules toxic to parasites." },
+        { q: "The packed cell volume (PCV/hematocrit) measures:", o: ["White blood cell count", "Percentage of blood volume occupied by red blood cells", "Platelet count", "Plasma protein level"], a: 1, e: "A low PCV indicates anemia." },
+        { q: "Which blood cell type lacks a nucleus in mammals?", o: ["Neutrophils", "Lymphocytes", "Mature erythrocytes (RBCs)", "Monocytes"], a: 2, e: "Mammalian RBCs lose their nucleus during maturation." },
+        { q: "Avian (bird) erythrocytes differ from mammalian ones because they are:", o: ["Larger and nucleated", "Smaller and anucleate", "Identical", "Cube-shaped"], a: 0, e: "Bird RBCs are oval and retain their nucleus." },
+        { q: "Basophils are the:", o: ["Most common WBC", "Least common WBC", "Largest WBC", "Smallest WBC"], a: 1, e: "They make up less than 1% of circulating WBCs." },
+        { q: "Monocytes that migrate into tissues become:", o: ["Plasma cells", "Macrophages", "Mast cells", "Fibroblasts"], a: 1, e: "They become tissue macrophages (e.g., Kupffer cells in the liver)." },
+        { q: "The Buffy coat in a centrifuged blood sample consists of:", o: ["RBCs only", "Plasma only", "WBCs and platelets", "Fibrinogen"], a: 2, e: "A thin white layer between the RBC column and the plasma." },
+        { q: "Reticulocytes are:", o: ["Old RBCs", "Immature RBCs released early from bone marrow", "A type of WBC", "Platelets"], a: 1, e: "Their count indicates the rate of red cell production." },
+        { q: "Rouleaux formation (RBCs stacking like coins) is normal in:", o: ["Dogs", "Cats", "Horses", "Cattle"], a: 2, e: "Equine RBCs normally form rouleaux due to high fibrinogen." },
+        { q: "Heinz bodies in RBCs indicate:", o: ["Normal aging", "Oxidative damage to hemoglobin", "Iron deficiency", "Parasitic infection"], a: 1, e: "Common in cats exposed to oxidants like onion or acetaminophen." },
+        { q: "The granulocytes include:", o: ["Lymphocytes, monocytes, and basophils", "Neutrophils, eosinophils, and basophils", "Only neutrophils", "Platelets and RBCs"], a: 1, e: "Named for their cytoplasmic granules." },
+        { q: "Lymphocytes are produced in:", o: ["Liver only", "Bone marrow and lymphoid organs", "Kidney", "Spleen only"], a: 1, e: "B cells mature in bone marrow; T cells mature in the thymus." },
+        { q: "Plasma cells are differentiated from:", o: ["Neutrophils", "B lymphocytes", "T lymphocytes", "Monocytes"], a: 1, e: "They produce and secrete antibodies." },
+        { q: "The lifespan of a circulating neutrophil is approximately:", o: ["120 days", "6-8 hours in blood", "Several years", "1 minute"], a: 1, e: "Short-lived but rapidly produced in response to infection." },
+        { q: "Which species has RBCs that commonly show crenation on blood smear?", o: ["Dog", "Cat", "Pig", "Horse"], a: 2, e: "Porcine RBCs commonly show crenation as an artifact." },
+        { q: "The process of blood cell formation is called:", o: ["Hemostasis", "Hematopoiesis", "Hemolysis", "Homeostasis"], a: 1, e: "Occurs primarily in the bone marrow of adults." }
       ],
       tf: [
         { q: "Avian and reptilian red blood cells contain a nucleus.", a: true, e: "True. Only mammalian RBCs are anucleated." },
         { q: "Monocytes are the largest of the white blood cells and transform into macrophages in the tissues.", a: true, e: "True. They are the 'clean-up' crew." },
         { q: "Basophils are the most abundant leukocytes in the blood of all domestic species.", a: false, e: "False. They are the rarest white blood cell." },
         { q: "B-lymphocytes are responsible for producing antibodies.", a: true, e: "True. They mature into plasma cells." },
-        { q: "Red bone marrow is primarily composed of adipose (fat) tissue.", a: false, e: "False. Red bone marrow is actively hematopoietic (producing blood cells); yellow bone marrow is adipose." }
+        { q: "Red bone marrow is primarily composed of adipose (fat) tissue.", a: false, e: "False. Red bone marrow is actively hematopoietic (producing blood cells); yellow bone marrow is adipose." },
+        { q: "Mammalian mature RBCs are nucleated.", a: false, e: "False. They lose their nucleus. Avian RBCs retain theirs." },
+        { q: "Rouleaux formation is always pathological.", a: false, e: "False. It is a normal finding in horses." },
+        { q: "Eosinophils are elevated in parasitic infections.", a: true, e: "True. They release toxic granules against parasites." },
+        { q: "Monocytes differentiate into macrophages in tissues.", a: true, e: "True. E.g., Kupffer cells in the liver." },
+        { q: "Reticulocytes are immature RBCs indicating active red cell production.", a: true, e: "True. An elevated reticulocyte count suggests regenerative anemia." },
+        { q: "Plasma cells produce antibodies.", a: true, e: "True. They are differentiated B lymphocytes." },
+        { q: "Heinz bodies are a sign of iron deficiency anemia.", a: false, e: "False. They indicate oxidative damage to hemoglobin." },
+        { q: "Avian erythrocytes are oval and nucleated.", a: true, e: "True. Unlike mammalian RBCs." },
+        { q: "Cattle have neutrophil-dominant blood like dogs.", a: false, e: "False. Cattle are LYMPHOCYTE-dominant." }
       ],
       fib: [
         { q: "The liquid extracellular matrix of blood is called _____.", a: ["plasma"], e: "Contains water, proteins, and electrolytes." },
         { q: "Mammalian red blood cells are called _____.", a: ["erythrocytes"], e: "Erythro = red." },
         { q: "The white blood cell type that produces antibodies is the _____.", a: ["lymphocyte", "b lymphocyte"], e: "Crucial for adaptive immunity." },
-        { q: "Cell fragments in the blood that initiate clotting are called _____.", a: ["platelets", "thrombocytes"], e: "They form a plug at the site of vascular injury." }
+        { q: "Cell fragments in the blood that initiate clotting are called _____.", a: ["platelets", "thrombocytes"], e: "They form a plug at the site of vascular injury." },
+        { q: "The most abundant WBC in dogs and horses is the _____.", a: ["neutrophil"], e: "Neutrophil-dominant species." },
+        { q: "Platelets are derived from large bone marrow cells called _____.", a: ["megakaryocytes"], e: "They shed cytoplasmic fragments." },
+        { q: "The percentage of blood occupied by RBCs is the _____ (PCV).", a: ["packed cell volume", "hematocrit"], e: "Low PCV = anemia." },
+        { q: "Immature RBCs with residual RNA are called _____.", a: ["reticulocytes"], e: "Elevated count indicates regeneration." },
+        { q: "The normal stacking of equine RBCs is called _____ formation.", a: ["rouleaux"], e: "Due to high fibrinogen." },
+        { q: "Monocytes that become phagocytic in tissues are called _____.", a: ["macrophages"], e: "Part of the mononuclear phagocyte system." },
+        { q: "B lymphocytes differentiate into antibody-producing _____ cells.", a: ["plasma"], e: "Effector cells of humoral immunity." },
+        { q: "The thin white layer of WBCs and platelets in centrifuged blood is the _____ coat.", a: ["buffy"], e: "Located between RBCs and plasma." },
+        { q: "The process of blood cell formation is called _____.", a: ["hematopoiesis", "haematopoiesis"], e: "Occurs in bone marrow." }
       ]
     },
     "Digestive & Other Systems": {
@@ -1744,7 +2180,23 @@ const quizBank = {
         { q: "In a lymph node, the B-cell rich areas located in the outer cortex are called:", o: ["Medullary cords", "Paracortex", "Lymphoid follicles", "Sinuses"], a: 2, e: "When active, they develop pale germinal centers." },
         { q: "The cells of the adrenal medulla that secrete adrenaline are called:", o: ["Spongiocytes", "Chromaffin cells", "Pinealocytes", "Chief cells"], a: 1, e: "Modified sympathetic postganglionic neurons." },
         { q: "Which cells in the testis are responsible for producing testosterone?", o: ["Sertoli cells", "Leydig (interstitial) cells", "Spermatogonia", "Myoid cells"], a: 1, e: "Located in the connective tissue between seminiferous tubules." },
-        { q: "The epidermis of the skin consists of how many primary strata (layers) in thick skin?", o: ["Three", "Four", "Five", "Six"], a: 2, e: "Basale, spinosum, granulosum, lucidum, corneum." }
+        { q: "The epidermis of the skin consists of how many primary strata (layers) in thick skin?", o: ["Three", "Four", "Five", "Six"], a: 2, e: "Basale, spinosum, granulosum, lucidum, corneum." },
+        { q: "The villi of the small intestine are lined by:", o: ["Stratified squamous epithelium", "Simple columnar epithelium with a brush border", "Pseudostratified epithelium", "Transitional epithelium"], a: 1, e: "Microvilli (brush border) increase absorptive surface area." },
+        { q: "Chief (zymogenic) cells of the stomach secrete:", o: ["HCl", "Pepsinogen", "Mucus", "Somatostatin"], a: 1, e: "Pepsinogen is the inactive precursor of pepsin." },
+        { q: "Brunner's glands, which secrete alkaline mucus, are found in the:", o: ["Stomach", "Duodenum", "Jejunum", "Colon"], a: 1, e: "They are in the submucosa of the duodenum." },
+        { q: "Peyer's patches are aggregated lymphoid nodules found in the:", o: ["Stomach", "Ileum", "Colon", "Liver"], a: 1, e: "They monitor intestinal contents for pathogens." },
+        { q: "The liver sinusoids are lined by:", o: ["Continuous endothelium", "Fenestrated endothelium with Kupffer cells", "Stratified epithelium", "Transitional epithelium"], a: 1, e: "Kupffer cells are resident macrophages." },
+        { q: "The portal triad in the liver consists of:", o: ["Central vein, hepatocyte, sinusoid", "Branch of hepatic artery, portal vein, and bile duct", "Three hepatocytes", "Three central veins"], a: 1, e: "Located at the corners of the classic hepatic lobule." },
+        { q: "The functional unit of the lung for gas exchange is the:", o: ["Bronchiole", "Alveolus", "Trachea", "Pleural cavity"], a: 1, e: "Gas exchange occurs across the thin alveolar wall." },
+        { q: "Type II pneumocytes in the alveoli produce:", o: ["Mucus", "Surfactant", "HCl", "Collagen"], a: 1, e: "Surfactant reduces surface tension and prevents collapse." },
+        { q: "The glomerulus of the kidney is:", o: ["A collecting duct", "A tuft of capillaries for filtration", "A type of tubule", "Part of the pelvis"], a: 1, e: "Blood filtered through glomerular capillaries into Bowman's capsule." },
+        { q: "The juxtaglomerular apparatus produces:", o: ["Erythropoietin", "Renin", "ADH", "Aldosterone"], a: 1, e: "Important for blood pressure regulation via the RAAS." },
+        { q: "Melanocytes in the skin produce:", o: ["Keratin", "Melanin (pigment)", "Sebum", "Sweat"], a: 1, e: "Melanin protects against UV radiation." },
+        { q: "Sebaceous glands secrete:", o: ["Sweat", "Sebum (an oily substance)", "Milk", "Mucus"], a: 1, e: "Sebum lubricates the skin and hair." },
+        { q: "Hair follicles are derived embryologically from the:", o: ["Dermis (mesoderm)", "Epidermis (ectoderm)", "Hypodermis", "Bone marrow"], a: 1, e: "Epidermal invaginations into the dermis." },
+        { q: "The thyroid gland is composed of follicles filled with:", o: ["Blood", "Colloid (containing thyroglobulin)", "Air", "Fat"], a: 1, e: "The colloid stores the precursor for thyroid hormones." },
+        { q: "The cells of the adrenal cortex that produce cortisol are in the zona:", o: ["Glomerulosa", "Fasciculata", "Reticularis", "Medulla"], a: 1, e: "The zona fasciculata produces glucocorticoids." },
+        { q: "Sertoli cells in the testis are responsible for:", o: ["Producing testosterone", "Supporting and nourishing developing sperm", "Producing LH", "Producing estrogen only"], a: 1, e: "They form the blood-testis barrier and support spermatogenesis." }
       ],
       tf: [
         { q: "The entire esophagus of a dog is composed of smooth muscle.", a: false, e: "False. It is composed of skeletal (voluntary) muscle throughout its entire length in the dog." },
@@ -1756,7 +2208,15 @@ const quizBank = {
         { q: "Alveolar macrophages are also known as 'dust cells'.", a: true, e: "True. They clean up inhaled debris from the alveoli." },
         { q: "The white pulp of the spleen is primarily responsible for filtering out old red blood cells.", a: false, e: "False. The RED pulp filters blood; the WHITE pulp is lymphoid tissue for immune response." },
         { q: "The pars nervosa of the pituitary gland synthesizes ADH and oxytocin.", a: false, e: "False. It only STORES and releases them; they are synthesized in the hypothalamus." },
-        { q: "Apocrine sweat glands are the predominant sweat glands in the haired skin of domestic mammals.", a: true, e: "True. Eccrine sweat glands are mostly limited to footpads and the horse's body." }
+        { q: "Apocrine sweat glands are the predominant sweat glands in the haired skin of domestic mammals.", a: true, e: "True. Eccrine sweat glands are mostly limited to footpads and the horse's body." },
+        { q: "Parietal cells secrete pepsinogen.", a: false, e: "False. Parietal cells secrete HCl. Chief cells secrete pepsinogen." },
+        { q: "Brunner's glands are in the submucosa of the duodenum.", a: true, e: "True. They secrete alkaline mucus." },
+        { q: "Peyer's patches are aggregated lymphoid nodules in the ileum.", a: true, e: "True. Part of gut-associated lymphoid tissue (GALT)." },
+        { q: "Type II pneumocytes produce surfactant.", a: true, e: "True. Surfactant prevents alveolar collapse." },
+        { q: "Melanocytes produce keratin.", a: false, e: "False. Melanocytes produce melanin. Keratinocytes produce keratin." },
+        { q: "Sebaceous glands produce sweat.", a: false, e: "False. They produce sebum. Sweat glands produce sweat." },
+        { q: "Hair follicles are derived from the epidermis (ectoderm).", a: true, e: "True. Downgrowths of the epidermis into the dermis." },
+        { q: "The zona glomerulosa of the adrenal cortex produces cortisol.", a: false, e: "False. The zona FASCICULATA produces cortisol. Glomerulosa produces aldosterone." }
       ],
       fib: [
         { q: "The innermost histological layer of the gastrointestinal tract is the tunica _____.", a: ["mucosa"], e: "It lines the lumen." },
@@ -1768,7 +2228,15 @@ const quizBank = {
         { q: "In the respiratory tract, _____ cells are responsible for secreting mucus.", a: ["goblet"], e: "They look like little wine glasses." },
         { q: "In birds, B-lymphocytes mature in the bursa of _____.", a: ["Fabricius"], e: "A sac-like organ near the cloaca." },
         { q: "The thyroid gland stores its hormone precursor extracellularly in follicles filled with _____.", a: ["colloid"], e: "A thick, protein-rich gel." },
-        { q: "The reflective layer in the choroid of the animal eye that aids night vision is the tapetum _____.", a: ["lucidum"], e: "Causes 'eye shine'." }
+        { q: "The reflective layer in the choroid of the animal eye that aids night vision is the tapetum _____.", a: ["lucidum"], e: "Causes 'eye shine'." },
+        { q: "The cells in the stomach that secrete HCl are _____ cells.", a: ["parietal", "oxyntic"], e: "Found in the body and fundus." },
+        { q: "The cells that secrete pepsinogen are _____ cells.", a: ["chief", "zymogenic"], e: "Inactive precursor of pepsin." },
+        { q: "Alkaline-mucus glands in the duodenal submucosa are _____ glands.", a: ["Brunner's"], e: "Neutralize gastric acid." },
+        { q: "Lymphoid aggregates in the ileum are _____ patches.", a: ["Peyer's"], e: "Part of GALT." },
+        { q: "Type II pneumocytes produce _____ to prevent alveolar collapse.", a: ["surfactant"], e: "Reduces surface tension." },
+        { q: "The tuft of capillaries for blood filtration in the kidney is the _____.", a: ["glomerulus"], e: "Enclosed by Bowman's capsule." },
+        { q: "The pigment-producing cells in the epidermis are _____.", a: ["melanocytes"], e: "Protect against UV damage." },
+        { q: "The oily substance secreted by sebaceous glands is _____.", a: ["sebum"], e: "Lubricates skin and hair." }
       ]
     }
   },
@@ -1800,7 +2268,32 @@ const quizBank = {
         { q: "The somite differentiates into three parts. Which part gives rise to the vertebrae and ribs?", o: ["Dermatome", "Myotome", "Sclerotome", "Syndetome"], a: 2, e: "Sclero = hard." },
         { q: "The lateral plate mesoderm splits into somatic and splanchnic layers. The space between them becomes the:", o: ["Blastocoel", "Amniotic cavity", "Intraembryonic coelom", "Neural canal"], a: 2, e: "Future body cavities (pleural, pericardial, peritoneal)." },
         { q: "The buccopharyngeal (oropharyngeal) membrane is a region where:", o: ["The notochord forms", "Ectoderm and endoderm are in direct contact with no mesoderm", "The neural tube fails to close", "Somites are located"], a: 1, e: "Will eventually rupture to form the mouth." },
-        { q: "Embryonic stem cells (ESCs) are typically derived from which part of the blastocyst?", o: ["Trophoblast", "Zona pellucida", "Inner Cell Mass", "Blastocoel"], a: 2, e: "These cells are pluripotent." }
+        { q: "Embryonic stem cells (ESCs) are typically derived from which part of the blastocyst?", o: ["Trophoblast", "Zona pellucida", "Inner Cell Mass", "Blastocoel"], a: 2, e: "These cells are pluripotent." },
+        { q: "During oogenesis, the first meiotic division is completed:", o: ["Before birth", "At ovulation", "At fertilization", "During menopause"], a: 1, e: "The LH surge triggers completion of meiosis I." },
+        { q: "The zona pellucida is primarily composed of:", o: ["Lipids", "Glycoproteins", "Collagen", "Hyaluronic acid"], a: 1, e: "Secreted by the oocyte and follicular cells." },
+        { q: "The cortical reaction is triggered by:", o: ["Progesterone", "Sperm binding to the zona pellucida", "Intracellular calcium release upon sperm entry", "Estrogen surge"], a: 2, e: "Calcium waves cause exocytosis of cortical granules." },
+        { q: "The space between the zona pellucida and the oocyte cell membrane is the:", o: ["Antrum", "Perivitelline space", "Blastocoel", "Amniotic cavity"], a: 1, e: "This is where the first polar body is extruded." },
+        { q: "Which enzyme is found in the sperm acrosome and digests the zona pellucida?", o: ["Hyaluronidase", "Acrosin", "Pepsin", "Amylase"], a: 1, e: "A key part of the acrosome reaction." },
+        { q: "The fusion of the male and female pronuclei is called:", o: ["Syngamy", "Plasmogamy", "Karyokinesis", "Cytokinesis"], a: 0, e: "Results in a diploid zygote." },
+        { q: "Identical twins can form by the splitting of the embryo at which stage?", o: ["Two-cell stage", "Blastocyst stage (splitting of ICM)", "Both of the above", "Gastrula stage"], a: 2, e: "Can occur at cleavage stages or at the ICM stage." },
+        { q: "The hypoblast cells migrate along the inside of the trophoblast to form the:", o: ["Amnion", "Heuser's membrane (yolk sac lining)", "Chorion", "Allantois"], a: 1, e: "Lines the primary yolk sac." },
+        { q: "The primitive node (Hensen's node) functions as the:", o: ["Organizer for the embryonic axis", "Site of implantation", "Origin of the placenta", "Origin of germ cells"], a: 0, e: "Directs the formation of the notochord and neural tube." },
+        { q: "The neural plate folds inward to form the neural groove, which then closes to form the:", o: ["Notochord", "Neural tube", "Primitive streak", "Somites"], a: 1, e: "The precursor to the CNS." },
+        { q: "Failure of the cranial neuropore to close results in:", o: ["Spina bifida", "Anencephaly", "Cleft palate", "Hydrocephalus"], a: 1, e: "A lethal condition where the brain fails to develop properly." },
+        { q: "Neural crest cells migrate extensively and give rise to all EXCEPT:", o: ["Melanocytes", "Dorsal root ganglia", "Skeletal muscle of the limbs", "Adrenal medulla"], a: 2, e: "Limb skeletal muscle comes from somites." },
+        { q: "The intermediate mesoderm gives rise to the:", o: ["Heart", "Urogenital system", "Vertebrae", "Skin dermis"], a: 1, e: "Kidneys, gonads, and their ducts." },
+        { q: "The sclerotome part of the somite forms the:", o: ["Vertebrae and ribs", "Skeletal muscles", "Dermis", "Spinal cord"], a: 0, e: "Sclero = hard; forms the axial skeleton." },
+        { q: "The dermis of the dorsal skin is derived from the:", o: ["Sclerotome", "Myotome", "Dermatome", "Neural crest"], a: 2, e: "Part of the somite." },
+        { q: "Angiogenesis refers to the:", o: ["Formation of new blood vessels from pre-existing ones", "De novo formation of blood vessels from angioblasts", "Formation of the heart tube", "Formation of blood cells"], a: 0, e: "Vasculogenesis is de novo formation." },
+        { q: "Primordial germ cells (PGCs) originate in the:", o: ["Gonadal ridge", "Wall of the yolk sac", "Neural crest", "Notochord"], a: 1, e: "They migrate from the yolk sac to the developing gonads." },
+        { q: "The cloacal membrane is composed of:", o: ["Ectoderm only", "Ectoderm and endoderm without intervening mesoderm", "Endoderm only", "All three germ layers"], a: 1, e: "It breaks down to form the anal/urogenital openings." },
+        { q: "The first functional organ system in the developing embryo is the:", o: ["Nervous system", "Cardiovascular system", "Digestive system", "Respiratory system"], a: 1, e: "Needed to transport nutrients as diffusion becomes insufficient." },
+        { q: "In the chick embryo, the equivalent of the mammalian inner cell mass is the:", o: ["Blastoderm", "Blastocoel", "Area pellucida", "Hypoblast"], a: 2, e: "The central clear area of the blastodisc." },
+        { q: "The process of cell specialization during development is called:", o: ["Proliferation", "Differentiation", "Apoptosis", "Migration"], a: 1, e: "Cells acquire specific structures and functions." },
+        { q: "Which signaling molecule is heavily involved in establishing the left-right axis of the embryo?", o: ["Sonic hedgehog (Shh)", "FGF8", "Nodal", "Wnt"], a: 2, e: "Nodal flow in the node determines left-sidedness." },
+        { q: "The morphogen Sonic hedgehog (Shh) is critically secreted by the:", o: ["Epiblast", "Notochord and floor plate of neural tube", "Trophoblast", "Somites"], a: 1, e: "Patterns the ventral neural tube and somites." },
+        { q: "Hox genes are primarily responsible for:", o: ["Left-right asymmetry", "Cranial-caudal axis patterning", "Dorsal-ventral patterning", "Placental development"], a: 1, e: "They determine segmental identity." },
+        { q: "Programmed cell death, essential for shaping structures like digits, is called:", o: ["Necrosis", "Apoptosis", "Autophagy", "Lysis"], a: 1, e: "Removes webbing between developing fingers/toes." }
       ],
       tf: [
         { q: "Spermatogenesis begins during fetal life and arrests until puberty.", a: false, e: "False. Oogenesis does this; spermatogenesis begins at puberty and is continuous." },
@@ -1814,7 +2307,19 @@ const quizBank = {
         { q: "The notochord eventually becomes the spinal cord in the adult animal.", a: false, e: "False. It induces the neural tube which becomes the spinal cord; the notochord itself becomes the nucleus pulposus of intervertebral discs." },
         { q: "Intermediate mesoderm gives rise to the kidneys and gonads.", a: true, e: "True. It forms the urogenital system." },
         { q: "The neural crest cells migrate to form the peripheral nervous system and melanocytes.", a: true, e: "True. Often called the 'fourth germ layer'." },
-        { q: "The hypoblast layer of the bilaminar disc forms the definitive embryonic ectoderm.", a: false, e: "False. It contributes mainly to the yolk sac endoderm; the epiblast forms the ectoderm." }
+        { q: "The hypoblast layer of the bilaminar disc forms the definitive embryonic ectoderm.", a: false, e: "False. It contributes mainly to the yolk sac endoderm; the epiblast forms the ectoderm." },
+        { q: "The first polar body is extruded prior to ovulation in most domestic species.", a: true, e: "True. Except in the dog, where it is extruded after ovulation." },
+        { q: "Polyspermy is a normal and necessary event in mammalian fertilization.", a: false, e: "False. It leads to polyploidy and embryonic death." },
+        { q: "The blastocoel cavity forms due to active pumping of sodium ions by the trophoblast.", a: true, e: "True. Water follows osmotically." },
+        { q: "The primitive streak forms on the ventral surface of the embryo.", a: false, e: "False. It forms on the DORSAL surface (the epiblast)." },
+        { q: "The notochord is a permanent structure that persists unchanged into adulthood.", a: false, e: "False. It mostly degenerates, but remnants form the nucleus pulposus of IV discs." },
+        { q: "Somites form in a cranial to caudal sequence.", a: true, e: "True. Like adding blocks from head to tail." },
+        { q: "The intraembryonic coelom eventually gives rise to the peritoneal, pleural, and pericardial cavities.", a: true, e: "True. It forms by the splitting of the lateral plate mesoderm." },
+        { q: "Neural tube closure begins at the cranial end and proceeds strictly caudally.", a: false, e: "False. It usually begins in the cervical region and zips up in both directions." },
+        { q: "Vasculogenesis is the formation of new blood vessels from existing ones.", a: false, e: "False. That is angiogenesis. Vasculogenesis is de novo formation from angioblasts." },
+        { q: "Apoptosis is essential for the separation of developing digits.", a: true, e: "True. Failure results in syndactyly (webbing)." },
+        { q: "Hox genes control the anterior-posterior patterning of the embryo.", a: true, e: "True. They dictate what structures form at which level." },
+        { q: "The mammalian egg is macrolecithal (large yolk).", a: false, e: "False. It is microlecithal (little yolk) because the placenta will provide nutrition." }
       ],
       fib: [
         { q: "The process by which spermatids transform into mature spermatozoa is called _____.", a: ["spermiogenesis"], e: "A morphological change, no cell division." },
@@ -1829,7 +2334,20 @@ const quizBank = {
         { q: "The three primary germ layers are the ectoderm, mesoderm, and _____.", a: ["endoderm"], e: "The innermost layer." },
         { q: "The _____ streak establishes the cranial-caudal axis and bilateral symmetry of the embryo.", a: ["primitive"], e: "Appears on the epiblast surface." },
         { q: "The rod of mesodermal tissue that induces the formation of the neural tube is the _____.", a: ["notochord"], e: "Forms from cells migrating through Hensen's node." },
-        { q: "Paraxial mesoderm segments into blocks of tissue called _____, which will form vertebrae and skeletal muscle.", a: ["somites"], e: "Appear in pairs sequentially." }
+        { q: "Paraxial mesoderm segments into blocks of tissue called _____, which will form vertebrae and skeletal muscle.", a: ["somites"], e: "Appear in pairs sequentially." },
+        { q: "The fusion of male and female pronuclei is termed _____.", a: ["syngamy"], e: "Creates the diploid zygote." },
+        { q: "The enzyme-filled cap on the sperm head is the _____.", a: ["acrosome"], e: "Contains hyaluronidase and acrosin." },
+        { q: "The space between the oocyte and the zona pellucida is the _____ space.", a: ["perivitelline"], e: "Where the polar bodies are found." },
+        { q: "The organizer of the embryonic axis, located at the cranial end of the primitive streak, is Hensen's _____.", a: ["node"], e: "Directs notochord formation." },
+        { q: "The folding of the neural plate into a tube is called _____.", a: ["neurulation"], e: "Forms the central nervous system." },
+        { q: "Failure of the cranial neuropore to close causes _____.", a: ["anencephaly"], e: "A lethal defect." },
+        { q: "The highly migratory cells from the edge of the neural folds are _____ crest cells.", a: ["neural"], e: "Form the PNS, melanocytes, etc." },
+        { q: "The _____ mesoderm gives rise to the kidneys and gonads.", a: ["intermediate"], e: "Lies between paraxial and lateral plate mesoderm." },
+        { q: "The part of the somite that forms the vertebrae is the _____.", a: ["sclerotome"], e: "Migrates around the notochord and neural tube." },
+        { q: "De novo formation of blood vessels from angioblasts is called _____.", a: ["vasculogenesis"], e: "Distinct from angiogenesis." },
+        { q: "Primordial germ cells originate in the wall of the _____ sac.", a: ["yolk"], e: "Before migrating to the genital ridges." },
+        { q: "Programmed cell death that shapes tissues (e.g., digits) is called _____.", a: ["apoptosis"], e: "A clean, non-inflammatory process." },
+        { q: "Genes that specify the cranial-caudal axis identity are the _____ genes.", a: ["hox", "homeobox"], e: "Highly conserved across species." }
       ]
     },
     "Systemic Embryology & Placentation": {
@@ -1858,7 +2376,32 @@ const quizBank = {
         { q: "Monozygotic (identical) twins result from:", o: ["Two sperm fertilizing one egg", "Two separate ovulations fertilized by two sperm", "The splitting of a single fertilized zygote", "A polar body being fertilized"], a: 2, e: "They share the exact same genome." },
         { q: "The maternal recognition of pregnancy in the mare relies on:", o: ["Interferon-tau secretion", "High estrogen levels", "The mobile blastocyst migrating mechanically throughout the uterus", "hCG production"], a: 2, e: "The embryo must touch all parts of the uterus to block luteolysis." },
         { q: "Which congenital anomaly involves a failure of the caudal neural tube to close properly?", o: ["Anencephaly", "Spina bifida", "Hydrocephalus", "Cyclopia"], a: 1, e: "Results in exposed spinal cord or meninges." },
-        { q: "The most common congenital heart defect in dogs, characterized by the failure of the fetal vessel connecting the pulmonary trunk to the aorta to close, is:", o: ["Ventricular septal defect", "Patent ductus arteriosus (PDA)", "Tetralogy of Fallot", "Persistent right aortic arch"], a: 1, e: "Causes a continuous 'washing machine' murmur." }
+        { q: "The most common congenital heart defect in dogs, characterized by the failure of the fetal vessel connecting the pulmonary trunk to the aorta to close, is:", o: ["Ventricular septal defect", "Patent ductus arteriosus (PDA)", "Tetralogy of Fallot", "Persistent right aortic arch"], a: 1, e: "Causes a continuous 'washing machine' murmur." },
+        { q: "The chorion is formed by the fusion of:", o: ["Trophoblast and somatic mesoderm", "Trophoblast and splanchnic mesoderm", "Epiblast and endoderm", "Amnion and yolk sac"], a: 0, e: "It forms the outermost fetal membrane." },
+        { q: "The amnion is formed by the fusion of:", o: ["Ectoderm and somatic mesoderm", "Ectoderm and splanchnic mesoderm", "Endoderm and somatic mesoderm", "Trophoblast and endoderm"], a: 0, e: "Folds up over the embryo to enclose it." },
+        { q: "Which fetal membrane is highly vascularized and fuses with the chorion to provide blood vessels to the placenta?", o: ["Amnion", "Allantois", "Yolk sac (in late pregnancy)", "Decidua"], a: 1, e: "The allantoic mesoderm contains the umbilical vessels." },
+        { q: "A diffuse, epitheliochorial placenta is found in the:", o: ["Pig and Horse", "Cow and Sheep", "Dog and Cat", "Human and Macaque"], a: 0, e: "The least invasive placental type." },
+        { q: "The maternal part of the ruminant placentome is the:", o: ["Cotyledon", "Caruncle", "Trophoblast", "Endometrial cup"], a: 1, e: "Caruncles are pre-existing, aglandular areas on the ruminant endometrium." },
+        { q: "The fetal part of the ruminant placentome is the:", o: ["Cotyledon", "Caruncle", "Chorionic girdle", "Amniotic plaque"], a: 0, e: "Fetal cotyledon + maternal caruncle = placentome." },
+        { q: "Endometrial cups, which secrete eCG (PMSG), are unique to the pregnancy of the:", o: ["Cow", "Sow", "Mare", "Bitch"], a: 2, e: "They form around day 35 and slough off around day 120." },
+        { q: "In which species is the transfer of maternal antibodies (IgG) across the placenta highest?", o: ["Horse", "Pig", "Cow", "Human (Primates)"], a: 3, e: "Haemochorial placentas allow IgG transfer; domestic animals rely heavily on colostrum." },
+        { q: "The respiratory diverticulum (lung bud) sprouts from the:", o: ["Dorsal wall of the foregut", "Ventral wall of the foregut", "Midgut", "Hindgut"], a: 1, e: "It remains connected to the gut tube via the trachea and larynx." },
+        { q: "The division of the cloaca into the urogenital sinus and the anorectal canal is accomplished by the:", o: ["Urorectal septum", "Tracheoesophageal septum", "Diaphragm", "Falciform ligament"], a: 0, e: "Failure to separate can cause rectovaginal or rectourethral fistulas." },
+        { q: "The liver develops as a bud from the:", o: ["Endoderm of the foregut", "Ectoderm of the stomodeum", "Mesoderm of the septum transversum", "Neural crest"], a: 0, e: "The hepatic diverticulum grows into the septum transversum." },
+        { q: "The pancreas develops from:", o: ["One single bud from the midgut", "Two buds (dorsal and ventral) from the foregut", "The spleen", "The neural crest"], a: 1, e: "The two buds fuse as the stomach and duodenum rotate." },
+        { q: "The permanent kidney (metanephros) develops from two sources: the metanephric blastema and the:", o: ["Mesonephric duct", "Ureteric bud", "Mullerian duct", "Pronephros"], a: 1, e: "The ureteric bud forms the collecting system; blastema forms the nephrons." },
+        { q: "The urinary bladder develops primarily from the:", o: ["Allantois and urogenital sinus", "Mesonephric duct", "Amnion", "Cloacal membrane"], a: 0, e: "The urachus connects the bladder to the allantois." },
+        { q: "In the female, the paramesonephric (Mullerian) ducts fuse caudally to form the:", o: ["Ovaries", "Uterus and cranial vagina", "Clitoris", "Labia"], a: 1, e: "They form the female reproductive tract." },
+        { q: "The sex determining region Y (SRY) gene on the Y chromosome directs the bipotential gonad to become a:", o: ["Ovary", "Testis", "Adrenal gland", "Kidney"], a: 1, e: "It upregulates factors like SOX9 to induce testicular differentiation." },
+        { q: "Anti-Mullerian Hormone (AMH), which causes regression of the female duct system in male embryos, is produced by:", o: ["Leydig cells", "Sertoli cells", "Spermatogonia", "Oocytes"], a: 1, e: "Also known as Mullerian Inhibiting Substance (MIS)." },
+        { q: "The embryonic heart tube folds upon itself to form the four chambers. The primitive ventricle becomes the:", o: ["Left ventricle", "Right ventricle", "Left atrium", "Right atrium"], a: 0, e: "The bulbus cordis contributes largely to the right ventricle." },
+        { q: "The septum primum and septum secundum are involved in the partitioning of the:", o: ["Ventricles", "Atria", "Truncus arteriosus", "A-V canal"], a: 1, e: "They form the flap valve of the foramen ovale." },
+        { q: "The tetralogy of Fallot includes a ventricular septal defect, pulmonary stenosis, right ventricular hypertrophy, and:", o: ["Patent ductus arteriosus", "Overriding aorta", "Atrial septal defect", "Coarctation of the aorta"], a: 1, e: "A classic congenital heart defect complex." },
+        { q: "The external ear canal (external acoustic meatus) develops from the:", o: ["First pharyngeal cleft", "First pharyngeal pouch", "Second pharyngeal arch", "Otic vesicle"], a: 0, e: "The only pharyngeal cleft to persist in adults." },
+        { q: "The thyroid gland originates as a downgrowth from the:", o: ["Floor of the pharynx (foramen cecum)", "Roof of the mouth", "Third pharyngeal pouch", "Neural crest"], a: 0, e: "It migrates down the neck; remnants can form thyroglossal duct cysts." },
+        { q: "The thymus develops from the endoderm of the:", o: ["First pharyngeal pouch", "Second pharyngeal pouch", "Third pharyngeal pouch", "Fourth pharyngeal pouch"], a: 2, e: "Along with the inferior parathyroid glands." },
+        { q: "Amelia refers to the congenital:", o: ["Absence of a limb", "Shortening of a limb", "Extra digits", "Fused digits"], a: 0, e: "A = without, melia = limb." },
+        { q: "Polydactyly is the presence of:", o: ["Fused digits", "Missing digits", "Extra digits", "Webbed digits"], a: 2, e: "Common in certain cat breeds (Hemingway cats)." }
       ],
       tf: [
         { q: "The yolk sac provides all the nutrition for the mammalian embryo throughout its entire gestation.", a: false, e: "False. The yolk sac regresses early; the placenta takes over nutrition." },
@@ -1873,7 +2416,20 @@ const quizBank = {
         { q: "Dizygotic (fraternal) twins have identical genomes because they come from the same fertilized egg.", a: false, e: "False. They come from two separate eggs fertilized by two different sperm." },
         { q: "Freemartinism occurs most commonly in twin pregnancies of the horse.", a: false, e: "False. It is most common in cattle." },
         { q: "Teratogens, such as certain drugs, toxic plants, or viruses, can cause congenital anomalies if the mother is exposed during pregnancy.", a: true, e: "True. Especially during the critical period of organogenesis." },
-        { q: "Central/superficial implantation, where the blastocyst does not burrow deeply into the uterine wall, is typical for domestic farm animals like cows and pigs.", a: true, e: "True. Unlike the interstitial implantation of humans." }
+        { q: "Central/superficial implantation, where the blastocyst does not burrow deeply into the uterine wall, is typical for domestic farm animals like cows and pigs.", a: true, e: "True. Unlike the interstitial implantation of humans." },
+        { q: "The chorion is the outermost fetal membrane.", a: true, e: "True. It forms the fetal side of the placenta." },
+        { q: "The allantois is heavily vascularized and forms the umbilical vessels.", a: true, e: "True. It fuses with the chorion to form the chorioallantoic placenta." },
+        { q: "The pig has a cotyledonary placenta.", a: false, e: "False. The pig has a diffuse placenta. Ruminants have a cotyledonary placenta." },
+        { q: "Endometrial cups in the mare secrete eCG to maintain secondary corpora lutea.", a: true, e: "True. This helps maintain pregnancy until the placenta takes over progesterone production." },
+        { q: "The lungs develop from the embryonic endoderm of the foregut.", a: true, e: "True. As an outpouching called the respiratory diverticulum." },
+        { q: "The urorectal septum divides the cloaca into the urogenital sinus and the rectum.", a: true, e: "True. Creating separate exits for urine/reproduction and feces." },
+        { q: "The pancreas develops from a single bud off the stomach.", a: false, e: "False. It develops from TWO buds (dorsal and ventral) off the duodenum." },
+        { q: "The ureteric bud gives rise to the nephrons (glomeruli and tubules).", a: false, e: "False. The metanephric blastema forms the nephrons; the ureteric bud forms the collecting ducts and ureter." },
+        { q: "The SRY gene is located on the X chromosome.", a: false, e: "False. It is the Sex-determining Region of the Y chromosome." },
+        { q: "Anti-Mullerian Hormone is produced by Leydig cells.", a: false, e: "False. It is produced by Sertoli cells. Leydig cells produce testosterone." },
+        { q: "The foramen ovale is an opening between the left and right ventricles.", a: false, e: "False. It is an opening between the left and right ATRIA." },
+        { q: "The thyroid gland originates from the floor of the embryonic pharynx.", a: true, e: "True. At a point called the foramen cecum." },
+        { q: "Syndactyly refers to the presence of extra digits.", a: false, e: "False. Syndactyly is fused digits. Polydactyly is extra digits." }
       ],
       fib: [
         { q: "The fetal membrane that stores waste in birds and expands to form the placenta in mammals is the _____.", a: ["allantois"], e: "Forms the chorioallantois." },
@@ -1887,348 +2443,25 @@ const quizBank = {
         { q: "The posterior pituitary gland (neurohypophysis) develops as a downgrowth from the embryonic brain called the _____.", a: ["infundibulum"], e: "Maintains a neural connection to the hypothalamus." },
         { q: "Identical twins that form from the splitting of a single embryo are technically called _____ twins.", a: ["monozygotic"], e: "From one zygote." },
         { q: "A female calf born co-twin to a male calf, usually resulting in her being sterile, is called a _____.", a: ["freemartin"], e: "A classic bovine reproductive anomaly." },
-        { q: "The failure of the anal membrane to rupture results in a congenital condition called atresia _____.", a: ["ani"], e: "Requires surgical correction." }
+        { q: "The failure of the anal membrane to rupture results in a congenital condition called atresia _____.", a: ["ani"], e: "Requires surgical correction." },
+        { q: "The fetal membrane formed by trophoblast and somatic mesoderm is the _____.", a: ["chorion"], e: "The outermost membrane." },
+        { q: "The fetal membrane that stores urine and provides blood vessels to the placenta is the _____.", a: ["allantois"], e: "Expands massively in domestic mammals." },
+        { q: "The mare and sow have a _____ placenta, where villi cover almost the entire chorion.", a: ["diffuse"], e: "As opposed to cotyledonary or zonary." },
+        { q: "The maternal part of a ruminant placentome is the _____.", a: ["caruncle"], e: "Fetal part is the cotyledon." },
+        { q: "Endometrial cups in the mare secrete _____ (hormone acronym).", a: ["ecg", "pmsg"], e: "Equine chorionic gonadotropin." },
+        { q: "The septum that divides the cloaca into urinary and digestive parts is the _____ septum.", a: ["urorectal"], e: "Grows downward." },
+        { q: "The liver and pancreas bud off from the embryonic _____gut.", a: ["fore", "foregut"], e: "Specifically the duodenum region." },
+        { q: "The permanent kidney forms from the metanephric blastema and the _____ bud.", a: ["ureteric"], e: "Which forms the ureter and collecting ducts." },
+        { q: "In males, the _____ (Wolffian) duct becomes the epididymis and ductus deferens.", a: ["mesonephric"], e: "Rescued by testosterone." },
+        { q: "In females, the _____ (Mullerian) ducts form the uterus and uterine tubes.", a: ["paramesonephric"], e: "Develops in the absence of AMH." },
+        { q: "The opening between the right and left atria in the fetal heart is the foramen _____.", a: ["ovale"], e: "Closes at birth." },
+        { q: "The condition of having extra digits is called _____.", a: ["polydactyly"], e: "Common anomaly." }
       ]
     }
-  }
+  },
 };
 
 // Legacy compatibility (optional - can be removed once fully transitioned)
 const mcqDB = quizBank.Forelimb.Osteology.mcq;
 const tfDB = quizBank.Forelimb.Osteology.tf;
 const fibDB = quizBank.Forelimb.Osteology.fib;
-
-// =========================================================
-// First-year BVSc & AH anatomy additions.
-// These additions are appended programmatically so uploaded Gemini data is preserved.
-// =========================================================
-
-(function addUGExamQuestionAdditions() {
-  if (typeof quizBank === "undefined") return;
-
-  const q = (text, answer, distractors, explanation) => ({
-    q: text,
-    o: [answer, ...distractors],
-    a: 0,
-    e: explanation
-  });
-
-  const distractors = (items, idx, field) => {
-    const values = [];
-    for (let step = 1; values.length < 3 && step <= items.length + 3; step++) {
-      const value = items[(idx + step) % items.length][field];
-      if (value && value !== items[idx][field] && !values.includes(value)) values.push(value);
-    }
-    return values;
-  };
-
-  const fromTopics = (items) => items.flatMap((item, idx) => [
-    {
-      mcq: q(`Which structure is best described as ${item.identity}?`, item.name, distractors(items, idx, "name"), `${item.name}: ${item.identity}.`),
-      fib: { q: `The structure described as ${item.identity} is _____.`, a: [item.name], e: `${item.name}: ${item.identity}.` },
-      tf: { q: `${item.name} is best described as ${item.identity}.`, a: true, e: `${item.name}: ${item.identity}.` }
-    },
-    {
-      mcq: q(`Where is ${item.name} located or most closely related?`, item.location, distractors(items, idx, "location"), `${item.name}: ${item.location}.`),
-      fib: { q: `_____ has this anatomical location or relationship: ${item.location}.`, a: [item.name], e: `${item.name}: ${item.location}.` },
-      tf: { q: `${item.name}: ${distractors(items, idx, "location")[0]}.`, a: false, e: `False. Correct: ${item.name}: ${item.location}.` }
-    },
-    {
-      mcq: q(`Which statement is correct for ${item.name}?`, item.exam, distractors(items, idx, "exam"), `${item.name}: ${item.exam}.`),
-      fib: { q: `The structure for which this statement is correct is _____: ${item.exam}.`, a: [item.name], e: `${item.name}: ${item.exam}.` },
-      tf: { q: `${item.name}: ${item.exam}.`, a: true, e: `${item.name}: ${item.exam}.` }
-    },
-    {
-      mcq: q(`Which clinical point is linked with ${item.name}?`, item.clinical, distractors(items, idx, "clinical"), `${item.name}: ${item.clinical}.`),
-      fib: { q: `_____ is linked with ${item.clinical}.`, a: [item.name], e: `${item.name}: ${item.clinical}.` },
-      tf: { q: `${item.name}: ${distractors(items, idx, "clinical")[0]}.`, a: false, e: `False. Correct: ${item.name}: ${item.clinical}.` }
-    },
-    {
-      mcq: q(`Which practical point is correct for ${item.name}?`, item.compare, distractors(items, idx, "compare"), `${item.name}: ${item.compare}.`),
-      fib: { q: `_____ has this practical point: ${item.compare}.`, a: [item.name], e: `${item.name}: ${item.compare}.` },
-      tf: { q: `${item.name}: ${item.compare}.`, a: true, e: `${item.name}: ${item.compare}.` }
-    }
-  ]);
-
-  const addExamQuestions = (region, system, topicQuestions, mcqCount, fibCount, tfCount) => {
-    quizBank[region] = quizBank[region] || {};
-    quizBank[region][system] = quizBank[region][system] || { mcq: [], tf: [], fib: [] };
-    quizBank[region][system].mcq = quizBank[region][system].mcq || [];
-    quizBank[region][system].fib = quizBank[region][system].fib || [];
-    quizBank[region][system].tf = quizBank[region][system].tf || [];
-
-    quizBank[region][system].mcq.push(...topicQuestions.slice(0, mcqCount).map(item => item.mcq));
-    quizBank[region][system].fib.push(...topicQuestions.slice(mcqCount, mcqCount + fibCount).map(item => item.fib));
-    quizBank[region][system].tf.push(...topicQuestions.slice(mcqCount + fibCount, mcqCount + fibCount + tfCount).map(item => item.tf));
-  };
-
-  const forelimbAngiology = [
-    { name: "Axillary artery", identity: "main arterial trunk entering the forelimb from the thoracic limb root", location: "medial axillary region before continuing as the brachial artery", exam: "continues as the brachial artery distal to the teres major region", clinical: "important landmark during deep dissection of the brachial plexus and axilla", compare: "supplies shoulder and proximal forelimb through subscapular and circumflex humeral branches", why: "Forelimb angiology questions commonly ask the sequence axillary artery to brachial artery." },
-    { name: "Brachial artery", identity: "principal artery of the arm supplying distal forelimb structures", location: "medial aspect of arm with the median nerve and brachial vein", exam: "gives collateral ulnar and common interosseous branches before dividing distally", clinical: "pulse and hemorrhage control are clinically important in the medial arm", compare: "continues distally toward the median artery in large animals", why: "The brachial artery is the main continuation after the axillary artery." },
-    { name: "Median artery", identity: "major arterial continuation in the forearm of domestic mammals", location: "caudomedial forearm close to the median nerve", exam: "is the main artery of the distal forelimb in the horse and ox", clinical: "vulnerable during deep medial forearm surgery and nerve block approaches", compare: "more dominant in ungulates than the radial artery", why: "The median artery is a favorite comparative forelimb vessel." },
-    { name: "Cephalic vein", identity: "large superficial vein routinely used for forelimb venipuncture", location: "cranial or craniomedial aspect of the antebrachium in the dog", exam: "is the common intravenous injection site in the canine forelimb", clinical: "used for catheterization and blood collection in dogs and cats", compare: "more clinically accessible in small animals than in large ruminants", why: "Cephalic vein use is specifically named in the practical syllabus." },
-    { name: "Accessory cephalic vein", identity: "superficial tributary running over the dorsum of the carpus/metacarpus", location: "dorsolateral distal forelimb joining the cephalic vein", exam: "helps drain the dorsal paw or distal forelimb", clinical: "may be visible during catheter placement or distal limb swelling", compare: "well demonstrated in carnivore superficial venous patterns", why: "Accessory cephalic vein is a common practical identification vessel." },
-    { name: "Brachial vein", identity: "deep companion vein of the brachial artery", location: "medial arm accompanying the brachial artery", exam: "drains deep tissues of the arm and continues proximally toward the axillary vein", clinical: "important in dissection because it accompanies the arterial and nerve bundle", compare: "deep veins usually accompany arteries, unlike many superficial veins", why: "Deep companion vessels are a standard angiology principle." },
-    { name: "Superficial cervical lymph node", identity: "palpable lymph node related to drainage of neck, shoulder, and forelimb", location: "cranial to the shoulder, deep to brachiocephalicus/omotransversarius region", exam: "also called the prescapular lymph node", clinical: "palpated during clinical examination and meat inspection", compare: "large and clinically palpable in ruminants and horses", why: "Palpable lymph nodes are highlighted in the syllabus." },
-    { name: "Cubital lymph nodes", identity: "small lymph nodes associated with the elbow region in some species", location: "near the medial side of the elbow or distal arm", exam: "receive lymph from parts of the distal forelimb", clinical: "may enlarge with distal limb inflammation", compare: "not consistently prominent in all domestic species", why: "Regional lymph drainage is paired with forelimb blood vessels in exams." },
-    { name: "Dorsal common digital vein III", identity: "distal limb vein used for regional intravenous anesthesia in cattle", location: "dorsal aspect of the bovine digit/pastern region", exam: "is a preferred vessel for bovine Bier block of the foot", clinical: "used before claw surgery and painful digital procedures", compare: "more important clinically in cattle than in the horse", why: "Bier block vessel questions are high-yield for bovine forelimb clinical anatomy." },
-    { name: "Palmar digital arteries", identity: "terminal vessels supplying the digit and hoof", location: "palmar aspect of the distal metacarpus and digit", exam: "run with palmar digital nerves toward the hoof", clinical: "important in laminitis, hoof trauma, and distal limb surgery", compare: "paired medial and lateral vessels accompany the digital nerves", why: "Distal digital vessels are repeatedly examined with hoof and nerve blocks." }
-  ];
-
-  const hindOsteoArth = [
-    { name: "Os coxae", identity: "hip bone formed by ilium, ischium, and pubis", location: "lateral wall and floor of the pelvis", exam: "all three parts meet at the acetabulum", clinical: "pelvic fractures can narrow the birth canal", compare: "large obturator foramen lightens the pelvic floor", why: "Os coxae formation is a core hindlimb osteology fact." },
-    { name: "Acetabulum", identity: "deep socket for the head of the femur", location: "lateral aspect of the os coxae", exam: "formed by ilium, ischium, and pubis", clinical: "site involved in hip luxation and coxofemoral dysplasia", compare: "equivalent to the glenoid cavity of the shoulder but deeper", why: "Hip joint anatomy is a frequent exam and viva topic." },
-    { name: "Tuber coxae", identity: "point of hip used as a palpable bony prominence", location: "craniolateral angle of the ilium", exam: "forms the caudal boundary landmark for the paralumbar fossa", clinical: "used for body condition and pelvic landmark assessment", compare: "very prominent in cattle and horses", why: "Surface landmarks are specifically listed in the syllabus." },
-    { name: "Tuber ischii", identity: "pin bone of cattle and caudal pelvic prominence", location: "caudal end of the ischium", exam: "forms the caudal limit of the pelvic floor", clinical: "important in pelvic measurements and recumbency injuries", compare: "called pin bone in dairy cattle judging", why: "Pin bone identification is high-yield practical anatomy." }
-  ];
-
-  const hindMyoNeuro = [
-    { name: "Quadriceps femoris", identity: "four-headed muscle that extends the stifle", location: "cranial thigh with insertion on the patella/tibial tuberosity via patellar ligaments", exam: "rectus femoris is the head arising from the ilium", clinical: "femoral nerve paralysis prevents weight bearing", compare: "vastus heads arise from femur while rectus femoris crosses the hip", why: "Quadriceps and femoral nerve are classic hindlimb exam pairings." },
-    { name: "Biceps femoris", identity: "large caudolateral thigh muscle of the hamstring group", location: "lateral thigh from sacrotuberous/ischial region to patella, tibia, and calcaneus", exam: "extends hip, stifle, and hock but can flex stifle depending on limb phase", clinical: "important in propulsion and intramuscular injection caution", compare: "part of the caudal thigh group with semitendinosus and semimembranosus", why: "Hamstring actions are commonly tested." },
-    { name: "Sciatic nerve", identity: "largest nerve of the body supplying most structures distal to the stifle", location: "passes through greater sciatic foramen and caudal thigh", exam: "divides into tibial and common peroneal nerves", clinical: "injury causes major distal limb paralysis", compare: "does not supply quadriceps; femoral nerve does", why: "Sciatic versus femoral nerve is a high-probability distinction." },
-    { name: "Obturator nerve", identity: "nerve to medial thigh adductor muscles", location: "passes through the obturator foramen", exam: "supplies adductor, gracilis, and obturator muscles", clinical: "damage during calving causes inability to adduct hindlimbs", compare: "calving paralysis is classically obturator nerve injury", why: "Obturator nerve paralysis is a classic bovine clinical question." }
-  ];
-
-  const hindAngioSplanch = [
-    { name: "Femoral artery", identity: "main arterial supply of the hindlimb after external iliac continuation", location: "femoral triangle on the medial thigh", exam: "palpable pulse point in dog and cat", clinical: "used for pulse, catheterization, and hemorrhage control", compare: "becomes popliteal distally after giving major thigh branches", why: "Femoral artery pulse is explicitly named in practical anatomy." },
-    { name: "Pudendal nerve", identity: "somatic nerve supplying perineum and external genital structures", location: "pelvic cavity and pudendal canal region", exam: "target for pudic nerve block", clinical: "important in obstetrical and urogenital procedures", compare: "separate from sciatic supply of the limb proper", why: "Pudic nerve block is listed in the hindlimb and pelvis syllabus." }
-  ];
-
-  const headOsteoArth = [
-    { name: "Atlas", identity: "first cervical vertebra supporting the skull", location: "between occipital condyles and axis", exam: "has wings and lacks a typical vertebral body", clinical: "cisterna magna puncture is near the atlanto-occipital region", compare: "forms the nodding yes joint with the occipital bone", why: "Atlas and axis differences are fundamental head and neck osteology." },
-    { name: "Axis", identity: "second cervical vertebra bearing the dens", location: "between atlas and C3", exam: "dens acts as the pivot for atlanto-axial rotation", clinical: "atlanto-axial instability can compress the spinal cord", compare: "forms the no movement with the atlas", why: "The dens of axis is a frequent MCQ answer." },
-    { name: "Paranasal sinuses", identity: "air-filled cavities within skull bones communicating with the nasal cavity", location: "frontal, maxillary and related skull bones depending on species", exam: "frontal and maxillary sinuses are especially important in ox and horse", clinical: "horn amputation and sinusitis are applied anatomy topics", compare: "sinus arrangement differs markedly among ox, horse, dog, and pig", why: "The syllabus directly emphasizes paranasal sinuses by species." }
-  ];
-
-  const headMyoSplanch = [
-    { name: "Masseter muscle", identity: "powerful muscle of mastication closing the jaw", location: "lateral surface of the mandibular ramus", exam: "innervated by mandibular division of trigeminal nerve", clinical: "atrophy suggests trigeminal motor involvement", compare: "well developed in herbivores for grinding", why: "Muscles of mastication and their nerve supply are common exam points." },
-    { name: "Tongue", identity: "muscular organ involved in prehension, taste, mastication, and swallowing", location: "floor of oral cavity attached to hyoid apparatus", exam: "hypoglossal nerve is motor to tongue muscles", clinical: "lingual paralysis affects prehension and swallowing", compare: "ruminant tongue is important for prehension; feline tongue has sharp papillae", why: "Tongue anatomy is explicitly included under head and neck splanchnology." },
-    { name: "Larynx", identity: "cartilaginous organ guarding the airway and producing voice", location: "between pharynx and trachea", exam: "recurrent laryngeal nerve supplies most intrinsic laryngeal muscles", clinical: "left recurrent laryngeal paralysis causes roaring in horses", compare: "thyroid, cricoid, arytenoid, and epiglottic cartilages are core parts", why: "Larynx and recurrent laryngeal nerve are high-yield clinical anatomy." }
-  ];
-
-  const headNeuroClinical = [
-    { name: "Jugular furrow", identity: "surface groove used for venipuncture in large animals", location: "between brachiocephalicus dorsally and sternocephalicus ventrally", exam: "external jugular vein lies in the furrow", clinical: "main site for intravenous injection in cattle and horses", compare: "more clinically important in large animals than the cephalic vein", why: "Jugular furrow boundaries are directly named in the syllabus." },
-    { name: "Carotid sheath", identity: "deep cervical fascial sheath containing major neurovascular structures", location: "deep in the neck beside trachea and oesophagus", exam: "contains common carotid artery and vagosympathetic trunk", clinical: "avoid accidental carotid puncture during jugular venipuncture", compare: "internal jugular is prominent in some species but not the main venipuncture vessel in large animals", why: "Carotid sheath structures are a favorite short-answer topic." },
-    { name: "Cornual nerve", identity: "sensory nerve to the horn region in cattle", location: "runs along the frontal crest toward the horn base", exam: "branch of the zygomaticotemporal nerve from maxillary division of trigeminal", clinical: "blocked for dehorning or horn amputation", compare: "superficial temporal artery must also be considered during horn surgery", why: "Cornual nerve and superficial temporal artery are explicitly named in the syllabus." },
-    { name: "Mental nerve", identity: "terminal branch emerging at the mental foramen", location: "rostral mandible near lower incisors/lip", exam: "desensitizes lower lip and incisive region", clinical: "mental nerve block is used for lower lip and incisor procedures", compare: "related to mandibular alveolar nerve pathway", why: "Mental nerve block is listed among expected head nerve blocks." }
-  ];
-
-  const introGeneral = [
-    { name: "Median plane", identity: "plane dividing the body into equal right and left halves", location: "vertical plane passing through the midline", exam: "sagittal planes parallel to it are paramedian", clinical: "used for precise description of lesions and incisions", compare: "different from transverse plane which divides cranial and caudal parts", why: "Anatomical planes are Unit 1 essentials." },
-    { name: "Dorsal direction", identity: "direction toward the back or vertebral column", location: "opposite of ventral in trunk anatomy", exam: "on limbs, cranial/caudal terms change to palmar or plantar distally", clinical: "prevents ambiguity in radiographic positioning", compare: "in the head, rostral replaces cranial toward the nose", why: "Directional terminology is always examined early." },
-    { name: "Axial skeleton", identity: "skeleton of skull, vertebral column, ribs, and sternum", location: "central long axis of the body", exam: "contrasted with appendicular skeleton of limbs", clinical: "vertebral fractures and rib fractures belong to axial skeleton", compare: "appendicular skeleton includes pectoral and pelvic limbs", why: "Classification of skeleton is a direct syllabus item." },
-    { name: "Long bone", identity: "bone with shaft and two extremities acting as a lever", location: "limbs such as humerus, femur, radius, tibia", exam: "has diaphysis, metaphysis, epiphysis, compact and cancellous bone", clinical: "common fracture sites and marrow cavity are clinically important", compare: "different from flat bones such as scapula and skull bones", why: "Bone classification with examples is high-yield." },
-    { name: "Synovial joint", identity: "freely movable joint with cavity, cartilage, capsule, and synovia", location: "limb joints such as shoulder, hip, elbow, stifle", exam: "also called diarthrodial joint", clinical: "site of arthritis, luxation, and intra-articular injection", compare: "more mobile than fibrous or cartilaginous joints", why: "Structure of diarthrodial joints is explicitly in Unit 1." }
-  ];
-
-  const introMyoArth = [
-    { name: "Tendon", identity: "dense connective tissue attaching muscle to bone", location: "at muscle ends crossing joints", exam: "transmits force of muscle contraction", clinical: "tendon injury severely affects locomotion", compare: "ligament connects bone to bone", why: "Tendon versus ligament is a common introductory MCQ." },
-    { name: "Ligament", identity: "fibrous band connecting bone to bone", location: "around joints or between bones", exam: "stabilizes joints and limits excessive movement", clinical: "sprain or rupture leads to joint instability", compare: "can be capsular, extracapsular, or intracapsular", why: "Ligaments are listed with arthrology basics." },
-    { name: "Aponeurosis", identity: "flat sheet-like tendon", location: "broad muscular attachments such as abdominal wall", exam: "forms part of rectus sheath and linea alba", clinical: "important in abdominal incisions and hernia repair", compare: "broader than a cord-like tendon", why: "Aponeurosis is named in Unit 1." },
-    { name: "Synovial bursa", identity: "fluid-filled sac reducing friction", location: "between tendon/skin/muscle and bony prominence", exam: "lined by synovial membrane", clinical: "inflammation is bursitis such as capped elbow", compare: "synovial sheath surrounds tendons over a longer course", why: "Bursa and sheath distinctions are common practical questions." },
-    { name: "Synovial sheath", identity: "tubular synovial structure surrounding a tendon", location: "where tendons pass through confined canals", exam: "reduces friction during tendon movement", clinical: "tenosynovitis causes pain and swelling", compare: "unlike a bursa, it wraps around the tendon", why: "Synovial sheath is specifically included in the syllabus." }
-  ];
-
-  const introAngioNeuro = [
-    { name: "Systemic circulation", identity: "blood route from left ventricle through body to right atrium", location: "aorta to systemic veins and venae cavae", exam: "carries oxygenated blood in systemic arteries", clinical: "shock and hemorrhage compromise systemic perfusion", compare: "contrasts with pulmonary circulation to the lungs", why: "General plan of circulation is a Unit 1 item." },
-    { name: "Spinal nerve", identity: "mixed nerve formed by union of dorsal and ventral roots", location: "emerges through intervertebral foramina", exam: "dorsal root is sensory and ventral root is motor", clinical: "nerve root injury causes segmental deficits", compare: "contains somatic and autonomic fibers after formation", why: "Formation of spinal nerve is directly named in the syllabus." },
-    { name: "Meninges", identity: "protective coverings of brain and spinal cord", location: "around central nervous system", exam: "dura mater, arachnoid mater, and pia mater are the three layers", clinical: "CSF lies in the subarachnoid space", compare: "epidural anesthesia is outside dura mater", why: "Meninges are an introductory neurology favorite." }
-  ];
-
-  const introSplanchClinical = [
-    { name: "Thoracic cavity", identity: "body cavity containing lungs, heart, thymus, and thoracic vessels", location: "bounded by ribs, sternum, thoracic vertebrae, and diaphragm", exam: "divided into pleural cavities and mediastinum", clinical: "auscultation and percussion use thoracic topography", compare: "separated from abdomen by diaphragm", why: "Cavity boundaries are central to Unit 1 and practicals." },
-    { name: "Abdominal cavity", identity: "cavity containing most digestive organs, kidneys, spleen, and glands", location: "between diaphragm and pelvic inlet", exam: "lined by peritoneum and related to omenta and mesenteries", clinical: "laparotomy and rumenotomy depend on abdominal topography", compare: "continues caudally into pelvic cavity without a complete wall", why: "Abdominal topography is repeatedly examined." },
-    { name: "Bone marrow collection", identity: "procedure using accessible marrow-containing bones", location: "sternum, ribs, iliac crest, or proximal long bones depending on species and age", exam: "red marrow is hematopoietic", clinical: "used for diagnosis of blood and marrow disorders", compare: "young animals have more active red marrow than adults", why: "Bone marrow collection sites are specifically in the syllabus." }
-  ];
-
-  const histCytology = [
-    { name: "Simple squamous epithelium", identity: "single layer of flat cells", location: "endothelium, mesothelium, alveoli, and Bowman's capsule", exam: "adapted for diffusion and filtration", clinical: "thin barrier allows rapid exchange but poor protection", compare: "flat nuclei make it easy to identify on slides", why: "Basic epithelium identification is high-yield histology." },
-    { name: "Simple cuboidal epithelium", identity: "single layer of cube-shaped cells with round central nuclei", location: "kidney tubules and small ducts", exam: "specialized for secretion and absorption", clinical: "renal tubular damage affects filtration and reabsorption", compare: "cell height roughly equals cell width", why: "Kidney tubule epithelium is a common slide question." },
-    { name: "Pseudostratified ciliated columnar epithelium", identity: "appears multilayered but all cells touch basement membrane", location: "trachea and larger conducting airways", exam: "goblet cells and cilia form the mucociliary apparatus", clinical: "ciliary damage impairs airway clearance", compare: "nuclei lie at different levels", why: "Respiratory epithelium is a classic practical spotter." },
-    { name: "Stratified squamous epithelium", identity: "multiple layers with flattened surface cells", location: "skin, oral cavity, oesophagus, and rumen mucosa", exam: "protects against abrasion", clinical: "keratinization increases protection in skin and rumen papillae", compare: "surface cells distinguish it from transitional epithelium", why: "Protective epithelium is a repeated histology MCQ." },
-    { name: "Transitional epithelium", identity: "distensible multilayered epithelium with dome-shaped umbrella cells", location: "renal pelvis, ureter, urinary bladder, proximal urethra", exam: "permits stretching without leakage of urine", clinical: "important barrier against urine toxicity", compare: "umbrella cells flatten when stretched", why: "Urothelium is a high-yield slide clue." },
-    { name: "Hyaline cartilage", identity: "glassy cartilage with chondrocytes in lacunae", location: "tracheal rings, articular cartilage, costal cartilage, fetal skeleton", exam: "type II collagen is typical", clinical: "articular cartilage has poor repair capacity", compare: "more homogeneous matrix than elastic or fibrocartilage", why: "Cartilage types are core connective tissue topics." },
-    { name: "Compact bone", identity: "dense lamellar bone organized into osteons", location: "diaphysis of long bones", exam: "Haversian canals carry vessels and nerves", clinical: "remodels under mechanical stress and fracture repair", compare: "concentric lamellae distinguish it from cancellous bone", why: "Bone histology is examined with osteology." },
-    { name: "Skeletal muscle", identity: "striated voluntary muscle with peripheral nuclei", location: "limb and body wall muscles", exam: "long multinucleated fibers show cross striations", clinical: "denervation leads to muscle atrophy", compare: "differs from cardiac muscle by lack of intercalated discs", why: "Muscle tissue comparison is a basic histology favorite." }
-  ];
-
-  const histBlood = [
-    { name: "Erythrocyte", identity: "anucleate biconcave red blood cell in mammals", location: "circulating blood", exam: "transports oxygen using hemoglobin", clinical: "anemia reduces oxygen carrying capacity", compare: "avian erythrocytes are nucleated and oval", why: "Species difference in blood cells is frequently asked." },
-    { name: "Neutrophil", identity: "granulocyte with segmented nucleus", location: "blood and acute inflammatory exudates", exam: "main leukocyte in acute bacterial inflammation", clinical: "neutrophilia suggests acute infection or inflammation", compare: "heterophils are avian equivalents", why: "Leukocyte identification is high-yield." },
-    { name: "Eosinophil", identity: "granulocyte with eosinophilic cytoplasmic granules", location: "blood, mucosa, and parasitic/allergic lesions", exam: "increases in parasitic infestation and allergy", clinical: "eosinophilia is important in veterinary diagnostics", compare: "granule appearance varies between species", why: "Eosinophil function is a common MCQ." },
-    { name: "Megakaryocyte", identity: "large marrow cell that produces platelets", location: "bone marrow sinusoids", exam: "cytoplasmic fragments become thrombocytes/platelets", clinical: "marrow disease can cause thrombocytopenia", compare: "much larger than surrounding hematopoietic cells", why: "Bone marrow is specifically included in Unit 7." }
-  ];
-
-  const histSystems = [
-    { name: "Liver lobule", identity: "hexagonal functional unit centered on a central vein", location: "hepatic parenchyma", exam: "portal triads lie at lobule corners", clinical: "hepatocyte injury alters liver enzymes and bile flow", compare: "sinusoids carry mixed portal and arterial blood toward central vein", why: "Liver microscopic structure is a major system histology topic." },
-    { name: "Kidney glomerulus", identity: "capillary tuft within Bowman's capsule", location: "renal cortex", exam: "forms the filtration barrier with podocytes and basement membrane", clinical: "glomerular damage causes proteinuria", compare: "renal corpuscles are absent from medulla", why: "Urinary histology spotters often focus on glomeruli." },
-    { name: "Trachea", identity: "conducting airway with ciliated mucosa and hyaline cartilage", location: "neck and thorax before bifurcation", exam: "has pseudostratified ciliated epithelium with goblet cells", clinical: "mucociliary clearance protects lower airways", compare: "C-shaped cartilage rings are mammalian tracheal features", why: "Respiratory system histology is directly in Unit 7." },
-    { name: "Lymph node", identity: "encapsulated lymphoid organ with cortex, paracortex, and medulla", location: "along lymphatic drainage pathways", exam: "afferent lymphatics enter capsule and efferent leaves hilus", clinical: "enlargement indicates drainage-area inflammation or neoplasia", compare: "unlike spleen, it filters lymph rather than blood", why: "Lymphatic organs are high-yield histology." },
-    { name: "Thyroid gland", identity: "endocrine gland made of colloid-filled follicles", location: "neck beside trachea", exam: "follicular cells produce thyroid hormones", clinical: "thyroid dysfunction alters metabolism", compare: "parafollicular C cells secrete calcitonin", why: "Endocrine histology commonly asks follicle identification." },
-    { name: "Testis seminiferous tubule", identity: "coiled tubule where spermatogenesis occurs", location: "testicular parenchyma", exam: "Sertoli cells support developing germ cells", clinical: "cryptorchidism impairs spermatogenesis", compare: "Leydig cells lie between tubules and produce testosterone", why: "Male genital histology is frequently examined." },
-    { name: "Ovary follicle", identity: "oocyte surrounded by follicular/granulosa cells", location: "ovarian cortex", exam: "Graafian follicle contains an antrum", clinical: "follicular waves underlie estrous cycle physiology", compare: "corpus luteum forms after ovulation", why: "Female genital histology is a standard practical topic." },
-    { name: "Mammary gland", identity: "compound tubuloalveolar gland producing milk", location: "udder or mammary chain depending on species", exam: "secretory alveoli drain through ducts to teat sinus", clinical: "mastitis alters gland structure and milk", compare: "active gland has larger alveoli and less connective tissue than inactive gland", why: "Mammary gland is specifically in Unit 7." }
-  ];
-
-  const embryoGeneral = [
-    { name: "Gametogenesis", identity: "formation of male and female gametes by meiosis and maturation", location: "testis and ovary", exam: "reduces chromosome number from diploid to haploid", clinical: "errors can cause infertility or chromosomal anomalies", compare: "spermatogenesis is continuous; oogenesis is cyclic and arrested", why: "Embryology begins with gametogenesis in the syllabus." },
-    { name: "Fertilization", identity: "fusion of sperm and oocyte to form a zygote", location: "usually ampulla of uterine tube in mammals", exam: "restores diploid chromosome number", clinical: "failure prevents embryo formation", compare: "requires capacitation and acrosome reaction", why: "Fertilization is a core early embryology topic." },
-    { name: "Cleavage", identity: "rapid mitotic divisions without growth of the embryo", location: "within zona pellucida during early tubal transport", exam: "produces blastomeres", clinical: "poor cleavage indicates poor embryo viability", compare: "differs from ordinary growth because total size does not increase", why: "Cleavage definitions are common MCQs." },
-    { name: "Morula", identity: "solid ball of blastomeres resembling a mulberry", location: "early embryo before blastocyst cavity forms", exam: "usually around 16 to 32 cells", clinical: "embryo transfer staging may identify morulae", compare: "precedes blastulation", why: "Morula versus blastula is high-yield." },
-    { name: "Blastocyst", identity: "embryo with trophoblast, inner cell mass, and blastocoel", location: "uterus before implantation/attachment", exam: "trophoblast contributes to fetal membranes and placenta", clinical: "hatching from zona pellucida is needed before attachment", compare: "inner cell mass forms the embryo proper", why: "Blastocyst components are repeatedly examined." },
-    { name: "Gastrulation", identity: "formation of three germ layers from embryonic disc", location: "embryonic disc through primitive streak", exam: "produces ectoderm, mesoderm, and endoderm", clinical: "major developmental defects can arise at this stage", compare: "follows blastulation and precedes organogenesis", why: "Gastrulation is explicitly listed in Unit 8." },
-    { name: "Implantation", identity: "attachment of conceptus to uterine lining", location: "uterine endometrium", exam: "domestic animals usually have superficial/central attachment rather than deeply invasive implantation", clinical: "failure causes early embryonic loss", compare: "humans have interstitial invasive implantation", why: "Types of implantation are named in the syllabus." },
-    { name: "Twinning", identity: "development of two fetuses in one pregnancy", location: "uterus", exam: "monozygotic twins arise from one zygote; dizygotic from two ova", clinical: "freemartinism is important in cattle", compare: "twin pregnancy is less desirable in mares than in many polytocous species", why: "Twinning is directly included in Unit 8." },
-    { name: "Amnion", identity: "fetal membrane enclosing embryo in fluid", location: "immediately around fetus", exam: "provides a shock-absorbing protective cavity", clinical: "amnion abnormalities affect fetal protection", compare: "not the main exchange membrane of the placenta", why: "Fetal membranes are a core Unit 8 topic." },
-    { name: "Allantois", identity: "fetal membrane associated with waste storage and vascular placenta formation", location: "expands from hindgut region into extraembryonic coelom", exam: "fuses with chorion to form chorioallantoic placenta", clinical: "urachus remnant may persist as patent urachus", compare: "very important in birds as a respiratory and waste membrane", why: "Allantois is a frequent fetal membrane MCQ." }
-  ];
-
-  const embryoSystems = [
-    { name: "Ectoderm derivatives", identity: "germ layer forming epidermis and nervous system components", location: "outer germ layer", exam: "forms epidermis, hair, hoof, enamel, brain and spinal cord via neural ectoderm", clinical: "neural tube defects involve ectodermal development", compare: "neural crest contributes to peripheral nerves and melanocytes", why: "Germ-layer derivatives are high-probability exam questions." },
-    { name: "Mesoderm derivatives", identity: "middle germ layer forming muscle, bone, connective tissue and urogenital structures", location: "between ectoderm and endoderm", exam: "paraxial mesoderm forms somites", clinical: "limb and vertebral anomalies involve mesodermal derivatives", compare: "intermediate mesoderm forms much of urinary and genital systems", why: "Mesoderm derivatives are a central embryology table." },
-    { name: "Endoderm derivatives", identity: "inner germ layer forming epithelial lining of gut and respiratory tract", location: "lining of primitive gut tube", exam: "forms liver and pancreas parenchyma", clinical: "atresia and duct anomalies involve endodermal organ development", compare: "connective tissue and muscle of gut wall are mesodermal", why: "Endoderm is repeatedly tested with digestive development." },
-    { name: "Neurulation", identity: "formation of neural tube from neural plate", location: "dorsal embryonic ectoderm over notochord", exam: "neural tube forms brain and spinal cord", clinical: "failure of closure causes spina bifida or anencephaly", compare: "neural crest cells migrate away from neural folds", why: "Nervous system development is listed in Unit 8." },
-    { name: "Heart tube looping", identity: "early folding of primitive heart tube", location: "cardiogenic region of embryo", exam: "straight tube bends to establish chamber relationships", clinical: "abnormal looping contributes to congenital heart defects", compare: "heart begins function very early in development", why: "Circulatory development is high-yield." },
-    { name: "Metanephros", identity: "definitive permanent kidney of mammals", location: "develops from ureteric bud and metanephric blastema", exam: "replaces pronephros and mesonephros as adult kidney", clinical: "developmental failure can cause renal agenesis", compare: "mesonephric duct persists in male reproductive tract", why: "Urinary system development is specifically named." },
-    { name: "Placenta classification", identity: "classification by gross villus distribution and histological barrier", location: "maternal-fetal interface", exam: "ruminants are cotyledonary; mare and sow are diffuse; dog and cat are zonary", clinical: "placental type affects maternal antibody transfer", compare: "epitheliochorial placenta has more tissue layers than endotheliochorial", why: "Placenta and classification are explicit Unit 8 topics." },
-    { name: "Umbilical cord", identity: "connection carrying fetal vessels between fetus and placenta", location: "between fetal abdomen and placenta", exam: "normally contains two umbilical arteries and one umbilical vein in mammals", clinical: "navel infection can track along umbilical remnants", compare: "umbilical arteries carry deoxygenated blood from fetus", why: "Umbilical cord is a common practical demonstration item." },
-    { name: "Pharyngeal arches", identity: "embryonic arches contributing to face, jaw, hyoid, and laryngeal structures", location: "cranial embryonic pharyngeal region", exam: "first arch is associated with mandibular and maxillary processes", clinical: "cleft palate and jaw anomalies relate to craniofacial development", compare: "each arch has cartilage, muscle, artery, and nerve components", why: "Head organ development often tests pharyngeal arch basics." },
-    { name: "Mammary gland development", identity: "development of milk-producing gland from ectodermal mammary line", location: "ventral body wall along milk line", exam: "epithelial buds grow into underlying mesenchyme", clinical: "supernumerary teats result from mammary line remnants", compare: "number and position of glands differ by species", why: "Mammary gland development is included with system development." }
-  ];
-
-  const thoraxCore = [
-    { name: "Thoracic vertebra", identity: "vertebra bearing costal facets for ribs", location: "dorsal wall of thorax", exam: "ox and dog usually have 13 thoracic vertebrae, horse has 18", clinical: "thoracic spine supports rib cage and protects spinal cord", compare: "only thoracic vertebrae articulate with ribs", why: "Thoracic vertebrae and species differences are Unit 4 essentials." },
-    { name: "Rib", identity: "curved bone forming lateral thoracic wall", location: "between thoracic vertebrae and sternum/costal cartilage", exam: "true ribs attach directly to sternum through costal cartilage", clinical: "rib fracture can damage pleura or lung", compare: "horse has 18 pairs, ox and dog usually 13 pairs", why: "Rib number and classification are common MCQs." },
-    { name: "Sternum", identity: "ventral midline bone of thoracic cage", location: "floor of thorax", exam: "composed of sternebrae with manubrium cranially and xiphoid caudally", clinical: "sternal recumbency and marrow collection relate to sternum", compare: "birds have a large keeled sternum for flight muscles", why: "Sternum differences are a basic thorax osteology question." },
-    { name: "Pleura", identity: "serous membrane of thoracic cavity and lungs", location: "parietal pleura lines wall; visceral pleura covers lungs", exam: "pleural cavity contains a thin film of serous fluid", clinical: "pneumothorax occurs when air enters pleural cavity", compare: "mediastinum separates right and left pleural sacs", why: "Pleural reflections are emphasized in practical Unit 4." },
-    { name: "Recurrent laryngeal nerve", identity: "branch of vagus returning to larynx after looping in thorax", location: "left side loops around aortic arch; right around subclavian artery", exam: "supplies intrinsic laryngeal muscles except cricothyroid", clinical: "left paralysis causes roaring in horses", compare: "its long thoracic course makes left side more vulnerable", why: "Roaring is specifically named in practical thorax." },
-    { name: "Heart", identity: "muscular pump within pericardium", location: "middle mediastinum between lungs", exam: "right side pumps to pulmonary circulation and left side to systemic circulation", clinical: "auscultation areas depend on topography", compare: "os cordis occurs in ox and buffalo", why: "Heart structure and thoracic topography are high-yield." }
-  ];
-
-  addExamQuestions("Forelimb", "Angiology", fromTopics(forelimbAngiology), 25, 13, 12); // 50
-  addExamQuestions("Hindlimb & Pelvis", "Osteology & Arthrology", fromTopics(hindOsteoArth), 10, 5, 5); // 20
-  addExamQuestions("Hindlimb & Pelvis", "Myology & Neurology", fromTopics(hindMyoNeuro), 10, 5, 5); // 20
-  addExamQuestions("Hindlimb & Pelvis", "Angiology & Splanchnology", fromTopics(hindAngioSplanch), 5, 3, 2); // 10
-  addExamQuestions("Head & Neck", "Osteology & Arthrology", fromTopics(headOsteoArth), 8, 4, 3); // 15
-  addExamQuestions("Head & Neck", "Myology & Splanchnology", fromTopics(headMyoSplanch), 7, 4, 4); // 15
-  addExamQuestions("Head & Neck", "Neurology, Angiology & Clinical", fromTopics(headNeuroClinical), 10, 5, 5); // 20
-  addExamQuestions("Introduction", "General Anatomy & Osteology", fromTopics(introGeneral), 13, 6, 6); // 25
-  addExamQuestions("Introduction", "Myology & Arthrology", fromTopics(introMyoArth), 12, 7, 6); // 25
-  addExamQuestions("Introduction", "Angiology & Neurology", fromTopics(introAngioNeuro), 8, 3, 4); // 15
-  addExamQuestions("Introduction", "Splanchnology & Clinical", fromTopics(introSplanchClinical), 7, 4, 4); // 15
-  addExamQuestions("Histology", "Cytology & Basic Tissues", fromTopics(histCytology), 20, 10, 10); // 40
-  addExamQuestions("Histology", "Blood & Bone Marrow", fromTopics(histBlood), 10, 5, 5); // 20
-  addExamQuestions("Histology", "Digestive & Other Systems", fromTopics(histSystems), 20, 10, 10); // 40
-  addExamQuestions("Embryology", "General Embryology (Gametogenesis to Gastrulation)", fromTopics(embryoGeneral), 25, 13, 12); // 50
-  addExamQuestions("Embryology", "Systemic Embryology & Placentation", fromTopics(embryoSystems), 25, 12, 13); // 50
-  addExamQuestions("Thorax", "Osteology", fromTopics(thoraxCore.slice(0, 2)), 5, 3, 2); // 10
-  addExamQuestions("Thorax", "Arthrology", fromTopics(thoraxCore.slice(2, 3)), 3, 1, 1); // 5
-  addExamQuestions("Thorax", "Splanchnology", fromTopics(thoraxCore.slice(3, 6)).slice(0, 14), 7, 3, 4); // 14
-})();
-
-// Additional Unit 1 introduction questions.
-(function addIntroductionUnit1SetTwo() {
-  if (typeof quizBank === "undefined" || !quizBank.Introduction) return;
-
-  const add = (system, mode, items) => {
-    quizBank.Introduction[system] = quizBank.Introduction[system] || { mcq: [], tf: [], fib: [] };
-    quizBank.Introduction[system][mode] = quizBank.Introduction[system][mode] || [];
-    quizBank.Introduction[system][mode].push(...items);
-  };
-
-  add("General Anatomy & Osteology", "mcq", [
-    { q: "Which branch of anatomy deals with structures visible to the naked eye?", o: ["Gross anatomy", "Histology", "Cytology", "Embryology"], a: 0, e: "Gross anatomy studies body structures that can be seen without a microscope." },
-    { q: "The plane that divides the body into equal right and left halves is the:", o: ["Median plane", "Transverse plane", "Dorsal plane", "Oblique plane"], a: 0, e: "The median plane passes through the midline and divides the body into equal right and left halves." },
-    { q: "A plane parallel to the median plane is called a:", o: ["Sagittal plane", "Transverse plane", "Horizontal plane", "Frontal plane"], a: 0, e: "Sagittal planes run parallel to the median plane." },
-    { q: "In the head, the term used for direction toward the nose is:", o: ["Rostral", "Cranial", "Caudal", "Palmar"], a: 0, e: "Rostral means toward the nose or beak in the head region." },
-    { q: "The skeleton of the limbs is called the:", o: ["Appendicular skeleton", "Axial skeleton", "Visceral skeleton", "Pneumatic skeleton"], a: 0, e: "The appendicular skeleton includes the bones of the forelimbs and hindlimbs." },
-    { q: "Which of the following is a flat bone?", o: ["Scapula", "Carpus", "Femur", "Patella"], a: 0, e: "The scapula is a flat bone with broad surfaces for muscle attachment." },
-    { q: "The shaft of a long bone is called the:", o: ["Diaphysis", "Epiphysis", "Metaphysis", "Apophysis"], a: 0, e: "The diaphysis is the shaft of a long bone." },
-    { q: "The ends of a long bone are called:", o: ["Epiphyses", "Diaphyses", "Processes", "Foramina"], a: 0, e: "The epiphyses form the proximal and distal ends of a long bone." },
-    { q: "A small hole in a bone for passage of vessels or nerves is a:", o: ["Foramen", "Fossa", "Condyle", "Tuberosity"], a: 0, e: "A foramen is an opening in bone." },
-    { q: "A smooth rounded articular projection on a bone is called a:", o: ["Condyle", "Spine", "Crest", "Sulcus"], a: 0, e: "A condyle is a rounded projection that usually takes part in a joint." }
-  ]);
-
-  add("Myology & Arthrology", "mcq", [
-    { q: "A freely movable joint is called a:", o: ["Diarthrosis", "Synarthrosis", "Synchondrosis", "Syndesmosis"], a: 0, e: "Diarthroses are freely movable synovial joints." },
-    { q: "The fluid present in a synovial joint is:", o: ["Synovia", "Lymph", "Cerebrospinal fluid", "Serum"], a: 0, e: "Synovia or synovial fluid lubricates the joint cavity." },
-    { q: "The articular ends of bones in a synovial joint are covered by:", o: ["Hyaline cartilage", "Elastic cartilage", "Fibrocartilage only", "Periosteum"], a: 0, e: "Articular surfaces are usually covered by hyaline cartilage." },
-    { q: "A hinge joint mainly permits:", o: ["Flexion and extension", "Rotation only", "Circumduction only", "Gliding only"], a: 0, e: "Hinge joints mainly allow flexion and extension." },
-    { q: "The shoulder and hip joints are examples of:", o: ["Ball and socket joints", "Pivot joints", "Suture joints", "Plane joints"], a: 0, e: "The shoulder and hip are ball and socket joints." },
-    { q: "A fibrous band connecting bone to bone is a:", o: ["Ligament", "Tendon", "Aponeurosis", "Fascia"], a: 0, e: "Ligaments connect bones and support joints." },
-    { q: "A tendon connects:", o: ["Muscle to bone", "Bone to bone", "Nerve to muscle", "Skin to bone"], a: 0, e: "Tendons attach muscles to bones." },
-    { q: "A broad flat tendon is called an:", o: ["Aponeurosis", "Bursa", "Retinaculum", "Cartilage"], a: 0, e: "An aponeurosis is a sheet-like tendon." }
-  ]);
-
-  add("Angiology & Neurology", "mcq", [
-    { q: "The chamber of the heart that pumps blood into the aorta is the:", o: ["Left ventricle", "Right ventricle", "Left atrium", "Right atrium"], a: 0, e: "The left ventricle pumps oxygenated blood into the aorta." },
-    { q: "The vessel carrying blood from the right ventricle to the lungs is the:", o: ["Pulmonary trunk", "Aorta", "Cranial vena cava", "Pulmonary vein"], a: 0, e: "The pulmonary trunk carries deoxygenated blood from the right ventricle to the lungs." },
-    { q: "The vessels that carry blood toward the heart are:", o: ["Veins", "Arteries", "Capillaries", "Lacteals"], a: 0, e: "Veins carry blood toward the heart." },
-    { q: "The vessels that usually carry blood away from the heart are:", o: ["Arteries", "Veins", "Lymph ducts", "Venules"], a: 0, e: "Arteries carry blood away from the heart." },
-    { q: "The lymphatic system finally drains mainly into the:", o: ["Venous system", "Arterial system", "Pleural cavity", "Peritoneal cavity"], a: 0, e: "Lymph returns to the blood through large veins near the venous angles." },
-    { q: "The brain and spinal cord form the:", o: ["Central nervous system", "Peripheral nervous system", "Autonomic nervous system", "Somatic nervous system only"], a: 0, e: "The central nervous system consists of the brain and spinal cord." },
-    { q: "The dorsal root of a spinal nerve is mainly:", o: ["Sensory", "Motor", "Sympathetic only", "Parasympathetic only"], a: 0, e: "The dorsal root carries sensory fibers toward the spinal cord." },
-    { q: "The ventral root of a spinal nerve is mainly:", o: ["Motor", "Sensory", "Lymphatic", "Venous"], a: 0, e: "The ventral root carries motor fibers away from the spinal cord." }
-  ]);
-
-  add("Splanchnology & Clinical", "mcq", [
-    { q: "The cavity containing the lungs and heart is the:", o: ["Thoracic cavity", "Abdominal cavity", "Pelvic cavity", "Cranial cavity"], a: 0, e: "The thoracic cavity contains the lungs, heart, and associated structures." },
-    { q: "The muscular partition between thorax and abdomen is the:", o: ["Diaphragm", "Mediastinum", "Pleura", "Peritoneum"], a: 0, e: "The diaphragm separates the thoracic and abdominal cavities." },
-    { q: "The serous membrane lining the abdominal cavity is the:", o: ["Peritoneum", "Pleura", "Pericardium", "Meninges"], a: 0, e: "The peritoneum lines the abdominal cavity and covers many abdominal organs." },
-    { q: "The main vein used for venipuncture in large animals is the:", o: ["Jugular vein", "Cephalic vein", "Femoral vein", "Portal vein"], a: 0, e: "The jugular vein is the main venipuncture site in large animals." }
-  ]);
-
-  add("General Anatomy & Osteology", "fib", [
-    { q: "The plane dividing the body into equal right and left halves is the _____ plane.", a: ["median"], e: "The median plane passes through the midline." },
-    { q: "A direction toward the nose in the head is called _____.", a: ["rostral"], e: "Rostral is used in the head for direction toward the nose." },
-    { q: "The skeleton of the skull, vertebral column, ribs and sternum is the _____ skeleton.", a: ["axial"], e: "The axial skeleton forms the central axis of the body." },
-    { q: "The shaft of a long bone is the _____.", a: ["diaphysis"], e: "The diaphysis is the shaft of a long bone." },
-    { q: "A hole in a bone for passage of vessels or nerves is a _____.", a: ["foramen"], e: "A foramen is an opening in bone." }
-  ]);
-
-  add("Myology & Arthrology", "fib", [
-    { q: "A freely movable synovial joint is called a _____.", a: ["diarthrosis"], e: "Diarthroses are freely movable joints." },
-    { q: "The fluid in a synovial joint is called _____.", a: ["synovia", "synovial fluid"], e: "Synovia lubricates the joint." },
-    { q: "A fibrous band connecting bone to bone is a _____.", a: ["ligament"], e: "Ligaments connect bones to bones." },
-    { q: "A tendon connects muscle to _____.", a: ["bone"], e: "Tendons attach muscles to bones." }
-  ]);
-
-  add("Angiology & Neurology", "fib", [
-    { q: "The heart chamber that pumps blood into the aorta is the left _____.", a: ["ventricle"], e: "The left ventricle pumps blood into the aorta." },
-    { q: "The vessels that carry blood toward the heart are _____.", a: ["veins"], e: "Veins carry blood toward the heart." },
-    { q: "The outermost meninx is the _____ mater.", a: ["dura"], e: "Dura mater is the tough outer meningeal layer." },
-    { q: "The dorsal root of a spinal nerve is mainly _____.", a: ["sensory"], e: "The dorsal root carries sensory fibers." }
-  ]);
-
-  add("Splanchnology & Clinical", "fib", [
-    { q: "The muscular partition between thorax and abdomen is the _____.", a: ["diaphragm"], e: "The diaphragm separates thoracic and abdominal cavities." },
-    { q: "The serous membrane of the abdominal cavity is the _____.", a: ["peritoneum"], e: "The peritoneum lines the abdominal cavity." }
-  ]);
-
-  add("General Anatomy & Osteology", "tf", [
-    { q: "The median plane divides the body into equal right and left halves.", a: true, e: "True. The median plane passes through the midline." },
-    { q: "Palmar is used for the caudal surface of the hindlimb distal to the tarsus.", a: false, e: "False. Palmar is used in the forelimb; plantar is used in the hindlimb distal to the tarsus." },
-    { q: "The patella is a sesamoid bone.", a: true, e: "True. The patella develops in the tendon of quadriceps femoris." },
-    { q: "The appendicular skeleton includes the skull and vertebral column.", a: false, e: "False. Skull and vertebral column belong to the axial skeleton." },
-    { q: "A fossa is a depression on a bone.", a: true, e: "True. A fossa is a hollow or depression." }
-  ]);
-
-  add("Myology & Arthrology", "tf", [
-    { q: "Synovial joints have a joint cavity.", a: true, e: "True. A joint cavity is a feature of synovial joints." },
-    { q: "A tendon connects bone to bone.", a: false, e: "False. A tendon connects muscle to bone; a ligament connects bone to bone." },
-    { q: "A hinge joint mainly permits flexion and extension.", a: true, e: "True. Hinge joints mainly allow flexion and extension." },
-    { q: "An aponeurosis is a rounded articular surface.", a: false, e: "False. An aponeurosis is a broad flat tendon." }
-  ]);
-
-  add("Angiology & Neurology", "tf", [
-    { q: "The pulmonary trunk carries blood from the right ventricle to the lungs.", a: true, e: "True. It carries deoxygenated blood to the lungs." },
-    { q: "The dorsal root of a spinal nerve is mainly motor.", a: false, e: "False. The dorsal root is sensory; the ventral root is motor." },
-    { q: "Dura mater is the outermost meningeal layer.", a: true, e: "True. Dura mater is the tough outer covering." },
-    { q: "The brain and spinal cord form the peripheral nervous system.", a: false, e: "False. They form the central nervous system." }
-  ]);
-
-  add("Splanchnology & Clinical", "tf", [
-    { q: "The diaphragm separates the thoracic and abdominal cavities.", a: true, e: "True. It forms the partition between thorax and abdomen." },
-    { q: "The jugular vein is commonly used for venipuncture in large animals.", a: true, e: "True. It is the main accessible vein in cattle and horses." }
-  ]);
-})();
