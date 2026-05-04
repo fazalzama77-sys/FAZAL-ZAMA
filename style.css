@@ -530,9 +530,17 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    height: 100%;
-    align-content: center;
+    /* Smoothly scroll when more cards exist than fit */
+    max-height: 100%;
+    overflow-y: auto;
+    align-content: start;
+    padding: 8px 4px 24px;       /* breathing room at top + bottom */
+    scrollbar-width: thin;
 }
+.quiz-menu-grid::-webkit-scrollbar { width: 8px; }
+.quiz-menu-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 4px; }
+.quiz-menu-grid::-webkit-scrollbar-thumb { background: rgba(0,242,255,0.30); border-radius: 4px; }
+.quiz-menu-grid::-webkit-scrollbar-thumb:hover { background: rgba(0,242,255,0.50); }
 
 .quiz-mode-card {
     background: rgba(255, 255, 255, 0.05);
@@ -2036,6 +2044,58 @@ body {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
+/* ============================================================
+   AUTO-HIDE FLOATING TOGGLE WHEN ANY OVERLAY/TOOLTIP IS OPEN
+   Triggers (any one of these = hide):
+     • body.body-modal-open  (set by atlas quiz openMenu/close)
+     • .modal-overlay.open present (WHY card modal)
+     • .quiz-overlay.open present  (WHY engineering challenge)
+     • a glossary tooltip is being shown via :focus / :hover on .gloss-term
+   Smooth fade so it never feels jumpy, fully reversible.
+   ============================================================ */
+body.body-modal-open .theme-toggle-btn,
+body.body-modal-open .elite-toggle-btn {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.85);
+}
+
+/* Modern browsers (Chrome 105+, Safari 15.4+, Firefox 121+) — :has() lets pure CSS detect open overlays */
+@supports selector(:has(*)) {
+    body:has(.modal-overlay.open) .theme-toggle-btn,
+    body:has(.modal-overlay.open) .elite-toggle-btn,
+    body:has(.quiz-overlay.open) .theme-toggle-btn,
+    body:has(.quiz-overlay.open) .elite-toggle-btn,
+    body:has(.gloss-term:focus) .theme-toggle-btn,
+    body:has(.gloss-term:focus) .elite-toggle-btn {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px) scale(0.85);
+    }
+    /* On mobile (where tooltip is fixed at viewport bottom), also hide on hover */
+    @media (max-width: 600px) {
+        body:has(.gloss-term:hover) .theme-toggle-btn,
+        body:has(.gloss-term:hover) .elite-toggle-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px) scale(0.85);
+        }
+    }
+}
+
+/* Mobile: shrink toggle slightly so it never crowds the corner */
+@media (max-width: 600px) {
+    .theme-toggle-btn {
+        padding: 10px 14px;
+        font-size: 0.78rem;
+        bottom: 14px;
+        left: 14px;
+    }
+    .theme-toggle-btn #theme-text {
+        display: none;   /* icon-only on tiny screens */
+    }
+}
+
 
 /* Elite Toggle Button */
 .elite-toggle-btn {
@@ -3184,15 +3244,18 @@ body.professional-mode .gloss-term::after {
   box-shadow: 0 6px 24px rgba(0,0,0,0.18);
 }
 
-/* On small screens, anchor tooltip to viewport rather than term */
+/* On small screens, anchor tooltip to TOP of viewport so it never collides
+   with the bottom-left floating toggle. (Toggle also auto-hides while a
+   tooltip is shown via :focus on .gloss-term — this is the visual fallback.) */
 @media (max-width: 600px) {
   .gloss-term::after {
     position: fixed;
     left: 12px !important;
     right: 12px !important;
-    bottom: 12px;
-    top: auto;
+    top: 12px;
+    bottom: auto;
     transform: none;
     max-width: calc(100% - 24px);
+    z-index: 10000;            /* above modal/toggle so it's always readable */
   }
 }

@@ -59,6 +59,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* Allow inner panes to scroll if content overflows on short laptops/tablets */
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Make the analysis view scroll when stats + chart + actions don't all fit */
+#quiz-analysis-view {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 4px;
 }
 
 .quiz-view-header {
@@ -1142,6 +1152,19 @@ body.professional-mode .review-back-to-top {
     height: 100%;
     max-height: none;
     border-radius: 0;
+    /* Reserve safe space at bottom so the Next/Submit/Review buttons
+       never sit under the floating Pro/Student toggle on short phones.
+       The toggle auto-hides while the modal is open via body.body-modal-open,
+       but this padding is a defence-in-depth fallback for older browsers. */
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+  }
+  /* Make sure inner navigation never gets clipped */
+  .quiz-navigation {
+    padding-bottom: 8px;
+  }
+  /* Analysis-action buttons (Try Again / Review Answers) wrap onto their own row */
+  .analysis-actions {
+    padding-bottom: 16px;
   }
   
   .analysis-stats-grid {

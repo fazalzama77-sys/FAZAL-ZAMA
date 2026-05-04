@@ -30,6 +30,7 @@ const quizApp = {
   openMenu: () => {
     document.getElementById('quiz-overlay').style.display = 'flex';
     document.querySelector('.quiz-modal').classList.remove('review-mode');
+    document.body.classList.add('body-modal-open');   // hides floating toggle
     quizApp.showRegionView();
     quizApp.loadSavedProgress();
   },
@@ -46,10 +47,12 @@ const quizApp = {
         quizApp.saveProgress();
         quizApp.cleanup();
         document.getElementById('quiz-overlay').style.display = 'none';
+        document.body.classList.remove('body-modal-open');
       }
     } else {
       quizApp.cleanup();
       document.getElementById('quiz-overlay').style.display = 'none';
+      document.body.classList.remove('body-modal-open');
     }
   },
 
