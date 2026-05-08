@@ -130,9 +130,91 @@ const dashboard = {
 
   render: () => {
     dashboard.renderOverviewStats();
+    dashboard.renderSrsPanel();      // Smart Review (Spaced Repetition)
     dashboard.renderAccuracyChart();
     dashboard.renderHeatmap();
     dashboard.renderHistory();
+  },
+
+  // ============== SMART REVIEW (Spaced Repetition Panel) ==============
+  renderSrsPanel: () => {
+    const container = document.getElementById('dash-srs-panel');
+    if (!container || typeof srs === 'undefined') return;
+
+    const stats = srs.getStats();
+    const dueQuestions = stats.dueNow;
+    const total = stats.totalCards;
+    const mastered = stats.mastered;
+    const masteryPct = total > 0 ? Math.round((mastered / total) * 100) : 0;
+
+    // Per-box bar bits — Leitner 1..5
+    const boxBars = [1, 2, 3, 4, 5].map(b => {
+        const count = stats.byBox[b] || 0;
+        const pct = total ? (count / total) * 100 : 0;
+        const colors = { 1: '#ff6b6b', 2: '#ff9f43', 3: '#feca57', 4: '#48dbfb', 5: '#1dd1a1' };
+        return `
+          <div class="srs-box" title="Box ${b}: ${count} cards (review every ${srs.intervals[b]} day${srs.intervals[b] > 1 ? 's' : ''})">
+            <div class="srs-box-bar"><div class="srs-box-fill" style="height:${Math.max(pct, 4)}%; background:${colors[b]};"></div></div>
+            <div class="srs-box-label">B${b}</div>
+            <div class="srs-box-count">${count}</div>
+          </div>`;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="srs-header">
+        <div>
+          <h3 class="srs-title"><i class="fas fa-brain"></i> Smart Review (Spaced Repetition)</h3>
+          <p class="srs-sub">Leitner-box system — wrong answers come back daily, right answers fade further apart.</p>
+        </div>
+        <div class="srs-due-pill ${dueQuestions > 0 ? 'has-due' : ''}">
+          <i class="fas fa-clock"></i> <strong>${dueQuestions}</strong> due now
+        </div>
+      </div>
+
+      <div class="srs-body">
+        <div class="srs-stats-row">
+          <div class="srs-mini-stat"><div class="lbl">Total Cards</div><div class="val">${total}</div></div>
+          <div class="srs-mini-stat"><div class="lbl">Mastered (B5)</div><div class="val" style="color:#1dd1a1;">${mastered}</div></div>
+          <div class="srs-mini-stat"><div class="lbl">Mastery</div><div class="val">${masteryPct}%</div></div>
+        </div>
+        <div class="srs-boxes">${boxBars}</div>
+        <div class="srs-actions">
+          <button class="srs-btn srs-btn-primary" onclick="dashboard.startSmartReview()" ${dueQuestions === 0 && total === 0 ? 'disabled' : ''}>
+            <i class="fas fa-play-circle"></i> ${dueQuestions > 0 ? `Review ${Math.min(dueQuestions, 20)} due now` : 'Practise mixed set'}
+          </button>
+          <button class="srs-btn srs-btn-ghost" onclick="dashboard.resetSrs()" title="Wipe all SRS progress">
+            <i class="fas fa-redo"></i> Reset
+          </button>
+        </div>
+        ${total === 0
+            ? `<div class="srs-empty"><i class="fas fa-info-circle"></i> Take a few quiz questions to seed your review deck — every answer auto-feeds the SRS engine.</div>`
+            : ''}
+      </div>
+    `;
+  },
+
+  startSmartReview: () => {
+    if (typeof srs === 'undefined' || typeof quizApp === 'undefined') {
+      alert('Quiz engine not available.');
+      return;
+    }
+    const reviewSet = srs.buildReviewSet('mcq', 20);
+    if (!reviewSet || reviewSet.length === 0) {
+      alert('No review questions available yet. Take a few quizzes first to build your deck!');
+      return;
+    }
+    // Hand off to quiz engine in "smart-review" mode
+    if (typeof quizApp.startSmartReview === 'function') {
+      quizApp.startSmartReview(reviewSet);
+    } else {
+      // Fallback: open quiz menu, user picks region
+      quizApp.openMenu();
+    }
+  },
+
+  resetSrs: () => {
+    if (typeof srs === 'undefined') return;
+    if (srs.reset()) dashboard.renderSrsPanel();
   },
 
   renderOverviewStats: () => {

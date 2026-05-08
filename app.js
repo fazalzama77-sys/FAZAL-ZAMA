@@ -131,6 +131,28 @@ const app = {
         if (location.hash !== hash) {
             history.pushState(null, '', hash);
         }
+        // Keep document.title in sync with current location for SEO + bookmark sanity
+        app.updatePageTitle();
+    },
+
+    // Builds a descriptive <title> from current state — helps SEO + browser tabs
+    updatePageTitle: () => {
+        const SITE = 'IVRI Anatomy';
+        const parts = [];
+        if (app.state.view === 'atlas') {
+            if (app.state.region) parts.push(app.state.region);
+            if (app.state.system) parts.push(app.state.system);
+            parts.push('Atlas');
+        } else if (app.state.view === 'why') {
+            parts.push('Biomechanics');
+        } else if (app.state.view === 'dashboard') {
+            parts.push('Dashboard');
+        } else if (app.state.view === 'landing') {
+            // Default site title
+            document.title = `${SITE} | Exploring Anatomy through Technology`;
+            return;
+        }
+        document.title = (parts.length ? parts.join(' · ') + ' · ' : '') + SITE;
     },
 
     toggleTheme: () => {
@@ -391,6 +413,9 @@ const app = {
 
         // Update URL so refresh / Back works on this exact topic
         app.setHash(`#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(app.state.system)}/${index}`);
+
+        // Override page title to include the structure name for sharper bookmarks/sharing
+        document.title = `${item.title} · ${app.state.system} · ${app.state.region} · IVRI Anatomy`;
 
         // ELITE MODE LOGIC: Use eliteDesc if available and eliteMode is ON
         const useElite = app.state.eliteMode && item.eliteDesc;
@@ -806,8 +831,34 @@ const aiResponseText = document.getElementById('aiResponseText');
 
 function openModal(item) {
     currentActiveItem = item;
-    document.getElementById('modalImg').src = item.img;
-    document.getElementById('modalImg').alt = item.title;
+
+    // ===== Smart image loading: skeleton until image is ready =====
+    const imgEl = document.getElementById('modalImg');
+    const imgCol = imgEl.parentElement; // .modal-image-col
+    if (item.img) {
+        imgEl.classList.remove('img-loaded');
+        imgCol.classList.add('img-loading');
+        imgEl.alt = item.title;
+        imgEl.decoding = 'async';
+        imgEl.loading = 'eager'; // user clicked - we want it
+        // Reset before assigning so we always trigger 'load' (even if same src)
+        imgEl.removeAttribute('src');
+        imgEl.onload = () => {
+            imgEl.classList.add('img-loaded');
+            imgCol.classList.remove('img-loading');
+        };
+        imgEl.onerror = () => {
+            imgCol.classList.remove('img-loading');
+            imgCol.classList.add('img-error');
+        };
+        imgCol.classList.remove('img-error');
+        imgEl.src = item.img;
+    } else {
+        // No image at all — clear and hide loading state
+        imgEl.removeAttribute('src');
+        imgCol.classList.remove('img-loading', 'img-error');
+    }
+
     document.getElementById('modalCategory').textContent = item.category.toUpperCase();
     document.getElementById('modalTitle').textContent = item.title;
     document.getElementById('modalComparison').textContent = `Comparison: ${item.comparison}`;

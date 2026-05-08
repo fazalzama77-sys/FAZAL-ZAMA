@@ -1375,6 +1375,45 @@ body.professional-mode .credit-foot { color: #607d8b; }
     justify-content: center;
     padding: 20px;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    min-height: 240px;
+}
+
+/* Skeleton shimmer while image is fetching */
+#why-view .modal-image-col.img-loading::before {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    border-radius: 8px;
+    background:
+        linear-gradient(90deg,
+            rgba(0,242,255,0.04) 0%,
+            rgba(0,242,255,0.18) 50%,
+            rgba(0,242,255,0.04) 100%);
+    background-size: 200% 100%;
+    animation: imgShimmer 1.4s ease-in-out infinite;
+}
+#why-view .modal-image-col.img-loading::after {
+    content: "Loading image…";
+    position: absolute;
+    color: var(--why-cyan);
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+#why-view .modal-image-col.img-error::before {
+    content: "Image unavailable";
+    color: #ff7070;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.7;
+}
+@keyframes imgShimmer {
+    0%   { background-position: 100% 50%; }
+    100% { background-position: -100% 50%; }
 }
 
 #why-view .modal-img {
@@ -1382,6 +1421,11 @@ body.professional-mode .credit-foot { color: #607d8b; }
     height: auto;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+#why-view .modal-img.img-loaded {
+    opacity: 1;
 }
 
 #why-view .modal-text-col {
@@ -2078,6 +2122,52 @@ body {
         min-height: 44px;
         touch-action: manipulation;
     }
+}
+
+/* ============================================================
+   MOBILE NAV — compact spacing on phones so labels still fit.
+   Nav-btns marked .nav-btn-keep-label (e.g. BOOKMARKS, QUIZ MODE)
+   keep BOTH icon and label so new students always know what they're tapping.
+   Only buttons WITHOUT that class become icon-only when space is tight.
+   ============================================================ */
+@media (max-width: 600px) {
+    .nav-bar {
+        gap: 6px !important;
+        padding: 8px 10px !important;
+    }
+    /* Compact every nav-btn slightly so multiple buttons fit a phone row */
+    .nav-bar .nav-btn {
+        padding: 9px 12px !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0.5px;
+    }
+    .nav-bar .nav-btn i { font-size: 0.95rem; }
+    /* Only icon-only-by-default for explicitly-marked secondary buttons
+       (e.g. Elite Toggle). Keep label whenever .nav-btn-keep-label is present
+       OR when it's the BACK button (first-child). */
+    .nav-bar .nav-btn.nav-btn-icon-only-mobile:not(.nav-btn-keep-label) {
+        padding: 10px 12px !important;
+        min-width: 44px;
+        font-size: 0;
+    }
+    .nav-bar .nav-btn.nav-btn-icon-only-mobile:not(.nav-btn-keep-label) i {
+        font-size: 1.05rem;
+        margin: 0;
+    }
+    .nav-bar .nav-btn.nav-btn-icon-only-mobile:not(.nav-btn-keep-label) span {
+        display: none;
+    }
+    /* Crumb shrinks slightly */
+    .nav-bar .badge {
+        font-size: 0.68rem !important;
+        padding: 5px 8px !important;
+    }
+}
+
+/* On very small phones (≤380px), labels can wrap onto multiple lines
+   if 4 buttons share the row. Allow flex-wrap as a graceful fallback. */
+@media (max-width: 380px) {
+    .nav-bar { flex-wrap: wrap !important; }
 }
 
 /* =========================================================
@@ -3327,6 +3417,11 @@ body.professional-mode .bm-btn.active {
   transform: translateY(8px);
   width: max-content;
   max-width: 320px;
+  /* Long definitions become scrollable instead of pushing off-screen */
+  max-height: 240px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   padding: 10px 14px;
   background: #14141f;
   color: #e8e8f0;
@@ -3342,6 +3437,11 @@ body.professional-mode .bm-btn.active {
   pointer-events: none;
   transition: opacity 0.15s ease;
   box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+}
+/* Allow user to scroll the tooltip when focused (tap on mobile) */
+.gloss-term:hover::after,
+.gloss-term:focus::after {
+  pointer-events: auto;
 }
 .gloss-term:hover::after,
 .gloss-term:focus::after {
@@ -3380,6 +3480,8 @@ body.professional-mode .gloss-term::after {
     bottom: auto;
     transform: none;
     max-width: calc(100% - 24px);
+    max-height: 60vh;          /* never covers >60% of screen */
+    overflow-y: auto;
     z-index: 10000;            /* above modal/toggle so it's always readable */
   }
 }

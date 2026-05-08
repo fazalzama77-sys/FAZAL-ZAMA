@@ -48,11 +48,13 @@ const quizApp = {
         quizApp.cleanup();
         document.getElementById('quiz-overlay').style.display = 'none';
         document.body.classList.remove('body-modal-open');
+        document.body.style.overflow = '';   // restore page scrolling
       }
     } else {
       quizApp.cleanup();
       document.getElementById('quiz-overlay').style.display = 'none';
       document.body.classList.remove('body-modal-open');
+      document.body.style.overflow = '';     // restore page scrolling
     }
   },
 
@@ -226,6 +228,70 @@ const quizApp = {
   },
 
   // ==================== QUIZ START ====================
+
+  // ===== SMART REVIEW (Spaced Repetition) =====
+  // Triggered from Dashboard. Receives an array from srs.buildReviewSet().
+  startSmartReview: (reviewSet) => {
+    if (!Array.isArray(reviewSet) || reviewSet.length === 0) {
+      alert('No questions available for review yet.');
+      return;
+    }
+
+    // ---- Lock the page first so the modal can claim the full viewport ----
+    // Without this, on mobile the underlying dashboard's scroll position
+    // + URL-bar resize can cause the modal to render at desktop dimensions.
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.body.style.overflow = 'hidden';      // freeze background scroll
+    document.body.classList.add('body-modal-open');
+
+    // ---- Setup quiz state ----
+    quizApp.mode = 'mcq';
+    quizApp.score = 0;
+    quizApp.wrong = 0;
+    quizApp.currentIndex = 0;
+    quizApp.userAnswers = [];
+    quizApp.bookmarks.clear();
+    quizApp.flagged.clear();
+    quizApp.quizState = 'active';
+    quizApp.selectedRegion = 'Smart Review';
+    quizApp.selectedSystem = 'Spaced Repetition';
+
+    // Map review entries → quiz questions, tagging metadata for SRS auto-recording
+    quizApp.questions = reviewSet.map(entry => {
+      const q = entry.q;
+      return Object.assign({}, q, {
+        _region: entry.region,
+        _system: entry.system,
+        _mode: entry.mode,
+        _index: entry.idx
+      });
+    });
+
+    quizApp.userAnswers = new Array(quizApp.questions.length).fill(null);
+    quizApp.startTime = Date.now();
+    quizApp.startTimer();
+
+    // ---- Show the overlay AFTER state is ready ----
+    const overlay = document.getElementById('quiz-overlay');
+    const modal = document.querySelector('.quiz-modal');
+    modal.classList.remove('review-mode');
+    overlay.style.display = 'flex';
+    quizApp.hideAllViews();
+    document.getElementById('quiz-active-view').style.display = 'flex';
+
+    // Force a layout reflow so the @media (max-width: 900px) rules
+    // apply to the freshly-displayed modal on mobile. Without this,
+    // some phones (iOS Safari especially) keep the previous desktop dims.
+    void modal.offsetHeight;
+    modal.style.opacity = '0';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        modal.style.opacity = '';
+        quizApp.renderQuestion();
+        quizApp.updateNavigationControls();
+      });
+    });
+  },
 
   start: (mode) => {
     const availableCount = quizApp.getQuestionCount(quizApp.selectedRegion, quizApp.selectedSystem, mode);

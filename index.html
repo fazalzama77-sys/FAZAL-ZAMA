@@ -6,6 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IVRI | Exploring Anatomy through Technology</title>
 
+  <!-- ===== SEO & SOCIAL SHARING ===== -->
+  <meta name="description"
+    content="Interactive Veterinary Anatomy atlas for B.V.Sc 1st-year students. Regional anatomy, histology, embryology, biomechanics, comparative species notes, MCQ quizzes, and spaced-repetition review.">
+  <meta name="keywords"
+    content="veterinary anatomy, IVRI, B.V.Sc, regional anatomy, histology, embryology, comparative anatomy, MCQ, ox horse dog pig fowl">
+  <meta name="author" content="Fazal Zama (B0-350-2025) — IVRI UG">
+  <meta name="theme-color" content="#0a192f">
+
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn previews) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IVRI Anatomy — Interactive UG Atlas">
+  <meta property="og:description"
+    content="Standard + Elite views for every structure, comparative tables across ox/horse/dog/pig/fowl, MCQ engine with spaced repetition, embryology + histology + clinical sites.">
+  <meta property="og:image" content="https://fazalzama.github.io/kimi-anatomy/og-preview.png">
+  <meta property="og:image:alt" content="IVRI Anatomy — UG study companion">
+  <meta property="og:url" content="https://fazalzama.github.io/kimi-anatomy/">
+  <meta property="og:site_name" content="IVRI Anatomy">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IVRI Anatomy — Interactive UG Atlas">
+  <meta name="twitter:description"
+    content="Veterinary anatomy study companion: regional anatomy, histology, embryology, MCQs with SRS, and clinical surgical sites.">
+  <meta name="twitter:image" content="https://fazalzama.github.io/kimi-anatomy/og-preview.png">
+
+  <!-- ===== FAVICON (inline SVG — no extra file needed) ===== -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230a192f'/><text x='50%25' y='52%25' font-size='38' font-family='Inter,sans-serif' font-weight='800' fill='%23FFD700' text-anchor='middle' dominant-baseline='middle'>I</text><text x='50%25' y='52%25' font-size='38' font-family='Inter,sans-serif' font-weight='800' fill='%2300F2FF' text-anchor='middle' dominant-baseline='middle' transform='translate(8,0)'>V</text></svg>">
+  <link rel="apple-touch-icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='28' fill='%230a192f'/><text x='50%25' y='54%25' font-size='110' font-family='Inter,sans-serif' font-weight='800' fill='%23FFD700' text-anchor='middle' dominant-baseline='middle'>I</text><text x='50%25' y='54%25' font-size='110' font-family='Inter,sans-serif' font-weight='800' fill='%2300F2FF' text-anchor='middle' dominant-baseline='middle' transform='translate(22,0)'>V</text></svg>">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -127,9 +158,9 @@
           </div>
           <ul class="credit-list">
             <li><b>Dr. Abhinov Verma</b><span class="credit-role">Senior Scientist</span></li>
-            <li><b>[Name 2]</b><span class="credit-role">[Designation]</span></li>
-            <li><b>[Name 3]</b><span class="credit-role">[Designation]</span></li>
-            <li><b>[Name 4]</b><span class="credit-role">[Designation]</span></li>
+            <li><b> Dr. Dangeti V.V.N. Durga Prasad</b><span class="credit-role">Scientist</span></li>
+            <li><b>Dr. Elizabeth V.L. Hmangaihzuali</b><span class="credit-role">Scientist</span></li>
+            <li><b>Dr. Samikshya Sarangi</b><span class="credit-role">Scientist</span></li>
           </ul>
           <div class="credit-foot">Anatomy Department, IVRI, Bareilly</div>
         </div>
@@ -174,11 +205,11 @@
           <button class="nav-btn elite-toggle-btn" id="elite-toggle" onclick="app.toggleElite()" style="display:none;">
             <i class="fas fa-graduation-cap"></i> <span id="elite-text">Elite View</span>
           </button>
-          <button class="nav-btn" onclick="app.showBookmarks(); app.setHash('#/bookmarks');"
+          <button class="nav-btn nav-btn-keep-label" onclick="app.showBookmarks(); app.setHash('#/bookmarks');"
             title="View bookmarked topics" aria-label="My Bookmarks">
             <i class="fas fa-star"></i> BOOKMARKS
           </button>
-          <button class="nav-btn" style="border-color: var(--atlas-gold); color: var(--atlas-gold);"
+          <button class="nav-btn nav-btn-keep-label" style="border-color: var(--atlas-gold); color: var(--atlas-gold);"
             onclick="quizApp.openMenu()">
             <i class="fas fa-brain"></i> QUIZ MODE
           </button>
@@ -627,6 +658,11 @@
       <!-- Overview Stats -->
       <div class="dash-stats-row" id="dash-overview-stats">
         <!-- Injected by JS -->
+      </div>
+
+      <!-- Smart Review (Spaced Repetition) Panel — Auto-rendered if quiz answered -->
+      <div class="dash-srs-panel" id="dash-srs-panel">
+        <!-- Injected by JS via dashboard.renderSrsPanel() -->
       </div>
 
       <!-- Main Dashboard Grid -->
