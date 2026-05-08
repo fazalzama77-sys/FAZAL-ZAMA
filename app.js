@@ -360,10 +360,14 @@ const app = {
         list.innerHTML = data.map((item, index) => {
             const id = app.bookmarkId(app.state.region, app.state.system, index);
             const star = app.isBookmarked(id) ? '<i class="fas fa-star bm-star" title="Bookmarked"></i> ' : '';
+            const readTick = app.isRead(id) ? '<i class="fas fa-check-circle read-tick" title="Read"></i> ' : '';
+            const readClass = app.isRead(id) ? ' is-read' : '';
             return `
-                <button class="topic-btn" data-index="${index}" onclick="app.renderDetail(${index}, this)">${star}${item.title.toUpperCase()}</button>
+                <button class="topic-btn${readClass}" data-index="${index}" onclick="app.renderDetail(${index}, this)">${readTick}${star}${item.title.toUpperCase()}</button>
             `;
         }).join('');
+        // Refresh the progress badge whenever the list re-renders
+        app.updateReadProgressBadge();
     },
 
     renderDetail: (index, btnElement) => {
@@ -399,6 +403,10 @@ const app = {
         const bookmarked = app.isBookmarked(bmId);
         const bmBtn = `<button class="bm-btn ${bookmarked ? 'active' : ''}" onclick="app.toggleBookmark(${index}, this)" title="${bookmarked ? 'Remove bookmark' : 'Bookmark this topic'}" aria-label="Toggle bookmark"><i class="fas fa-star"></i> <span>${bookmarked ? 'Bookmarked' : 'Bookmark'}</span></button>`;
 
+        // Mark as Read button
+        const isReadNow = app.isRead(bmId);
+        const readBtn = `<button class="read-btn ${isReadNow ? 'active' : ''}" onclick="app.toggleRead(${index}, this)" title="${isReadNow ? 'Mark as unread' : 'Mark as read'}" aria-label="Toggle read status"><i class="${isReadNow ? 'fas fa-check-circle' : 'far fa-circle'}"></i> <span>${isReadNow ? 'Read' : 'Mark as Read'}</span></button>`;
+
         // Build content based on available data
         let contentHtml = `
             <div class="detail-header">
@@ -406,7 +414,10 @@ const app = {
                     <div class="h-title">${item.title} ${modeBadge}</div>
                     <span class="h-sub">/// ${modeLabel} // ${app.state.system.toUpperCase()}</span>
                 </div>
-                ${bmBtn}
+                <div class="detail-header-actions">
+                    ${readBtn}
+                    ${bmBtn}
+                </div>
             </div>
 
             <div class="feature-box" style="animation: detailFade 0.5s ease; background:rgba(255,255,255,0.03); padding:20px; border-radius:8px; margin-bottom:20px;">
@@ -490,6 +501,7 @@ const app = {
 
     // ============== BOOKMARKS ==============
     BOOKMARK_KEY: 'ivri-bookmarks',
+    READ_KEY: 'ivri-read',  // Mark-as-Read storage
 
     bookmarkId: (region, system, index) => `${region}::${system}::${index}`,
 
@@ -501,6 +513,76 @@ const app = {
     _saveBookmarks: (arr) => localStorage.setItem(app.BOOKMARK_KEY, JSON.stringify(arr)),
 
     isBookmarked: (id) => app._loadBookmarks().includes(id),
+
+    // ============== MARK AS READ ==============
+    _loadRead: () => {
+        try { return JSON.parse(localStorage.getItem(app.READ_KEY)) || []; }
+        catch { return []; }
+    },
+    _saveRead: (arr) => localStorage.setItem(app.READ_KEY, JSON.stringify(arr)),
+    isRead: (id) => app._loadRead().includes(id),
+
+    toggleRead: (index, btn) => {
+        if (!app.state.region || !app.state.system) return;
+        const id = app.bookmarkId(app.state.region, app.state.system, index);
+        const list = app._loadRead();
+        const i = list.indexOf(id);
+        const nowRead = (i === -1);
+        if (nowRead) {
+            list.push(id);
+            if (typeof showToast === 'function') showToast('Marked as read', 'success', 'fa-check-circle');
+        } else {
+            list.splice(i, 1);
+            if (typeof showToast === 'function') showToast('Marked as unread', 'info', 'fa-circle');
+        }
+        app._saveRead(list);
+        // Update the toggle button in detail panel
+        if (btn) {
+            btn.classList.toggle('active', nowRead);
+            const span = btn.querySelector('span');
+            if (span) span.innerText = nowRead ? 'Read' : 'Mark as Read';
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = nowRead ? 'fas fa-check-circle' : 'far fa-circle';
+        }
+        // Refresh sidebar tick marks + progress badge
+        app.renderTopicList();
+        app.updateReadProgressBadge();
+        // Re-mark active topic
+        const act = document.querySelector(`.topic-btn[data-index="${index}"]`);
+        if (act) act.classList.add('active');
+    },
+
+    // Returns {read, total, percent} for current region+system
+    getReadStats: (region, system) => {
+        if (!region || !system || !atlasData[region] || !atlasData[region][system]) {
+            return { read: 0, total: 0, percent: 0 };
+        }
+        const total = atlasData[region][system].length;
+        const readList = app._loadRead();
+        let read = 0;
+        for (let i = 0; i < total; i++) {
+            if (readList.includes(app.bookmarkId(region, system, i))) read++;
+        }
+        return { read, total, percent: total ? Math.round((read / total) * 100) : 0 };
+    },
+
+    // Update the small "X / Y read" + progress bar shown in the breadcrumb / sidebar header
+    updateReadProgressBadge: () => {
+        const badge = document.getElementById('read-progress-badge');
+        if (!badge) return;
+        if (!app.state.region || !app.state.system) {
+            badge.style.display = 'none';
+            return;
+        }
+        const { read, total, percent } = app.getReadStats(app.state.region, app.state.system);
+        if (total === 0) { badge.style.display = 'none'; return; }
+        badge.style.display = 'flex';
+        badge.innerHTML = `
+            <span class="rp-text"><i class="fas fa-check-circle"></i> ${read}/${total} read</span>
+            <span class="rp-bar"><span class="rp-fill" style="width:${percent}%"></span></span>
+            <span class="rp-pct">${percent}%</span>
+        `;
+    },
 
     toggleBookmark: (index, btn) => {
         if (!app.state.region || !app.state.system) return;

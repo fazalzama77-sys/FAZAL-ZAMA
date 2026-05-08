@@ -327,6 +327,19 @@
   background: rgba(255, 215, 0, 0.1);
 }
 
+/* Skip-mode styling — when user hasn't answered, button looks neutral
+   instead of confident gold, so user knows they're skipping */
+.nav-next.is-skip {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: var(--text-mute) !important;
+  background: rgba(255, 255, 255, 0.04);
+}
+.nav-next.is-skip:hover {
+  border-color: rgba(255, 200, 80, 0.55) !important;
+  color: #ffd466 !important;
+  background: rgba(255, 200, 80, 0.10);
+}
+
 .nav-submit {
   border-color: #00ff9d;
   color: #00ff9d;

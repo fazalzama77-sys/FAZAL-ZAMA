@@ -613,26 +613,36 @@ const quizApp = {
     const submitBtn = document.getElementById('submit-quiz-btn');
     const currentAnswer = quizApp.userAnswers[quizApp.currentIndex];
 
-    // Previous button
+    // Previous button — visible whenever not on first question
     prevBtn.style.display = quizApp.currentIndex > 0 ? 'flex' : 'none';
     prevBtn.disabled = false;
 
-    // Next/Submit buttons
     const isLastQuestion = quizApp.currentIndex === quizApp.questions.length - 1;
 
-    if (currentAnswer !== null) {
-      // Answered - show Next or Submit
-      if (isLastQuestion) {
-        nextBtn.style.display = 'none';
-        submitBtn.style.display = 'flex';
-      } else {
-        nextBtn.style.display = 'flex';
-        submitBtn.style.display = 'none';
-      }
-    } else {
-      // Not answered - hide both Next and Submit
+    // ===== ALWAYS allow forward navigation (skip support) =====
+    // Even if the user hasn't picked an option, they can press Next to skip.
+    // The label changes to "Skip ›" to make it clear, switches to "Next ›" once answered.
+    if (isLastQuestion) {
       nextBtn.style.display = 'none';
+      submitBtn.style.display = 'flex';
+      // Allow submitting at any time on the last question (skipped Qs simply stay null)
+      submitBtn.disabled = false;
+    } else {
+      nextBtn.style.display = 'flex';
       submitBtn.style.display = 'none';
+      // Cosmetic label change: "Skip" if not answered, "Next" if answered
+      const labelSpan = nextBtn.querySelector('.nav-label') || nextBtn;
+      const isSkipping = (currentAnswer === null);
+      nextBtn.classList.toggle('is-skip', isSkipping);
+      // Update inner text safely (preserve any icon)
+      const icon = nextBtn.querySelector('i');
+      const newText = isSkipping ? 'Skip' : 'Next';
+      if (labelSpan === nextBtn) {
+        // No dedicated label span — rebuild while keeping icon
+        nextBtn.innerHTML = `${newText} <i class="fas fa-arrow-right"></i>`;
+      } else {
+        labelSpan.innerText = newText;
+      }
     }
   },
 
