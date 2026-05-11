@@ -57,15 +57,27 @@ const srs = {
     },
 
     // ---- BUILDING A SMART REVIEW SET ----
-    // Pulls all due questions across all regions/systems for a given mode (mcq/tf/fib).
-    // If pool isn't large enough, fills with new (never-seen) questions.
-    buildReviewSet: (mode = 'mcq', limit = 20) => {
+    // Priority order (HIGHEST → lowest):
+    //   Tier 1: Wrong-answered cards in Box 1, due now    ← "your weak spots"
+    //   Tier 2: Cards in Box 2-3, due now                  ← "still strengthening"
+    //   Tier 3: Cards in Box 4-5, due now                  ← "long-term refresher"
+    //   Tier 4: Never-seen questions                        ← only if deck not full
+    //
+    // Within each tier, results are SHUFFLED so the order is fresh every session.
+    // Questions answered in the last `cooldownMins` minutes are EXCLUDED to avoid
+    // showing the user a question they just saw.
+    buildReviewSet: (mode = 'mcq', limit = 20, cooldownMins = 10) => {
         if (typeof quizBank === 'undefined') return [];
 
         const state = srs._load();
-        const allQuestions = [];
+        const now = Date.now();
+        const cooldownMs = cooldownMins * 60 * 1000;
 
-        // Collect every question with its identity
+        const tier1 = [];   // wrong (box 1, due)
+        const tier2 = [];   // learning (box 2-3, due)
+        const tier3 = [];   // mastered refresher (box 4-5, due)
+        const tier4 = [];   // never seen
+
         Object.keys(quizBank).forEach((region) => {
             Object.keys(quizBank[region]).forEach((system) => {
                 const sysData = quizBank[region][system];
@@ -73,23 +85,85 @@ const srs = {
                 sysData[mode].forEach((q, idx) => {
                     const qid = srs.qid(region, system, mode, idx);
                     const card = state[qid];
-                    allQuestions.push({ qid, region, system, mode, idx, q, card });
+                    const entry = { qid, region, system, mode, idx, q, card };
+
+                    if (!card) { tier4.push(entry); return; }
+
+                    // Cooldown: skip cards seen in last few minutes
+                    if (card.lastReview && (now - card.lastReview) < cooldownMs) return;
+
+                    if (!srs.isDue(card)) return;   // not due → skip entirely
+
+                    if (card.box === 1) tier1.push(entry);
+                    else if (card.box <= 3) tier2.push(entry);
+                    else tier3.push(entry);
                 });
             });
         });
 
-        // Sort: due-with-low-box first (struggling), then never-seen, then promoted
-        allQuestions.sort((a, b) => {
-            const aDue = !a.card || srs.isDue(a.card);
-            const bDue = !b.card || srs.isDue(b.card);
-            if (aDue && !bDue) return -1;
-            if (!aDue && bDue) return 1;
-            const aBox = a.card ? a.card.box : 0; // never-seen ranks before high boxes
-            const bBox = b.card ? b.card.box : 0;
-            return aBox - bBox;
+        const shuffle = (arr) => {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        };
+
+        return []
+            .concat(shuffle(tier1))      // wrong-spots first
+            .concat(shuffle(tier2))
+            .concat(shuffle(tier3))
+            .concat(shuffle(tier4))      // never-seen as filler
+            .slice(0, limit);
+    },
+
+    // ---- WEAK-ONLY DECK ----
+    // Returns ONLY Box-1 (wrong) cards, shuffled, with cooldown applied.
+    // Used by "Drill Weak Topics" button on the dashboard.
+    buildWeakSet: (mode = 'mcq', limit = 20, cooldownMins = 10) => {
+        if (typeof quizBank === 'undefined') return [];
+        const state = srs._load();
+        const now = Date.now();
+        const cooldownMs = cooldownMins * 60 * 1000;
+        const weak = [];
+
+        Object.keys(state).forEach((qid) => {
+            const card = state[qid];
+            if (!card || card.box !== 1) return;
+            if (card.lastReview && (now - card.lastReview) < cooldownMs) return;
+
+            const parts = qid.split('::');
+            if (parts.length !== 4) return;
+            const [region, system, qMode, idxStr] = parts;
+            if (qMode !== mode) return;
+            const idx = parseInt(idxStr, 10);
+
+            const sysData = quizBank[region] && quizBank[region][system];
+            const q = sysData && sysData[mode] && sysData[mode][idx];
+            if (!q) return;
+
+            weak.push({ qid, region, system, mode, idx, q, card });
         });
 
-        return allQuestions.slice(0, limit);
+        for (let i = weak.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [weak[i], weak[j]] = [weak[j], weak[i]];
+        }
+        return weak.slice(0, limit);
+    },
+
+    // ---- HELPER: how many weak (wrong) cards are currently due ----
+    getWeakDueCount: (mode = 'mcq', cooldownMins = 10) => {
+        const state = srs._load();
+        const now = Date.now();
+        const cooldownMs = cooldownMins * 60 * 1000;
+        let count = 0;
+        Object.values(state).forEach((card) => {
+            if (!card || card.box !== 1) return;
+            if (card.lastReview && (now - card.lastReview) < cooldownMs) return;
+            count++;
+        });
+        return count;
     },
 
     // ---- STATS ----

@@ -42,19 +42,27 @@ const quizApp = {
 
     document.querySelector('.quiz-modal').classList.remove('review-mode');
 
-    if (quizApp.quizState === 'active') {
-      if (confirm('Quiz in progress! Save progress and exit?')) {
-        quizApp.saveProgress();
-        quizApp.cleanup();
-        document.getElementById('quiz-overlay').style.display = 'none';
-        document.body.classList.remove('body-modal-open');
-        document.body.style.overflow = '';   // restore page scrolling
-      }
-    } else {
+    // Helper to perform the closing animation + state reset + dashboard refresh
+    const doClose = () => {
       quizApp.cleanup();
       document.getElementById('quiz-overlay').style.display = 'none';
       document.body.classList.remove('body-modal-open');
-      document.body.style.overflow = '';     // restore page scrolling
+      document.body.style.overflow = '';
+      // If this was a Smart Review session, refresh the dashboard panel
+      // so the user immediately sees their updated box counts + due counters.
+      if (quizApp._isSmartReview && typeof dashboard !== 'undefined' && typeof dashboard.renderSrsPanel === 'function') {
+        try { dashboard.renderSrsPanel(); } catch (e) { /* dashboard may not be visible */ }
+      }
+      quizApp._isSmartReview = false;
+    };
+
+    if (quizApp.quizState === 'active') {
+      if (confirm('Quiz in progress! Save progress and exit?')) {
+        quizApp.saveProgress();
+        doClose();
+      }
+    } else {
+      doClose();
     }
   },
 
@@ -230,12 +238,19 @@ const quizApp = {
   // ==================== QUIZ START ====================
 
   // ===== SMART REVIEW (Spaced Repetition) =====
-  // Triggered from Dashboard. Receives an array from srs.buildReviewSet().
-  startSmartReview: (reviewSet) => {
+  // Triggered from Dashboard. Receives an array from srs.buildReviewSet()
+  // OR srs.buildWeakSet(). Second arg sets the visible label.
+  startSmartReview: (reviewSet, opts = {}) => {
     if (!Array.isArray(reviewSet) || reviewSet.length === 0) {
       alert('No questions available for review yet.');
       return;
     }
+    const mode = opts.mode || 'mixed';   // 'weak' | 'mixed'
+    const labels = {
+      weak:  { region: 'Drill Weak Topics', system: 'Box-1 cards (your wrong answers)' },
+      mixed: { region: 'Smart Review',      system: 'Spaced Repetition' },
+    };
+    const label = labels[mode] || labels.mixed;
 
     // ---- Lock the page first so the modal can claim the full viewport ----
     // Without this, on mobile the underlying dashboard's scroll position
@@ -253,8 +268,9 @@ const quizApp = {
     quizApp.bookmarks.clear();
     quizApp.flagged.clear();
     quizApp.quizState = 'active';
-    quizApp.selectedRegion = 'Smart Review';
-    quizApp.selectedSystem = 'Spaced Repetition';
+    quizApp.selectedRegion = label.region;
+    quizApp.selectedSystem = label.system;
+    quizApp._isSmartReview = true;   // flag used by close() to refresh dashboard
 
     // Map review entries → quiz questions, tagging metadata for SRS auto-recording
     quizApp.questions = reviewSet.map(entry => {

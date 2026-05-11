@@ -657,6 +657,54 @@
     cursor: not-allowed;
     transform: none;
 }
+
+/* "Drill Weak Topics" — red fire button, the user's most-important action */
+.srs-btn-weak {
+    background: linear-gradient(135deg, #ff6b6b, #ff9f43);
+    color: #1a0606;
+    border: none;
+    font-weight: 700;
+}
+.srs-btn-weak:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(255, 107, 107, 0.42);
+}
+.srs-btn-weak:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(255, 107, 107, 0.10);
+    color: var(--text-mute);
+}
+
+/* Pill group at top of the SRS card — holds "weak" and "due" badges */
+.srs-pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.srs-due-pill.weak-due {
+    background: linear-gradient(135deg, rgba(255,107,107,0.25), rgba(255,159,67,0.12));
+    border-color: #ff6b6b;
+    color: #ffb4b4;
+    animation: srs-pulse 2.4s ease-in-out infinite;
+}
+.srs-due-pill.weak-due strong { color: #ffffff; }
+.srs-due-pill.weak-due i { color: #ff7a00; }
+
+/* Tip note at bottom of the panel */
+.srs-tip {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid #feca57;
+    color: var(--text-mute);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border-radius: 4px;
+}
+.srs-tip i { color: #feca57; margin-right: 6px; }
 .srs-btn-ghost {
     background: transparent;
     border-color: rgba(255,255,255,0.18);

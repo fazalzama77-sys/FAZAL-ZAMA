@@ -776,17 +776,73 @@ body.professional-mode .topic-btn.is-read {
 }
 
 .footer-logo-space {
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px dashed var(--text-mute);
-    border-radius: 50%;
-    margin: 0 auto 20px;
+    width: auto;
+    height: auto;
+    min-height: 110px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    margin: 0 auto 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-mute);
     font-size: 0.8rem;
+    padding: 12px 24px;
+}
+
+/* The actual IVRI institutional logo image */
+.footer-logo-img {
+    max-height: 110px;
+    max-width: 280px;
+    width: auto;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 16px rgba(0, 242, 255, 0.18));
+    transition: transform 0.4s ease, filter 0.4s ease;
+    /* In dark mode, soften the white background of the logo so it blends with the dark footer */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+.footer-logo-img:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 6px 22px rgba(255, 215, 0, 0.30));
+}
+
+/* Light/Professional mode — drop the white card since the page IS white */
+body.professional-mode .footer-logo-img {
+    background: transparent;
+    filter: none;
+    padding: 0;
+}
+
+/* Fallback hint shown if the logo file isn't uploaded yet */
+.footer-logo-fallback {
+    display: inline-block;
+    padding: 16px 24px;
+    border: 1px dashed var(--text-mute);
+    border-radius: 12px;
+    color: var(--text-mute);
+    font-size: 0.85rem;
+    font-family: var(--font-code);
+    background: rgba(255, 255, 255, 0.03);
+}
+.footer-logo-fallback code {
+    background: rgba(0, 242, 255, 0.15);
+    color: var(--why-cyan);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: var(--font-code);
+    margin-left: 4px;
+}
+
+/* Mobile: shrink so it never crowds the credits */
+@media (max-width: 600px) {
+    .footer-logo-img {
+        max-height: 90px;
+        max-width: 220px;
+    }
 }
 
 .footer-text {
@@ -2831,10 +2887,9 @@ body.professional-mode .footer {
 }
 
 body.professional-mode .footer-logo-space {
-    background: white;
-    border: 2px solid rgba(21, 101, 192, 0.2);
-    color: var(--atlas-gold);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 body.professional-mode .footer-text {

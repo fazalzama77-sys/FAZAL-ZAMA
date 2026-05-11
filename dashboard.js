@@ -136,6 +136,15 @@ const dashboard = {
     dashboard.renderHistory();
   },
 
+  // Lightweight refresh — only re-renders the SRS panel (after a quiz answer).
+  // Cheap; safe to call frequently.
+  refreshSrsLive: () => {
+    const panel = document.getElementById('dash-srs-panel');
+    if (panel && panel.offsetParent !== null) {   // only if dashboard is visible
+      dashboard.renderSrsPanel();
+    }
+  },
+
   // ============== SMART REVIEW (Spaced Repetition Panel) ==============
   renderSrsPanel: () => {
     const container = document.getElementById('dash-srs-panel');
@@ -145,6 +154,7 @@ const dashboard = {
     const dueQuestions = stats.dueNow;
     const total = stats.totalCards;
     const mastered = stats.mastered;
+    const weakDue = (typeof srs.getWeakDueCount === 'function') ? srs.getWeakDueCount('mcq') : (stats.byBox[1] || 0);
     const masteryPct = total > 0 ? Math.round((mastered / total) * 100) : 0;
 
     // Per-box bar bits — Leitner 1..5
@@ -152,8 +162,9 @@ const dashboard = {
         const count = stats.byBox[b] || 0;
         const pct = total ? (count / total) * 100 : 0;
         const colors = { 1: '#ff6b6b', 2: '#ff9f43', 3: '#feca57', 4: '#48dbfb', 5: '#1dd1a1' };
+        const labels = { 1: 'Wrong / new', 2: 'Learning', 3: 'Strengthening', 4: 'Knowing', 5: 'Mastered' };
         return `
-          <div class="srs-box" title="Box ${b}: ${count} cards (review every ${srs.intervals[b]} day${srs.intervals[b] > 1 ? 's' : ''})">
+          <div class="srs-box" title="Box ${b} — ${labels[b]} • ${count} card${count !== 1 ? 's' : ''} • next review in ${srs.intervals[b]} day${srs.intervals[b] > 1 ? 's' : ''}">
             <div class="srs-box-bar"><div class="srs-box-fill" style="height:${Math.max(pct, 4)}%; background:${colors[b]};"></div></div>
             <div class="srs-box-label">B${b}</div>
             <div class="srs-box-count">${count}</div>
@@ -164,10 +175,13 @@ const dashboard = {
       <div class="srs-header">
         <div>
           <h3 class="srs-title"><i class="fas fa-brain"></i> Smart Review (Spaced Repetition)</h3>
-          <p class="srs-sub">Leitner-box system — wrong answers come back daily, right answers fade further apart.</p>
+          <p class="srs-sub">Wrong answers come back tomorrow. Right answers fade further apart (1d → 3d → 7d → 14d → 30d).</p>
         </div>
-        <div class="srs-due-pill ${dueQuestions > 0 ? 'has-due' : ''}">
-          <i class="fas fa-clock"></i> <strong>${dueQuestions}</strong> due now
+        <div class="srs-pill-group">
+          ${weakDue > 0 ? `<div class="srs-due-pill weak-due" title="Box-1 cards (questions you got wrong) that are due now"><i class="fas fa-fire"></i> <strong>${weakDue}</strong> weak</div>` : ''}
+          <div class="srs-due-pill ${dueQuestions > 0 ? 'has-due' : ''}" title="All cards due for review now">
+            <i class="fas fa-clock"></i> <strong>${dueQuestions}</strong> due
+          </div>
         </div>
       </div>
 
@@ -179,8 +193,13 @@ const dashboard = {
         </div>
         <div class="srs-boxes">${boxBars}</div>
         <div class="srs-actions">
-          <button class="srs-btn srs-btn-primary" onclick="dashboard.startSmartReview()" ${dueQuestions === 0 && total === 0 ? 'disabled' : ''}>
-            <i class="fas fa-play-circle"></i> ${dueQuestions > 0 ? `Review ${Math.min(dueQuestions, 20)} due now` : 'Practise mixed set'}
+          <button class="srs-btn srs-btn-weak" onclick="dashboard.startWeakReview()" ${weakDue === 0 ? 'disabled' : ''}
+                  title="Practise ONLY the questions you got wrong (Box 1). Best for fixing weak concepts.">
+            <i class="fas fa-fire"></i> Drill weak topics ${weakDue > 0 ? `(${Math.min(weakDue, 20)})` : ''}
+          </button>
+          <button class="srs-btn srs-btn-primary" onclick="dashboard.startSmartReview()" ${dueQuestions === 0 && total === 0 ? 'disabled' : ''}
+                  title="Mixed review — weak first, then learning cards, then mastered refreshers.">
+            <i class="fas fa-play-circle"></i> ${dueQuestions > 0 ? `Smart review (${Math.min(dueQuestions, 20)})` : 'Practise mixed set'}
           </button>
           <button class="srs-btn srs-btn-ghost" onclick="dashboard.resetSrs()" title="Wipe all SRS progress">
             <i class="fas fa-redo"></i> Reset
@@ -188,7 +207,8 @@ const dashboard = {
         </div>
         ${total === 0
             ? `<div class="srs-empty"><i class="fas fa-info-circle"></i> Take a few quiz questions to seed your review deck — every answer auto-feeds the SRS engine.</div>`
-            : ''}
+            : `<div class="srs-tip"><i class="fas fa-lightbulb"></i> Wrong answers stay in Box 1 and reappear tomorrow until you get them right. Each correct answer promotes the card to the next box and waits longer before re-asking.</div>`
+        }
       </div>
     `;
   },
@@ -200,14 +220,30 @@ const dashboard = {
     }
     const reviewSet = srs.buildReviewSet('mcq', 20);
     if (!reviewSet || reviewSet.length === 0) {
-      alert('No review questions available yet. Take a few quizzes first to build your deck!');
+      alert('All caught up! No cards are due for review right now.\n\nTake some new quiz questions to add cards to your deck, or come back tomorrow.');
       return;
     }
-    // Hand off to quiz engine in "smart-review" mode
     if (typeof quizApp.startSmartReview === 'function') {
-      quizApp.startSmartReview(reviewSet);
+      quizApp.startSmartReview(reviewSet, { mode: 'mixed' });
     } else {
-      // Fallback: open quiz menu, user picks region
+      quizApp.openMenu();
+    }
+  },
+
+  // Drill ONLY weak (Box-1) questions — the user's wrong-answer history
+  startWeakReview: () => {
+    if (typeof srs === 'undefined' || typeof quizApp === 'undefined') {
+      alert('Quiz engine not available.');
+      return;
+    }
+    const weakSet = srs.buildWeakSet('mcq', 20);
+    if (!weakSet || weakSet.length === 0) {
+      alert('No weak cards right now — you have no Box-1 questions due.\n\nEither all your wrong answers were promoted, or none answered yet.');
+      return;
+    }
+    if (typeof quizApp.startSmartReview === 'function') {
+      quizApp.startSmartReview(weakSet, { mode: 'weak' });
+    } else {
       quizApp.openMenu();
     }
   },
