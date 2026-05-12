@@ -651,9 +651,9 @@ atlasData["Head & Neck"] = {
     {
         title: "Introduction: The Cranial Command Center",
         desc: `<b>Exam Focus:</b><br>
-        • 12 Cranial Nerves: "On Old Olympus' Towering Top, A Finn And German Viewed Some Hops"<br>
+        • 12 Cranial Nerves — letter sequence: <b>O-O-O-T-T-A-F-V-G-V-A-H</b> (Olfactory, Optic, Oculomotor, Trochlear, Trigeminal, Abducens, Facial, Vestibulocochlear, Glossopharyngeal, Vagus, Accessory, Hypoglossal)<br>
         • Functional Types: Sensory (I, II, VIII), Motor (III, IV, VI, XI, XII), Mixed (V, VII, IX, X)<br>
-        • Mnemonic: "Some Say Marry Money, But My Brother Says Big Brains Matter More"<br>
+        • Sensory-Motor Mnemonic: "Some Say Marry Money, But My Brother Says Big Brains Matter More" (S = Sensory, M = Motor, B = Both)<br>
         • <b>Critical Concept:</b> Bovine skull fuses Orbital Fissure + Foramen Rotundum = <b>Foramen Orbitorotundum</b> <br>
         • Ox: Foramen Ovale is discrete; Horse: Uses Foramen Lacerum (Oval Notch)<br>
         • Clinical Minefield: Goat horn has dual innervation (Cornual + Infratrochlear)`,
@@ -661,8 +661,8 @@ atlasData["Head & Neck"] = {
         eliteDesc: `<h3>The Cranial Command Center</h3>
         <p>The bovine head represents the most complex cubic footage in the animal kingdom—a fortress housing the central processing unit, major organs of special sense, and mechanisms for ingestion and communication. The twelve paired cranial nerves are the "Dirty Dozen" that dictate survival, allowing the animal to see predators, smell forage, chew the cud, swallow, and maintain balance.</p>
         
-        <h4>Mnemonic Architecture</h4>
-        <p><b>The Classical Sequence:</b> "On Old Olympus' Towering Top, A Finn And German Viewed Some Hops"</p>
+        <h4>Letter-Sequence Memory Aid</h4>
+        <p><b>The 12 cranial nerves in order:</b> O-O-O-T-T-A-F-V-G-V-A-H. Pair this letter sequence with any phrase you find easy to remember.</p>
         <ul>
             <li><b>I</b> - Olfactory</li>
             <li><b>II</b> - Optic</li>
