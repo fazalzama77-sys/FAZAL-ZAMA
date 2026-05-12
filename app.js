@@ -689,10 +689,16 @@ const app = {
     _waitingWorker: null,
 
     showUpdateBanner: (worker) => {
+        // Honor a session-level dismissal so the banner doesn't reappear on every reload.
+        try {
+            if (sessionStorage.getItem('ivri-update-dismissed') === '1') return;
+        } catch (e) { /* sessionStorage may be unavailable in private mode */ }
+
         app._waitingWorker = worker;
         const banner = document.getElementById('update-banner');
         if (banner) {
             banner.hidden = false;
+            banner.style.display = ''; // clear any inline display:none from a prior dismiss
             // Trigger CSS slide-down
             requestAnimationFrame(() => banner.classList.add('show'));
         }
@@ -702,18 +708,33 @@ const app = {
         const banner = document.getElementById('update-banner');
         if (banner) {
             banner.classList.remove('show');
-            setTimeout(() => { banner.hidden = true; }, 350);
+            // CSS sets `display:flex` on .update-banner, which overrides the [hidden] attribute,
+            // so we must explicitly force display:none here.
+            setTimeout(() => {
+                banner.hidden = true;
+                banner.style.display = 'none';
+            }, 350);
         }
+        // Remember the dismissal for this tab/session — banner won't re-show on reload.
+        try { sessionStorage.setItem('ivri-update-dismissed', '1'); } catch (e) { /* noop */ }
     },
 
     // Called when the user clicks "Refresh now" on the update banner
     applyUpdate: () => {
+        // Visually acknowledge the click immediately so the user sees something happen
+        const banner = document.getElementById('update-banner');
+        if (banner) {
+            const txt = banner.querySelector('.update-banner-text');
+            if (txt) txt.textContent = 'Refreshing…';
+            banner.classList.remove('show');
+        }
+
         if (app._waitingWorker) {
             app._waitingWorker.postMessage({ type: 'SKIP_WAITING' });
-            // controllerchange listener (set in init) will reload the page automatically
-        } else {
-            window.location.reload();
         }
+        // Safety net: if the SW handoff doesn't fire `controllerchange` within 2s
+        // (or there was no waiting worker at all), hard-reload anyway.
+        setTimeout(() => { window.location.reload(); }, 2000);
     },
 
     // Nuclear option — wipe all caches + unregister all SWs + reload
