@@ -14,7 +14,7 @@
 //   4. SW calls skipWaiting() → activates → page's controllerchange listener reloads.
 // =========================================================
 
-const CACHE_VERSION = 'ivri-anatomy-v12';
+const CACHE_VERSION = 'ivri-anatomy-v13';
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [
@@ -45,10 +45,12 @@ const APP_SHELL = [
     './manifest.json'
 ];
 
-// ---- INSTALL: pre-cache the app shell ----
-// NOTE: We do NOT call self.skipWaiting() here. We wait for the page to
-// post a SKIP_WAITING message (after the user clicks "Refresh now").
+// ---- INSTALL: pre-cache the app shell and activate immediately ----
+// We auto-skip waiting so a new SW activates as soon as it finishes installing.
+// No "update available" banner needed — readers transparently get the latest
+// version on their next page reload.
 self.addEventListener('install', (event) => {
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_VERSION).then((cache) =>
             Promise.all(

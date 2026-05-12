@@ -85,8 +85,6 @@
       50%     { transform: scale(1.04); filter: drop-shadow(0 0 48px rgba(0,242,255,0.65)); }
     }
     @keyframes ivri-spin { to { transform: rotate(360deg); } }
-    body > :not(#ivri-splash) { animation: ivri-fade-in .6s ease .15s both; }
-    @keyframes ivri-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   </style>
 </head>
 
@@ -109,18 +107,6 @@
       setTimeout(hide, 3500);
     })();
   </script>
-
-  <!-- ================= UPDATE BANNER (PWA auto-update) ================= -->
-  <div id="update-banner" class="update-banner" hidden role="alert" aria-live="polite">
-    <i class="fas fa-cloud-arrow-down"></i>
-    <span class="update-banner-text">A new version is available.</span>
-    <button class="update-btn primary" onclick="app.applyUpdate()">
-      <i class="fas fa-rotate"></i> Refresh now
-    </button>
-    <button class="update-btn dismiss" onclick="app.dismissUpdateBanner()" aria-label="Dismiss" title="Dismiss">
-      &times;
-    </button>
-  </div>
 
   <!-- ================= THEME TOGGLE (Moved to Top-Left to avoid overlap) ================= -->
   <button id="theme-toggle" class="theme-toggle-btn" onclick="app.toggleTheme()" title="Switch to Professional Mode">

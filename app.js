@@ -24,45 +24,22 @@ const app = {
             app.state.eliteMode = true;
         }
 
-        // ---- Service worker registration (offline / PWA + auto-update) ----
+        // ---- Service worker registration (offline / PWA, silent auto-update) ----
+        // The SW now self-activates on install (calls skipWaiting() itself) and
+        // claims existing clients on activate. So a new version takes over
+        // transparently — no banner, no surprise reloads. Visitors get the
+        // latest site bytes on their next natural page load.
         if ('serviceWorker' in navigator && location.protocol !== 'file:') {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./service-worker.js')
                     .then((registration) => {
-                        // Force an immediate check for a new SW
                         registration.update().catch(() => { });
-
-                        // If a SW is ALREADY waiting when we arrive (rare but possible)
-                        if (registration.waiting && navigator.serviceWorker.controller) {
-                            app.showUpdateBanner(registration.waiting);
-                        }
-
-                        // Listen for new SW being found (an update is on the way)
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            if (!newWorker) return;
-                            newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // A previous SW exists → this is a TRUE update, not first install
-                                    app.showUpdateBanner(newWorker);
-                                }
-                            });
-                        });
-
                         // Re-check for updates every 60 minutes while tab is open
                         setInterval(() => {
                             registration.update().catch(() => { });
                         }, 60 * 60 * 1000);
                     })
                     .catch((err) => console.warn('SW registration failed:', err.message));
-
-                // When the new SW takes control, reload exactly once
-                let _reloaded = false;
-                navigator.serviceWorker.addEventListener('controllerchange', () => {
-                    if (_reloaded) return;
-                    _reloaded = true;
-                    window.location.reload();
-                });
             });
         }
 
@@ -686,56 +663,9 @@ const app = {
     },
 
     // ============== PWA UPDATE FLOW ==============
-    _waitingWorker: null,
-
-    showUpdateBanner: (worker) => {
-        // Honor a session-level dismissal so the banner doesn't reappear on every reload.
-        try {
-            if (sessionStorage.getItem('ivri-update-dismissed') === '1') return;
-        } catch (e) { /* sessionStorage may be unavailable in private mode */ }
-
-        app._waitingWorker = worker;
-        const banner = document.getElementById('update-banner');
-        if (banner) {
-            banner.hidden = false;
-            banner.style.display = ''; // clear any inline display:none from a prior dismiss
-            // Trigger CSS slide-down
-            requestAnimationFrame(() => banner.classList.add('show'));
-        }
-    },
-
-    dismissUpdateBanner: () => {
-        const banner = document.getElementById('update-banner');
-        if (banner) {
-            banner.classList.remove('show');
-            // CSS sets `display:flex` on .update-banner, which overrides the [hidden] attribute,
-            // so we must explicitly force display:none here.
-            setTimeout(() => {
-                banner.hidden = true;
-                banner.style.display = 'none';
-            }, 350);
-        }
-        // Remember the dismissal for this tab/session — banner won't re-show on reload.
-        try { sessionStorage.setItem('ivri-update-dismissed', '1'); } catch (e) { /* noop */ }
-    },
-
-    // Called when the user clicks "Refresh now" on the update banner
-    applyUpdate: () => {
-        // Visually acknowledge the click immediately so the user sees something happen
-        const banner = document.getElementById('update-banner');
-        if (banner) {
-            const txt = banner.querySelector('.update-banner-text');
-            if (txt) txt.textContent = 'Refreshing…';
-            banner.classList.remove('show');
-        }
-
-        if (app._waitingWorker) {
-            app._waitingWorker.postMessage({ type: 'SKIP_WAITING' });
-        }
-        // Safety net: if the SW handoff doesn't fire `controllerchange` within 2s
-        // (or there was no waiting worker at all), hard-reload anyway.
-        setTimeout(() => { window.location.reload(); }, 2000);
-    },
+    // Updates are applied silently by the service worker (it skipWaiting()s on
+    // install and clients.claim()s on activate). Readers get the latest version
+    // on their next natural page reload — no banner, no prompts.
 
     // Nuclear option — wipe all caches + unregister all SWs + reload
     forceClearCacheAndReload: async () => {
