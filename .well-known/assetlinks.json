@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.fazalzama.ivrianatomy",
+      "sha256_cert_fingerprints": ["E0:A3:13:4A:FE:96:FD:78:E0:7D:97:A8:7C:9F:56:25:C3:60:D7:2B:0D:B4:1F:89:89:9D:B9:A0:C1:46:04:4B"]
+    }
+  }
+]
