@@ -52,9 +52,63 @@
   <link rel="stylesheet" href="dashboard.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0a0a14">
+
+  <!-- ===== INSTANT SPLASH (masks initial paint, fades out smoothly) ===== -->
+  <style>
+    html, body { background: #0a0a14; }
+    #ivri-splash {
+      position: fixed; inset: 0; z-index: 99999;
+      background: radial-gradient(circle at 50% 45%, #142036 0%, #0a0a14 60%);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 24px;
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+    #ivri-splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+    #ivri-splash img {
+      width: 168px; height: 168px;
+      animation: ivri-pulse 1.6s ease-in-out infinite;
+      filter: drop-shadow(0 0 32px rgba(0,242,255,0.35));
+    }
+    #ivri-splash .ivri-ring {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 3px solid rgba(0,242,255,0.18);
+      border-top-color: #00f2ff;
+      animation: ivri-spin 1s linear infinite;
+    }
+    #ivri-splash .ivri-tag {
+      color: #6f8aa8; font-family: Inter, system-ui, sans-serif;
+      font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+      opacity: .7;
+    }
+    @keyframes ivri-pulse {
+      0%,100% { transform: scale(1);    filter: drop-shadow(0 0 32px rgba(0,242,255,0.35)); }
+      50%     { transform: scale(1.04); filter: drop-shadow(0 0 48px rgba(0,242,255,0.65)); }
+    }
+    @keyframes ivri-spin { to { transform: rotate(360deg); } }
+    body > :not(#ivri-splash) { animation: ivri-fade-in .6s ease .15s both; }
+    @keyframes ivri-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  </style>
 </head>
 
 <body>
+  <!-- Splash overlay (auto-removed after load) -->
+  <div id="ivri-splash" aria-hidden="true">
+    <img src="images/icon-512.png" alt="">
+    <div class="ivri-ring"></div>
+    <div class="ivri-tag">IVRI Anatomy Engine</div>
+  </div>
+  <script>
+    (function () {
+      var splash = document.getElementById('ivri-splash');
+      function hide() {
+        splash.classList.add('hide');
+        setTimeout(function () { splash.remove(); }, 700);
+      }
+      // Hide after load OR after 3.5s max (whichever comes first)
+      window.addEventListener('load', function () { setTimeout(hide, 300); });
+      setTimeout(hide, 3500);
+    })();
+  </script>
 
   <!-- ================= UPDATE BANNER (PWA auto-update) ================= -->
   <div id="update-banner" class="update-banner" hidden role="alert" aria-live="polite">
