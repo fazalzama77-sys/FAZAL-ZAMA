@@ -827,5 +827,573 @@ anatomyData = [
             correctIndex: 2,
             explanation: "Rhinos have the standard perissodactyl 3-toe foot. The Horse — same order — has a single digit. The Rhino's 3 toes spread the enormous weight."
         }
+    },
+
+    // ====================================================================
+    // 25 NEW COMPARATIVE DIFFERENCES (DOMESTIC SPECIES)
+    // ====================================================================
+    {
+        id: 52,
+        title: "Equine Frog vs Bovine Digital Cushion",
+        category: "hindlimb",
+        comparison: "Horse vs. Ox",
+        why: "The Horse hoof has a V-shaped rubbery 'FROG' on the sole — a wedge of soft horn that absorbs concussion + acts as a hydraulic pump pushing venous blood up the leg with every step. The Ox does NOT have a frog; instead each cloven claw has a soft 'DIGITAL CUSHION' deep inside the heel that does the shock absorption. Same job, totally different anatomy — horse keeps it external (sole-visible), ox keeps it internal.",
+        clinical: "<b>Thrush (horse):</b> Bacterial infection of the frog → black smelly necrosis; treated by paring + topical antiseptic. <b>Sole ulcer (cow):</b> Damaged digital cushion under sole horn → exposed corium → lameness; classic dairy disease.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Horse_hoof_underside.jpg/640px-Horse_hoof_underside.jpg",
+        analogy: "Horse foot = sneaker with the sole-cushion glued ON THE OUTSIDE (you can see it). Cow foot = sneaker with the cushion HIDDEN INSIDE the heel. Both cushion shock; only one is visible.",
+        quiz: {
+            question: "Which soft-tissue structure of the horse foot acts as a hydraulic pump for venous return?",
+            options: ["Coronary band", "Frog", "White line", "Lateral cartilage"],
+            correctIndex: 1,
+            explanation: "Every time the horse loads the foot, the frog is compressed → pushes blood out of the digital cushion vessels back up the leg. It's a peripheral 'second heart'."
+        }
+    },
+    {
+        id: 53,
+        title: "Bovine Forestomach Keratinization",
+        category: "axial",
+        comparison: "Ox vs. Horse/Dog",
+        why: "The rumen, reticulum, and omasum of cattle are lined by STRATIFIED SQUAMOUS KERATINIZED epithelium — the same tough tissue as your skin. The horse and dog stomach have only GLANDULAR epithelium throughout. Cattle evolved this skin-like lining so the rough, abrasive forage and microbial environment doesn't shred the stomach wall.",
+        clinical: "<b>Parakeratosis (cow):</b> Excessive keratinisation of rumen papillae from high-grain diets → reduced VFA absorption, poor weight gain. <b>Equine gastric ulcers (EGUS):</b> Horse has a small non-glandular region only at the cardia (margo plicatus) — ulcers form there from acid splash during exercise.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Stomach_colors.png/640px-Stomach_colors.png",
+        analogy: "Cattle's rumen is leather-lined like a workman's glove — designed to handle rough material. Horse stomach is silk-lined — meant for soft chewed paste only.",
+        quiz: {
+            question: "Which compartment of the bovine stomach is lined by GLANDULAR (NOT keratinised) epithelium?",
+            options: ["Rumen", "Reticulum", "Omasum", "Abomasum"],
+            correctIndex: 3,
+            explanation: "Only the abomasum is glandular — it's the 'true stomach' homolog. The other three are non-glandular fermentation chambers with skin-like lining."
+        }
+    },
+    {
+        id: 54,
+        title: "Horse Wolf Tooth",
+        category: "axial",
+        comparison: "Horse vs. Other species",
+        why: "Many horses have a small vestigial 1st premolar (PM1) called the <b>WOLF TOOTH</b> sitting just in front of the cheek-teeth. It serves no chewing function but interferes with the bit. NO other domestic species has this — it's a phylogenetic leftover of the original 4-premolar Equidae dentition.",
+        clinical: "<b>Wolf tooth extraction</b> is one of the most common equine dental procedures, done before bitting young horses. Failure to remove → headshaking, bit resistance, training problems. Some horses also have 'blind wolf teeth' (unerupted), diagnosed on radiograph.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
+        analogy: "Like an evolutionary appendix — once useful, now just a thing that occasionally needs surgical removal.",
+        quiz: {
+            question: "Which tooth is referred to as the 'wolf tooth' in horses?",
+            options: ["Canine", "Vestigial 1st premolar (PM1)", "1st molar", "Incisor I3"],
+            correctIndex: 1,
+            explanation: "The wolf tooth is the small, often-vestigial first premolar (PM1). It's routinely extracted before bitting because it sits exactly where the bit rests."
+        }
+    },
+    {
+        id: 55,
+        title: "Bovine Penis Sigmoid Flexure",
+        category: "hindlimb",
+        comparison: "Bull vs. Stallion",
+        why: "The bull, ram, and boar penis is FIBROELASTIC — short cavernous spaces, mostly dense collagen — held permanently flexed in an S-shape (the SIGMOID FLEXURE) behind the scrotum. Erection works by STRAIGHTENING the flexure (length increase only). The stallion penis is MUSCULOCAVERNOUS — huge cavernous spaces that engorge with blood (volume increase). Two completely different erection engineering.",
+        clinical: "<b>Persistent frenulum (bull):</b> Strap of tissue holds penis bent — cannot extend during mating. <b>Paraphimosis (stallion):</b> Engorged penis can't retract — emergency in horses, less issue in bull's fibroelastic penis which retracts mechanically via retractor penis muscle.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cow_reproductive_tract.jpg/640px-Cow_reproductive_tract.jpg",
+        analogy: "Bull penis = an extendable car aerial: stays the same thickness, just unfolds longer. Stallion penis = a balloon: gets thicker and longer by filling with blood.",
+        quiz: {
+            question: "How does erection work in the bull's fibroelastic penis?",
+            options: ["By blood engorgement (volume increase)", "By straightening of the sigmoid flexure (length increase)", "By rotation of the os penis", "By muscular contraction only"],
+            correctIndex: 1,
+            explanation: "Bull penis stays roughly the same thickness during erection — it 'unfolds' by straightening the permanent S-shaped sigmoid flexure to extend out of the sheath."
+        }
+    },
+    {
+        id: 56,
+        title: "Cat Filiform Papillae (Sandpaper Tongue)",
+        category: "axial",
+        comparison: "Cat vs. Dog",
+        why: "The cat's tongue is covered with backward-pointing FILIFORM papillae made of dense keratin — so densely packed that the tongue feels like sandpaper. They act as a built-in brush for grooming + a flesh-stripping rasp for cleaning meat off bone. The dog has smaller, softer filiform papillae and primarily uses its tongue for panting (cooling), not grooming.",
+        clinical: "<b>Hairballs (trichobezoars) in cats</b> are a direct consequence — the cat swallows shed hair caught by the keratin spines while grooming. <b>Heat stress in dogs:</b> Tongue is the primary cooling organ; brachycephalic breeds can't pant effectively → overheating risk.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Cow_mouth_dental_pad.jpg/640px-Cow_mouth_dental_pad.jpg",
+        analogy: "Cat tongue is a comb-meets-Velcro: built for hooking. Dog tongue is a wet flannel: built for cooling.",
+        quiz: {
+            question: "Why does the cat's tongue feel like sandpaper?",
+            options: ["Bony plates under mucosa", "Densely packed keratinised filiform papillae", "Calcified taste buds", "Salt crystals on the surface"],
+            correctIndex: 1,
+            explanation: "Filiform papillae packed with keratin spikes point backward → act as a brush + meat-rasp. Same principle but smaller in dogs."
+        }
+    },
+    {
+        id: 57,
+        title: "Equine Chestnut & Ergot — Vestigial Pads",
+        category: "forelimb",
+        comparison: "Horse vs. Other ungulates",
+        why: "Horses have two small horny patches on each leg: the <b>CHESTNUT</b> (medial side, above the carpus on forelimb or below the hock on hindlimb) and the <b>ERGOT</b> (caudal aspect of fetlock). These are vestiges of the carpal pad / metacarpal pad — pads on the heel area that ancestral 3-toed Equidae walked on. As the horse evolved to a single digit, the pads shrank to these horny remnants.",
+        clinical: "Chestnut patterns are unique to each horse — used like fingerprints for identification (chestnut + ergot pictures on passports). Not generally affected by disease but can crack and need trimming.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
+        analogy: "Like the appendix or wisdom teeth in humans — leftover hardware from when the body was used differently.",
+        quiz: {
+            question: "What are chestnuts and ergots on a horse's limbs?",
+            options: ["Tumour growths", "Vestigial pads from ancestral multi-toed Equidae", "Calcified ligaments", "Modern bony growths"],
+            correctIndex: 1,
+            explanation: "Both are evolutionary leftovers — horny remnants of the metacarpal/metatarsal pads of ancestor horses that walked on multiple toes."
+        }
+    },
+    {
+        id: 58,
+        title: "Pig Snout Bone (Os Rostri)",
+        category: "axial",
+        comparison: "Pig vs. Other domestic species",
+        why: "The pig is the ONLY domestic species with a true bone inside the tip of its nose — the <b>OS ROSTRI</b>. It is a small disc of bone embedded in the cartilage of the snout. Function: stiffens the rooting disc so the pig can flip soil aside while foraging without crushing the soft tissue.",
+        clinical: "Pig farmers historically performed 'ringing' (inserting a metal ring through the rostral disc) to prevent rooting damage in pasture pigs. The os rostri provides anchor strength for the ring. Snout injuries / fractures of the os rostri can occur in fighting boars.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Pig_snout.jpg/640px-Pig_snout.jpg",
+        analogy: "It's like the pig has built itself a bulldozer blade — a bone reinforcing plate at the front of the snout for digging through compacted earth.",
+        quiz: {
+            question: "The os rostri (rostral bone) is found in which species?",
+            options: ["Horse", "Ox", "Pig", "Dog"],
+            correctIndex: 2,
+            explanation: "Pig only — it's a small splanchnic/heterotopic bone in the tip of the snout that reinforces the rooting disc."
+        }
+    },
+    {
+        id: 59,
+        title: "Dog Os Penis & Os Clitoris",
+        category: "hindlimb",
+        comparison: "Dog vs. Ox/Horse",
+        why: "Dogs have a literal BONE inside the penis — the <b>OS PENIS (baculum)</b> — with a ventral groove that contains the urethra. Bitches have a smaller homolog, the <b>OS CLITORIS</b>. No domestic ungulate has these bones. Function: maintains penile rigidity during the prolonged 'tie' that's characteristic of canine mating.",
+        clinical: "<b>Urethral obstruction in dogs:</b> Bladder stones (urolithiasis) most commonly lodge at the caudal end of the os penis, where the urethra makes an abrupt bend. Surgical retrieval requires careful work around the bone. <b>Fractures of os penis</b> occur from blunt trauma.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dog_skeleton.jpg/640px-Dog_skeleton.jpg",
+        analogy: "While most mammals rely on hydraulics (blood pressure) for erection, the dog also has a structural scaffold built in — like having both inflatable AND solid support in the same column.",
+        quiz: {
+            question: "Which species has an os penis (baculum) among the listed domestic animals?",
+            options: ["Stallion", "Bull", "Boar", "Dog"],
+            correctIndex: 3,
+            explanation: "The dog has an os penis with a urethral groove on its ventral surface. Important clinical landmark for urethral obstruction surgery."
+        }
+    },
+    {
+        id: 60,
+        title: "Equine Navicular Bone",
+        category: "forelimb",
+        comparison: "Horse vs. Ox",
+        why: "Inside each horse hoof is a small boat-shaped sesamoid bone called the <b>NAVICULAR BONE (distal sesamoid)</b>. It sits behind P3 and acts as a pulley for the deep digital flexor tendon. The ox also has a distal sesamoid per claw, but smaller, fewer problems. The horse's single-digit weight-bearing concentrates enormous stress on this little bone.",
+        clinical: "<b>Navicular Disease (Horse):</b> Chronic degeneration of the navicular bone + bursa + DDF tendon — leading cause of forelimb lameness in performance horses. Diagnosed by radiograph (cyst-like lesions in bone), navicular bursa block, MRI. Treatment: corrective shoeing + bisphosphonates + sometimes neurectomy.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
+        analogy: "The navicular is like a tiny pulley wheel inside the foot — it changes the angle of pull of the deep flexor tendon as it wraps around to insert into P3.",
+        quiz: {
+            question: "The navicular bone is which type of bone?",
+            options: ["Long bone", "Flat bone", "Sesamoid bone", "Irregular bone"],
+            correctIndex: 2,
+            explanation: "Navicular is the distal sesamoid bone — develops within the deep digital flexor tendon as a pulley behind the coffin bone (P3)."
+        }
+    },
+    {
+        id: 61,
+        title: "Mare Ovulation Fossa",
+        category: "hindlimb",
+        comparison: "Mare vs. Cow/Bitch",
+        why: "The mare ovary is unique: covered by tunica albuginea EXCEPT at one indentation — the <b>OVULATION FOSSA</b> — which is the ONLY site where ovulation can occur. In other species (cow, bitch, sow, ewe) ovulation can happen anywhere on the ovarian surface. Functional reason: the mare's ovary is inside-out compared to other mammals — medulla outside, cortex inside.",
+        clinical: "Trans-rectal ultrasound: an experienced equine vet can see follicles approach the ovulation fossa to predict timing. Trans-rectal palpation per cycle is the foundation of mare breeding programmes. Ovarian tumours (granulosa cell tumour) often originate near the fossa.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cow_reproductive_tract.jpg/640px-Cow_reproductive_tract.jpg",
+        analogy: "Cow ovary = a hill with eggs popping out from any side. Mare ovary = a fortress with one gate (the ovulation fossa) — every egg must exit through that single opening.",
+        quiz: {
+            question: "In the mare, ovulation occurs only at:",
+            options: ["Any point on the ovary surface", "The hilum", "The ovulation fossa", "The medulla"],
+            correctIndex: 2,
+            explanation: "Mare ovaries are 'inverted' anatomically — cortex is internal, medulla external. The ovulation fossa is the only break in the tunica albuginea where a follicle can rupture."
+        }
+    },
+    {
+        id: 62,
+        title: "Bovine Frontal Sinus Expansion",
+        category: "axial",
+        comparison: "Ox vs. Horse",
+        why: "The <b>FRONTAL SINUS</b> in the ox is enormous — it extends from the forehead back into the horn cores and laterally over the orbit. The horse frontal sinus is also large but doesn't enter the horn (no horn). The dog frontal sinus is small. Bovine sinus design accommodates the horn anchorage + reduces skull weight.",
+        clinical: "<b>Sinusitis (horse):</b> Common; pus accumulates → unilateral nasal discharge + facial swelling. <b>Sinusitis (ox):</b> Often follows dehorning if horn base infection spreads to sinus (the cavities communicate). <b>Trephination</b> (drilling a hole through the skull to drain sinus pus) is a routine procedure with anatomy-specific entry points.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cattle_kidney.jpg/640px-Cattle_kidney.jpg",
+        analogy: "Cow skull is like an inflated balloon at the top — much of it is air-filled space rather than solid bone. Reduces head weight AND provides horn anchorage.",
+        quiz: {
+            question: "Why is dehorning considered a 'sinus surgery' in mature cattle?",
+            options: ["The horn is part of the brain", "The frontal sinus extends into the horn core", "The horn shares blood supply with eyes", "The horn contains lymph nodes"],
+            correctIndex: 1,
+            explanation: "Mature horn cores are hollow extensions of the frontal sinus. Sawing them off literally opens the sinus — wound care must keep it clean to prevent sinusitis."
+        }
+    },
+    {
+        id: 63,
+        title: "Equine Stomach 'Margo Plicatus'",
+        category: "axial",
+        comparison: "Horse vs. Other monogastrics",
+        why: "Inside the horse stomach is a sharp horizontal line called the <b>MARGO PLICATUS</b> — the boundary between the non-glandular (squamous, white) cardiac region and the glandular (pink) fundic region. Other monogastrics (dog, cat, pig) have a much smaller squamous zone or none. The horse's large squamous region is the equivalent of the ruminant forestomachs — a holdover of its hindgut-fermenter design.",
+        clinical: "<b>Equine Gastric Ulcer Syndrome (EGUS):</b> Ulcers form along the margo plicatus on the squamous side, where unprotected stratified epithelium meets acidic glandular contents during exercise (acid splash). Common in racehorses; treated with omeprazole.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Stomach_colors.png/640px-Stomach_colors.png",
+        analogy: "Horse stomach is a 2-coloured container: upper half is bare metal (squamous, no acid protection), lower half is enamel-coated (glandular, acid-resistant). The 'margo plicatus' is the paint line.",
+        quiz: {
+            question: "Where do most equine gastric ulcers form?",
+            options: ["Glandular fundic region", "Squamous region along the margo plicatus", "Pyloric antrum only", "Duodenum"],
+            correctIndex: 1,
+            explanation: "The squamous (non-glandular) upper part of the equine stomach has NO mucus or bicarbonate protection. Acid splashing up during exercise erodes it → ulcers along the margo plicatus."
+        }
+    },
+    {
+        id: 64,
+        title: "Bovine Pre-pubic Tendon",
+        category: "hindlimb",
+        comparison: "Cow/Mare vs. Bitch",
+        why: "The <b>PRE-PUBIC TENDON</b> is a thick fibrous band attaching the rectus abdominis and pectineus muscles to the cranial edge of the pubis. It anchors the abdominal wall to the pelvis. In late-pregnant mares and cows, the weight of the gravid uterus + foetus + fluid can RUPTURE this tendon. Bitch pregnancies don't generate enough weight to threaten it.",
+        clinical: "<b>Pre-pubic Tendon Rupture (mare):</b> Late-gestation emergency. The mare's belly suddenly drops; she can't push during foaling. Caesarean section + euthanasia decision often required. <b>Pre-pubic tendon hernia:</b> Partial rupture → ventral abdominal hernia.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cow_reproductive_tract.jpg/640px-Cow_reproductive_tract.jpg",
+        analogy: "Imagine the abdominal wall as a hammock and the pre-pubic tendon as the rope holding one end. In a heavily pregnant mare, that rope can snap under load.",
+        quiz: {
+            question: "Rupture of the pre-pubic tendon is most dangerous in:",
+            options: ["Young growing calves", "Late-pregnant mares/cows", "Castrated bulls", "Suckling lambs"],
+            correctIndex: 1,
+            explanation: "The huge uterine load near term in mares (and cows with hydrops) can rupture the pre-pubic tendon — emergency obstetric situation."
+        }
+    },
+    {
+        id: 65,
+        title: "Equine Ungual Cartilages",
+        category: "forelimb",
+        comparison: "Horse vs. Ox",
+        why: "Above each side of the horse's coffin bone (P3) sit two flat plates called <b>UNGUAL CARTILAGES (lateral cartilages of the foot)</b> that extend up above the coronet. They flex with weight bearing + assist the digital cushion + frog pump in moving venous blood up the leg. Cattle DO have small lateral cartilages but they are tiny — irrelevant clinically. The horse depends on these cartilages.",
+        clinical: "<b>Sidebone (horse):</b> Pathological ossification of the ungual cartilages — palpable hard lumps above the coronet on each side. Usually doesn't cause lameness but can be a cosmetic/conformation flaw. Heavy draft breeds are most prone.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Horse_hoof_underside.jpg/640px-Horse_hoof_underside.jpg",
+        analogy: "Like having two flexible 'wings' built into the sides of each hoof — they spring under load and rebound to pump blood out.",
+        quiz: {
+            question: "Ossification of the ungual cartilages in horses is called:",
+            options: ["Ringbone", "Sidebone", "Splints", "Bowed tendon"],
+            correctIndex: 1,
+            explanation: "Sidebone = ossified ungual (lateral) cartilage above the coronet. Common incidental radiographic finding in draft horses."
+        }
+    },
+    {
+        id: 66,
+        title: "Bovine Lacrimal Bulla",
+        category: "axial",
+        comparison: "Ox vs. Horse",
+        why: "The lacrimal bone of the ox has a peculiar inflated portion called the <b>LACRIMAL BULLA</b> — a hollow air-filled extension into the orbit, communicating with the maxillary sinus. The horse and dog don't have this. Function: extends paranasal sinus capacity + reduces skull weight.",
+        clinical: "Sinus infections of the maxillary sinus in cattle can extend into the lacrimal bulla → unilateral epiphora (tearing) + facial swelling near the eye. Drainage may require trephination of the bulla.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cattle_kidney.jpg/640px-Cattle_kidney.jpg",
+        analogy: "An extra storage room added behind the eye — cattle skulls are essentially honeycombed with these air pockets.",
+        quiz: {
+            question: "The lacrimal bulla is a feature of:",
+            options: ["Equine skull", "Bovine skull", "Canine skull", "Porcine skull"],
+            correctIndex: 1,
+            explanation: "The lacrimal bulla is an air-filled inflation of the lacrimal bone — characteristic of cattle and small ruminants; absent in horse and dog."
+        }
+    },
+    {
+        id: 67,
+        title: "Horse vs Dog Pelvic Inclination",
+        category: "hindlimb",
+        comparison: "Horse vs. Dog",
+        why: "The horse pelvis is roughly HORIZONTAL — long axis of sacrum runs nearly parallel to the ground. The dog pelvis is INCLINED downward — sacrum + ilium tilted ~30° below horizontal. This affects gait: horses can extend the hindlimb backward through a long arc (galloping stride); dogs have a more compact pelvis for jumping/twisting agility.",
+        clinical: "<b>Pelvimetry:</b> Different acceptable dimensions for different species. <b>Hip dysplasia (dog):</b> The inclined pelvis allows incomplete acetabular coverage to be tolerated, but worsens with breed selection. <b>Sacroiliac luxation:</b> Different management approaches in horse (mostly conservative) vs dog (often surgical).",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dog_skeleton.jpg/640px-Dog_skeleton.jpg",
+        analogy: "Horse pelvis is a long flat tray pointing backward. Dog pelvis is the same tray tipped down at the back like a slide.",
+        quiz: {
+            question: "Compared to the dog, the horse pelvis is:",
+            options: ["Steeply inclined downward", "Roughly horizontal", "Tilted to one side", "Always rotated 90°"],
+            correctIndex: 1,
+            explanation: "Horse pelvis is nearly horizontal — provides a long arc of motion for the hindlimb during the galloping stride. Dog pelvis is inclined."
+        }
+    },
+    {
+        id: 68,
+        title: "Cattle Carpal Bone Fusion Pattern",
+        category: "forelimb",
+        comparison: "Ox vs. Horse vs. Dog",
+        why: "Number of carpal bones differs by species: <b>Ox = 6</b> (C2+C3 fused, C1 absent), <b>Horse = 7-8</b>, <b>Dog = 7</b> (radial+intermediate fused into 'intermedioradial'), <b>Pig = 8</b> (full primitive pattern). Fusion reduces friction surfaces + adds strength for weight-bearing → favoured in cursorial (running) species.",
+        clinical: "<b>Slab fracture of C3 (horse):</b> Common race-horse injury from repetitive concussion on the carpus. Radiographic identification is essential. <b>Carpal hygroma (cow):</b> Bursitis over precarpal area — chronic 'kneeling' on hard concrete causes a precarpal subcutaneous bursa.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dog_skeleton.jpg/640px-Dog_skeleton.jpg",
+        analogy: "Evolution removed bones it didn't need: horse, ox, sheep all fused/lost carpals as they became single-digit or 2-digit runners. Dog, pig kept more — they need rotational paw use.",
+        quiz: {
+            question: "How many carpal bones does the ox have?",
+            options: ["4", "6", "7", "8"],
+            correctIndex: 1,
+            explanation: "Ox has 6 — proximal row (4: radial, intermediate, ulnar, accessory) + distal row (2: fused C2+C3, plus C4). C1 absent."
+        }
+    },
+    {
+        id: 69,
+        title: "Cattle Horn Anatomy",
+        category: "axial",
+        comparison: "Cattle vs. Deer (antlers)",
+        why: "Cattle <b>HORNS</b> are permanent bony cores (extensions of the frontal bone) covered with a keratin sheath. They grow throughout life, are never shed, and are HOLLOW INSIDE (continuous with the frontal sinus in adults). Deer <b>ANTLERS</b> are completely different: solid bone, deciduous (shed annually), and not covered with keratin — covered with velvet skin during growth.",
+        clinical: "<b>Dehorning (cattle):</b> Painful procedure; nerve block of cornual branch of zygomaticotemporal nerve required. In mature cattle, sawing through horn opens the frontal sinus → sinusitis risk. <b>Disbudding (calves):</b> Cautery destruction of horn bud before bony horn develops — quicker, less painful.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cattle_kidney.jpg/640px-Cattle_kidney.jpg",
+        analogy: "Cow horn = a fingernail growing on a finger of bone, never shed. Deer antler = a tree branch grown fresh every year and dropped in winter.",
+        quiz: {
+            question: "Why does dehorning a mature bovine open the frontal sinus?",
+            options: ["The sinus is in the cheek", "The horn core is a hollow extension of the frontal sinus", "The sinus surrounds the brain", "The horn contains the sinus duct"],
+            correctIndex: 1,
+            explanation: "In mature cattle the frontal sinus extends INTO the horn core itself. Removing the horn cuts into the sinus directly."
+        }
+    },
+    {
+        id: 70,
+        title: "Equine Stay Apparatus vs Dog Active Stance",
+        category: "forelimb",
+        comparison: "Horse vs. Dog",
+        why: "Horses have a <b>STAY APPARATUS</b> — a passive locking system of ligaments + check ligaments + intermediate tubercle + suspensory apparatus — that lets them stand and even sleep on their feet with NO muscle effort. Dogs lack this — they must actively use muscles to stand and lie down to rest. Energy efficiency vs flexibility trade-off.",
+        clinical: "<b>Recumbent horse warning:</b> If a healthy adult horse lies down for more than an hour, it's a clinical red flag (pain, illness, exhaustion). Horses are physically built to stand. <b>Decubitus ulcers in dogs:</b> Common in old/recumbent dogs that can't reposition themselves.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
+        analogy: "Horse legs are like camera tripods that lock open — once set, they hold the load with zero energy. Dog legs are like collapsible umbrellas — they need active muscle to stay up.",
+        quiz: {
+            question: "The 'stay apparatus' of the horse is:",
+            options: ["A muscle group", "A passive ligamentous locking system", "A vascular network", "A nerve plexus"],
+            correctIndex: 1,
+            explanation: "The stay apparatus is a network of ligaments + tendons + check ligaments that mechanically lock the limbs in extension — allowing the horse to sleep standing with virtually no muscle work."
+        }
+    },
+    {
+        id: 71,
+        title: "Mare 'Mobile Phase' Pregnancy vs Cow",
+        category: "hindlimb",
+        comparison: "Mare vs. Cow",
+        why: "The mare conceptus is unique: it floats free in the uterus for ~16 days, MIGRATING between both uterine horns continuously. This mechanical 'tour' is how the mare's body recognises pregnancy → suppresses PGF2α → maintains the CL. Cow conceptus fixes much earlier (~day 17) in one horn and uses chemical signaling (interferon-tau) instead.",
+        clinical: "<b>Mare twin pregnancy:</b> 60-70% of twin embryos can be 'crushed' manually per rectum during the mobile phase (day 14-16) by an experienced vet — singletons survive better. <b>'Maternal recognition window' in mare</b> is mechanical, not chemical — disturbing the uterus before day 17 risks losing the pregnancy.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cow_reproductive_tract.jpg/640px-Cow_reproductive_tract.jpg",
+        analogy: "Mare embryo is a tourist with a map — wanders the uterus to register pregnancy. Cow embryo plants a flag in one spot + uses chemistry (interferon-tau) to make the announcement.",
+        quiz: {
+            question: "Maternal recognition of pregnancy in the mare is achieved by:",
+            options: ["Secretion of interferon-tau", "Mechanical migration of the conceptus", "Hormonal flush from ovaries", "Estrogen-progesterone ratio shift"],
+            correctIndex: 1,
+            explanation: "Mare conceptus migrates throughout both uterine horns for 16+ days — this mechanical signal prevents PGF2α release and protects the CL."
+        }
+    },
+    {
+        id: 72,
+        title: "Dog Anal Sacs (Paranal Sinuses)",
+        category: "hindlimb",
+        comparison: "Dog/Cat vs. Ungulates",
+        why: "Dogs and cats have two scent glands — <b>ANAL SACS (paranal sinuses)</b> — opening at the 4 and 8 o'clock positions of the anus. They secrete a foul-smelling oily fluid used for territory marking + identification. Ungulates (cow, horse, pig) do NOT have these. Carnivores rely on scent-based communication far more than herbivores.",
+        clinical: "<b>Anal sacculitis / impaction:</b> Extremely common in dogs — sacs don't empty during defaecation → distended → infected. Manifests as 'scooting' (dragging bottom on the ground). Treatment: manual expression ± lavage; surgical removal for chronic cases.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dog_skeleton.jpg/640px-Dog_skeleton.jpg",
+        analogy: "Dogs come with built-in 'scent stamps' that release a unique signature with each defaecation. Cats have them too but seal them tighter. Ungulates don't carry such bottles.",
+        quiz: {
+            question: "Anal sacs in dogs open at which clock positions on the anus?",
+            options: ["6 and 12", "3 and 9", "4 and 8", "2 and 10"],
+            correctIndex: 2,
+            explanation: "Standard locations are 4 and 8 o'clock (when viewing the anus). Easy landmarks for manual expression / surgical approach."
+        }
+    },
+    {
+        id: 73,
+        title: "Bovine vs Equine Hoof Growth Rate",
+        category: "forelimb",
+        comparison: "Horse vs. Ox",
+        why: "Hoof wall grows at ~6-8 mm/month in horses → full hoof renewal in 9-12 months. Cattle hooves grow at ~5 mm/month → renewal in 12-14 months. Slightly faster in horses because their constant movement / weight bearing demands quicker renewal of the working surface. Cattle grow more slowly, but lameness is more easily detected because of cloven foot allowing 1-claw block trimming.",
+        clinical: "<b>Routine hoof care frequency:</b> Horses need trimming every 6-8 weeks. Cattle benefit from 2 trims per year (early lactation + dry-off period). Foot care is a top economic factor in dairy productivity.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Horse_hoof_underside.jpg/640px-Horse_hoof_underside.jpg",
+        analogy: "Think of hoof horn like fingernail — keeps growing, gets worn down by use, needs trimming if not wearing evenly.",
+        quiz: {
+            question: "Approximate growth rate of the equine hoof wall is:",
+            options: ["1-2 mm/month", "6-8 mm/month", "20 mm/month", "Same as hair growth"],
+            correctIndex: 1,
+            explanation: "Hoof horn grows ~6-8 mm/month in the horse. A full hoof wall is replaced in 9-12 months. Slower in cattle."
+        }
+    },
+    {
+        id: 74,
+        title: "Sow vs Cow Mammary Chain",
+        category: "axial",
+        comparison: "Sow vs. Cow",
+        why: "Sows have <b>multiple paired mammary glands</b> (6-8 pairs) arranged in a row from thorax to inguinal region — adapted for litter pregnancies. Each teat has 2 streak canals. Cow has 4 quarters with 4 teats — adapted for one (occasionally two) calves. Bitch similar to sow (5 pairs); mare has 2 teats only (single foal).",
+        clinical: "<b>'Teat order' in piglets:</b> Newborn piglets establish a hierarchy by claiming a specific teat — best teats (cranial = more milk) go to dominant piglets. Failure to suckle from a personal teat → starvation. <b>Bovine mastitis:</b> Easier to manage per-quarter due to functional independence.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Pig_snout.jpg/640px-Pig_snout.jpg",
+        analogy: "Cow udder = single 4-tap kitchen tank. Sow udder = a long row of 16 mini-taps along the belly, one per piglet.",
+        quiz: {
+            question: "How many streak canals open at each teat of a sow?",
+            options: ["1", "2", "3", "Variable (4-5)"],
+            correctIndex: 1,
+            explanation: "Sow has 2 streak canals per teat (versus 1 in cow). Allows two milk-secreting lobes per teat to drain independently."
+        }
+    },
+    {
+        id: 75,
+        title: "Cattle vs Horse Diaphragm Attachment",
+        category: "axial",
+        comparison: "Ox vs. Horse",
+        why: "The diaphragm attaches similarly in both — to the costal arch + xiphoid + lumbar vertebrae (via crura) — but the cattle diaphragm is in DIRECT contact with the reticulum, separated only by a thin peritoneal-pleural fold. The horse diaphragm has more buffer (omentum + stomach) between it and pericardium.",
+        clinical: "<b>Traumatic Reticulopericarditis (Hardware Disease, cattle):</b> Sharp metal swallowed → settles in reticulum → with rumen contractions, pierces diaphragm → enters pericardial sac → septic pericarditis. Pathognomonic to cattle. Treatment: rumen magnet (prevention) or rumenotomy.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cattle_kidney.jpg/640px-Cattle_kidney.jpg",
+        analogy: "Cow heart and reticulum are next-door neighbours separated by a thin wall (diaphragm). A nail going through the wall hits the heart. Horse heart has a buffer room (omentum) between it and the stomach.",
+        quiz: {
+            question: "Hardware disease in cattle involves perforation of:",
+            options: ["Abomasum → liver", "Reticulum → diaphragm → pericardium", "Rumen → spleen", "Omasum → kidney"],
+            correctIndex: 1,
+            explanation: "Sharp wire in reticulum pierces forward through the diaphragm into the pericardial sac, causing septic pericarditis. Classic bovine syndrome."
+        }
+    },
+    {
+        id: 76,
+        title: "Equine Cranial Mesenteric Artery Vulnerability",
+        category: "axial",
+        comparison: "Horse vs. Other species",
+        why: "The cranial mesenteric artery supplies most of the small intestine. In horses, this artery is a notorious target of <b>Strongylus vulgaris</b> larvae — they migrate into the artery wall, cause thrombosis, and trigger ischemic colic. Cattle have similar arteries but Strongylus doesn't infect them. The horse's hindgut-fermenter design with large mesenteric arcades + parasite biology = perfect storm.",
+        clinical: "<b>Verminous Arteritis / Thromboembolic Colic (horse):</b> Larvae of S. vulgaris damage arterial intima → thrombi → embolize distally → small intestinal infarction → severe colic. Prevention: routine ivermectin/moxidectin deworming.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
+        analogy: "The cranial mesenteric is the highway feeding the entire intestinal city. Strongylus larvae are the road-blockers — clog up the highway, and the city (gut) starves and dies in patches.",
+        quiz: {
+            question: "Strongylus vulgaris causes colic in horses primarily by:",
+            options: ["Direct toxin secretion", "Blockage of bile flow", "Thromboembolism of cranial mesenteric artery", "Liver damage"],
+            correctIndex: 2,
+            explanation: "S. vulgaris migrates through the cranial mesenteric arterial wall → causes thrombosis → emboli lodge in distal mesenteric vessels → ischemic infarction of gut → colic."
+        }
+    },
+
+    // ====================================================================
+    // 10 NEW WILDLIFE vs DOMESTIC COMPARISONS
+    // ====================================================================
+    {
+        id: 77,
+        title: "Pangolin Keratin Scales",
+        category: "wildlife",
+        comparison: "Pangolin vs. Other mammals",
+        why: "The pangolin is the ONLY mammal covered in true keratin scales (made of the same protein as hair, hooves, and nails — but arranged as overlapping plates like a reptile). When threatened, the pangolin rolls into a ball; its scales are razor-sharp at the edges. No domestic species has this protection.",
+        clinical: "Pangolin scales have no medicinal value despite traditional Chinese medicine claims — they're chemically identical to fingernails. Pangolins are critically endangered due to scale poaching + bushmeat trade.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Pangolin_rolled_up.jpg/640px-Pangolin_rolled_up.jpg",
+        analogy: "It's as if a dog or cat replaced all its hairs with a coat of overlapping fingernails. Same protein (keratin), totally different architecture.",
+        quiz: {
+            question: "Pangolin scales are made of:",
+            options: ["Bone", "Cartilage", "Keratin (same as fingernail)", "Modified dentine"],
+            correctIndex: 2,
+            explanation: "Pangolin scales are KERATIN — the same protein as nails, hair, hooves, horns. Just arranged in overlapping rigid plates rather than fine fibres."
+        }
+    },
+    {
+        id: 78,
+        title: "Anteater Tongue (60 cm) vs Dog Tongue",
+        category: "wildlife",
+        comparison: "Giant Anteater vs. Dog",
+        why: "The giant anteater has a tongue ~60 cm long — longer than its head — anchored not to the hyoid like in mammals but extending all the way back to the sternum. It can flick in/out up to 150 times per minute. Dog tongue, by comparison, is muscular and short, used for lapping water and panting. Anteater design = specialist termite-eating tool.",
+        clinical: "Captive anteaters need specialised feeding (puréed insectivore diet through narrow tubes) because their toothless tongue mechanism can't handle pellets. Tongue injury or atrophy = starvation.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Giant_Anteater.jpg/640px-Giant_Anteater.jpg",
+        analogy: "The dog tongue is a wet washcloth. The anteater tongue is a sticky retractable measuring tape that can reach 60 cm into a termite mound.",
+        quiz: {
+            question: "What anchors the giant anteater's exceptionally long tongue?",
+            options: ["The hyoid bone only", "The mandibular symphysis", "The sternum", "The cricoid cartilage"],
+            correctIndex: 2,
+            explanation: "Uniquely, the anteater's tongue extends back and anchors to the sternum, not the hyoid — letting it project 60 cm out of the mouth."
+        }
+    },
+    {
+        id: 79,
+        title: "Tortoise Shell = Modified Ribs + Vertebrae",
+        category: "wildlife",
+        comparison: "Tortoise vs. Mammals",
+        why: "The tortoise shell isn't just a shell glued on — it's the animal's SKELETON turned inside out. The dorsal carapace = fused thoracic vertebrae + ribs + dermal bones. The ventral plastron = fused sternum + clavicles + abdominal ribs. The internal organs are literally INSIDE the bony case. No domestic species has anything remotely like this.",
+        clinical: "Shell fractures in tortoises require special veterinary repair (cable ties, epoxy, fiberglass) — they're fractures of the spinal column + ribs. Heal slowly. Respiratory disease is hard to diagnose because chest wall doesn't move conventionally.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tortoise_shell.jpg/640px-Tortoise_shell.jpg",
+        analogy: "Imagine if your ribs grew sideways, fused into a single dome over your back, and your sternum became a flat bony floor under your belly. That's a tortoise.",
+        quiz: {
+            question: "The carapace (top shell) of a tortoise is anatomically:",
+            options: ["A thick layer of skin", "Fused vertebrae + ribs + dermal bones", "Modified scales only", "Calcified cartilage"],
+            correctIndex: 1,
+            explanation: "Carapace = vertebrae + ribs + dermal ossifications fused together. Plastron = sternum + clavicles + abdominal ribs. The shell IS the skeleton."
+        }
+    },
+    {
+        id: 80,
+        title: "Hummingbird Ball-and-Socket Shoulder",
+        category: "wildlife",
+        comparison: "Hummingbird vs. Other birds",
+        why: "Hummingbirds have a true ball-and-socket shoulder joint (gleno-humeral) that allows 180° rotation of the wing — they can flap UPWARD as forcefully as downward. This is what gives them hover capability + reverse flight + lateral flight. Other birds (including chickens, eagles) have a more restricted hinge-like shoulder; they can only generate downward thrust. Among domestic 'birds' (poultry, ducks), none can hover.",
+        clinical: "Hummingbird metabolic rate is the highest of any vertebrate (~12× human BMR). They enter torpor at night to survive. Captive husbandry requires constant access to nectar — they will starve in 4-6 hours without food.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Hummingbird_in_flight.jpg/640px-Hummingbird_in_flight.jpg",
+        analogy: "Chickens are propeller aircraft (one direction of thrust only). Hummingbirds are helicopters — they can rotate the rotor blades to push air in any direction.",
+        quiz: {
+            question: "Why can hummingbirds hover but chickens cannot?",
+            options: ["Bigger wings", "Ball-and-socket shoulder joint with 180° rotation", "Higher heart rate", "Hollow bones"],
+            correctIndex: 1,
+            explanation: "Hummingbird's true ball-and-socket shoulder allows full wing rotation → thrust in any direction → true hovering flight. Other birds have a more hinge-like shoulder."
+        }
+    },
+    {
+        id: 81,
+        title: "Naked Mole Rat Cold-Blooded Mammal",
+        category: "wildlife",
+        comparison: "Naked Mole Rat vs. Other mammals",
+        why: "Naked mole rats are effectively COLD-BLOODED — they don't maintain a constant body temperature. They have minimal hair, very low metabolism, and survive on the constant 30°C of their underground burrows. They are also resistant to cancer, can live without oxygen for 18 minutes, and live 30+ years. The closest mammal to behaving like a reptile.",
+        clinical: "Major research model — naked mole rats almost never get cancer. Understanding their high-molecular-weight hyaluronan + p53 pathway may reveal therapies for human cancer.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Nacktmull.jpg/640px-Nacktmull.jpg",
+        analogy: "Most mammals are like household central heating — burn fuel constantly to keep warm. The naked mole rat is a passive house — uses the surrounding ground temperature for free heating.",
+        quiz: {
+            question: "Which of the following describes naked mole rats?",
+            options: ["Standard mammalian thermoregulation", "Effectively cold-blooded — poor thermoregulation", "Always cold", "Always overheating"],
+            correctIndex: 1,
+            explanation: "Naked mole rats are heterothermic — their body temp tracks burrow temperature. Closest mammal to a reptile in thermoregulation."
+        }
+    },
+    {
+        id: 82,
+        title: "Sea Lion Flipper vs Dog Forelimb",
+        category: "wildlife",
+        comparison: "Sea Lion vs. Dog",
+        why: "The sea lion FLIPPER is a fully transformed dog forelimb: the humerus + radius + ulna shortened and broadened; the carpals, metacarpals, and phalanges elongated into paddle-like rays; soft webbing between digits. The same bones, same nerve plexus, same blood supply — just reshaped for water propulsion. A perfect example of homologous structure.",
+        clinical: "Sea lion flipper diseases (cellulitis, fractures) treated based on dog anatomy knowledge — orthopaedic surgeons can identify each bone clearly. Stranded sea lions often need fluid therapy via venepuncture of the flipper using same techniques as dog cephalic vein.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sea_lion.jpg/640px-Sea_lion.jpg",
+        analogy: "Imagine taking your dog's front leg, shortening the upper bones, elongating the finger bones, and sealing the spaces with webbing. That's a sea lion flipper.",
+        quiz: {
+            question: "Compared to a dog forelimb, the sea lion flipper has:",
+            options: ["Completely different bone structure", "Same bones but elongated phalanges + webbed soft tissue", "No bones (just cartilage)", "Extra bones for paddling"],
+            correctIndex: 1,
+            explanation: "Same skeletal plan, modified proportions — humerus/radius/ulna shortened, phalanges elongated, interdigital webbing. Classic homologous structure."
+        }
+    },
+    {
+        id: 83,
+        title: "Walrus Baculum — Longest Penis Bone",
+        category: "wildlife",
+        comparison: "Walrus vs. Dog",
+        why: "The walrus has the largest os penis (baculum) of any land mammal — up to 60 cm long. It's a structural support for prolonged mating in cold Arctic waters where blood-based hydraulics fail in the cold. The dog's os penis is much smaller (~10 cm). The need for a rigid scaffold in cold conditions = bigger bone.",
+        clinical: "Walrus bacula are highly valued in Arctic indigenous cultures (carving, fertility symbolism). Walrus fossils with the baculum are key paleontological dating tools — they don't decay quickly.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Walrus_male.jpg/640px-Walrus_male.jpg",
+        analogy: "Imagine a dog's penis bone scaled up by 5× — that's what a walrus carries inside its body. The walrus is the gold-medalist of baculum length among mammals.",
+        quiz: {
+            question: "Which mammal has the longest os penis (baculum)?",
+            options: ["Bull", "Dog", "Walrus", "Horse"],
+            correctIndex: 2,
+            explanation: "Walrus baculum can reach 60 cm — longest of any land mammal. The horse and bull, despite their size, have no os penis at all (musculocavernous or fibroelastic instead)."
+        }
+    },
+    {
+        id: 84,
+        title: "Sloth Inverted Claws & Slow Metabolism",
+        category: "wildlife",
+        comparison: "Sloth vs. Dog",
+        why: "Sloths hang upside-down from branches using CURVED HOOK CLAWS that don't actively grip — they passively lock the digit closed via tendon engineering, so the sloth uses ZERO muscle energy to hang. Combined with the lowest metabolism of any mammal (~40% of expected for body weight), sloths can survive on a leaf diet that no other mammal could.",
+        clinical: "Sloths in captivity often die of stress + improper diet. Heart rate can drop to ~15 bpm during rest — heart-rate-based anaesthesia monitors give false alarms. Body temperature varies more than other mammals.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Sloth.jpg/640px-Sloth.jpg",
+        analogy: "A sloth's claws are like coat hooks — bend it once and it stays. No muscle needed to hold the coat. That's why a sloth can sleep upside-down for 15 hours a day.",
+        quiz: {
+            question: "How does a sloth hang motionless from branches?",
+            options: ["Strong muscle contractions", "Passive tendon-lock mechanism in the curved claws", "Suction cups on the digits", "Reverse gravity sensors"],
+            correctIndex: 1,
+            explanation: "Sloth claws are curved hooks that passively engage when the digit relaxes — no muscle effort needed. Combined with extreme energy efficiency, allows sloth to sleep upside-down."
+        }
+    },
+    {
+        id: 85,
+        title: "Crocodile 4-Chambered Heart",
+        category: "wildlife",
+        comparison: "Crocodile vs. Other reptiles",
+        why: "Crocodiles are the only reptiles with a TRUE 4-chambered heart (like birds and mammals) — but with a special twist: the FORAMEN OF PANIZZA, a permanent opening between the left and right aortic arches. This lets them SHUNT blood away from the lungs during long dives (up to 1 hour). Other reptiles (snakes, lizards) have only a 3-chambered heart.",
+        clinical: "Captive crocodilians anaesthetized for surgery need careful monitoring because they can shunt blood to bypass anesthetic delivery to the lungs. The foramen of Panizza must be considered when interpreting blood gas analysis.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Crocodile.jpg/640px-Crocodile.jpg",
+        analogy: "A crocodile heart is a 4-chambered house with a secret door (Panizza) between the left and right aortas — open this door, and the crocodile becomes a 'reptile' that can hold its breath; close it, and it's a 'mammal' with full oxygen delivery.",
+        quiz: {
+            question: "What unique feature lets crocodiles dive for 1+ hour without breathing?",
+            options: ["3-chambered heart", "Special lungs only", "4-chambered heart with foramen of Panizza shunt", "Tail-pumping circulation"],
+            correctIndex: 2,
+            explanation: "Crocodile has a 4-chambered heart + an opening (foramen of Panizza) between the two aortic arches that allows them to shunt blood away from the lungs during prolonged dives."
+        }
+    },
+    {
+        id: 86,
+        title: "Cheetah Non-Retractable Claws",
+        category: "wildlife",
+        comparison: "Cheetah vs. Lion/Tiger/House Cat",
+        why: "Cheetahs are the only big cats with semi-non-retractable claws — they don't fully sheath. The exposed claws act as built-in running spikes for traction during 110 km/h chases. Other felids (lion, tiger, house cat) retract their claws to keep them sharp for climbing and prey-grappling. Cheetah trades grappling for speed.",
+        clinical: "Cheetah claws wear down more than other cats — captive cheetahs need claw inspection during anaesthesia. Their long, thin legs are also more fracture-prone. Genetic bottleneck (extreme inbreeding ~10,000 years ago) makes them susceptible to disease.",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Cheetah_running.jpg/640px-Cheetah_running.jpg",
+        analogy: "House cats are like Wolverine — claws hide in sheaths, come out sharp on demand. Cheetahs are like sprinters wearing permanent track spikes — always grip-ready, slightly worn down all the time.",
+        quiz: {
+            question: "Why does the cheetah have non-retractable claws?",
+            options: ["For climbing", "For running traction at high speed", "For digging burrows", "For self-defence"],
+            correctIndex: 1,
+            explanation: "Cheetah claws stay exposed like running spikes — providing extra grip on the ground during 110 km/h sprints. Unique among the cat family."
+        }
     }
 ];
