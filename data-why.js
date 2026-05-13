@@ -785,7 +785,7 @@ anatomyData = [
         title: "Dental Pad of Ruminants",
         category: "axial",
         comparison: "Ox vs. Horse/Dog",
-        why: "The Ox has NO upper incisors. Their place is taken by a thick, cornified mucosal cushion — the <b>dental pad (pollex dentalis)</b>. The lower incisors grip forage against this pad and the head jerks to tear off grass. The Horse has full upper and lower incisors for clipping grass cleanly; the Dog has them for grasping prey. The pad+incisors arrangement of cattle suits a tearing rather than a slicing bite.",
+        why: "The Ox has NO upper incisors. Their place is taken by a thick, cornified mucosal cushion — the <b> dental pad (pollex dentalis) </b>. The lower incisors grip forage against this pad and the head jerks to tear off grass. The Horse has full upper and lower incisors for clipping grass cleanly; the Dog has them for grasping prey. The pad+incisors arrangement of cattle suits a tearing rather than a slicing bite.",
         clinical: "Age determination by dentition in cattle uses ONLY the lower incisors (since there are no uppers to wear). 'Wave mouth' or 'step mouth' uneven wear must be checked for cattle on rough pastures.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Cow_mouth_dental_pad.jpg/640px-Cow_mouth_dental_pad.jpg",
         analogy: "The horse mouth is a pair of scissors — sharp blades meeting blade. The cow mouth is a hand pulling against a rubber pad — grip-and-tear instead of cut.",
