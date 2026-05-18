@@ -237,41 +237,24 @@ body {
 }
 /* No icon-shrinking rules — let .orb-icon use its default 3rem+ size */
 
-/* Mobile: force 2 cards per row using flex-basis (overrides inline width).
-   Cards are square-ish (~160×160) with icon on top + label below.
-   Hides the "REGIONAL ANATOMY MODULE" subtitle on phones to keep cards tidy. */
+/* Mobile: cards stack naturally in a single column, keeping the original
+   look — full-size icons, yellow/cyan comet glow visible behind each card,
+   and natural vertical scrolling. NO forced grid, NO disabled glow. */
 @media (max-width: 700px) {
-    #atlas-selector.portal-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 14px !important;
-        margin-top: 20px;
-        padding: 10px 12px 40px;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #atlas-selector .portal-card {
-        width: 100% !important;
-        height: 160px !important;
-        min-width: 0 !important;
-        padding: 16px 8px !important;
-        display: flex !important;
+    #atlas-selector.portal-grid,
+    #atlas-content .portal-grid {
+        gap: 26px !important;
+        margin-top: 24px;
+        padding-bottom: 60px;
         flex-direction: column;
+        flex-wrap: nowrap;
         align-items: center;
-        justify-content: center;
     }
-    #atlas-selector .portal-card .orb-icon {
-        font-size: 2.4rem !important;
-        margin-bottom: 8px !important;
+    /* Cards keep their 280×300 default size — same as desktop */
+    #atlas-selector .portal-card,
+    #atlas-content .portal-card {
+        flex-shrink: 0;
     }
-    #atlas-selector .portal-card .card-label {
-        font-size: 0.95rem !important;
-        text-align: center;
-        line-height: 1.2;
-    }
-    /* Hide the redundant "REGIONAL ANATOMY MODULE" subtitle on phones */
-    #atlas-selector .portal-card .card-sub { display: none !important; }
 }
 
 /* --- PORTAL CARDS (THE ORBS) --- */
