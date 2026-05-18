@@ -731,7 +731,7 @@ function renderCards(data) {
                 <div class="card-comparison">
                     <i class="fas fa-balance-scale"></i> ${item.comparison}
                 </div>
-                <p class="card-preview">${item.why}</p>
+                <p class="card-preview">${(item.why || '').replace(/<[^>]+>/g, '').slice(0, 220)}${(item.why || '').length > 220 ? '…' : ''}</p>
             </div>
             <div class="card-footer">
                 <span class="read-more">Analyze <i class="fas fa-microscope"></i></span>
@@ -813,8 +813,9 @@ function openModal(item) {
     document.getElementById('modalCategory').textContent = item.category.toUpperCase();
     document.getElementById('modalTitle').textContent = item.title;
     document.getElementById('modalComparison').textContent = `Comparison: ${item.comparison}`;
-    document.getElementById('modalWhy').textContent = item.why;
-    document.getElementById('modalClinical').textContent = item.clinical;
+    // ⬇ Use innerHTML so <b>, <br>, <i> tags in WHY data render properly (not as literal text)
+    document.getElementById('modalWhy').innerHTML = item.why || '';
+    document.getElementById('modalClinical').innerHTML = item.clinical || '';
 
     aiResponseBox.style.display = 'none';
     aiResponseText.innerHTML = '';
@@ -994,10 +995,30 @@ const quizSession = {
             else if (i === selectedIdx) b.classList.add('wrong');
         });
 
+        // Encouragement messages — rotate so it feels fresh
+        const PRAISE = ['Brilliant!', 'Spot on!', 'Excellent!', 'Nailed it!', 'On point!', 'Well done!', 'Sharp!', 'Beautiful!'];
+        const STREAK_TAUNT = {
+            3: '🔥 3 in a row!',
+            5: '🚀 5 streak — on fire!',
+            7: '⚡ 7 straight — unstoppable!',
+            10: '👑 10 streak — MASTER!',
+            15: '🌟 15 streak — legendary!'
+        };
+        const COMFORT = [
+            "Not quite — but you're learning. Keep going!",
+            'Close call. Read the explanation below.',
+            "That's a tricky one. Remember this for next time.",
+            'No worries — wrong answers help you learn faster.'
+        ];
+
         if (correct) {
             this.score++;
             this.streak++;
             if (this.streak > this.bestStreak) this.bestStreak = this.streak;
+            quizSession._burstConfetti(btn);
+            if (STREAK_TAUNT[this.streak]) {
+                quizSession._popMilestone(STREAK_TAUNT[this.streak]);
+            }
         } else {
             this.streak = 0;
             this.wrongLog.push({
@@ -1011,13 +1032,57 @@ const quizSession = {
         const fb = document.getElementById('quizFeedback');
         fb.style.display = 'block';
         fb.className = 'quiz-feedback ' + (correct ? 'fb-good' : 'fb-bad');
-        fb.innerHTML = `<strong>${correct ? '✓ Correct!' : '✗ Not quite.'}</strong> ${q.explanation}`;
+        const headline = correct
+            ? `<strong>✓ ${PRAISE[Math.floor(Math.random() * PRAISE.length)]}</strong>`
+            : `<strong>✗ ${COMFORT[Math.floor(Math.random() * COMFORT.length)]}</strong><br><span class="qf-correct">Correct answer: <b>${q.options[q.correctIndex]}</b></span>`;
+        fb.innerHTML = `${headline}<div class="qf-explain">${q.explanation}</div>`;
 
-        // Update HUD live
-        document.getElementById('hudScore').innerText = this.score;
-        document.getElementById('hudStreak').innerHTML = `${this.streak}&nbsp;<i class="fas fa-fire" style="color:${this.streak >= 3 ? '#ff7a00' : '#888'};"></i>`;
+        // Update HUD live (with bump animation)
+        const scoreEl = document.getElementById('hudScore');
+        scoreEl.innerText = this.score;
+        if (correct) {
+            scoreEl.classList.remove('hud-bump');
+            void scoreEl.offsetWidth;
+            scoreEl.classList.add('hud-bump');
+        }
+        document.getElementById('hudStreak').innerHTML =
+            `${this.streak}&nbsp;<i class="fas fa-fire" style="color:${this.streak >= 3 ? '#ff7a00' : '#888'};"></i>`;
 
         document.getElementById('nextQuizBtn').style.display = 'inline-flex';
+    },
+
+    // ---- Tiny CSS-only confetti burst on correct answer ----
+    _burstConfetti(originBtn) {
+        if (!originBtn) return;
+        const colors = ['#00f2ff', '#ffd466', '#ff7a00', '#7df9ff', '#50dc96', '#bd93f9'];
+        const rect = originBtn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const N = 14;
+        for (let i = 0; i < N; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'qz-confetti';
+            const angle = (Math.PI * 2 * i) / N + (Math.random() - 0.5) * 0.4;
+            const dist = 80 + Math.random() * 60;
+            dot.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+            dot.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+            dot.style.setProperty('--rot', Math.random() * 720 - 360 + 'deg');
+            dot.style.background = colors[i % colors.length];
+            dot.style.left = cx + 'px';
+            dot.style.top = cy + 'px';
+            document.body.appendChild(dot);
+            setTimeout(() => dot.remove(), 900);
+        }
+    },
+
+    // ---- Milestone popup ("3 in a row!", "5 streak!", etc.) ----
+    _popMilestone(text) {
+        const pop = document.createElement('div');
+        pop.className = 'qz-milestone';
+        pop.innerHTML = text;
+        document.body.appendChild(pop);
+        setTimeout(() => pop.classList.add('out'), 1200);
+        setTimeout(() => pop.remove(), 1700);
     },
 
     _showResults() {

@@ -53,58 +53,100 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0a0a14">
 
-  <!-- ===== INSTANT SPLASH (masks initial paint, fades out smoothly) ===== -->
+  <!-- ===== INSTANT SPLASH (GPU-accelerated, 60fps, snappy fade) ===== -->
   <style>
     html, body { background: #0a0a14; }
     #ivri-splash {
       position: fixed; inset: 0; z-index: 99999;
       background: radial-gradient(circle at 50% 45%, #142036 0%, #0a0a14 60%);
       display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 24px;
-      transition: opacity .55s ease, visibility .55s ease;
+      flex-direction: column; gap: 28px;
+      /* Faster, more cinematic fade-out */
+      transition: opacity .35s cubic-bezier(.4,0,.2,1), visibility .35s linear;
+      contain: layout paint;  /* isolates the splash so it can't slow the rest of the page */
     }
     #ivri-splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-    #ivri-splash img {
-      width: 168px; height: 168px;
-      animation: ivri-pulse 1.6s ease-in-out infinite;
-      filter: drop-shadow(0 0 32px rgba(0,242,255,0.35));
+    /* Logo: only transform animates (GPU layer) */
+    #ivri-splash .ivri-logo {
+      width: 144px; height: 144px;
+      display: flex; align-items: center; justify-content: center;
+      will-change: transform;
+      animation: ivri-pulse 1.4s ease-in-out infinite;
+    }
+    #ivri-splash .ivri-logo img {
+      width: 100%; height: 100%; display: block;
+    }
+    /* Static glow behind logo — NOT animated, no per-frame cost */
+    #ivri-splash .ivri-glow {
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,242,255,0.35) 0%, transparent 70%);
+      pointer-events: none;
     }
     #ivri-splash .ivri-ring {
-      width: 56px; height: 56px; border-radius: 50%;
-      border: 3px solid rgba(0,242,255,0.18);
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2.5px solid rgba(0,242,255,0.15);
       border-top-color: #00f2ff;
-      animation: ivri-spin 1s linear infinite;
+      will-change: transform;
+      animation: ivri-spin .85s linear infinite;
     }
     #ivri-splash .ivri-tag {
-      color: #6f8aa8; font-family: Inter, system-ui, sans-serif;
-      font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
-      opacity: .7;
+      color: #7fa1c4; font-family: Inter, system-ui, sans-serif;
+      font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+      font-weight: 500;
+      opacity: 0;
+      animation: ivri-tag-in .6s .15s ease-out forwards;
     }
+    /* Animate ONLY transform — GPU-only, no layout/paint */
     @keyframes ivri-pulse {
-      0%,100% { transform: scale(1);    filter: drop-shadow(0 0 32px rgba(0,242,255,0.35)); }
-      50%     { transform: scale(1.04); filter: drop-shadow(0 0 48px rgba(0,242,255,0.65)); }
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.06); }
     }
     @keyframes ivri-spin { to { transform: rotate(360deg); } }
+    @keyframes ivri-tag-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: .75; transform: translateY(0); }
+    }
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      #ivri-splash .ivri-logo,
+      #ivri-splash .ivri-ring { animation: none; }
+      #ivri-splash { transition: opacity .2s ease; }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Splash overlay (auto-removed after load) -->
+  <!-- Splash overlay (auto-removed once page is ready) -->
   <div id="ivri-splash" aria-hidden="true">
-    <img src="images/icon-512.png" alt="">
+    <div style="position:relative; display:flex; align-items:center; justify-content:center;">
+      <div class="ivri-glow"></div>
+      <div class="ivri-logo"><img src="images/icon-512.png" alt=""></div>
+    </div>
     <div class="ivri-ring"></div>
-    <div class="ivri-tag">IVRI Anatomy Engine</div>
+    <div class="ivri-tag">IVRI Anatomy</div>
   </div>
   <script>
     (function () {
       var splash = document.getElementById('ivri-splash');
+      var hidden = false;
       function hide() {
+        if (hidden) return;
+        hidden = true;
         splash.classList.add('hide');
-        setTimeout(function () { splash.remove(); }, 700);
+        setTimeout(function () { splash.remove(); }, 400);
       }
-      // Hide after load OR after 3.5s max (whichever comes first)
-      window.addEventListener('load', function () { setTimeout(hide, 300); });
-      setTimeout(hide, 3500);
+      // Hide as soon as DOM is interactive (faster than waiting for full load)
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        requestAnimationFrame(hide);
+      } else {
+        document.addEventListener('DOMContentLoaded', function () {
+          requestAnimationFrame(hide);
+        });
+      }
+      // Hard ceiling: never block past 2.5s
+      setTimeout(hide, 2500);
     })();
   </script>
 

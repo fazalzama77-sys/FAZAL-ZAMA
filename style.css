@@ -177,6 +177,31 @@ body {
     padding-bottom: 100px;
 }
 
+/* Staggered entrance for landing — each element slides in 80ms after the previous */
+#landing-view.active .badge        { animation: heroEnter .55s cubic-bezier(.4,0,.2,1)  .05s both; }
+#landing-view.active .hero-title   { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .12s both; }
+#landing-view.active .portal-grid  { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .22s both; }
+#landing-view.active .portal-card:nth-child(1) { animation: cardEnter .55s cubic-bezier(.4,0,.2,1)  .30s both; }
+#landing-view.active .portal-card:nth-child(2) { animation: cardEnter .55s cubic-bezier(.4,0,.2,1)  .38s both; }
+#landing-view.active .portal-card:nth-child(3) { animation: cardEnter .55s cubic-bezier(.4,0,.2,1)  .46s both; }
+#landing-view.active .footer      { animation: heroEnter .6s  cubic-bezier(.4,0,.2,1)  .55s both; }
+
+@keyframes heroEnter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(22px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+@media (prefers-reduced-motion: reduce) {
+    #landing-view.active .badge,
+    #landing-view.active .hero-title,
+    #landing-view.active .portal-grid,
+    #landing-view.active .portal-card,
+    #landing-view.active .footer { animation: none; }
+}
+
 .hero-title {
     font-size: 4rem;
     font-weight: 800;
@@ -186,7 +211,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 20px 0;
-    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Removed heavy text-shadow on gradient text — was repainting every frame */
 }
 
 .portal-grid {
@@ -222,6 +247,9 @@ body {
     animation: spin-cw 4s linear infinite;
     z-index: -1;
     opacity: 0.7;
+    /* Promote to its own GPU layer so the spin is silky-smooth */
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .portal-card::after {
@@ -233,13 +261,24 @@ body {
     z-index: -1;
 }
 
+/* Hover uses transform only (GPU); box-shadow set statically not animated */
+.portal-card {
+    transition: transform .25s cubic-bezier(.4,0,.2,1), box-shadow .25s ease;
+    will-change: transform;
+}
 .portal-card:hover {
-    transform: scale(1.05);
-    animation: cardGlow 0.3s ease forwards;
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 24px rgba(255,215,0,0.18);
+}
+.portal-card:active {
+    transform: translateY(-2px) scale(1.01);
+    transition: transform .08s ease;
 }
 
-.portal-card:active {
-    animation: buttonPress 0.2s ease;
+/* Reduced-motion users get instant transitions, no spin */
+@media (prefers-reduced-motion: reduce) {
+    .portal-card::before { animation: none; opacity: 0.4; }
+    .portal-card, .portal-card:hover, .portal-card:active { transition: none; transform: none; }
 }
 
 .orb-icon {
@@ -1676,6 +1715,71 @@ body.professional-mode .credit-foot { color: #607d8b; }
     background: rgba(255, 100, 100, 0.10);
     color: #ffb4b4;
     border: 1px solid rgba(255, 100, 100, 0.35);
+}
+#why-view .quiz-feedback strong { font-size: 1.05rem; display: inline-block; margin-bottom: 4px; }
+#why-view .quiz-feedback .qf-correct { display: block; font-size: .9rem; opacity: .9; margin-top: 4px; }
+#why-view .quiz-feedback .qf-explain { margin-top: 8px; font-size: .92rem; line-height: 1.55; opacity: .92; }
+
+/* HUD score bump animation when correct */
+#why-view .quiz-hud-cell .hud-bump {
+    animation: hud-bump-anim .5s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes hud-bump-anim {
+    0%   { transform: scale(1);    color: #fff; }
+    35%  { transform: scale(1.32); color: #50dc96; text-shadow: 0 0 12px rgba(80,220,150,0.7); }
+    100% { transform: scale(1);    color: #fff; }
+}
+
+/* ===== Confetti burst on correct answer ===== */
+.qz-confetti {
+    position: fixed;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 100000;
+    will-change: transform, opacity;
+    animation: qz-confetti-fly .85s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes qz-confetti-fly {
+    0%   { transform: translate(-50%, -50%) scale(1)   rotate(0deg); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(.5) rotate(var(--rot)); opacity: 0; }
+}
+
+/* ===== Streak milestone popup ===== */
+.qz-milestone {
+    position: fixed;
+    top: 30%; left: 50%;
+    transform: translate(-50%, -50%) scale(.6);
+    background: linear-gradient(135deg, #00f2ff, #ffd466);
+    color: #04111a;
+    font-family: var(--font-code, monospace);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    padding: 18px 32px;
+    border-radius: 999px;
+    box-shadow: 0 20px 50px rgba(0,242,255,0.45), 0 0 0 4px rgba(255,255,255,0.08);
+    z-index: 100001;
+    pointer-events: none;
+    opacity: 0;
+    animation: qz-milestone-in .35s cubic-bezier(.34,1.56,.64,1) forwards;
+    will-change: transform, opacity;
+}
+.qz-milestone.out {
+    animation: qz-milestone-out .45s cubic-bezier(.4,0,.6,1) forwards;
+}
+@keyframes qz-milestone-in {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+    60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1);    }
+}
+@keyframes qz-milestone-out {
+    to { opacity: 0; transform: translate(-50%, -80%) scale(.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .qz-confetti, .qz-milestone, #why-view .quiz-hud-cell .hud-bump { animation: none !important; }
+    .qz-confetti, .qz-milestone { display: none; }
 }
 
 /* ===== Engineering Challenge — Session UI (Cheerful + Professional) ===== */
