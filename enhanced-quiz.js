@@ -54,6 +54,11 @@ const quizApp = {
         try { dashboard.renderSrsPanel(); } catch (e) { /* dashboard may not be visible */ }
       }
       quizApp._isSmartReview = false;
+      // Always clear exam-mode state on close — next quiz starts fresh
+      quizApp.examMode = false;
+      quizApp.examFeedback = null;
+      quizApp.examEndsAt = null;
+      document.querySelector('.quiz-modal')?.classList.remove('exam-no-feedback');
     };
 
     if (quizApp.quizState === 'active') {
@@ -82,6 +87,10 @@ const quizApp = {
     quizApp.userAnswers = [];
     quizApp.bookmarks.clear();
     quizApp.flagged.clear();
+    // Always reset exam state so a fresh menu open never inherits silent mode
+    quizApp.examMode = false;
+    quizApp.examFeedback = null;
+    quizApp.examEndsAt = null;
     quizApp.startTime = null;
     quizApp.endTime = null;
     quizApp.quizState = 'menu';
@@ -372,6 +381,11 @@ const quizApp = {
     quizApp.selectedRegion = label.region;
     quizApp.selectedSystem = label.system;
     quizApp._isSmartReview = true;   // flag used by close() to refresh dashboard
+    // Reset exam state — Smart Review uses instant feedback like normal quizzes
+    quizApp.examMode = false;
+    quizApp.examFeedback = null;
+    quizApp.examEndsAt = null;
+    document.querySelector('.quiz-modal')?.classList.remove('exam-no-feedback');
 
     // Map review entries → quiz questions, tagging metadata for SRS auto-recording
     quizApp.questions = reviewSet.map(entry => {
@@ -426,6 +440,11 @@ const quizApp = {
     quizApp.bookmarks.clear();
     quizApp.flagged.clear();
     quizApp.quizState = 'active';
+    // CRITICAL: reset exam state so regular quizzes show instant feedback again
+    quizApp.examMode = false;
+    quizApp.examFeedback = null;
+    quizApp.examEndsAt = null;
+    document.querySelector('.quiz-modal')?.classList.remove('exam-no-feedback');
 
     // Build filtered pool
     quizApp.questions = quizApp.buildQuestionPool(mode);
@@ -657,7 +676,7 @@ const quizApp = {
 
   checkMCQ: (isCorrect, btn, selectedIdx, qData) => {
     const btns = document.querySelectorAll('.quiz-option');
-    btns.forEach(b => b.disabled = true);
+    const examSilent = (quizApp.examMode && quizApp.examFeedback === 'end');
 
     // Store answer
     quizApp.userAnswers[quizApp.currentIndex] = {
@@ -666,105 +685,118 @@ const quizApp = {
       correctAnswer: qData.o[qData.a]
     };
 
-    if (isCorrect) {
-      btn.classList.add('correct');
-      quizApp.score++;
-      quizApp.showFeedback(true, qData.e);
+    if (examSilent) {
+      // EXAM-mode (deferred feedback): just visually mark the user's choice as "selected"
+      // — DO NOT reveal correctness. Let user change answer until they move on.
+      btns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
     } else {
-      btn.classList.add('wrong');
-      // Highlight correct answer
-      btns.forEach(b => {
-        if (b.innerText === qData.o[qData.a]) {
-          b.classList.add('correct');
-        }
-      });
-      quizApp.wrong++;
-      quizApp.showFeedback(false, `Correct Answer: ${qData.o[qData.a]}<br>${qData.e}`);
+      btns.forEach(b => b.disabled = true);
+      if (isCorrect) {
+        btn.classList.add('correct');
+        quizApp.score++;
+      } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => {
+          if (b.innerText === qData.o[qData.a]) b.classList.add('correct');
+        });
+        quizApp.wrong++;
+      }
+      quizApp.showFeedback(isCorrect, isCorrect ? qData.e : `Correct Answer: ${qData.o[qData.a]}<br>${qData.e}`);
     }
 
     quizApp.updateNavigationControls();
     quizApp.renderQuestionGrid();
 
-    // ---- SRS hook ----
-    if (typeof srs !== 'undefined' && qData._region) {
+    // ---- SRS hook (only when feedback is shown — otherwise count at exam end) ----
+    if (!examSilent && typeof srs !== 'undefined' && qData._region) {
       srs.recordAnswer(srs.qid(qData._region, qData._system, qData._mode, qData._index), isCorrect);
     }
   },
 
   checkTF: (userBool, btn, qData) => {
     const btns = document.querySelectorAll('.quiz-option');
-    btns.forEach(b => b.disabled = true);
-
+    const examSilent = (quizApp.examMode && quizApp.examFeedback === 'end');
     const isCorrect = userBool === qData.a;
 
-    // Store answer
     quizApp.userAnswers[quizApp.currentIndex] = {
       answer: userBool,
       isCorrect: isCorrect,
       correctAnswer: qData.a
     };
 
-    if (isCorrect) {
-      btn.classList.add('correct');
-      quizApp.score++;
-      quizApp.showFeedback(true, qData.e);
+    if (examSilent) {
+      btns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
     } else {
-      btn.classList.add('wrong');
-      // Highlight correct answer
-      btns.forEach(b => {
-        if ((qData.a && b.innerText.includes('TRUE')) || (!qData.a && b.innerText.includes('FALSE'))) {
-          b.classList.add('correct');
-        }
-      });
-      quizApp.wrong++;
-      quizApp.showFeedback(false, qData.e);
+      btns.forEach(b => b.disabled = true);
+      if (isCorrect) {
+        btn.classList.add('correct');
+        quizApp.score++;
+      } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => {
+          if ((qData.a && b.innerText.includes('TRUE')) || (!qData.a && b.innerText.includes('FALSE'))) {
+            b.classList.add('correct');
+          }
+        });
+        quizApp.wrong++;
+      }
+      quizApp.showFeedback(isCorrect, qData.e);
     }
 
     quizApp.updateNavigationControls();
     quizApp.renderQuestionGrid();
 
-    // ---- SRS hook ----
-    if (typeof srs !== 'undefined' && qData._region) {
+    if (!examSilent && typeof srs !== 'undefined' && qData._region) {
       srs.recordAnswer(srs.qid(qData._region, qData._system, qData._mode, qData._index), isCorrect);
     }
   },
 
   checkFIB: (userText, input, qData) => {
     if (!userText) return;
-    input.disabled = true;
-
+    const examSilent = (quizApp.examMode && quizApp.examFeedback === 'end');
     const cleanUser = userText.trim().toLowerCase();
     const isMatch = qData.a.some(ans => ans.toLowerCase() === cleanUser);
 
-    // Store answer
     quizApp.userAnswers[quizApp.currentIndex] = {
       answer: userText,
       isCorrect: isMatch,
       correctAnswer: qData.a[0]
     };
 
-    if (isMatch) {
-      input.style.borderColor = '#00ff9d';
-      input.style.color = '#00ff9d';
-      quizApp.score++;
-      quizApp.showFeedback(true, qData.e);
+    if (examSilent) {
+      // Just visually accept the input; no colour reveal, no feedback
+      input.style.borderColor = 'var(--why-cyan, #00f2ff)';
+      input.style.color = 'var(--text-main, #fff)';
     } else {
-      input.style.borderColor = '#ff6b6b';
-      input.style.color = '#ff6b6b';
-      quizApp.wrong++;
-      quizApp.showFeedback(false, `Correct Answer: ${qData.a[0].toUpperCase()}<br>${qData.e}`);
+      input.disabled = true;
+      if (isMatch) {
+        input.style.borderColor = '#00ff9d';
+        input.style.color = '#00ff9d';
+        quizApp.score++;
+      } else {
+        input.style.borderColor = '#ff6b6b';
+        input.style.color = '#ff6b6b';
+        quizApp.wrong++;
+      }
+      quizApp.showFeedback(isMatch, isMatch ? qData.e : `Correct Answer: ${qData.a[0].toUpperCase()}<br>${qData.e}`);
     }
 
     quizApp.updateNavigationControls();
     quizApp.renderQuestionGrid();
 
-    // ---- SRS hook ----
-    if (typeof srs !== 'undefined' && qData._region) {
+    if (!examSilent && typeof srs !== 'undefined' && qData._region) {
       srs.recordAnswer(srs.qid(qData._region, qData._system, qData._mode, qData._index), isMatch);
     }
   },
 
   showFeedback: (isCorrect, text) => {
+    // === Suppress instant feedback in EXAM mode (when feedback is set to 'end') ===
+    // Real exams don't reveal answers between questions — only at the end.
+    if (quizApp.examMode && quizApp.examFeedback === 'end') {
+      return;
+    }
     const fb = document.getElementById('quiz-feedback');
     fb.style.display = 'block';
     fb.innerHTML = `

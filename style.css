@@ -237,25 +237,41 @@ body {
 }
 /* No icon-shrinking rules — let .orb-icon use its default 3rem+ size */
 
-/* Mobile: 2 cards per row, slightly shorter so 4 rows fit better on a phone */
+/* Mobile: force 2 cards per row using flex-basis (overrides inline width).
+   Cards are square-ish (~160×160) with icon on top + label below.
+   Hides the "REGIONAL ANATOMY MODULE" subtitle on phones to keep cards tidy. */
 @media (max-width: 700px) {
     #atlas-selector.portal-grid {
-        gap: 16px !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
         margin-top: 20px;
-        padding-bottom: 40px;
+        padding: 10px 12px 40px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
     }
     #atlas-selector .portal-card {
-        width: calc(50% - 12px) !important;
+        width: 100% !important;
+        height: 160px !important;
         min-width: 0 !important;
-        height: 220px !important;
+        padding: 16px 8px !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     #atlas-selector .portal-card .orb-icon {
-        font-size: 2.6rem !important;
-        margin-bottom: 12px !important;
+        font-size: 2.4rem !important;
+        margin-bottom: 8px !important;
     }
     #atlas-selector .portal-card .card-label {
-        font-size: 1.05rem !important;
+        font-size: 0.95rem !important;
+        text-align: center;
+        line-height: 1.2;
     }
+    /* Hide the redundant "REGIONAL ANATOMY MODULE" subtitle on phones */
+    #atlas-selector .portal-card .card-sub { display: none !important; }
 }
 
 /* --- PORTAL CARDS (THE ORBS) --- */
@@ -777,6 +793,22 @@ body.professional-mode .topic-btn.is-read {
     background: rgba(255, 107, 107, 0.1);
     color: #fff;
     opacity: 0.6;
+}
+
+/* EXAM-MODE neutral "selected" — user picked this, but no reveal of right/wrong */
+.quiz-option.selected {
+    border-color: var(--why-cyan, #00f2ff);
+    background: rgba(0, 242, 255, 0.10);
+    color: #fff;
+    box-shadow: 0 0 0 2px rgba(0,242,255,0.20);
+}
+.quiz-option.selected::after {
+    content: "✓ Your answer";
+    font-size: 0.7rem;
+    color: var(--why-cyan, #00f2ff);
+    margin-left: 10px;
+    letter-spacing: 1px;
+    opacity: 0.85;
 }
 
 .fill-input {
