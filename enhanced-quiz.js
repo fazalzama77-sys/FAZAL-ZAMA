@@ -235,6 +235,107 @@ const quizApp = {
     document.getElementById('quiz-review-view').style.display = 'none';
   },
 
+  // ==================== CUSTOMISABLE EXAM MODE ====================
+  // Triggered by the "EXAM MODE" card on the format-select screen.
+  openExamConfig: () => {
+    const overlay = document.getElementById('exam-config-overlay');
+    if (!overlay) return;
+    document.getElementById('exam-cfg-scope').innerText =
+      `${quizApp.selectedRegion} → ${quizApp.selectedSystem}`;
+    overlay.style.display = 'flex';
+    // Wire chip selectors (idempotent)
+    overlay.querySelectorAll('.exam-cfg-chips').forEach(group => {
+      group.querySelectorAll('.exam-chip').forEach(chip => {
+        chip.onclick = () => {
+          group.querySelectorAll('.exam-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          quizApp._updateExamPoolCount();
+        };
+      });
+    });
+    quizApp._updateExamPoolCount();
+  },
+
+  closeExamConfig: () => {
+    const overlay = document.getElementById('exam-config-overlay');
+    if (overlay) overlay.style.display = 'none';
+  },
+
+  _readExamCfg: () => {
+    const pick = (id) => {
+      const el = document.querySelector(`#${id} .exam-chip.active`);
+      return el ? el.dataset.value : null;
+    };
+    return {
+      duration: parseInt(pick('exam-cfg-duration') || '30', 10),
+      count:    parseInt(pick('exam-cfg-count')    || '45', 10),
+      format:   pick('exam-cfg-format') || 'mcq',
+      feedback: pick('exam-cfg-feedback') || 'end'
+    };
+  },
+
+  _buildExamPool: (format) => {
+    // Reuse buildQuestionPool for each mode
+    if (format === 'mixed') {
+      return [
+        ...quizApp.buildQuestionPool('mcq'),
+        ...quizApp.buildQuestionPool('tf'),
+        ...quizApp.buildQuestionPool('fib')
+      ];
+    }
+    return quizApp.buildQuestionPool(format);
+  },
+
+  _updateExamPoolCount: () => {
+    const cfg = quizApp._readExamCfg();
+    const pool = quizApp._buildExamPool(cfg.format);
+    const el = document.getElementById('exam-pool-count');
+    if (el) el.innerText = pool.length;
+  },
+
+  startExamMode: () => {
+    const cfg = quizApp._readExamCfg();
+    let pool = quizApp._buildExamPool(cfg.format);
+    if (pool.length === 0) {
+      alert('No questions available in this format for the selected region/system.');
+      return;
+    }
+    // Shuffle then trim to requested count
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    const requested = Math.min(cfg.count, pool.length);
+    pool = pool.slice(0, requested);
+
+    // Setup quiz state in EXAM mode
+    quizApp.mode = 'mixed';     // active view handles per-question rendering by q.mode if present
+    quizApp.score = 0;
+    quizApp.wrong = 0;
+    quizApp.currentIndex = 0;
+    quizApp.bookmarks.clear();
+    quizApp.flagged.clear();
+    quizApp.quizState = 'active';
+    quizApp.questions = pool;
+    quizApp.userAnswers = new Array(pool.length).fill(null);
+    quizApp.examMode = true;
+    quizApp.examFeedback = cfg.feedback;       // 'end' or 'instant'
+    quizApp.examDurationSec = cfg.duration * 60;
+    quizApp.examEndsAt = Date.now() + quizApp.examDurationSec * 1000;
+    quizApp.startTime = Date.now();
+    quizApp.startTimer();
+
+    // Close config + show active view
+    quizApp.closeExamConfig();
+    quizApp.hideAllViews();
+    document.getElementById('quiz-active-view').style.display = 'flex';
+    quizApp.renderQuestion();
+    quizApp.updateNavigationControls();
+
+    // Hide instant feedback if feedback === 'end' — disable the per-answer reveal hooks
+    document.querySelector('.quiz-modal').classList.toggle('exam-no-feedback', cfg.feedback === 'end');
+  },
+
   // ==================== QUIZ START ====================
 
   // ===== SMART REVIEW (Spaced Repetition) =====
@@ -444,12 +545,14 @@ const quizApp = {
     interactionArea.innerHTML = '';
     document.getElementById('quiz-feedback').style.display = 'none';
 
-    // Render based on question type
-    if (quizApp.mode === 'mcq') {
+    // Render based on question type — use per-question _mode for mixed/exam mode,
+    // fall back to global mode for normal single-format quizzes
+    const qMode = q._mode || quizApp.mode;
+    if (qMode === 'mcq') {
       quizApp.renderMCQ(q, userAnswer, interactionArea);
-    } else if (quizApp.mode === 'tf') {
+    } else if (qMode === 'tf') {
       quizApp.renderTF(q, userAnswer, interactionArea);
-    } else if (quizApp.mode === 'fib') {
+    } else if (qMode === 'fib') {
       quizApp.renderFIB(q, userAnswer, interactionArea);
     }
 

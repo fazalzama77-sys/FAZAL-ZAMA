@@ -222,6 +222,42 @@ body {
     justify-content: center;
 }
 
+/* Atlas region selector — 8 cards. Restore full-size icons (looked too small),
+   keep proper wrapping + bottom scroll padding so all regions are reachable. */
+#atlas-selector.portal-grid {
+    gap: 28px !important;
+    margin-top: 30px;
+    padding-bottom: 60px;
+    align-content: flex-start;
+}
+/* Keep original card dimensions (icons stay big like before) */
+#atlas-selector .portal-card {
+    width: 280px !important;
+    height: 300px !important;
+}
+/* No icon-shrinking rules — let .orb-icon use its default 3rem+ size */
+
+/* Mobile: 2 cards per row, slightly shorter so 4 rows fit better on a phone */
+@media (max-width: 700px) {
+    #atlas-selector.portal-grid {
+        gap: 16px !important;
+        margin-top: 20px;
+        padding-bottom: 40px;
+    }
+    #atlas-selector .portal-card {
+        width: calc(50% - 12px) !important;
+        min-width: 0 !important;
+        height: 220px !important;
+    }
+    #atlas-selector .portal-card .orb-icon {
+        font-size: 2.6rem !important;
+        margin-bottom: 12px !important;
+    }
+    #atlas-selector .portal-card .card-label {
+        font-size: 1.05rem !important;
+    }
+}
+
 /* --- PORTAL CARDS (THE ORBS) --- */
 .portal-card {
     background: rgba(17, 34, 64, 0.4);
@@ -1195,13 +1231,37 @@ body.professional-mode .credit-foot { color: #607d8b; }
     gap: 20px;
     margin-bottom: 40px;
     padding: 20px;
-    background: rgba(10, 25, 47, 0.8);
+    background: rgba(10, 25, 47, 0.92);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     backdrop-filter: blur(10px);
     position: sticky;
     top: 20px;
     z-index: 100;
+    /* Smooth slide for the auto-hide-on-scroll behaviour */
+    transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+    will-change: transform;
+}
+
+/* Auto-hide on scroll-down (toggled by JS class 'controls-hidden') */
+#why-view .controls.controls-hidden {
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* On mobile, compact + move flush to top so it doesn't waste screen */
+@media (max-width: 700px) {
+    #why-view .controls {
+        top: 8px;
+        margin-bottom: 18px;
+        padding: 12px;
+        gap: 10px;
+    }
+    #why-view .controls .search-wrapper input { padding: 8px 12px; font-size: 0.85rem; }
+    #why-view .controls .filters { gap: 6px; }
+    #why-view .controls .filter-btn { padding: 6px 12px; font-size: 0.75rem; }
+    #why-view .controls .ai-btn { padding: 8px 14px; font-size: 0.85rem; }
 }
 
 #why-view .search-wrapper {
@@ -2649,14 +2709,31 @@ body.professional-mode .desc-text b {
     font-weight: 600;
 }
 
-/* Enhanced Table Styling */
+/* Enhanced Table Styling — allows horizontal scroll when content wider than viewport */
 body.professional-mode .comp-table {
     background: white;
     border-radius: 12px;
-    overflow: hidden;
+    overflow-x: auto;          /* was 'hidden' — prevented mobile scroll of long tables */
+    overflow-y: visible;
+    display: block;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border);
 }
+body.professional-mode .comp-table tbody { display: table; width: 100%; min-width: 600px; }
+
+/* Same fix for default (neon) theme — wrap any tables so they're scrollable */
+.comp-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+.comp-table tbody { display: table; width: 100%; min-width: 520px; }
+.comp-table::-webkit-scrollbar { height: 6px; }
+.comp-table::-webkit-scrollbar-thumb { background: rgba(0,242,255,0.35); border-radius: 3px; }
+body.professional-mode .comp-table::-webkit-scrollbar-thumb { background: rgba(21,101,192,0.30); }
 
 body.professional-mode .comp-table tr:nth-child(even) {
     background: rgba(21, 101, 192, 0.02);
@@ -3480,7 +3557,8 @@ body.professional-mode .toast.warning { border-left: 3px solid #f57c00; }
     gap: 8px;
     flex-wrap: wrap;
 }
-.read-btn {
+.read-btn,
+.share-btn {
     background: transparent;
     border: 1px solid var(--border, rgba(255,255,255,0.15));
     color: var(--text-mute, #888);
@@ -3493,6 +3571,27 @@ body.professional-mode .toast.warning { border-left: 3px solid #f57c00; }
     align-items: center;
     gap: 8px;
     transition: all 0.2s ease;
+}
+.share-btn:hover {
+    border-color: var(--why-cyan, #00f2ff);
+    color: var(--why-cyan, #00f2ff);
+    background: rgba(0,242,255,0.08);
+}
+body.professional-mode .share-btn {
+    border-color: #cfd8dc;
+    color: #455a64;
+    background: #ffffff;
+}
+body.professional-mode .share-btn:hover {
+    border-color: #00897b;
+    color: #00897b;
+    background: #e0f2f1;
+}
+@media (max-width: 600px) {
+    .share-btn span,
+    .read-btn span,
+    .bm-btn span { display: none; }   /* icon-only on phones to save space */
+    .share-btn, .read-btn, .bm-btn { padding: 10px 12px; }
 }
 .read-btn:hover {
     border-color: #50dc96;

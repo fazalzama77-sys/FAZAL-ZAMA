@@ -409,6 +409,9 @@ const app = {
         const isReadNow = app.isRead(bmId);
         const readBtn = `<button class="read-btn ${isReadNow ? 'active' : ''}" onclick="app.toggleRead(${index}, this)" title="${isReadNow ? 'Mark as unread' : 'Mark as read'}" aria-label="Toggle read status"><i class="${isReadNow ? 'fas fa-check-circle' : 'far fa-circle'}"></i> <span>${isReadNow ? 'Read' : 'Mark as Read'}</span></button>`;
 
+        // Share button — uses native Web Share API on mobile, falls back to copy-link on desktop
+        const shareBtn = `<button class="share-btn" onclick="app.shareCurrent(${index})" title="Share this topic" aria-label="Share"><i class="fas fa-share-alt"></i> <span>Share</span></button>`;
+
         // Build content based on available data
         let contentHtml = `
             <div class="detail-header">
@@ -417,6 +420,7 @@ const app = {
                     <span class="h-sub">/// ${modeLabel} // ${app.state.system.toUpperCase()}</span>
                 </div>
                 <div class="detail-header-actions">
+                    ${shareBtn}
                     ${readBtn}
                     ${bmBtn}
                 </div>
@@ -498,6 +502,35 @@ const app = {
         // Decorate text with glossary tooltips (after innerHTML is set)
         if (typeof glossary !== 'undefined') {
             try { glossary.decorate(panel); } catch (e) { console.warn('Glossary decorate failed:', e.message); }
+        }
+    },
+
+    // ============== SHARE ==============
+    // Shares the current structure via native share sheet (mobile)
+    // OR copies a deep-link to clipboard (desktop).
+    shareCurrent: async (index) => {
+        if (!app.state.region || !app.state.system) return;
+        const data = atlasData[app.state.region][app.state.system];
+        const item = data && data[index];
+        if (!item) return;
+        const baseUrl = location.origin + location.pathname;
+        const url = `${baseUrl}#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(app.state.system)}/${index}`;
+        const title = `${item.title} — IVRI Anatomy`;
+        const text = `${item.title} (${app.state.system}, ${app.state.region}) — study with me on IVRI Anatomy 📖`;
+        try {
+            if (navigator.share) {
+                await navigator.share({ title, text, url });
+            } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(url);
+                if (typeof showToast === 'function') showToast('Link copied to clipboard', 'success', 'fa-link');
+            } else {
+                window.prompt('Copy this link:', url);
+            }
+        } catch (err) {
+            // User dismissed share sheet — ignore silently
+            if (err && err.name !== 'AbortError' && typeof showToast === 'function') {
+                showToast('Could not share', 'warning', 'fa-exclamation-circle');
+            }
         }
     },
 
@@ -1133,7 +1166,47 @@ const quizSession = {
 
 document.addEventListener('DOMContentLoaded', () => {
     app.init();
+    setupAutoHideControls();
 });
+
+// ===== AUTO-HIDE WHY-SECTION CONTROLS ON SCROLL DOWN =====
+// Twitter/YouTube-style: bar slides up when scrolling down, returns when scrolling up.
+// Frees mobile screen real-estate without removing functionality.
+function setupAutoHideControls() {
+    const ctrl = document.querySelector('#why-view .controls');
+    if (!ctrl) return;
+
+    let lastY = window.scrollY;
+    let ticking = false;
+    const THRESH = 12;       // ignore tiny jitter (touchpad noise)
+    const TOP_LOCK = 80;     // never hide if user is near top
+
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            // Only apply when on WHY view AND on mobile (≤900px)
+            const isMobile = window.innerWidth <= 900;
+            const isWhy = document.getElementById('why-view')?.classList.contains('active');
+            if (!isMobile || !isWhy) {
+                ctrl.classList.remove('controls-hidden');
+                ticking = false;
+                return;
+            }
+            const y = window.scrollY;
+            const delta = y - lastY;
+            if (Math.abs(delta) > THRESH) {
+                if (delta > 0 && y > TOP_LOCK) ctrl.classList.add('controls-hidden');
+                else if (delta < 0)            ctrl.classList.remove('controls-hidden');
+                lastY = y;
+            }
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Reset on resize/orientation change
+    window.addEventListener('resize', () => ctrl.classList.remove('controls-hidden'));
+}
 
 if (grid && anatomyData) {
     renderCards(anatomyData);

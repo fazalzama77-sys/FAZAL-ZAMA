@@ -552,6 +552,72 @@
             <p class="mode-count" id="fib-count">0 questions</p>
             <div class="mode-desc">Type the correct answer</div>
           </div>
+          <div class="quiz-mode-card exam-card" onclick="quizApp.openExamConfig()" id="exam-card">
+            <i class="fas fa-graduation-cap mode-icon" style="color:#ff7a00;"></i>
+            <h3>EXAM MODE</h3>
+            <p class="mode-count">Timed mock exam</p>
+            <div class="mode-desc">Customisable: pick duration + question count + format. No instant feedback — like a real exam.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAM MODE CONFIG OVERLAY -->
+      <div id="exam-config-overlay" class="exam-config-overlay" style="display:none;" onclick="if(event.target===this) quizApp.closeExamConfig()">
+        <div class="exam-config-card">
+          <button class="modal-close" onclick="quizApp.closeExamConfig()" aria-label="Close">&times;</button>
+          <h2 class="exam-cfg-title"><i class="fas fa-graduation-cap"></i> Configure Your Exam</h2>
+          <p class="exam-cfg-sub" id="exam-cfg-scope">REGION > SYSTEM</p>
+
+          <div class="exam-cfg-row">
+            <label class="exam-cfg-label">Duration</label>
+            <div class="exam-cfg-chips" id="exam-cfg-duration">
+              <button class="exam-chip" data-value="15">15 min</button>
+              <button class="exam-chip active" data-value="30">30 min</button>
+              <button class="exam-chip" data-value="45">45 min</button>
+              <button class="exam-chip" data-value="60">60 min</button>
+              <button class="exam-chip" data-value="90">90 min</button>
+            </div>
+          </div>
+
+          <div class="exam-cfg-row">
+            <label class="exam-cfg-label">Questions</label>
+            <div class="exam-cfg-chips" id="exam-cfg-count">
+              <button class="exam-chip" data-value="20">20 Qs</button>
+              <button class="exam-chip" data-value="30">30 Qs</button>
+              <button class="exam-chip active" data-value="45">45 Qs</button>
+              <button class="exam-chip" data-value="60">60 Qs</button>
+              <button class="exam-chip" data-value="100">100 Qs</button>
+            </div>
+          </div>
+
+          <div class="exam-cfg-row">
+            <label class="exam-cfg-label">Question Format</label>
+            <div class="exam-cfg-chips" id="exam-cfg-format">
+              <button class="exam-chip active" data-value="mcq">MCQ only</button>
+              <button class="exam-chip" data-value="tf">True / False</button>
+              <button class="exam-chip" data-value="fib">Fill blanks</button>
+              <button class="exam-chip" data-value="mixed">All mixed</button>
+            </div>
+          </div>
+
+          <div class="exam-cfg-row">
+            <label class="exam-cfg-label">Reveal Answers</label>
+            <div class="exam-cfg-chips" id="exam-cfg-feedback">
+              <button class="exam-chip active" data-value="end">At the end (exam-like)</button>
+              <button class="exam-chip" data-value="instant">After each (practice-like)</button>
+            </div>
+          </div>
+
+          <div class="exam-cfg-summary" id="exam-cfg-summary">
+            <i class="fas fa-info-circle"></i> Available: <span id="exam-pool-count">?</span> questions in this pool
+          </div>
+
+          <div class="exam-cfg-actions">
+            <button class="srs-btn srs-btn-ghost" onclick="quizApp.closeExamConfig()">Cancel</button>
+            <button class="srs-btn srs-btn-primary" onclick="quizApp.startExamMode()">
+              <i class="fas fa-play-circle"></i> Start Exam
+            </button>
+          </div>
         </div>
       </div>
 
