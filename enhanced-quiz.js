@@ -992,10 +992,34 @@ const quizApp = {
     const backToTop = document.getElementById('review-back-to-top');
     if (backToTop) backToTop.remove();
 
-    const attempted = quizApp.score + quizApp.wrong; // Questions actually answered
-    const unanswered = quizApp.questions.length - attempted;
+    // ===== Recompute counters from userAnswers (truth source) =====
+    // In normal quizzes the score/wrong counters tick up on each answer.
+    // In EXAM mode they don't (no instant feedback) — so we recount from
+    // userAnswers at submission. Also fires SRS recording for exam answers.
+    let computedScore = 0;
+    let computedWrong = 0;
+    let attemptedCount = 0;
+    quizApp.userAnswers.forEach((ans, i) => {
+      if (ans == null) return;
+      attemptedCount++;
+      if (ans.isCorrect) computedScore++;
+      else                computedWrong++;
+      // Late SRS recording for exam-mode questions (no instant feedback path)
+      if (quizApp.examMode && typeof srs !== 'undefined') {
+        const q = quizApp.questions[i];
+        if (q && q._region) {
+          srs.recordAnswer(srs.qid(q._region, q._system, q._mode, q._index), !!ans.isCorrect);
+        }
+      }
+    });
+    // If exam mode, overwrite the counters; otherwise verify with existing
+    if (quizApp.examMode || (quizApp.score + quizApp.wrong) !== attemptedCount) {
+      quizApp.score = computedScore;
+      quizApp.wrong = computedWrong;
+    }
 
-    // BUG FIX: Calculate accuracy based on attempted questions, not total questions
+    const attempted = attemptedCount;
+    const unanswered = quizApp.questions.length - attempted;
     const accuracy = attempted === 0 ? 0 : Math.round((quizApp.score / attempted) * 100);
 
     // Update stats
