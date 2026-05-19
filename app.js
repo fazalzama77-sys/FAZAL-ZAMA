@@ -77,6 +77,11 @@ const app = {
             app.showHighlights();
             return;
         }
+        if (view === 'notes') {
+            app._loadViewInternal('atlas');
+            app.showNotes();
+            return;
+        }
         if (view === 'atlas') {
             app._loadViewInternal('atlas');
             const region = parts[1] || null;
@@ -417,9 +422,15 @@ const app = {
         // Share button — uses native Web Share API on mobile, falls back to copy-link on desktop
         const shareBtn = `<button class="share-btn" onclick="app.shareCurrent(${index})" title="Share this topic" aria-label="Share"><i class="fas fa-share-alt"></i> <span>Share</span></button>`;
 
-        // Highlight count badge on the button (if any highlights exist for this topic)
-        const hlCount = app.getHighlightsForTopic(bmId).length;
-        const hlBtn = `<button class="hl-btn ${hlCount ? 'active' : ''}" onclick="app.toggleHighlightMode(this)" title="Highlight important text (select text + tap this)" aria-label="Toggle highlight mode"><i class="fas fa-highlighter"></i> <span>Highlight${hlCount ? ` (${hlCount})` : ''}</span></button>`;
+        // Highlight count badge on the button (with per-colour breakdown if any highlights exist)
+        const hlList = app.getHighlightsForTopic(bmId);
+        const hlCount = hlList.length;
+        const hlBreakdown = app._formatHighlightBreakdown(hlList);
+        const hlBtn = `<button class="hl-btn ${hlCount ? 'active' : ''}" onclick="app.toggleHighlightMode(this)" title="Highlight important text (select text + tap this)" aria-label="Toggle highlight mode"><i class="fas fa-highlighter"></i> <span>Highlight${hlCount ? ` (${hlBreakdown})` : ''}</span></button>`;
+
+        // Notes button (count of notes saved against this topic)
+        const noteCount = app.getNotesForTopic(bmId).length;
+        const noteBtn = `<button class="note-btn ${noteCount ? 'active' : ''}" onclick="app.openNoteDialog(${index})" title="Add a typed note to this topic" aria-label="Add note"><i class="fas fa-sticky-note"></i> <span>Note${noteCount ? ` (${noteCount})` : ''}</span></button>`;
 
         // Build content based on available data
         let contentHtml = `
@@ -430,6 +441,7 @@ const app = {
                 </div>
                 <div class="detail-header-actions">
                     ${hlBtn}
+                    ${noteBtn}
                     ${shareBtn}
                     ${readBtn}
                     ${bmBtn}
@@ -507,6 +519,9 @@ const app = {
             `;
         }
 
+        // Append rendered notes block at the end (if any)
+        contentHtml += app._renderNotesBlock(bmId);
+
         panel.innerHTML = contentHtml;
 
         // Decorate text with glossary tooltips (after innerHTML is set)
@@ -516,7 +531,9 @@ const app = {
 
         // Re-apply user highlights for this topic (find saved fragments + wrap in <mark>)
         app.applyHighlightsToPanel(bmId);
-        // Enable selection-based highlighting UX on this panel
+        // Anchor any notes that point at specific text fragments
+        app.applyNoteAnchorsToPanel(bmId);
+        // Enable selection-based highlighting + note UX on this panel
         app.attachHighlightSelectionUI(panel, bmId);
     },
 
@@ -656,46 +673,63 @@ const app = {
         }
     },
 
-    // Floating "Highlight" mini-toolbar that appears when user selects text in the detail panel
+    // Fixed top-of-viewport action bar that appears when user selects text in
+    // the detail panel. Pinned to the top so the native browser selection
+    // toolbar (Copy / Web search / Ask Claude / Read aloud / etc.) can't sit
+    // on top of it — those menus appear at the selection itself, never at
+    // the very top of the viewport.
     attachHighlightSelectionUI: (panel, topicId) => {
         // Remove any prior popup from a previous render
         const old = document.getElementById('hl-popup');
-        if (old) old.remove();
+        if (old) {
+            if (old._listener) document.removeEventListener('selectionchange', old._listener);
+            old.remove();
+        }
 
         const popup = document.createElement('div');
         popup.id = 'hl-popup';
-        popup.className = 'hl-popup';
+        popup.className = 'hl-popup hl-popup-top';
         popup.style.display = 'none';
         popup.innerHTML = `
-            <button class="hl-popup-btn hl-yellow" data-color="yellow" title="Highlight yellow"></button>
-            <button class="hl-popup-btn hl-green"  data-color="green"  title="Highlight green"></button>
-            <button class="hl-popup-btn hl-pink"   data-color="pink"   title="Highlight pink"></button>
+            <span class="hl-popup-label"><i class="fas fa-highlighter"></i> Mark:</span>
+            <button class="hl-popup-btn hl-yellow" data-color="yellow" title="Highlight yellow (important)"></button>
+            <button class="hl-popup-btn hl-green"  data-color="green"  title="Highlight green (clinical)"></button>
+            <button class="hl-popup-btn hl-pink"   data-color="pink"   title="Highlight pink (tricky / exam-likely)"></button>
+            <button class="hl-popup-btn hl-blue"   data-color="blue"   title="Highlight blue (definition / must-memorise)"></button>
+            <span class="hl-popup-sep"></span>
+            <button class="hl-popup-action hl-note-action" title="Add a typed note attached to this text">
+              <i class="fas fa-sticky-note"></i> Note
+            </button>
+            <button class="hl-popup-action hl-close-action" title="Close" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
         `;
         document.body.appendChild(popup);
 
+        const hide = () => {
+            popup.style.display = 'none';
+            popup.dataset.text = '';
+        };
+
         const onSelectionChange = () => {
             const sel = window.getSelection();
-            if (!sel || sel.isCollapsed) { popup.style.display = 'none'; return; }
+            if (!sel || sel.isCollapsed) { hide(); return; }
             const text = sel.toString().trim();
-            if (text.length < 3 || text.length > 400) { popup.style.display = 'none'; return; }
-            // Ensure the selection is INSIDE the detail panel
+            if (text.length < 3 || text.length > 400) { hide(); return; }
+            // Must be inside the detail panel
             const range = sel.getRangeAt(0);
-            if (!panel.contains(range.commonAncestorContainer)) {
-                popup.style.display = 'none';
-                return;
-            }
-            const rect = range.getBoundingClientRect();
+            if (!panel.contains(range.commonAncestorContainer)) { hide(); return; }
             popup.style.display = 'flex';
-            popup.style.left = (window.scrollX + rect.left + rect.width / 2) + 'px';
-            popup.style.top  = (window.scrollY + rect.top - 50) + 'px';
             popup.dataset.text = text;
         };
         document.addEventListener('selectionchange', onSelectionChange);
-        // Store the listener handle on the popup so we can remove it later if needed
         popup._listener = onSelectionChange;
 
-        // Wire color buttons
+        // Color buttons -> save highlight
         popup.querySelectorAll('.hl-popup-btn').forEach(btn => {
+            // Use mousedown so selection isn't lost before we read it
+            btn.addEventListener('mousedown', (e) => e.preventDefault());
+            btn.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
             btn.onclick = (e) => {
                 e.preventDefault();
                 const color = btn.dataset.color;
@@ -707,18 +741,44 @@ const app = {
                     if (typeof showToast === 'function') showToast('Highlighted', 'success', 'fa-highlighter');
                 }
                 window.getSelection().removeAllRanges();
-                popup.style.display = 'none';
+                hide();
             };
         });
+
+        // "Note" action -> open a small dialog and save note anchored to the selection
+        const noteAct = popup.querySelector('.hl-note-action');
+        noteAct.addEventListener('mousedown', (e) => e.preventDefault());
+        noteAct.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
+        noteAct.onclick = (e) => {
+            e.preventDefault();
+            const text = popup.dataset.text;
+            if (!text) return;
+            hide();
+            window.getSelection().removeAllRanges();
+            app.openNoteDialogForAnchor(topicId, text);
+        };
+
+        const closeAct = popup.querySelector('.hl-close-action');
+        closeAct.onclick = (e) => { e.preventDefault(); window.getSelection().removeAllRanges(); hide(); };
+    },
+
+    _formatHighlightBreakdown: (list) => {
+        if (!list || !list.length) return '';
+        const counts = {};
+        for (const h of list) counts[h.color || 'yellow'] = (counts[h.color || 'yellow'] || 0) + 1;
+        const order = ['yellow', 'green', 'pink', 'blue'];
+        const parts = [];
+        for (const c of order) if (counts[c]) parts.push(`<span class="hl-chip hl-${c}">${counts[c]}</span>`);
+        return parts.join('');
     },
 
     _refreshHighlightCountBadge: (topicId) => {
         const btn = document.querySelector('.hl-btn');
         if (!btn) return;
         const span = btn.querySelector('span');
-        const count = app.getHighlightsForTopic(topicId).length;
-        if (span) span.innerText = count ? `Highlight (${count})` : 'Highlight';
-        btn.classList.toggle('active', count > 0);
+        const list = app.getHighlightsForTopic(topicId);
+        if (span) span.innerHTML = list.length ? `Highlight (${app._formatHighlightBreakdown(list)})` : 'Highlight';
+        btn.classList.toggle('active', list.length > 0);
     },
 
     // Header button — gives the user a hint to select text first
@@ -728,22 +788,44 @@ const app = {
         }
     },
 
+    // Internal filter state for My-Highlights view (search box + color chips)
+    _hlViewState: { q: '', color: 'all' },
+
     // Show ALL highlights across every topic — for end-of-revision quick review
     showHighlights: () => {
         const all = app._loadAllHighlights();
-        const topics = Object.keys(all).sort();
+        const totalCount = Object.values(all).reduce((n, arr) => n + arr.length, 0);
         document.getElementById('atlas-selector').style.display = 'none';
         document.getElementById('atlas-content').style.display = 'grid';
-        document.getElementById('atlas-crumb').innerHTML = `ATLAS > MY HIGHLIGHTS (${topics.reduce((n, k) => n + all[k].length, 0)})`;
+        document.getElementById('atlas-crumb').innerHTML = `ATLAS > MY HIGHLIGHTS (${totalCount})`;
 
         const sidebar = document.getElementById('topic-list');
         const panel = document.getElementById('detail-panel');
-        if (!topics.length) {
+
+        if (!totalCount) {
             sidebar.innerHTML = '<div style="padding:20px; color:var(--text-mute);">No highlights yet. Open any atlas topic and select text to highlight.</div>';
             panel.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-mute);"><i class="fas fa-highlighter" style="font-size:3rem; opacity:.3;"></i><div style="margin-top:14px;">Your highlighted text will appear here for end-of-revision review.</div></div>';
             return;
         }
-        // Sidebar: list of topics that have highlights
+
+        // ---- Top toolbar: search box + color filter + export ----
+        const toolbar = `
+            <div class="hl-toolbar">
+                <input id="hl-search" class="hl-search" type="search" placeholder="Search your highlights..." value="${app._hlViewState.q.replace(/"/g, '&quot;')}" />
+                <div class="hl-filter-chips">
+                  <button class="hl-filter ${app._hlViewState.color==='all'?'on':''}"   data-c="all">All</button>
+                  <button class="hl-filter hl-yellow ${app._hlViewState.color==='yellow'?'on':''}" data-c="yellow"></button>
+                  <button class="hl-filter hl-green  ${app._hlViewState.color==='green' ?'on':''}" data-c="green"></button>
+                  <button class="hl-filter hl-pink   ${app._hlViewState.color==='pink'  ?'on':''}" data-c="pink"></button>
+                  <button class="hl-filter hl-blue   ${app._hlViewState.color==='blue'  ?'on':''}" data-c="blue"></button>
+                </div>
+                <button class="hl-export-btn" onclick="app.exportHighlights()" title="Copy all highlights to clipboard as plain text">
+                  <i class="fas fa-copy"></i> Export
+                </button>
+            </div>`;
+
+        // ---- Sidebar: topic list with counts ----
+        const topics = Object.keys(all).sort();
         sidebar.innerHTML = topics.map(tid => {
             const [region, system, idx] = tid.split('::');
             const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
@@ -751,21 +833,400 @@ const app = {
             const count = all[tid].length;
             return `<button class="topic-btn" onclick="app.openBookmark('${region}','${system}',${idx})"><span style="color: var(--atlas-gold);">${count}×</span> ${title}<div style="font-size:.7rem; opacity:.6;">${region} • ${system}</div></button>`;
         }).join('');
-        // Main panel: every highlight grouped by topic
+
+        panel.innerHTML = toolbar + '<div id="hl-results"></div>';
+        app._renderHighlightResults();
+
+        // Wire the search box and chips
+        const search = document.getElementById('hl-search');
+        if (search) {
+            search.addEventListener('input', (e) => {
+                app._hlViewState.q = e.target.value;
+                app._renderHighlightResults();
+            });
+        }
+        panel.querySelectorAll('.hl-filter').forEach(b => {
+            b.onclick = () => {
+                app._hlViewState.color = b.dataset.c;
+                panel.querySelectorAll('.hl-filter').forEach(x => x.classList.toggle('on', x.dataset.c === b.dataset.c));
+                app._renderHighlightResults();
+            };
+        });
+    },
+
+    _renderHighlightResults: () => {
+        const container = document.getElementById('hl-results');
+        if (!container) return;
+        const all = app._loadAllHighlights();
+        const q = (app._hlViewState.q || '').toLowerCase().trim();
+        const cf = app._hlViewState.color || 'all';
+
+        const blocks = [];
+        let shown = 0;
+        Object.keys(all).sort().forEach(tid => {
+            const [region, system, idx] = tid.split('::');
+            const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
+            const title = item ? item.title : '(deleted)';
+            let items = all[tid].slice().sort((a, b) => b.t - a.t);
+            if (cf !== 'all') items = items.filter(h => (h.color || 'yellow') === cf);
+            if (q) items = items.filter(h => h.text.toLowerCase().includes(q));
+            if (!items.length) return;
+            shown += items.length;
+            blocks.push(`
+              <div class="hl-group">
+                <div class="hl-group-head">
+                  <span class="hl-group-title">${title}</span>
+                  <span class="hl-group-meta">${region} · ${system}</span>
+                </div>
+                ${items.map(h => `
+                  <div class="hl-group-item hl-${h.color || 'yellow'}">${h.text.replace(/</g, '&lt;')}
+                    ${h.note ? `<div class="hl-group-note"><i class="fas fa-sticky-note"></i> ${h.note.replace(/</g, '&lt;')}</div>` : ''}
+                  </div>
+                `).join('')}
+              </div>`);
+        });
+        container.innerHTML = blocks.length
+            ? blocks.join('')
+            : '<div style="padding:40px; text-align:center; color:var(--text-mute);">No highlights match your filter.</div>';
+    },
+
+    // Copy every highlight to clipboard as a plain-text revision sheet
+    exportHighlights: () => {
+        const all = app._loadAllHighlights();
+        const lines = [];
+        lines.push('IVRI Anatomy - My Highlights');
+        lines.push('Exported ' + new Date().toLocaleString());
+        lines.push('');
+        Object.keys(all).sort().forEach(tid => {
+            const [region, system, idx] = tid.split('::');
+            const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
+            const title = item ? item.title : '(deleted)';
+            lines.push(`### ${title}  [${region} / ${system}]`);
+            all[tid].slice().sort((a, b) => b.t - a.t).forEach(h => {
+                const tag = (h.color || 'yellow').toUpperCase();
+                lines.push(`- [${tag}] ${h.text}`);
+                if (h.note) lines.push(`    note: ${h.note}`);
+            });
+            lines.push('');
+        });
+        const text = lines.join('\n');
+        const done = () => { if (typeof showToast === 'function') showToast('Highlights copied to clipboard', 'success', 'fa-copy'); };
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(() => window.prompt('Copy your highlights:', text));
+        else window.prompt('Copy your highlights:', text);
+    },
+
+    // ============== NOTES (typed comments per topic) ==============
+    // Storage shape:
+    //   localStorage['ivri-notes'] = {
+    //     "Forelimb::Osteology::2": [
+    //         { text: "Important for exam!", anchor: "blood-testis barrier" | null,
+    //           color: "yellow", t: 1700000000 }
+    //     ]
+    //   }
+    NOTES_KEY: 'ivri-notes',
+
+    _loadAllNotes: () => {
+        try { return JSON.parse(localStorage.getItem(app.NOTES_KEY)) || {}; }
+        catch { return {}; }
+    },
+    _saveAllNotes: (obj) => localStorage.setItem(app.NOTES_KEY, JSON.stringify(obj)),
+
+    getNotesForTopic: (topicId) => {
+        const all = app._loadAllNotes();
+        return all[topicId] || [];
+    },
+
+    saveNote: (topicId, text, anchor, color = 'yellow') => {
+        if (!text || !text.trim()) return false;
+        const all = app._loadAllNotes();
+        if (!all[topicId]) all[topicId] = [];
+        all[topicId].push({
+            text: text.trim().slice(0, 1000),
+            anchor: anchor || null,
+            color: color,
+            t: Date.now()
+        });
+        if (all[topicId].length > 100) all[topicId] = all[topicId].slice(-100);
+        app._saveAllNotes(all);
+        return true;
+    },
+
+    updateNote: (topicId, noteTimestamp, newText) => {
+        const all = app._loadAllNotes();
+        if (!all[topicId]) return false;
+        const n = all[topicId].find(x => x.t === noteTimestamp);
+        if (!n) return false;
+        n.text = (newText || '').trim().slice(0, 1000);
+        app._saveAllNotes(all);
+        return true;
+    },
+
+    removeNote: (topicId, noteTimestamp) => {
+        const all = app._loadAllNotes();
+        if (!all[topicId]) return false;
+        const before = all[topicId].length;
+        all[topicId] = all[topicId].filter(n => n.t !== noteTimestamp);
+        if (all[topicId].length !== before) {
+            if (all[topicId].length === 0) delete all[topicId];
+            app._saveAllNotes(all);
+            return true;
+        }
+        return false;
+    },
+
+    // Header "Note" button — opens a dialog to add a general note (no anchor)
+    openNoteDialog: (index) => {
+        if (!app.state.region || !app.state.system) return;
+        const topicId = app.bookmarkId(app.state.region, app.state.system, index);
+        app._showNoteEditor({ topicId, anchor: null, initialText: '', mode: 'add' });
+    },
+
+    // Called from the selection popup's "Note" action — pre-fills the anchor
+    openNoteDialogForAnchor: (topicId, anchor) => {
+        app._showNoteEditor({ topicId, anchor, initialText: '', mode: 'add' });
+    },
+
+    // Edit-an-existing-note dialog
+    openNoteEditor: (topicId, noteTimestamp) => {
+        const n = app.getNotesForTopic(topicId).find(x => x.t === noteTimestamp);
+        if (!n) return;
+        app._showNoteEditor({ topicId, anchor: n.anchor, initialText: n.text, mode: 'edit', editingTs: noteTimestamp, color: n.color });
+    },
+
+    _showNoteEditor: ({ topicId, anchor, initialText, mode, editingTs, color }) => {
+        // Remove any existing dialog
+        const old = document.getElementById('note-editor-backdrop');
+        if (old) old.remove();
+
+        const backdrop = document.createElement('div');
+        backdrop.id = 'note-editor-backdrop';
+        backdrop.className = 'note-editor-backdrop';
+        backdrop.innerHTML = `
+            <div class="note-editor">
+              <div class="note-editor-head">
+                <i class="fas fa-sticky-note"></i>
+                <span>${mode === 'edit' ? 'Edit note' : 'Add note'}</span>
+                <button class="note-editor-close" aria-label="Close"><i class="fas fa-times"></i></button>
+              </div>
+              ${anchor ? `<div class="note-editor-anchor">Attached to: "<em>${anchor.replace(/</g, '&lt;').slice(0, 140)}${anchor.length > 140 ? '...' : ''}</em>"</div>` : ''}
+              <textarea id="note-editor-text" placeholder="Type your note... e.g. 'Important for exam!' or 'Ask sir about this'">${(initialText || '').replace(/</g, '&lt;')}</textarea>
+              <div class="note-editor-colors">
+                <span style="color:var(--text-mute); font-size:.8rem; margin-right:6px;">Colour:</span>
+                ${['yellow','green','pink','blue'].map(c =>
+                    `<button class="note-color-swatch hl-${c} ${c === (color || 'yellow') ? 'on' : ''}" data-color="${c}" aria-label="${c}"></button>`
+                ).join('')}
+              </div>
+              <div class="note-editor-actions">
+                ${mode === 'edit' ? '<button class="note-btn-delete">Delete</button>' : ''}
+                <button class="note-btn-cancel">Cancel</button>
+                <button class="note-btn-save"><i class="fas fa-check"></i> ${mode === 'edit' ? 'Save changes' : 'Save note'}</button>
+              </div>
+            </div>`;
+        document.body.appendChild(backdrop);
+
+        let chosenColor = color || 'yellow';
+        backdrop.querySelectorAll('.note-color-swatch').forEach(s => {
+            s.onclick = () => {
+                chosenColor = s.dataset.color;
+                backdrop.querySelectorAll('.note-color-swatch').forEach(x => x.classList.toggle('on', x.dataset.color === chosenColor));
+            };
+        });
+
+        const close = () => backdrop.remove();
+        backdrop.querySelector('.note-editor-close').onclick = close;
+        backdrop.querySelector('.note-btn-cancel').onclick = close;
+        backdrop.addEventListener('click', (e) => { if (e.target === backdrop) close(); });
+
+        const textarea = backdrop.querySelector('#note-editor-text');
+        setTimeout(() => textarea.focus(), 30);
+
+        backdrop.querySelector('.note-btn-save').onclick = () => {
+            const text = textarea.value;
+            if (!text.trim()) {
+                if (typeof showToast === 'function') showToast('Type something first', 'warning', 'fa-exclamation-circle');
+                return;
+            }
+            if (mode === 'edit') {
+                app.updateNote(topicId, editingTs, text);
+                if (typeof showToast === 'function') showToast('Note updated', 'success', 'fa-check');
+            } else {
+                app.saveNote(topicId, text, anchor, chosenColor);
+                if (typeof showToast === 'function') showToast('Note saved', 'success', 'fa-sticky-note');
+            }
+            close();
+            // Re-render the current detail to show the new/updated note
+            app._refreshCurrentDetail();
+        };
+
+        const delBtn = backdrop.querySelector('.note-btn-delete');
+        if (delBtn) {
+            delBtn.onclick = () => {
+                if (!confirm('Delete this note?')) return;
+                app.removeNote(topicId, editingTs);
+                if (typeof showToast === 'function') showToast('Note deleted', 'info', 'fa-trash');
+                close();
+                app._refreshCurrentDetail();
+            };
+        }
+    },
+
+    // Re-render the active topic in place (used after note save/edit/delete)
+    _refreshCurrentDetail: () => {
+        const act = document.querySelector('.topic-btn.active');
+        if (!act) return;
+        const idx = parseInt(act.dataset.index, 10);
+        if (isNaN(idx)) return;
+        app.renderDetail(idx, act);
+    },
+
+    // Builds the "My Notes" block appended at the bottom of each topic
+    _renderNotesBlock: (topicId) => {
+        const notes = app.getNotesForTopic(topicId);
+        if (!notes.length) return '';
+        const sorted = notes.slice().sort((a, b) => b.t - a.t);
+        const items = sorted.map(n => {
+            const dateStr = new Date(n.t).toLocaleDateString();
+            const anchorChip = n.anchor
+                ? `<div class="note-anchor-chip" onclick="app._jumpToAnchor('${encodeURIComponent(n.anchor)}')"><i class="fas fa-link"></i> "${n.anchor.replace(/</g, '&lt;').slice(0, 60)}${n.anchor.length > 60 ? '...' : ''}"</div>`
+                : '';
+            return `
+              <div class="note-card hl-${n.color || 'yellow'}" data-ts="${n.t}">
+                <div class="note-card-body">${n.text.replace(/</g, '&lt;').replace(/\n/g, '<br>')}</div>
+                ${anchorChip}
+                <div class="note-card-foot">
+                  <span class="note-card-date">${dateStr}</span>
+                  <button class="note-card-btn" onclick="app.openNoteEditor('${topicId}', ${n.t})" title="Edit"><i class="fas fa-pen"></i></button>
+                </div>
+              </div>`;
+        }).join('');
+        return `
+            <div class="notes-section" style="margin-top:30px; animation: detailFade 1s ease;">
+              <strong style="color:var(--why-cyan); font-family:var(--font-code); display:block; margin-bottom:12px;">
+                <i class="fas fa-sticky-note"></i> MY NOTES (${notes.length})
+              </strong>
+              <div class="note-grid">${items}</div>
+            </div>`;
+    },
+
+    // After innerHTML is set, wrap text matching each note's anchor with a small ✎ icon
+    applyNoteAnchorsToPanel: (topicId) => {
+        const panel = document.getElementById('detail-panel');
+        if (!panel) return;
+        const notes = app.getNotesForTopic(topicId).filter(n => n.anchor);
+        if (!notes.length) return;
+        // De-duplicate by anchor text (use first/latest note per anchor for jump-to-edit)
+        const anchorMap = {};
+        notes.sort((a, b) => b.t - a.t).forEach(n => { if (!anchorMap[n.anchor]) anchorMap[n.anchor] = n.t; });
+        // Sort longest first so longer anchors wrap before shorter ones nested inside them
+        const anchors = Object.keys(anchorMap).sort((a, b) => b.length - a.length);
+        for (const anchorText of anchors) {
+            app._tagAnchorInPanel(panel, anchorText, anchorMap[anchorText], topicId);
+        }
+    },
+
+    _tagAnchorInPanel: (root, needle, noteTs, topicId) => {
+        if (!needle) return;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+                let p = node.parentNode;
+                while (p && p !== root) {
+                    if (p.nodeName === 'BUTTON' || p.nodeName === 'A' || (p.classList && p.classList.contains('note-anchored-icon'))) return NodeFilter.FILTER_REJECT;
+                    p = p.parentNode;
+                }
+                return node.nodeValue.includes(needle) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }
+        });
+        const targets = [];
+        let n;
+        while ((n = walker.nextNode())) targets.push(n);
+        for (const textNode of targets) {
+            const idx = textNode.nodeValue.indexOf(needle);
+            if (idx === -1) continue;
+            const after = textNode.splitText(idx + needle.length);
+            const middle = textNode.splitText(idx);
+            // middle is the anchored text — insert a tiny clickable ✎ icon right after it
+            const icon = document.createElement('span');
+            icon.className = 'note-anchored-icon';
+            icon.id = 'note-anchor-' + noteTs;
+            icon.title = 'View / edit note';
+            icon.innerHTML = '<i class="fas fa-sticky-note"></i>';
+            icon.onclick = (e) => { e.stopPropagation(); app.openNoteEditor(topicId, noteTs); };
+            after.parentNode.insertBefore(icon, after);
+            break; // tag only the first occurrence per text node — enough to find the note
+        }
+    },
+
+    // Scroll the panel to the anchored text and pulse it
+    _jumpToAnchor: (encodedAnchor) => {
+        const anchor = decodeURIComponent(encodedAnchor);
+        const panel = document.getElementById('detail-panel');
+        if (!panel) return;
+        // Try to find a <mark> with this text first; fall back to walking text nodes
+        const marks = panel.querySelectorAll('mark.user-hl');
+        let target = null;
+        for (const m of marks) { if (m.dataset.text === anchor || m.textContent === anchor) { target = m; break; } }
+        if (!target) {
+            // Walk text nodes
+            const walker = document.createTreeWalker(panel, NodeFilter.SHOW_TEXT);
+            let n;
+            while ((n = walker.nextNode())) {
+                if (n.nodeValue.includes(anchor)) {
+                    // Find nearest element ancestor for scrolling
+                    target = n.parentElement;
+                    break;
+                }
+            }
+        }
+        if (target && target.scrollIntoView) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('anchor-pulse');
+            setTimeout(() => target.classList.remove('anchor-pulse'), 1600);
+        }
+    },
+
+    // Show ALL notes across every topic — sister view to showHighlights
+    showNotes: () => {
+        const all = app._loadAllNotes();
+        const total = Object.values(all).reduce((n, arr) => n + arr.length, 0);
+        document.getElementById('atlas-selector').style.display = 'none';
+        document.getElementById('atlas-content').style.display = 'grid';
+        document.getElementById('atlas-crumb').innerHTML = `ATLAS > MY NOTES (${total})`;
+
+        const sidebar = document.getElementById('topic-list');
+        const panel = document.getElementById('detail-panel');
+
+        if (!total) {
+            sidebar.innerHTML = '<div style="padding:20px; color:var(--text-mute);">No notes yet. Open any atlas topic and tap the "Note" button.</div>';
+            panel.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-mute);"><i class="fas fa-sticky-note" style="font-size:3rem; opacity:.3;"></i><div style="margin-top:14px;">Your typed notes will appear here.</div></div>';
+            return;
+        }
+
+        const topics = Object.keys(all).sort();
+        sidebar.innerHTML = topics.map(tid => {
+            const [region, system, idx] = tid.split('::');
+            const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
+            const title = item ? item.title : '(deleted)';
+            const count = all[tid].length;
+            return `<button class="topic-btn" onclick="app.openBookmark('${region}','${system}',${idx})"><span style="color: var(--why-cyan);">${count}×</span> ${title}<div style="font-size:.7rem; opacity:.6;">${region} • ${system}</div></button>`;
+        }).join('');
+
         panel.innerHTML = topics.map(tid => {
             const [region, system, idx] = tid.split('::');
             const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
             const title = item ? item.title : '(deleted)';
-            const items = all[tid].sort((a, b) => b.t - a.t);
+            const notes = all[tid].slice().sort((a, b) => b.t - a.t);
             return `
               <div class="hl-group">
                 <div class="hl-group-head">
                   <span class="hl-group-title">${title}</span>
                   <span class="hl-group-meta">${region} · ${system}</span>
                 </div>
-                ${items.map(h => `<div class="hl-group-item hl-${h.color || 'yellow'}">${h.text.replace(/</g, '&lt;')}</div>`).join('')}
-              </div>
-            `;
+                ${notes.map(n => `
+                  <div class="hl-group-item hl-${n.color || 'yellow'}">
+                    ${n.text.replace(/</g, '&lt;').replace(/\n/g, '<br>')}
+                    ${n.anchor ? `<div class="hl-group-note"><i class="fas fa-link"></i> "${n.anchor.replace(/</g, '&lt;').slice(0, 100)}${n.anchor.length > 100 ? '...' : ''}"</div>` : ''}
+                  </div>`).join('')}
+              </div>`;
         }).join('');
     },
 
