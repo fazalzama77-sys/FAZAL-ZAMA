@@ -72,6 +72,11 @@ const app = {
             app.showBookmarks();
             return;
         }
+        if (view === 'highlights') {
+            app._loadViewInternal('atlas');
+            app.showHighlights();
+            return;
+        }
         if (view === 'atlas') {
             app._loadViewInternal('atlas');
             const region = parts[1] || null;
@@ -412,6 +417,10 @@ const app = {
         // Share button — uses native Web Share API on mobile, falls back to copy-link on desktop
         const shareBtn = `<button class="share-btn" onclick="app.shareCurrent(${index})" title="Share this topic" aria-label="Share"><i class="fas fa-share-alt"></i> <span>Share</span></button>`;
 
+        // Highlight count badge on the button (if any highlights exist for this topic)
+        const hlCount = app.getHighlightsForTopic(bmId).length;
+        const hlBtn = `<button class="hl-btn ${hlCount ? 'active' : ''}" onclick="app.toggleHighlightMode(this)" title="Highlight important text (select text + tap this)" aria-label="Toggle highlight mode"><i class="fas fa-highlighter"></i> <span>Highlight${hlCount ? ` (${hlCount})` : ''}</span></button>`;
+
         // Build content based on available data
         let contentHtml = `
             <div class="detail-header">
@@ -420,6 +429,7 @@ const app = {
                     <span class="h-sub">/// ${modeLabel} // ${app.state.system.toUpperCase()}</span>
                 </div>
                 <div class="detail-header-actions">
+                    ${hlBtn}
                     ${shareBtn}
                     ${readBtn}
                     ${bmBtn}
@@ -503,6 +513,11 @@ const app = {
         if (typeof glossary !== 'undefined') {
             try { glossary.decorate(panel); } catch (e) { console.warn('Glossary decorate failed:', e.message); }
         }
+
+        // Re-apply user highlights for this topic (find saved fragments + wrap in <mark>)
+        app.applyHighlightsToPanel(bmId);
+        // Enable selection-based highlighting UX on this panel
+        app.attachHighlightSelectionUI(panel, bmId);
     },
 
     // ============== SHARE ==============
@@ -532,6 +547,226 @@ const app = {
                 showToast('Could not share', 'warning', 'fa-exclamation-circle');
             }
         }
+    },
+
+    // ============== HIGHLIGHTING (textbook-marker style) ==============
+    // Storage shape:
+    //   localStorage['ivri-highlights'] = {
+    //     "Forelimb::Osteology::2": [
+    //         { text: "blood-testis barrier", color: "yellow", t: 1700000000 }
+    //     ]
+    //   }
+    HIGHLIGHT_KEY: 'ivri-highlights',
+
+    _loadAllHighlights: () => {
+        try { return JSON.parse(localStorage.getItem(app.HIGHLIGHT_KEY)) || {}; }
+        catch { return {}; }
+    },
+    _saveAllHighlights: (obj) => localStorage.setItem(app.HIGHLIGHT_KEY, JSON.stringify(obj)),
+
+    getHighlightsForTopic: (topicId) => {
+        const all = app._loadAllHighlights();
+        return all[topicId] || [];
+    },
+
+    saveHighlightFragment: (topicId, text, color = 'yellow') => {
+        if (!text || text.trim().length < 3) return false;
+        const all = app._loadAllHighlights();
+        if (!all[topicId]) all[topicId] = [];
+        // Don't add exact duplicates
+        if (all[topicId].some(h => h.text === text)) return false;
+        all[topicId].push({ text: text, color: color, t: Date.now() });
+        // Cap per-topic at 50 to keep localStorage healthy
+        if (all[topicId].length > 50) all[topicId] = all[topicId].slice(-50);
+        app._saveAllHighlights(all);
+        return true;
+    },
+
+    removeHighlightFragment: (topicId, text) => {
+        const all = app._loadAllHighlights();
+        if (!all[topicId]) return false;
+        const before = all[topicId].length;
+        all[topicId] = all[topicId].filter(h => h.text !== text);
+        if (all[topicId].length !== before) {
+            if (all[topicId].length === 0) delete all[topicId];
+            app._saveAllHighlights(all);
+            return true;
+        }
+        return false;
+    },
+
+    // After content innerHTML is set, walk text nodes and wrap saved fragments in <mark>
+    applyHighlightsToPanel: (topicId) => {
+        const panel = document.getElementById('detail-panel');
+        if (!panel) return;
+        const highlights = app.getHighlightsForTopic(topicId);
+        if (!highlights.length) return;
+        // Sort by length DESC so longer fragments get wrapped before short ones (avoids nesting issues)
+        const sorted = [...highlights].sort((a, b) => b.text.length - a.text.length);
+        for (const h of sorted) {
+            app._wrapTextInPanel(panel, h.text, h.color || 'yellow');
+        }
+    },
+
+    _wrapTextInPanel: (root, needle, color) => {
+        if (!needle) return;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+                // Skip if already inside a <mark> or interactive element
+                let p = node.parentNode;
+                while (p && p !== root) {
+                    if (p.nodeName === 'MARK' || p.nodeName === 'BUTTON' || p.nodeName === 'A') return NodeFilter.FILTER_REJECT;
+                    p = p.parentNode;
+                }
+                return node.nodeValue.includes(needle) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }
+        });
+        const targets = [];
+        let n;
+        while ((n = walker.nextNode())) targets.push(n);
+        for (const textNode of targets) {
+            const parts = textNode.nodeValue.split(needle);
+            if (parts.length < 2) continue;
+            const frag = document.createDocumentFragment();
+            parts.forEach((part, i) => {
+                if (i > 0) {
+                    const m = document.createElement('mark');
+                    m.className = 'user-hl hl-' + color;
+                    m.dataset.text = needle;
+                    m.textContent = needle;
+                    m.title = 'Tap to remove highlight';
+                    m.onclick = (e) => {
+                        e.stopPropagation();
+                        if (!app.state.region || !app.state.system) return;
+                        const idx = parseInt(document.querySelector('.topic-btn.active')?.dataset.index, 10);
+                        if (isNaN(idx)) return;
+                        const tid = app.bookmarkId(app.state.region, app.state.system, idx);
+                        if (app.removeHighlightFragment(tid, needle)) {
+                            if (typeof showToast === 'function') showToast('Highlight removed', 'info', 'fa-highlighter');
+                            // Replace the <mark> with plain text in-place
+                            m.replaceWith(document.createTextNode(needle));
+                            app._refreshHighlightCountBadge(tid);
+                        }
+                    };
+                    frag.appendChild(m);
+                }
+                if (part) frag.appendChild(document.createTextNode(part));
+            });
+            textNode.replaceWith(frag);
+        }
+    },
+
+    // Floating "Highlight" mini-toolbar that appears when user selects text in the detail panel
+    attachHighlightSelectionUI: (panel, topicId) => {
+        // Remove any prior popup from a previous render
+        const old = document.getElementById('hl-popup');
+        if (old) old.remove();
+
+        const popup = document.createElement('div');
+        popup.id = 'hl-popup';
+        popup.className = 'hl-popup';
+        popup.style.display = 'none';
+        popup.innerHTML = `
+            <button class="hl-popup-btn hl-yellow" data-color="yellow" title="Highlight yellow"></button>
+            <button class="hl-popup-btn hl-green"  data-color="green"  title="Highlight green"></button>
+            <button class="hl-popup-btn hl-pink"   data-color="pink"   title="Highlight pink"></button>
+        `;
+        document.body.appendChild(popup);
+
+        const onSelectionChange = () => {
+            const sel = window.getSelection();
+            if (!sel || sel.isCollapsed) { popup.style.display = 'none'; return; }
+            const text = sel.toString().trim();
+            if (text.length < 3 || text.length > 400) { popup.style.display = 'none'; return; }
+            // Ensure the selection is INSIDE the detail panel
+            const range = sel.getRangeAt(0);
+            if (!panel.contains(range.commonAncestorContainer)) {
+                popup.style.display = 'none';
+                return;
+            }
+            const rect = range.getBoundingClientRect();
+            popup.style.display = 'flex';
+            popup.style.left = (window.scrollX + rect.left + rect.width / 2) + 'px';
+            popup.style.top  = (window.scrollY + rect.top - 50) + 'px';
+            popup.dataset.text = text;
+        };
+        document.addEventListener('selectionchange', onSelectionChange);
+        // Store the listener handle on the popup so we can remove it later if needed
+        popup._listener = onSelectionChange;
+
+        // Wire color buttons
+        popup.querySelectorAll('.hl-popup-btn').forEach(btn => {
+            btn.onclick = (e) => {
+                e.preventDefault();
+                const color = btn.dataset.color;
+                const text = popup.dataset.text;
+                if (!text) return;
+                if (app.saveHighlightFragment(topicId, text, color)) {
+                    app._wrapTextInPanel(panel, text, color);
+                    app._refreshHighlightCountBadge(topicId);
+                    if (typeof showToast === 'function') showToast('Highlighted', 'success', 'fa-highlighter');
+                }
+                window.getSelection().removeAllRanges();
+                popup.style.display = 'none';
+            };
+        });
+    },
+
+    _refreshHighlightCountBadge: (topicId) => {
+        const btn = document.querySelector('.hl-btn');
+        if (!btn) return;
+        const span = btn.querySelector('span');
+        const count = app.getHighlightsForTopic(topicId).length;
+        if (span) span.innerText = count ? `Highlight (${count})` : 'Highlight';
+        btn.classList.toggle('active', count > 0);
+    },
+
+    // Header button — gives the user a hint to select text first
+    toggleHighlightMode: (btn) => {
+        if (typeof showToast === 'function') {
+            showToast('Select any text in the article to highlight it', 'info', 'fa-highlighter');
+        }
+    },
+
+    // Show ALL highlights across every topic — for end-of-revision quick review
+    showHighlights: () => {
+        const all = app._loadAllHighlights();
+        const topics = Object.keys(all).sort();
+        document.getElementById('atlas-selector').style.display = 'none';
+        document.getElementById('atlas-content').style.display = 'grid';
+        document.getElementById('atlas-crumb').innerHTML = `ATLAS > MY HIGHLIGHTS (${topics.reduce((n, k) => n + all[k].length, 0)})`;
+
+        const sidebar = document.getElementById('topic-list');
+        const panel = document.getElementById('detail-panel');
+        if (!topics.length) {
+            sidebar.innerHTML = '<div style="padding:20px; color:var(--text-mute);">No highlights yet. Open any atlas topic and select text to highlight.</div>';
+            panel.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-mute);"><i class="fas fa-highlighter" style="font-size:3rem; opacity:.3;"></i><div style="margin-top:14px;">Your highlighted text will appear here for end-of-revision review.</div></div>';
+            return;
+        }
+        // Sidebar: list of topics that have highlights
+        sidebar.innerHTML = topics.map(tid => {
+            const [region, system, idx] = tid.split('::');
+            const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
+            const title = item ? item.title : '(deleted)';
+            const count = all[tid].length;
+            return `<button class="topic-btn" onclick="app.openBookmark('${region}','${system}',${idx})"><span style="color: var(--atlas-gold);">${count}×</span> ${title}<div style="font-size:.7rem; opacity:.6;">${region} • ${system}</div></button>`;
+        }).join('');
+        // Main panel: every highlight grouped by topic
+        panel.innerHTML = topics.map(tid => {
+            const [region, system, idx] = tid.split('::');
+            const item = atlasData?.[region]?.[system]?.[parseInt(idx, 10)];
+            const title = item ? item.title : '(deleted)';
+            const items = all[tid].sort((a, b) => b.t - a.t);
+            return `
+              <div class="hl-group">
+                <div class="hl-group-head">
+                  <span class="hl-group-title">${title}</span>
+                  <span class="hl-group-meta">${region} · ${system}</span>
+                </div>
+                ${items.map(h => `<div class="hl-group-item hl-${h.color || 'yellow'}">${h.text.replace(/</g, '&lt;')}</div>`).join('')}
+              </div>
+            `;
+        }).join('');
     },
 
     // ============== BOOKMARKS ==============
