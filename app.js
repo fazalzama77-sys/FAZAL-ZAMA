@@ -590,11 +590,16 @@ const app = {
         if (!text || text.trim().length < 3) return false;
         const all = app._loadAllHighlights();
         if (!all[topicId]) all[topicId] = [];
-        // Don't add exact duplicates
-        if (all[topicId].some(h => h.text === text)) return false;
-        all[topicId].push({ text: text, color: color, t: Date.now() });
-        // Cap per-topic at 50 to keep localStorage healthy
-        if (all[topicId].length > 50) all[topicId] = all[topicId].slice(-50);
+        // If this exact text is already saved, just update the colour + timestamp
+        // (was returning false here, which made the visual wrap fail on re-taps).
+        const existing = all[topicId].find(h => h.text === text);
+        if (existing) {
+            existing.color = color;
+            existing.t = Date.now();
+        } else {
+            all[topicId].push({ text: text, color: color, t: Date.now() });
+            if (all[topicId].length > 50) all[topicId] = all[topicId].slice(-50);
+        }
         app._saveAllHighlights(all);
         return true;
     },
@@ -623,6 +628,20 @@ const app = {
         for (const h of sorted) {
             app._wrapTextInPanel(panel, h.text, h.color || 'yellow');
         }
+    },
+
+    // Strip every <mark.user-hl> in the panel whose dataset.text equals `text`.
+    // Used before re-wrapping when the user re-taps the popup on the same
+    // selection (e.g. to change colour) — keeps the DOM clean.
+    _unwrapMarksByText: (panel, text) => {
+        if (!panel || !text) return;
+        const marks = panel.querySelectorAll('mark.user-hl');
+        marks.forEach(m => {
+            if (m.dataset.text === text) {
+                while (m.firstChild) m.parentNode.insertBefore(m.firstChild, m);
+                m.remove();
+            }
+        });
     },
 
     // Attach the click-to-remove handler to a <mark> so tapping it deletes the highlight
@@ -884,15 +903,17 @@ const app = {
                 const text = popup.dataset.text;
                 const liveRange = popup._range;
                 if (!text) return;
-                if (app.saveHighlightFragment(topicId, text, color)) {
-                    // Wrap the LIVE range first (handles cross-tag selections);
-                    // fall back to the text-matching wrap if for some reason the
-                    // range is no longer usable.
-                    const wrapped = liveRange ? app._wrapLiveRange(liveRange, panel, color) : false;
-                    if (!wrapped) app._wrapTextInPanel(panel, text, color);
-                    app._refreshHighlightCountBadge(topicId);
-                    if (typeof showToast === 'function') showToast('Highlighted', 'success', 'fa-highlighter');
-                }
+                // Save (or update colour if duplicate) AND always attempt the visual
+                // wrap — never gate the wrap on the save result, otherwise duplicate
+                // saves silently skip the visual update.
+                app.saveHighlightFragment(topicId, text, color);
+                // If the text is already wrapped (different colour, or earlier
+                // failed wrap), strip the old <mark>s first so we can re-wrap clean.
+                app._unwrapMarksByText(panel, text);
+                const wrapped = liveRange ? app._wrapLiveRange(liveRange, panel, color) : false;
+                if (!wrapped) app._wrapTextInPanel(panel, text, color);
+                app._refreshHighlightCountBadge(topicId);
+                if (typeof showToast === 'function') showToast('Highlighted', 'success', 'fa-highlighter');
                 const sel = window.getSelection();
                 if (sel) sel.removeAllRanges();
                 hide();
