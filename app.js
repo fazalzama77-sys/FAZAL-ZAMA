@@ -618,29 +618,95 @@ const app = {
         if (!panel) return;
         const highlights = app.getHighlightsForTopic(topicId);
         if (!highlights.length) return;
-        // Sort by length DESC so longer fragments get wrapped before short ones (avoids nesting issues)
+        // Longest first so shorter fragments don't get nested inside longer ones
         const sorted = [...highlights].sort((a, b) => b.text.length - a.text.length);
         for (const h of sorted) {
             app._wrapTextInPanel(panel, h.text, h.color || 'yellow');
         }
     },
 
+    // Attach the click-to-remove handler to a <mark> so tapping it deletes the highlight
+    _attachMarkRemoveHandler: (mark) => {
+        mark.title = 'Tap to remove highlight';
+        mark.onclick = (e) => {
+            e.stopPropagation();
+            if (!app.state.region || !app.state.system) return;
+            const activeBtn = document.querySelector('.topic-btn.active');
+            if (!activeBtn) return;
+            const idx = parseInt(activeBtn.dataset.index, 10);
+            if (isNaN(idx)) return;
+            const tid = app.bookmarkId(app.state.region, app.state.system, idx);
+            const needle = mark.dataset.text || mark.textContent;
+            if (app.removeHighlightFragment(tid, needle)) {
+                if (typeof showToast === 'function') showToast('Highlight removed', 'info', 'fa-highlighter');
+                // Replace the <mark> with its contents in-place (preserves any inner <b>/<i>)
+                while (mark.firstChild) mark.parentNode.insertBefore(mark.firstChild, mark);
+                mark.remove();
+                app._refreshHighlightCountBadge(tid);
+            }
+        };
+    },
+
+    // Wrap a live Range (from the user's actual text selection) in a <mark>.
+    // Handles both single-text-node selections AND selections that cross element
+    // boundaries (e.g. across <b>, <br>, <i> tags) — the common case in our prose.
+    _wrapLiveRange: (range, panel, color) => {
+        if (!range || !panel.contains(range.commonAncestorContainer)) return false;
+        const text = range.toString();
+        if (!text) return false;
+        const mark = document.createElement('mark');
+        mark.className = 'user-hl hl-' + color;
+        mark.dataset.text = text;
+        try {
+            // Fast path — works only if the range starts and ends in the same text node
+            range.surroundContents(mark);
+        } catch (e) {
+            // Range crosses element boundaries — extract its contents (which may
+            // include element fragments like a closing </b>) and re-insert wrapped.
+            try {
+                const contents = range.extractContents();
+                mark.appendChild(contents);
+                range.insertNode(mark);
+            } catch (e2) {
+                return false;
+            }
+        }
+        app._attachMarkRemoveHandler(mark);
+        return true;
+    },
+
+    // Wrap saved-highlight text in the panel. Tries simple text-node match first
+    // (fast); falls back to a flat-text matcher that can span element boundaries
+    // (so e.g. a highlight stretching across "<b>X</b> Y" survives a page reload).
     _wrapTextInPanel: (root, needle, color) => {
         if (!needle) return;
+        // ---- Pass 1: simple, single-text-node match (fast path) ----
+        if (app._wrapInSingleNode(root, needle, color)) return;
+        // ---- Pass 2: flat-text match across element boundaries ----
+        app._wrapAcrossNodes(root, needle, color);
+    },
+
+    _isSkipParent: (root, node) => {
+        let p = node.parentNode;
+        while (p && p !== root) {
+            if (p.nodeName === 'MARK' || p.nodeName === 'BUTTON' || p.nodeName === 'A') return true;
+            if (p.classList && p.classList.contains('note-anchored-icon')) return true;
+            p = p.parentNode;
+        }
+        return false;
+    },
+
+    _wrapInSingleNode: (root, needle, color) => {
         const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-            acceptNode(node) {
-                // Skip if already inside a <mark> or interactive element
-                let p = node.parentNode;
-                while (p && p !== root) {
-                    if (p.nodeName === 'MARK' || p.nodeName === 'BUTTON' || p.nodeName === 'A') return NodeFilter.FILTER_REJECT;
-                    p = p.parentNode;
-                }
+            acceptNode: (node) => {
+                if (app._isSkipParent(root, node)) return NodeFilter.FILTER_REJECT;
                 return node.nodeValue.includes(needle) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
             }
         });
         const targets = [];
         let n;
         while ((n = walker.nextNode())) targets.push(n);
+        if (!targets.length) return false;
         for (const textNode of targets) {
             const parts = textNode.nodeValue.split(needle);
             if (parts.length < 2) continue;
@@ -651,26 +717,103 @@ const app = {
                     m.className = 'user-hl hl-' + color;
                     m.dataset.text = needle;
                     m.textContent = needle;
-                    m.title = 'Tap to remove highlight';
-                    m.onclick = (e) => {
-                        e.stopPropagation();
-                        if (!app.state.region || !app.state.system) return;
-                        const idx = parseInt(document.querySelector('.topic-btn.active')?.dataset.index, 10);
-                        if (isNaN(idx)) return;
-                        const tid = app.bookmarkId(app.state.region, app.state.system, idx);
-                        if (app.removeHighlightFragment(tid, needle)) {
-                            if (typeof showToast === 'function') showToast('Highlight removed', 'info', 'fa-highlighter');
-                            // Replace the <mark> with plain text in-place
-                            m.replaceWith(document.createTextNode(needle));
-                            app._refreshHighlightCountBadge(tid);
-                        }
-                    };
+                    app._attachMarkRemoveHandler(m);
                     frag.appendChild(m);
                 }
                 if (part) frag.appendChild(document.createTextNode(part));
             });
             textNode.replaceWith(frag);
         }
+        return true;
+    },
+
+    // Flat-text search: builds a continuous string from all eligible text nodes,
+    // finds the needle, maps the offsets back to DOM nodes, then surrounds the
+    // matching Range with a <mark>. This is what makes a highlight that crosses
+    // a <b> or <br> tag re-apply correctly after page reload.
+    _wrapAcrossNodes: (root, needle, color) => {
+        const nodes = [];
+        const offsets = [];
+        let flat = '';
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node) => app._isSkipParent(root, node) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+        });
+        let n;
+        while ((n = walker.nextNode())) {
+            offsets.push(flat.length);
+            nodes.push(n);
+            flat += n.nodeValue;
+        }
+        if (!nodes.length) return false;
+
+        // Try exact match first; if that fails, collapse whitespace and retry
+        let idx = flat.indexOf(needle);
+        let matchLen = needle.length;
+        if (idx === -1) {
+            const flatNorm = flat.replace(/\s+/g, ' ');
+            const needleNorm = needle.replace(/\s+/g, ' ');
+            const normIdx = flatNorm.indexOf(needleNorm);
+            if (normIdx === -1) return false;
+            // Map normalised index back into the original flat string by counting
+            // how many original chars produced normIdx normalised chars.
+            let orig = 0, norm = 0;
+            while (norm < normIdx && orig < flat.length) {
+                if (/\s/.test(flat[orig])) {
+                    // collapse run of whitespace -> 1 char in normalised
+                    while (orig < flat.length && /\s/.test(flat[orig])) orig++;
+                    norm++;
+                } else { orig++; norm++; }
+            }
+            idx = orig;
+            // Determine match length in original chars
+            let end = orig, normEnd = norm;
+            while (normEnd < normIdx + needleNorm.length && end < flat.length) {
+                if (/\s/.test(flat[end])) {
+                    while (end < flat.length && /\s/.test(flat[end])) end++;
+                    normEnd++;
+                } else { end++; normEnd++; }
+            }
+            matchLen = end - orig;
+        }
+        const endIdx = idx + matchLen;
+
+        // Map flat offsets back to (textNode, offset-within-node)
+        let startNode = null, startOff = 0, endNode = null, endOff = 0;
+        for (let i = 0; i < nodes.length; i++) {
+            const nStart = offsets[i];
+            const nEnd = nStart + nodes[i].nodeValue.length;
+            if (startNode === null && idx >= nStart && idx <= nEnd) {
+                startNode = nodes[i];
+                startOff = idx - nStart;
+            }
+            if (endIdx >= nStart && endIdx <= nEnd) {
+                endNode = nodes[i];
+                endOff = endIdx - nStart;
+                break;
+            }
+        }
+        if (!startNode || !endNode) return false;
+
+        const range = document.createRange();
+        try {
+            range.setStart(startNode, startOff);
+            range.setEnd(endNode, endOff);
+        } catch (e) { return false; }
+
+        const mark = document.createElement('mark');
+        mark.className = 'user-hl hl-' + color;
+        mark.dataset.text = needle;
+        try {
+            range.surroundContents(mark);
+        } catch (e) {
+            try {
+                const contents = range.extractContents();
+                mark.appendChild(contents);
+                range.insertNode(mark);
+            } catch (e2) { return false; }
+        }
+        app._attachMarkRemoveHandler(mark);
+        return true;
     },
 
     // Fixed top-of-viewport action bar that appears when user selects text in
@@ -722,26 +865,36 @@ const app = {
             if (!panel.contains(range.commonAncestorContainer)) { hide(); return; }
             popup.style.display = 'flex';
             popup.dataset.text = text;
+            // Stash a clone of the live Range so we can wrap it after the user
+            // taps a colour button (tapping clears the selection on mobile).
+            popup._range = range.cloneRange();
         };
         document.addEventListener('selectionchange', onSelectionChange);
         popup._listener = onSelectionChange;
 
-        // Color buttons -> save highlight
+        // Color buttons -> save + visually wrap the highlight immediately
         popup.querySelectorAll('.hl-popup-btn').forEach(btn => {
-            // Use mousedown so selection isn't lost before we read it
+            // mousedown preventDefault keeps the selection alive long enough to
+            // capture the Range (the touchstart handler used to cancel the click
+            // on some mobile browsers — removed).
             btn.addEventListener('mousedown', (e) => e.preventDefault());
-            btn.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
             btn.onclick = (e) => {
                 e.preventDefault();
                 const color = btn.dataset.color;
                 const text = popup.dataset.text;
+                const liveRange = popup._range;
                 if (!text) return;
                 if (app.saveHighlightFragment(topicId, text, color)) {
-                    app._wrapTextInPanel(panel, text, color);
+                    // Wrap the LIVE range first (handles cross-tag selections);
+                    // fall back to the text-matching wrap if for some reason the
+                    // range is no longer usable.
+                    const wrapped = liveRange ? app._wrapLiveRange(liveRange, panel, color) : false;
+                    if (!wrapped) app._wrapTextInPanel(panel, text, color);
                     app._refreshHighlightCountBadge(topicId);
                     if (typeof showToast === 'function') showToast('Highlighted', 'success', 'fa-highlighter');
                 }
-                window.getSelection().removeAllRanges();
+                const sel = window.getSelection();
+                if (sel) sel.removeAllRanges();
                 hide();
             };
         });
@@ -749,13 +902,13 @@ const app = {
         // "Note" action -> open a small dialog and save note anchored to the selection
         const noteAct = popup.querySelector('.hl-note-action');
         noteAct.addEventListener('mousedown', (e) => e.preventDefault());
-        noteAct.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
         noteAct.onclick = (e) => {
             e.preventDefault();
             const text = popup.dataset.text;
             if (!text) return;
             hide();
-            window.getSelection().removeAllRanges();
+            const sel = window.getSelection();
+            if (sel) sel.removeAllRanges();
             app.openNoteDialogForAnchor(topicId, text);
         };
 
