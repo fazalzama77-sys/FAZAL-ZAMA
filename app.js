@@ -679,7 +679,8 @@ const app = {
     // on top of it — those menus appear at the selection itself, never at
     // the very top of the viewport.
     attachHighlightSelectionUI: (panel, topicId) => {
-        // Remove any prior popup from a previous render
+        // Remove any prior popup AND its selectionchange listener so we don't
+        // leak handlers when the user navigates between topics.
         const old = document.getElementById('hl-popup');
         if (old) {
             if (old._listener) document.removeEventListener('selectionchange', old._listener);
@@ -791,8 +792,18 @@ const app = {
     // Internal filter state for My-Highlights view (search box + color chips)
     _hlViewState: { q: '', color: 'all' },
 
+    // Remove the selection popup + its listener (called when switching views)
+    _teardownHighlightPopup: () => {
+        const old = document.getElementById('hl-popup');
+        if (old) {
+            if (old._listener) document.removeEventListener('selectionchange', old._listener);
+            old.remove();
+        }
+    },
+
     // Show ALL highlights across every topic — for end-of-revision quick review
     showHighlights: () => {
+        app._teardownHighlightPopup();
         const all = app._loadAllHighlights();
         const totalCount = Object.values(all).reduce((n, arr) => n + arr.length, 0);
         document.getElementById('atlas-selector').style.display = 'none';
@@ -1130,6 +1141,8 @@ const app = {
             acceptNode(node) {
                 let p = node.parentNode;
                 while (p && p !== root) {
+                    // Skip buttons, links, our own icon. Allow walking into <mark> so
+                    // a note anchored to highlighted text still gets its icon.
                     if (p.nodeName === 'BUTTON' || p.nodeName === 'A' || (p.classList && p.classList.contains('note-anchored-icon'))) return NodeFilter.FILTER_REJECT;
                     p = p.parentNode;
                 }
@@ -1142,17 +1155,24 @@ const app = {
         for (const textNode of targets) {
             const idx = textNode.nodeValue.indexOf(needle);
             if (idx === -1) continue;
-            const after = textNode.splitText(idx + needle.length);
-            const middle = textNode.splitText(idx);
-            // middle is the anchored text — insert a tiny clickable ✎ icon right after it
+            // Build the icon
             const icon = document.createElement('span');
             icon.className = 'note-anchored-icon';
             icon.id = 'note-anchor-' + noteTs;
             icon.title = 'View / edit note';
             icon.innerHTML = '<i class="fas fa-sticky-note"></i>';
-            icon.onclick = (e) => { e.stopPropagation(); app.openNoteEditor(topicId, noteTs); };
-            after.parentNode.insertBefore(icon, after);
-            break; // tag only the first occurrence per text node — enough to find the note
+            icon.onclick = (e) => { e.stopPropagation(); e.preventDefault(); app.openNoteEditor(topicId, noteTs); };
+            // If the text node sits inside a <mark.user-hl>, place the icon AFTER
+            // the mark so it doesn't get caught by the mark's click-to-remove handler.
+            const parentMark = (textNode.parentNode && textNode.parentNode.nodeName === 'MARK') ? textNode.parentNode : null;
+            if (parentMark) {
+                parentMark.parentNode.insertBefore(icon, parentMark.nextSibling);
+            } else {
+                const after = textNode.splitText(idx + needle.length);
+                textNode.splitText(idx);
+                after.parentNode.insertBefore(icon, after);
+            }
+            break; // one icon per anchor is enough
         }
     },
 
@@ -1186,6 +1206,7 @@ const app = {
 
     // Show ALL notes across every topic — sister view to showHighlights
     showNotes: () => {
+        app._teardownHighlightPopup();
         const all = app._loadAllNotes();
         const total = Object.values(all).reduce((n, arr) => n + arr.length, 0);
         document.getElementById('atlas-selector').style.display = 'none';
@@ -1343,6 +1364,7 @@ const app = {
 
     // Show all bookmarked topics in the Atlas content area
     showBookmarks: () => {
+        app._teardownHighlightPopup();
         const ids = app._loadBookmarks();
         document.getElementById('atlas-selector').style.display = 'none';
         document.getElementById('atlas-content').style.display = 'grid';

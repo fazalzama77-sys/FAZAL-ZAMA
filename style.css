@@ -3791,22 +3791,28 @@ body.professional-mode .hl-btn.active {
     color: #e65100;
 }
 
-/* The actual highlighted text inside the article content */
+/* The actual highlighted text inside the article content
+   — strong background fill + thick underline so it reads clearly
+   on every screen size and in both themes (matches the textbook-
+   marker look the user wants). */
 mark.user-hl {
-    padding: 0 3px;
+    padding: 1px 4px;
     border-radius: 3px;
     cursor: pointer;
     transition: filter .15s ease;
-    color: inherit;            /* keep page text colour */
-    border-bottom: 2px solid currentColor;
+    color: inherit;
+    border-bottom: 3px solid currentColor;
+    font-weight: 500;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
 }
 mark.user-hl:hover { filter: brightness(1.15); }
-mark.user-hl.hl-yellow { background: rgba(255, 213, 79, 0.40); border-bottom-color: #ffd54f; }
-mark.user-hl.hl-green  { background: rgba(102, 187, 106, 0.40); border-bottom-color: #66bb6a; }
-mark.user-hl.hl-pink   { background: rgba(244, 143, 177, 0.40); border-bottom-color: #f48fb1; }
-body.professional-mode mark.user-hl.hl-yellow { background: #fff59d; border-bottom-color: #fbc02d; color: #263238; }
-body.professional-mode mark.user-hl.hl-green  { background: #c8e6c9; border-bottom-color: #43a047; color: #263238; }
-body.professional-mode mark.user-hl.hl-pink   { background: #f8bbd0; border-bottom-color: #d81b60; color: #263238; }
+mark.user-hl.hl-yellow { background: rgba(255, 213, 79, 0.55); border-bottom-color: #ffd54f; }
+mark.user-hl.hl-green  { background: rgba(102, 187, 106, 0.55); border-bottom-color: #43a047; }
+mark.user-hl.hl-pink   { background: rgba(244, 143, 177, 0.55); border-bottom-color: #d81b60; }
+body.professional-mode mark.user-hl.hl-yellow { background: #fff59d; border-bottom-color: #f9a825; color: #263238; }
+body.professional-mode mark.user-hl.hl-green  { background: #c8e6c9; border-bottom-color: #2e7d32; color: #263238; }
+body.professional-mode mark.user-hl.hl-pink   { background: #f8bbd0; border-bottom-color: #ad1457; color: #263238; }
 
 /* Floating "Pick a colour" toolbar that appears when user selects text */
 .hl-popup {
@@ -3962,15 +3968,23 @@ body.professional-mode .hl-group-item.hl-pink   { background: #f8bbd0; color: #2
 .hl-popup-action.hl-close-action:hover { background: rgba(255,255,255,0.06); color: var(--text-main); }
 
 @media (max-width: 600px) {
-    .hl-popup.hl-popup-top { padding: 5px 6px; gap: 4px; }
+    .hl-popup.hl-popup-top { padding: 5px 6px; gap: 4px; border-radius: 24px; }
     .hl-popup-label { display: none; }
-    .hl-popup-action { padding: 6px 10px; font-size: .72rem; }
-    .hl-popup-action i { font-size: .9rem; }
+    .hl-popup-sep   { display: none; }
+    .hl-popup-btn   { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.12); padding: 0; }
+    .hl-popup-action { padding: 5px 9px; font-size: .7rem; }
+    .hl-popup-action i { font-size: .85rem; }
+    .hl-popup-action.hl-note-action span,
+    .hl-popup-action.hl-note-action { gap: 3px; }
+}
+@media (max-width: 380px) {
+    .hl-popup-action.hl-note-action { padding: 5px 7px; }
+    .hl-popup-action.hl-note-action::after { content: ''; }
 }
 
 /* Blue highlight colour (definition / must-memorise) */
-mark.user-hl.hl-blue   { background: rgba(93, 173, 226, 0.40); border-bottom-color: #5dade2; }
-body.professional-mode mark.user-hl.hl-blue { background: #bbdefb; border-bottom-color: #1976d2; color: #102a43; }
+mark.user-hl.hl-blue   { background: rgba(93, 173, 226, 0.55); border-bottom-color: #1e88e5; }
+body.professional-mode mark.user-hl.hl-blue { background: #bbdefb; border-bottom-color: #1565c0; color: #102a43; }
 .hl-group-item.hl-blue { background: rgba(93, 173, 226, 0.25); border-left: 3px solid #5dade2; }
 body.professional-mode .hl-group-item.hl-blue { background: #bbdefb; color: #102a43; }
 
@@ -4138,11 +4152,18 @@ body.professional-mode #note-editor-text { background: #f5f7fa; color: #102a43; 
 #note-editor-text:focus { outline: none; border-color: var(--why-cyan); }
 .note-editor-colors { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .note-color-swatch {
-    width: 24px; height: 24px; border-radius: 50%;
+    width: 28px; height: 28px; border-radius: 50%;
     border: 2px solid var(--border);
     cursor: pointer; padding: 0;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
+    transition: transform .15s ease, border-color .15s ease;
 }
-.note-color-swatch.on { border-color: #fff; transform: scale(1.15); }
+.note-color-swatch.hl-yellow { background: #ffd54f; }
+.note-color-swatch.hl-green  { background: #66bb6a; }
+.note-color-swatch.hl-pink   { background: #f48fb1; }
+.note-color-swatch.hl-blue   { background: #5dade2; }
+.note-color-swatch.on { border-color: #fff; transform: scale(1.18); box-shadow: 0 0 0 2px rgba(255,255,255,0.25); }
+body.professional-mode .note-color-swatch.on { border-color: #102a43; box-shadow: 0 0 0 2px rgba(0,0,0,0.2); }
 .note-editor-actions {
     display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;
     border-top: 1px solid var(--border); padding-top: 12px;
