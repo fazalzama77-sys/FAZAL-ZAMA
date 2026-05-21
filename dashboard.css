@@ -60,66 +60,6 @@
 }
 
 /* ================= DASHBOARD GRID ================= */
-/* =========================================================
-   DASHBOARD & PERFORMANCE TRACKER STYLES
-   ========================================================= */
-
-/* ================= OVERVIEW STATS ROW ================= */
-.dash-stats-row {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.dash-stat-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 15px;
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.dash-stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, currentColor, transparent);
-    opacity: 0.3;
-}
-
-.dash-stat-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.dash-stat-icon {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-    opacity: 0.8;
-}
-
-.dash-stat-value {
-    font-size: 2rem;
-    font-weight: 800;
-    font-family: var(--font-code);
-    margin-bottom: 5px;
-}
-
-.dash-stat-label {
-    font-family: var(--font-code);
-    font-size: 0.75rem;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
 
 /* ================= DASHBOARD GRID ================= */
 .dash-grid {
@@ -749,4 +689,294 @@ body.professional-mode .srs-box-count { color: #263238; }
     .srs-box { padding: 8px 4px 6px; }
     .srs-box-bar { height: 50px; }
     .srs-actions .srs-btn { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ============================================================
+   PHASE 4: MODERN DASHBOARD & LEITNER SRS MAKEOVER
+   ============================================================ */
+
+/* Glassmorphic Stats and Panels */
+.dash-stat-card {
+    background: rgba(17, 34, 64, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 10px 30px rgba(2, 12, 27, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.dash-stat-card:hover {
+    background: rgba(17, 34, 64, 0.65) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 40px rgba(0, 242, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dash-card {
+    background: rgba(17, 34, 64, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 15px 35px rgba(2, 12, 27, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    border-radius: 20px !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.dash-card:hover {
+    background: rgba(17, 34, 64, 0.55) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
+}
+
+.insight-box {
+    background: rgba(10, 20, 38, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 14px !important;
+}
+
+.insight-box:hover {
+    background: rgba(10, 20, 38, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Leitner Box Glass-Tube Makeover */
+.srs-box {
+    background: rgba(10, 20, 38, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 12px !important;
+    padding: 14px 10px 10px !important;
+    transition: all 0.3s ease !important;
+}
+
+.srs-box:hover {
+    background: rgba(10, 20, 38, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+.srs-box-bar {
+    height: 70px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 30px !important; /* Capsule tube design */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 242, 255, 0.05) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.srs-box-fill {
+    border-radius: 0 0 30px 30px !important;
+    background-image: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.45) 100%
+    ) !important;
+    position: relative !important;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Specific Glowing Fluid Gradients & Shadows for Leitner Levels */
+.srs-box:nth-child(1) .srs-box-fill {
+    background: linear-gradient(180deg, #ff6b6b, #d53f3f) !important;
+    box-shadow: 0 0 12px #ff6b6b !important;
+    animation: srs-fluid-glow 3s ease-in-out infinite !important;
+}
+.srs-box:nth-child(2) .srs-box-fill {
+    background: linear-gradient(180deg, #ff9f43, #d35400) !important;
+    box-shadow: 0 0 12px #ff9f43 !important;
+    animation: srs-fluid-glow 3s ease-in-out infinite 0.6s !important;
+}
+.srs-box:nth-child(3) .srs-box-fill {
+    background: linear-gradient(180deg, #feca57, #f39c12) !important;
+    box-shadow: 0 0 12px #feca57 !important;
+    animation: srs-fluid-glow 3s ease-in-out infinite 1.2s !important;
+}
+.srs-box:nth-child(4) .srs-box-fill {
+    background: linear-gradient(180deg, #48dbfb, #2980b9) !important;
+    box-shadow: 0 0 12px #48dbfb !important;
+    animation: srs-fluid-glow 3s ease-in-out infinite 1.8s !important;
+}
+.srs-box:nth-child(5) .srs-box-fill {
+    background: linear-gradient(180deg, #1dd1a1, #10ac84) !important;
+    box-shadow: 0 0 12px #1dd1a1 !important;
+    animation: srs-fluid-glow 3s ease-in-out infinite 2.4s !important;
+}
+
+@keyframes srs-fluid-glow {
+    0%, 100% {
+        filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.2));
+    }
+    50% {
+        filter: brightness(1.25) drop-shadow(0 0 6px rgba(255,255,255,0.4));
+    }
+}
+
+/* Hyper-realistic Glint light reflection on the cylindrical capsule tube */
+.srs-box-bar::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0; left: 0; right: 0; bottom: 0 !important;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(255, 255, 255, 0.38) 15%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0) 55%,
+        rgba(255, 255, 255, 0.15) 85%,
+        rgba(255, 255, 255, 0.30) 90%,
+        rgba(255, 255, 255, 0) 100%
+    ) !important;
+    pointer-events: none !important;
+    border-radius: 30px !important;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Heatmap tiles modern polish */
+.dash-hm-cell {
+    border-radius: 6px !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+    font-size: 0.85rem !important;
+}
+
+.dash-hm-cell.empty {
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px dashed rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.25) !important;
+    border-radius: 6px !important;
+}
+
+.dash-hm-cell:not(.empty) {
+    border-radius: 6px !important;
+    box-shadow: 0 0 8px rgba(0, 242, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    background-image: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0) 100%
+    ) !important;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.dash-hm-cell:not(.empty):hover {
+    transform: translateY(-2px) scale(1.08) !important;
+    box-shadow: 0 5px 15px rgba(0, 242, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Elegant History Table Glass Panels */
+.dash-ht-row {
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+    border-radius: 8px !important;
+    margin-bottom: 8px !important;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.dash-ht-row:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(0, 242, 255, 0.12) !important;
+    transform: translateX(4px) !important;
+    box-shadow: 0 4px 15px rgba(2, 12, 27, 0.2) !important;
+}
+
+/* Professional Mode (Light Theme) Clean Makeover */
+body.professional-mode .dash-stat-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid rgba(21, 101, 192, 0.1) !important;
+    box-shadow: 0 8px 24px rgba(21, 101, 192, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    color: var(--text-main) !important;
+}
+
+body.professional-mode .dash-stat-card:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 12px 30px rgba(21, 101, 192, 0.12) !important;
+    border-color: var(--atlas-gold) !important;
+}
+
+body.professional-mode .dash-card {
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(21, 101, 192, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+body.professional-mode .dash-card:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 15px 40px rgba(21, 101, 192, 0.15) !important;
+    border-color: rgba(21, 101, 192, 0.2) !important;
+}
+
+body.professional-mode .insight-box {
+    background: rgba(21, 101, 192, 0.03) !important;
+    border: 1px solid rgba(21, 101, 192, 0.06) !important;
+    box-shadow: inset 0 0 10px rgba(21, 101, 192, 0.02) !important;
+}
+
+body.professional-mode .insight-box:hover {
+    background: rgba(21, 101, 192, 0.06) !important;
+}
+
+body.professional-mode .srs-box {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(21, 101, 192, 0.1) !important;
+    box-shadow: inset 0 0 12px rgba(21, 101, 192, 0.02) !important;
+}
+
+body.professional-mode .srs-box:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: var(--atlas-gold) !important;
+}
+
+body.professional-mode .srs-box-bar {
+    background: rgba(21, 101, 192, 0.05) !important;
+    border: 1px solid rgba(21, 101, 192, 0.12) !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+body.professional-mode .srs-box-fill {
+    background-image: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.65) 100%
+    ) !important;
+}
+
+/* High-contrast colors for Professional light-theme fluid SRS elements */
+body.professional-mode .srs-box:nth-child(1) .srs-box-fill { background: linear-gradient(180deg, #ff5252, #e53935) !important; box-shadow: 0 0 6px rgba(229,57,53,0.3) !important; }
+body.professional-mode .srs-box:nth-child(2) .srs-box-fill { background: linear-gradient(180deg, #ffa726, #f57c00) !important; box-shadow: 0 0 6px rgba(245,124,0,0.3) !important; }
+body.professional-mode .srs-box:nth-child(3) .srs-box-fill { background: linear-gradient(180deg, #ffee58, #fbc02d) !important; box-shadow: 0 0 6px rgba(251,192,45,0.3) !important; }
+body.professional-mode .srs-box:nth-child(4) .srs-box-fill { background: linear-gradient(180deg, #26c6da, #0097a7) !important; box-shadow: 0 0 6px rgba(0,151,167,0.3) !important; }
+body.professional-mode .srs-box:nth-child(5) .srs-box-fill { background: linear-gradient(180deg, #66bb6a, #388e3c) !important; box-shadow: 0 0 6px rgba(56,142,60,0.3) !important; }
+
+body.professional-mode .srs-box-bar::after {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0.45) 15%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0) 55%,
+        rgba(255, 255, 255, 0.2) 85%,
+        rgba(255, 255, 255, 0.35) 90%,
+        rgba(255, 255, 255, 0) 100%
+    ) !important;
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5), inset 0 -1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.professional-mode .srs-box-count {
+    color: var(--text-main) !important;
+}
+
+body.professional-mode .dash-hm-cell:not(.empty) {
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.professional-mode .dash-ht-header {
+    background: rgba(21, 101, 192, 0.05) !important;
+}
+
+body.professional-mode .dash-ht-row {
+    border-bottom: 1px solid rgba(21, 101, 192, 0.05) !important;
+}
+
+body.professional-mode .dash-ht-row:hover {
+    background: rgba(21, 101, 192, 0.03) !important;
 }
