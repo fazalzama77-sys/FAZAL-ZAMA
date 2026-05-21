@@ -1685,7 +1685,7 @@ function renderCards(data) {
 
     data.forEach((item, index) => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = `card ${item.category || ''}`;
         card.style.animationDelay = `${index * 0.05}s`;
         card.onclick = () => openModal(item);
 
