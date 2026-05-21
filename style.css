@@ -1285,7 +1285,7 @@ body.professional-mode #why-view header::before {
 }
 
 #why-view .subtitle::before {
-    content: '[ SYS_ENG_09 //';
+    content: '[ Beyond // ';
     color: var(--why-cyan);
     opacity: 0.7;
     font-size: 0.75rem;
@@ -1294,7 +1294,7 @@ body.professional-mode #why-view header::before {
 }
 
 #why-view .subtitle::after {
-    content: '// COORD_Y: 52° ]';
+    content: '// Textbooks ]';
     color: var(--why-cyan);
     opacity: 0.7;
     font-size: 0.75rem;
