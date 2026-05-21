@@ -3136,64 +3136,149 @@ body.professional-mode {
 }
 
 /* Professional Mode - Subtle Depth instead of Neon */
+body.professional-mode #atlas-view {
+    background-image: 
+        radial-gradient(rgba(21, 101, 192, 0.035) 1.2px, transparent 1.2px),
+        linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 50%, #f0f4f8 100%) !important;
+    background-size: 24px 24px, 100% 100% !important;
+    background-attachment: fixed !important;
+}
+
 body.professional-mode .portal-card::before {
-    display: none;
-    /* Remove spinning border */
+    content: '';
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: transparent;
+    box-shadow: 0 8px 30px rgba(21, 101, 192, 0.04), 0 1px 2px rgba(21, 101, 192, 0.02);
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+    will-change: opacity;
+}
+
+body.professional-mode .portal-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+    transform: translate3d(-100%, -100%, 0);
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+    will-change: transform;
+    pointer-events: none;
 }
 
 body.professional-mode .portal-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--atlas-gold);
-    /* Color-coded left border */
-    box-shadow: 0 4px 6px rgba(21, 101, 192, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.82) !important;
+    backdrop-filter: blur(16px) translateZ(0) !important;
+    -webkit-backdrop-filter: blur(16px) translateZ(0) !important;
+    border: 1px solid rgba(21, 101, 192, 0.12) !important;
+    border-left: 5px solid var(--region-accent, var(--atlas-gold)) !important;
+    box-shadow: none !important;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, border-left-width 0.4s ease !important;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 body.professional-mode .portal-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(21, 101, 192, 0.15);
-    border-color: var(--atlas-gold);
-    border-left-width: 6px;
-    /* Thicker accent on hover */
+    transform: translateY(-6px) scale(1.02) translateZ(0) !important;
+    border-color: var(--region-accent, var(--atlas-gold)) !important;
+    border-left-width: 8px !important;
+    box-shadow: 0 15px 35px rgba(21, 101, 192, 0.1) !important;
 }
 
-body.professional-mode .card-why {
-    border-left-color: var(--why-cyan);
-    /* Teal accent for Why cards */
+body.professional-mode .portal-card:hover::after {
+    transform: translate3d(100%, 100%, 0);
 }
 
-body.professional-mode .card-why:hover {
-    border-color: var(--why-cyan);
-}
+/* Region-Specific Color Accent Codes */
+body.professional-mode .portal-card[onclick*="Introduction"] { --region-accent: var(--medical-sage); }
+body.professional-mode .portal-card[onclick*="Forelimb"] { --region-accent: var(--medical-purple); }
+body.professional-mode .portal-card[onclick*="Hindlimb"] { --region-accent: var(--atlas-gold); }
+body.professional-mode .portal-card[onclick*="Thorax"] { --region-accent: var(--medical-coral); }
+body.professional-mode .portal-card[onclick*="Abdomen"] { --region-accent: var(--why-cyan); }
+body.professional-mode .portal-card[onclick*="Head"] { --region-accent: var(--medical-amber); }
+body.professional-mode .portal-card[onclick*="Histology"] { --region-accent: #ab47bc; }
+body.professional-mode .portal-card[onclick*="Embryology"] { --region-accent: #ec407a; }
 
-body.professional-mode .orb-icon {
+/* Lens-Pocket Icon Frame style */
+body.professional-mode .portal-card .orb-icon {
+    font-size: 2.2rem !important;
+    margin-bottom: 20px !important;
+    color: var(--region-accent, var(--atlas-gold)) !important;
     filter: none !important;
-    color: var(--atlas-gold) !important;
     text-shadow: none !important;
-    font-size: 4.5rem;
-    /* Slightly smaller for elegance */
-    transition: color 0.3s;
-}
-
-body.professional-mode .card-why .orb-icon {
-    color: var(--why-cyan) !important;
+    background: #ffffff;
+    border: 1px solid rgba(21, 101, 192, 0.1);
+    box-shadow: 0 4px 10px rgba(21, 101, 192, 0.04);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.4s ease, border-color 0.4s ease;
+    z-index: 2;
 }
 
 body.professional-mode .portal-card:hover .orb-icon {
-    color: var(--medical-coral) !important;
-    /* Warm pop on hover */
+    transform: scale(1.1) rotate(5deg) !important;
+    background: var(--region-accent, var(--atlas-gold)) !important;
+    color: #ffffff !important;
+    border-color: var(--region-accent, var(--atlas-gold)) !important;
 }
 
+/* Card labels and typography */
 body.professional-mode .card-label {
-    color: var(--text-main);
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    color: var(--text-main) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+    font-family: var(--font-ui) !important;
+    transition: color 0.3s ease;
+}
+
+body.professional-mode .portal-card:hover .card-label {
+    color: var(--region-accent, var(--atlas-gold)) !important;
 }
 
 body.professional-mode .card-sub {
-    color: var(--text-mute);
-    font-size: 0.9rem;
+    color: var(--text-mute) !important;
+    font-size: 0.8rem !important;
+    font-family: var(--font-code) !important;
+    letter-spacing: 0.5px !important;
+    margin-top: 4px;
+}
+
+/* Card progress bar style overrides */
+body.professional-mode .card-progress-container {
+    width: 80%;
+    margin-top: 15px;
+    z-index: 2;
+}
+
+body.professional-mode .card-progress-bar {
+    height: 4px !important;
+    background: rgba(21, 101, 192, 0.08) !important;
+    border-radius: 2px !important;
+    overflow: hidden;
+}
+
+body.professional-mode .card-progress-fill {
+    background: linear-gradient(90deg, var(--region-accent, var(--atlas-gold)), var(--medical-coral, #ff7043)) !important;
+    height: 100%;
+    border-radius: 2px;
+}
+
+body.professional-mode .card-progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem !important;
+    font-family: var(--font-code) !important;
+    color: var(--text-mute) !important;
+    margin-top: 6px;
+    font-weight: 600;
 }
 
 body.professional-mode .hero-title {
@@ -3207,29 +3292,106 @@ body.professional-mode .hero-title {
 
 /* Professional Mode - Clean Navigation with Color Accents */
 body.professional-mode .nav-bar {
-    border-bottom: 2px solid rgba(21, 101, 192, 0.1);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 15px 25px !important;
+    border-radius: 30px !important;
+    margin-bottom: 25px !important;
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.05) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+body.professional-mode #atlas-crumb {
+    font-family: var(--font-code) !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.5px;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    background: rgba(21, 101, 192, 0.05) !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    color: var(--atlas-gold) !important;
+    font-weight: 700;
 }
 
 body.professional-mode .nav-btn {
-    border: 1px solid transparent;
-    color: var(--text-mute);
-    font-weight: 600;
-    background: rgba(21, 101, 192, 0.05);
-    border-radius: 8px;
-    transition: all 0.3s;
+    border: 1px solid rgba(21, 101, 192, 0.18) !important;
+    color: var(--text-main) !important;
+    font-weight: 600 !important;
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 8px 18px !important;
+    font-size: 0.82rem !important;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    box-shadow: 0 2px 5px rgba(21, 101, 192, 0.03) !important;
 }
 
 body.professional-mode .nav-btn:hover {
-    background: var(--atlas-gold);
-    color: white;
-    border-color: var(--atlas-gold);
-    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+    background: rgba(21, 101, 192, 0.05) !important;
+    border-color: var(--atlas-gold) !important;
+    color: var(--atlas-gold) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(21, 101, 192, 0.08) !important;
+}
+
+body.professional-mode .nav-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Color thematic buttons in header */
+body.professional-mode .nav-btn[onclick*="showBookmarks"] {
+    border-color: rgba(255, 193, 7, 0.3) !important;
+    color: #ff8f00 !important;
+}
+body.professional-mode .nav-btn[onclick*="showBookmarks"]:hover {
+    background: #fff8e1 !important;
+    border-color: #ffa000 !important;
+}
+
+body.professional-mode .nav-btn[onclick*="showHighlights"] {
+    border-color: rgba(255, 112, 67, 0.3) !important;
+    color: #d84315 !important;
+}
+body.professional-mode .nav-btn[onclick*="showHighlights"]:hover {
+    background: #fbe9e7 !important;
+    border-color: #ff7043 !important;
+}
+
+body.professional-mode .nav-btn[onclick*="showNotes"] {
+    border-color: rgba(0, 137, 123, 0.3) !important;
+    color: #00695c !important;
+}
+body.professional-mode .nav-btn[onclick*="showNotes"]:hover {
+    background: #e0f2f1 !important;
+    border-color: #00897b !important;
+}
+
+body.professional-mode .nav-btn[onclick*="quizApp"] {
+    border-color: rgba(126, 87, 194, 0.3) !important;
+    color: #4527a0 !important;
+}
+body.professional-mode .nav-btn[onclick*="quizApp"]:hover {
+    background: #f3e5f5 !important;
+    border-color: #7e57c2 !important;
+}
+
+/* Elite Toggle Button */
+body.professional-mode .elite-toggle-btn {
+    border-color: rgba(21, 101, 192, 0.3) !important;
+    color: var(--atlas-gold) !important;
+}
+body.professional-mode .elite-toggle-btn:hover {
+    background: rgba(21, 101, 192, 0.05) !important;
+    border-color: var(--atlas-gold) !important;
+}
+body.professional-mode .elite-toggle-btn.active {
+    background: var(--atlas-gold) !important;
+    color: #ffffff !important;
+    border-color: var(--atlas-gold) !important;
 }
 
 /* Professional Mode - Content Areas with Soft Color Coding */
@@ -3239,68 +3401,128 @@ body.professional-mode .workspace {
 }
 
 body.professional-mode .sidebar {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border-radius: 12px;
-    border-top: 4px solid var(--atlas-gold);
-    /* Accent header */
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    border-top: 4px solid var(--atlas-gold) !important;
+    box-shadow: 0 4px 15px rgba(21, 101, 192, 0.04) !important;
+    border-radius: 16px !important;
+    overflow-y: auto;
+}
+
+/* Progress Badge in Sidebar */
+body.professional-mode .read-progress-badge {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    border-left: 4px solid var(--medical-sage) !important;
+    color: var(--text-main) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    box-shadow: 0 2px 10px rgba(21, 101, 192, 0.02) !important;
+}
+
+body.professional-mode .read-progress-badge .rp-text {
+    color: #2e7d32 !important;
+    font-weight: 700 !important;
+}
+
+body.professional-mode .read-progress-badge .rp-bar {
+    background: rgba(21, 101, 192, 0.08) !important;
+    height: 5px !important;
+    border-radius: 3px !important;
+}
+
+body.professional-mode .read-progress-badge .rp-fill {
+    background: linear-gradient(90deg, var(--medical-sage), #00897b) !important;
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(102, 187, 106, 0.3) !important;
+}
+
+body.professional-mode .read-progress-badge .rp-pct {
+    color: var(--text-main) !important;
+    font-weight: 700 !important;
 }
 
 body.professional-mode .topic-btn {
-    border-bottom: 1px solid rgba(21, 101, 192, 0.08);
-    color: var(--text-mute);
-    font-weight: 500;
-    transition: all 0.2s;
-    border-left: 3px solid transparent;
+    border-bottom: 1px solid rgba(21, 101, 192, 0.06) !important;
+    color: var(--text-mute) !important;
+    font-family: var(--font-code) !important;
+    font-weight: 600 !important;
+    padding: 16px 20px !important;
+    background: transparent !important;
+    border-left: 4px solid transparent !important;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
 body.professional-mode .topic-btn:hover {
-    color: var(--atlas-gold);
-    background: rgba(21, 101, 192, 0.04);
-    border-left-color: var(--atlas-gold);
-    padding-left: 25px;
+    color: var(--atlas-gold) !important;
+    background: rgba(21, 101, 192, 0.03) !important;
+    border-left-color: rgba(21, 101, 192, 0.4) !important;
+    padding-left: 24px !important;
 }
 
 body.professional-mode .topic-btn.active {
-    background: linear-gradient(90deg, rgba(21, 101, 192, 0.1), transparent);
-    color: var(--atlas-gold);
-    border-left-color: var(--atlas-gold);
-    font-weight: 700;
-    border-bottom-color: rgba(21, 101, 192, 0.2);
+    background: linear-gradient(90deg, rgba(21, 101, 192, 0.06), transparent) !important;
+    color: var(--atlas-gold) !important;
+    border-left-color: var(--atlas-gold) !important;
+    font-weight: 700 !important;
+    padding-left: 24px !important;
+    border-bottom-color: rgba(21, 101, 192, 0.1) !important;
+}
+
+/* Checked/Read topic indicators */
+body.professional-mode .topic-btn.is-read {
+    background: rgba(46, 125, 50, 0.03) !important;
+    border-left-color: rgba(46, 125, 50, 0.3) !important;
+}
+
+body.professional-mode .topic-btn.is-read.active {
+    background: linear-gradient(90deg, rgba(46, 125, 50, 0.06), transparent) !important;
+    border-left-color: #2e7d32 !important;
+}
+
+body.professional-mode .topic-btn .read-tick {
+    color: #2e7d32 !important;
+    filter: none !important;
 }
 
 body.professional-mode .content-area {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 12px;
-    border-top: 4px solid var(--medical-coral);
-    /* Warm accent for content */
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    border-top: 4px solid var(--medical-purple) !important;
+    box-shadow: 0 8px 30px rgba(21, 101, 192, 0.05) !important;
+    border-radius: 16px !important;
+    padding: 35px !important;
 }
 
 body.professional-mode .h-title {
-    color: var(--text-main);
-    font-weight: 700;
-    position: relative;
-    padding-bottom: 15px;
+    color: var(--text-main) !important;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 6px !important;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 body.professional-mode .h-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--atlas-gold), var(--medical-coral));
-    border-radius: 2px;
+    display: none;
 }
 
 body.professional-mode .h-sub {
-    color: var(--why-cyan);
-    border-bottom: 1px solid rgba(0, 137, 123, 0.2);
-    font-weight: 600;
+    color: var(--text-mute) !important;
+    font-family: var(--font-code) !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-block;
 }
 
 body.professional-mode .desc-text {
@@ -3315,17 +3537,124 @@ body.professional-mode .desc-text b {
     font-weight: 600;
 }
 
+/* Textbook callout block description */
+body.professional-mode .feature-box {
+    background: rgba(126, 87, 194, 0.025) !important;
+    border: 1px solid rgba(126, 87, 194, 0.08) !important;
+    border-left: 4px solid var(--medical-purple) !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    margin-bottom: 25px !important;
+    box-shadow: inset 0 1px 3px rgba(126, 87, 194, 0.01) !important;
+}
+
+body.professional-mode .feature-box div {
+    color: var(--text-main) !important;
+    line-height: 1.8 !important;
+    font-size: 1.05rem !important;
+}
+
+body.professional-mode .feature-box strong {
+    color: var(--medical-purple) !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* Detail header actions toolbar button styling */
+body.professional-mode .detail-header-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+body.professional-mode .detail-header-actions button {
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    font-family: var(--font-code) !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    padding: 8px 14px !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 4px rgba(21, 101, 192, 0.02) !important;
+}
+
+/* textbook clinical correlation blocks */
+body.professional-mode .content-area div[style*="dashed var(--why-cyan)"] {
+    margin-top: 30px !important;
+    border: 1px dashed rgba(255, 112, 67, 0.3) !important;
+    border-left: 4px solid var(--medical-coral) !important;
+    padding: 24px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 112, 67, 0.025) !important;
+    box-shadow: inset 0 1px 3px rgba(255, 112, 67, 0.01) !important;
+}
+
+body.professional-mode .content-area div[style*="dashed var(--why-cyan)"] strong {
+    color: var(--medical-coral) !important;
+    font-family: var(--font-code) !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+body.professional-mode .content-area div[style*="dashed var(--why-cyan)"] p {
+    color: var(--text-main) !important;
+    line-height: 1.7 !important;
+    margin-top: 8px !important;
+}
+
+/* 6. Medical Imaging Viewer frame */
+body.professional-mode .img-container {
+    background: #0f172a !important; /* viewer slate */
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    border-radius: 12px !important;
+    position: relative;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.professional-mode .img-container::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    z-index: 1;
+}
+
+body.professional-mode .atlas-image-caption {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-family: var(--font-code) !important;
+    font-size: 0.76rem !important;
+    letter-spacing: 0.2px;
+    margin-top: 15px !important;
+    line-height: 1.4 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+body.professional-mode .img-placeholder-text {
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-family: var(--font-code) !important;
+}
+
+body.professional-mode .img-placeholder-text i {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
 /* Enhanced Table Styling — allows horizontal scroll when content wider than viewport */
 body.professional-mode .comp-table {
-    background: white;
-    border-radius: 12px;
-    overflow-x: auto;          /* was 'hidden' — prevented mobile scroll of long tables */
-    overflow-y: visible;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(21, 101, 192, 0.12) !important;
+    box-shadow: 0 4px 15px rgba(21, 101, 192, 0.02) !important;
+    overflow-x: auto !important;
+    margin-top: 15px !important;
     display: block;
     max-width: 100%;
     -webkit-overflow-scrolling: touch;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--border);
 }
 body.professional-mode .comp-table tbody { display: table; width: 100%; min-width: 600px; }
 
@@ -3339,26 +3668,37 @@ body.professional-mode .comp-table tbody { display: table; width: 100%; min-widt
 .comp-table tbody { display: table; width: 100%; min-width: 520px; }
 .comp-table::-webkit-scrollbar { height: 6px; }
 .comp-table::-webkit-scrollbar-thumb { background: rgba(0,242,255,0.35); border-radius: 3px; }
-body.professional-mode .comp-table::-webkit-scrollbar-thumb { background: rgba(21,101,192,0.30); }
+body.professional-mode .comp-table::-webkit-scrollbar-thumb { background: rgba(21,101,192,0.30) !important; }
+
+body.professional-mode .comp-table tr {
+    border-bottom: 1px solid rgba(21, 101, 192, 0.08) !important;
+}
+
+body.professional-mode .comp-table tr:last-child {
+    border-bottom: none !important;
+}
 
 body.professional-mode .comp-table tr:nth-child(even) {
-    background: rgba(21, 101, 192, 0.02);
-    /* Subtle zebra striping */
+    background: rgba(21, 101, 192, 0.015) !important;
 }
 
 body.professional-mode .comp-table td {
-    border-bottom: 1px solid rgba(21, 101, 192, 0.1);
-    padding: 18px 15px;
+    padding: 16px 20px !important;
+    vertical-align: middle !important;
 }
 
 body.professional-mode .species-label {
-    color: var(--atlas-gold);
-    font-weight: 700;
-    background: rgba(21, 101, 192, 0.08);
-    border-radius: 6px;
-    padding: 8px 12px;
-    display: inline-block;
-    width: auto;
+    color: #1565c0 !important;
+    font-weight: 700 !important;
+    background: rgba(21, 101, 192, 0.06) !important;
+    border: 1px solid rgba(21, 101, 192, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 6px 14px !important;
+    display: inline-block !important;
+    text-align: center;
+    width: auto !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.5px;
 }
 
 /* Professional Mode - Why Section with Category Colors */
@@ -5282,6 +5622,68 @@ body.professional-mode .hl-group-item.hl-blue { background: #bbdefb; color: #102
     font-style: italic;
 }
 .hl-group-note i { color: var(--why-cyan); margin-right: 4px; }
+
+/* Professional Mode overrides for Highlights view */
+body.professional-mode .hl-toolbar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 10px rgba(21, 101, 192, 0.03) !important;
+}
+
+body.professional-mode .hl-search {
+    background: #ffffff !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+    border-radius: 8px !important;
+    color: var(--text-main) !important;
+}
+
+body.professional-mode .hl-search:focus {
+    border-color: var(--atlas-gold) !important;
+    box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.08) !important;
+}
+
+body.professional-mode .hl-filter {
+    border-color: rgba(21, 101, 192, 0.15) !important;
+}
+
+body.professional-mode .hl-filter[data-c="all"] {
+    background: #ffffff !important;
+    color: var(--text-mute) !important;
+    border: 1px solid rgba(21, 101, 192, 0.15) !important;
+}
+
+body.professional-mode .hl-filter[data-c="all"]:hover {
+    color: var(--atlas-gold) !important;
+    border-color: var(--atlas-gold) !important;
+}
+
+body.professional-mode .hl-filter.on {
+    border-color: var(--atlas-gold) !important;
+}
+
+body.professional-mode .hl-export-btn {
+    background: #ffffff !important;
+    border: 1px solid rgba(21, 101, 192, 0.2) !important;
+    color: var(--atlas-gold) !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+body.professional-mode .hl-export-btn:hover {
+    background: rgba(21, 101, 192, 0.05) !important;
+    border-color: var(--atlas-gold) !important;
+}
+
+body.professional-mode .hl-group-note {
+    background: rgba(255, 112, 67, 0.03) !important;
+    border-left-color: var(--medical-coral) !important;
+    color: var(--text-main) !important;
+}
+
+body.professional-mode .hl-group-note i {
+    color: var(--medical-coral) !important;
+}
 
 /* ============================================================
    NOTE BUTTON in detail header (mirrors .hl-btn)
