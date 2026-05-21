@@ -243,11 +243,24 @@ const app = {
             breadcrumb.innerHTML = "ATLAS > SELECT REGION";
             grid.innerHTML = Object.keys(atlasData).map(region => {
                 const icon = app.getRegionIcon(region);
+                const stats = app.getRegionReadStats(region);
+                const progressHtml = stats.total > 0 ? `
+                    <div class="card-progress-container">
+                        <div class="card-progress-bar">
+                            <div class="card-progress-fill" style="width: ${stats.percent}%"></div>
+                        </div>
+                        <div class="card-progress-text">
+                            <span>PROGRESS</span>
+                            <span>${stats.percent}%</span>
+                        </div>
+                    </div>
+                ` : '';
                 return `
                 <div class="portal-card card-atlas" style="width: 280px; height: 300px;" onclick="app.selectRegion('${region}')">
-                    <i class="fas ${icon} orb-icon" style="color: var(--atlas-gold); font-size: 3rem; margin-bottom: 20px; z-index: 2;"></i>
-                    <div class="card-label" style="font-size: 1.5rem;">${region}</div>
-                    <div class="card-sub">REGIONAL ANATOMY MODULE</div>
+                    <i class="fas ${icon} orb-icon" style="color: var(--atlas-gold); font-size: 3rem; margin-bottom: 15px; z-index: 2;"></i>
+                    <div class="card-label" style="font-size: 1.4rem; font-weight: 800; text-align: center; z-index: 2;">${region}</div>
+                    <div class="card-sub" style="margin-bottom: 15px; z-index: 2;">REGIONAL ANATOMY MODULE</div>
+                    ${progressHtml}
                 </div>
             `}).join('');
         }
@@ -258,11 +271,24 @@ const app = {
             grid.innerHTML = Object.keys(systems).map(sys => {
                 const sysIcon = app.getSystemIcon(sys);
                 const count = systems[sys].length;
+                const stats = app.getReadStats(app.state.region, sys);
+                const progressHtml = stats.total > 0 ? `
+                    <div class="card-progress-container">
+                        <div class="card-progress-bar">
+                            <div class="card-progress-fill" style="width: ${stats.percent}%"></div>
+                        </div>
+                        <div class="card-progress-text">
+                            <span>PROGRESS</span>
+                            <span>${stats.percent}%</span>
+                        </div>
+                    </div>
+                ` : '';
                 return `
                 <div class="portal-card card-why" style="width: 280px; height: 300px;" onclick="app.selectSystem('${sys}')">
-                    <i class="fas ${sysIcon} orb-icon" style="color: var(--why-cyan); font-size: 3rem; margin-bottom: 20px; z-index: 2;"></i>
-                    <div class="card-label" style="font-size: 1.5rem;">${sys}</div>
-                    <div class="card-sub">${count} STRUCTURES<br>CLICK TO ACCESS</div>
+                    <i class="fas ${sysIcon} orb-icon" style="color: var(--why-cyan); font-size: 3rem; margin-bottom: 15px; z-index: 2;"></i>
+                    <div class="card-label" style="font-size: 1.4rem; font-weight: 800; text-align: center; z-index: 2;">${sys}</div>
+                    <div class="card-sub" style="margin-bottom: 15px; z-index: 2;">${count} STRUCTURES</div>
+                    ${progressHtml}
                 </div>
             `}).join('');
         }
@@ -1476,6 +1502,23 @@ const app = {
         // Re-mark active topic
         const act = document.querySelector(`.topic-btn[data-index="${index}"]`);
         if (act) act.classList.add('active');
+    },
+    // Returns {read, total, percent} aggregated across all systems in a region
+    getRegionReadStats: (region) => {
+        if (!region || !atlasData[region]) {
+            return { read: 0, total: 0, percent: 0 };
+        }
+        let read = 0;
+        let total = 0;
+        const readList = app._loadRead();
+        Object.keys(atlasData[region]).forEach(system => {
+            const structures = atlasData[region][system];
+            total += structures.length;
+            structures.forEach((item, index) => {
+                if (readList.includes(app.bookmarkId(region, system, index))) read++;
+            });
+        });
+        return { read, total, percent: total ? Math.round((read / total) * 100) : 0 };
     },
 
     // Returns {read, total, percent} for current region+system
