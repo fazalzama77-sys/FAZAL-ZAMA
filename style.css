@@ -1207,8 +1207,7 @@ body.professional-mode .credit-foot { color: #607d8b; }
                 radial-gradient(circle at 0% 100%, rgba(138, 43, 226, 0.04), transparent 50%),
                 #020c1b;
     position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0);
+    overflow: visible;
 }
 
 #why-view header {
