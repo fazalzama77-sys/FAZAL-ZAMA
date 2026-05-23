@@ -46,7 +46,158 @@ const app = {
         // ---- Hash routing ----
         window.addEventListener('hashchange', () => app.routeFromHash());
         // Defer first route until DOM ready (data files loaded via script tags)
-        setTimeout(() => app.routeFromHash(), 0);
+        setTimeout(() => {
+            app.routeFromHash();
+            app._initBottomNav();
+        }, 0);
+    },
+
+    // ============== BOTTOM NAV / TOP DOCK glue ==============
+    // The bottom nav is the persistent spine of navigation on mobile;
+    // on desktop the same component reconfigures into a top-centered dock
+    // via CSS (no JS branching needed). This function wires:
+    //   - "active slot" highlight that follows the current view
+    //   - hide-on-scroll behaviour (the bar slides away on deep scroll
+    //     into reading content and re-appears on scroll-up)
+    _initBottomNav: () => {
+        const nav = document.getElementById('bottom-nav');
+        if (!nav) return;
+        // Hide-on-scroll: only on small screens; uses passive listener so it
+        // never blocks scrolling. Threshold tuned to feel natural (90px).
+        let lastY = window.scrollY;
+        let ticking = false;
+        const onScroll = () => {
+            const y = window.scrollY;
+            if (Math.abs(y - lastY) < 6) { ticking = false; return; }
+            // Only auto-hide on narrow screens — desktop dock stays put
+            if (window.innerWidth < 901) {
+                if (y > lastY && y > 90) nav.classList.add('bn-hidden');
+                else nav.classList.remove('bn-hidden');
+            }
+            lastY = y;
+            ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+        }, { passive: true });
+        app._refreshBottomNavActive();
+    },
+
+    // Mark the bottom-nav slot that matches the current logical view.
+    // Logical view is broader than the view-section: e.g. #/library and
+    // #/highlights both light up the Library slot.
+    _refreshBottomNavActive: () => {
+        const nav = document.getElementById('bottom-nav');
+        if (!nav) return;
+        const hash = (location.hash || '').replace(/^#\/?/, '').split('/')[0];
+        let active = '';
+        if (hash === 'atlas' || hash === '' || app.state.view === 'atlas') active = 'atlas';
+        if (hash === 'why' || app.state.view === 'why') active = 'why';
+        if (hash === 'library' || hash === 'bookmarks' || hash === 'highlights' || hash === 'notes') active = 'library';
+        if (hash === 'me' || hash === 'dashboard') active = 'me';
+        nav.querySelectorAll('.bn-item').forEach(b => {
+            b.classList.toggle('is-active', b.dataset.view === active);
+        });
+    },
+
+    // Wrapper called by every bottom-nav button. Centralises routing so we
+    // never end up with desynced URL + view state.
+    navigateTo: (view) => {
+        if (view === 'atlas') {
+            app.loadView('atlas');
+        } else if (view === 'why') {
+            app.loadView('why');
+        }
+        app._refreshBottomNavActive();
+    },
+
+    openQuiz: () => {
+        if (typeof quizApp !== 'undefined' && quizApp.openMenu) {
+            quizApp.openMenu();
+        }
+        app._refreshBottomNavActive();
+    },
+
+    openMe: () => {
+        app._teardownHighlightPopup();
+        app._loadViewInternal('me');
+        app.setHash('#/me');
+        app._renderMeStats();
+        app._refreshBottomNavActive();
+    },
+
+    _renderMeStats: () => {
+        const bm = (app._loadBookmarks() || []).length;
+        const hl = Object.values(app._loadAllHighlights() || {}).reduce((n, a) => n + a.length, 0);
+        const nt = Object.values(app._loadAllNotes() || {}).reduce((n, a) => n + a.length, 0);
+        const rd = (app._loadRead() || []).length;
+        const set = (id, v) => { const el = document.getElementById(id); if (el) el.innerText = v; };
+        set('me-stat-bookmarks', bm);
+        set('me-stat-highlights', hl);
+        set('me-stat-notes', nt);
+        set('me-stat-read', rd);
+        const themeDesc = document.getElementById('me-theme-desc');
+        if (themeDesc) {
+            const isPro = document.body.classList.contains('professional-mode');
+            themeDesc.innerText = isPro ? 'Currently: Professional (medical) — tap to switch' : 'Currently: Student (neon) — tap to switch';
+        }
+    },
+
+    openAbout: () => {
+        const m = document.getElementById('about-modal');
+        if (m) m.style.display = 'flex';
+    },
+    closeAbout: () => {
+        const m = document.getElementById('about-modal');
+        if (m) m.style.display = 'none';
+    },
+
+    // ============== LIBRARY (unified Bookmarks + Highlights + Notes) ==============
+    _activeLibraryTab: 'bookmarks',
+
+    openLibrary: (tab) => {
+        const t = tab || app._activeLibraryTab || 'bookmarks';
+        app._activeLibraryTab = t;
+        app._teardownHighlightPopup();
+        // Atlas view hosts the library — it already has the sidebar/panel shell
+        app._loadViewInternal('atlas');
+        document.getElementById('atlas-selector').style.display = 'none';
+        document.getElementById('atlas-content').style.display = 'grid';
+
+        // Show the library tab bar at the top of the atlas content
+        const tabs = document.getElementById('library-tabs');
+        if (tabs) {
+            tabs.classList.add('is-open');
+            tabs.style.display = 'flex';
+            // Position the sliding indicator
+            const idx = ['bookmarks', 'highlights', 'notes'].indexOf(t);
+            tabs.dataset.active = String(Math.max(0, idx));
+            tabs.querySelectorAll('.lib-tab').forEach(b => {
+                b.classList.toggle('is-active', b.dataset.tab === t);
+            });
+        }
+
+        // Dispatch to the existing renderer for the chosen tab
+        if (t === 'bookmarks') {
+            app.showBookmarks();
+            app.setHash('#/library/bookmarks');
+        } else if (t === 'highlights') {
+            app.showHighlights();
+            app.setHash('#/library/highlights');
+        } else {
+            app.showNotes();
+            app.setHash('#/library/notes');
+        }
+        app._refreshBottomNavActive();
+    },
+
+    // Hide the library tab bar when leaving library mode
+    _hideLibraryTabs: () => {
+        const tabs = document.getElementById('library-tabs');
+        if (tabs) {
+            tabs.classList.remove('is-open');
+            tabs.style.display = 'none';
+        }
     },
 
     // ============== HASH ROUTING ==============
@@ -65,25 +216,31 @@ const app = {
 
         if (view === 'why' || view === 'dashboard' || view === 'landing') {
             if (app.state.view !== view) app._loadViewInternal(view);
+            app._hideLibraryTabs();
+            app._refreshBottomNavActive();
             return;
         }
-        if (view === 'bookmarks') {
-            app._loadViewInternal('atlas');
-            app.showBookmarks();
+        if (view === 'me') {
+            app._loadViewInternal('me');
+            app._hideLibraryTabs();
+            app._renderMeStats();
+            app._refreshBottomNavActive();
             return;
         }
-        if (view === 'highlights') {
-            app._loadViewInternal('atlas');
-            app.showHighlights();
+        if (view === 'library') {
+            // Sub-route: #/library/bookmarks | /highlights | /notes
+            const sub = parts[1] || app._activeLibraryTab || 'bookmarks';
+            app.openLibrary(sub);
             return;
         }
-        if (view === 'notes') {
-            app._loadViewInternal('atlas');
-            app.showNotes();
-            return;
-        }
+        // Legacy deep-links — route through Library so the tab bar appears
+        if (view === 'bookmarks')  { app.openLibrary('bookmarks');  return; }
+        if (view === 'highlights') { app.openLibrary('highlights'); return; }
+        if (view === 'notes')      { app.openLibrary('notes');      return; }
         if (view === 'atlas') {
             app._loadViewInternal('atlas');
+            app._hideLibraryTabs();
+            app._refreshBottomNavActive();
             const region = parts[1] || null;
             const system = parts[2] || null;
             const idx = parts[3] != null ? parseInt(parts[3], 10) : null;
@@ -211,10 +368,15 @@ const app = {
         if (viewName === 'why' && typeof renderCards === 'function' && typeof anatomyData !== 'undefined') {
             renderCards(anatomyData);
         }
+        if (viewName === 'me') app._renderMeStats();
+        // Whenever the view switches, refresh the bottom-nav active indicator
+        app._refreshBottomNavActive();
     },
 
     // REGIONAL ANATOMY NAVIGATION
     renderAtlasSelector: () => {
+        // Returning to the region/system grid means we're not in Library either
+        app._hideLibraryTabs();
         const grid = document.getElementById('atlas-selector');
         const breadcrumb = document.getElementById('atlas-crumb');
         const eliteBtn = document.getElementById('elite-toggle');
@@ -370,6 +532,16 @@ const app = {
     },
 
     atlasBack: () => {
+        // Special case: leaving the Library frame should always go back to the
+        // atlas region selector, not deeper into atlas state.
+        const libTabs = document.getElementById('library-tabs');
+        if (libTabs && libTabs.classList.contains('is-open')) {
+            app._hideLibraryTabs();
+            app.state.system = null;
+            app.setHash('#/atlas');
+            app.renderAtlasSelector();
+            return;
+        }
         if (document.getElementById('atlas-content').style.display === 'grid') {
             app.state.system = null;
             app.setHash(app.state.region ? `#/atlas/${encodeURIComponent(app.state.region)}` : '#/atlas');
@@ -1619,6 +1791,7 @@ const app = {
     openBookmark: (region, system, idx) => {
         app.state.region = region;
         app.state.system = system;
+        app._hideLibraryTabs();  // leaving library mode
         app.setHash(`#/atlas/${encodeURIComponent(region)}/${encodeURIComponent(system)}/${idx}`);
         document.getElementById('atlas-crumb').innerHTML = `ATLAS > ${region.toUpperCase()} > ${system.toUpperCase()}`;
         app.renderTopicList();
