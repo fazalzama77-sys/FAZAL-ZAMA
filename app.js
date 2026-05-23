@@ -200,6 +200,29 @@ const app = {
         }
     },
 
+    // Reset the detail panel back to its "awaiting selection" placeholder.
+    // Used whenever we navigate to a new system but don't open a specific
+    // topic — otherwise the previous topic's content would stay visible
+    // (e.g. you click Histology after viewing Scapula → Scapula keeps showing
+    // until you click something in the new sidebar). That felt broken.
+    _resetDetailPanel: () => {
+        // Also clean up any selection popup tied to the old topic
+        app._teardownHighlightPopup();
+        const panel = document.getElementById('detail-panel');
+        if (!panel) return;
+        panel.innerHTML = `
+            <div style="height:100%; display:flex; flex-direction:column;
+                        justify-content:center; align-items:center;
+                        opacity:0.3; color: var(--text-mute);
+                        padding: 40px; text-align: center;">
+                <i class="fas fa-crosshairs" style="font-size:3rem; margin-bottom:20px;"></i>
+                <div style="font-family: var(--font-code); letter-spacing: 1.5px;">SELECT A TOPIC FROM THE LEFT</div>
+                <div style="font-size: .8rem; opacity: .7; margin-top: 8px;">
+                    Pick any structure to view its standard + elite description, comparative table, and clinical correlation.
+                </div>
+            </div>`;
+    },
+
     // ============== HASH ROUTING ==============
     // Hash format examples:
     //   #/landing
@@ -262,6 +285,11 @@ const app = {
                         const btn = document.querySelector(`.topic-btn[data-index="${idx}"]`);
                         if (btn) app.renderDetail(idx, btn);
                     }, 30);
+                } else {
+                    // New region/system but no specific topic — reset the
+                    // detail panel so the previous topic's content doesn't
+                    // bleed into the new context.
+                    app._resetDetailPanel();
                 }
             } else {
                 app.renderAtlasSelector();
@@ -516,6 +544,9 @@ const app = {
         document.getElementById('atlas-content').style.display = 'grid';
         document.getElementById('atlas-crumb').innerHTML = `ATLAS > ${app.state.region.toUpperCase()} > ${system.toUpperCase()}`;
         app.renderTopicList();
+        // Fresh system = fresh detail panel; otherwise the previous topic
+        // (e.g. Scapula from Forelimb > Osteology) leaks into the new context.
+        app._resetDetailPanel();
 
         const eliteBtn = document.getElementById('elite-toggle');
         if (eliteBtn) {
