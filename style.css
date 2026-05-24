@@ -6992,6 +6992,52 @@ body.professional-mode .me-toggle-pill { background: #cfd8dc; }
 body.professional-mode .me-toggle-pill.on { background: #1976d2; }
 body.professional-mode .me-toggle-state { color: #5c6b80; }
 
+/* ---------- BACKUP / RESTORE cards + safety note ---------- */
+.me-card-backup {
+    border-color: rgba(124, 240, 124, 0.20);
+    background: linear-gradient(135deg, rgba(124,240,124,0.05), rgba(93,173,226,0.04));
+}
+.me-card-backup:hover {
+    border-color: rgba(124, 240, 124, 0.5);
+    background: linear-gradient(135deg, rgba(124,240,124,0.10), rgba(93,173,226,0.06));
+}
+.backup-note {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 16px;
+    margin: 0 0 28px;
+    background: rgba(124, 240, 124, 0.05);
+    border: 1px solid rgba(124, 240, 124, 0.18);
+    border-left: 3px solid #7cf07c;
+    border-radius: 12px;
+    font-size: .85rem;
+    color: var(--text-main);
+    line-height: 1.5;
+    animation: meFade .5s ease;
+}
+.backup-note > i {
+    color: #7cf07c;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.backup-note b { color: #7cf07c; }
+body.professional-mode .me-card-backup {
+    background: #e8f5e9;
+    border-color: #a5d6a7;
+}
+body.professional-mode .me-card-backup:hover {
+    border-color: #66bb6a;
+    background: #c8e6c9;
+}
+body.professional-mode .backup-note {
+    background: #e8f5e9;
+    border-color: #a5d6a7;
+    border-left-color: #2e7d32;
+    color: #102a43;
+}
+body.professional-mode .backup-note > i,
+body.professional-mode .backup-note b { color: #2e7d32; }
+
 /* ---------- AUDIO PRONUNCIATION button (next to topic title) ---------- */
 .speak-btn {
     background: rgba(0, 242, 255, 0.08);

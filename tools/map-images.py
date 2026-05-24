@@ -329,33 +329,74 @@ def main():
     print()
 
     # Step 1: parse every data file
+    # Atlas data files use the pattern  atlasData["Region"] = { "System": [ {entries...} ] }
+    # so we also pull the region+system around each entry block to enable
+    # folder-scoped matching downstream.
     all_entries = []   # list of dicts: section, data_file, ...entry fields
     file_texts = {}    # data_file path -> text
+    region_re = re.compile(r'atlasData\[\s*"([^"]+)"\s*\]\s*=\s*\{')
+    system_re = re.compile(r'"([^"]+)"\s*:\s*\[')
+
     for df in DATA_FILES:
         text = df.read_text(encoding="utf-8")
         file_texts[df] = text
         section = detect_section(df.name)
+        # Pre-compute the (region, system) ownership ranges so we can label
+        # each entry by walking backwards from its position.
+        regions = [(m.start(), m.group(1)) for m in region_re.finditer(text)]
+        systems = [(m.start(), m.group(1)) for m in system_re.finditer(text)]
+
+        def label_for(pos):
+            r = ""
+            s = ""
+            for sp, rn in regions:
+                if sp <= pos: r = rn
+                else: break
+            for sp, sn in systems:
+                if sp <= pos: s = sn
+                else: break
+            return r, s
+
         for e in find_entries(text):
             e["section"] = section
             e["data_file"] = df.name
             e["data_path"] = df
+            r, s = label_for(e["block_start"])
+            e["region_label"] = r
+            e["system_label"] = s
+            e["region_slug"] = slug(r) if r else None
+            e["system_slug"] = slug(s) if s else None
             all_entries.append(e)
     print(f"  Parsed {len(DATA_FILES)} data files -> {len(all_entries)} entries.")
 
-    # Step 2: collect images
+    # Step 2: collect images — RECURSIVELY through the nested folder structure
+    # images/atlas/<region>/<system>/<file>.webp
+    # We extract region+system from the path so we can scope matches to just
+    # the right anatomy entries (huge accuracy boost).
     images = []
     for section, d in IMG_DIRS.items():
         if not d.exists():
             continue
-        for p in sorted(d.iterdir()):
-            if p.is_file() and p.suffix.lower() in SUPPORTED_EXT and not p.name.startswith("."):
-                images.append({
-                    "section": section,
-                    "name": p.name,
-                    "slug": slug(p.name),
-                    "rel": f"images/{section}/{p.name}",
-                })
+        for p in sorted(d.rglob("*")):
+            if not p.is_file(): continue
+            if p.suffix.lower() not in SUPPORTED_EXT: continue
+            if p.name.startswith("."): continue
+            rel = p.relative_to(d)
+            parts = rel.parts          # e.g. ("forelimb","osteology","scapula.webp")
+            # Region/system inferred from folder names (lowercased, hyphen-normalised)
+            folder_region = slug(parts[0]) if len(parts) >= 2 else None
+            folder_system = slug(parts[1]) if len(parts) >= 3 else None
+            images.append({
+                "section": section,
+                "name": p.name,
+                "slug": slug(p.name),
+                "rel": ("images/" + section + "/" + str(rel)).replace("\\", "/"),
+                "folder_region": folder_region,
+                "folder_system": folder_system,
+            })
     print(f"  Found {len(images)} images.")
+    if any(im["folder_region"] for im in images):
+        print(cyan(f"  Detected nested folder structure — matches will be scoped by region+system."))
     print()
 
     # Step 3: for each image, find best entry
@@ -363,12 +404,39 @@ def main():
     matched_entry_keys = set()   # (data_file, block_start) -> already assigned an image this run
 
     for img in images:
-        # Restrict candidates to entries of the same section when possible
-        candidates = [e for e in all_entries if e["section"] == img["section"]] or all_entries
+        # Three-stage candidate scoping for maximum accuracy:
+        # 1. Same section (atlas vs why).
+        # 2. If folder gave us a region, narrow to that region.
+        # 3. If folder gave us a system, narrow to that system too.
+        # We only DEMAND folder-match when folder info is available; otherwise
+        # we fall back to whole-section search like before.
+        candidates = [e for e in all_entries if e["section"] == img["section"]]
+
+        scoped = candidates
+        if img.get("folder_region"):
+            r_scoped = [e for e in scoped if e.get("region_slug") == img["folder_region"]]
+            if r_scoped:
+                scoped = r_scoped
+        if img.get("folder_system"):
+            s_scoped = [e for e in scoped if e.get("system_slug") == img["folder_system"]]
+            if s_scoped:
+                scoped = s_scoped
+
+        # If folder scoping yielded nothing useful, fall back to all section candidates
+        if not scoped:
+            scoped = candidates or all_entries
+
         best = None
         best_score = 0
-        for e in candidates:
+        for e in scoped:
             s = score_match(img["slug"], e)
+            # Folder-scoped matches get a confidence boost — we already know
+            # they're in the right region/system, so even partial filename
+            # matches are very likely correct.
+            if img.get("folder_region") and e.get("region_slug") == img["folder_region"]:
+                s = min(100, s + 10)
+            if img.get("folder_system") and e.get("system_slug") == img["folder_system"]:
+                s = min(100, s + 8)
             if s > best_score:
                 best_score = s
                 best = e

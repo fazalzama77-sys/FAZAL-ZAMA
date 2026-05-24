@@ -185,57 +185,80 @@ def main():
     grand_warn = 0
     grand_err = 0
 
+    # Walk the raw folders RECURSIVELY so the user can organise images into
+    # subfolders like images-raw/atlas/forelimb/osteology/scapula.jpg.
+    # The output mirrors the same subfolder structure, so the compressed
+    # webp lands at images/atlas/forelimb/osteology/scapula.webp.
     for section in ("atlas", "why"):
         raw = RAW_DIRS[section]
         out = OUT_DIRS[section]
         if not raw.exists():
             continue
 
-        # Gather candidate files (ignore hidden + the _done archive)
-        candidates = [
-            p for p in sorted(raw.iterdir())
-            if p.is_file()
-            and p.suffix.lower() in SUPPORTED
-            and not p.name.startswith(".")
-        ]
+        # Walk every subdirectory; skip _done archives.
+        candidates = []
+        for src in sorted(raw.rglob("*")):
+            if not src.is_file():
+                continue
+            if src.suffix.lower() not in SUPPORTED:
+                continue
+            if src.name.startswith("."):
+                continue
+            # Skip anything inside a _done folder anywhere in the path
+            if DONE_DIR_NAME in src.parts:
+                continue
+            candidates.append(src)
 
         if not candidates:
             print(yellow(f"⚠  No images found in images-raw/{section}/"))
-            print(f"   Drop your raw {section} images into that folder, then run me again.\n")
+            print(f"   Drop your raw {section} images (or subfolders of images) there, then run me again.\n")
             continue
 
-        print(bold(cyan(f"▼ Processing  images-raw/{section}/  ({len(candidates)} files)")))
-
+        # Group by parent subfolder for tidy log output
+        from collections import defaultdict
+        by_dir = defaultdict(list)
         for src in candidates:
-            grand_total += 1
-            result = compress_one(src, out, args.force)
-            name = result["name"]
+            rel_dir = src.parent.relative_to(raw)
+            by_dir[str(rel_dir).replace("\\", "/")].append(src)
 
-            if result["status"] == "ok":
-                grand_done += 1
-                w, h = result["size_px"]
-                msg = (f"  {green('✓')} {name:<35} → "
-                       f"{result['out']:<35} "
-                       f"{result['kb']:6.1f} KB  q={result['quality']}  {w}×{h}")
-                print(msg)
-                if not args.keep_raw:
-                    move_to_done(src)
-            elif result["status"] == "warn":
-                grand_warn += 1
-                w, h = result["size_px"]
-                msg = (f"  {yellow('!')} {name:<35} → "
-                       f"{result['out']:<35} "
-                       f"{result['kb']:6.1f} KB  q={result['quality']}  (above target, kept)")
-                print(msg)
-                if not args.keep_raw:
-                    move_to_done(src)
-            elif result["status"] == "skip":
-                msg = f"  {cyan('·')} {name:<35} → {result['msg']}"
-                print(msg)
-            else:
-                grand_err += 1
-                msg = f"  {red('✗')} {name:<35} → ERROR: {result.get('msg','?')}"
-                print(msg)
+        print(bold(cyan(f"▼ Processing  images-raw/{section}/  ({len(candidates)} files across {len(by_dir)} folder(s))")))
+
+        for rel_dir, files in by_dir.items():
+            label = rel_dir if rel_dir != "." else "(root)"
+            print(cyan(f"  • {label}/  ({len(files)} files)"))
+            for src in files:
+                grand_total += 1
+                # Mirror the subfolder structure into the output dir
+                sub = src.parent.relative_to(raw)
+                target_dir = out / sub
+                result = compress_one(src, target_dir, args.force)
+                name = result["name"]
+
+                if result["status"] == "ok":
+                    grand_done += 1
+                    w, h = result["size_px"]
+                    rel_out = str((sub / result["out"])).replace("\\", "/")
+                    msg = (f"    {green('✓')} {name:<32} → {rel_out:<48} "
+                           f"{result['kb']:6.1f} KB  q={result['quality']}  {w}×{h}")
+                    print(msg)
+                    if not args.keep_raw:
+                        move_to_done(src)
+                elif result["status"] == "warn":
+                    grand_warn += 1
+                    w, h = result["size_px"]
+                    rel_out = str((sub / result["out"])).replace("\\", "/")
+                    msg = (f"    {yellow('!')} {name:<32} → {rel_out:<48} "
+                           f"{result['kb']:6.1f} KB  q={result['quality']}  (above target)")
+                    print(msg)
+                    if not args.keep_raw:
+                        move_to_done(src)
+                elif result["status"] == "skip":
+                    msg = f"    {cyan('·')} {name:<32} → {result['msg']}"
+                    print(msg)
+                else:
+                    grand_err += 1
+                    msg = f"    {red('✗')} {name:<32} → ERROR: {result.get('msg','?')}"
+                    print(msg)
 
         print()
 

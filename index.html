@@ -994,6 +994,16 @@
           <div class="me-card-title">Performance Dashboard</div>
           <div class="me-card-desc">Accuracy trends, weak topics, smart review queue.</div>
         </button>
+        <button class="me-card me-card-backup" onclick="app.exportBackup()">
+          <i class="fas fa-cloud-arrow-down me-card-icon" style="color:#7cf07c;"></i>
+          <div class="me-card-title">Backup My Data</div>
+          <div class="me-card-desc">Download all bookmarks, notes, highlights, quiz progress, streak. Save it somewhere safe.</div>
+        </button>
+        <button class="me-card me-card-backup" onclick="app.promptImportBackup()">
+          <i class="fas fa-cloud-arrow-up me-card-icon" style="color:#5dade2;"></i>
+          <div class="me-card-title">Restore from Backup</div>
+          <div class="me-card-desc">Bring back data from a backup file (e.g. after switching phones).</div>
+        </button>
         <button class="me-card" onclick="app.openAbout()">
           <i class="fas fa-circle-info me-card-icon" style="color:var(--why-cyan);"></i>
           <div class="me-card-title">About this Platform</div>
@@ -1014,6 +1024,21 @@
           <div class="me-card-title">Reset App Cache</div>
           <div class="me-card-desc">Refresh app files (your saved data stays safe).</div>
         </button>
+      </div>
+
+      <!-- Hidden file picker used by the Restore card -->
+      <input type="file" id="restore-file" accept="application/json,.json"
+             style="display:none;"
+             onchange="app.importBackupFromFile(this)">
+
+      <!-- Helpful note explaining the backup model -->
+      <div class="backup-note">
+        <i class="fas fa-shield-halved"></i>
+        <div>
+          <b>Why this matters:</b> Your bookmarks, notes, highlights, and quiz progress live in your browser only.
+          If you clear browser data, switch phones, or use incognito by accident, they're gone forever.
+          <b>Download a backup at least once a month</b> and keep the JSON file in Google Drive / WhatsApp to yourself.
+        </div>
       </div>
 
       <footer class="me-footer">

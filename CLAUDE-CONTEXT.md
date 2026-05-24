@@ -236,7 +236,20 @@ Boot sequence (in `app._initEngagement`):
 
 **Heatmap** in Me page uses `app._buildHeatmapData()` — last 84 days, grouped 12 cols × 7 rows.
 
-**Audio pronunciation** uses the browser's `speechSynthesis` API — free, no API key, works offline. Trigger: speak-button next to Atlas topic titles + double-click any glossary term. Implemented in `app.speak(text)`.
+**Audio pronunciation** uses the browser's `speechSynthesis` API — free, no API key, works offline. The speak-button next to an Atlas topic title now reads the **full content** (title + description + comparative + clinical) of the active topic via `app.speakCurrentTopic()`, with a play/stop toggle. Double-click any glossary term still triggers `app.speak()` for a one-shot pronunciation.
+
+**Backup & Restore** lives in `app.exportBackup()` / `app.importBackupFromFile()` — exports every IVRI localStorage key into a single JSON file (~10–200 KB), validates the file shape on import, asks confirmation if local data exists, then reloads to re-render. The keys covered are listed in `app._backupKeys()` — **add any new `ivri-*` key there** or backups will silently miss it.
+
+### 📸 Image folder structure (nested)
+
+Both `images-raw/atlas/` and `images/atlas/` follow this 3-level structure:
+```
+<region>/<system>/<file>.webp
+e.g. images/atlas/forelimb/osteology/scapula.webp
+```
+The compress script (`tools/compress.py`) walks the raw tree recursively and mirrors output paths. The mapper (`tools/map-images.py`) uses the folder path to scope matches by region+system — accuracy is ~95% when images sit in the right subfolder. Read `tools/IMAGE-WORKFLOW.md` for the full non-coder workflow.
+
+**No "25 MB folder" limit exists** — the only real cap is 25 MB per individual file (Cloudflare Pages), and the compressor pegs files at ~300 KB. The 20,000-files-per-deployment cap on Cloudflare leaves room for 80+ images per atlas entry.
 
 ---
 

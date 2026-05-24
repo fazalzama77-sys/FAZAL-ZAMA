@@ -491,6 +491,137 @@ const app = {
         if (app.state.view === 'me') app._renderMeStats();
     },
 
+    // ============== BACKUP & RESTORE ==============
+    // Every per-user key the app writes to localStorage. Anything new added in
+    // future should be appended here so backups capture it.
+    _backupKeys: () => ([
+        'ivri-theme',
+        'ivri-elite',
+        'ivri-bookmarks',
+        'ivri-read',
+        'ivri-srs-state',
+        'ivri-quiz-progress',
+        'ivri-highlights',
+        'ivri-notes',
+        'ivri-visits',
+        'ivri-onboarded',
+        'ivri-install-dismissed',
+        'ivri-activity',
+        'ivri-notify-srs',
+        'ivri-notify-last',
+    ]),
+
+    // Export every IVRI localStorage key into a single JSON file the user
+    // downloads. The file is small (~10-200 KB depending on highlights/notes)
+    // and human-readable — a safe long-term archive.
+    exportBackup: () => {
+        const payload = {
+            app: 'IVRI Anatomy',
+            version: 1,
+            exported_at: new Date().toISOString(),
+            user_agent: navigator.userAgent,
+            data: {},
+            stats: {},
+        };
+        const keys = app._backupKeys();
+        keys.forEach(k => {
+            const v = localStorage.getItem(k);
+            if (v !== null) payload.data[k] = v;
+        });
+        // Friendly summary inside the file so the user sees what's in it
+        try {
+            payload.stats = {
+                bookmarks: (JSON.parse(payload.data['ivri-bookmarks'] || '[]') || []).length,
+                read_topics: (JSON.parse(payload.data['ivri-read'] || '[]') || []).length,
+                highlight_groups: Object.keys(JSON.parse(payload.data['ivri-highlights'] || '{}') || {}).length,
+                note_groups: Object.keys(JSON.parse(payload.data['ivri-notes'] || '{}') || {}).length,
+                active_days: Object.keys(JSON.parse(payload.data['ivri-activity'] || '{}') || {}).length,
+            };
+        } catch (e) { /* tolerate corrupted entries */ }
+
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const today = app._today();
+        a.href = url;
+        a.download = `ivri-anatomy-backup-${today}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        // Revoke the blob URL after a beat so the browser can finish downloading
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        if (typeof showToast === 'function') showToast('Backup downloaded', 'success', 'fa-download');
+    },
+
+    // Open the file picker; the chosen file is parsed and restored via
+    // importBackupFromFile(). Wired to the hidden <input id="restore-file">.
+    promptImportBackup: () => {
+        const input = document.getElementById('restore-file');
+        if (input) input.click();
+    },
+
+    // Called when the user picks a backup JSON. Validates shape, asks for
+    // confirmation if the device already has data, then restores every key
+    // and reloads so views re-render from the new state.
+    importBackupFromFile: (fileInput) => {
+        const file = fileInput && fileInput.files && fileInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onerror = () => {
+            if (typeof showToast === 'function') showToast('Could not read file', 'warning', 'fa-exclamation-circle');
+        };
+        reader.onload = () => {
+            let payload;
+            try {
+                payload = JSON.parse(String(reader.result || ''));
+            } catch (e) {
+                if (typeof showToast === 'function') showToast('Invalid backup file', 'warning', 'fa-exclamation-circle');
+                fileInput.value = '';
+                return;
+            }
+            if (!payload || payload.app !== 'IVRI Anatomy' || !payload.data) {
+                if (typeof showToast === 'function') showToast('Not a valid IVRI Anatomy backup', 'warning', 'fa-exclamation-circle');
+                fileInput.value = '';
+                return;
+            }
+
+            // Warn if the device already has meaningful data — give the user
+            // a chance to back it up before overwriting.
+            const localKeys = app._backupKeys();
+            const hasLocalData = localKeys.some(k => {
+                const v = localStorage.getItem(k);
+                return v !== null && v !== '' && v !== '[]' && v !== '{}';
+            });
+            const summary = payload.stats || {};
+            const summaryLines = [
+                `Backup created: ${payload.exported_at ? new Date(payload.exported_at).toLocaleString() : 'unknown'}`,
+                `Bookmarks: ${summary.bookmarks || 0}`,
+                `Read topics: ${summary.read_topics || 0}`,
+                `Highlight groups: ${summary.highlight_groups || 0}`,
+                `Notes groups: ${summary.note_groups || 0}`,
+                `Active days: ${summary.active_days || 0}`,
+            ].join('\n');
+
+            const proceed = confirm(
+                'Restore this backup?\n\n' + summaryLines +
+                (hasLocalData ? '\n\n⚠ This will REPLACE your current data on this device. Consider downloading a backup first.' : '')
+            );
+            if (!proceed) { fileInput.value = ''; return; }
+
+            // Clear existing IVRI keys, then write the backup values
+            localKeys.forEach(k => localStorage.removeItem(k));
+            const restored = payload.data || {};
+            Object.keys(restored).forEach(k => {
+                // Only restore keys we recognise (defence against tampered files)
+                if (localKeys.includes(k)) localStorage.setItem(k, restored[k]);
+            });
+            if (typeof showToast === 'function') showToast('Backup restored — reloading…', 'success', 'fa-check-circle');
+            fileInput.value = '';
+            setTimeout(() => window.location.reload(), 900);
+        };
+        reader.readAsText(file);
+    },
+
     // ============== BOTTOM NAV / TOP DOCK glue ==============
     // The bottom nav is the persistent spine of navigation on mobile;
     // on desktop the same component reconfigures into a top-centered dock
