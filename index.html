@@ -967,6 +967,33 @@
         </div>
       </section>
 
+      <!-- Nav-position picker — desktop only. Lets the user park the bottom
+           nav wherever feels most comfortable (bottom / top / left / right). -->
+      <div class="nav-pos-picker" id="nav-pos-picker">
+        <div class="nav-pos-label">
+          <i class="fas fa-arrows-up-down-left-right"></i>
+          <span><b>Navigation position</b><br><small>Choose where the menu bar sits on desktop. Mobile always stays at the bottom.</small></span>
+        </div>
+        <div class="nav-pos-options">
+          <button class="nav-pos-option" data-pos="bottom" onclick="app.setNavPosition('bottom')" title="Bottom (default)" aria-label="Bottom">
+            <span class="np-frame"><span class="np-bar np-bottom"></span></span>
+            <span class="np-name">Bottom</span>
+          </button>
+          <button class="nav-pos-option" data-pos="top" onclick="app.setNavPosition('top')" title="Top" aria-label="Top">
+            <span class="np-frame"><span class="np-bar np-top"></span></span>
+            <span class="np-name">Top</span>
+          </button>
+          <button class="nav-pos-option" data-pos="left" onclick="app.setNavPosition('left')" title="Left side" aria-label="Left side">
+            <span class="np-frame"><span class="np-bar np-left"></span></span>
+            <span class="np-name">Left</span>
+          </button>
+          <button class="nav-pos-option" data-pos="right" onclick="app.setNavPosition('right')" title="Right side" aria-label="Right side">
+            <span class="np-frame"><span class="np-bar np-right"></span></span>
+            <span class="np-name">Right</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Settings toggles row (compact) -->
       <div class="me-toggles">
         <button class="me-toggle" id="me-notif-toggle" onclick="app.toggleSrsNotifications()">

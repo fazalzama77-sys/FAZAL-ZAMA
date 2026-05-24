@@ -24,6 +24,9 @@ const app = {
             app.state.eliteMode = true;
         }
 
+        // Apply saved nav-bar position class to <body> before first paint
+        app._applyNavPosition();
+
         // ---- Service worker registration (offline / PWA, silent auto-update) ----
         // The SW now self-activates on install (calls skipWaiting() itself) and
         // claims existing clients on activate. So a new version takes over
@@ -63,6 +66,32 @@ const app = {
         try { app._showOnboardingIfFirstTime(); } catch (e) { console.warn('onboard', e); }
         try { app._setupInstallPrompt(); } catch (e) { console.warn('install', e); }
         try { app._maybeShowSrsNotification(); } catch (e) { console.warn('notify', e); }
+    },
+
+    // ---------- Nav-bar position (desktop only — mobile is always bottom) ----------
+    NAV_POS_KEY: 'ivri-nav-pos',
+    NAV_POSITIONS: ['bottom', 'top', 'left', 'right'],
+
+    _applyNavPosition: () => {
+        const saved = localStorage.getItem(app.NAV_POS_KEY) || 'bottom';
+        const cls = app.NAV_POSITIONS.includes(saved) ? saved : 'bottom';
+        // Strip any previous nav-pos-* class and apply the new one
+        document.body.classList.remove('nav-pos-bottom', 'nav-pos-top', 'nav-pos-left', 'nav-pos-right');
+        document.body.classList.add('nav-pos-' + cls);
+    },
+
+    setNavPosition: (pos) => {
+        if (!app.NAV_POSITIONS.includes(pos)) return;
+        localStorage.setItem(app.NAV_POS_KEY, pos);
+        app._applyNavPosition();
+        // Refresh the picker UI so the new selection is reflected
+        document.querySelectorAll('.nav-pos-option').forEach(b => {
+            b.classList.toggle('is-active', b.dataset.pos === pos);
+        });
+        if (typeof showToast === 'function') {
+            const labels = { bottom: 'bottom', top: 'top', left: 'left side', right: 'right side' };
+            showToast(`Navigation moved to ${labels[pos]}`, 'success', 'fa-arrows-to-circle');
+        }
     },
 
     // ---------- Visit counter (drives install-prompt timing) ----------
@@ -639,10 +668,18 @@ const app = {
         const onScroll = () => {
             const y = window.scrollY;
             if (Math.abs(y - lastY) < 6) { ticking = false; return; }
-            // Only auto-hide on narrow screens — desktop dock stays put
-            if (window.innerWidth < 901) {
+            // Auto-hide rules:
+            //   - Mobile (≤900px): always allowed (saves space when reading)
+            //   - Desktop with horizontal nav (top/bottom): allowed
+            //   - Desktop with vertical nav (left/right): NEVER — feels weird
+            const isMobile = window.innerWidth < 901;
+            const isVertical = document.body.classList.contains('nav-pos-left')
+                            || document.body.classList.contains('nav-pos-right');
+            if (isMobile || !isVertical) {
                 if (y > lastY && y > 90) nav.classList.add('bn-hidden');
                 else nav.classList.remove('bn-hidden');
+            } else {
+                nav.classList.remove('bn-hidden');
             }
             lastY = y;
             ticking = false;
@@ -750,6 +787,12 @@ const app = {
             && localStorage.getItem(app.NOTIF_PREF_KEY) === '1';
         if (notifState) notifState.innerText = on ? 'On — daily reminder when topics are due' : 'Off — tap to enable browser notifications';
         if (notifPill) notifPill.classList.toggle('on', on);
+
+        // --- Nav-position picker selection state ---
+        const curPos = localStorage.getItem(app.NAV_POS_KEY) || 'bottom';
+        document.querySelectorAll('.nav-pos-option').forEach(b => {
+            b.classList.toggle('is-active', b.dataset.pos === curPos);
+        });
     },
 
     openAbout: () => {

@@ -646,7 +646,8 @@ body.professional-mode .topic-btn.is-read {
     height: 100%;
     background: rgba(2, 12, 27, 0.95);
     backdrop-filter: blur(10px);
-    z-index: 1000;
+    /* Sit above the bottom nav (z=9000) so the bar can't cover the modal */
+    z-index: 9700;
     display: none;
     justify-content: center;
     align-items: center;
@@ -672,18 +673,24 @@ body.professional-mode .topic-btn.is-read {
 .quiz-menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    /* Smoothly scroll when more cards exist than fit */
-    max-height: 100%;
-    overflow-y: auto;
+    gap: 16px;
+    /* HARD CAP — viewport minus nav-bar + modal padding + header.
+       This bypasses every flex-sizing edge case that was breaking the scroll. */
+    max-height: calc(100vh - 260px);
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     align-content: start;
-    padding: 8px 4px 24px;       /* breathing room at top + bottom */
+    padding: 4px 8px 24px 4px;
+    /* Visible custom scrollbar so users see it can scroll */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,242,255,0.55) rgba(255,255,255,0.05);
     scrollbar-width: thin;
 }
-.quiz-menu-grid::-webkit-scrollbar { width: 8px; }
-.quiz-menu-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 4px; }
-.quiz-menu-grid::-webkit-scrollbar-thumb { background: rgba(0,242,255,0.30); border-radius: 4px; }
-.quiz-menu-grid::-webkit-scrollbar-thumb:hover { background: rgba(0,242,255,0.50); }
+.quiz-menu-grid::-webkit-scrollbar { width: 10px; }
+.quiz-menu-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 5px; }
+.quiz-menu-grid::-webkit-scrollbar-thumb { background: rgba(0,242,255,0.55); border-radius: 5px; }
+.quiz-menu-grid::-webkit-scrollbar-thumb:hover { background: rgba(0,242,255,0.80); }
 
 .quiz-mode-card {
     background: rgba(255, 255, 255, 0.05);
@@ -6235,24 +6242,28 @@ body.professional-mode .theme-toggle-btn:hover i {
 /* Body padding so content isn't hidden under the bar */
 body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 
-/* ---------- Desktop reconfigures the same nav into a top dock ---------- */
+/* ---------- Desktop: same bar lives at the BOTTOM, just rendered as an
+   elegant centered pill instead of a full-width strip. Consistency with
+   mobile beats the old top-dock — bottom-nav is universal on desktop too. */
 @media (min-width: 901px) {
-    body { padding-bottom: 0; }
     .bottom-nav {
-        top: 14px; bottom: auto;
-        left: 50%; right: auto;
+        /* Pull the bar into a centered pill, anchored to bottom */
+        left: 50%;
+        right: auto;
         transform: translateX(-50%);
+        bottom: 18px;
         width: auto;
         height: auto;
-        padding: 6px 8px;
+        padding: 6px 10px;
         grid-template-columns: repeat(5, auto);
-        gap: 4px;
+        gap: 6px;
         border-radius: 999px;
         border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(14, 20, 36, 0.85);
-        box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+        background: rgba(14, 20, 36, 0.88);
+        box-shadow: 0 16px 44px rgba(0,0,0,0.45);
     }
-    .bottom-nav.bn-hidden { transform: translateX(-50%) translateY(-200%); }
+    /* Auto-hide slides DOWN (out of viewport bottom) on desktop too */
+    .bottom-nav.bn-hidden { transform: translateX(-50%) translateY(160%); }
     .bn-item {
         flex-direction: row;
         padding: 10px 18px;
@@ -6261,16 +6272,19 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
         border-radius: 999px;
     }
     .bn-item .bn-icon { font-size: 1.05rem; }
-    .bn-item.is-active { background: rgba(255, 213, 79, 0.12); }
+    .bn-item.is-active { background: rgba(255, 213, 79, 0.14); }
+    /* Hide the small bar indicator on desktop — the background highlight is enough */
     .bn-item.is-active::before { display: none; }
     .bn-item-primary { padding: 6px; }
     .bn-item-primary .bn-fab {
-        width: 40px; height: 40px;
+        width: 44px; height: 44px;
         margin: 0;
-        font-size: 1rem;
-        box-shadow: 0 4px 14px rgba(255, 213, 79, 0.4);
+        font-size: 1.05rem;
+        box-shadow: 0 6px 18px rgba(255, 213, 79, 0.45);
     }
     .bn-item-primary .bn-label { display: none; }
+    /* Slightly less padding-bottom on desktop since the bar is shorter */
+    body { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* Professional mode — light theme */
@@ -6741,7 +6755,8 @@ body.professional-mode .onboard-body b { color: #1565c0; }
 .install-banner {
     position: fixed;
     left: 12px; right: 12px;
-    bottom: calc(76px + env(safe-area-inset-bottom, 0px));   /* clears bottom nav */
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));   /* clears bottom nav (mobile)
+                                                                — desktop override below */
     z-index: 9500;
     background: linear-gradient(135deg, rgba(14,20,36,0.98), rgba(20,32,54,0.98));
     backdrop-filter: blur(14px);
@@ -6805,6 +6820,9 @@ body.professional-mode .onboard-body b { color: #1565c0; }
     .install-banner { padding: 12px; }
     .install-msg { font-size: .8rem; }
     .install-btn { padding: 7px 12px; font-size: .72rem; }
+}
+@media (min-width: 901px) {
+    .install-banner { bottom: 100px; }
 }
 body.professional-mode .install-banner { background: linear-gradient(135deg, #ffffff, #f5f7fa); border-color: #1976d2; }
 body.professional-mode .install-icon { background: linear-gradient(135deg, #1976d2, #1565c0); color: #ffffff; }
@@ -6991,6 +7009,162 @@ body.professional-mode .me-toggle:hover { border-color: #1976d2; background: rgb
 body.professional-mode .me-toggle-pill { background: #cfd8dc; }
 body.professional-mode .me-toggle-pill.on { background: #1976d2; }
 body.professional-mode .me-toggle-state { color: #5c6b80; }
+
+/* ---------- NAV POSITION PICKER (desktop preference, lives in Me) ---------- */
+.nav-pos-picker {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    animation: meFade .4s ease;
+}
+.nav-pos-label {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    font-size: .9rem;
+    line-height: 1.4;
+}
+.nav-pos-label > i {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 213, 79, 0.12);
+    color: var(--atlas-gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+}
+.nav-pos-label b { color: var(--text-main); }
+.nav-pos-label small { color: var(--text-mute); font-size: .78rem; }
+
+.nav-pos-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+.nav-pos-option {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 8px 8px;
+    cursor: pointer;
+    color: var(--text-mute);
+    font-family: var(--font-code);
+    font-size: .7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    transition: border-color .2s ease, background .2s ease, transform .15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.nav-pos-option:hover { border-color: rgba(255,213,79,0.4); color: var(--text-main); }
+.nav-pos-option:active { transform: scale(.96); }
+.nav-pos-option.is-active {
+    border-color: var(--atlas-gold);
+    background: rgba(255,213,79,0.10);
+    color: var(--atlas-gold);
+    box-shadow: 0 4px 14px rgba(255,213,79,0.18);
+}
+/* Mini visual preview: small frame with a coloured bar in the chosen position */
+.np-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0,0,0,0.25);
+}
+.np-bar {
+    position: absolute;
+    background: var(--atlas-gold);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(255,213,79,0.5);
+}
+.np-bottom { left: 18%; right: 18%; bottom: 8%; height: 18%; border-radius: 999px; }
+.np-top    { left: 18%; right: 18%; top:    8%; height: 18%; border-radius: 999px; }
+.np-left   { top: 18%; bottom: 18%; left:   8%; width:  18%; border-radius: 999px; }
+.np-right  { top: 18%; bottom: 18%; right:  8%; width:  18%; border-radius: 999px; }
+.np-name { font-weight: 700; }
+
+/* Pro mode */
+body.professional-mode .nav-pos-picker { background: #f5f7fa; border-color: #d0d7de; }
+body.professional-mode .nav-pos-label > i { background: rgba(25,118,210,0.10); color: #1565c0; }
+body.professional-mode .nav-pos-option { background: #ffffff; border-color: #d0d7de; }
+body.professional-mode .nav-pos-option.is-active {
+    border-color: #1565c0; background: rgba(25,118,210,0.10); color: #1565c0;
+    box-shadow: 0 4px 14px rgba(25,118,210,0.18);
+}
+body.professional-mode .np-frame { background: #eceff1; border-color: #cfd8dc; }
+body.professional-mode .np-bar { background: #1565c0; box-shadow: 0 0 6px rgba(21,101,192,0.4); }
+
+/* Tighter on small phones — but the picker still works, mobile users just
+   won't see the change reflected in their view (mobile always = bottom). */
+@media (max-width: 480px) {
+    .nav-pos-options { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ================================================================
+   NAV POSITION VARIANTS (desktop only — mobile stays bottom always)
+   ================================================================ */
+@media (min-width: 901px) {
+    /* TOP: same pill, anchored to top of viewport */
+    body.nav-pos-top .bottom-nav {
+        top: 18px; bottom: auto;
+    }
+    body.nav-pos-top .bottom-nav.bn-hidden { transform: translateX(-50%) translateY(-160%); }
+    body.nav-pos-top { padding-bottom: 0; padding-top: 88px; }
+
+    /* LEFT: vertical column on the left side */
+    body.nav-pos-left .bottom-nav,
+    body.nav-pos-right .bottom-nav {
+        top: 50%; bottom: auto;
+        left: 18px; right: auto;
+        transform: translateY(-50%);
+        grid-template-columns: auto;     /* one column */
+        grid-template-rows: repeat(5, auto);
+        padding: 10px 6px;
+        gap: 8px;
+        border-radius: 22px;
+        flex-direction: column;
+    }
+    body.nav-pos-left .bottom-nav.bn-hidden { transform: translateY(-50%) translateX(-180%); }
+    body.nav-pos-left { padding-bottom: 0; padding-left: 92px; }
+    body.nav-pos-left .bn-item {
+        flex-direction: column;
+        padding: 10px 8px;
+        gap: 4px;
+        font-size: .66rem;
+        width: 64px;
+        border-radius: 14px;
+    }
+    body.nav-pos-left .bn-item .bn-icon { font-size: 1.2rem; }
+    body.nav-pos-left .bn-item-primary .bn-fab { width: 44px; height: 44px; font-size: 1.05rem; }
+
+    /* RIGHT: same column, anchored right */
+    body.nav-pos-right .bottom-nav {
+        left: auto; right: 18px;
+    }
+    body.nav-pos-right .bottom-nav.bn-hidden { transform: translateY(-50%) translateX(180%); }
+    body.nav-pos-right { padding-bottom: 0; padding-right: 92px; }
+    body.nav-pos-right .bn-item {
+        flex-direction: column;
+        padding: 10px 8px;
+        gap: 4px;
+        font-size: .66rem;
+        width: 64px;
+        border-radius: 14px;
+    }
+    body.nav-pos-right .bn-item .bn-icon { font-size: 1.2rem; }
+    body.nav-pos-right .bn-item-primary .bn-fab { width: 44px; height: 44px; font-size: 1.05rem; }
+
+    /* Install banner needs to respect the new nav side. Pin it bottom-center
+       regardless, just clear the bar when nav is bottom; for top/left/right
+       the bottom is free so the banner can sit lower. */
+    body.nav-pos-top .install-banner    { bottom: 24px; }
+    body.nav-pos-left .install-banner   { bottom: 24px; left: 110px; }
+    body.nav-pos-right .install-banner  { bottom: 24px; right: 110px; }
+}
 
 /* ---------- BACKUP / RESTORE cards + safety note ---------- */
 .me-card-backup {
