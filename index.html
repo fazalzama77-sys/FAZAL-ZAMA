@@ -342,11 +342,9 @@
           <button class="nav-btn elite-toggle-btn" id="elite-toggle" onclick="app.toggleElite()" style="display:none;">
             <i class="fas fa-graduation-cap"></i> <span id="elite-text">Elite View</span>
           </button>
-          <!-- Desktop-only convenience buttons (bottom nav handles these on mobile) -->
-          <button class="nav-btn nav-btn-desktop-only" onclick="app.openLibrary()"
-            title="My Library: Bookmarks, Highlights, Notes" aria-label="My Library">
-            <i class="fas fa-bookmark"></i> <span>LIBRARY</span>
-          </button>
+          <!-- Quiz Mode is the only desktop-only shortcut kept here. Library
+               is fully owned by the top dock (desktop) / bottom nav (mobile)
+               so we don't duplicate it. -->
           <button class="nav-btn nav-btn-desktop-only" style="border-color: var(--atlas-gold); color: var(--atlas-gold);"
             onclick="quizApp.openMenu()" aria-label="Quiz Mode">
             <i class="fas fa-brain"></i> <span>QUIZ MODE</span>

@@ -7017,6 +7017,20 @@ body.professional-mode .me-toggle-state { color: #5c6b80; }
 }
 .speak-btn:active { transform: scale(.94); }
 .speak-btn i { font-size: .85rem; }
+/* While reading aloud: solid cyan fill + soft pulsing ring */
+.speak-btn.is-playing {
+    background: var(--why-cyan);
+    color: #0a0f1c;
+    border-color: var(--why-cyan);
+    animation: speakPulse 1.4s ease-in-out infinite;
+}
+.speak-btn.is-playing i { color: #0a0f1c; }
+@keyframes speakPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.5); }
+    50%      { box-shadow: 0 0 0 8px rgba(0, 242, 255, 0); }
+}
+body.professional-mode .speak-btn.is-playing { background: #1976d2; color: #ffffff; border-color: #1976d2; }
+body.professional-mode .speak-btn.is-playing i { color: #ffffff; }
 body.professional-mode .speak-btn { background: rgba(25,118,210,0.06); border-color: rgba(25,118,210,0.35); color: #1976d2; }
 body.professional-mode .speak-btn:hover { background: rgba(25,118,210,0.15); box-shadow: 0 0 16px rgba(25,118,210,0.3); }
 @media (max-width: 600px) {

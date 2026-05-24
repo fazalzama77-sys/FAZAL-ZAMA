@@ -350,7 +350,10 @@ const app = {
         } catch (e) { console.warn('srs notif', e); }
     },
 
-    // ---------- Audio pronunciation (browser SpeechSynthesis API, no API key) ----------
+    // ---------- Audio pronunciation + read-aloud (browser SpeechSynthesis API, no API key) ----------
+    _ttsActive: false,
+
+    // One-shot pronunciation (used by glossary double-click) — just speaks the word.
     speak: (text) => {
         if (!('speechSynthesis' in window)) {
             if (typeof showToast === 'function') showToast('Speech not supported in this browser', 'warning');
@@ -360,10 +363,127 @@ const app = {
             window.speechSynthesis.cancel();
             const u = new SpeechSynthesisUtterance(String(text));
             u.lang = 'en-US';
-            u.rate = 0.92;   // slightly slower for anatomical terms
+            u.rate = 0.92;
             u.pitch = 1.0;
             window.speechSynthesis.speak(u);
         } catch (e) { console.warn('speak', e); }
+    },
+
+    // Strip HTML to plain text for cleaner speech (turns <b>X</b><br>Y into "X. Y").
+    _htmlToSpeech: (html) => {
+        if (!html) return '';
+        const tmp = document.createElement('div');
+        tmp.innerHTML = String(html)
+            .replace(/<br\s*\/?>/gi, '. ')
+            .replace(/<\/(p|li|tr|h[1-6]|div)>/gi, '. ')
+            .replace(/<li[^>]*>/gi, ' • ');
+        // Collapse whitespace + multiple full stops
+        return tmp.textContent
+            .replace(/\s+/g, ' ')
+            .replace(/\.\s*\./g, '.')
+            .replace(/\s+([.,;:])/g, '$1')
+            .trim();
+    },
+
+    // Read the FULL content of the active Atlas topic: title, description,
+    // comparative species notes, clinical correlation. Tap again to stop.
+    speakCurrentTopic: (btn) => {
+        if (!('speechSynthesis' in window)) {
+            if (typeof showToast === 'function') showToast('Speech not supported in this browser', 'warning');
+            return;
+        }
+        // Toggle: if already speaking, stop.
+        if (app._ttsActive) {
+            window.speechSynthesis.cancel();
+            app._ttsActive = false;
+            app._setSpeakBtnPlaying(false);
+            return;
+        }
+        if (!app.state.region || !app.state.system) return;
+        const activeBtn = document.querySelector('.topic-btn.active');
+        if (!activeBtn) return;
+        const idx = parseInt(activeBtn.dataset.index, 10);
+        if (isNaN(idx)) return;
+        const item = atlasData[app.state.region][app.state.system][idx];
+        if (!item) return;
+
+        // Assemble what to read: title + description (elite OR standard, per current mode)
+        // + comparative species rows + clinical correlation.
+        const useElite = app.state.eliteMode && item.eliteDesc;
+        const body = useElite ? item.eliteDesc : item.desc;
+        const chunks = [];
+        chunks.push(item.title);
+        if (body) chunks.push(app._htmlToSpeech(body));
+        if (item.comparative && item.comparative.length) {
+            chunks.push('Comparative analysis.');
+            item.comparative.forEach(c => {
+                chunks.push(`${c.species}: ${app._htmlToSpeech(c.note)}`);
+            });
+        }
+        if (item.clinical) {
+            chunks.push('Clinical correlation.');
+            chunks.push(app._htmlToSpeech(item.clinical));
+        }
+        // Browsers truncate utterances over ~32k chars and pause oddly on very long
+        // ones. Split into sentence groups of ~250 chars and queue them.
+        const sentences = chunks.join('. ').split(/(?<=[.!?])\s+/);
+        const groups = [];
+        let buf = '';
+        for (const s of sentences) {
+            if ((buf + ' ' + s).length > 250 && buf) {
+                groups.push(buf.trim());
+                buf = s;
+            } else {
+                buf = buf ? buf + ' ' + s : s;
+            }
+        }
+        if (buf) groups.push(buf.trim());
+
+        window.speechSynthesis.cancel();
+        app._ttsActive = true;
+        app._setSpeakBtnPlaying(true);
+
+        let i = 0;
+        const speakNext = () => {
+            if (!app._ttsActive || i >= groups.length) {
+                app._ttsActive = false;
+                app._setSpeakBtnPlaying(false);
+                return;
+            }
+            const u = new SpeechSynthesisUtterance(groups[i++]);
+            u.lang = 'en-US';
+            u.rate = 0.95;
+            u.pitch = 1.0;
+            u.onend = speakNext;
+            u.onerror = () => {
+                app._ttsActive = false;
+                app._setSpeakBtnPlaying(false);
+            };
+            window.speechSynthesis.speak(u);
+        };
+        speakNext();
+
+        // Stop reading if the user navigates away from the topic
+        if (!app._ttsCleanupHooked) {
+            app._ttsCleanupHooked = true;
+            window.addEventListener('hashchange', () => {
+                if (app._ttsActive) {
+                    window.speechSynthesis.cancel();
+                    app._ttsActive = false;
+                    app._setSpeakBtnPlaying(false);
+                }
+            });
+        }
+    },
+
+    _setSpeakBtnPlaying: (playing) => {
+        const btn = document.querySelector('.speak-btn');
+        if (!btn) return;
+        btn.classList.toggle('is-playing', playing);
+        const icon = btn.querySelector('i');
+        if (icon) icon.className = playing ? 'fas fa-stop' : 'fas fa-volume-high';
+        btn.setAttribute('title', playing ? 'Stop reading' : 'Read this topic aloud');
+        btn.setAttribute('aria-label', playing ? 'Stop reading' : 'Read this topic aloud');
     },
 
     // Refresh Me page stats inline (used by toggles that change settings)
@@ -1025,7 +1145,7 @@ const app = {
                 <div>
                     <div class="h-title">
                         ${item.title}
-                        <button class="speak-btn" onclick="app.speak('${item.title.replace(/'/g, "\\'")}')" title="Hear pronunciation" aria-label="Pronounce ${item.title}">
+                        <button class="speak-btn" onclick="app.speakCurrentTopic(this)" title="Read this topic aloud" aria-label="Read this topic aloud">
                             <i class="fas fa-volume-high"></i>
                         </button>
                         ${modeBadge}
