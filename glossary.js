@@ -282,6 +282,12 @@ const glossary = {
                 span.addEventListener('mouseenter', onShow);
                 span.addEventListener('focus', onShow);
                 span.addEventListener('touchstart', onShow, { passive: true });
+                // Double-click / long-press the glossary term => speak it aloud
+                // (uses browser SpeechSynthesis — no API key needed).
+                span.addEventListener('dblclick', (e) => {
+                    e.preventDefault();
+                    if (window.app && app.speak) app.speak(e.currentTarget.textContent);
+                });
                 frag.appendChild(span);
                 lastIdx = m.index + m[0].length;
             }

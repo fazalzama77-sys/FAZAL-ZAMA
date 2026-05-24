@@ -49,7 +49,326 @@ const app = {
         setTimeout(() => {
             app.routeFromHash();
             app._initBottomNav();
+            app._initEngagement();   // visit counter, install prompt, streak, onboarding
         }, 0);
+    },
+
+    // ============== ENGAGEMENT LAYER ==============
+    // Boots streak/visit/install/onboarding/notification logic. Each helper
+    // is fully self-contained so any single piece can be disabled without
+    // affecting others.
+    _initEngagement: () => {
+        try { app._bumpVisit(); } catch (e) { console.warn('visit', e); }
+        try { app._recordActivityToday(); } catch (e) { console.warn('activity', e); }
+        try { app._showOnboardingIfFirstTime(); } catch (e) { console.warn('onboard', e); }
+        try { app._setupInstallPrompt(); } catch (e) { console.warn('install', e); }
+        try { app._maybeShowSrsNotification(); } catch (e) { console.warn('notify', e); }
+    },
+
+    // ---------- Visit counter (drives install-prompt timing) ----------
+    VISITS_KEY: 'ivri-visits',
+    _bumpVisit: () => {
+        const cur = parseInt(localStorage.getItem(app.VISITS_KEY) || '0', 10);
+        localStorage.setItem(app.VISITS_KEY, String(cur + 1));
+    },
+    _visitCount: () => parseInt(localStorage.getItem(app.VISITS_KEY) || '0', 10),
+
+    // ---------- Daily activity / streak ----------
+    // Stores a map of YYYY-MM-DD -> true for every day the user did ANYTHING
+    // (opened the app, read a topic, answered a quiz, saved a highlight, etc.)
+    // The streak counter looks at consecutive days ending today/yesterday.
+    ACTIVITY_KEY: 'ivri-activity',
+    _today: () => {
+        const d = new Date();
+        return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    },
+    _loadActivity: () => {
+        try { return JSON.parse(localStorage.getItem(app.ACTIVITY_KEY)) || {}; }
+        catch { return {}; }
+    },
+    _saveActivity: (obj) => localStorage.setItem(app.ACTIVITY_KEY, JSON.stringify(obj)),
+    _recordActivityToday: () => {
+        const all = app._loadActivity();
+        const t = app._today();
+        if (!all[t]) {
+            all[t] = true;
+            app._saveActivity(all);
+        }
+    },
+    // Returns {current, longest, totalDays}
+    _computeStreak: () => {
+        const all = app._loadActivity();
+        const dates = Object.keys(all).sort();   // ISO sorts chronologically
+        if (!dates.length) return { current: 0, longest: 0, totalDays: 0 };
+
+        const fmt = (d) => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        const has = (d) => !!all[fmt(d)];
+
+        // Current streak — count backwards from today (or yesterday if today not logged yet)
+        let current = 0;
+        const d = new Date();
+        if (!has(d)) d.setDate(d.getDate() - 1);  // grace: missed today, count from yesterday
+        while (has(d)) {
+            current++;
+            d.setDate(d.getDate() - 1);
+        }
+
+        // Longest streak — scan through the date set
+        let longest = 0, run = 0, prevTs = null;
+        const DAY = 86400000;
+        dates.forEach(ds => {
+            const ts = new Date(ds).getTime();
+            if (prevTs !== null && (ts - prevTs) === DAY) run++;
+            else run = 1;
+            if (run > longest) longest = run;
+            prevTs = ts;
+        });
+        return { current, longest, totalDays: dates.length };
+    },
+
+    // 12-week (84-day) heatmap, oldest -> newest, grouped by week
+    _buildHeatmapData: () => {
+        const all = app._loadActivity();
+        const DAYS = 84;
+        const cells = [];
+        const d = new Date();
+        d.setHours(0,0,0,0);
+        for (let i = DAYS - 1; i >= 0; i--) {
+            const dd = new Date(d);
+            dd.setDate(dd.getDate() - i);
+            const key = dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
+            cells.push({ date: key, label: dd.toDateString(), active: !!all[key], dow: dd.getDay() });
+        }
+        return cells;
+    },
+
+    // ---------- Onboarding (3-slide first-visit tour) ----------
+    ONBOARD_KEY: 'ivri-onboarded',
+    _showOnboardingIfFirstTime: () => {
+        if (localStorage.getItem(app.ONBOARD_KEY) === '1') return;
+        // Defer a moment so splash has cleared
+        setTimeout(() => app.startOnboarding(), 800);
+    },
+    startOnboarding: () => {
+        const modal = document.getElementById('onboard-modal');
+        if (!modal) return;
+        modal.style.display = 'flex';
+        modal._slide = 0;
+        app._renderOnboardSlide();
+    },
+    closeOnboarding: (markDone) => {
+        const modal = document.getElementById('onboard-modal');
+        if (!modal) return;
+        modal.style.display = 'none';
+        if (markDone !== false) localStorage.setItem(app.ONBOARD_KEY, '1');
+    },
+    _onboardSlides: [
+        {
+            icon: 'fa-book-open', accent: '#ffd54f',
+            title: 'Welcome to IVRI Anatomy',
+            body: 'Your B.V.Sc study companion — built for first-year students. Atlas, quizzes, and your own notes. Works even offline.'
+        },
+        {
+            icon: 'fa-graduation-cap', accent: '#ffd54f',
+            title: 'Two depths of detail',
+            body: 'Every Atlas topic has a <b>Standard</b> view for quick revision and an <b>Elite</b> view with full UG-level academic depth. Toggle the Elite View button anytime.'
+        },
+        {
+            icon: 'fa-brain', accent: '#ffd54f',
+            title: 'Test yourself constantly',
+            body: 'The center <b>Quiz</b> button takes you to MCQ, True/False, Fill-in-Blanks, Exam Mode and Smart Review (spaced repetition). Wrong answers come back automatically.'
+        },
+        {
+            icon: 'fa-bookmark', accent: '#00f2ff',
+            title: 'Mark your favourites',
+            body: 'Bookmark topics, highlight key sentences in 4 colours, type notes on selected text. Everything lives in your <b>Library</b>.'
+        },
+        {
+            icon: 'fa-circle-user', accent: '#bd93f9',
+            title: 'Track your progress',
+            body: 'Open the <b>Me</b> tab to see your daily study streak, performance dashboard, backup your data, and change theme.'
+        }
+    ],
+    _renderOnboardSlide: () => {
+        const modal = document.getElementById('onboard-modal');
+        if (!modal) return;
+        const slides = app._onboardSlides;
+        const i = modal._slide || 0;
+        const s = slides[i];
+        const card = modal.querySelector('.onboard-card');
+        card.innerHTML = `
+            <button class="onboard-skip" onclick="app.closeOnboarding(true)">Skip</button>
+            <div class="onboard-icon" style="color:${s.accent};"><i class="fas ${s.icon}"></i></div>
+            <h2 class="onboard-title">${s.title}</h2>
+            <p class="onboard-body">${s.body}</p>
+            <div class="onboard-dots">
+                ${slides.map((_, k) => `<span class="onboard-dot ${k === i ? 'on' : ''}"></span>`).join('')}
+            </div>
+            <div class="onboard-actions">
+                ${i > 0 ? '<button class="onboard-btn ghost" onclick="app._onboardPrev()"><i class="fas fa-arrow-left"></i> Back</button>' : '<span></span>'}
+                ${i < slides.length - 1
+                    ? '<button class="onboard-btn primary" onclick="app._onboardNext()">Next <i class="fas fa-arrow-right"></i></button>'
+                    : '<button class="onboard-btn primary" onclick="app.closeOnboarding(true)"><i class="fas fa-rocket"></i> Get started</button>'}
+            </div>`;
+    },
+    _onboardNext: () => {
+        const modal = document.getElementById('onboard-modal');
+        modal._slide = Math.min((modal._slide || 0) + 1, app._onboardSlides.length - 1);
+        app._renderOnboardSlide();
+    },
+    _onboardPrev: () => {
+        const modal = document.getElementById('onboard-modal');
+        modal._slide = Math.max((modal._slide || 0) - 1, 0);
+        app._renderOnboardSlide();
+    },
+    // Triggered from Me page card so users can re-watch the tour
+    replayOnboarding: () => {
+        localStorage.removeItem(app.ONBOARD_KEY);
+        app.startOnboarding();
+    },
+
+    // ---------- Install-as-app prompt ----------
+    INSTALL_DISMISS_KEY: 'ivri-install-dismissed',
+    _deferredInstallPrompt: null,
+    _setupInstallPrompt: () => {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            app._deferredInstallPrompt = e;
+            if (localStorage.getItem(app.INSTALL_DISMISS_KEY) === '1') return;
+            if (app._visitCount() < 2) return;
+            setTimeout(() => app._showInstallBanner(), 1500);
+        });
+        window.addEventListener('appinstalled', () => {
+            app._hideInstallBanner();
+            if (typeof showToast === 'function') showToast('IVRI Anatomy installed!', 'success', 'fa-check-circle');
+        });
+        // iOS Safari never fires beforeinstallprompt — show a friendly fallback
+        // banner with "Add to Home Screen" instructions after 2 visits.
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        if (isIOS && !isStandalone
+            && localStorage.getItem(app.INSTALL_DISMISS_KEY) !== '1'
+            && app._visitCount() >= 2) {
+            setTimeout(() => app._showInstallBanner(), 1800);
+        }
+    },
+    _showInstallBanner: () => {
+        const b = document.getElementById('install-banner');
+        if (!b) return;
+        // iOS doesn't fire beforeinstallprompt — detect it for a friendly fallback
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            b.querySelector('.install-msg').innerHTML =
+                'Install IVRI Anatomy: tap <i class="fas fa-arrow-up-from-bracket"></i> Share, then <b>Add to Home Screen</b>.';
+            b.querySelector('.install-btn').style.display = 'none';
+        }
+        b.style.display = 'flex';
+        requestAnimationFrame(() => b.classList.add('install-shown'));
+    },
+    _hideInstallBanner: () => {
+        const b = document.getElementById('install-banner');
+        if (!b) return;
+        b.classList.remove('install-shown');
+        setTimeout(() => { b.style.display = 'none'; }, 300);
+    },
+    triggerInstall: async () => {
+        if (!app._deferredInstallPrompt) {
+            // No native prompt available — guide manually
+            if (typeof showToast === 'function')
+                showToast('Open your browser menu → "Install app" / "Add to Home Screen"', 'info', 'fa-mobile-screen');
+            return;
+        }
+        try {
+            app._deferredInstallPrompt.prompt();
+            const choice = await app._deferredInstallPrompt.userChoice;
+            if (choice && choice.outcome === 'accepted') {
+                if (typeof showToast === 'function') showToast('Installing…', 'success', 'fa-download');
+            }
+        } catch (e) { console.warn(e); }
+        app._deferredInstallPrompt = null;
+        app._hideInstallBanner();
+    },
+    dismissInstall: () => {
+        localStorage.setItem(app.INSTALL_DISMISS_KEY, '1');
+        app._hideInstallBanner();
+    },
+
+    // ---------- SRS daily notification ----------
+    NOTIF_PREF_KEY: 'ivri-notify-srs',     // '1' | '0'
+    NOTIF_LAST_KEY: 'ivri-notify-last',    // YYYY-MM-DD
+    requestNotificationPermission: async () => {
+        if (!('Notification' in window)) {
+            if (typeof showToast === 'function') showToast('This browser does not support notifications', 'warning');
+            return;
+        }
+        if (Notification.permission === 'granted') {
+            localStorage.setItem(app.NOTIF_PREF_KEY, '1');
+            if (typeof showToast === 'function') showToast('Daily review reminders are on', 'success', 'fa-bell');
+            app._refreshMeStatsLite();
+            return;
+        }
+        const perm = await Notification.requestPermission();
+        if (perm === 'granted') {
+            localStorage.setItem(app.NOTIF_PREF_KEY, '1');
+            if (typeof showToast === 'function') showToast('Daily review reminders are on', 'success', 'fa-bell');
+        } else {
+            if (typeof showToast === 'function') showToast('Notifications blocked. Enable in browser settings.', 'warning');
+        }
+        app._refreshMeStatsLite();
+    },
+    toggleSrsNotifications: () => {
+        const cur = localStorage.getItem(app.NOTIF_PREF_KEY) === '1';
+        if (cur) {
+            localStorage.setItem(app.NOTIF_PREF_KEY, '0');
+            if (typeof showToast === 'function') showToast('Review reminders turned off', 'info', 'fa-bell-slash');
+            app._refreshMeStatsLite();
+        } else {
+            app.requestNotificationPermission();
+        }
+    },
+    _maybeShowSrsNotification: () => {
+        if (!('Notification' in window)) return;
+        if (Notification.permission !== 'granted') return;
+        if (localStorage.getItem(app.NOTIF_PREF_KEY) !== '1') return;
+        // Only once per day
+        if (localStorage.getItem(app.NOTIF_LAST_KEY) === app._today()) return;
+        // Count due SRS items
+        if (typeof srs === 'undefined' || !srs._loadState) return;
+        try {
+            const state = srs._loadState();
+            const now = Date.now();
+            const due = Object.values(state || {}).filter(item => (item.nextDue || 0) <= now).length;
+            if (due > 0) {
+                new Notification('IVRI Anatomy', {
+                    body: `You have ${due} topic${due === 1 ? '' : 's'} due for Smart Review today.`,
+                    icon: 'images/icon-192.png',
+                    badge: 'images/icon-192.png',
+                    tag: 'srs-daily'
+                });
+                localStorage.setItem(app.NOTIF_LAST_KEY, app._today());
+            }
+        } catch (e) { console.warn('srs notif', e); }
+    },
+
+    // ---------- Audio pronunciation (browser SpeechSynthesis API, no API key) ----------
+    speak: (text) => {
+        if (!('speechSynthesis' in window)) {
+            if (typeof showToast === 'function') showToast('Speech not supported in this browser', 'warning');
+            return;
+        }
+        try {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(String(text));
+            u.lang = 'en-US';
+            u.rate = 0.92;   // slightly slower for anatomical terms
+            u.pitch = 1.0;
+            window.speechSynthesis.speak(u);
+        } catch (e) { console.warn('speak', e); }
+    },
+
+    // Refresh Me page stats inline (used by toggles that change settings)
+    _refreshMeStatsLite: () => {
+        if (app.state.view === 'me') app._renderMeStats();
     },
 
     // ============== BOTTOM NAV / TOP DOCK glue ==============
@@ -141,6 +460,45 @@ const app = {
             const isPro = document.body.classList.contains('professional-mode');
             themeDesc.innerText = isPro ? 'Currently: Professional (medical) — tap to switch' : 'Currently: Student (neon) — tap to switch';
         }
+        // --- Streak block ---
+        const streak = app._computeStreak();
+        set('streak-current', streak.current);
+        set('streak-longest', streak.longest);
+        set('streak-total', streak.totalDays);
+        // Toggle "is-active" class on the flame if current streak > 0 (drives the glow)
+        const flameEl = document.querySelector('.streak-block');
+        if (flameEl) flameEl.classList.toggle('is-active', streak.current > 0);
+
+        // --- Heatmap render ---
+        const grid = document.getElementById('heatmap-grid');
+        if (grid) {
+            const cells = app._buildHeatmapData();
+            // Group by week (12 columns × 7 days); cells[0] is oldest -> start of week
+            // Calculate offset so the first column aligns to its weekday
+            const firstDow = cells[0].dow;   // 0=Sunday..6=Saturday
+            const html = [];
+            // Build a 7-row grid where each column = 1 week. Use day-of-week as row.
+            for (let day = 0; day < 7; day++) {
+                for (let col = 0; col < 12; col++) {
+                    const idx = col * 7 + day - firstDow;
+                    if (idx < 0 || idx >= cells.length) {
+                        html.push('<span class="hm-cell hm-out"></span>');
+                    } else {
+                        const c = cells[idx];
+                        html.push(`<span class="hm-cell ${c.active ? 'hm-on' : 'hm-empty'}" title="${c.label}${c.active ? ' — active' : ''}"></span>`);
+                    }
+                }
+            }
+            grid.innerHTML = html.join('');
+        }
+        // --- Notification toggle state ---
+        const notifState = document.getElementById('me-notif-state');
+        const notifPill = document.getElementById('me-notif-pill');
+        const on = ('Notification' in window)
+            && Notification.permission === 'granted'
+            && localStorage.getItem(app.NOTIF_PREF_KEY) === '1';
+        if (notifState) notifState.innerText = on ? 'On — daily reminder when topics are due' : 'Off — tap to enable browser notifications';
+        if (notifPill) notifPill.classList.toggle('on', on);
     },
 
     openAbout: () => {
@@ -665,7 +1023,13 @@ const app = {
         let contentHtml = `
             <div class="detail-header">
                 <div>
-                    <div class="h-title">${item.title} ${modeBadge}</div>
+                    <div class="h-title">
+                        ${item.title}
+                        <button class="speak-btn" onclick="app.speak('${item.title.replace(/'/g, "\\'")}')" title="Hear pronunciation" aria-label="Pronounce ${item.title}">
+                            <i class="fas fa-volume-high"></i>
+                        </button>
+                        ${modeBadge}
+                    </div>
                     <span class="h-sub">/// ${modeLabel} // ${app.state.system.toUpperCase()}</span>
                 </div>
                 <div class="detail-header-actions">
@@ -1679,6 +2043,7 @@ const app = {
 
     toggleRead: (index, btn) => {
         if (!app.state.region || !app.state.system) return;
+        app._recordActivityToday();
         const id = app.bookmarkId(app.state.region, app.state.system, index);
         const list = app._loadRead();
         const i = list.indexOf(id);

@@ -172,7 +172,7 @@ quizBank = {
 
 - **Single-page app:** `index.html` is a section-switcher. Each section is a `<section class="view-section">`. Navigation by `view-section.active` class + hash routing (`#/atlas/Forelimb/Osteology/2`).
 - **Image loading is already click-to-load:** Atlas modals only fetch images when user clicks a structure. WHY cards render text-only; image loads when user opens the modal. No lazy-loading library needed.
-- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`.
+- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (streak map), `ivri-notify-srs`, `ivri-notify-last`.
 - **PWA:** Service worker caches everything; app installs to Android home screen via `manifest.json`.
 - **State globals:** `atlasData` (regional), `anatomyData` (WHY), `quizBank` (questions), `srs.*` (SRS engine), `quizApp.*` (quiz state).
 
@@ -220,6 +220,23 @@ The app uses a **3-layer navigation model**. Respect these boundaries when addin
 5. **If unsure between two approaches**, ask me ONE short question. Don't write code both ways.
 6. **For big features**, give me a 5-line plan first. Wait for "yes go".
 7. **End your responses with a "what to test" checklist** so I can verify quickly.
+
+---
+
+### 🎯 Engagement layer (v3)
+
+Boot sequence (in `app._initEngagement`):
+1. **Visit counter** (`ivri-visits`) bumps every load — drives install-banner timing.
+2. **Daily activity log** (`ivri-activity`) records today's date — drives streak.
+3. **Onboarding tour** — 5 slides, shown once on first visit. Re-triggerable from Me page (`app.replayOnboarding()`). Storage key `ivri-onboarded`.
+4. **Install-as-app banner** — listens for `beforeinstallprompt`, shows after 2 visits. iOS fallback shows "Add to Home Screen" hint with the share icon.
+5. **SRS daily notification** — fires browser Notification (no service-worker push) on app open if: permission granted, user enabled it, SRS items due, and not already fired today.
+
+**Streak math** lives in `app._computeStreak()` — returns `{current, longest, totalDays}`. Counts backwards from today with a 1-day grace (if user hasn't logged today yet, counts from yesterday).
+
+**Heatmap** in Me page uses `app._buildHeatmapData()` — last 84 days, grouped 12 cols × 7 rows.
+
+**Audio pronunciation** uses the browser's `speechSynthesis` API — free, no API key, works offline. Trigger: speak-button next to Atlas topic titles + double-click any glossary term. Implemented in `app.speak(text)`.
 
 ---
 

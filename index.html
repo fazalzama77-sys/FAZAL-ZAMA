@@ -944,6 +944,51 @@
         <div class="me-stat"><span class="me-stat-num" id="me-stat-read">0</span><span class="me-stat-lbl">Read</span></div>
       </div>
 
+      <!-- Streak block: current streak, longest, total active days, + 12-week heatmap -->
+      <section class="streak-block" id="streak-block">
+        <div class="streak-head">
+          <div class="streak-flame"><i class="fas fa-fire"></i></div>
+          <div class="streak-main">
+            <div class="streak-num" id="streak-current">0</div>
+            <div class="streak-lbl">day streak</div>
+          </div>
+          <div class="streak-side">
+            <div class="streak-side-row"><span id="streak-longest">0</span><span>longest</span></div>
+            <div class="streak-side-row"><span id="streak-total">0</span><span>total days</span></div>
+          </div>
+        </div>
+        <div class="heatmap-wrap">
+          <div class="heatmap-title">Last 12 weeks</div>
+          <div class="heatmap-grid" id="heatmap-grid" aria-label="Activity heatmap"></div>
+          <div class="heatmap-legend">
+            <span>Less</span>
+            <span class="hm-cell-mini hm-empty"></span>
+            <span class="hm-cell-mini hm-on"></span>
+            <span>More</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings toggles row (compact) -->
+      <div class="me-toggles">
+        <button class="me-toggle" id="me-notif-toggle" onclick="app.toggleSrsNotifications()">
+          <i class="fas fa-bell"></i>
+          <span class="me-toggle-text">
+            <span class="me-toggle-title">Daily Review Reminder</span>
+            <span class="me-toggle-state" id="me-notif-state">Off</span>
+          </span>
+          <span class="me-toggle-pill" id="me-notif-pill"></span>
+        </button>
+        <button class="me-toggle" onclick="app.replayOnboarding()">
+          <i class="fas fa-circle-play"></i>
+          <span class="me-toggle-text">
+            <span class="me-toggle-title">Replay Welcome Tour</span>
+            <span class="me-toggle-state">Re-watch the 5-slide intro</span>
+          </span>
+          <i class="fas fa-chevron-right me-toggle-chev"></i>
+        </button>
+      </div>
+
       <!-- Action grid: cards instead of a list — more touch-friendly + visual -->
       <div class="me-grid">
         <button class="me-card" onclick="app.loadView('dashboard')">
@@ -1023,6 +1068,23 @@
         <p><b>Fazal Zama</b> &middot; B.V.Sc &amp; A.H. UG &middot; Roll No. B0-350-2025 &middot; IVRI Bareilly</p>
       </div>
     </div>
+  </div>
+
+  <!-- ================= ONBOARDING TOUR (first-time visitors) ================= -->
+  <div id="onboard-modal" class="onboard-modal" style="display:none;" onclick="if(event.target===this) app.closeOnboarding(true)">
+    <div class="onboard-card" role="dialog" aria-modal="true" aria-label="Welcome tour">
+      <!-- contents injected by app._renderOnboardSlide() -->
+    </div>
+  </div>
+
+  <!-- ================= INSTALL-AS-APP BANNER ================= -->
+  <div id="install-banner" class="install-banner" style="display:none;" role="region" aria-label="Install IVRI as app">
+    <div class="install-icon"><i class="fas fa-download"></i></div>
+    <div class="install-msg">
+      Install IVRI Anatomy as an app — works offline, loads faster, lives on your home screen.
+    </div>
+    <button class="install-btn" onclick="app.triggerInstall()"><i class="fas fa-plus"></i> Install</button>
+    <button class="install-close" onclick="app.dismissInstall()" aria-label="Dismiss"><i class="fas fa-times"></i></button>
   </div>
 
   <!-- ================= BOTTOM NAVIGATION (mobile) + Top dock (desktop) ================= -->
