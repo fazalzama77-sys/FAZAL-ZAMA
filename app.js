@@ -116,13 +116,114 @@ const app = {
         catch { return {}; }
     },
     _saveActivity: (obj) => localStorage.setItem(app.ACTIVITY_KEY, JSON.stringify(obj)),
-    _recordActivityToday: () => {
+    // Activity log now tracks WHICH kind of action happened today, not just "yes".
+    // Backwards-compatible: old "true" values still count as active.
+    // Shape: { 'YYYY-MM-DD': { open:1, read:0, quiz:0, hl:0, note:0 } }
+    _recordActivityToday: (kind = 'open') => {
         const all = app._loadActivity();
         const t = app._today();
-        if (!all[t]) {
-            all[t] = true;
-            app._saveActivity(all);
+        // Migrate legacy boolean entries
+        if (all[t] === true) all[t] = { open: 1, read: 0, quiz: 0, hl: 0, note: 0 };
+        if (!all[t]) all[t] = { open: 0, read: 0, quiz: 0, hl: 0, note: 0 };
+        if (typeof all[t] === 'object') {
+            all[t][kind] = (all[t][kind] || 0) + 1;
         }
+        app._saveActivity(all);
+        // After any meaningful action, check if user just hit a milestone — celebrate.
+        if (kind !== 'open') app._maybeCelebrateMilestone();
+    },
+
+    // Returns true if today has ANY logged activity (open / read / quiz / hl / note).
+    _hasActivity: (entry) => {
+        if (!entry) return false;
+        if (entry === true) return true;
+        return Object.values(entry).some(v => v > 0);
+    },
+
+    // Best streak ever — preserved even after a break. Updated whenever streak grows.
+    BEST_STREAK_KEY: 'ivri-best-streak',
+    _readBestStreak: () => parseInt(localStorage.getItem(app.BEST_STREAK_KEY) || '0', 10),
+    _writeBestStreak: (n) => localStorage.setItem(app.BEST_STREAK_KEY, String(n)),
+
+    // Streak shield — 1 free skip per 7 days (Duolingo style). Stored as count.
+    SHIELD_KEY: 'ivri-streak-shield',
+    _readShields: () => parseInt(localStorage.getItem(app.SHIELD_KEY) || '1', 10),
+    _writeShields: (n) => localStorage.setItem(app.SHIELD_KEY, String(Math.max(0, n))),
+
+    // Milestone celebration toast when streak crosses key thresholds
+    LAST_MILESTONE_KEY: 'ivri-last-milestone',
+    MILESTONES: [3, 7, 14, 30, 50, 100, 200, 365],
+    _maybeCelebrateMilestone: () => {
+        const { current } = app._computeStreak();
+        const last = parseInt(localStorage.getItem(app.LAST_MILESTONE_KEY) || '0', 10);
+        const hit = app.MILESTONES.find(m => current >= m && m > last);
+        if (hit) {
+            localStorage.setItem(app.LAST_MILESTONE_KEY, String(hit));
+            if (typeof showToast === 'function') {
+                const msgs = {
+                    3:   'Three days in a row! Habit forming.',
+                    7:   'One full week! You\'re officially consistent.',
+                    14:  'Two weeks straight — anatomy is becoming muscle memory.',
+                    30:  'A whole MONTH! Top 1% of students.',
+                    50:  '50-day streak. Discipline of an exam topper.',
+                    100: 'Triple digits! 100 days of anatomy.',
+                    200: '200 days. You\'re a different student now.',
+                    365: 'ONE YEAR. Legend.',
+                };
+                showToast(msgs[hit], 'success', 'fa-fire');
+            }
+            // Reward: grant a streak shield on big milestones
+            if ([7, 30, 100].includes(hit)) {
+                app._writeShields(app._readShields() + 1);
+            }
+        }
+    },
+
+    // Motivational message based on current streak length
+    _streakMessage: (cur, longest) => {
+        if (cur === 0 && longest === 0) return 'Open the app every day to build your streak. The first day starts now.';
+        if (cur === 0)                  return `You had a ${longest}-day streak. Open the app today to start again.`;
+        if (cur === 1)                  return 'Day one! Come back tomorrow to make it two.';
+        if (cur < 3)                    return 'Streak forming. One more day cements the habit.';
+        if (cur < 7)                    return `${7 - cur} day${7 - cur === 1 ? '' : 's'} to your first full week.`;
+        if (cur < 14)                   return `${14 - cur} day${14 - cur === 1 ? '' : 's'} to two weeks straight.`;
+        if (cur < 30)                   return `${30 - cur} day${30 - cur === 1 ? '' : 's'} to a full month.`;
+        if (cur < 100)                  return `${100 - cur} day${100 - cur === 1 ? '' : 's'} to the 100-day milestone.`;
+        if (cur < 365)                  return `${365 - cur} day${365 - cur === 1 ? '' : 's'} to one year.`;
+        return 'You\'re past one year. Inspiring.';
+    },
+
+    // Share streak to WhatsApp / native share sheet — student virality
+    shareStreak: async () => {
+        const { current, longest, totalDays } = app._computeStreak();
+        const text = current === 0
+            ? `Studying B.V.Sc anatomy on IVRI Anatomy — best streak so far: ${longest} days. Free interactive atlas + quiz: https://fazal-zama.pages.dev/`
+            : `${current}-day study streak on IVRI Anatomy! Best ever: ${longest} days. Total study days: ${totalDays}. Free atlas + MCQ + Smart Review: https://fazal-zama.pages.dev/`;
+        try {
+            if (navigator.share) {
+                await navigator.share({ title: 'My IVRI Anatomy streak', text });
+            } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(text);
+                if (typeof showToast === 'function') showToast('Streak text copied to clipboard', 'success', 'fa-copy');
+            } else {
+                window.prompt('Copy:', text);
+            }
+        } catch (e) { /* user dismissed share sheet — ignore */ }
+    },
+
+    // Stats for the past N days — used by Me page panel
+    _activityWindowStats: (days = 30) => {
+        const all = app._loadActivity();
+        let active = 0;
+        const d = new Date();
+        d.setHours(0,0,0,0);
+        for (let i = 0; i < days; i++) {
+            const dd = new Date(d);
+            dd.setDate(dd.getDate() - i);
+            const k = dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
+            if (app._hasActivity(all[k])) active++;
+        }
+        return { active, total: days, percent: Math.round(active / days * 100) };
     },
     // Returns {current, longest, totalDays}
     _computeStreak: () => {
@@ -142,15 +243,26 @@ const app = {
             d.setDate(d.getDate() - 1);
         }
 
-        // Longest streak — scan through the date set
-        let longest = 0, run = 0, prevTs = null;
-        const DAY = 86400000;
+        // Longest streak — scan dates in order, advance prev by 1 calendar day
+        // (date arithmetic, not millisecond subtraction — DST-proof).
+        let longest = 0, run = 0, prev = null;
         dates.forEach(ds => {
-            const ts = new Date(ds).getTime();
-            if (prevTs !== null && (ts - prevTs) === DAY) run++;
-            else run = 1;
+            const [y, m, dd] = ds.split('-').map(Number);
+            const cur = new Date(y, m - 1, dd);
+            if (prev) {
+                const expected = new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() + 1);
+                if (cur.getFullYear() === expected.getFullYear()
+                    && cur.getMonth() === expected.getMonth()
+                    && cur.getDate() === expected.getDate()) {
+                    run++;
+                } else {
+                    run = 1;
+                }
+            } else {
+                run = 1;
+            }
             if (run > longest) longest = run;
-            prevTs = ts;
+            prev = cur;
         });
         return { current, longest, totalDays: dates.length };
     },
@@ -390,6 +502,12 @@ const app = {
         }
         try {
             window.speechSynthesis.cancel();
+            // If a full-topic read was running, clear its UI state too so the
+            // speak button doesn't keep showing the "playing" indicator.
+            if (app._ttsActive) {
+                app._ttsActive = false;
+                app._setSpeakBtnPlaying(false);
+            }
             const u = new SpeechSynthesisUtterance(String(text));
             u.lang = 'en-US';
             u.rate = 0.92;
@@ -538,6 +656,9 @@ const app = {
         'ivri-activity',
         'ivri-notify-srs',
         'ivri-notify-last',
+        'ivri-nav-pos',                    // user's desktop nav-bar position pref
+        'ivri-streak-shield',              // streak-shield count (new in v3 enhancement)
+        'ivri-best-streak',                // historical best (preserved across breaks)
     ]),
 
     // Export every IVRI localStorage key into a single JSON file the user
@@ -758,21 +879,29 @@ const app = {
         if (flameEl) flameEl.classList.toggle('is-active', streak.current > 0);
 
         // --- Heatmap render ---
+        // CORRECT alignment: today must land in the LAST column at its day-of-week.
+        // We build the grid such that the last column ends on today; earlier
+        // columns step back by full weeks. Empty cells (hm-out) only appear in
+        // the TOP-LEFT (past the 84-day window), never in the bottom-right where
+        // today's cell should always be visible.
         const grid = document.getElementById('heatmap-grid');
         if (grid) {
             const cells = app._buildHeatmapData();
-            // Group by week (12 columns × 7 days); cells[0] is oldest -> start of week
-            // Calculate offset so the first column aligns to its weekday
-            const firstDow = cells[0].dow;   // 0=Sunday..6=Saturday
+            // cells[83] is today. cells[i] is (83-i) days ago. Newest cell's dow:
+            const todayDow = cells[cells.length - 1].dow;     // 0=Sun..6=Sat
+            const COLS = 12;
             const html = [];
-            // Build a 7-row grid where each column = 1 week. Use day-of-week as row.
             for (let day = 0; day < 7; day++) {
-                for (let col = 0; col < 12; col++) {
-                    const idx = col * 7 + day - firstDow;
-                    if (idx < 0 || idx >= cells.length) {
+                for (let col = 0; col < COLS; col++) {
+                    // Days from today this grid cell represents.
+                    // Last column = current week. Days into that week = (todayDow - day).
+                    // Each earlier column adds 7 days back.
+                    const daysAgo = (COLS - 1 - col) * 7 + (todayDow - day);
+                    if (daysAgo < 0 || daysAgo >= cells.length) {
                         html.push('<span class="hm-cell hm-out"></span>');
                     } else {
-                        const c = cells[idx];
+                        // cells array runs oldest -> newest; daysAgo=0 means today (last index).
+                        const c = cells[cells.length - 1 - daysAgo];
                         html.push(`<span class="hm-cell ${c.active ? 'hm-on' : 'hm-empty'}" title="${c.label}${c.active ? ' — active' : ''}"></span>`);
                     }
                 }
@@ -1477,8 +1606,6 @@ const app = {
         if (!text || text.trim().length < 3) return false;
         const all = app._loadAllHighlights();
         if (!all[topicId]) all[topicId] = [];
-        // If this exact text is already saved, just update the colour + timestamp
-        // (was returning false here, which made the visual wrap fail on re-taps).
         const existing = all[topicId].find(h => h.text === text);
         if (existing) {
             existing.color = color;
@@ -1488,6 +1615,7 @@ const app = {
             if (all[topicId].length > 50) all[topicId] = all[topicId].slice(-50);
         }
         app._saveAllHighlights(all);
+        app._recordActivityToday('hl');     // counts toward streak
         return true;
     },
 
@@ -2020,6 +2148,7 @@ const app = {
         });
         if (all[topicId].length > 100) all[topicId] = all[topicId].slice(-100);
         app._saveAllNotes(all);
+        app._recordActivityToday('note');   // counts toward streak
         return true;
     },
 
@@ -2180,15 +2309,21 @@ const app = {
             </div>`;
     },
 
-    // After innerHTML is set, wrap text matching each note's anchor with a small ✎ icon
+    // After innerHTML is set, wrap text matching each note's anchor with a small ✎ icon.
+    // If MULTIPLE notes share the same anchor text, we attach ALL their timestamps
+    // to the icon and let the user cycle/pick from a small popup (no note gets lost).
     applyNoteAnchorsToPanel: (topicId) => {
         const panel = document.getElementById('detail-panel');
         if (!panel) return;
         const notes = app.getNotesForTopic(topicId).filter(n => n.anchor);
         if (!notes.length) return;
-        // De-duplicate by anchor text (use first/latest note per anchor for jump-to-edit)
-        const anchorMap = {};
-        notes.sort((a, b) => b.t - a.t).forEach(n => { if (!anchorMap[n.anchor]) anchorMap[n.anchor] = n.t; });
+        // Group ALL notes by anchor text (newest first). Bug #6 fix: keep every
+        // timestamp, not just the latest, so older notes stay reachable.
+        const anchorMap = {};   // anchor -> [ts1, ts2, ...] (newest first)
+        notes.sort((a, b) => b.t - a.t).forEach(n => {
+            if (!anchorMap[n.anchor]) anchorMap[n.anchor] = [];
+            anchorMap[n.anchor].push(n.t);
+        });
         // Sort longest first so longer anchors wrap before shorter ones nested inside them
         const anchors = Object.keys(anchorMap).sort((a, b) => b.length - a.length);
         for (const anchorText of anchors) {
@@ -2196,14 +2331,15 @@ const app = {
         }
     },
 
-    _tagAnchorInPanel: (root, needle, noteTs, topicId) => {
+    _tagAnchorInPanel: (root, needle, noteTimestamps, topicId) => {
         if (!needle) return;
+        // noteTimestamps is now an ARRAY (Bug #6 fix). Accept either array or
+        // single number for backwards compat.
+        const tsList = Array.isArray(noteTimestamps) ? noteTimestamps : [noteTimestamps];
         const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
             acceptNode(node) {
                 let p = node.parentNode;
                 while (p && p !== root) {
-                    // Skip buttons, links, our own icon. Allow walking into <mark> so
-                    // a note anchored to highlighted text still gets its icon.
                     if (p.nodeName === 'BUTTON' || p.nodeName === 'A' || (p.classList && p.classList.contains('note-anchored-icon'))) return NodeFilter.FILTER_REJECT;
                     p = p.parentNode;
                 }
@@ -2216,15 +2352,23 @@ const app = {
         for (const textNode of targets) {
             const idx = textNode.nodeValue.indexOf(needle);
             if (idx === -1) continue;
-            // Build the icon
             const icon = document.createElement('span');
             icon.className = 'note-anchored-icon';
-            icon.id = 'note-anchor-' + noteTs;
-            icon.title = 'View / edit note';
-            icon.innerHTML = '<i class="fas fa-sticky-note"></i>';
-            icon.onclick = (e) => { e.stopPropagation(); e.preventDefault(); app.openNoteEditor(topicId, noteTs); };
-            // If the text node sits inside a <mark.user-hl>, place the icon AFTER
-            // the mark so it doesn't get caught by the mark's click-to-remove handler.
+            icon.title = tsList.length > 1
+                ? `${tsList.length} notes — tap to choose`
+                : 'View / edit note';
+            // Show a small count badge when multiple notes share this anchor
+            icon.innerHTML = tsList.length > 1
+                ? `<i class="fas fa-sticky-note"></i><span class="note-anchor-count">${tsList.length}</span>`
+                : '<i class="fas fa-sticky-note"></i>';
+            icon.onclick = (e) => {
+                e.stopPropagation(); e.preventDefault();
+                if (tsList.length === 1) {
+                    app.openNoteEditor(topicId, tsList[0]);
+                } else {
+                    app._showNotePicker(topicId, tsList, icon);
+                }
+            };
             const parentMark = (textNode.parentNode && textNode.parentNode.nodeName === 'MARK') ? textNode.parentNode : null;
             if (parentMark) {
                 parentMark.parentNode.insertBefore(icon, parentMark.nextSibling);
@@ -2233,8 +2377,49 @@ const app = {
                 textNode.splitText(idx);
                 after.parentNode.insertBefore(icon, after);
             }
-            break; // one icon per anchor is enough
+            break;
         }
+    },
+
+    // Small popup that lists all notes anchored to the same text fragment.
+    // Tapping a row opens that specific note's editor.
+    _showNotePicker: (topicId, timestamps, anchorEl) => {
+        const old = document.getElementById('note-picker');
+        if (old) old.remove();
+        const notes = app.getNotesForTopic(topicId);
+        const items = timestamps
+            .map(ts => notes.find(n => n.t === ts))
+            .filter(Boolean);
+        if (!items.length) return;
+        const picker = document.createElement('div');
+        picker.id = 'note-picker';
+        picker.className = 'note-picker';
+        picker.innerHTML = `
+            <div class="note-picker-head">${items.length} notes here</div>
+            ${items.map(n => `
+                <button class="note-picker-row hl-${n.color || 'yellow'}" data-ts="${n.t}">
+                    <div class="note-picker-preview">${(n.text || '').replace(/</g, '&lt;').slice(0, 90)}${(n.text || '').length > 90 ? '…' : ''}</div>
+                    <div class="note-picker-date">${new Date(n.t).toLocaleDateString()}</div>
+                </button>
+            `).join('')}`;
+        // Position relative to the icon
+        const rect = anchorEl.getBoundingClientRect();
+        picker.style.position = 'fixed';
+        picker.style.top  = (rect.bottom + 6) + 'px';
+        picker.style.left = Math.max(12, Math.min(window.innerWidth - 280, rect.left)) + 'px';
+        document.body.appendChild(picker);
+        picker.querySelectorAll('.note-picker-row').forEach(b => {
+            b.onclick = () => {
+                const ts = parseInt(b.dataset.ts, 10);
+                picker.remove();
+                app.openNoteEditor(topicId, ts);
+            };
+        });
+        // Click-outside to close
+        setTimeout(() => {
+            const close = (e) => { if (!picker.contains(e.target)) { picker.remove(); document.removeEventListener('click', close, true); } };
+            document.addEventListener('click', close, true);
+        }, 50);
     },
 
     // Scroll the panel to the anchored text and pulse it
@@ -2337,7 +2522,7 @@ const app = {
 
     toggleRead: (index, btn) => {
         if (!app.state.region || !app.state.system) return;
-        app._recordActivityToday();
+        app._recordActivityToday('read');   // counts toward streak as a "read" action
         const id = app.bookmarkId(app.state.region, app.state.system, index);
         const list = app._loadRead();
         const i = list.indexOf(id);

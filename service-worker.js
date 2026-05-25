@@ -33,14 +33,17 @@ const APP_SHELL = [
     './srs.js',
     './glossary.js',
     './data-image-annotations.JS',
+    './data-introduction.JS',     // Unit 1 — was MISSING (offline atlas was blank for Intro)
     './data-forelimb.JS',
-    './data-hindlimb.JS',
+    './data-head-neck.JS',
     './data-thorax.JS',
     './data-abdomen.JS',
-    './data-head-neck.JS',
+    './data-hindlimb.JS',
     './data-splanchnology.JS',
+    './data-histology.JS',        // Unit 7 — was MISSING
+    './data-embryology.JS',       // Unit 8 — was MISSING
     './data-quiz.JS',
-    './data-why.JS',
+    './data-why.js',              // FIXED: actual filename is lowercase .js (was .JS — 404'd on Cloudflare)
     './images/scapula-ox-horse-dog-annotated.png',
     './manifest.json'
 ];

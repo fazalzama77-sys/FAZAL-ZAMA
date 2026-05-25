@@ -5004,14 +5004,24 @@ body.professional-mode .badge {
 
 #toast-container {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9999;
+  /* Clear the bottom-nav (64px + safe area on mobile, 18px-anchored pill on desktop).
+     Push toasts ABOVE the nav with a small margin so they always read clean. */
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  right: 16px;
+  z-index: 10050;       /* above bottom-nav (9000) and install banner (9500) */
   display: flex;
   flex-direction: column-reverse;
   gap: 10px;
   pointer-events: none;
 }
+/* On desktop the dock is a pill at bottom: 18px (~50px tall) — clearance smaller */
+@media (min-width: 901px) {
+  #toast-container { bottom: 86px; right: 24px; }
+}
+/* When the nav is at TOP / LEFT / RIGHT the bottom is free again */
+body.nav-pos-top    #toast-container,
+body.nav-pos-left   #toast-container,
+body.nav-pos-right  #toast-container { bottom: 24px; }
 
 .toast {
   display: flex;
