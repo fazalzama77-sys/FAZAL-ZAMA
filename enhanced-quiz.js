@@ -768,6 +768,9 @@ const quizApp = {
     const btns = document.querySelectorAll('.quiz-option');
     btns.forEach(b => b.disabled = true);
 
+    // Log today's quiz activity for streak (any quiz answer counts)
+    if (window.app && app._recordActivityToday) app._recordActivityToday('quiz');
+
     // Store answer
     quizApp.userAnswers[quizApp.currentIndex] = {
       selectedIdx: selectedIdx,
@@ -803,6 +806,7 @@ const quizApp = {
   checkTF: (userBool, btn, qData) => {
     const btns = document.querySelectorAll('.quiz-option');
     btns.forEach(b => b.disabled = true);
+    if (window.app && app._recordActivityToday) app._recordActivityToday('quiz');
 
     const isCorrect = userBool === qData.a;
 
@@ -841,6 +845,7 @@ const quizApp = {
   checkFIB: (userText, input, qData) => {
     if (!userText) return;
     input.disabled = true;
+    if (window.app && app._recordActivityToday) app._recordActivityToday('quiz');
 
     const cleanUser = userText.trim().toLowerCase();
     const isMatch = qData.a.some(ans => ans.toLowerCase() === cleanUser);

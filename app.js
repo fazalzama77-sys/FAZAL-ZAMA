@@ -228,11 +228,12 @@ const app = {
     // Returns {current, longest, totalDays}
     _computeStreak: () => {
         const all = app._loadActivity();
-        const dates = Object.keys(all).sort();   // ISO sorts chronologically
+        // Filter to dates that have actual activity (object or boolean true)
+        const dates = Object.keys(all).filter(k => app._hasActivity(all[k])).sort();
         if (!dates.length) return { current: 0, longest: 0, totalDays: 0 };
 
         const fmt = (d) => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-        const has = (d) => !!all[fmt(d)];
+        const has = (d) => app._hasActivity(all[fmt(d)]);
 
         // Current streak — count backwards from today (or yesterday if today not logged yet)
         let current = 0;
@@ -278,7 +279,7 @@ const app = {
             const dd = new Date(d);
             dd.setDate(dd.getDate() - i);
             const key = dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
-            cells.push({ date: key, label: dd.toDateString(), active: !!all[key], dow: dd.getDay() });
+            cells.push({ date: key, label: dd.toDateString(), active: app._hasActivity(all[key]), dow: dd.getDay() });
         }
         return cells;
     },
@@ -869,14 +870,41 @@ const app = {
             const isPro = document.body.classList.contains('professional-mode');
             themeDesc.innerText = isPro ? 'Currently: Professional (medical) — tap to switch' : 'Currently: Student (neon) — tap to switch';
         }
-        // --- Streak block ---
+        // --- Streak block (v3 — enhanced) ---
         const streak = app._computeStreak();
+        // Persist a separate "best-ever" so it survives even if longest in current
+        // dataset drops (e.g. user wipes activity but keeps the trophy).
+        const storedBest = app._readBestStreak();
+        if (streak.longest > storedBest) app._writeBestStreak(streak.longest);
+        const bestEver = Math.max(storedBest, streak.longest);
+        const window30 = app._activityWindowStats(30);
+
         set('streak-current', streak.current);
-        set('streak-longest', streak.longest);
+        set('streak-longest', bestEver);
         set('streak-total', streak.totalDays);
-        // Toggle "is-active" class on the flame if current streak > 0 (drives the glow)
+
+        // Active flame glow
         const flameEl = document.querySelector('.streak-block');
         if (flameEl) flameEl.classList.toggle('is-active', streak.current > 0);
+
+        // Tier class — flame intensity grows with streak length for visual reward
+        if (flameEl) {
+            flameEl.classList.remove('tier-1', 'tier-2', 'tier-3', 'tier-4');
+            if      (streak.current >= 100) flameEl.classList.add('tier-4');
+            else if (streak.current >= 30)  flameEl.classList.add('tier-3');
+            else if (streak.current >= 7)   flameEl.classList.add('tier-2');
+            else if (streak.current >= 3)   flameEl.classList.add('tier-1');
+        }
+
+        // Motivational message + 30-day window text
+        const msgEl = document.getElementById('streak-message');
+        if (msgEl) msgEl.innerText = app._streakMessage(streak.current, bestEver);
+        const w30El = document.getElementById('streak-window');
+        if (w30El) w30El.innerText = `${window30.active}/${window30.total} days in the last month`;
+
+        // Shields + share button — these elements live in the upgraded streak block
+        const shieldsEl = document.getElementById('streak-shields');
+        if (shieldsEl) shieldsEl.innerText = app._readShields();
 
         // --- Heatmap render ---
         // CORRECT alignment: today must land in the LAST column at its day-of-week.

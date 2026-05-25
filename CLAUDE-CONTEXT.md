@@ -172,7 +172,8 @@ quizBank = {
 
 - **Single-page app:** `index.html` is a section-switcher. Each section is a `<section class="view-section">`. Navigation by `view-section.active` class + hash routing (`#/atlas/Forelimb/Osteology/2`).
 - **Image loading is already click-to-load:** Atlas modals only fetch images when user clicks a structure. WHY cards render text-only; image loads when user opens the modal. No lazy-loading library needed.
-- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (streak map), `ivri-notify-srs`, `ivri-notify-last`.
+- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (per-day action map), `ivri-notify-srs`, `ivri-notify-last`, `ivri-nav-pos`, `ivri-streak-shield`, `ivri-best-streak`, `ivri-last-milestone`.
+- **Activity log shape (v3):** `{ 'YYYY-MM-DD': { open: n, read: n, quiz: n, hl: n, note: n } }`. Legacy `true` values still count as active for back-compat. `app._hasActivity(entry)` is the safe check; `app._recordActivityToday(kind)` is the logger.
 - **PWA:** Service worker caches everything; app installs to Android home screen via `manifest.json`.
 - **State globals:** `atlasData` (regional), `anatomyData` (WHY), `quizBank` (questions), `srs.*` (SRS engine), `quizApp.*` (quiz state).
 
