@@ -235,8 +235,58 @@
 
   <!-- ================= VIEW 1: LANDING ================= -->
   <section id="landing-view" class="view-section active">
-    <div class="badge">IVRI BAREILLY • ANATOMY Section</div>
-    <h1 class="hero-title">EXPLORING ANATOMY<br>THROUGH TECHNOLOGY</h1>
+    <!-- Split Hero Container -->
+    <div class="hero-split-container">
+      <!-- Left Side: Text and Actions -->
+      <div class="hero-left-pane">
+        <div class="hero-sys-tag"><span class="tag-line"></span> [SYS.INIT] IVRI ANATOMY ENGINE</div>
+        <h1 class="hero-title">EXPLORING ANATOMY<br>THROUGH TECHNOLOGY.</h1>
+        <p class="hero-subtitle">
+          An academic veterinary anatomy atlas developed at IVRI. We bridge classical science with modern technology to teach regional anatomy.
+        </p>
+        <div class="hero-ctas">
+          <button onclick="app.loadView('atlas')" class="hero-cta cta-primary">
+            <i class="fas fa-book-open"></i> Explore Atlas
+          </button>
+          <button onclick="app.openQuiz()" class="hero-cta cta-secondary">
+            <i class="fas fa-bolt"></i> Practice Quiz
+          </button>
+        </div>
+      </div>
+      
+      <!-- Right Side: Video Background Pane -->
+      <div class="hero-right-pane">
+        <video id="landing-bg-video" class="landing-bg-video" autoplay loop muted playsinline aria-hidden="true">
+          <source src="pomelli_creative_video_9_16_0607 (1).mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- Statistics Strip -->
+    <div class="hero-stats-strip">
+      <div class="stat-item">
+        <span class="stat-number">2,420+</span>
+        <span class="stat-label">QUIZ QUESTIONS</span>
+      </div>
+      <div class="stat-item-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-number">8</span>
+        <span class="stat-label">SYLLABUS UNITS</span>
+      </div>
+      <div class="stat-item-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-number">5</span>
+        <span class="stat-label">SPECIES COMPARED</span>
+      </div>
+      <div class="stat-item-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">OFFLINE PWA</span>
+      </div>
+    </div>
+
+    <!-- Dynamic Welcome / Resume Studied Banner -->
+    <div id="dynamic-resume-panel" class="dynamic-resume-panel"></div>
 
     <div class="portal-grid">
 
@@ -244,10 +294,10 @@
       <div class="portal-card card-atlas" onclick="app.loadView('atlas')">
         <i class="fas fa-star orb-icon" style="color: var(--atlas-gold);"></i>
         <div class="card-label">THE ATLAS</div>
-        <div class="card-sub">
-          REGIONAL ANATOMY<br>
-          HIGH-RESOLUTION DATABASE<br>
-          QUIZ & VISUALS
+        <div class="card-features">
+          <div>REGIONAL ANATOMY</div>
+          <div>HIGH-RESOLUTION DATABASE</div>
+          <div>QUIZ &amp; VISUALS</div>
         </div>
       </div>
 
@@ -255,10 +305,10 @@
       <div class="portal-card card-why" onclick="app.loadView('why')">
         <i class="fas fa-question orb-icon" style="color: var(--why-cyan);"></i>
         <div class="card-label">THE WHY</div>
-        <div class="card-sub">
-          BIOMECHANICAL ENGINE<br>
-          FUNCTIONAL LOGIC<br>
-          ENGINEERING ANALOGIES
+        <div class="card-features">
+          <div>BIOMECHANICAL ENGINE</div>
+          <div>FUNCTIONAL LOGIC</div>
+          <div>ENGINEERING ANALOGIES</div>
         </div>
       </div>
 
@@ -266,14 +316,12 @@
       <div class="portal-card card-dashboard" onclick="app.loadView('dashboard')">
         <i class="fas fa-chart-line orb-icon" style="color: #bd93f9;"></i>
         <div class="card-label">DASHBOARD</div>
-        <div class="card-sub">
-          PERFORMANCE TRACKER<br>
-          QUIZ HISTORY<br>
-          TOPIC STRENGTHS
+        <div class="card-features">
+          <div>PERFORMANCE TRACKER</div>
+          <div>QUIZ HISTORY</div>
+          <div>TOPIC STRENGTHS</div>
         </div>
       </div>
-
-    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -942,8 +990,7 @@
         <div class="me-stat"><span class="me-stat-num" id="me-stat-read">0</span><span class="me-stat-lbl">Read</span></div>
       </div>
 
-      <!-- Streak block v3: motivational message, milestone progress, shields,
-           share, 30-day window stats + 12-week heatmap -->
+      <!-- Streak block: current streak, longest, total active days, + 12-week heatmap -->
       <section class="streak-block" id="streak-block">
         <div class="streak-head">
           <div class="streak-flame"><i class="fas fa-fire"></i></div>
@@ -952,30 +999,10 @@
             <div class="streak-lbl">day streak</div>
           </div>
           <div class="streak-side">
-            <div class="streak-side-row"><span id="streak-longest">0</span><span>best ever</span></div>
+            <div class="streak-side-row"><span id="streak-longest">0</span><span>longest</span></div>
             <div class="streak-side-row"><span id="streak-total">0</span><span>total days</span></div>
           </div>
         </div>
-
-        <!-- Motivational message + milestone progress hint -->
-        <div class="streak-message" id="streak-message">Open the app every day to build your streak.</div>
-        <div class="streak-window">
-          <i class="fas fa-calendar-days"></i>
-          <span id="streak-window">0/30 days in the last month</span>
-        </div>
-
-        <!-- Action row: shields count + share button -->
-        <div class="streak-actions">
-          <div class="streak-shields-pill" title="Streak shields — earned at 7-day, 30-day and 100-day milestones. Each one would forgive a missed day.">
-            <i class="fas fa-shield-halved"></i>
-            <span id="streak-shields">0</span>
-            <small>shields</small>
-          </div>
-          <button class="streak-share-btn" onclick="app.shareStreak()">
-            <i class="fas fa-share-nodes"></i> Share my streak
-          </button>
-        </div>
-
         <div class="heatmap-wrap">
           <div class="heatmap-title">Last 12 weeks</div>
           <div class="heatmap-grid" id="heatmap-grid" aria-label="Activity heatmap"></div>
@@ -1106,7 +1133,7 @@
       <div class="about-hero">
         <i class="fas fa-graduation-cap about-hero-icon"></i>
         <h2 class="about-hero-title">IVRI Anatomy</h2>
-        <div class="about-hero-tag">Exploring Anatomy Through Technology</div>
+        <div class="about-hero-tag">EXPLORING ANATOMY THROUGH TECHNOLOGY.</div>
       </div>
 
       <div class="about-section">

@@ -53,6 +53,7 @@ const app = {
             app.routeFromHash();
             app._initBottomNav();
             app._initEngagement();   // visit counter, install prompt, streak, onboarding
+            app._initLandingCanvas();
         }, 0);
     },
 
@@ -66,6 +67,273 @@ const app = {
         try { app._showOnboardingIfFirstTime(); } catch (e) { console.warn('onboard', e); }
         try { app._setupInstallPrompt(); } catch (e) { console.warn('install', e); }
         try { app._maybeShowSrsNotification(); } catch (e) { console.warn('notify', e); }
+    },
+
+    // Renders and controls the interactive 3D holographic vertebra on the landing page
+    _initLandingCanvas: () => {
+        const canvas = document.getElementById('landing-anatomy-canvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        let width = 0, height = 0;
+        
+        // Resize handler
+        const resize = () => {
+            width = canvas.width = canvas.clientWidth;
+            height = canvas.height = canvas.clientHeight;
+        };
+        window.addEventListener('resize', resize);
+        resize();
+
+        // 3D Model Vertices and Edges for Vertebra
+        const vertices = [];
+        const edges = [];
+        
+        const rings = 4;
+        const segments = 12;
+        const radius = 24;
+        
+        // 1. Vertebral Body (cylinder)
+        for (let r = 0; r < rings; r++) {
+            const z = (r - (rings - 1) / 2) * 10;
+            for (let s = 0; s < segments; s++) {
+                const theta = (s / segments) * Math.PI * 2;
+                const cos = Math.cos(theta);
+                const sin = Math.sin(theta);
+                
+                vertices.push({ x: cos * radius, y: sin * radius, z: z, type: 'body' });
+                const idx = vertices.length - 1;
+                
+                if (s > 0) edges.push([idx - 1, idx]);
+                else edges.push([idx + segments - 1, idx]);
+                
+                if (r > 0) edges.push([idx - segments, idx]);
+            }
+        }
+        
+        // 2. Dorsal Spinous Process (vertebral spine)
+        vertices.push({ x: 0, y: -68, z: 0, type: 'spine' });
+        const spineIdx = vertices.length - 1;
+        for (let r = 0; r < rings; r++) {
+            edges.push([r * segments + 9, spineIdx]); // Connect top segment to spine
+        }
+        
+        // 3. Transverse Processes (left/right wings)
+        vertices.push({ x: -60, y: 8, z: -4, type: 'transverse-l' });
+        const leftIdx = vertices.length - 1;
+        vertices.push({ x: 60, y: 8, z: -4, type: 'transverse-r' });
+        const rightIdx = vertices.length - 1;
+        
+        for (let r = 0; r < rings; r++) {
+            edges.push([r * segments + 6, leftIdx]); // Left
+            edges.push([r * segments + 0, rightIdx]); // Right
+        }
+        
+        // 4. Vertebral Arch
+        const archRadius = 32;
+        for (let r = 0; r < rings; r++) {
+            const z = (r - (rings - 1) / 2) * 10;
+            for (let a = 0; a < 5; a++) {
+                const theta = Math.PI + (a / 4) * Math.PI;
+                vertices.push({ x: Math.cos(theta) * archRadius, y: Math.sin(theta) * archRadius - 12, z: z, type: 'arch' });
+                const idx = vertices.length - 1;
+                
+                if (a > 0) edges.push([idx - 1, idx]);
+                if (a === 0) edges.push([idx, r * segments + 6]);
+                if (a === 4) edges.push([idx, r * segments + 0]);
+                if (r > 0) edges.push([idx - 5, idx]);
+            }
+        }
+
+        // State for rotation
+        let angleX = 0.3;
+        let angleY = 0.5;
+        let targetAngleX = 0.3;
+        let targetAngleY = 0.5;
+        let dragStartX = 0, dragStartY = 0;
+        let isDragging = false;
+
+        // Interactive mouse drag rotation
+        const landingView = document.getElementById('landing-view');
+        if (landingView) {
+            landingView.addEventListener('mousedown', (e) => {
+                // Ignore clicks on buttons/cards
+                if (e.target.closest('.hero-cta, .portal-card, .lh-link, .theme-toggle-btn, .search-toggle-btn, .resume-btn')) return;
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const dx = e.clientX - dragStartX;
+                    const dy = e.clientY - dragStartY;
+                    targetAngleY = angleY + dx * 0.008;
+                    targetAngleX = angleX + dy * 0.008;
+                    dragStartX = e.clientX;
+                    dragStartY = e.clientY;
+                    angleX = targetAngleX;
+                    angleY = targetAngleY;
+                } else {
+                    // Parallax hover drift
+                    const rx = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+                    const ry = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+                    targetAngleY = angleY + rx * 0.2;
+                    targetAngleX = angleX + ry * 0.2;
+                }
+            });
+
+            // Mobile touch drag rotation
+            landingView.addEventListener('touchstart', (e) => {
+                if (e.target.closest('.hero-cta, .portal-card, .lh-link, .theme-toggle-btn, .search-toggle-btn, .resume-btn')) return;
+                isDragging = true;
+                dragStartX = e.touches[0].clientX;
+                dragStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            landingView.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length > 0) {
+                    const dx = e.touches[0].clientX - dragStartX;
+                    const dy = e.touches[0].clientY - dragStartY;
+                    targetAngleY = angleY + dx * 0.008;
+                    targetAngleX = angleX + dy * 0.008;
+                    dragStartX = e.touches[0].clientX;
+                    dragStartY = e.touches[0].clientY;
+                    angleX = targetAngleX;
+                    angleY = targetAngleY;
+                }
+            }, { passive: true });
+
+            landingView.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+
+        // Animation Loop
+        const loop = () => {
+            // Only execute draw if we're on the landing view
+            if (app.state.view !== 'landing') {
+                requestAnimationFrame(loop);
+                return;
+            }
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Auto rotation drift (when not dragging)
+            if (!isDragging) {
+                angleY += 0.003;
+                targetAngleY += 0.003;
+            }
+
+            // Smooth interpolation for parallax
+            const smoothAngleX = angleX + (targetAngleX - angleX) * 0.1;
+            const smoothAngleY = angleY + (targetAngleY - angleY) * 0.1;
+
+            // Compute rotated coordinates
+            const cosX = Math.cos(smoothAngleX), sinX = Math.sin(smoothAngleX);
+            const cosY = Math.cos(smoothAngleY), sinY = Math.sin(smoothAngleY);
+
+            const projected = vertices.map(v => {
+                // Rotate Y
+                const x1 = v.x * cosY - v.z * sinY;
+                const z1 = v.z * cosY + v.x * sinY;
+
+                // Rotate X
+                const y2 = v.y * cosX - z1 * sinX;
+                const z2 = z1 * cosX + v.y * sinX;
+
+                // Perspective projection
+                const fov = 350;
+                const offsetY = -40; // Offset up to sit centered under the hero title
+                const scale = fov / (fov + z2);
+                
+                return {
+                    x: x1 * scale + width / 2,
+                    y: y2 * scale + height / 2.3 + offsetY,
+                    z: z2
+                };
+            });
+
+            const isPro = document.body.classList.contains('professional-mode');
+
+            // Draw HUD Circles in background
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2.3 - 40, 140, 0, Math.PI * 2);
+            ctx.strokeStyle = isPro ? 'rgba(126, 87, 194, 0.04)' : 'rgba(0, 242, 255, 0.04)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2.3 - 40, 170, angleY * 0.5, angleY * 0.5 + Math.PI * 0.8);
+            ctx.strokeStyle = isPro ? 'rgba(126, 87, 194, 0.06)' : 'rgba(255, 215, 0, 0.06)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Draw Wireframe Edges
+            ctx.lineWidth = 1.2;
+            edges.forEach(([i1, i2]) => {
+                const p1 = projected[i1];
+                const p2 = projected[i2];
+                if (!p1 || !p2) return;
+
+                // Depth-based opacity (farther lines are fainter)
+                const maxZ = 60;
+                const opacityFactor = 1 - (p1.z + p2.z) / (2 * maxZ); // 0 to 1
+                const baseOpacity = isPro ? 0.16 : 0.28;
+                const opacity = Math.max(0.06, opacityFactor * baseOpacity);
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                
+                // Color depending on type & mode
+                if (isPro) {
+                    ctx.strokeStyle = `rgba(126, 87, 194, ${opacity})`; // Lilac clinical
+                } else {
+                    // Mix cyan and gold depending on Z depth
+                    const color = p1.z > 0 ? `rgba(0, 242, 255, ${opacity})` : `rgba(255, 215, 0, ${opacity})`;
+                    ctx.strokeStyle = color;
+                }
+                ctx.stroke();
+            });
+
+            // Draw Nodes (vertices points)
+            projected.forEach(p => {
+                // Depth-based radius and opacity
+                const radius = Math.max(1, (1 - p.z / 60) * 2.5);
+                const opacity = Math.max(0.1, (1 - p.z / 60) * 0.6);
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+                if (isPro) {
+                    ctx.fillStyle = `rgba(126, 87, 194, ${opacity * 0.7})`;
+                } else {
+                    ctx.fillStyle = p.z > 0 ? `rgba(0, 242, 255, ${opacity})` : `rgba(255, 215, 0, ${opacity})`;
+                }
+                ctx.fill();
+            });
+
+            // Draw Holographic Telemetry overlay text in bottom-right/left corners of canvas
+            ctx.font = '10px JetBrains Mono, Courier New, monospace';
+            ctx.fillStyle = isPro ? 'rgba(84, 110, 122, 0.4)' : 'rgba(136, 146, 176, 0.4)';
+            
+            const txtLeftY = height - 40;
+            ctx.fillText(`SYS_SCANNER: ACTIVE [FOV_350]`, 30, txtLeftY);
+            ctx.fillText(`OSTEOLOGY_WIRE: VERTICES=106 EDGES=180`, 30, txtLeftY + 14);
+
+            const txtRightY = height - 40;
+            const yawDeg = Math.round(((smoothAngleY % (Math.PI * 2)) * 180) / Math.PI);
+            ctx.fillText(`ROT_YAW: ${yawDeg}° // DEPTH_REF: COMP`, width - 240, txtRightY);
+            ctx.fillText(`IVRI_CORE_ANATOMY // VCI_UNIT_1_8`, width - 240, txtRightY + 14);
+
+            requestAnimationFrame(loop);
+        };
+        
+        loop();
     },
 
     // ---------- Nav-bar position (desktop only — mobile is always bottom) ----------
@@ -116,124 +384,22 @@ const app = {
         catch { return {}; }
     },
     _saveActivity: (obj) => localStorage.setItem(app.ACTIVITY_KEY, JSON.stringify(obj)),
-    // Activity log now tracks WHICH kind of action happened today, not just "yes".
-    // Backwards-compatible: old "true" values still count as active.
-    // Shape: { 'YYYY-MM-DD': { open:1, read:0, quiz:0, hl:0, note:0 } }
-    _recordActivityToday: (kind = 'open') => {
+    _recordActivityToday: () => {
         const all = app._loadActivity();
         const t = app._today();
-        // Migrate legacy boolean entries
-        if (all[t] === true) all[t] = { open: 1, read: 0, quiz: 0, hl: 0, note: 0 };
-        if (!all[t]) all[t] = { open: 0, read: 0, quiz: 0, hl: 0, note: 0 };
-        if (typeof all[t] === 'object') {
-            all[t][kind] = (all[t][kind] || 0) + 1;
+        if (!all[t]) {
+            all[t] = true;
+            app._saveActivity(all);
         }
-        app._saveActivity(all);
-        // After any meaningful action, check if user just hit a milestone — celebrate.
-        if (kind !== 'open') app._maybeCelebrateMilestone();
-    },
-
-    // Returns true if today has ANY logged activity (open / read / quiz / hl / note).
-    _hasActivity: (entry) => {
-        if (!entry) return false;
-        if (entry === true) return true;
-        return Object.values(entry).some(v => v > 0);
-    },
-
-    // Best streak ever — preserved even after a break. Updated whenever streak grows.
-    BEST_STREAK_KEY: 'ivri-best-streak',
-    _readBestStreak: () => parseInt(localStorage.getItem(app.BEST_STREAK_KEY) || '0', 10),
-    _writeBestStreak: (n) => localStorage.setItem(app.BEST_STREAK_KEY, String(n)),
-
-    // Streak shield — 1 free skip per 7 days (Duolingo style). Stored as count.
-    SHIELD_KEY: 'ivri-streak-shield',
-    _readShields: () => parseInt(localStorage.getItem(app.SHIELD_KEY) || '1', 10),
-    _writeShields: (n) => localStorage.setItem(app.SHIELD_KEY, String(Math.max(0, n))),
-
-    // Milestone celebration toast when streak crosses key thresholds
-    LAST_MILESTONE_KEY: 'ivri-last-milestone',
-    MILESTONES: [3, 7, 14, 30, 50, 100, 200, 365],
-    _maybeCelebrateMilestone: () => {
-        const { current } = app._computeStreak();
-        const last = parseInt(localStorage.getItem(app.LAST_MILESTONE_KEY) || '0', 10);
-        const hit = app.MILESTONES.find(m => current >= m && m > last);
-        if (hit) {
-            localStorage.setItem(app.LAST_MILESTONE_KEY, String(hit));
-            if (typeof showToast === 'function') {
-                const msgs = {
-                    3:   'Three days in a row! Habit forming.',
-                    7:   'One full week! You\'re officially consistent.',
-                    14:  'Two weeks straight — anatomy is becoming muscle memory.',
-                    30:  'A whole MONTH! Top 1% of students.',
-                    50:  '50-day streak. Discipline of an exam topper.',
-                    100: 'Triple digits! 100 days of anatomy.',
-                    200: '200 days. You\'re a different student now.',
-                    365: 'ONE YEAR. Legend.',
-                };
-                showToast(msgs[hit], 'success', 'fa-fire');
-            }
-            // Reward: grant a streak shield on big milestones
-            if ([7, 30, 100].includes(hit)) {
-                app._writeShields(app._readShields() + 1);
-            }
-        }
-    },
-
-    // Motivational message based on current streak length
-    _streakMessage: (cur, longest) => {
-        if (cur === 0 && longest === 0) return 'Open the app every day to build your streak. The first day starts now.';
-        if (cur === 0)                  return `You had a ${longest}-day streak. Open the app today to start again.`;
-        if (cur === 1)                  return 'Day one! Come back tomorrow to make it two.';
-        if (cur < 3)                    return 'Streak forming. One more day cements the habit.';
-        if (cur < 7)                    return `${7 - cur} day${7 - cur === 1 ? '' : 's'} to your first full week.`;
-        if (cur < 14)                   return `${14 - cur} day${14 - cur === 1 ? '' : 's'} to two weeks straight.`;
-        if (cur < 30)                   return `${30 - cur} day${30 - cur === 1 ? '' : 's'} to a full month.`;
-        if (cur < 100)                  return `${100 - cur} day${100 - cur === 1 ? '' : 's'} to the 100-day milestone.`;
-        if (cur < 365)                  return `${365 - cur} day${365 - cur === 1 ? '' : 's'} to one year.`;
-        return 'You\'re past one year. Inspiring.';
-    },
-
-    // Share streak to WhatsApp / native share sheet — student virality
-    shareStreak: async () => {
-        const { current, longest, totalDays } = app._computeStreak();
-        const text = current === 0
-            ? `Studying B.V.Sc anatomy on IVRI Anatomy — best streak so far: ${longest} days. Free interactive atlas + quiz: https://fazal-zama.pages.dev/`
-            : `${current}-day study streak on IVRI Anatomy! Best ever: ${longest} days. Total study days: ${totalDays}. Free atlas + MCQ + Smart Review: https://fazal-zama.pages.dev/`;
-        try {
-            if (navigator.share) {
-                await navigator.share({ title: 'My IVRI Anatomy streak', text });
-            } else if (navigator.clipboard) {
-                await navigator.clipboard.writeText(text);
-                if (typeof showToast === 'function') showToast('Streak text copied to clipboard', 'success', 'fa-copy');
-            } else {
-                window.prompt('Copy:', text);
-            }
-        } catch (e) { /* user dismissed share sheet — ignore */ }
-    },
-
-    // Stats for the past N days — used by Me page panel
-    _activityWindowStats: (days = 30) => {
-        const all = app._loadActivity();
-        let active = 0;
-        const d = new Date();
-        d.setHours(0,0,0,0);
-        for (let i = 0; i < days; i++) {
-            const dd = new Date(d);
-            dd.setDate(dd.getDate() - i);
-            const k = dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
-            if (app._hasActivity(all[k])) active++;
-        }
-        return { active, total: days, percent: Math.round(active / days * 100) };
     },
     // Returns {current, longest, totalDays}
     _computeStreak: () => {
         const all = app._loadActivity();
-        // Filter to dates that have actual activity (object or boolean true)
-        const dates = Object.keys(all).filter(k => app._hasActivity(all[k])).sort();
+        const dates = Object.keys(all).sort();   // ISO sorts chronologically
         if (!dates.length) return { current: 0, longest: 0, totalDays: 0 };
 
         const fmt = (d) => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-        const has = (d) => app._hasActivity(all[fmt(d)]);
+        const has = (d) => !!all[fmt(d)];
 
         // Current streak — count backwards from today (or yesterday if today not logged yet)
         let current = 0;
@@ -244,26 +410,15 @@ const app = {
             d.setDate(d.getDate() - 1);
         }
 
-        // Longest streak — scan dates in order, advance prev by 1 calendar day
-        // (date arithmetic, not millisecond subtraction — DST-proof).
-        let longest = 0, run = 0, prev = null;
+        // Longest streak — scan through the date set
+        let longest = 0, run = 0, prevTs = null;
+        const DAY = 86400000;
         dates.forEach(ds => {
-            const [y, m, dd] = ds.split('-').map(Number);
-            const cur = new Date(y, m - 1, dd);
-            if (prev) {
-                const expected = new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() + 1);
-                if (cur.getFullYear() === expected.getFullYear()
-                    && cur.getMonth() === expected.getMonth()
-                    && cur.getDate() === expected.getDate()) {
-                    run++;
-                } else {
-                    run = 1;
-                }
-            } else {
-                run = 1;
-            }
+            const ts = new Date(ds).getTime();
+            if (prevTs !== null && (ts - prevTs) === DAY) run++;
+            else run = 1;
             if (run > longest) longest = run;
-            prev = cur;
+            prevTs = ts;
         });
         return { current, longest, totalDays: dates.length };
     },
@@ -279,7 +434,7 @@ const app = {
             const dd = new Date(d);
             dd.setDate(dd.getDate() - i);
             const key = dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
-            cells.push({ date: key, label: dd.toDateString(), active: app._hasActivity(all[key]), dow: dd.getDay() });
+            cells.push({ date: key, label: dd.toDateString(), active: !!all[key], dow: dd.getDay() });
         }
         return cells;
     },
@@ -503,12 +658,6 @@ const app = {
         }
         try {
             window.speechSynthesis.cancel();
-            // If a full-topic read was running, clear its UI state too so the
-            // speak button doesn't keep showing the "playing" indicator.
-            if (app._ttsActive) {
-                app._ttsActive = false;
-                app._setSpeakBtnPlaying(false);
-            }
             const u = new SpeechSynthesisUtterance(String(text));
             u.lang = 'en-US';
             u.rate = 0.92;
@@ -657,9 +806,6 @@ const app = {
         'ivri-activity',
         'ivri-notify-srs',
         'ivri-notify-last',
-        'ivri-nav-pos',                    // user's desktop nav-bar position pref
-        'ivri-streak-shield',              // streak-shield count (new in v3 enhancement)
-        'ivri-best-streak',                // historical best (preserved across breaks)
     ]),
 
     // Export every IVRI localStorage key into a single JSON file the user
@@ -870,66 +1016,31 @@ const app = {
             const isPro = document.body.classList.contains('professional-mode');
             themeDesc.innerText = isPro ? 'Currently: Professional (medical) — tap to switch' : 'Currently: Student (neon) — tap to switch';
         }
-        // --- Streak block (v3 — enhanced) ---
+        // --- Streak block ---
         const streak = app._computeStreak();
-        // Persist a separate "best-ever" so it survives even if longest in current
-        // dataset drops (e.g. user wipes activity but keeps the trophy).
-        const storedBest = app._readBestStreak();
-        if (streak.longest > storedBest) app._writeBestStreak(streak.longest);
-        const bestEver = Math.max(storedBest, streak.longest);
-        const window30 = app._activityWindowStats(30);
-
         set('streak-current', streak.current);
-        set('streak-longest', bestEver);
+        set('streak-longest', streak.longest);
         set('streak-total', streak.totalDays);
-
-        // Active flame glow
+        // Toggle "is-active" class on the flame if current streak > 0 (drives the glow)
         const flameEl = document.querySelector('.streak-block');
         if (flameEl) flameEl.classList.toggle('is-active', streak.current > 0);
 
-        // Tier class — flame intensity grows with streak length for visual reward
-        if (flameEl) {
-            flameEl.classList.remove('tier-1', 'tier-2', 'tier-3', 'tier-4');
-            if      (streak.current >= 100) flameEl.classList.add('tier-4');
-            else if (streak.current >= 30)  flameEl.classList.add('tier-3');
-            else if (streak.current >= 7)   flameEl.classList.add('tier-2');
-            else if (streak.current >= 3)   flameEl.classList.add('tier-1');
-        }
-
-        // Motivational message + 30-day window text
-        const msgEl = document.getElementById('streak-message');
-        if (msgEl) msgEl.innerText = app._streakMessage(streak.current, bestEver);
-        const w30El = document.getElementById('streak-window');
-        if (w30El) w30El.innerText = `${window30.active}/${window30.total} days in the last month`;
-
-        // Shields + share button — these elements live in the upgraded streak block
-        const shieldsEl = document.getElementById('streak-shields');
-        if (shieldsEl) shieldsEl.innerText = app._readShields();
-
         // --- Heatmap render ---
-        // CORRECT alignment: today must land in the LAST column at its day-of-week.
-        // We build the grid such that the last column ends on today; earlier
-        // columns step back by full weeks. Empty cells (hm-out) only appear in
-        // the TOP-LEFT (past the 84-day window), never in the bottom-right where
-        // today's cell should always be visible.
         const grid = document.getElementById('heatmap-grid');
         if (grid) {
             const cells = app._buildHeatmapData();
-            // cells[83] is today. cells[i] is (83-i) days ago. Newest cell's dow:
-            const todayDow = cells[cells.length - 1].dow;     // 0=Sun..6=Sat
-            const COLS = 12;
+            // Group by week (12 columns × 7 days); cells[0] is oldest -> start of week
+            // Calculate offset so the first column aligns to its weekday
+            const firstDow = cells[0].dow;   // 0=Sunday..6=Saturday
             const html = [];
+            // Build a 7-row grid where each column = 1 week. Use day-of-week as row.
             for (let day = 0; day < 7; day++) {
-                for (let col = 0; col < COLS; col++) {
-                    // Days from today this grid cell represents.
-                    // Last column = current week. Days into that week = (todayDow - day).
-                    // Each earlier column adds 7 days back.
-                    const daysAgo = (COLS - 1 - col) * 7 + (todayDow - day);
-                    if (daysAgo < 0 || daysAgo >= cells.length) {
+                for (let col = 0; col < 12; col++) {
+                    const idx = col * 7 + day - firstDow;
+                    if (idx < 0 || idx >= cells.length) {
                         html.push('<span class="hm-cell hm-out"></span>');
                     } else {
-                        // cells array runs oldest -> newest; daysAgo=0 means today (last index).
-                        const c = cells[cells.length - 1 - daysAgo];
+                        const c = cells[idx];
                         html.push(`<span class="hm-cell ${c.active ? 'hm-on' : 'hm-empty'}" title="${c.label}${c.active ? ' — active' : ''}"></span>`);
                     }
                 }
@@ -1195,6 +1306,11 @@ const app = {
         app.state.view = viewName;
         window.scrollTo(0, 0);
 
+        if (viewName === 'landing') {
+            app.state.region = null;
+            app.state.system = null;
+            app.renderLandingView();
+        }
         if (viewName === 'atlas') {
             // Reset to selector unless hash is restoring deeper state
             app.state.region = null;
@@ -1208,6 +1324,87 @@ const app = {
         if (viewName === 'me') app._renderMeStats();
         // Whenever the view switches, refresh the bottom-nav active indicator
         app._refreshBottomNavActive();
+    },
+
+    // Renders a dynamic and personalized "Welcome back" card on the landing page if study history is present
+    renderLandingView: () => {
+        const panel = document.getElementById('dynamic-resume-panel');
+        if (!panel) return;
+
+        // Clear previous panel content
+        panel.innerHTML = '';
+
+        // Read study stats
+        const bookmarks = app._loadBookmarks();
+        const readList = app._loadRead();
+        const streakObj = app._computeStreak(); // { current, longest, totalDays }
+        const srsDueCount = (typeof srs !== 'undefined') ? srs.getDueQids().length : 0;
+        const lastStudiedHash = localStorage.getItem('ivri-last-studied-hash');
+        const lastStudiedTitle = localStorage.getItem('ivri-last-studied-title');
+
+        // Check if there's any active study progress
+        const hasBookmarks = bookmarks.length > 0;
+        const hasRead = readList.length > 0;
+        const hasStreak = streakObj.current > 0;
+        const hasSrsDue = srsDueCount > 0;
+        const hasLastStudied = !!lastStudiedHash && !!lastStudiedTitle;
+
+        if (!hasBookmarks && !hasRead && !hasStreak && !hasSrsDue && !hasLastStudied) {
+            // No study history at all, keep panel hidden
+            panel.style.display = 'none';
+            return;
+        }
+
+        panel.style.display = 'block';
+
+        // Choose what to prioritize in the welcome banner:
+        // 1. SRS Due items (highest priority for active recall)
+        // 2. Resume studying last active topic
+        // 3. Keep streak alive if they haven't logged activity today
+        let cardIcon = 'fa-fire';
+        let titleText = 'Welcome back!';
+        let subtitleText = '';
+        let buttonText = 'Continue';
+        let buttonAction = `app.loadView('atlas')`;
+
+        if (hasSrsDue) {
+            cardIcon = 'fa-brain';
+            titleText = `${srsDueCount} Question${srsDueCount > 1 ? 's' : ''} Due for Review`;
+            subtitleText = 'Keep your memory sharp! Your Spaced Repetition queue is ready.';
+            buttonText = 'Review Now';
+            buttonAction = `app.loadView('dashboard')`; // Navigate to dashboard which holds the SRS panel
+        } else if (hasLastStudied) {
+            cardIcon = 'fa-book-open';
+            titleText = `Resume studying: ${lastStudiedTitle}`;
+            subtitleText = `Pick up right where you left off.`;
+            buttonText = 'Resume';
+            buttonAction = `location.hash = '${lastStudiedHash}'`;
+        } else if (hasStreak) {
+            cardIcon = 'fa-fire';
+            titleText = `${streakObj.current}-Day Study Streak!`;
+            subtitleText = `Keep your streak alive. Review weak areas or read a new structure!`;
+            buttonText = 'Practice';
+            buttonAction = `app.openQuiz()`;
+        } else {
+            cardIcon = 'fa-graduation-cap';
+            titleText = 'Ready to continue?';
+            subtitleText = `You have ${bookmarks.length} bookmarked structure${bookmarks.length > 1 ? 's' : ''}.`;
+            buttonText = 'Open Atlas';
+            buttonAction = `app.loadView('atlas')`;
+        }
+
+        panel.innerHTML = `
+            <div class="resume-card">
+                <div class="resume-card-body">
+                    <i class="fas ${cardIcon}"></i>
+                    <div>
+                        <div class="resume-text-title">${titleText}</div>
+                        <div class="resume-text-subtitle">${subtitleText}</div>
+                    </div>
+                </div>
+                <button onclick="${buttonAction}" class="resume-btn">${buttonText} <i class="fas fa-chevron-right" style="font-size:0.75rem; margin-left:4px;"></i></button>
+            </div>
+        `;
     },
 
     // REGIONAL ANATOMY NAVIGATION
@@ -1437,7 +1634,12 @@ const app = {
         const panel = document.getElementById('detail-panel');
 
         // Update URL so refresh / Back works on this exact topic
-        app.setHash(`#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(app.state.system)}/${index}`);
+        const lastStudiedPath = `#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(app.state.system)}/${index}`;
+        app.setHash(lastStudiedPath);
+        
+        // Save to localStorage for the landing page "Resume Study" panel
+        localStorage.setItem('ivri-last-studied-hash', lastStudiedPath);
+        localStorage.setItem('ivri-last-studied-title', item.title);
 
         // Override page title to include the structure name for sharper bookmarks/sharing
         document.title = `${item.title} · ${app.state.system} · ${app.state.region} · IVRI Anatomy`;
@@ -1634,6 +1836,8 @@ const app = {
         if (!text || text.trim().length < 3) return false;
         const all = app._loadAllHighlights();
         if (!all[topicId]) all[topicId] = [];
+        // If this exact text is already saved, just update the colour + timestamp
+        // (was returning false here, which made the visual wrap fail on re-taps).
         const existing = all[topicId].find(h => h.text === text);
         if (existing) {
             existing.color = color;
@@ -1643,7 +1847,6 @@ const app = {
             if (all[topicId].length > 50) all[topicId] = all[topicId].slice(-50);
         }
         app._saveAllHighlights(all);
-        app._recordActivityToday('hl');     // counts toward streak
         return true;
     },
 
@@ -2176,7 +2379,6 @@ const app = {
         });
         if (all[topicId].length > 100) all[topicId] = all[topicId].slice(-100);
         app._saveAllNotes(all);
-        app._recordActivityToday('note');   // counts toward streak
         return true;
     },
 
@@ -2337,21 +2539,15 @@ const app = {
             </div>`;
     },
 
-    // After innerHTML is set, wrap text matching each note's anchor with a small ✎ icon.
-    // If MULTIPLE notes share the same anchor text, we attach ALL their timestamps
-    // to the icon and let the user cycle/pick from a small popup (no note gets lost).
+    // After innerHTML is set, wrap text matching each note's anchor with a small ✎ icon
     applyNoteAnchorsToPanel: (topicId) => {
         const panel = document.getElementById('detail-panel');
         if (!panel) return;
         const notes = app.getNotesForTopic(topicId).filter(n => n.anchor);
         if (!notes.length) return;
-        // Group ALL notes by anchor text (newest first). Bug #6 fix: keep every
-        // timestamp, not just the latest, so older notes stay reachable.
-        const anchorMap = {};   // anchor -> [ts1, ts2, ...] (newest first)
-        notes.sort((a, b) => b.t - a.t).forEach(n => {
-            if (!anchorMap[n.anchor]) anchorMap[n.anchor] = [];
-            anchorMap[n.anchor].push(n.t);
-        });
+        // De-duplicate by anchor text (use first/latest note per anchor for jump-to-edit)
+        const anchorMap = {};
+        notes.sort((a, b) => b.t - a.t).forEach(n => { if (!anchorMap[n.anchor]) anchorMap[n.anchor] = n.t; });
         // Sort longest first so longer anchors wrap before shorter ones nested inside them
         const anchors = Object.keys(anchorMap).sort((a, b) => b.length - a.length);
         for (const anchorText of anchors) {
@@ -2359,15 +2555,14 @@ const app = {
         }
     },
 
-    _tagAnchorInPanel: (root, needle, noteTimestamps, topicId) => {
+    _tagAnchorInPanel: (root, needle, noteTs, topicId) => {
         if (!needle) return;
-        // noteTimestamps is now an ARRAY (Bug #6 fix). Accept either array or
-        // single number for backwards compat.
-        const tsList = Array.isArray(noteTimestamps) ? noteTimestamps : [noteTimestamps];
         const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
             acceptNode(node) {
                 let p = node.parentNode;
                 while (p && p !== root) {
+                    // Skip buttons, links, our own icon. Allow walking into <mark> so
+                    // a note anchored to highlighted text still gets its icon.
                     if (p.nodeName === 'BUTTON' || p.nodeName === 'A' || (p.classList && p.classList.contains('note-anchored-icon'))) return NodeFilter.FILTER_REJECT;
                     p = p.parentNode;
                 }
@@ -2380,23 +2575,15 @@ const app = {
         for (const textNode of targets) {
             const idx = textNode.nodeValue.indexOf(needle);
             if (idx === -1) continue;
+            // Build the icon
             const icon = document.createElement('span');
             icon.className = 'note-anchored-icon';
-            icon.title = tsList.length > 1
-                ? `${tsList.length} notes — tap to choose`
-                : 'View / edit note';
-            // Show a small count badge when multiple notes share this anchor
-            icon.innerHTML = tsList.length > 1
-                ? `<i class="fas fa-sticky-note"></i><span class="note-anchor-count">${tsList.length}</span>`
-                : '<i class="fas fa-sticky-note"></i>';
-            icon.onclick = (e) => {
-                e.stopPropagation(); e.preventDefault();
-                if (tsList.length === 1) {
-                    app.openNoteEditor(topicId, tsList[0]);
-                } else {
-                    app._showNotePicker(topicId, tsList, icon);
-                }
-            };
+            icon.id = 'note-anchor-' + noteTs;
+            icon.title = 'View / edit note';
+            icon.innerHTML = '<i class="fas fa-sticky-note"></i>';
+            icon.onclick = (e) => { e.stopPropagation(); e.preventDefault(); app.openNoteEditor(topicId, noteTs); };
+            // If the text node sits inside a <mark.user-hl>, place the icon AFTER
+            // the mark so it doesn't get caught by the mark's click-to-remove handler.
             const parentMark = (textNode.parentNode && textNode.parentNode.nodeName === 'MARK') ? textNode.parentNode : null;
             if (parentMark) {
                 parentMark.parentNode.insertBefore(icon, parentMark.nextSibling);
@@ -2405,49 +2592,8 @@ const app = {
                 textNode.splitText(idx);
                 after.parentNode.insertBefore(icon, after);
             }
-            break;
+            break; // one icon per anchor is enough
         }
-    },
-
-    // Small popup that lists all notes anchored to the same text fragment.
-    // Tapping a row opens that specific note's editor.
-    _showNotePicker: (topicId, timestamps, anchorEl) => {
-        const old = document.getElementById('note-picker');
-        if (old) old.remove();
-        const notes = app.getNotesForTopic(topicId);
-        const items = timestamps
-            .map(ts => notes.find(n => n.t === ts))
-            .filter(Boolean);
-        if (!items.length) return;
-        const picker = document.createElement('div');
-        picker.id = 'note-picker';
-        picker.className = 'note-picker';
-        picker.innerHTML = `
-            <div class="note-picker-head">${items.length} notes here</div>
-            ${items.map(n => `
-                <button class="note-picker-row hl-${n.color || 'yellow'}" data-ts="${n.t}">
-                    <div class="note-picker-preview">${(n.text || '').replace(/</g, '&lt;').slice(0, 90)}${(n.text || '').length > 90 ? '…' : ''}</div>
-                    <div class="note-picker-date">${new Date(n.t).toLocaleDateString()}</div>
-                </button>
-            `).join('')}`;
-        // Position relative to the icon
-        const rect = anchorEl.getBoundingClientRect();
-        picker.style.position = 'fixed';
-        picker.style.top  = (rect.bottom + 6) + 'px';
-        picker.style.left = Math.max(12, Math.min(window.innerWidth - 280, rect.left)) + 'px';
-        document.body.appendChild(picker);
-        picker.querySelectorAll('.note-picker-row').forEach(b => {
-            b.onclick = () => {
-                const ts = parseInt(b.dataset.ts, 10);
-                picker.remove();
-                app.openNoteEditor(topicId, ts);
-            };
-        });
-        // Click-outside to close
-        setTimeout(() => {
-            const close = (e) => { if (!picker.contains(e.target)) { picker.remove(); document.removeEventListener('click', close, true); } };
-            document.addEventListener('click', close, true);
-        }, 50);
     },
 
     // Scroll the panel to the anchored text and pulse it
@@ -2550,7 +2696,7 @@ const app = {
 
     toggleRead: (index, btn) => {
         if (!app.state.region || !app.state.system) return;
-        app._recordActivityToday('read');   // counts toward streak as a "read" action
+        app._recordActivityToday();
         const id = app.bookmarkId(app.state.region, app.state.system, index);
         const list = app._loadRead();
         const i = list.indexOf(id);
