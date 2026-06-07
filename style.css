@@ -726,7 +726,9 @@ body.professional-mode .portal-card:hover .card-desc {
     color: #263238;
 }
 
-/* Mobile responsive styles for new landing elements */
+/* ================================================================
+   MOBILE LAYOUT — Refined Academic App Experience
+   ================================================================ */
 @media (max-width: 900px) {
     .hero-split-container {
         flex-direction: column;
@@ -734,20 +736,66 @@ body.professional-mode .portal-card:hover .card-desc {
         min-height: auto;
         max-height: none;
     }
+
+    /* ── Hero Text Pane — Centered, compact spacing ── */
     .hero-left-pane {
-        padding: 40px 24px 30px 24px;
-        align-items: flex-start;
-        text-align: left;
+        padding: 36px 24px 24px 24px;
+        align-items: center;
+        text-align: center;
     }
+    .hero-sys-tag {
+        font-size: 0.72rem;
+        margin-bottom: 12px;
+        justify-content: center;
+        width: 100%;
+    }
+    .tag-line {
+        width: 16px;
+        margin-right: 8px;
+    }
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.15;
+        text-align: center;
+        width: 100%;
+    }
+    .hero-subtitle {
+        font-size: 0.92rem;
+        line-height: 1.55;
+        text-align: center;
+        max-width: 480px;
+        margin: 0 auto 20px auto;
+        width: 100%;
+    }
+
+    /* ── CTA Buttons — Side by side, centered, compact ── */
+    .hero-ctas {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    .hero-cta {
+        flex: 1;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 0.82rem;
+        min-width: 0;
+    }
+
+    /* ── Video Card — Small centered preview ── */
     .hero-right-pane {
-        width: 220px; /* Scale down to prevent it from pushing content down too much */
-        aspect-ratio: 9 / 16; /* Locked vertical aspect ratio */
+        width: 180px;
+        aspect-ratio: 9 / 16;
         height: auto;
         min-height: auto;
-        margin: 0 auto 30px auto; /* Centered with bottom gap */
+        margin: 20px auto 10px auto;
         border-top: none;
-        border-radius: 16px;
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+        border-radius: 18px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
         border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .hero-right-pane::before {
@@ -757,56 +805,41 @@ body.professional-mode .portal-card:hover .card-desc {
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
     }
-    .hero-sys-tag {
-        font-size: 0.72rem; /* Fits on a single line on mobile viewports */
-        margin-bottom: 12px;
-    }
-    .tag-line {
-        width: 16px;
-        margin-right: 8px;
-    }
-    .hero-title {
-        font-size: 2.1rem; /* Fits long words like 'technology' on mobile */
-        line-height: 1.15;
-        text-align: left;
-    }
-    .hero-subtitle {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        text-align: left;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-    .hero-ctas {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        width: 100%;
-        max-width: 320px;
-        margin: 0 0 24px 0; /* Add bottom margin to separate from the video card */
-    }
-    .hero-cta {
-        width: 100%;
-        justify-content: center;
-    }
+
+    /* ── Stats Strip — Horizontal row ── */
     .hero-stats-strip {
-        flex-direction: column;
-        gap: 12px;
-        padding: 16px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0;
+        padding: 14px 16px;
         border-radius: 16px;
         width: calc(100% - 32px);
-        margin: 20px 16px;
+        margin: 16px 16px;
+    }
+    .stat-item {
+        flex: 1;
+        min-width: 0;
+    }
+    .stat-number {
+        font-size: 1.1rem;
+    }
+    .stat-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.3px;
     }
     .stat-item-divider {
-        width: 40px;
-        height: 1px;
+        width: 1px;
+        height: 26px;
+        margin: 0 4px;
     }
+
+    /* ── Resume Banner ── */
     .resume-card {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
         padding: 14px;
-        margin: 0 16px 20px 16px;
+        margin: 0 16px 16px 16px;
         width: calc(100% - 32px);
     }
     .resume-card-body {
@@ -816,9 +849,61 @@ body.professional-mode .portal-card:hover .card-desc {
     .resume-btn {
         width: 100%;
     }
+
+    /* ── Portal Cards — Vertical stack, compact ── */
     #landing-view .portal-grid {
         flex-direction: column;
         align-items: center;
+        gap: 20px !important;
+        margin-top: 30px !important;
+        padding: 0 16px !important;
+    }
+
+    #landing-view .portal-card {
+        width: 270px !important;
+        height: 330px !important;
+        min-height: auto !important;
+        padding: 28px 20px !important;
+    }
+
+    #landing-view .orb-icon {
+        font-size: 2.8rem !important;
+        margin-bottom: 14px !important;
+    }
+
+    #landing-view .card-label {
+        font-size: 1.4rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    #landing-view .card-features {
+        font-size: 0.72rem !important;
+        line-height: 2 !important;
+    }
+
+    /* ── Footer — Bottom nav clearance ── */
+    .footer {
+        padding-bottom: calc(40px + 74px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* Small phones (under 380px) */
+@media (max-width: 380px) {
+    .hero-left-pane {
+        padding: 28px 18px 18px 18px;
+    }
+    .hero-title {
+        font-size: 1.7rem;
+    }
+    .hero-subtitle {
+        font-size: 0.85rem;
+    }
+    .hero-cta {
+        padding: 10px 12px;
+        font-size: 0.78rem;
+    }
+    .hero-right-pane {
+        width: 160px;
     }
 }
 
