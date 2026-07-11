@@ -25,6 +25,27 @@ const quizApp = {
   regions: ["Forelimb", "Hindlimb & Pelvis", "Head & Neck", "Thorax", "Abdomen"],
   systems: ["Osteology", "Myology", "Arthrology", "Neurology", "Angiology", "Splanchnology"],
 
+  // Normalize harmless presentation differences without making the matcher fuzzy
+  // enough to accept anatomically different terms.
+  normalizeFIBAnswer: (value) => String(value ?? '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[\u2018\u2019\u02BC']/g, '')
+    .replace(/&/g, ' and ')
+    .replace(/[\u2010-\u2015\-_/]+/g, ' ')
+    .replace(/[^a-zA-Z0-9\s]/g, ' ')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/\b(?:[a-z]\s+){1,}[a-z]\b/g, acronym => acronym.replace(/\s/g, ''))
+    .trim(),
+
+  isAcceptedFIBAnswer: (userText, acceptedAnswers) => {
+    const normalizedUser = quizApp.normalizeFIBAnswer(userText);
+    return normalizedUser.length > 0 && acceptedAnswers.some(
+      answer => quizApp.normalizeFIBAnswer(answer) === normalizedUser
+    );
+  },
+
   // ==================== INITIALIZATION ====================
 
   openMenu: () => {
@@ -723,8 +744,7 @@ const quizApp = {
       }
       input.oninput = (e) => {
         const userText = e.target.value;
-        const cleanUser = userText.trim().toLowerCase();
-        const isMatch = q.a.some(ans => ans.toLowerCase() === cleanUser);
+        const isMatch = quizApp.isAcceptedFIBAnswer(userText, q.a);
         quizApp.userAnswers[quizApp.currentIndex] = {
           answer: userText,
           isCorrect: isMatch,
@@ -768,9 +788,6 @@ const quizApp = {
     const btns = document.querySelectorAll('.quiz-option');
     btns.forEach(b => b.disabled = true);
 
-    // Log today's quiz activity for streak (any quiz answer counts)
-    if (window.app && app._recordActivityToday) app._recordActivityToday('quiz');
-
     // Store answer
     quizApp.userAnswers[quizApp.currentIndex] = {
       selectedIdx: selectedIdx,
@@ -806,7 +823,6 @@ const quizApp = {
   checkTF: (userBool, btn, qData) => {
     const btns = document.querySelectorAll('.quiz-option');
     btns.forEach(b => b.disabled = true);
-    if (window.app && app._recordActivityToday) app._recordActivityToday('quiz');
 
     const isCorrect = userBool === qData.a;
 
@@ -845,10 +861,8 @@ const quizApp = {
   checkFIB: (userText, input, qData) => {
     if (!userText) return;
     input.disabled = true;
-    if (window.app && app._recordActivityToday) app._recordActivityToday('quiz');
 
-    const cleanUser = userText.trim().toLowerCase();
-    const isMatch = qData.a.some(ans => ans.toLowerCase() === cleanUser);
+    const isMatch = quizApp.isAcceptedFIBAnswer(userText, qData.a);
 
     // Store answer
     quizApp.userAnswers[quizApp.currentIndex] = {
