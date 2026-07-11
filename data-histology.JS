@@ -235,3 +235,69 @@ atlasData["Histology"] = {
         }
     ]
 };
+
+// Audited veterinary corrections (2026): normalizes species-specific statements
+// and removes outdated or over-generalized teaching claims at load time.
+(function applyHistologyCorrections() {
+    const replacements = [
+        ["<b>Mesenchymal stem cells</b> — pluripotent", "<b>Mesenchymal stromal/stem cells</b> — multipotent"],
+        ["foot processes form blood-brain barrier", "end-feet support the blood-brain barrier, whose seal is formed by capillary endothelial tight junctions"],
+        ["called Kupffer cell (liver), microglia (CNS), osteoclast (bone), Langerhans (skin), alveolar macrophage (lung)", "include Kupffer and alveolar macrophages; microglia, osteoclasts and Langerhans cells are related but distinct tissue-resident populations"],
+        ["Cornea (5 layers — epithelium + Bowman's + stroma + Descemet's + endothelium)", "Cornea (4 conventional layers in domestic animals: epithelium + stroma + Descemet's membrane + endothelium; no distinct Bowman's layer)"],
+        ["<b>Cornea (5 layers, anterior to posterior):</b>", "<b>Cornea (4 conventional layers in domestic animals, anterior to posterior):</b>"],
+        ["  2. Bowman's Membrane — basement membrane + thin layer.<br>  3.", "  2."],
+        ["  4. Descemet's Membrane", "  3. Descemet's Membrane"],
+        ["  5. Posterior Endothelium", "  4. Posterior Endothelium"],
+        ["Area centralis (visual streak in horse/cattle)", "Area centralis and visual streak are distinct retinal specializations; a visual streak is prominent in horse and cattle"],
+        ["Vitreous body — gel filling the posterior chamber", "Vitreous body — gel filling the vitreous chamber behind the lens"],
+        ["Eccrine sweat glands</b> — present in equine skin (true sweat-cooling); footpads of dog/cat", "Epitrichial (apocrine) sweat glands</b> — abundant in equine skin and responsible for sweat cooling; eccrine/atrichial glands occur mainly at specialized sites such as carnivore footpads"],
+        ["non-keratinized in ruminants and horse", "keratinized in ruminants and horse; generally non-keratinized in carnivores and pig"],
+        ["Non-keratinized stratified squamous", "Stratified squamous; commonly keratinized in horse and ruminants and generally non-keratinized in carnivores and pig"],
+        ["pluripotent mesenchymal stem cells", "multipotent mesenchymal stromal/stem cells"],
+        ["Mesenchymal cells are pluripotent", "Mesenchymal stromal/stem cells are multipotent"],
+        ["Microglia, Kupffer cells, osteoclasts, and Langerhans cells are all macrophages", "Microglia, Kupffer cells, osteoclasts, and Langerhans cells belong to related mononuclear-phagocyte lineages but are distinct resident cell populations"],
+        ["ALL connective tissues and ALL muscle derive from mesoderm", "Most connective tissues and muscles derive from mesoderm; important exceptions include neural-crest-derived craniofacial connective tissues and neuroectoderm-derived iris muscles"],
+        ["Glial cells outnumber neurons ~10:1", "The whole mammalian brain contains roughly comparable total numbers of glia and neurons, with marked regional and species variation"],
+        ["astrocyte tight junctions form the blood-brain barrier", "endothelial tight junctions form the blood-brain barrier, supported by pericytes, basement membrane and astrocytic end-feet"],
+        ["Astrocytes form the blood-brain barrier", "Brain capillary endothelial tight junctions form the blood-brain barrier; astrocytes support and regulate it"],
+        ["5-7 million/ÂµL", "species-dependent (approximately 5-12 million/ÂµL among common domestic mammals)"],
+        ["lifespan ~120 days", "lifespan is species-dependent (shorter in several domestic species than the human value of about 120 days)"],
+        ["multinucleated megakaryocyte", "large megakaryocyte with one highly polyploid, multilobulated nucleus"],
+        ["multinucleated giant cell", "giant cell with one highly polyploid, multilobulated nucleus"],
+        ["Parotid is the only major salivary gland active in the horse", "All major salivary glands contribute in the horse; the parotid is especially active during mastication"],
+        ["Pig: smooth, unipyramidal", "Pig: smooth externally but multipyramidal/multipapillate internally"],
+        ["positive and negative selection occur in cortex", "positive selection occurs mainly in the cortex; negative selection occurs chiefly in the medulla and corticomedullary region"],
+        ["All tonsils are covered by stratified squamous epithelium and contain crypts", "Tonsillar epithelium and crypt development vary by site: oropharyngeal tonsils are usually stratified squamous, whereas the pharyngeal tonsil has respiratory epithelium"],
+        ["90% cornified cells = optimum mating time", "a high proportion of cornified cells supports oestrus staging in the bitch, but breeding time should be refined with progesterone/LH testing and clinical context"],
+        ["Cornea has 5 layers", "Domestic-animal cornea is conventionally described in 4 layers because a distinct Bowman's layer is absent"],
+        ["area centralis (visual streak)", "area centralis and visual streak (distinct specializations whose prominence varies by species)"],
+        ["fills the posterior chamber", "fills the vitreous chamber behind the lens"],
+        ["Horse has eccrine sweat glands", "Horse has abundant epitrichial (apocrine) sweat glands; eccrine/atrichial glands are largely restricted to specialized sites such as footpads in carnivores"],
+        ["hCG in all domestic species", "chorionic gonadotrophins are species-specific: hCG is primate-derived and eCG is produced by equine endometrial cups"],
+        ["bovine LSV (BLV)", "bovine leukaemia virus (BLV)-associated enzootic bovine leukosis/lymphoma"],
+        ["<1 mm", "&lt;1 mm"]
+    ];
+    const fix = value => {
+        if (typeof value !== "string") return value;
+        for (const [oldText, newText] of replacements) value = value.split(oldText).join(newText);
+        return value;
+    };
+    for (const section of Object.values(atlasData.Histology || {})) {
+        if (!Array.isArray(section)) continue;
+        for (const item of section) {
+            for (const key of ["desc", "eliteDesc", "clinical"]) item[key] = fix(item[key]);
+            if (Array.isArray(item.comparative)) for (const row of item.comparative) row.note = fix(row.note);
+        }
+    }
+    const cytology = atlasData.Histology && atlasData.Histology.Cytology;
+    if (Array.isArray(cytology) && !cytology.some(x => x.title === "Microscopy, Micrometry & Routine H&E")) {
+        cytology.push({
+            title: "Microscopy, Micrometry & Routine H&E",
+            desc: "Light microscopy resolves routinely stained cells and tissues; electron microscopy provides ultrastructural detail. Micrometry requires calibration of an ocular scale against a stage micrometer at each objective magnification.",
+            eliteDesc: "Routine paraffin histology follows fixation, dehydration, clearing, paraffin infiltration, embedding, sectioning, mounting and staining. In H&E, haematoxylin colours basophilic nuclei blue-purple and eosin colours most cytoplasm and extracellular proteins pink.",
+            comparative: [{ species: "All domestic species", note: "The processing principles are shared, but fixation, decalcification, section thickness and special stains must suit the tissue and diagnostic question." }],
+            clinical: "Poor fixation, thick sections, folds, chatter, precipitate and incorrect micrometer calibration can create artefacts or false measurements.",
+            imgCode: "microscopy_he"
+        });
+    }
+})();

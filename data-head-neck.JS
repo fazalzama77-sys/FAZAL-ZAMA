@@ -54,47 +54,17 @@ atlasData["Head & Neck"] = {
             <h4>Squamous Part (Squama occipitalis)</h4>
             <p>In the ox, this component is entirely restricted to the nuchal (posterior) surface of the skull. It does not contribute to the dorsal roof. It bears the external occipital protuberance, a rugose thickening for the attachment of the funicular part of the ligamentum nuchae, essential for supporting the massive head.</p>`,
 
-            comparative: [
-                { species: "Ox (Bos taurus)", note: "Prominent condyles with distinct separation. Nuchal crest distinct; forms transverse ridge of nuchal surface. Paracondylar processes short, broad, curved medially. Foramen magnum large, circular to oval. Basilar tubercles flattened, less distinct." },
-                { species: "Horse (Equus caballus)", note: "Smaller, widely separated condyles allow lateral rotation. Very prominent nuchal crest forms the poll (highest point). Paracondylar processes long, straight, directed ventrally. Foramen magnum triangular to oval. Very prominent muscular tubercles." },
-                { species: "Dog (Canis lupus)", note: "Large separated condyles with deep intercondyloid notch. High sharp nuchal crest (except brachycephalic). Short paracondylar processes projecting ventrally by lateral processes of exoccipital. Circular foramen magnum located ventrally. Basioccipital plate-like, tubercles absent." },
-                { species: "Pig (Sus scrofa)", note: "Large separated condyles allow substantial flexion for grazing. Prominent nuchal crest projects dorsally as high, thin plate. Very long paracondylar processes directed straight ventrally (paramastoid process). Oval foramen magnum. Prominent rough tubercles for heavy flexor attachment." },
-                { species: "Fowl (Gallus domesticus)", note: "Single median condyle located ventral to foramen magnum allows wide rotation (near 180°). Temporal crests replace nuchal crest. Represented by paraoccipital processes. Transversely oval foramen magnum with dorsal notch common in toy breeds. Less prominent, fuses with sphenoid early." }
-            ],
+            comparative: [{"species":"Ox","note":"Paired occipital condyles flank the foramen magnum; a strong nuchal crest and paracondylar processes provide neck-muscle attachment."},{"species":"Horse","note":"Paired occipital condyles and prominent paracondylar processes; nuchal attachments are strongly developed."},{"species":"Dog","note":"Paired occipital condyles; the foramen magnum may show breed-related shape variation, but toy-breed features must not be assigned to birds."},{"species":"Fowl (Gallus domesticus)","note":"A single occipital condyle permits extensive head rotation. Avian occipital anatomy must be described independently of canine skull traits."}],
 
             clinical: "<b>Clinical Insight:</b> In Gallus domesticus, the presence of a single occipital condyle forms a highly mobile articulation with the atlas, permitting an extensive range of head rotation. This enhanced mobility is essential for preening, rapid environmental surveillance, precise visual alignment, and predator detection. In contrast, the bi-condylar arrangement of the mammalian skull generally provides greater stability but a comparatively reduced range of rotational movement."
         },
         {
             title: "Sphenoid Bone (Os sphenoidale)",
-            desc: `<b>Key Features:</b><br>
-            • <b>Keystone</b> of cranial base, terraced structure (presphenoid higher than basisphenoid)<br>
-            • <b>Foramen Orbitorotundum:</b> Pathognomonic for ruminants - fusion of foramen rotundum + orbital fissure<br>
-            • Transmits: CN III, IV, VI, V1 (ophthalmic), V2 (maxillary)<br>
-            • <b>Oval Foramen:</b> For V3 (mandibular nerve) - distinct in ox, absent as discrete foramen in horse<br>
-            • <b>Sella Turcica:</b> Deep hypophyseal fossa (houses pituitary) with high thick dorsum sellae<br>
-            • <b>NO Alar Canal:</b> Maxillary artery courses on surface (not through bone) - changes surgical approach`,
+            desc: "<b>Sphenoid complex:</b><br>• Presphenoid and basisphenoid form the cranial base and part of the orbit.<br>• In ruminants and pigs, orbital fissure and foramen rotundum unite as the foramen orbitorotundum.<br>• Cattle lack an alar canal and possess a distinct foramen ovale for V3.<br>• Horse and dog retain separate orbital fissure and foramen rotundum; both possess an alar canal.",
 
-            eliteDesc: `<h3>The Cranial Base Keystone</h3>
-            <p>The sphenoid bone acts as the keystone of the cranial base, situated rostral to the occipital bone. In the ox, the sphenoid is <b>terraced</b>, meaning the rostral portion (presphenoid) sits at a higher elevation than the caudal portion (basisphenoid), reflecting the kyphosis of the cranial base.</p>
-            
-            <h4>Anatomical Topography</h4>
-            <p><b>Basisphenoid (Os basisphenoidale):</b> The caudal segment. Its dorsal surface features the <b>sella turcica</b> (Turkish saddle), which houses the pituitary gland. The dorsum sellae in the ox is high and thick, creating a deep hypophyseal fossa compared to the horse. The wings (alae) spread laterally to articulate with the temporal bones, forming the oval foramen.</p>
-            
-            <p><b>Presphenoid (Os praesphenoidale):</b> The rostral segment. Its body is hollow, excavated by the sphenoidal sinus, which communicates with the nasal cavity through the ethmoid meatus. The wings of the presphenoid form the caudal orbital wall and contain the optic canals.</p>
-            
-            <p><b>Foramen Orbitorotundum:</b> This is a <b>pathognomonic feature of the ruminant skull</b>. In the ox, the foramen rotundum and the orbital fissure fuse to form a single, massive opening. This transmits Cranial Nerves III (Oculomotor), IV (Trochlear), VI (Abducent), and the ophthalmic (V1) and maxillary (V2) branches of the Trigeminal nerve.</p>
-            
-            <p><b>Oval Foramen (Foramen ovale):</b> A distinct foramen in the ox located in the wing of the basisphenoid, transmitting the mandibular nerve (CN V3). This is absent as a discrete foramen in the horse, where it is represented by a notch in the foramen lacerum.</p>
-            
-            <p><b>Alar Canal:</b> Absent in the ox. This means the maxillary artery courses on the surface of the pterygoid muscles rather than through a bony conduit, altering the approach for vascular ligation in this region compared to the horse.</p>`,
+            eliteDesc: "<b>SPHENOID COMPLEX</b><br><br>The presphenoid and basisphenoid form much of the cranial base and contribute to the orbit. In ruminants and pigs, the orbital fissure and foramen rotundum unite as the foramen orbitorotundum, transmitting CN III, IV, VI, V1 and V2. In the horse and dog those openings remain separate. Cattle lack an alar canal; horse and dog possess one. The bovine foramen ovale transmits V3, whereas in the horse V3 exits through the oval notch/foramen-lacerum region.",
 
-            comparative: [
-                { species: "Ox (Bos taurus)", note: "Foramen Orbitorotundum present (massive fusion of rotundum + orbital fissure). Alar Canal absent. Foramen Ovale present (large, discrete). Deep sella turcica with prominent hypophyseal fossa. Extremely large sphenoid sinus." },
-                { species: "Horse (Equus caballus)", note: "Foramen Orbitorotundum present; similar to ruminants. Alar Canal present (transmits maxillary artery). Foramen Ovale present. Flat; shallow fossa. Communicates with ethmoid labyrinth." },
-                { species: "Dog (Canis lupus)", note: "Orbital fissure and Foramen rotundum are separate (no fusion). Alar Canal present (transmits maxillary artery). Absent; replaced by large foramen lacerum. Distinct foramen ovale for CN V. Shallow; indistinct dorsum sellae. Communicates with palatine sinus." },
-                { species: "Pig (Sus scrofa)", note: "Orbital fissure and Foramen rotundum are separate. Alar Canal present. Distinct foramen ovale present for CN V. Deep pituitary fossa. Often filled with marrow in small breeds." },
-                { species: "Fowl (Gallus domesticus)", note: "Multiple separate foramina for cranial nerves (no fusion). Absent. Absent; replaced by incisura ovalis in foramen lacerum. Shallow; indistinct dorsum sellae. Absent; pneumatized by other systems." }
-            ],
+            comparative: [{"species":"Ox","note":"Foramen orbitorotundum present; alar canal absent; foramen ovale distinct."},{"species":"Horse","note":"Orbital fissure and foramen rotundum remain separate; alar canal present; V3 exits through the oval notch/foramen-lacerum region."},{"species":"Dog","note":"Orbital fissure, foramen rotundum and foramen ovale are separate; alar canal present."},{"species":"Pig","note":"Foramen orbitorotundum is present, so this fusion is not unique to ruminants."}],
 
             clinical: "<b>Functional Context:</b> The absence of the Alar Canal in the ox means the maxillary artery courses on the surface of the pterygoid muscles rather than through a bony conduit, altering the approach for vascular ligation in this region compared to the horse."
         },
@@ -108,29 +78,9 @@ atlasData["Head & Neck"] = {
             • <b>Ethmoidal Labyrinth:</b> 5 endoturbinates, ~18 ectoturbinates<br>
             • <b>First endoturbinate:</b> Forms core of Dorsal Nasal Concha`,
 
-            eliteDesc: `<h3>The Olfactory Center</h3>
-            <p>The ethmoid is a complex, cuboidal bone located deep between the orbits, separating the nasal cavity from the cranial cavity. It is the osseous center for olfaction.</p>
-            
-            <h4>Anatomical Topography</h4>
-            <p><b>Cribriform Plate (Lamina cribrosa):</b> A horizontal sieve-like plate located at the deepest part of the cranial fossa. It is perforated by numerous foramina transmitting the olfactory nerve fascicles (CN I) from the nasal mucosa to the olfactory bulbs.</p>
-            
-            <p><b>Crista Galli:</b> A median, vertical bony ridge projecting into the cranial cavity from the cribriform plate. In the ox, it is distinct but relatively short and thick compared to the spine-like process in the pig. It serves as an anchor for the falx cerebri.</p>
-            
-            <p><b>Perpendicular Plate (Lamina perpendicularis):</b> A median vertical plate that extends rostrally to form the caudal osseous portion of the nasal septum. It articulates with the vomer ventrally and the frontal bone dorsally.</p>
-            
-            <p><b>Ethmoidal Labyrinth:</b> A dense mass of delicate bony scrolls known as ethmoturbinates:</p>
-            <ul>
-                <li><b>Endoturbinates:</b> The inner row of large scrolls. In the ox, there are usually <b>5 endoturbinates</b>. The first endoturbinate is enormous and forms the core of the Dorsal Nasal Concha.</li>
-                <li><b>Ectoturbinates:</b> The outer row of smaller scrolls, numbering approximately <b>18 in the ox</b>.</li>
-            </ul>`,
+            eliteDesc: "<b>ETHMOID BONE</b><br><br>The ethmoid separates the cranial and nasal cavities and includes the cribriform plate, perpendicular plate and ethmoidal labyrinth. Olfactory nerve filaments pass through numerous cribriform foramina. Ethmoturbinate number and arrangement vary by species and individual; fixed universal counts should not be taught. The crista galli projects into the cranial cavity and must be described from species-specific references.",
 
-            comparative: [
-                { species: "Ox (Bos taurus)", note: "Large labyrinth; 5 endoturbinates, ~18 ectoturbinates. Crista galli present; thick and low ridge. Perpendicular plate extensive; forms large part of septum. Lateral masses (lamina papyracea) present. Deep olfactory fossae." },
-                { species: "Horse (Equus caballus)", note: "Extensive labyrinth; 6 endoturbinates, ~25 ectoturbinates. Crista galli present; prominent. Perpendicular plate extensive. Deep." },
-                { species: "Dog (Canis lupus)", note: "Complex labyrinth; 7 endoturbinates, ~20 ectoturbinates. Crista galli present; high and ridge-like. Perpendicular plate extensive. Very deep; houses large olfactory bulbs." },
-                { species: "Pig (Sus scrofa)", note: "Massive labyrinth; highly complex lamellae for macrosmatic olfaction. Crista galli absent or vestigial. Perpendicular plate extensive. Deep." },
-                { species: "Fowl (Gallus domesticus)", note: "Reduced; simple structure, olfaction is less critical. Very prominent; spine-like projection. Thin; membranous/cartilaginous. Small olfactory lobes." }
-            ],
+            comparative: [{"species":"Ox","note":"Well-developed ethmoidal labyrinth supporting a large olfactory mucosal area."},{"species":"Horse","note":"Extensive ethmoidal labyrinth; species-specific lamellar arrangement."},{"species":"Dog","note":"Highly developed ethmoturbinates, especially in long-headed breeds."},{"species":"Pig","note":"Extensive labyrinth associated with strong olfaction; avoid unsupported fixed lamellar counts."},{"species":"Fowl (Gallus domesticus)","note":"Avian ethmoid and nasal conchae differ fundamentally from mammalian ethmoturbinates and require chicken-specific description."}],
 
             clinical: "<b>Comparative Note on Fowl:</b> The avian ethmoid is simplified. The olfactory lobes are small, and the turbinates are less convoluted, reflecting the general reliance of birds on vision rather than olfaction (with exceptions like vultures or kiwi)."
         },
@@ -161,12 +111,12 @@ atlasData["Head & Neck"] = {
             comparative: [
                 { species: "Ox (Bos taurus)", note: "Forms entire cranial roof; reaches nuchal crest. Present in horned breeds. Supraorbital foramen present (open groove/foramen, often double). Massive complex sinus with septa extending to horn core. Temporal line pushed laterally." },
                 { species: "Horse (Equus caballus)", note: "Restricted to forehead; parietals form the roof. Absent. Supraorbital foramen present. Moderate; confined to frontal bone. Normal position." },
-                { species: "Dog (Canis lupus)", note: "Restricted to forehead; parietals form the roof. Absent. Absent (Open orbit; orbital ligament replaces bone). Extensive; covers entire cranium. Normal position." },
+                { species: "Dog (Canis lupus)", note: "Restricted to forehead; parietals form the roof. Absent. Absent (Open orbit; orbital ligament replaces bone). Highly breed-variable; reduced or absent compartments may occur in brachycephalic dogs. Normal position." },
                 { species: "Pig (Sus scrofa)", note: "Flat/Concave dorsum; heavy supraorbital rim. Absent. Present (located at base of zygomatic process). Large; communicates directly with dorsal conchal sinus. Normal position." },
                 { species: "Fowl (Gallus domesticus)", note: "Forms roof of orbit and braincase; fused with other bones. Absent. Absent. Absent/Spongy bone (pneumatized by air sacs). Part of temporal fossa rim (squamosal)." }
             ],
 
-            clinical: "<b>Comparative Insight:</b> The 'complete bony orbit' of the ox and horse is a crucial adaptation for herbivores, providing robust protection for the eye against trauma during grazing in brush, unlike the 'open orbit' of the carnivore which allows for wider jaw opening (temporalis muscle expansion) without bony restriction."
+            clinical: "<b>Clinical relevance:</b> The frontal sinus and cornual diverticulum vary with age, horn status and species. A complete bony orbit occurs in horse, pig and ruminants, while carnivores have an orbital ligament completing the rim. Functional explanations should be presented cautiously rather than as certain causal or behavioral conclusions."
         },
         {
             title: "Parietal & Interparietal Bones",
@@ -224,7 +174,7 @@ atlasData["Head & Neck"] = {
             comparative: [
                 { species: "Ox (Bos taurus)", note: "Tympanic bulla compressed laterally; rough surface. Zygomatic process curved; forms wide arch. Small mastoid process; part of nuchal line. Glenoid fossa (TMJ) concave-convex. External acoustic meatus directed laterally." },
                 { species: "Horse (Equus caballus)", note: "Tympanic bulla large, bulbous, smooth (shell-like). Zygomatic process short; overlaps zygomatic bone. Small but distinct mastoid process. Convex/Concave; allows lateral grinding. Directed laterally." },
-                { species: "Dog (Canis lupus)", note: "Tympanic bulla very large; elongated vertically; flask-shaped. Zygomatic process long; overlaps zygomatic bone. Very long and distinct mastoid process. Convex/Concave; allows grinding. Directed dorsolaterally." },
+                { species: "Dog (Canis lupus)", note: "Tympanic bulla very large; elongated vertically; flask-shaped. Zygomatic process long; overlaps zygomatic bone. Very long and distinct mastoid process. Convex/Concave; primarily permits hinge-like opening and closing with limited lateral excursion. Directed dorsolaterally." },
                 { species: "Pig (Sus scrofa)", note: "Tympanic bulla distinct; fused with paraoccipital. Zygomatic process short; robust mastoid. Distinct. Deep groove; strictly hinge-like (ginglymus). Directed ventrolaterally." },
                 { species: "Fowl (Gallus domesticus)", note: "Tympanic bulla absent (analogous structures differ). Part of temporal fossa rim (squamosal). Absent. Articulates via Quadrate bone (not TMJ). Not applicable." }
             ],
@@ -255,13 +205,7 @@ atlasData["Head & Neck"] = {
             
             <p><b>Palatine Process:</b> Forms the major portion of the hard palate, fusing with the counterpart at the median palatine suture.</p>`,
 
-            comparative: [
-                { species: "Ox (Bos taurus)", note: "Facial tuberosity knob-like. Single infraorbital foramen above 3rd premolar. 6 cheek teeth (no incisors/canines). Extensive sinus continuous with palatine. Shape: Short and broad." },
-                { species: "Horse (Equus caballus)", note: "Facial crest prominent sharp ridge. Single infraorbital foramen above 3rd premolar. 6 cheek teeth + canines (male). Divided into rostral/caudal compartments. Long and narrow." },
-                { species: "Dog (Canis lupus)", note: "Smooth surface (no crest). Multiple small foramina. Premolars + Molars + Canines. Small. Long and robust." },
-                { species: "Pig (Sus scrofa)", note: "Prominent ridge above canine. Single; above 1st cheek tooth. PM + M + Canines. Large recess rather than true sinus. Short (brachy) to Long (dolicho)." },
-                { species: "Fowl (Gallus domesticus)", note: "Absent. Single; above 3rd cheek tooth. Edentulous (no teeth). Pneumatized (antorbital sinus). Slender rod-like (part of upper beak)." }
-            ],
+            comparative: [{"species":"Ox","note":"Bears upper cheek teeth and a facial tuberosity; the infraorbital foramen is related to species-specific cheek-tooth landmarks."},{"species":"Horse","note":"Facial crest and infraorbital canal are prominent; long cheek-tooth reserve crowns affect sinus anatomy."},{"species":"Dog","note":"Contains canine and cheek-tooth alveoli; infraorbital landmarks vary with skull conformation."},{"species":"Pig","note":"Robust maxilla supporting complete cheek-tooth dentition."},{"species":"Fowl (Gallus domesticus)","note":"Contributes to the upper beak and palate; chickens are edentulous and have no cheek-tooth landmarks."}],
 
             clinical: "<b>Clinical Relevance:</b> Infection from the upper cheek teeth (PM4, M1, M2, M3) can break into the maxillary sinus, causing empyema (pus accumulation). Trephination is performed dorsal to the facial tuberosity, avoiding the nasolacrimal duct and the infraorbital nerve."
         },
@@ -305,7 +249,7 @@ atlasData["Head & Neck"] = {
                 { species: "Fowl (Gallus domesticus)", note: "Incisive: Absent (forms beak tip). Fused, sharp tip. Nasal: Thin, flexible. Fused with Frontal (Kinetic hinge - nasofrontal hinge allows prokinesis)." }
             ],
 
-            clinical: "<b>Fowl Comparison:</b> The nasal bone in chickens forms a nasofrontal hinge with the frontal bone. This is a synovial syndesmosis that allows the upper beak to flex upward relative to the braincase (prokinesis), a key adaptation for avian feeding."
+            clinical: "<b>Clinical relevance:</b> The nasoincisive notch and nasal bones are palpable landmarks in large animals. In birds the craniofacial hinge permits upper-beak movement through specialized flexible articulations; it must not be called a “synovial syndesmosis.”"
         },
         {
             title: "Lacrimal & Zygomatic Bones",
@@ -406,34 +350,9 @@ atlasData["Head & Neck"] = {
             • <b>Lingual process:</b> Short, tuberous in ox (vs long spur in horse)<br>
             • Supports tongue and larynx`,
 
-            eliteDesc: `<h3>Mandible (Mandibula)</h3>
-            <p>The lower jaw; the only mobile bone of the skull.</p>
-            
-            <h4>Anatomical Topography</h4>
-            <p><b>Symphysis:</b> The joint between the two halves (mandibular synchondrosis). In the ox, this ossifies very late or never fully, allowing some independent movement of the halves.</p>
-            <p><b>Diastema:</b> The large gap between the incisors (only lower incisors are present) and the cheek teeth.</p>
-            <p><b>Coronoid Process:</b> Long and curves caudally for insertion of the temporalis muscle.</p>
-            <p><b>Condylar Process:</b> Concave-convex articular surface for the TMJ.</p>
-            <p><b>Angle:</b> The angle of the mandible is expanded and rough for the insertion of the masseter and pterygoid muscles (chewing muscles).</p>
-            
-            <h3>Hyoid Apparatus (Apparatus hyoideus)</h3>
-            <p>A series of bony rods suspending the tongue and larynx from the skull.</p>
-            
-            <h4>Anatomical Topography</h4>
-            <p><b>Stylohyoid (Stylohyoideum):</b> The largest element in the ox. It is flattened and has a distinct muscular angle near its proximal end.</p>
-            <p><b>Epihyoid:</b> Short and cylindrical.</p>
-            <p><b>Ceratohyoid:</b> Rod-like.</p>
-            <p><b>Basihyoid:</b> The transverse bar connecting the two sides.</p>
-            <p><b>Lingual Process:</b> Projects rostrally from the basihyoid into the tongue. In the ox, this is short and tuberous, distinguishing it sharply from the horse.</p>
-            <p><b>Thyrohyoid:</b> Connects to the thyroid cartilage of the larynx.</p>`,
+            eliteDesc: "<b>MANDIBLE AND HYOID</b><br><br>The paired mandibular halves meet rostrally at a species-specific symphysis. In the dog the mandibular symphysis normally remains a fibrous/fibrocartilaginous union rather than fusing early, and the coronoid process is large for temporalis attachment. The hyoid apparatus suspends the tongue and larynx and differs among mammals. The domestic fowl has a species-appropriate basihyal/urohyal and branchial apparatus; the extreme hyoid wrapping around the skull is a woodpecker specialization, not normal chicken anatomy.",
 
-            comparative: [
-                { species: "Ox (Bos taurus)", note: "Mandible: Symphysis ossifies very late/never fully. 8 Incisors, 6 Cheek teeth. Coronoid long curved. Saddle-shaped condyle. Large rounded rough angle. Hyoid: Stylohyoid large with angle. Lingual process short, blunt, tuberous." },
-                { species: "Horse (Equus caballus)", note: "Mandible: Fibrous symphysis (never fuses). 6 Incisors, 6 Cheek teeth. Coronoid long slender (for temporalis). Convex condyle. Hooked angular process. Hyoid: Stylohyoid large with angle. Lingual process very long, spur-like." },
-                { species: "Dog (Canis lupus)", note: "Mandible: Fuses early. I, C, PM, M. Coronoid short small. Cylindrical hinge condyle. Hyoid: Small nodule or fused. Lingual process absent/vestigial." },
-                { species: "Pig (Sus scrofa)", note: "Mandible: Fused into single bone. I, C, PM, M. Coronoid wide high. Large rounded condyle. Hyoid: Long distinct bone. Curved rod lingual process." },
-                { species: "Fowl (Gallus domesticus)", note: "Mandible: Fuses completely in adult. Edentulous (beak). Surangular distinct bone. Retroarticular process. Articulates with Quadrate. Hyoid: Entoglossal bone supports tongue. Extremely long apparatus curling around skull." }
-            ],
+            comparative: [{"species":"Ox","note":"Mandibular symphysis ossifies with maturity; broad cheek-tooth region supports grinding."},{"species":"Horse","note":"Mandibular symphysis is fused in the adult; long diastema and large cheek-tooth region."},{"species":"Dog","note":"Mandibular symphysis remains fibrous; coronoid process is large and the TMJ is predominantly hinge-like."},{"species":"Fowl (Gallus domesticus)","note":"Lower jaw articulates through the quadrate; the hyoid supports tongue and swallowing but does not curl around the skull as in woodpeckers."}],
 
             clinical: "<b>Fowl Note:</b> The avian hyoid apparatus is extremely long, curling around the back of the skull in species like woodpeckers, but less so in the fowl. It includes the entoglossal bone inside the tongue, a unique avian feature."
         },
@@ -447,27 +366,9 @@ atlasData["Head & Neck"] = {
             • Highly vascular mucosa<br>
             • <b>Ox:</b> 5 endoturbinates, ~18 ectoturbinates total`,
 
-            eliteDesc: `<h3>The Turbinates (Conchae nasales)</h3>
-            <p>Delicate, scroll-like bones within the nasal cavity that increase surface area for warming air and filtration.</p>
-            
-            <h4>Anatomical Topography</h4>
-            <p><b>Dorsal Nasal Concha:</b> Formed by the first endoturbinate of the ethmoid bone. It is a single scroll.</p>
-            <p><b>Ventral Nasal Concha:</b> A separate bone (maxilloturbinate) attached to the maxilla. In the ox, it is a <b>double scroll</b> (rolls dorsal and ventral), unlike the horse which has a single scroll dorsally.</p>
-            <p><b>Middle Concha:</b> Smaller, situated between the dorsal and ventral conchae.</p>
-            
-            <p>The ethmoidal labyrinth contains:</p>
-            <ul>
-                <li><b>5 Endoturbinates</b> (inner row)</li>
-                <li><b>~18 Ectoturbinates</b> (outer row)</li>
-            </ul>`,
+            eliteDesc: "<b>NASAL CONCHAE</b><br><br>Dorsal and ventral nasal conchae project from the lateral nasal wall and bear spiral lamellae whose arrangement is species-specific. Ethmoidal conchae occupy the caudal nasal cavity. In the horse, dorsal and ventral conchae contain defined dorsal and ventral scrolls and communicate with paranasal compartments in specific ways; they must not be described elsewhere as simply single-scroll structures.",
 
-            comparative: [
-                { species: "Ox (Bos taurus)", note: "Ventral concha is double scroll. Highly vascular. 5 endoturbinates, ~18 ectoturbinates." },
-                { species: "Horse (Equus caballus)", note: "Ventral concha double scroll. Dorsal concha encloses large sinus. 6 endoturbinates, ~25 ectoturbinates." },
-                { species: "Dog (Canis lupus)", note: "Extremely complex branching (lamellae) for macrosmatic olfaction. 7 endoturbinates, ~20 ectoturbinates." },
-                { species: "Pig (Sus scrofa)", note: "Similar to ox; long and narrow turbinates." },
-                { species: "Fowl (Gallus domesticus)", note: "Simplified into three cartilaginous/bony folds (rostral, middle, caudal)." }
-            ],
+            comparative: [{"species":"Ox","note":"Dorsal and ventral conchae are well developed; conchal sinuses and communications are species-specific."},{"species":"Horse","note":"Dorsal and ventral conchae have spiral lamellae/scrolls and defined conchal sinuses."},{"species":"Dog","note":"Complex conchae and ethmoturbinates provide a large olfactory surface."},{"species":"Fowl (Gallus domesticus)","note":"Usually three nasal conchae with avian morphology, not mammalian scroll terminology."}],
 
             clinical: null
         },
@@ -513,7 +414,7 @@ atlasData["Head & Neck"] = {
             <p><b>Maxillary Sinus:</b> Trephination is performed dorsal to the facial tuberosity, avoiding the nasolacrimal duct and the infraorbital nerve.</p>`,
 
             comparative: [],
-            clinical: "<b>Clinical Relevance:</b> Infection from the upper cheek teeth (PM4, M1, M2, M3) can break into the maxillary sinus, causing empyema (pus accumulation). The complexity of the frontal sinus compartments dictates the approach to treating sinusitis and horn fractures."
+            clinical: "<b>Clinical relevance:</b> Sinus trephination or drainage requires species-specific landmarks, knowledge of compartments, age and horn status, and preferably imaging. Do not publish a fixed distance from the midline as a universal bovine trephination point."
         },
         {
             title: "Pterygopalatine & Temporal Fossae",
@@ -564,19 +465,13 @@ atlasData["Head & Neck"] = {
             <p><b>Comparative Note:</b> Deep in the ox and dog; shallow in the horse. In the ox, it is displaced laterally by the frontal sinus expansion.</p>`,
 
             comparative: [],
-            clinical: "<b>Critical Landmark:</b> The Pterygopalatine Fossa is the target for the Peterson Eye Block. The specific location of the foramen orbitorotundum and this fossa are critical for nerve blocks in veterinary practice."
+            clinical: "<b>Clinical relevance:</b> The pterygopalatine fossa contains major nerves and vessels. Retrobulbar and Peterson techniques may desensitize orbital motor and sensory nerves, but carry risks to the globe, optic nerve and vessels and must be performed only by trained veterinarians using current species-specific guidance."
         },
         {
             title: "Cervical Vertebrae (C1-C7) — Bones of the Neck",
-            desc: "<b>High-Yield Points:</b><br>• <b>All mammals have 7 cervical vertebrae</b> — from mouse to giraffe to whale (true even in long-necked species).<br>• <b>C1 = Atlas</b> — ring-shaped, NO body, NO spinous process. Carries the skull.<br>• <b>C2 = Axis</b> — has a tooth-like <b>DENS (odontoid process)</b> pointing forward into atlas. Massive spinous process.<br>• <b>C3-C5 = 'Typical'</b> cervical vertebrae — long body, big transverse processes with foramen transversarium for vertebral artery & vein.<br>• <b>C6</b> — has a distinct ventral plate-like 'ventral lamina' on each side.<br>• <b>C7</b> — last cervical; no foramen transversarium; spinous process becomes prominent (boundary with thorax).<br><br>The wings of atlas + spinous process of C2 are the most palpable bony landmarks of the neck.",
-            eliteDesc: "<b>CERVICAL VERTEBRAE — DETAILED ANATOMY (B.V.Sc UG)</b><br><br><b>UNIVERSAL RULE:</b> All mammals have <b>7 cervical vertebrae (C1-C7)</b> — regardless of neck length. The giraffe has 7 (each ~28 cm long); the mouse has 7 (each ~2 mm). The only exceptions: manatees and 2-toed sloths (6); 3-toed sloths (8-9).<br><br><b>I. C1 — ATLAS (Atlas vertebra):</b><br>The first vertebra.<br>• <b>Shape:</b> Bony ring; NO body, NO spinous process.<br>• Two large lateral <b>wings (alae atlantis)</b> — palpable behind the ear, the most prominent neck landmark.<br>• <b>Cranial articular foveae</b> — two concave surfaces that grip the occipital condyles of skull → atlanto-occipital joint (nodding 'YES').<br>• <b>Caudal articular foveae</b> — articulate with axis.<br>• <b>Fovea dentis</b> — small concave facet on the ventral arch where the dens of axis pivots.<br>• <b>Foramina:</b> vertebral foramen (large, for spinal cord) + 2 lateral vertebral foramina + 1 alar foramen (transmits vertebral artery + 1st cervical nerve).<br>• <b>Atlas wing site = atlanto-occipital CSF tap (cisterna magna)</b>.<br><br><b>II. C2 — AXIS (Axis / Epistropheus):</b><br>The longest cervical vertebra; bears the weight of the head's rotation.<br>• <b>Body:</b> Long, prominent.<br>• <b>Dens (odontoid process / processus dentis)</b> — tooth-like projection on the cranial end of the body; sits in the atlas ring as a pivot for atlas to rotate around (head 'NO' movement).<br>  – Held in place by <b>apical, alar, and transverse ligaments</b>.<br>• <b>Spinous process</b> — massive, plate-like; largest spine of any cervical vertebra in ox/horse.<br>• <b>Transverse foramen</b> small.<br>• Articulates cranially with atlas, caudally with C3.<br><br><b>III. C3, C4, C5 — TYPICAL CERVICAL VERTEBRAE:</b><br>The 'standard' cervical vertebrae.<br>• <b>Body:</b> Long (longest in horse), with convex cranial end (head) + concave caudal end (fossa) — saddle-shaped articulation.<br>• <b>Spinous process:</b> Short and obtuse (becomes progressively taller from C3 → C7).<br>• <b>Transverse processes:</b> Long, plate-like, with two divergent branches (dorsal + ventral); pierced by the <b>foramen transversarium</b> for the vertebral artery, vein and nerve.<br>• <b>Articular processes:</b> Large and flat — facet joints.<br><br><b>IV. C6 — THE 'VENTRAL CREST' VERTEBRA:</b><br>• Body slightly shorter.<br>• <b>Ventral lamina/plate</b> — a large flat ventral extension on each transverse process, characteristic of C6. Major attachment for longus colli & scalene muscles.<br>• Transverse foramen present.<br><br><b>V. C7 — TRANSITION TO THORAX:</b><br>• Last cervical; called <b>vertebra prominens</b> in humans because of its big spinous process.<br>• <b>NO foramen transversarium</b> (vertebral artery has already left the cervical chain).<br>• <b>NO ventral lamina</b>.<br>• Caudal articular surface articulates with the 1st rib head → starts the thoracic skeleton.<br>• Spinous process tall and pointed.<br><br><b>VI. INTERVERTEBRAL JOINTS:</b><br>• Body-to-body: cartilaginous symphyses with <b>intervertebral discs</b> — cervical discs are the LARGEST in the body (~25% of vertebral length).<br>• Facet joints: synovial.<br>• Allow great flexibility (especially flexion-extension at AO joint, rotation at AA joint).<br><br><b>VII. PALPABLE LANDMARKS ON THE LIVE COW:</b><br>• <b>Wings of atlas</b> — protrude laterally behind the ear; #1 neck landmark.<br>• <b>Spinous process of axis</b> — palpable just behind the atlas.<br>• <b>Transverse processes of C5-C7</b> — palpable in thin animals along the lower neck.",
-            comparative: [
-                { species: "Horse", note: "Long cervical bodies → very flexible long neck. Wings of atlas projecting widely. The 'flexion' point for headset is at AO joint." },
-                { species: "Ox", note: "Shorter, broader cervical bodies than horse. Massive spine of axis." },
-                { species: "Dog", note: "Cervical discs are common site of disc disease ('cervical IVDD') — paresis, neck pain. Wobbler syndrome in Great Danes/Dobermans involves caudal cervical malformation." },
-                { species: "Pig", note: "Cervicals short and stout; neck movement limited." },
-                { species: "Fowl", note: "Number of cervicals varies (13-25 depending on species). Each vertebra is heterocoelous (saddle-shaped) — allows the bird to turn its head ~270° (especially owls)." }
-            ],
+            desc: "<b>High-yield points:</b><br>• Most mammals, including ox, horse, dog and pig, have seven cervical vertebrae; rare mammalian exceptions exist.<br>• C1 is the atlas and C2 the axis.<br>• C3-C5 are typical cervical vertebrae; C6 has a characteristic ventral lamina and C7 marks the cervicothoracic transition.<br>• Atlas foramina and vertebral-artery routes vary by species.",
+            eliteDesc: "<b>CERVICAL VERTEBRAE</b><br><br>Most mammals, including the principal domestic mammals, have seven cervical vertebrae; rare mammalian exceptions exist. The atlas has dorsal and ventral arches and species-specific alar, lateral and transverse foramina. The axis bears the dens. Vertebral-artery and spinal-nerve routes through the atlas vary by species and should not be generalized. Domestic fowl usually have 14 cervical vertebrae and marked neck mobility, but owl rotation must not be used as the chicken comparison.",
+            comparative: [{"species":"Ox","note":"Seven cervical vertebrae; atlas foramina and axis morphology are bovine-specific."},{"species":"Horse","note":"Seven cervical vertebrae with large transverse processes and species-specific atlas vascular routes."},{"species":"Dog","note":"Seven cervical vertebrae; relatively greater neck mobility than large ungulates."},{"species":"Fowl (Gallus domesticus)","note":"Usually 14 cervical vertebrae in the chicken, permitting extensive but not owl-like neck rotation."}],
             clinical: "<b>Atlanto-Axial Subluxation (Toy Dogs):</b> Yorkie / Toy Poodle puppies — congenital absence or fracture of the dens → atlas slips on axis → spinal cord compression → tetraparesis. Surgical fixation needed. <b>Cervical IVDD (Dog):</b> Disc herniation between C2-C7 — neck pain + thoracic-limb lameness. <b>Wobbler Syndrome (Horse, Great Dane, Doberman):</b> Caudal cervical instability with cord compression — ataxia. <b>CSF Tap Sites:</b> Atlanto-occipital (cisterna magna) — needle on dorsal midline between occiput and wings of atlas. <b>Vertebral Artery Damage:</b> Trauma to wings of atlas can rupture the vertebral artery as it passes through the alar foramen.",
             imgCode: "cervical_vertebrae"
         }
@@ -586,31 +481,27 @@ atlasData["Head & Neck"] = {
         {
             title: "Cutaneous & Facial Muscles (Mimetic / Expression)",
             desc: "<b>High-Yield Points:</b><br>• Thin sheet-like muscles in the skin of the head; INNERVATED BY <b>FACIAL NERVE (CN VII)</b>.<br>• <b>Orbicularis oris</b> — sphincter of mouth.<br>• <b>Orbicularis oculi</b> — closes eyelids ('blink' reflex).<br>• <b>Levator nasolabialis</b> — lifts upper lip & nostril (Flehmen response).<br>• <b>Buccinator</b> — cheek muscle, keeps food between molars.<br>• <b>Caninus, Levator labii superioris, Depressor labii inferioris</b> — lip movers.<br>• <b>Auricular muscles (rostral, dorsal, caudal, ventral)</b> — move pinna; very large in cattle/horse.<br>• <b>Cutaneous faciei</b> — superficial skin muscle of face (insect-twitch).<br><br>Damage to CN VII = facial nerve paralysis: ear droop, ptosis, lip droop, deviated muzzle, no menace response.",
-            eliteDesc: "<b>FACIAL (MIMETIC) MUSCLES — CN VII TERRITORY</b><br><br>The facial muscles are thin, flat, often paper-like sheets that lie just under the skin and produce the visible movements of face, ear, eyelid, lip, and nostril. <b>ALL are innervated by the facial nerve (CN VII)</b> — paralysis of CN VII produces the classic 'facial paralysis' picture (drooped ear, ptosis, deviated muzzle).<br><br><b>1. SPHINCTER MUSCLES OF FACE:</b><br>• <b>Orbicularis Oris</b> — closes the lips. Acts during prehension and suckling.<br>• <b>Orbicularis Oculi</b> — closes the eyelids. Critical for the corneal protective blink and the menace response.<br><br><b>2. LIP-LIFTING / NASAL DILATORS:</b><br>• <b>Levator Nasolabialis</b> — lifts upper lip and dilates nostril; basis of <b>Flehmen response</b> in cattle/horse.<br>• <b>Levator Labii Superioris (Caninus)</b> — lifts upper lip.<br>• <b>Depressor Labii Inferioris</b> — lowers lower lip.<br>• <b>Mentalis</b> — chin elevator.<br>• <b>Zygomaticus</b> — pulls corner of mouth back & up.<br><br><b>3. CHEEK MUSCLE:</b><br>• <b>Buccinator</b> — keeps food between the molars during chewing; prevents pocketing in cheek.<br><br><b>4. AURICULAR (EAR) MUSCLES:</b><br>Domestic mammals have 14-21 auricular muscles, grouped:<br>• Rostral auricular (push pinna forward).<br>• Dorsal auricular (raise).<br>• Caudal auricular (pull back).<br>• Ventral auricular (lower).<br>Largest in cattle/horse where the ear has wide range of motion (acoustic + thermal control).<br><br><b>5. CUTANEOUS FACIEI / PLATYSMA:</b><br>• Subcutaneous sheet over the face & cheek, allowing the skin to twitch off insects (panniculus reflex of head).<br><br><b>CLINICAL CN VII PALSY:</b><br>• Drooped ear, ptosis, drooped lip, deviated muzzle to the contralateral side, no blink, food spillage from mouth.<br>• Causes: middle ear infection (otitis media), dehorning trauma at horn base, facial trauma, idiopathic.",
-            comparative: [
-                { species: "Ox", note: "Cornual nerve (sensory branch of CN V) supplies horn base; CN VII branches commonly damaged during dehorning if hot-iron/saw is misplaced." },
-                { species: "Horse", note: "Auricular muscles very developed (ear position is part of behaviour). Facial nerve crosses ramus of mandible — vulnerable when horse leans on hard halter ('halter neuropathy')." },
-                { species: "Dog", note: "Brachycephalic dogs have weakened mimetic muscles → sloppy facial expression." }
-            ],
+            eliteDesc: "<b>FACIAL MUSCLES</b><br><br>Muscles of facial expression are supplied by the facial nerve. The menace response is not a pure CN VII test: it requires vision through CN II, central processing, cerebellar coordination and facial motor output. Routine dehorning targets cornual sensory nerves and should not be taught as a common cause of facial-nerve injury. Brachycephalic appearance must not be attributed to “weak mimetic muscles” without evidence.",
+            comparative: [{"species":"Ox","note":"Facial muscles move the lips, nostrils, eyelids and ears and are supplied by CN VII."},{"species":"Horse","note":"Highly mobile lips and nostrils are important in prehension and airflow."},{"species":"Dog","note":"Facial-muscle arrangement varies with skull conformation, but brachycephaly should not be described as generalized mimetic-muscle weakness."},{"species":"Fowl","note":"Avian facial movement is organized differently around the beak and eyelids."}],
             clinical: "<b>Facial Nerve Paralysis (CN VII):</b> Lop ear, ptosis, lip droop, drooling. Common in cattle after dehorning or otitis media. <b>Test:</b> Menace response, palpebral reflex, ear retraction.",
             imgCode: "facial_muscles"
         },
         {
             title: "Muscles of Mastication (Chewing)",
             desc: "<b>4 Pairs — INNERVATED BY MANDIBULAR DIVISION OF CN V (Trigeminal):</b><br><br>1. <b>Masseter</b> — large, on lateral cheek; closes jaw (most powerful in herbivores).<br>2. <b>Temporalis</b> — fan-shaped, in temporal fossa; closes jaw.<br>3. <b>Medial Pterygoid</b> — deep, medial side of mandible; closes jaw + side-to-side grinding.<br>4. <b>Lateral Pterygoid</b> — protracts and shifts the mandible side-to-side (key for grinding cud).<br><br><b>Digastricus</b> — small; OPENS the jaw.<br><br>In herbivores (ox, horse): masseter + medial pterygoid form a sling around the mandible for the side-to-side <b>grinding</b> motion of cud-chewing — much larger than in carnivores.",
-            eliteDesc: "<b>MUSCLES OF MASTICATION — CN V (mandibular branch) TERRITORY</b><br><br>Mastication = chewing. The herbivore design includes a side-to-side grinding action made possible by enlarged pterygoid + masseter muscles forming a 'sling' around the mandible.<br><br><b>1. MASSETER:</b><br>• Origin: zygomatic arch + facial crest.<br>• Insertion: lateral surface of mandibular ramus.<br>• Action: Closes jaw (powerful in herbivores; thick & meaty).<br><br><b>2. TEMPORALIS:</b><br>• Origin: temporal fossa.<br>• Insertion: coronoid process of mandible.<br>• Action: Closes jaw. Larger in carnivores than herbivores.<br><br><b>3. MEDIAL PTERYGOID:</b><br>• Origin: pterygoid bone + palatine.<br>• Insertion: medial mandible.<br>• Action: Closes jaw + medial-lateral grinding.<br><br><b>4. LATERAL PTERYGOID:</b><br>• Origin: pterygoid crest.<br>• Insertion: condylar process of mandible.<br>• Action: Protracts mandible (forward) and side-to-side. Critical for cud grinding.<br><br><b>5. DIGASTRICUS:</b><br>• 2 bellies (rostral + caudal) joined by tendon at hyoid.<br>• Action: <b>OPENS</b> the jaw (depresses mandible).<br>• Also assists in swallowing.<br><br><b>FUNCTIONAL SYNTHESIS:</b><br>• <b>Closing jaw</b>: Masseter + Temporalis + Medial Pterygoid (massive in herbivores).<br>• <b>Opening jaw</b>: Digastricus (small, gravity does most work).<br>• <b>Side-to-side grinding</b>: Asymmetric action of medial + lateral pterygoids (one side at a time → 'one-sided chewing' in cud-chewers).<br>• <b>Protraction</b>: Lateral pterygoids together.<br><br><b>CN V (TRIGEMINAL) — MANDIBULAR DIVISION:</b> Provides motor to all masticatory muscles. Sensory to the lower jaw, lower lip, lower teeth, anterior 2/3 tongue (general sensation).",
+            eliteDesc: "<b>MUSCLES OF MASTICATION</b><br><br>Masseter, temporalis, medial pterygoid and lateral pterygoid are supplied by the mandibular division of the trigeminal nerve. Their relative size and actions vary with species and permit different combinations of elevation, protraction and lateral excursion. Digastricus depresses the mandible, but its bellies, intermediate tendon and innervation vary by species. Canine 2M autoimmune disease is correctly termed masticatory muscle myositis, not masseter myositis.",
             comparative: [
                 { species: "Ox/Horse (Herbivores)", note: "<b>Massive masseter + medial pterygoid</b> — visible bulge on cheek. Side-to-side cud-grinding chew." },
                 { species: "Dog/Cat (Carnivores)", note: "<b>Massive temporalis</b> for vertical bone-crushing bite. Pterygoids small (no grinding)." },
                 { species: "Fowl", note: "Lacks teeth → mastication done by gizzard. Jaw muscles small." }
             ],
-            clinical: "<b>Masseter Myositis (Dog):</b> Auto-immune, German Shepherd predisposed; jaw cannot open / bilateral atrophy. <b>Lockjaw (Tetanus):</b> Tonic spasm of masticatory muscles → trismus. <b>Trigeminal Neuritis:</b> Idiopathic; bilateral mandibular paralysis ('dropped jaw' in dogs).",
+            clinical: "<b>Masticatory muscle myositis (dog):</b> An immune-mediated disease of type 2M masticatory fibers that can cause painful trismus acutely and muscle atrophy chronically. <b>Tetanus:</b> May cause generalized rigidity and trismus. <b>Trigeminal neuropathy:</b> Can cause mandibular weakness or dropped jaw.",
             imgCode: "mastication_muscles"
         },
         {
             title: "Muscles of the Tongue, Pharynx, Soft Palate, Hyoid & Larynx",
             desc: "<b>Tongue Muscles (mostly CN XII):</b><br>• <b>Genioglossus</b> — protrudes tongue.<br>• <b>Hyoglossus</b> — retracts & depresses.<br>• <b>Styloglossus</b> — retracts & elevates.<br>• Plus intrinsic muscles for changing shape.<br><br><b>Pharyngeal Muscles (CN IX, X):</b><br>• Constrictors (rostral, middle, caudal) — push food caudally during swallowing.<br>• Stylopharyngeus — elevates pharynx.<br><br><b>Soft Palate Muscles (CN IX, X):</b><br>• Palatinus, Tensor + Levator Veli Palatini — close nasopharynx during swallowing.<br><br><b>Hyoid Muscles:</b> Sternohyoideus, Sternothyroideus, Mylohyoideus, Geniohyoideus — move hyoid + tongue.<br><br><b>Laryngeal Muscles (CN X — Recurrent Laryngeal Nerve):</b><br>• <b>Cricoarytenoideus dorsalis</b> — ABDUCTS vocal folds (only abductor!).<br>• Cricoarytenoideus lateralis, Thyroarytenoideus — adduct.<br><br>Damage to recurrent laryngeal nerve → roaring/hemiplegia laryngis in horse (inspiratory whistle).",
-            eliteDesc: "<b>MUSCLES OF DEGLUTITION (Swallowing) & PHONATION</b><br><br>This complex set of muscles coordinates eating, breathing, and vocalisation. Multiple cranial nerves must work together (V, VII, IX, X, XII).<br><br><b>I. TONGUE MUSCLES:</b><br><b>Extrinsic (move the tongue) — all CN XII (Hypoglossal):</b><br>• Genioglossus — pulls tongue forward (protrusion).<br>• Hyoglossus — retracts and depresses.<br>• Styloglossus — retracts and elevates.<br><b>Intrinsic (change shape):</b><br>• Longitudinal, transverse, vertical fibres within tongue body.<br><b>Hypoglossal (CN XII) palsy:</b> Tongue protrudes to the affected side (ipsilateral deviation).<br><br><b>II. PHARYNGEAL MUSCLES (CN IX, X via pharyngeal plexus):</b><br>• <b>Rostral, Middle, Caudal Pharyngeal Constrictors</b> — sequential contraction propels bolus.<br>• <b>Stylopharyngeus</b> — elevates pharynx during swallow.<br>• <b>Palatopharyngeus</b> — pulls pharynx upward.<br><br><b>III. SOFT PALATE MUSCLES:</b><br>• <b>Tensor Veli Palatini</b> (CN V) — tenses palate.<br>• <b>Levator Veli Palatini</b> (CN X) — elevates palate to seal nasopharynx.<br>• <b>Palatinus</b> — shortens palate.<br>• <b>Palatoglossus, Palatopharyngeus</b> — close oropharynx.<br><br><b>IV. HYOID MUSCLES:</b><br>• <b>Sternohyoideus, Sternothyroideus</b> — pull hyoid/larynx caudally during swallowing.<br>• <b>Mylohyoideus</b> — floor of mouth, raises tongue.<br>• <b>Geniohyoideus</b> — pulls hyoid forward.<br>• <b>Stylohyoideus</b> — pulls hyoid up & back.<br>• <b>Digastricus</b> (already covered) — also a hyoid mover.<br><br><b>V. LARYNGEAL MUSCLES (all CN X — vagus, via recurrent laryngeal nerve, except cricothyroideus = cranial laryngeal):</b><br>• <b>Cricoarytenoideus Dorsalis (CAD):</b> The ONLY abductor of the vocal folds. Opens the rima glottidis during inspiration.<br>• <b>Cricoarytenoideus Lateralis (CAL):</b> Adducts vocal fold.<br>• <b>Thyroarytenoideus / Vocalis:</b> Adducts and tenses vocal fold.<br>• <b>Arytenoideus Transversus:</b> Adducts.<br>• <b>Cricothyroideus:</b> Tenses vocal fold (pitch).<br><br><b>RECURRENT LARYNGEAL NERVE — A LONG, VULNERABLE LOOP:</b><br>The left RLN loops around the aortic arch, the right RLN around the right subclavian artery, then ascends in the trachea-oesophagus groove to the larynx. The LEFT side is longer → more vulnerable.<br><br><b>'ROARING' (Recurrent Laryngeal Neuropathy / Idiopathic Laryngeal Hemiplegia):</b> Atrophy of LEFT cricoarytenoideus dorsalis → vocal fold cannot abduct → inspiratory whistle/'roar' under exercise → exercise intolerance in racehorses. Treatment = laryngoplasty ('tieback' surgery).",
+            eliteDesc: "<b>TONGUE, PHARYNX AND SOFT PALATE</b><br><br>Intrinsic and extrinsic tongue muscles are supplied chiefly by CN XII, except palatoglossus. Pharyngeal and most soft-palate muscles receive motor fibers mainly through the vagus/pharyngeal plexus. Tensor veli palatini is the key exception and is supplied by the mandibular division of CN V. Species differences in the larynx and pharynx should be stated explicitly.",
             comparative: [
                 { species: "Horse", note: "Long left RLN — classic 'roarer' surgery. Soft palate very long → cannot mouth-breathe (obligate nasal breather)." },
                 { species: "Ox", note: "Soft palate shorter; swallowing & cud-chewing rely on synchronised pharyngeal & tongue movements." },
@@ -622,7 +513,7 @@ atlasData["Head & Neck"] = {
         {
             title: "Neck Muscles & Boundaries of the Jugular Furrow",
             desc: "<b>Superficial Neck Muscles:</b><br>• <b>Brachiocephalicus</b> — long muscle from skull → arm; flexes/extends neck, advances limb.<br>• <b>Sternomandibularis (Sternocephalicus mandibular part)</b> — sternum to mandible; flexes head.<br>• <b>Sternocephalicus (mastoid part)</b> — sternum to mastoid; turns head sideways.<br>• <b>Omotransversarius</b> — scapula to wing of atlas.<br>• <b>Splenius, Rhomboideus, Longissimus capitis</b> — deeper neck muscles.<br><br><b>Jugular Furrow Boundaries:</b><br>• <b>Cranial:</b> caudal border of mandible.<br>• <b>Caudal:</b> manubrium sterni.<br>• <b>Dorsal:</b> brachiocephalicus muscle.<br>• <b>Ventral:</b> sternocephalicus (mandibular part) — sternomandibularis.<br>• <b>Floor:</b> deep cervical fascia / scalene + omohyoid.<br>• <b>Contents:</b> External jugular vein (the practical IV site in cattle/horse).",
-            eliteDesc: "<b>NECK MUSCLES & JUGULAR FURROW</b><br><br>The neck has multiple layers of muscles classified by function: head/neck movement, limb advancement, and respiratory accessory.<br><br><b>I. SUPERFICIAL LATERAL MUSCLES:</b><br><b>1. Brachiocephalicus:</b><br>• Long strap-like muscle from base of skull (mastoid + occipital) to crest of greater tubercle of humerus.<br>• 3 parts in domestic mammals — cleidomastoideus + cleido-occipitalis + cleidobrachialis (the clavicle is a tendinous intersection in domestic species).<br>• Action: Advances limb, extends shoulder, turns head/neck.<br>• Forms the <b>DORSAL boundary of the jugular furrow</b>.<br><br><b>2. Sternocephalicus:</b><br>• Two parts: <b>Sternomandibularis</b> (to mandible) and <b>Sternomastoideus</b> (to mastoid process).<br>• Origin: manubrium sterni.<br>• Action: Flexes neck, turns head.<br>• Forms the <b>VENTRAL boundary of the jugular furrow</b>.<br><br><b>3. Omotransversarius:</b> Wing of atlas → scapula. Advances limb.<br><br><b>II. JUGULAR FURROW (Sulcus jugularis):</b><br>• Distinct groove on the lateral surface of the neck.<br>• <b>Cranial limit:</b> caudal border of mandible / parotid region.<br>• <b>Caudal limit:</b> shoulder / manubrium sterni.<br>• <b>Dorsal wall:</b> brachiocephalicus.<br>• <b>Ventral wall:</b> sternocephalicus (mandibular).<br>• <b>Floor (deep):</b> scalene & longus colli muscles + carotid sheath.<br>• <b>Contents:</b><br>  – <b>External jugular vein</b> (most superficial — the venepuncture target).<br>  – Deep to the vein: <b>Common carotid artery</b>, <b>Vagosympathetic trunk</b>, <b>Recurrent laryngeal nerve</b>, <b>Tracheal duct</b> = these together form the <b>CAROTID SHEATH</b>.<br><br><b>III. CAROTID SHEATH:</b><br>A connective tissue tube that wraps and binds the deep cervical neurovascular bundle:<br>• <b>Common carotid artery</b> — to head.<br>• <b>Internal jugular vein</b> (small in horse, may be absent).<br>• <b>Vagosympathetic trunk</b> — vagus + sympathetic combined.<br>• <b>Recurrent laryngeal nerve</b> — ascends from thorax along trachea-oesophagus groove.<br>Important during deep neck surgery; accidental injury produces Horner's syndrome (sympathetic) or laryngeal paralysis (RLN).<br><br><b>IV. EPAXIAL (Dorsal) MUSCLES:</b><br>• Longissimus capitis, Splenius, Semispinalis capitis — extend head/neck.<br>• Rhomboideus — moves scapula.<br><br><b>V. HYPAXIAL (Ventral) MUSCLES:</b><br>• Longus capitis, Longus colli, Scalenus — flex head/neck.",
+            eliteDesc: "<b>JUGULAR FURROW AND DEEP NECK</b><br><br>The external jugular vein is the principal superficial content of the jugular furrow, bounded by brachiocephalicus dorsally and sternocephalicus ventrally with a species-variable muscular floor. The common carotid artery and vagosympathetic trunk lie much deeper in the carotid sheath. The recurrent laryngeal nerve follows the tracheoesophageal region and must not be listed as a routine superficial furrow content.",
             comparative: [
                 { species: "Horse", note: "Jugular furrow well-defined. Avoid lower 1/3 — carotid lies just under jugular vein → risk of arterial puncture." },
                 { species: "Cattle", note: "Jugular furrow shallow because of heavy brisket; venepuncture in upper 2/3." },
@@ -636,7 +527,7 @@ atlasData["Head & Neck"] = {
         {
             title: "Articulations & Special Ligaments of Head and Neck",
             desc: "<b>Cranial Articulations:</b><br>• <b>Atlanto-occipital joint</b> (Skull-C1): nodding 'YES' joint. Condyles of occipital fit cranial articular fovea of atlas. Site of <b>cisterna magna CSF tap</b>.<br>• <b>Atlanto-axial joint</b> (C1-C2): rotational 'NO' joint. Dens of axis pivots in atlas.<br>• <b>Other intervertebral joints</b> of cervical vertebrae: facet joints + intervertebral discs.<br>• <b>Temporomandibular joint (TMJ)</b>: synovial joint between mandibular condyle + temporal bone; with articular disc; allows hinge + slight gliding/grinding.<br><br><b>Special Ligaments of Head and Neck:</b><br>• <b>Nuchal ligament (Funicular + Lamellar parts)</b> — yellow elastic; supports head, runs from external occipital protuberance → withers.<br>• <b>Apical, Alar, Transverse ligaments of dens</b> — stabilise C1-C2.<br>• <b>Dorsal & Ventral atlanto-axial ligaments</b>.",
-            eliteDesc: "<b>HEAD-NECK ARTICULATIONS & LIGAMENTS</b><br><br><b>I. ATLANTO-OCCIPITAL JOINT (AO):</b><br>• Type: Synovial — modified hinge.<br>• Surfaces: Two convex occipital condyles fit into two concave cranial articular foveae of atlas.<br>• Movement: Mainly flexion-extension ('nodding YES'); minimal lateral.<br>• Capsule: Single capsule encloses both condyles.<br>• <b>CSF Tap (Cisterna Magna):</b> Needle on dorsal midline at AO space, between occiput and atlas wing — into subarachnoid space.<br><br><b>II. ATLANTO-AXIAL JOINT (AA):</b><br>• Type: Synovial — pivot (trochoid).<br>• The <b>dens (odontoid process)</b> of axis projects forward and articulates with the ventral arch of atlas. The dens is held by:<br>  – <b>Apical ligament of dens</b> — to occipital.<br>  – <b>Alar ligaments</b> — to occipital condyles.<br>  – <b>Transverse ligament of atlas</b> — holds dens against ventral arch.<br>• Movement: Rotation around long axis ('shaking head NO').<br>• <b>Atlanto-axial subluxation</b> — congenital in toy dog breeds (Yorkie, Toy Poodle) due to absent or hypoplastic dens → spinal cord compression.<br><br><b>III. CERVICAL INTERVERTEBRAL JOINTS:</b><br>• Symphysis (between bodies, with disc) + facet joints (synovial).<br>• Cervical discs are the LARGEST → frequent disc disease in dogs ('wobbler syndrome' = caudal cervical spondylomyelopathy).<br><br><b>IV. TEMPOROMANDIBULAR JOINT (TMJ):</b><br>• Synovial; modified condylar.<br>• Mandibular condyle + mandibular fossa of temporal bone, separated by <b>articular disc</b>.<br>• Movement: Hinge (open-close) + protrusion (forward) + lateral grinding (especially in herbivores).<br>• Innervation: CN V (mandibular).<br>• Capsule reinforced by <b>lateral & medial collateral ligaments</b>.<br><br><b>V. NUCHAL LIGAMENT (Ligamentum nuchae):</b><br>• Massive yellow elastic ligament from external occipital protuberance/spine of axis → spinous processes of T2-T5.<br>• 2 parts:<br>  – <b>Funicular part</b> (cord-like, dorsal): supports head from withers.<br>  – <b>Lamellar part</b> (sheet-like, ventral to funicular): attaches to spinous processes of cervical vertebrae C2-C7.<br>• Function: <b>passive support of the head</b> — saves enormous muscular work in heavy-headed species (horse, ox).<br>• Best developed in HORSE; well-developed in OX; reduced in dog and absent/rudimentary in pig.<br>• <b>Nuchal bursa</b> — supraspinous bursa beneath funicular part at cranial pole of withers; site of <b>'poll evil' / 'fistulous withers'</b> in horses (chronic bursitis).<br><br><b>VI. SPECIAL LIGAMENTS OF HEAD:</b><br>• <b>Stylohyoid ligament/apparatus</b> — chain of small bones connecting hyoid to skull.<br>• <b>Temporomandibular collateral ligaments</b> — limit TMJ movement.<br>• <b>Sphenomandibular & Stylomandibular ligaments</b> — secondary support of jaw.",
+            eliteDesc: "<b>HEAD AND NECK ARTICULATIONS</b><br><br>The atlanto-occipital joint permits chiefly flexion and extension; the atlantoaxial joint permits rotation. Ligaments of the dens vary among species, so apical, alar and transverse ligaments must not be presented as identical in all domestic animals. The nuchal ligament supports the head in ungulates. Poll evil is inflammation/infection of bursae at the poll, whereas fistulous withers affects bursae and tissues over the withers.",
             comparative: [
                 { species: "Horse", note: "Massive nuchal ligament — supports very heavy head. <b>Poll evil</b> = nuchal bursitis." },
                 { species: "Ox", note: "Nuchal ligament well-developed; horns add to load → bursitis ('fistulous withers'). Common reason for euthanasia in old draft cattle." },
@@ -650,47 +541,9 @@ atlasData["Head & Neck"] = {
     "Neurology": [
     {
         title: "Introduction: The Cranial Command Center",
-        desc: `<b>Exam Focus:</b><br>
-        • 12 Cranial Nerves — letter sequence: <b>O-O-O-T-T-A-F-V-G-V-A-H</b> (Olfactory, Optic, Oculomotor, Trochlear, Trigeminal, Abducens, Facial, Vestibulocochlear, Glossopharyngeal, Vagus, Accessory, Hypoglossal)<br>
-        • Functional Types: Sensory (I, II, VIII), Motor (III, IV, VI, XI, XII), Mixed (V, VII, IX, X)<br>
-        • Sensory-Motor Mnemonic: "Some Say Marry Money, But My Brother Says Big Brains Matter More" (S = Sensory, M = Motor, B = Both)<br>
-        • <b>Critical Concept:</b> Bovine skull fuses Orbital Fissure + Foramen Rotundum = <b>Foramen Orbitorotundum</b> <br>
-        • Ox: Foramen Ovale is discrete; Horse: Uses Foramen Lacerum (Oval Notch)<br>
-        • Clinical Minefield: Goat horn has dual innervation (Cornual + Infratrochlear)`,
+        desc: "<b>Cranial nerves:</b> Twelve paired nerves connect the brain with special senses, extraocular and facial muscles, mastication, swallowing, phonation, tongue movement and parasympathetic functions. Fiber classifications and foraminal exits must be given by species. The bovine cornual nerve follows the temporal line and is described here as an ophthalmic-associated cornual branch formed through lacrimal/zygomaticotemporal communications; goats additionally require the infratrochlear cornual branch.",
 
-        eliteDesc: `<h3>The Cranial Command Center</h3>
-        <p>The bovine head represents the most complex cubic footage in the animal kingdom—a fortress housing the central processing unit, major organs of special sense, and mechanisms for ingestion and communication. The twelve paired cranial nerves are the "Dirty Dozen" that dictate survival, allowing the animal to see predators, smell forage, chew the cud, swallow, and maintain balance.</p>
-        
-        <h4>Letter-Sequence Memory Aid</h4>
-        <p><b>The 12 cranial nerves in order:</b> O-O-O-T-T-A-F-V-G-V-A-H. Pair this letter sequence with any phrase you find easy to remember.</p>
-        <ul>
-            <li><b>I</b> - Olfactory</li>
-            <li><b>II</b> - Optic</li>
-            <li><b>III</b> - Oculomotor</li>
-            <li><b>IV</b> - Trochlear</li>
-            <li><b>V</b> - Trigeminal</li>
-            <li><b>VI</b> - Abducens</li>
-            <li><b>VII</b> - Facial</li>
-            <li><b>VIII</b> - Auditory (Vestibulocochlear)</li>
-            <li><b>IX</b> - Glossopharyngeal</li>
-            <li><b>X</b> - Vagus</li>
-            <li><b>XI</b> - Spinal Accessory</li>
-            <li><b>XII</b> - Hypoglossal</li>
-        </ul>
-
-        <h4>Functional Fiber Classification</h4>
-        <p>Cranial nerves carry not just Somatic Sensory and Motor fibers, but also Special Visceral and Special Somatic fibers:</p>
-        <ul>
-            <li><b>Sensory Only:</b> I (Olfactory), II (Optic), VIII (Vestibulocochlear)</li>
-            <li><b>Motor Only:</b> III (Oculomotor), IV (Trochlear), VI (Abducens), XI (Accessory), XII (Hypoglossal)</li>
-            <li><b>Mixed (Both):</b> V (Trigeminal), VII (Facial), IX (Glossopharyngeal), X (Vagus)</li>
-        </ul>
-        <p><i>Mnemonic for mixed nerves:</i> "Some Say Marry Money, But My Brother Says Big Brains Matter More"</p>
-
-        <h4>The Bovine Specialization: Foramen Orbitorotundum</h4>
-        <p>The most clinically significant anatomical variation in the ox is the <b>Foramen Orbitorotundum</b>—a pathognomonic fusion of the orbital fissure and foramen rotundum into a single massive opening. This fusion has profound implications for nerve blocks like the Peterson Eye Block, as a single injection affects multiple nerves simultaneously (III, IV, VI, V1, V2).</p>
-        
-        <p><b>Comparative Warning:</b> The Horse maintains separate exits (Orbital Fissure for III, IV, VI, V1; Foramen Rotundum for V2), while the Dog represents the standard mammalian pattern. The Ox simplifies; the Horse complicates.</p>`,
+        eliteDesc: "<b>CRANIAL NERVE ORGANIZATION</b><br><br>The twelve cranial nerves carry special sensory, somatic motor, branchial motor and autonomic fibers. In cattle the cornual nerve follows the temporal line to the horn and is conventionally treated as an ophthalmic-associated branch formed through lacrimal/zygomaticotemporal communications. Goats require blockade of both lacrimal and infratrochlear cornual branches. Classification should acknowledge terminology differences among veterinary texts rather than label the nerve simply as V2.",
 
         comparative: [
             { species: "Ox (Bos taurus)", note: "Foramen Orbitorotundum present (fusion of orbital fissure + rotundum). Foramen Ovale discrete and separate. High optic decussation (80-90%) for panoramic vision." },
@@ -698,7 +551,7 @@ atlasData["Head & Neck"] = {
             { species: "Dog (Canis lupus)", note: "Standard mammalian pattern: separate orbital fissure, foramen rotundum, and ovale. Alar canal present for maxillary artery." },
             { species: "Goat (Capra hircus)", note: "CRITICAL CLINICAL VARIANT: Horn bud innervated by TWO nerves—Cornual nerve (V2) AND Cornual branch of Infratrochlear nerve (V1). The 'Goat Trap' for dehorning anesthesia." }
         ],
-        clinical: "<b>The Goat Trap:</b> Unlike cattle where the Cornual nerve (V2 branch) alone supplies the horn, goats require blocking both the Cornual nerve (posterior to lateral canthus) AND the Infratrochlear nerve (dorsomedial to eye, V1 branch). Failing to block the Infratrochlear results in failed anesthesia and a violent patient."
+        clinical: "<b>Cornual anesthesia:</b> In cattle, block the cornual pathway using bovine landmarks and account for accessory innervation. In goats, both lacrimal and infratrochlear cornual branches must be desensitized. Use calm, professional safety language and current species-specific anesthetic guidance."
     },
     {
         title: "CN I & II: The Special Senses (Olfactory & Optic)",
@@ -709,30 +562,7 @@ atlasData["Head & Neck"] = {
         • <b>PLR Test:</b> Afferent = CN II, Efferent = CN III; positive PLR doesn't prove vision (cortical blindness possible)<br>
         • <b>Menace Response:</b> Tests cortical vision (CN II in, CN VII out)`,
 
-        eliteDesc: `<h3>Cranial Nerve I: The Olfactory Nerve</h3>
-        <p>In the macrosmatic ox, smell is paramount for feed selection, social hierarchy, and reproductive recognition. The olfactory nerve is anatomically unique—not a single trunk but a collection of non-myelinated axons arising from the Olfactory Epithelium on the ethmoturbinates. These fibers bundle together to pass through the fenestrations of the Cribriform Plate of the ethmoid bone.</p>
-        
-        <p><b>Angiology Correlation:</b> The ethmoidal arteries (branches of the external ophthalmic) accompany these nerves, supplying the rich vascular bed of the nasal mucosa. This explains the epistaxis risk with nasal trauma or severe sinusitis.</p>
-        
-        <h4>The Vomeronasal Organ (Organ of Jacobson)</h4>
-        <p>Located on the floor of the nasal cavity, this organ detects non-volatile pheromones. When a bull curls his lip (the <b>Flehmen Response</b>), he physically pumps air and pheromones into the incisive ducts to reach this organ, mediated by the olfactory system.</p>
-
-        <h3>Cranial Nerve II: The Optic Nerve</h3>
-        <p>The optic nerve is an extension of the diencephalon, ensheathed in all three meninges (dura, arachnoid, pia). This explains why increased intracranial pressure causes papilledema (swelling of the optic disc) and why optic neuritis causes pain on eye movement.</p>
-        
-        <p><b>Course:</b> Extends from the optic disc of the retina, through the Optic Canal of the presphenoid wing, to the optic chiasm. The central retinal artery and vein run within or alongside the nerve.</p>
-        
-        <h4>Comparative Insight: Prey vs. Predator</h4>
-        <p>In the Ox and Horse, approximately <b>80-90% of optic nerve fibers decussate</b> (cross over) at the optic chiasm. This high percentage supports their panoramic, monocular vision—essential for detecting predators on the horizon with nearly 360° field of view. In the Dog (and human), the decussation is lower (50-65%), allowing for greater binocular overlap and depth perception required for hunting.</p>
-        
-        <h4>Clinical Testing</h4>
-        <p><b>Pupillary Light Reflex (PLR):</b></p>
-        <ul>
-            <li><b>Afferent:</b> CN II (detects light)</li>
-            <li><b>Efferent:</b> CN III (constricts pupil via parasympathetic fibers)</li>
-            <li><b>Critical Interpretation:</b> A positive PLR proves the retina and midbrain are intact, but does NOT prove the animal can see (cortical blindness is possible).</li>
-        </ul>
-        <p><b>Menace Response:</b> The "hand-waving" test. Afferent = CN II, Efferent = CN VII (blink). This tests cortical vision and requires functional cerebrum.</p>`,
+        eliteDesc: "<b>CN I AND CN II</b><br><br>Olfactory nerve filaments cross the cribriform plate to the olfactory bulb. The optic nerve passes through the optic canal to the optic chiasm. The proportion of decussating optic fibers and total visual field varies by species and measurement method; use approximate, cited values rather than fixed percentages or a literal 360-degree field.",
 
         comparative: [
             { species: "Ox (Bos taurus)", note: "Macrosmatic (smell-dominant). Optic decussation 80-90%. Panoramic vision. Flehmen response highly developed in bulls." },
@@ -743,130 +573,18 @@ atlasData["Head & Neck"] = {
     },
     {
         title: "CN III, IV, VI: The Orbital Motor Group",
-        desc: `<b>Exam Essentials:</b><br>
-        • <b>Common Exit (Ox):</b> All three exit via <b>Foramen Orbitorotundum</b> (fusion unique to ruminants)<br>
-        • <b>CN III (Oculomotor):</b> Motor to Dorsal/Ventral/Medial Rectus, Ventral Oblique, Levator Palpebrae; <b>Parasympathetic</b> to sphincter pupillae (constriction)<br>
-        • <b>CN IV (Trochlear):</b> Only nerve exiting dorsal brainstem; longest intracranial course (trauma vulnerable); innervates Dorsal Oblique (intorsion)<br>
-        • <b>CN VI (Abducens):</b> Innervates Lateral Rectus (abduction) and Retractor Bulbi (protection)<br>
-        • <b>Lesion Signs:</b> CN III = Ventrolateral strabismus + Ptosis + Mydriasis; CN VI = Medial strabismus (cross-eye)`,
+        desc: "<b>Orbital motor group:</b><br>• CN III supplies dorsal, medial and ventral recti, ventral oblique, levator palpebrae and parasympathetic pupillary fibers.<br>• CN IV supplies dorsal oblique.<br>• CN VI supplies lateral rectus and most of retractor bulbi.<br><br>In cattle these pass through the foramen orbitorotundum; in horse and dog they pass through the separate orbital fissure.",
 
-        eliteDesc: `<h3>The Oculomotor Trio</h3>
-        <p>These three nerves function as the motor supply to the extraocular muscles. In the Ox, they are anatomically linked by their common exit through the Foramen Orbitorotundum, creating both efficiency and vulnerability—a single lesion can paralyze the entire globe.</p>
+        eliteDesc: "<b>ORBITAL MOTOR NERVES</b><br><br>CN III supplies most extraocular muscles and parasympathetic fibers to the pupil; CN IV supplies dorsal oblique; CN VI supplies lateral rectus and most of retractor bulbi. In cattle these nerves pass through the foramen orbitorotundum. In horse and dog they use the separate orbital fissure; the maxillary nerve uses the separate foramen rotundum. Polioencephalomalacia and lead poisoning should not be presented as causes of an isolated trochlear neuropathy.",
 
-        <h4>Cranial Nerve III: The Oculomotor Nerve</h4>
-        <p><b>Origin:</b> Midbrain (ventral surface).<br>
-        <b>Exit (Ox):</b> Foramen Orbitorotundum.<br>
-        <b>Target Muscles:</b></p>
-        <ul>
-            <li>Dorsal Rectus (elevation)</li>
-            <li>Ventral Rectus (depression)</li>
-            <li>Medial Rectus (adduction)</li>
-            <li>Ventral Oblique (elevation, abduction)</li>
-            <li>Levator Palpebrae Superioris (lifts upper eyelid)</li>
-        </ul>
-        
-        <p><b>Parasympathetic Component:</b> Pre-ganglionic fibers travel to the Ciliary Ganglion. Post-ganglionic fibers (Short Ciliary Nerves) innervate the Sphincter Pupillae (pupil constriction) and Ciliary muscles (accommodation). This is why CN III lesions cause <b>mydriasis</b> (dilated pupil).</p>
-
-        <h4>Cranial Nerve IV: The Trochlear Nerve</h4>
-        <p><b>Origin:</b> Midbrain (dorsal surface).<br>
-        <b>Unique Feature:</b> It is the ONLY cranial nerve to exit the dorsal aspect of the brainstem. It has the longest intracranial course, making it vulnerable to trauma (especially in polioencephalomalacia or lead poisoning).<br>
-        <b>Target Muscle:</b> Dorsal Oblique.<br>
-        <b>Function:</b> Rotates the globe medially (intorsion).</p>
-
-        <h4>Cranial Nerve VI: The Abducens Nerve</h4>
-        <p><b>Origin:</b> Medulla.<br>
-        <b>Exit (Ox):</b> Foramen Orbitorotundum.<br>
-        <b>Target Muscles:</b></p>
-        <ul>
-            <li>Lateral Rectus: Abducts the eye (moves laterally)</li>
-            <li>Retractor Bulbi: Retracts the globe into the orbit (protective reflex when eating or during corneal stimulation)</li>
-        </ul>
-
-        <h4>Clinical Signs of Paralysis</h4>
-        <p><b>CN III Lesion:</b></p>
-        <ul>
-            <li>Ventrolateral Strabismus: Eye looks "down and out" because Lateral Rectus (VI) and Dorsal Oblique (IV) are unopposed</li>
-            <li>Ptosis: Drooping of upper eyelid (Levator paralysis)</li>
-            <li>Mydriasis: Dilated pupil (loss of parasympathetic constriction)</li>
-        </ul>
-        <p><b>CN VI Lesion:</b></p>
-        <ul>
-            <li>Medial Strabismus: Eye deviates inward (cross-eyed) due to unopposed Medial Rectus</li>
-            <li>Inability to retract globe: Loss of corneal reflex protection</li>
-        </ul>`,
-
-        comparative: [
-            { species: "Ox (Bos taurus)", note: "Common exit via Foramen Orbitorotundum. All three nerves vulnerable to single lesion (tumor/abscess). Retractor bulbi well-developed for grazing protection." },
-            { species: "Horse (Equus caballus)", note: "Separate exits: Orbital Fissure for III, IV, VI. Foramen Rotundum separate for V2. This separation protects against total orbital paralysis from single lesion." },
-            { species: "Dog (Canis lupus)", note: "Standard mammalian pattern. Long intracranial course of CN IV makes it vulnerable to raised intracranial pressure (tentorial herniation)." }
-        ],
+        comparative: [{"species":"Ox","note":"CN III, IV, VI and V1 pass through the foramen orbitorotundum with V2."},{"species":"Horse","note":"Orbital fissure and foramen rotundum are separate."},{"species":"Dog","note":"Orbital fissure and foramen rotundum are separate; clinical deficits depend on lesion location."}],
         clinical: "<b>Diagnostic Localization:</b> A ventrolateral strabismus with ptosis and mydriasis localizes the lesion to CN III (midbrain or orbital fissure). Medial strabismus alone indicates CN VI pathology (often from guttural pouch disease in horses or skull fractures in cattle)."
     },
     {
         title: "CN V: The Trigeminal Nerve (The Giant)",
-        desc: `<b>The Great Sensory Divider:</b><br>
-        • Largest cranial nerve; arises from Pons; splits into three divisions at trigeminal ganglion<br>
-        • <b>V1 (Ophthalmic):</b> Sensory only; exits Foramen Orbitorotundum (ox); supplies cornea, forehead, nasal cavity, <b>goat horn</b> (partial)<br>
-        • <b>V2 (Maxillary):</b> Sensory only; gives rise to <b>Cornual nerve</b> (bovine horn); runs with Maxillary Artery<br>
-        • <b>V3 (Mandibular):</b> Mixed; exits Foramen Ovale (ox); motor to muscles of mastication (Masseter, Temporalis, Pterygoids)<br>
-        • <b>Clinical:</b> V3 lesion = "Dropped jaw" + inability to chew; jaw deviates toward lesion side<br>
-        • <b>Angiology:</b> Rete Mirabile Epidurale surrounds trigeminal ganglion (infection risk)`,
+        desc: "<b>Trigeminal nerve:</b> V1 is sensory to the cornea, orbit and dorsomedial face; V2 supplies the maxillary teeth, upper lip and adjacent face; V3 supplies mandibular sensation and motor fibers to masticatory muscles. In cattle, qualified lacrimal/zygomaticotemporal communications form the cornual pathway; avoid labeling it simply as V2.",
 
-        eliteDesc: `<h3>The Great Sensory Nerve of the Head</h3>
-        <p>The Trigeminal is the largest cranial nerve, serving as the architect of sensation for the face and the motor engine for chewing. It arises from the Pons and splits into three divisions at the Trigeminal Ganglion.</p>
-
-        <h4>Angiology Correlation: The Rete Mirabile</h4>
-        <p>In the bovine, the internal carotid artery regresses during development. The brain is supplied by the <b>Rete Mirabile Epidurale</b>, a meshwork of arteries derived from the maxillary and vertebral arteries. The Trigeminal Ganglion lies in close proximity to the cavernous sinus and this arterial rete. Infection in the cavernous sinus (from severe sinusitis or horn base infections) can easily compromise the Trigeminal nerve.</p>
-
-        <h4>Division 1: Ophthalmic Nerve (V1) - Purely Sensory</h4>
-        <p><b>Course (Ox):</b> Travels in the cavernous sinus and exits via the Foramen Orbitorotundum.</p>
-        <p><b>Branches:</b></p>
-        <ul>
-            <li><b>Frontal Nerve:</b> Emerges from orbit to supply upper eyelid and forehead skin. In the Ox, exits orbit directly (supraorbital foramen transmits vessels primarily).</li>
-            <li><b>Lacrimal Nerve:</b> Sensory to lacrimal gland and lateral canthus.</li>
-            <li><b>Nasociliary Nerve:</b> Parent trunk for ethmoidal and infratrochlear nerves.
-                <ul>
-                    <li><b>Infratrochlear Nerve:</b> Runs along medial orbital wall; supplies medial canthus, lacrimal sac, third eyelid.</li>
-                    <li><b>Critical Variant (Goat):</b> The Infratrochlear sends a cornual branch to the horn bud. This is the "Goat Trap"—blocking only the Cornual nerve (V2) fails to anesthetize the goat horn.</li>
-                </ul>
-            </li>
-        </ul>
-
-        <h4>Division 2: Maxillary Nerve (V2) - Purely Sensory</h4>
-        <p><b>Course (Ox):</b> Exits via Foramen Orbitorotundum; enters Pterygopalatine Fossa; runs alongside Maxillary Artery.</p>
-        <p><b>Major Branches:</b></p>
-        <ul>
-            <li><b>Zygomatic Nerve:</b> Divides into zygomaticofacial (cheek) and zygomaticotemporal.
-                <ul>
-                    <li><b>Cornual Nerve:</b> Branch of zygomaticotemporal; THE specific sensory nerve to the bovine horn. Ascends along temporal ridge.</li>
-                </ul>
-            </li>
-            <li><b>Infraorbital Nerve:</b> Continuation of maxillary nerve; travels through Infraorbital Canal.
-                <ul>
-                    <li>Dental supply: Superior Alveolar nerves to upper premolars/molars within canal.</li>
-                    <li>Exit: Infraorbital Foramen.</li>
-                    <li>Terminal branches: Supply muzzle, upper lip, nostrils (Nasolabial nerve).</li>
-                </ul>
-            </li>
-            <li><b>Pterygopalatine Nerve:</b> Supplies hard and soft palate (Major and Minor Palatine nerves).</li>
-        </ul>
-
-        <h4>Division 3: Mandibular Nerve (V3) - Mixed</h4>
-        <p><b>Course (Ox):</b> Exits via discrete <b>Foramen Ovale</b> (unlike horse where it uses Foramen Lacerum).</p>
-        <p><b>Motor Branches:</b></p>
-        <ul>
-            <li>Muscles of Mastication: Masseter (power closure), Temporalis (closure), Pterygoids (lateral grinding), Mylohyoid, Digastricus (anterior belly only—opens jaw).</li>
-        </ul>
-        <p><b>Sensory Branches:</b></p>
-        <ul>
-            <li><b>Buccal Nerve:</b> Sensory to cheek mucosa (NOT the buccinator muscle—that's CN VII).</li>
-            <li><b>Auriculotemporal Nerve:</b> Sensation to ear and temporal region.</li>
-            <li><b>Lingual Nerve:</b> Sensation (touch/pain/temp) to rostral 2/3 of tongue.</li>
-            <li><b>Inferior Alveolar Nerve:</b> Enters Mandibular Foramen on medial ramus; supplies all lower teeth; exits Mental Foramen as Mental Nerve (lower lip/chin).</li>
-        </ul>
-
-        <h4>Clinical Signs of V3 Damage</h4>
-        <p>"Dropped jaw" with inability to chew. The tongue may hang out. In unilateral lesions, the jaw deviates <b>toward</b> the side of the lesion due to unopposed action of healthy contralateral pterygoid muscles pushing the jaw across.</p>`,
+        eliteDesc: "<b>TRIGEMINAL NERVE</b><br><br>V1 is sensory to the orbit, cornea and dorsomedial facial structures; V2 supplies the maxillary teeth, upper lip and related facial regions; V3 supplies mandibular sensation and branchial motor fibers to masticatory muscles. The supraorbital foramen transmits the supraorbital nerve with accompanying vessels. In adult cattle the rostral epidural rete is supplied chiefly by maxillary arterial rete branches; vertebrobasilar supply should be described separately. Cornual innervation must follow the qualified ophthalmic-associated description used in the introductory entry.",
 
         comparative: [
             { species: "Ox (Bos taurus)", note: "Foramen Ovale is discrete, separate opening in basisphenoid wing. Cornual nerve from V2 supplies horn exclusively (in cattle). Rete Mirabile present." },
@@ -878,47 +596,9 @@ atlasData["Head & Neck"] = {
     },
     {
         title: "CN VII: The Facial Nerve (The Mask)",
-        desc: `<b>The Mask of Expression:</b><br>
-        • Mixed nerve (GSE, GVE, SVA, GSA); Origin: Medulla; Exit: <b>Stylomastoid Foramen</b><br>
-        • Intracranial: Enters Internal Acoustic Meatus (with CN VIII), travels through Facial Canal in petrous temporal bone<br>
-        • <b>Geniculate Ganglion:</b> Sensory for taste; gives off Greater Petrosal Nerve (parasympathetic to lacrimal/nasal glands)<br>
-        • <b>Chorda Tympani:</b> Crosses middle ear, joins Lingual Nerve (V3)—carries taste from rostral 2/3 tongue<br>
-        • <b>Major Branches:</b> Auriculopalpebral (eyelid/ear motor), Dorsal/Ventral Buccal (lips/cheeks), Cervical<br>
-        • <b>Ox vs Horse:</b> Ox has rich plexus between buccal branches over masseter; Horse has widely separated branches`,
+        desc: "<b>Facial nerve:</b> A mixed cranial nerve with SVE motor fibers to muscles of facial expression, parasympathetic fibers to selected glands, taste fibers and limited somatic sensation. It exits the stylomastoid foramen and divides into species-specific facial branches.",
 
-        eliteDesc: `<h3>Cranial Nerve VII: The Facial Nerve</h3>
-        <p>The Facial nerve dictates the animal's ability to blink, move its ears, and flare its nostrils. It is the nerve of facial expression and parasympathetic supply to salivary and lacrimal glands.</p>
-
-        <h4>Intracranial Course</h4>
-        <p>Enters the <b>Internal Acoustic Meatus</b> (with CN VIII), then travels through the <b>Facial Canal</b> in the petrous temporal bone—an extremely tortuous path making it vulnerable to middle ear infections.</p>
-        <p><b>Key Intracranial Structures:</b></p>
-        <ul>
-            <li><b>Geniculate Ganglion:</b> Located at the "knee" (geniculum) of the facial canal. Contains sensory neurons for taste from rostral tongue.</li>
-            <li><b>Greater Petrosal Nerve:</b> Parasympathetic fibers to lacrimal and nasal glands (secretomotor).</li>
-            <li><b>Chorda Tympani:</b> Branches off inside the canal, crosses the middle ear (tympanic cavity), and joins the Lingual Nerve (V3). Carries taste from rostral 2/3 of tongue AND parasympathetic supply to submandibular/sublingual salivary glands.</li>
-        </ul>
-
-        <h4>Exit and Branching</h4>
-        <p><b>Exit:</b> Stylomastoid Foramen, then enters Parotid Salivary Gland where it forms a plexus.</p>
-        <p><b>Angiology Note:</b> The nerve intertwines with the Transverse Facial Artery and vein within the parotid.</p>
-
-        <h4>Major Branches</h4>
-        <p><b>1. Auriculopalpebral Nerve:</b></p>
-        <ul>
-            <li>Ascends over the zygomatic arch.</li>
-            <li>Motor to eyelids (Orbicularis oculi) and ear muscles.</li>
-            <li><b>Clinical:</b> Target for auriculopalpebral block to stop eyelid closure (akinesia) during eye examination.</li>
-        </ul>
-        <p><b>2. Dorsal and Ventral Buccal Branches:</b></p>
-        <ul>
-            <li>Run across masseter muscle to the face.</li>
-            <li>Motor to lips (Orbicularis oris), cheeks (Buccinator), and nostrils.</li>
-            <li><b>Ox vs Horse:</b> In the horse, these branches are widely separated. In the ox, there is a rich plexus (anastomosis) between dorsal and ventral branches over the masseter muscle, providing collateral innervation.</li>
-        </ul>
-        <p><b>3. Cervical Branch:</b> Supplies cutaneous colli muscle.</p>
-
-        <h4>Clinical Pathology</h4>
-        <p><b>Facial Paralysis:</b> Drooping ear, drooping lip (commissure), absent palpebral reflex (cannot blink), widened palpebral fissure, food impaction in cheek (buccinator paralysis), and dry cornea (lacrimal paralysis). Common in Listeriosis (asymmetric deficits).</p>`,
+        eliteDesc: "<b>FACIAL NERVE</b><br><br>Facial motor fibers to muscles derived from the second pharyngeal arch are special visceral efferent (SVE), not GSE. Peripheral lesions cause ipsilateral weakness of facial expression and blinking. Reduced lacrimation occurs only when the lesion is proximal enough to affect parasympathetic pathways; distal facial paralysis more commonly causes exposure keratitis from poor blinking.",
 
         comparative: [
             { species: "Ox (Bos taurus)", note: "Rich anastomotic plexus between buccal branches over masseter. Stylomastoid foramen distinct. Facial canal courses through petrous temporal bone." },
@@ -936,45 +616,7 @@ atlasData["Head & Neck"] = {
         • <b>CN XI (Accessory):</b> Motor to Trapezius, Sternocephalicus, Omotransversarius; unique spinal origin<br>
         • <b>Ruminant Specialization:</b> Vagus controls rumen/reticulum/omasum motility; damage = Vagal Indigestion (Hoflund Syndrome)`,
 
-        eliteDesc: `<h3>The Vagal Complex: Masters of Viscera</h3>
-        <p>These three nerves exit together (via Jugular Foramen in ox) and function as a complex for swallowing, vocalization, and visceral autonomic control. They are the interface between the brain and the thoraco-abdominal viscera.</p>
-
-        <h4>Cranial Nerve IX: The Glossopharyngeal Nerve</h4>
-        <p><b>Functions:</b></p>
-        <ul>
-            <li><b>Motor:</b> Stylopharyngeus muscle (dilates pharynx during swallowing).</li>
-            <li><b>Sensory:</b> Caudal 1/3 of tongue (taste and general sensation).</li>
-            <li><b>Visceral Sensory:</b> Carotid Body (chemoreceptors for O2/CO2/pH) and Carotid Sinus (baroreceptors for blood pressure).</li>
-            <li><b>Parasympathetic:</b> Otic Ganglion → Parotid Salivary Gland (secretomotor).</li>
-        </ul>
-        <p><b>Clinical:</b> Damage causes dysphagia (difficulty swallowing) and loss of gag reflex.</p>
-
-        <h4>Cranial Nerve X: The Vagus Nerve ("The Wanderer")</h4>
-        <p>In the ruminant, the Vagus is the lifeline of digestion and visceral homeostasis.</p>
-        <p><b>Course:</b> Descends the neck in the Carotid Sheath along with the Vagosympathetic trunk and Common Carotid Artery.</p>
-        
-        <h5>Laryngeal Innervation (Critical for Surgery)</h5>
-        <p><b>1. Cranial Laryngeal Nerve:</b></p>
-        <ul>
-            <li>Sensory to laryngeal mucosa above vocal cords.</li>
-            <li>Motor to Cricothyroid muscle (tenses vocal cords).</li>
-        </ul>
-        <p><b>2. Recurrent Laryngeal Nerve (The "Recurrent" Path):</b></p>
-        <ul>
-            <li><b>Left Side:</b> Loops around the Aortic Arch (heart surgery risk!).</li>
-            <li><b>Right Side:</b> Loops around the Right Subclavian Artery.</li>
-            <li><b>Innervation:</b> All intrinsic laryngeal muscles EXCEPT Cricothyroid.</li>
-            <li><b>Critical Muscle:</b> Cricoarytenoideus Dorsalis (CAD)—the ONLY abductor of the glottis (opens airway).</li>
-        </ul>
-        <p><b>Pathology—Laryngeal Hemiplegia ("Roaring"):</b> Neuropathy of the left recurrent laryngeal nerve (common in horses, rare in cattle) causes paralysis of the CAD muscle. The arytenoid cartilage collapses into the airway during inspiration, creating an audible roar. The left side is more vulnerable due to the longer course around the heart.</p>
-
-        <h5>Gastric Innervation (Ruminant Specialization)</h5>
-        <p>The dorsal and ventral vagal trunks control the intricate motility cycles of the rumen, reticulum, and omasum (eructation, regurgitation, remastication). Damage to these trunks (from traumatic reticuloperitonitis/hardware disease, or surgical transection) causes <b>Vagal Indigestion (Hoflund Syndrome)</b>—characterized by functional stenosis, rumen atony, and failure of eructation.</p>
-
-        <h4>Cranial Nerve XI: The Accessory Nerve</h4>
-        <p><b>Unique Origin:</b> Arises from both the cervical spinal cord (spinal root) and medulla (cranial root).</p>
-        <p><b>Function:</b> Motor to the muscles of the neck and shoulder: Trapezius, Omotransversarius, Sternocephalicus, and Cleidocephalicus.</p>
-        <p><b>Clinical:</b> Damage causes inability to elevate shoulder or turn neck effectively.</p>`,
+        eliteDesc: "<b>GLOSSOPHARYNGEAL, VAGUS AND ACCESSORY NERVES</b><br><br>CN IX and X supply pharyngeal sensation and motor functions important in swallowing; CN X also carries extensive parasympathetic fibers to thoracic and abdominal viscera. CN XI supplies major neck muscles. Vagal indigestion is a syndrome of impaired forestomach motility or outflow with multiple possible causes, not simply unilateral or bilateral vagal transection. The so-called cranial root of XI is commonly treated as part of the vagal system in modern descriptions.",
 
         comparative: [
             { species: "Ox (Bos taurus)", note: "Jugular Foramen distinct and separate from Foramen Ovale. Recurrent laryngeal loops around aortic arch (left) and subclavian (right). Extensive ruminant vagal specialization for forestomach control." },
@@ -1025,203 +667,41 @@ atlasData["Head & Neck"] = {
             { species: "Horse (Equus caballus)", note: "Single hypoglossal canal typically. Horse uses lips for prehension more than tongue; tongue used less for grasping, more for manipulation." },
             { species: "Dog (Canis lupus)", note: "Single hypoglossal canal. Tongue essential for lapping water and manipulation of food within mouth." }
         ],
-        clinical: "<b>The Tongue Test:</b> Grasp the tongue and assess tone and withdrawal. In hypoglossal paralysis, the tongue is flaccid and atrophied. In Listeriosis, the tongue may show tremors or asymmetry. Always check for accompanying cranial nerve deficits to localize brainstem lesions."
+        clinical: "<b>Clinical relevance:</b> Hypoglossal injury causes ipsilateral tongue weakness and, with chronic denervation, atrophy. Listerial brainstem disease can involve CN V-XII in variable asymmetric combinations; no fixed CN XII-V-VII triad is diagnostic."
     },
     {
         title: "Foramina & Exit Strategies: Comparative",
-        desc: `<b>The Skull Floor Comparison:</b><br>
-        • <b>Ox (Efficient Fusion):</b> Foramen Orbitorotundum (III, IV, VI, V1, V2); Foramen Ovale (V3—discrete); Jugular Foramen (IX, X, XI—distinct)<br>
-        • <b>Horse (Complex Separation):</b> Orbital Fissure (III, IV, VI, V1); Foramen Rotundum → Alar Canal (V2); Foramen Lacerum/Oval Notch (V3); Foramen Lacerum caudal (IX, X, XI)<br>
-        • <b>Dog (Standard Mammal):</b> Separate orbital fissure, rotundum, and ovale; Alar Canal for artery<br>
-        • <b>Clinical:</b> Single lesion at Foramen Orbitorotundum (ox) affects all orbital nerves simultaneously—profound anesthesia but also profound paralysis risk`,
+        desc: "<b>Comparative exits:</b><br>• Ox and pig: foramen orbitorotundum combines orbital fissure and foramen rotundum.<br>• Horse and dog: orbital fissure and foramen rotundum remain separate.<br>• Ox: foramen ovale carries V3 and no alar canal is present.<br>• Horse: V3 uses the oval-notch/foramen-lacerum region and the alar canal is present.<br>• Dog: separate foramen ovale and alar canal.",
 
-        eliteDesc: `<h3>Comparative Cranial Exit Anatomy</h3>
-        <p>The skull floors of the Ox, Horse, and Dog differ significantly in their foramina patterns, creating distinct clinical implications for nerve blocks and pathological processes.</p>
+        eliteDesc: "<b>MAJOR CRANIAL EXITS</b><br><br>Ruminants and pigs possess a foramen orbitorotundum formed by fusion of the orbital fissure and foramen rotundum. Horse and dog retain separate openings. Cattle lack an alar canal; horse and dog possess one. The bovine mandibular nerve uses the foramen ovale, while the equine nerve exits through the oval notch/foramen-lacerum region. CN IX-XI use the jugular foramen or species-equivalent caudal lacerum region, and CN XII uses the hypoglossal canal.",
 
-        <h4>The Ox: Fusion and Efficiency</h4>
-        <p>The bovine skull simplifies exits through fusion, creating larger, fewer openings:</p>
-        <ul>
-            <li><b>Foramen Orbitorotundum:</b> Massive fusion of orbital fissure and foramen rotundum. Transmits CN III, IV, VI, V1, V2, and ophthalmic veins. Located deep in orbit, formed by presphenoid/basisphenoid wings.</li>
-            <li><b>Foramen Ovale:</b> Discrete, oval opening in basisphenoid wing transmitting CN V3 (Mandibular nerve). Separate from Jugular Foramen.</li>
-            <li><b>Jugular Foramen:</b> Distinct opening between occipital and temporal bones transmitting CN IX, X, XI and jugular vein bulb.</li>
-        </ul>
-        <p><b>Angiology:</b> Maxillary artery courses on surface of pterygoid muscles (no Alar Canal).</p>
-
-        <h4>The Horse: Separation and Complexity</h4>
-        <p>The Equid skull maintains separate exits with complex routing:</p>
-        <ul>
-            <li><b>Orbital Fissure:</b> Transmits CN III, IV, VI, V1 only.</li>
-            <li><b>Foramen Rotundum:</b> Transmits CN V2 only. Opens directly into <b>Alar Canal</b>.</li>
-            <li><b>Foramen Lacerum:</b> Large, irregular, jagged gap at skull base.
-                <ul>
-                    <li><b>Oval Notch:</b> Rostral border of Foramen Lacerum serves as exit for CN V3.</li>
-                    <li><b>Jugular Portion:</b> Caudal aspect serves as exit for CN IX, X, XI.</li>
-                    <li><b>Carotid Notch:</b> Internal Carotid Artery enters here (persists in horse, regressed in ox).</li>
-                </ul>
-            </li>
-        </ul>
-
-        <h4>The Dog: The Standard Mammalian Pattern</h4>
-        <ul>
-            <li><b>Orbital Fissure:</b> CN III, IV, VI, V1.</li>
-            <li><b>Foramen Rotundum:</b> CN V2 (separate).</li>
-            <li><b>Foramen Ovale:</b> CN V3 (distinct).</li>
-            <li><b>Alar Canal:</b> Present (like horse), transmitting maxillary artery.</li>
-            <li><b>Foramen Lacerum:</b> Small, filled with cartilage in life.</li>
-        </ul>
-
-        <h4>Clinical Implications</h4>
-        <p><b>Peterson Eye Block:</b> In cattle, targeting the Foramen Orbitorotundum blocks all orbital nerves (III, IV, VI, V1, V2) simultaneously. In horses, achieving equivalent blockade requires multiple injections or different approaches due to separate foramina.</p>
-        <p><b>Surgical Risk:</b> In cattle, a single abscess or tumor at the Foramen Orbitorotundum can paralyze the entire globe and eliminate all facial sensation—anatomical efficiency becomes clinical vulnerability.</p>`,
-
-        comparative: [
-            { species: "Ox (Bos taurus)", note: "Foramen Orbitorotundum (fusion) present. Foramen Ovale discrete. Jugular Foramen distinct. NO Alar Canal (maxillary artery superficial)." },
-            { species: "Horse (Equus caballus)", note: "Separate Orbital Fissure and Foramen Rotundum. Foramen Lacerum is large irregular gap containing Oval Notch (V3) and Jugular portion (IX, X, XI). Alar Canal present." },
-            { species: "Dog (Canis lupus)", note: "Standard pattern: separate fissure, rotundum, and ovale. Alar Canal present for maxillary artery. Foramen Lacerum small." }
-        ],
+        comparative: [{"species":"Ox","note":"Foramen orbitorotundum; distinct foramen ovale; no alar canal."},{"species":"Horse","note":"Separate orbital fissure and foramen rotundum; alar canal present; V3 exits at the oval notch/foramen-lacerum region."},{"species":"Dog","note":"Separate orbital fissure, rotundum and ovale; alar canal present."},{"species":"Pig","note":"Foramen orbitorotundum present."}],
         clinical: "<b>Critical Localization:</b> Complete ophthalmoplegia (paralysis of all eye muscles) with sensory loss to the cornea and upper face in cattle localizes to the Foramen Orbitorotundum region. In horses, such diffuse deficits would suggest a cavernous sinus syndrome or multiple lesions rather than a single foramen issue."
     },
     {
         title: "Clinical Applications: Regional Anesthesia",
-        desc: `<b>High-Stakes Field Blocks:</b><br>
-        • <b>Cornual Nerve Block (Cattle):</b> 5-10mL lidocaine halfway along temporal ridge between lateral canthus and horn base; blocks V2 branch<br>
-        • <b>Goat Modification:</b> Must block TWO sites—posterior (Cornual/V2) AND dorsomedial (Infratrochlear/V1)<br>
-        • <b>Peterson Eye Block:</b> Targets Foramen Orbitorotundum; 15-20mL at 'V' notch (supraorbital process + zygomatic arch + coronoid process junction); blocks III, IV, VI, V1, V2<br>
-        • <b>Auriculopalpebral Block:</b> Subcutaneous over zygomatic arch; motor block only (akinesia), NOT sensory—cornea still feels pain!<br>
-        • <b>Safety:</b> Always aspirate before injection—Internal Maxillary Artery adjacent to Foramen Orbitorotundum`,
+        desc: "<b>Regional anesthesia of the bovine head</b><br><br>Cornual, auriculopalpebral, infraorbital, mental, mandibular, maxillary and retrobulbar techniques may be indicated for selected procedures. The exact block, drug, dose, needle and approach must be chosen for the species and individual animal by a trained veterinarian. Horses do not have a cornual nerve block.",
 
-        eliteDesc: `<h3>Clinical Anesthesia Techniques</h3>
-        <p>Mastery of cranial nerve anatomy enables precise regional anesthesia essential for veterinary practice—particularly dehorning and ocular surgery.</p>
+        eliteDesc: "<b>SAFE HEAD-REGION ANESTHESIA</b><br><br>For bovine dehorning, desensitize the cornual nerve and account for accessory innervation; goats require both lacrimal and infratrochlear cornual branches. Auriculopalpebral block supplies motor akinesia but not corneal analgesia. Dental and ocular blocks require accurate species-specific foraminal anatomy. Peterson and retrobulbar techniques carry risks to the globe, optic nerve and major vessels. Do not publish universal volumes, needle sizes, trajectories or toxicity thresholds; calculate dosing for the animal and agent.",
 
-        <h4>1. The Cornual Nerve Block (Dehorning)</h4>
-        <p><b>Objective:</b> Anesthesia of the horn bud/horn for painless dehorning or disbudding.</p>
-        
-        <p><b>Anatomy (Ox):</b> The Cornual nerve is a branch of the Zygomaticotemporal nerve (from V2). It emerges from the orbit, running along the lateral border of the frontal bone's temporal ridge, covered by skin and thin frontalis muscle.</p>
-        
-        <p><b>Technique:</b></p>
-        <ol>
-            <li>Palpate the temporal ridge between the lateral canthus of the eye and the horn base.</li>
-            <li>Insert needle halfway along this line, just ventral to the crest.</li>
-            <li>Deposit 5-10mL Lidocaine subcutaneously and deeply along the periosteum.</li>
-            <li>Wait 10 minutes. Test with needle prick before proceeding.</li>
-        </ol>
-
-        <h4>2. The "Goat Trap" Modification</h4>
-        <p><b>Critical Difference:</b> The goat horn is supplied by TWO nerves:</p>
-        <ul>
-            <li>Cornual nerve (from V2, like ox)</li>
-            <li>Cornual branch of the Infratrochlear nerve (from V1)</li>
-        </ul>
-        <p><b>Dual Technique Required:</b></p>
-        <ol>
-            <li><b>Site 1:</b> Posterior to the lateral canthus (standard cornual block).</li>
-            <li><b>Site 2:</b> Dorsomedial to the eye, near the medial canthus, to catch the Infratrochlear branch.</li>
-        </ol>
-        <p>Failure to perform both blocks results in violent head shaking, vocalization, and failed restraint.</p>
-
-        <h4>3. The Peterson Eye Block (Enucleation)</h4>
-        <p><b>Objective:</b> Complete anesthesia and akinesia of the globe and orbit for enucleation (removal of the eye), usually due to Squamous Cell Carcinoma ("Cancer Eye").</p>
-        
-        <p><b>Anatomy:</b> This high-skill block targets the Foramen Orbitorotundum, blocking CN III, IV, VI (motor) and V1, V2 (sensory).</p>
-        
-        <p><b>Landmarks (The "V" Notch):</b></p>
-        <ul>
-            <li>Supraorbital Process of frontal bone (cranially)</li>
-            <li>Zygomatic Arch (ventrally)</li>
-            <li>Coronoid Process of the Mandible (caudally)</li>
-        </ul>
-        
-        <p><b>Technique:</b></p>
-        <ol>
-            <li>Insert a curved 18G needle (10-12cm) at the notch formed by these structures.</li>
-            <li>Advance horizontally and slightly caudally/medially.</li>
-            <li>"Walk" the needle off the cranial border of the Coronoid Process of the mandible.</li>
-            <li>Advance until it hits the bony plate of the sphenoid near the Foramen Orbitorotundum.</li>
-            <li><b>ASPIRATE!</b> The Internal Maxillary Artery is adjacent—intravascular injection causes seizures.</li>
-            <li>Inject 15-20mL slowly.</li>
-        </ol>
-        <p><b>Result:</b> Eye immobilized (akinesia) and numb (anesthesia). Note: Auriculopalpebral nerve (CN VII) is NOT blocked here; eyelids may still flutter unless separately blocked.</p>
-
-        <h4>4. The Auriculopalpebral Block</h4>
-        <p><b>Objective:</b> Stop eyelids from closing (akinesia) during eye examination or minor procedures.</p>
-        <p><b>Nerve:</b> Auriculopalpebral branch of CN VII (facial).</p>
-        <p><b>Technique:</b> Palpate the nerve crossing the dorsal aspect of the Zygomatic Arch. Inject 5mL subcutaneously.</p>
-        <p><b>Critical Limitation:</b> This is a MOTOR block only. Sensation remains INTACT (cornea can still feel pain via V1). <b>Use ONLY for examination, not surgery.</b> For painful procedures, combine with topical anesthesia or retrobulbar block.</p>`,
-
-        comparative: [
-            { species: "Ox (Bos taurus)", note: "Cornual nerve block single site. Peterson block targets Foramen Orbitorotundum. Auriculopalpebral block for motor only." },
-            { species: "Horse (Equus caballus)", note: "Cornual nerve block similar. Retrobulbar block more common than Peterson for ocular surgery due to separate foramina making Peterson less predictable." },
-            { species: "Goat (Capra hircus)", note: "REQUIRES DUAL CORNUAL BLOCK—Cornual (V2) + Infratrochlear (V1) branches both innervate horn." }
-        ],
+        comparative: [{"species":"Cattle","note":"Cornual and ocular blocks require bovine-specific anatomy and calculated dosing."},{"species":"Goat","note":"Both lacrimal and infratrochlear cornual branches must be addressed for horn procedures."},{"species":"Horse","note":"Equine dental and ocular blocks use equine-specific landmarks; there is no cornual block."},{"species":"Dog","note":"Small-animal blocks require weight-based dosing and appropriate imaging or landmark guidance."}],
         clinical: "<b>Safety Protocol:</b> When performing Peterson block, ALWAYS aspirate before injecting. If blood appears in the hub, withdraw slightly and re-aspirate. Intravenous injection of local anesthetic into the maxillary artery can cause immediate seizures, collapse, and death. Never exceed toxic dose calculations (usually 2-4mg/kg lidocaine maximum)."
     },
     {
         title: "Clinical Neurology: Pathology",
-        desc: `<b>Pattern Recognition:</b><br>
-        • <b>Listeriosis (Circling Disease):</b> Listeria monocytogenes ascends CN V sensory branches → brainstem microabscesses; Triad: CN V (dropped jaw), CN VII (facial droop), CN VIII (head tilt/circling)<br>
-        • <b>Horner's Syndrome:</b> Sympathetic trunk damage (runs with vagus in neck) → Miosis (constricted pupil), Ptosis, Enophthalmos, <b>Dry nose</b> (bovine specific—loss of sweating on muzzle)<br>
-        • <b>Laryngeal Hemiplegia (Roaring):</b> Left Recurrent Laryngeal Neuropathy → paralysis of Cricoarytenoideus Dorsalis (only abductor) → arytenoid collapse into airway during inspiration<br>
-        • <b>Trigeminal Neuritis:</b> Dropped jaw, inability to close mouth, jaw deviation toward lesion side<br>
-        • <b>Facial Paralysis:</b> Drooping ear/lip, absent palpebral reflex (CN VII), widened palpebral fissure, food in cheek`,
+        desc: "<b>Major syndromes:</b><br>• Listeriosis: asymmetric brainstem disease with variable CN V-XII deficits, circling, head tilt and dysphagia.<br>• Facial paralysis: poor blink, drooping lip/ear and exposure keratitis.<br>• Horner syndrome: sympathetic denervation with species-variable ocular and vascular signs.<br>• Trigeminal disease: sensory loss or masticatory weakness depending on division.<br><br>No fixed cranial-nerve triad is diagnostic by itself.",
 
-        eliteDesc: `<h3>Cranial Nerve Pathology</h3>
-        <p>Understanding the anatomical course and function of cranial nerves enables precise localization of neurological lesions.</p>
+        eliteDesc: "<b>CLINICAL NEUROLOGY</b><br><br>Listeriosis produces asymmetric brainstem disease with variable deficits of CN V-XII, head tilt, circling and dysphagia; no fixed cranial-nerve triad is diagnostic. Horner syndrome reflects interruption of sympathetic supply and its signs vary by species; a “dry nose from loss of sweating” is not a universal bovine sign. Traumatic reticuloperitonitis should not be listed as a routine cause of Horner syndrome. Diagnosis requires localization plus appropriate laboratory and imaging tests.",
 
-        <h4>1. Listeriosis ("Circling Disease")</h4>
-        <p><b>Etiology:</b> <i>Listeria monocytogenes</i> bacteria ascend the sensory branches of CN V from mucosal abrasions (often from feeding coarse silage or hay). They cause microabscesses in the brainstem trigeminal nuclei and adjacent cranial nerve nuclei.</p>
-        
-        <p><b>Clinical Presentation:</b> Asymmetric cranial nerve deficits typical of brainstem lesions:</p>
-        <ul>
-            <li><b>CN V:</b> Dropped jaw, facial analgesia (unilateral).</li>
-            <li><b>CN VII:</b> Facial paralysis—drooping ear and lip, absent palpebral reflex (cannot blink), widened palpebral fissure.</li>
-            <li><b>CN VIII:</b> Head tilt, circling toward affected side, nystagmus.</li>
-            <li><b>IX, X, XII:</b> Dysphagia, tongue paralysis.</li>
-        </ul>
-        <p><b>Prognosis:</b> Guarded to poor; requires aggressive antibiotic therapy (penicillin, oxytetracycline) and supportive care. Permanent deficits common if treatment delayed.</p>
-
-        <h4>2. Horner's Syndrome (Angiology-Neurology Interface)</h4>
-        <p><b>Etiology:</b> Damage to the Sympathetic Trunk (which runs with the Vagus nerve in the carotid sheath in the neck). Causes loss of sympathetic tone to the head.</p>
-        
-        <p><b>Classic Triad:</b></p>
-        <ul>
-            <li><b>Miosis:</b> Constricted pupil (loss of sympathetic dilation).</li>
-            <li><b>Ptosis:</b> Drooping upper eyelid (Müller muscle atony).</li>
-            <li><b>Enophthalmos:</b> Sunken eye (retraction of globe due to loss of orbital smooth muscle tone).</li>
-        </ul>
-        
-        <p><b>Bovine Specific Sign:</b> Loss of sweating on the nose on the affected side (dry nose/hyperthermia of the muzzle) due to loss of sympathetic innervation to cutaneous sweat glands. This is a key differentiator in cattle compared to small animals.</p>
-        
-        <p><b>Common Causes:</b> Traumatic reticuloperitonitis (hardware disease) with vagus involvement, neck trauma, guttural pouch infections (horses), brachial plexus avulsion.</p>
-
-        <h4>3. Laryngeal Hemiplegia ("Roaring")</h4>
-        <p><b>Pathophysiology:</b> Neuropathy of the left Recurrent Laryngeal Nerve (longer course around aortic arch makes it vulnerable) causes paralysis of the Cricoarytenoideus Dorsalis (CAD) muscle—the ONLY abductor of the glottis.</p>
-        
-        <p><b>Clinical Signs:</b> The arytenoid cartilage collapses into the airway during inspiration, creating an audible roaring sound (stridor) and exercise intolerance. Common in large horses (Draft breeds, Thoroughbreds), rare but possible in cattle.</p>
-        
-        <p><b>Diagnosis:</b> Endoscopic examination of larynx shows failure of left arytenoid to abduct during inspiration.</p>
-
-        <h4>4. Facial Nerve Paralysis</h4>
-        <p><b>Signs:</b> Drooping ear, drooping lip (commissure), absent palpebral reflex (cannot blink), widened palpebral fissure, food impaction in cheek (buccinator paralysis), and dry cornea (lacrimal gland paralysis leading to exposure keratitis).</p>
-        
-        <p><b>Causes:</b> Listeriosis (brainstem), otitis media/interna (nerve inflammation in facial canal), trauma to stylomastoid foramen region, guttural pouch disease (horses).</p>
-
-        <h4>5. Trigeminal Neuritis</h4>
-        <p><b>Unilateral:</b> Jaw deviates toward affected side when opened; unilateral muscle atrophy.</p>
-        <p><b>Bilateral:</b> "Dropped jaw"—inability to close mouth; tongue protrusion; inability to chew; profuse salivation; starvation if chronic.</p>`,
-
-        comparative: [
-            { species: "Ox (Bos taurus)", note: "Horner's syndrome shows dry nose (sweat loss). Listeriosis common from silage feeding. Left recurrent laryngeal neuropathy rare but possible." },
-            { species: "Horse (Equus caballus)", note: "Left laryngeal hemiplegia ('Roaring') very common in large breeds. Guttural pouch disease affects CN VII, IX, X, XI, XII and sympathetic trunk." },
-            { species: "Dog (Canis lupus)", note: "Trigeminal neuritis (dropped jaw) common in older dogs, often idiopathic. Otitis externa/media commonly affects facial nerve." }
-        ],
+        comparative: [{"species":"Ox","note":"Listeriosis may cause variable asymmetric brainstem deficits; Horner signs must be interpreted with bovine autonomic anatomy."},{"species":"Horse","note":"Recurrent laryngeal neuropathy and facial trauma are important species-specific disorders."},{"species":"Dog","note":"Vestibular, facial and trigeminal disorders require lesion localization and diagnostic testing."}],
         clinical: "<b>Localization Rule:</b> Multiple cranial nerve deficits (especially asymmetric) localizing to the brainstem suggest Listeriosis or space-occupying lesions (tumors, abscesses). Peripheral single nerve deficits suggest trauma or localized inflammation (e.g., otitis media affecting CN VII specifically)."
     }
 ],
     "Angiology": [
         {
             title: "Arteries of the Head & Neck",
-            desc: "<b>High-Yield Points:</b><br>• <b>Common Carotid Artery</b> (in carotid sheath) — chief artery of head; branches at level of larynx into:<br>  – <b>External Carotid</b> — main artery of face, jaws, tongue, dura.<br>  – <b>Internal Carotid</b> — to brain (via carotid rete in ox).<br>  – <b>Occipital</b> — to brain & deep neck.<br><br><b>Important Branches of External Carotid:</b><br>• <b>Lingual artery</b> — to tongue.<br>• <b>Facial artery</b> — over mandibular notch (HORSE PULSE SITE).<br>• <b>Maxillary artery</b> — through alar canal; supplies face, palate, teeth, eye.<br>• <b>Superficial Temporal artery</b> — to temporalis & horn (KEY in dehorning hemorrhage).<br>• <b>Cornual (Horn) artery</b> — branch of superficial temporal; supplies horn — <b>must be ligated during dehorning to prevent fatal hemorrhage</b>.<br>• <b>Infraorbital, Supraorbital, Auricular, Lingual</b> arteries.",
-            eliteDesc: "<b>ARTERIAL SUPPLY OF THE HEAD & NECK</b><br><br><b>I. COMMON CAROTID ARTERY (CCA):</b><br>• Origin: Off the brachiocephalic trunk (right) or directly from the aortic arch (left in some species).<br>• Course: Ascends in the carotid sheath, deep in the jugular furrow, alongside the trachea & oesophagus.<br>• Termination: At the level of the larynx → branches into <b>external carotid + occipital + internal carotid (when present)</b>.<br><br><b>II. INTERNAL CAROTID ARTERY:</b><br>• In Ox: Functional in young, becomes obliterated in adults — replaced by the <b>maxillary route via the carotid rete mirabile</b> at the base of the brain.<br>• In Horse: Persists; passes through guttural pouch and enters cranium via foramen lacerum.<br>• In Dog: Patent through life; standard route to brain.<br><br><b>III. EXTERNAL CAROTID ARTERY (the workhorse for the head):</b><br>• <b>Lingual a.</b> — main artery to the tongue (entered when ligating Stenson's duct).<br>• <b>Facial a.</b> — Wraps around ventral border of mandible at mandibular notch. <b>Standard pulse site in HORSE.</b><br>• <b>Caudal Auricular a.</b> — to ear.<br>• <b>Superficial Temporal a.</b> — major branch crossing zygomatic arch; gives rise to:<br>  – <b>Cornual (Horn) artery</b> — supplies horn base. <b>MUST be ligated during dehorning</b> to prevent severe hemorrhage from the cut horn base.<br>  – <b>Auriculopalpebral a.</b> — to eye and ear region.<br>• <b>Maxillary a.</b> — terminal branch; runs through alar canal, gives off:<br>  – <b>Inferior alveolar a.</b> (mandibular teeth via mandibular foramen).<br>  – <b>Infraorbital a.</b> (upper teeth via infraorbital canal).<br>  – <b>Sphenopalatine, Greater palatine, Buccal arteries</b> to palate, sinuses, cheek.<br>  – <b>External ophthalmic a.</b> + branches to eye, lacrimal gland.<br><br><b>IV. CAROTID RETE MIRABILE (in Ox & Sheep):</b><br>• Network of small arteries at the base of the brain.<br>• Function: <b>brain cooling</b> — counter-current heat exchange between cool venous blood (from nasal cavity sinuses) and arterial blood; protects brain from overheating in hot pastures.<br>• Same anatomical principle present in giraffe (massive rete handles pressure changes when raising/lowering neck).<br><br><b>V. AGE-RELATED ARTERY CHANGES IN OX:</b><br>The internal carotid regresses and the brain comes to depend almost entirely on the maxillary artery + carotid rete. This is why the <b>Peterson's eye block</b> works so reliably — local anaesthetic placed near the rete diffuses to multiple cranial nerves.",
+            desc: "<b>Bovine head arteries:</b><br>• The common carotid supplies the head chiefly through the external carotid system in the adult.<br>• The extracranial internal carotid regresses after birth.<br>• External-carotid branches include lingual, facial, superficial temporal and maxillary arteries.<br>• The maxillary artery supplies the rostral epidural rete but does not pass through an alar canal in cattle.<br>• Cornual vessels require deliberate hemostasis during horn surgery.",
+            eliteDesc: "<b>ARTERIES OF THE BOVINE HEAD AND NECK</b><br><br>The common carotid divides chiefly into external carotid branches in the adult. The extracranial internal carotid regresses after birth in cattle, and the brain receives major arterial supply through the maxillary-derived rostral epidural rete with vertebrobasilar contribution caudally. The maxillary artery does not traverse an alar canal in cattle because the alar canal is absent. Cornual vessels can bleed substantially during horn surgery, but hemorrhage should be described and controlled without claiming that every case is fatal unless ligated.",
             comparative: [
                 { species: "Horse", note: "Internal carotid passes through guttural pouch — site of fatal mycotic erosion ('guttural pouch mycosis' → epistaxis). Facial artery palpable on mandible." },
                 { species: "Ox", note: "Internal carotid regresses; brain supplied via maxillary + rete. <b>Cornual artery</b> + superficial temporal artery vital in dehorning." },
@@ -1233,7 +713,7 @@ atlasData["Head & Neck"] = {
         {
             title: "Veins & Lymph Nodes of the Head & Neck",
             desc: "<b>Major Veins:</b><br>• <b>External Jugular Vein</b> — chief drainage of head; in jugular furrow; <b>standard IV site in cattle/horse</b>.<br>  Formed by union of <b>linguofacial + maxillary veins</b> at the angle of mandible.<br>• <b>Linguofacial vein</b> — drains tongue + face.<br>• <b>Maxillary vein</b> — drains deep face, jaws.<br>• Internal jugular vein — small or absent in horse; well-developed in dog.<br>• <b>Vertebral vein</b> — drains brain & cervical spine.<br><br><b>Lymph Nodes (Routine in Clinical Exam):</b><br>• <b>Parotid LN</b> — caudal to mandible.<br>• <b>Mandibular LN</b> — at angle of mandible.<br>• <b>Lateral & Medial Retropharyngeal LN</b> — deep, behind pharynx.<br>• <b>Superficial Cervical (Prescapular) LN</b> — base of neck, on supraspinatus.<br>• <b>Deep Cervical LN</b> — chains along carotid (cranial, middle, caudal).",
-            eliteDesc: "<b>VENOUS DRAINAGE & LYMPH NODES OF HEAD/NECK</b><br><br><b>I. EXTERNAL JUGULAR VEIN (V. jugularis externa):</b><br>• <b>Formation:</b> Linguofacial vein + Maxillary vein, just behind the mandibular angle, in front of the parotid gland.<br>• <b>Course:</b> Descends in the jugular furrow → over the first rib → joins subclavian vein to form cranial vena cava.<br>• <b>Tributaries:</b><br>  – Linguofacial vein (lingual + facial branches).<br>  – Maxillary vein (deep facial structures).<br>  – Cranial superficial cervical vein.<br>  – Hyoid venous arch (in horse).<br>• <b>Clinical:</b> #1 IV access in large animals. Avoid the lower 1/3 (close to carotid).<br><br><b>II. INTERNAL JUGULAR VEIN:</b> Drains brain via dural sinuses → cavernous sinus → emissary veins → IJV. In horse, very small; most cranial venous drainage is via vertebral and external jugular veins.<br><br><b>III. VERTEBRAL VEIN:</b> Runs through transverse foramina of cervical vertebrae alongside the vertebral artery; drains spinal cord, deep neck.<br><br><b>IV. LYMPH NODES OF THE HEAD (Routine clinical palpation in cattle):</b><br><br><b>A. Parotid Lymph Centre:</b><br>• <b>Parotid LN</b> — under cover of cranial border of parotid salivary gland.<br>• Drains: dorsal head, eye, ear.<br><br><b>B. Mandibular Lymph Centre:</b><br>• <b>Mandibular LN</b> — at angle of mandible, in fat under skin.<br>• Drains: lower face, lips, tongue, oral cavity.<br>• <b>Routinely palpated in clinical exam</b>; enlargement = oral disease, dental infection, or generalized lymphadenopathy.<br><br><b>C. Retropharyngeal Lymph Centre:</b><br>• <b>Lateral retropharyngeal LN</b> — behind pharynx, lateral.<br>• <b>Medial retropharyngeal LN</b> — deep, between dorsal pharynx and longus capitis.<br>• Drains: pharynx, larynx, deep face, tongue.<br>• <b>Site for tuberculosis lesions</b> in cattle (granulomas in retropharyngeal LN are a flag at meat inspection).<br><br><b>V. LYMPH NODES OF THE NECK:</b><br>• <b>Cranial, Middle, Caudal Deep Cervical LN</b> — chains along carotid sheath; drain neck structures, larynx, trachea.<br>• <b>Superficial Cervical (Prescapular) LN</b> — on cranial border of supraspinatus, deep to brachiocephalicus. Drains: skin of neck, shoulder, cranial forelimb. <b>Routinely palpated.</b><br><br><b>VI. EFFERENT FROM NECK:</b><br>All lymph from head & neck eventually drains via the <b>tracheal lymph trunks</b> (right and left) into:<br>• <b>Right venous angle</b> (right tracheal trunk → right lymphatic duct → right venous angle).<br>• <b>Left venous angle</b> (left tracheal trunk → thoracic duct).",
+            eliteDesc: "<b>VEINS AND LYMPH NODES</b><br><br>The external jugular is formed by major tributaries including linguofacial and maxillary veins and drains through species-specific venous convergence into the brachiocephalic/cranial-caval system. Mandibular, parotid and superficial cervical nodes may be examined externally; medial retropharyngeal nodes are deep and are not routinely externally palpable. Thoracic-duct and right-lymphatic drainage patterns vary among species and should not be forced into a fixed human-style venous-angle scheme.",
             comparative: [
                 { species: "Horse", note: "External jugular dominant; internal jugular tiny. Lower jugular furrow has carotid lying just deep — risk during venepuncture." },
                 { species: "Cattle", note: "Routine palpation: parotid + mandibular + retropharyngeal + prescapular LN. Bovine TB: caseous granulomas in retropharyngeal LN." },

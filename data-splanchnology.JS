@@ -17,12 +17,12 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • The <b>Pharynx</b> is a muscular tube common to both respiratory and digestive pathways.<br>
         • Key features: Tongue (torus linguae in Ox), Teeth, Salivary Glands, and Soft Palate.`,
         eliteDesc: `<h3>Oral Cavity and Pharyngeal Architecture</h3>
-        <p>The splanchnology of the head begins with the <b>oral cavity (cavum oris)</b>, which in ruminants is specialized for ingestion of large quantities of roughage. The absence of upper incisors and the presence of a cornified <b>dental pad</b> are pathognomonic adaptations.</p>
+        <p>The splanchnology of the head begins with the <b>oral cavity (cavum oris)</b>, which in ruminants is specialized for prehension and mastication of fibrous feed. Upper incisors and the upper canine are absent; a cornified <b>dental pad</b> occupies their region.</p>
         <p>The bovine tongue bears a distinctive <b>torus linguae</b> (lingual torus) — a firm dorsal swelling of smooth muscle and connective tissue in the middle third of the tongue that aids in grasping forage.</p>
         <p>The <b>pharynx</b> acts as a critical switching station where the respiratory and digestive tracts cross. It is divided into the oropharynx, nasopharynx, and laryngopharynx. The epiglottis acts as the switching valve during deglutition.</p>
         <p>The <b>salivary glands</b> of ruminants are enormous — the parotid alone can weigh 400 g — because ruminants require vast quantities of alkaline saliva (up to 150 L/day in cattle) to buffer the fermentation acids in the rumen.</p>`,
         comparative: [
-            { species: "Ox", note: "Dental pad (pollex dentalis) replaces upper incisors. Large torus linguae. Parotid gland is enormous. Soft palate is relatively short." },
+            { species: "Ox", note: "Dental pad (pulvinus dentalis) occupies the upper incisor and canine region. Large torus linguae. Parotid gland is extensive. Soft palate is relatively short." },
             { species: "Horse", note: "Has upper incisors. Very long, fleshy soft palate — obligate nasal breather. Cannot vomit due to strong cardiac sphincter." },
             { species: "Dog", note: "Has both upper and lower incisors. Soft palate is short. Vomiting reflex is well developed." }
         ],
@@ -41,8 +41,8 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p><b>Tooth Structure:</b> Crown (above gum) + Root (in alveolus). Tissues: enamel (hardest), dentine, cementum, pulp (with vessels & nerves).</p>
         <p><b>Types of Teeth:</b> Incisors (I) for cutting; Canines (C) for tearing; Premolars (P) + Molars (M) for grinding (cheek teeth).</p>
         <p><b>Hypsodont vs Brachydont:</b><br>
-        • <b>Hypsodont</b> (high-crowned, continuous eruption) — horse, ruminants, rabbit. Adapted to abrasive plant diet.<br>
-        • <b>Brachydont</b> (low-crowned, no continuous eruption) — dog, cat, pig, human.</p>
+        • <b>Hypsodont</b> (high-crowned) — horse and ruminants; equine cheek teeth undergo prolonged eruption from a finite reserve crown. Rabbits have aradicular, continuously growing teeth.<br>
+        • <b>Brachydont</b> (low-crowned) — dog, cat, pig and human.</p>
         <p><b>OX DENTAL FORMULA:</b><br>
         Deciduous: 2(Di 0/4, Dc 0/0, Dp 3/3) = 20 teeth.<br>
         Permanent: 2(I 0/3, C 0/1, P 3/3, M 3/3) = 32 teeth.<br>
@@ -61,12 +61,12 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • Beyond 5 years — wear pattern of incisors used; 'leveling' progresses from medial to lateral with age.</p>
         <p><b>AGE DETERMINATION BY DENTITION (Horse) — 'Galvayne's groove' on the upper corner incisor + cup wear pattern:</b><br>
         • Cups disappear from lower I1 at ~6 yrs, I2 at ~7, I3 at ~8 ('smooth mouth' at 9).<br>
-        • Galvayne's groove appears at corner of upper I3 at 10 yrs, halfway down at 15, all the way down at 20, fades by 30.</p>
+        • Galvayne's groove may appear near 10 years, extend approximately halfway by 15 and along the tooth by 20, but its timing is variable and must not be used as an exact age determination.</p>
         <p><b>AGE DETERMINATION (Dog):</b><br>
         Deciduous teeth erupt 3-6 weeks. Permanent: incisors at 3-5 months, canines at 5-6 months, premolars 4-6 months, molars 5-7 months. After 1 year — wear pattern of incisor cusps (cusps level by 4-5 yrs).</p>`,
         comparative: [
             { species: "Ox", note: "32 permanent teeth. NO upper incisors. Hypsodont cheek teeth. 'Full mouth' at ~4 years." },
-            { species: "Horse", note: "36-44 teeth (variable). All hypsodont. Galvayne's groove for age." },
+            { species: "Horse", note: "Usually 36-44 teeth depending on sex and presence of wolf/canine teeth. Incisors and cheek teeth are hypsodont; Galvayne's groove provides only an approximate age estimate." },
             { species: "Dog", note: "42 teeth, brachydont. Carnassial teeth = upper P4 + lower M1 (shearing pair)." },
             { species: "Pig", note: "44 teeth. Tusks = canines (continuous growth in boar). 'Needle teeth' in piglets often clipped." }
         ],
@@ -87,7 +87,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p><b>SOFT PALATE (Palatum molle / Velum palatinum):</b><br>
         • Muscular curtain extending caudally from the hard palate.<br>
         • Separates nasopharynx (above) from oropharynx (below).<br>
-        • Free caudal edge has the <b>uvula</b> (small in domestic species) and palatoglossal/palatopharyngeal arches.<br>
+        • Domestic mammals generally lack a distinct human-like <b>uvula</b>; the caudal free border continues into the palatoglossal and palatopharyngeal arches.<br>
         • Muscles: tensor veli palatini, levator veli palatini, palatinus, palatoglossus, palatopharyngeus.<br>
         • <b>Length matters!</b> Horse soft palate is very long → reaches epiglottis caudally → palate seals the oropharynx, making horse an obligate nasal breather (cannot mouth-breathe even during exercise).</p>
         <p><b>TONGUE (Lingua):</b><br>
@@ -111,7 +111,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • <b>Crossing of pathways</b>: respiratory tract crosses the digestive tract at the pharynx — the epiglottis covers the larynx during swallowing.</p>`,
         comparative: [
             { species: "Ox", note: "Torus linguae present. Lenticular papillae on torus. Soft palate short." },
-            { species: "Horse", note: "Very long soft palate — locked over the epiglottis → obligate nasal breather. Soft palate displacement (DDSP) is a performance-limiting condition." },
+            { species: "Horse", note: "Long soft palate; the epiglottis normally lies dorsal to its caudal margin, producing obligate nasal breathing. Dorsal displacement of the soft palate (DDSP) is abnormal and can limit performance." },
             { species: "Dog", note: "Sensitive cooling tongue (panting). Brachycephalics have elongated soft palate → BOAS." },
             { species: "Cat", note: "Filiform papillae heavily keratinized → sandpaper tongue for grooming and stripping flesh." }
         ],
@@ -121,7 +121,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         title: "Salivary Glands (Parotid, Mandibular, Sublingual)",
         desc: `<b>3 Major Pairs:</b><br>
         • <b>Parotid Gland</b> — largest in horse and ox; lies caudal to mandibular ramus; serous secretion.<br>
-          – Duct: <b>Stensen's (Parotid) duct</b> — opens opposite upper P3-P4 in oral vestibule.<br>
+          – Duct: <b>Stensen's (parotid) duct</b> — opens on a parotid papilla in the oral vestibule; the cheek-tooth landmark varies by species.<br>
         • <b>Mandibular Gland</b> — under the angle of jaw; mixed seromucous.<br>
           – Duct: <b>Wharton's duct</b> — opens at sublingual caruncle.<br>
         • <b>Sublingual Gland</b> — under tongue; mucous.<br>
@@ -134,12 +134,12 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p><b>1. PAROTID GLAND (Glandula parotis):</b><br>
         • Largest salivary gland in horse and ox.<br>
         • Located in the parotid region — caudal & ventral to the ear, behind the ramus of mandible.<br>
-        • Type: <b>Serous</b> (watery, enzyme-poor in ox; rich in amylase in horse).<br>
+        • Type: <b>Serous</b>. Salivary alpha-amylase can be measured in horses, but saliva is not taught as a major site of equine starch digestion.<br>
         • <b>Stenson's duct (Parotid duct, ductus parotideus)</b>:<br>
           – Crosses ventral border of mandible alongside facial artery & vein.<br>
           – Ascends on lateral surface of masseter.<br>
-          – Pierces buccinator muscle to open into oral vestibule opposite the <b>upper 3rd-4th cheek tooth (P3-P4 in ox)</b>.<br>
-        • <b>Surgical importance:</b> Stenson's duct can be ligated for parotid fistula. Course passes facial nerve & vessels at mandible — risk during dehorning.<br><br>
+          – Pierces the buccinator to open on the parotid papilla; in cattle the opening is commonly described near the upper fifth cheek-tooth region, with species variation.<br>
+        • <b>Surgical importance:</b> The facial course of the duct must be protected during surgery for parotid fistula and other procedures involving the cheek.<br><br>
         <b>2. MANDIBULAR GLAND (Glandula mandibularis):</b><br>
         • Located ventral to parotid, in intermandibular space.<br>
         • Type: <b>Seromucous</b> (mixed).<br>
@@ -157,10 +157,10 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • Ox: ~100-150 L/day (mostly parotid, alkaline, buffers rumen).<br>
         • Horse: ~10-12 L/day.<br>
         • Dog: ~1 L/day.<br>
-        • Saliva = water (99%) + bicarbonate (buffer) + amylase + mucin + lysozyme + immunoglobulins.</p>
+        • Saliva is principally water and contains species-dependent bicarbonate, mucins, antimicrobial factors, immunoglobulins and variable enzyme activity.</p>
         <p><b>FUNCTIONS:</b><br>
         1. Lubrication of food → easier swallowing.<br>
-        2. Digestion (amylase in horse/dog; minimal in ox).<br>
+        2. Lubrication and buffering; measurable salivary alpha-amylase in horse and dog should not be presented as a major established oral digestive pathway.<br>
         3. Buffering — bicarbonate stabilises rumen pH.<br>
         4. Antibacterial (lysozyme + IgA).<br>
         5. Cooling (panting in dog evaporates saliva).<br>
@@ -182,7 +182,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <br>
         <b>Trachea:</b> Cartilaginous tube; in ox ~50 incomplete C-rings; runs in mid-line of neck. <b>Tracheotomy</b> site = mid-cervical region between 3rd & 5th tracheal rings.<br>
         <br>
-        <b>Oesophagus:</b> Muscular tube; lies on left of trachea in neck, then crosses to right. Cervical → thoracic → abdominal parts; pierces oesophageal hiatus of diaphragm.`,
+        <b>Oesophagus:</b> Muscular tube; in cattle it deviates to the left of the trachea in the cervical region and returns toward the median plane caudally. It has cervical, thoracic and short abdominal parts and passes through the oesophageal hiatus.`,
         eliteDesc: `<h3>LARYNX, TRACHEA & OESOPHAGUS</h3>
         <p><b>I. LARYNX (Box of Voice):</b><br>
         Located at the entrance of the lower respiratory tract, in the throat. Functions: airway, voice production (phonation), protection of airway during swallowing (cough reflex).</p>
@@ -203,8 +203,8 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p><b>II. TRACHEA:</b><br>
         Tube carrying air from larynx to bronchi. Walls = ~50 incomplete cartilage C-rings (open dorsally, closed by tracheal muscle), connected by annular ligaments.<br>
         • Lined by ciliated pseudostratified columnar epithelium with goblet cells (mucociliary clearance).<br>
-        • Course: cervical (palpable in jugular furrow) → thoracic (mediastinum) → bifurcation at carina (T5-T6).<br>
-        • Bovine + porcine specialty: <b>Tracheal bronchus</b> — extra bronchus from trachea to right cranial lobe (proximal to bifurcation).<br>
+        • Course: cervical (ventral, near the midline) → thoracic (mediastinum) → bifurcation at the carina; vertebral level varies with species and position.<br>
+        • Ruminant + porcine feature: <b>Tracheal bronchus</b> — a bronchus arising proximal to the bifurcation and supplying the right cranial lung lobe.<br>
         • <b>Tracheotomy / Tracheostomy</b>: Mid-cervical region, ventral midline, between 3rd and 5th tracheal rings — emergency airway.</p>
         <p><b>III. OESOPHAGUS:</b><br>
         Muscular tube from pharynx to stomach. Begins dorsal to larynx, descends initially DORSAL to trachea, then crosses to the LEFT side of trachea in the neck, returns to mid-line in the thorax (above heart), pierces the diaphragm at the <b>oesophageal hiatus</b>.<br>
@@ -221,18 +221,17 @@ atlasData["Head & Neck"]["Splanchnology"].push(
     {
         title: "Endocrine of Head & Neck: Thyroid & Parathyroid",
         desc: `<b>Thyroid Gland:</b><br>
-        • Two lateral lobes (right + left) connected by isthmus, located on either side of trachea, just caudal to larynx (5th-6th tracheal ring in ox).<br>
+        • Right and left lobes lie beside the cranial cervical trachea; isthmus development and exact tracheal-ring level vary by species and individual.<br>
         • Produces <b>T3 (triiodothyronine), T4 (thyroxine)</b> — regulate metabolism. Calcitonin (from C-cells) lowers blood Ca²⁺.<br>
         <br>
         <b>Parathyroid Glands:</b><br>
-        • Small (rice-grain sized); paired; secrete <b>PTH (parathormone)</b> — raises blood Ca²⁺.<br>
-        • <b>External parathyroid (Cranial):</b> usually outside thyroid capsule, near common carotid.<br>
-        • <b>Internal parathyroid (Caudal):</b> embedded in thyroid tissue.<br>
+        • Small glands that secrete <b>PTH (parathormone)</b>, increasing blood Ca²⁺. Number, position and size vary by species.<br>
+        • <b>External</b> and <b>internal</b> describe position relative to thyroid tissue/capsule; they must not be treated as universal synonyms for cranial and caudal.<br>
         <br>
         <b>Clinical:</b> Iodine deficiency → goiter (visible enlargement). Parathyroid tumours → hyperparathyroidism → hypercalcaemia.`,
         eliteDesc: `<h3>THYROID & PARATHYROID GLANDS</h3>
         <p><b>THYROID GLAND (Glandula thyreoidea):</b><br>
-        Located on both sides of the trachea, just caudal to the larynx (at the level of the first few tracheal rings — typically 5th-6th in ox). Two lateral lobes connected ventrally by a thin isthmus (well-developed in dog, narrow in horse, may be cord-like in ox).</p>
+        Located beside the cranial cervical trachea. Exact level, shape and isthmus development vary among cattle, horse, pig and carnivores and should be learned species-specifically.</p>
         <p><b>Histology:</b> Built of follicles — spherical structures lined by follicular cells (synthesise T3/T4 stored as thyroglobulin in colloid lumen). Between follicles: parafollicular ('C') cells secreting calcitonin.</p>
         <p><b>Hormones:</b><br>
         • <b>T4 (thyroxine)</b> + <b>T3 (triiodothyronine)</b> — regulate basal metabolic rate, growth, development. Iodine essential.<br>
@@ -240,9 +239,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p><b>Vasculature:</b> Cranial thyroid artery (from common carotid) + caudal thyroid artery (often inconstant).<br>
         Innervation: cervical sympathetic + parasympathetic via vagus.</p>
         <p><b>PARATHYROID GLANDS:</b><br>
-        Tiny, paired glands (~grain of rice). Two pairs in domestic species:<br>
-        • <b>External (cranial) parathyroid</b> — usually OUTSIDE thyroid capsule, in carotid sheath area, lateral to common carotid; the more accessible.<br>
-        • <b>Internal (caudal) parathyroid</b> — usually EMBEDDED in thyroid tissue.</p>
+        Domestic species generally possess external and internal parathyroid tissue, but number and topography vary. <b>External</b> glands lie separate from thyroid parenchyma and may be located at a distance (notably in cattle); <b>internal</b> glands are embedded in or closely applied to thyroid tissue. Cranial/caudal developmental origin should be described separately.</p>
         <p><b>Hormone:</b> Parathormone (PTH) — RAISES blood Ca²⁺ by:<br>
         1. Mobilising Ca²⁺ from bone (osteoclast activation).<br>
         2. Increasing Ca²⁺ reabsorption in kidney.<br>
@@ -261,7 +258,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         desc: `<b>EYE (Bulbus oculi):</b><br>
         • 3 tunics — fibrous (sclera + cornea), vascular (uvea: choroid + ciliary body + iris), nervous (retina).<br>
         • Lens, vitreous + aqueous humour.<br>
-        • <b>Tapetum lucidum</b> — reflective layer in choroid → eye-shine in domestic animals (NOT in pig/human).<br>
+        • <b>Tapetum lucidum</b> — reflective choroidal specialization in many domestic mammals; absent in pigs and birds as well as humans.<br>
         • Eyelids (upper, lower, third) + lacrimal apparatus + extra-ocular muscles (CN III, IV, VI).<br>
         <br>
         <b>EAR:</b><br>
@@ -276,7 +273,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • <b>Cornea</b> — transparent, anterior 1/6; main refractive surface.<br>
         • Limbus = junction between sclera and cornea.</p>
         <p><b>2. Vascular Tunic (Uvea, middle):</b><br>
-        • <b>Choroid</b> — pigmented, vascular layer; contains <b>tapetum lucidum</b> (a reflecting iridescent area at the dorsal fundus, made of crystals — gives 'eye shine' in domestic animals at night). Tapetum is ABSENT in pig and human.<br>
+        • <b>Choroid</b> — pigmented, vascular layer. In species with a tapetum lucidum, the dorsal fundus is reflective; the tapetum is fibrous in many herbivores and cellular in carnivores. It is absent in pigs and birds.<br>
         • <b>Ciliary body</b> — produces aqueous humour; ciliary muscle controls lens shape (accommodation).<br>
         • <b>Iris</b> — pigmented diaphragm; central pupil. Sphincter pupillae (CN III/parasympathetic) = constricts; dilator pupillae (sympathetic) = dilates.</p>
         <p><b>3. Nervous Tunic (Retina):</b><br>
@@ -289,7 +286,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • <b>Vitreous body</b> — gel filling the space between lens and retina.<br>
         • <b>Eyelids</b> — upper, lower, and a <b>third eyelid (nictitating membrane)</b> at medial canthus.<br>
         • <b>Lacrimal apparatus</b> — lacrimal gland (above eye) → tears → lacrimal puncta (medial canthus) → nasolacrimal duct → nasal cavity.<br>
-        • <b>Extraocular muscles</b> — 4 recti (dorsal, ventral, medial, lateral), 2 obliques, retractor bulbi (only in domestic animals — pulls eye into orbit).<br>
+        • <b>Extraocular muscles</b> — 4 recti (dorsal, ventral, medial, lateral), 2 obliques and retractor bulbi. The retractor bulbi occurs in many non-primate mammals and retracts the globe.<br>
         Innervation: CN III (oculomotor — most), CN IV (trochlear — dorsal oblique only), CN VI (abducens — lateral rectus + retractor bulbi).</p>
         <p><b>II. EAR — THREE PARTS:</b></p>
         <p><b>1. External Ear (Auris externa):</b><br>
@@ -318,47 +315,8 @@ atlasData["Head & Neck"]["Splanchnology"].push(
 );
 
 
-// ---- THORAX > SPLANCHNOLOGY ----
-atlasData["Thorax"]["Splanchnology"].push(
-    {
-        title: "Respiratory System: Lungs & Pleura",
-        desc: `<b>Overview:</b><br>
-        • The lungs are the primary organs of respiration.<br>
-        • Ruminant lungs are <b>highly lobulated</b> (interlobular septa of connective tissue).<br>
-        • The <b>Tracheal Bronchus</b> (Bronchus trachealis) is a unique feature of the Ox and Pig — it directly supplies the right cranial lobe from the trachea, proximal to the bifurcation.<br>
-        • Pleural cavity contains a small amount of serous fluid for frictionless lung movement.`,
-        eliteDesc: `<h3>Thoracic Viscera: Pulmonology</h3>
-        <p>The bovine respiratory system is characterized by its high degree of <b>lobulation</b> and the presence of the <b>bronchus trachealis</b>. This extra bronchus arises from the trachea proximal to the carina and supplies the right cranial lobe, completely independently of the main bronchial tree.</p>
-        <p>This anatomical feature is clinically significant as it can be a site for localized infections (right cranial lobe pneumonia) or selective inhalation of foreign bodies during forced feeding or drenching.</p>
-        <p>The interlobular septa in cattle lungs are thick and visible on gross examination, making lobular pneumonia easy to identify at necropsy. The horse, by contrast, has very thin septa making true lobular pneumonia rare.</p>
-        <p>The bovine <b>pleural cavity</b> is divided by the mediastinum. Unlike in dogs, the two pleural cavities are more distinctly separated — right-sided effusion does not always affect the left side.</p>`,
-        comparative: [
-            { species: "Ox", note: "Tracheal bronchus present. Highly lobulated with thick interlobular septa. Right cranial lobe supplied directly from trachea." },
-            { species: "Horse", note: "No tracheal bronchus. Lungs are poorly lobulated (septa thin or absent). More susceptible to diffuse pneumonia." },
-            { species: "Pig", note: "Also has a tracheal bronchus, similar to the Ox. Three lobes on left, four on right (plus accessory/cardiac lobe)." },
-            { species: "Dog", note: "No tracheal bronchus. Three lobes on left (cranial, middle, caudal), four on right (cranial, middle, caudal, accessory)." }
-        ],
-        clinical: "<b>Enzootic Pneumonia in Calves:</b> Typically begins in the right cranial lobe, possibly due to the independent tracheal bronchus directing inhaled pathogens. <b>Auscultation Tip:</b> The right cranial lobe must be auscultated cranially and high on the thorax in cattle. <b>Pleuropneumonia:</b> Fibrinous exudate can seal the pleural surfaces — pathognomonic fibrous tags ('jellyfish') seen at necropsy."
-    },
-    {
-        title: "Cardiovascular System: The Bovine Heart",
-        desc: `<b>Overview:</b><br>
-        • Located in the middle mediastinum, with apex pointing ventrocaudally to the left.<br>
-        • Features <b>Ossa Cordis</b> (ossified cartilages at the aortic root) in older cattle — unique among domestic species.<br>
-        • Pericardium = fibrous outer layer + serous inner layer (visceral = epicardium).<br>
-        • The reticulum lies directly against the diaphragm, which is separated from the pericardium by a thin membrane.`,
-        eliteDesc: `<h3>Unique Bovine Cardiac Architecture</h3>
-        <p>The bovine heart is remarkable for the development of <b>Ossa Cordis</b> — one or two ossified nodules (formerly cartilaginous) located at the base of the aorta, adjacent to the aortic valve. These are pathognomonic of Bos taurus and are absent in all other domestic species. They are best palpated post-mortem at the aortic root.</p>
-        <p>The pericardium is attached ventrally to the sternum via the <b>sternopericardiac ligament</b>. The thin median partition between the pericardium and the diaphragm means that foreign bodies from the reticulum that penetrate the diaphragm have immediate access to the pericardial space.</p>
-        <p><b>Cardiac Position:</b> The bovine heart occupies the 3rd to 6th intercostal spaces, with the apex reaching to the left of the midsternal line. Auscultation: Left side (3rd-5th ICS, lower third) for mitral and aortic valves; right side (3rd-4th ICS) for tricuspid.</p>`,
-        comparative: [
-            { species: "Ox", note: "Ossa Cordis present at aortic root. Heart base at 3rd-6th ICS. Pericardium closely related to diaphragm and reticulum." },
-            { species: "Horse", note: "No Ossa Cordis. Aortic valve has three semilunar cusps. Large heart relative to body (up to 10 kg in Thoroughbreds)." },
-            { species: "Dog", note: "No Ossa Cordis in normal dogs (cats may have os cordis rarely). Heart is more globular. Rate 60-140 bpm." }
-        ],
-        clinical: "<b>Traumatic Reticulopericarditis (Hardware Disease):</b> Swallowed metal objects (wire, nails) settle in the reticulum, pierce the reticular wall and diaphragm, and reach the pericardial space. Causes septic pericarditis — 'washing machine' heart sounds on auscultation. Diagnosis: Grunt test, rumenocentesis, radiography. Treatment: Rumenotomy, magnets (prevention). <b>Endocarditis:</b> Bacterial infection of heart valves, often secondary to foot rot or septicemia."
-    }
-);
+// Thoracic lungs, pleura and heart are maintained in data-thorax.JS.
+// Do not append duplicate entries here; one canonical source prevents conflicting teaching.
 
 // ---- ABDOMEN > SPLANCHNOLOGY ----
 atlasData["Abdomen"]["Splanchnology"].push(
@@ -376,12 +334,12 @@ atlasData["Abdomen"]["Splanchnology"].push(
         <p><b>Omasum:</b> On the right side, spherical with leaf-like folds (laminae omasi) that trap and squeeze digesta. The omasal canal connects to the abomasum via the omasoabomasal orifice.</p>
         <p><b>Abomasum:</b> The 'true' stomach — glandular, secretes HCl and pepsin. Located on the ventral abdominal floor, right of midline. Can undergo displacement (LDA/RDA) in high-producing dairy cows.</p>`,
         comparative: [
-            { species: "Ox", note: "Four-compartment stomach. Rumen capacity ~150L. High salivary buffering capacity (150L/day alkaline saliva). Teat-canal reflex suckles milk past proventriculi directly to abomasum in calves." },
+            { species: "Ox", note: "Four-compartment stomach. Adult rumen capacity and saliva production vary with body size and diet. The reticular/oesophageal groove reflex directs suckled milk toward the abomasum in the calf." },
             { species: "Horse", note: "Simple single-compartment stomach (monogastric). Small capacity (~15L). Pyloric sphincter is strong — unable to vomit. Cecum and colon are massive (hindgut fermentation)." },
             { species: "Pig", note: "Monogastric with a well-developed diverticulum gastri. Gastric ulcers common near pars oesophagea." },
             { species: "Dog", note: "Simple stomach. Prone to gastric dilatation-volvulus (GDV) — stomach rotates on its axis, trapping gas. Emergency." }
         ],
-        clinical: "<b>Left Displacement of Abomasum (LDA):</b> Abomasum slips under rumen to lie between rumen and left abdominal wall — 'ping' on percussion-auscultation. Common in fresh dairy cows (high-grain diet). <b>Right Displacement / Volvulus (RDA/RVA):</b> More severe, abomasum rotates clockwise — emergency surgery. <b>Ruminal Bloat:</b> Frothy (legume) or free-gas (vagal indigestion) bloat — distension of left paralumbar fossa. <b>Vagal Indigestion:</b> Damage to vagal nerve branches disrupts reticulo-omasal flow — 'papple' shape (distended right flank from omasal/reticular impaction)."
+        clinical: "<b>Left displacement of abomasum:</b> The gas-filled abomasum moves between the rumen and left abdominal wall, producing a characteristic percussion-auscultation ping. <b>Right displacement/volvulus:</b> Volvulus compromises blood supply and is an emergency. <b>Ruminal tympany:</b> May be frothy or free-gas; free-gas tympany has several causes and is not synonymous with vagal indigestion. <b>Vagal indigestion:</b> Functional outflow failure produces variable abdominal distension patterns depending on the affected compartment and stage."
     },
     {
         title: "Digestive System: Small Intestine (Duodenum, Jejunum, Ileum)",
@@ -396,11 +354,11 @@ atlasData["Abdomen"]["Splanchnology"].push(
         eliteDesc: `<h3>Bovine Small Intestine</h3>
         <p>The bovine small intestine averages <b>40 metres</b> long with a small diameter (~5 cm). It lies almost entirely in the <b>right half</b> of the abdominal cavity because the massive rumen occupies the left.</p>
         <p><b>Duodenum (~1 m):</b> Begins at the pylorus on the right side, runs cranially, makes the <b>sigmoid (cranial) flexure</b>, then turns caudally as the descending duodenum along the right flank, crosses behind the root of the mesentery (caudal flexure), and returns cranially as the ascending duodenum to become the jejunum. The <b>major duodenal papilla</b> (bile duct opening) is in the proximal duodenum; the <b>minor duodenal papilla</b> (accessory pancreatic duct) opens further distally.</p>
-        <p><b>Jejunum:</b> The longest part, hanging in coils from a long mesentery on the right side. It is arranged peripherally around the <b>supraomental recess</b> (the pocket formed by the greater omentum). This anatomical arrangement is the basis for the surgical approach via the right flank.</p>
+        <p><b>Jejunum:</b> The longest part, hanging in coils from a long mesentery. In cattle most jejunal coils occupy the <b>supraomental recess</b> on the right, an arrangement relevant to a right-flank surgical approach.</p>
         <p><b>Ileum:</b> The short terminal segment that runs cranio-dorsally and opens into the cecum at the <b>ileocecal orifice</b>; the <b>ileocecal fold</b> (a peritoneal band from ileum to cecum) is the surgeon's landmark to identify the ileum during laparotomy.</p>
-        <p><b>Vasculature:</b> The entire small intestine is supplied by the <b>cranial mesenteric artery</b>; venous blood drains into the <b>portal vein</b> and goes first to the liver. Lymphatics drain to the <b>cranial mesenteric lymph nodes</b>.</p>`,
+        <p><b>Vasculature:</b> Most of the small intestine is supplied by the <b>cranial mesenteric artery</b>, while the proximal duodenum also receives celiac-derived cranial pancreaticoduodenal supply. Venous blood drains to the portal system; lymphatic drainage follows regional intestinal nodes.</p>`,
         comparative: [
-            { species: "Ox", note: "~40 m long. Small intestine on right side. Coils arranged peripherally around supraomental recess." },
+            { species: "Ox", note: "Length varies with size. Most jejunal coils lie on the right within the supraomental recess." },
             { species: "Horse", note: "Small intestine ~22 m. Duodenum forms a distinctive S-shape; jejunum is mobile and prone to volvulus → colic." },
             { species: "Dog", note: "Short small intestine (~4 m). Mobile mesentery — common site of intussusception in pups." },
             { species: "Pig", note: "Long, coiled small intestine. Spiral colon distinguishes pig from other species at necropsy." }
@@ -418,9 +376,9 @@ atlasData["Abdomen"]["Splanchnology"].push(
         • Rectum is covered later under pelvic viscera.`,
         eliteDesc: `<h3>Bovine Large Intestine</h3>
         <p><b>Cecum:</b> A blind tube ~75 cm long, lying in the dorsal right flank. The base receives the ileum and continues as the colon; the free apex points caudally. The cecum is the site of secondary microbial fermentation in ruminants.</p>
-        <p><b>Ascending Colon:</b> Has three parts — proximal loop, <b>spiral loop (ansa spiralis)</b>, and distal loop. The spiral loop is a flat disc-shaped coil with <b>centripetal turns</b> spiralling inward to a central flexure, then <b>centrifugal turns</b> spiralling back outward. This is <b>pathognomonic</b> for ruminants.</p>
+        <p><b>Ascending Colon:</b> Has proximal, spiral and distal loops. In ruminants the <b>spiral loop (ansa spiralis)</b> forms a relatively flat disc with centripetal turns, a central flexure and centrifugal turns. Pigs also have a spiral ascending colon, but it is cone-shaped rather than a flat ruminant disc.</p>
         <p><b>Transverse Colon:</b> Crosses the midline cranial to the root of the mesentery.</p>
-        <p><b>Descending Colon:</b> Continues into the pelvic cavity as the rectum. Forms the <b>sigmoid flexure</b> just before becoming rectum.</p>
+        <p><b>Descending Colon:</b> Passes caudally and continues at the pelvic inlet as the rectum; cattle do not possess a human-like sigmoid colon.</p>
         <p><b>Surgical importance:</b> Cecal dilatation/torsion in dairy cattle presents as right-sided ping. The right flank is the standard surgical window (cecotomy).</p>
         <p><b>Blood supply:</b> Cranial mesenteric artery (cecum, ascending, transverse) and caudal mesenteric artery (descending colon, rectum).</p>`,
         comparative: [
@@ -435,7 +393,7 @@ atlasData["Abdomen"]["Splanchnology"].push(
         title: "Digestive Accessory: Liver",
         desc: `<b>High-Yield Points:</b><br>
         • Largest gland in body. Lies almost entirely on the <b>RIGHT side</b> in ox (pushed by rumen).<br>
-        • Ox liver = <b>undivided</b> grossly — has only shallow fissures (no true lobes); divided into right, left, quadrate, caudate lobes.<br>
+        • Bovine liver is <b>poorly externally lobated</b>: right, left, quadrate and caudate lobes are recognized, but fissures are shallow.<br>
         • <b>Caudate lobe</b> bears prominent <b>renal impression</b> (from right kidney) — diagnostic of ruminants.<br>
         • <b>Gall bladder PRESENT</b> in ox, sheep, dog (ABSENT in horse).<br>
         • <b>Porta hepatis</b>: entry of portal vein, hepatic artery; exit of bile duct.<br>
@@ -460,19 +418,20 @@ atlasData["Abdomen"]["Splanchnology"].push(
         • Mixed exocrine + endocrine gland.<br>
         • In ox: lies in <b>right side</b>, related to dorsal surface of liver and right kidney; partly within the lesser omentum.<br>
         • Two lobes (right + left) joined by a body — wraps around the portal vein.<br>
-        • <b>Ducts:</b> Ox typically has only the <b>accessory pancreatic duct</b> opening at the minor duodenal papilla. (Horse: only main duct. Dog: usually both.)<br>
+        • <b>Ducts:</b> Cattle and pigs usually drain through the <b>accessory pancreatic duct</b>; sheep and goats usually through the pancreatic duct; horses commonly have both ducts, and dogs commonly have both with individual variation.<br>
         • Endocrine = <b>Islets of Langerhans</b> → insulin (β cells), glucagon (α cells).`,
         eliteDesc: `<h3>Pancreas</h3>
         <p>The pancreas is a soft, lobulated, pale yellow-pink gland with both exocrine and endocrine roles. The <b>exocrine portion</b> (>98% by mass) secretes pancreatic juice (trypsin, chymotrypsin, lipase, amylase). The <b>endocrine portion</b> consists of microscopic islets (Islets of Langerhans) producing insulin, glucagon, somatostatin, and pancreatic polypeptide.</p>
         <p><b>Topography in Ox:</b> The pancreas lies on the right side of the abdomen, in the lesser omentum, attached to the dorsal surface of the liver and the right kidney. It is roughly L-shaped — a right lobe extending caudally, and a left lobe extending toward the spleen.</p>
         <p><b>Ducts:</b><br>
-        • <b>Pancreatic duct (main):</b> Drains with bile duct at the major duodenal papilla — present in horse and many dogs.<br>
-        • <b>Accessory pancreatic duct:</b> Opens at the minor duodenal papilla, more distal. In ox, only this duct is functional.</p>`,
+        • <b>Pancreatic duct:</b> Opens at the major duodenal papilla, often near the bile duct.<br>
+        • <b>Accessory pancreatic duct:</b> Opens separately at the minor duodenal papilla. Presence and dominance of the two ducts are species-dependent.</p>`,
         comparative: [
-            { species: "Ox", note: "Only the accessory pancreatic duct functional. Opens at minor duodenal papilla." },
-            { species: "Horse", note: "Only the main pancreatic duct (no accessory) — drains with bile duct." },
-            { species: "Dog", note: "Both ducts usually present — main duct opens with bile, accessory duct opens separately." },
-            { species: "Pig", note: "Only accessory duct present (like ox). Pancreas extracts historically used for insulin commercial production." }
+            { species: "Ox", note: "Usually the accessory pancreatic duct is the principal/only patent outlet and opens at the minor duodenal papilla." },
+            { species: "Sheep/Goat", note: "Usually the pancreatic duct is present and the accessory duct is absent." },
+            { species: "Horse", note: "Both pancreatic and accessory pancreatic ducts are commonly present." },
+            { species: "Dog", note: "Both ducts are commonly present, although the pancreatic duct may be small or absent in some individuals." },
+            { species: "Pig", note: "Usually the accessory pancreatic duct is present. Porcine pancreatic tissue was historically used in insulin production; this is historical context, not a treatment recommendation." }
         ],
         clinical: "<b>Acute Pancreatitis (dogs):</b> Classic 'praying' posture with cranial abdominal pain — often after fatty meal. <b>Diabetes Mellitus:</b> Loss of β-cell function (Type 1) or insulin resistance (Type 2) — common in older cats and dogs. <b>Exocrine Pancreatic Insufficiency (EPI):</b> German Shepherds — chronic diarrhoea with undigested food."
     },
@@ -501,15 +460,15 @@ atlasData["Abdomen"]["Splanchnology"].push(
         title: "Urinary System: Kidneys & Ureters",
         desc: `<b>High-Yield Points:</b><br>
         • Two retroperitoneal organs in sublumbar region.<br>
-        • <b>Ox kidney = LOBULATED ('bunch of grapes')</b> — only ruminants have this externally lobed kidney.<br>
+        • <b>Cattle kidney = externally lobulated</b>; sheep and goat kidneys are externally smooth.<br>
         • Right kidney: more cranial, fixed, contacts caudate lobe of liver. Left kidney: more caudal, MOBILE — pushed across midline by rumen ('floating' or wandering left kidney).<br>
         • Functional unit = <b>nephron</b>. No single renal pelvis in ox — calyces drain directly into ureter.<br>
         • Ureter passes caudally over psoas muscles → opens into bladder at trigone.<br>
         • Palpable per rectum in cow (left kidney especially).`,
         eliteDesc: `<h3>Ruminant Urinary System</h3>
-        <p><b>Bovine Kidneys:</b> The most distinctive feature is <b>external lobation</b> — the kidney surface is divided into 15-20 lobes by deep grooves, giving a 'bunch of grapes' appearance. This is unique to ruminants among domestic species.</p>
+        <p><b>Bovine Kidneys:</b> In cattle, fetal lobation persists externally, producing approximately 15-20 visible lobes separated by grooves. This is characteristic of cattle among the principal domestic ruminants; sheep and goat kidneys are externally smooth.</p>
         <p><b>Right kidney:</b> Lies under the last rib and first 2-3 lumbar transverse processes; relatively fixed; bears a clear impression on the caudate lobe of the liver.</p>
-        <p><b>Left kidney:</b> Suspended by a long mesoduodenum/peritoneal fold and is pushed across the midline by the dorsal sac of the rumen — hence called the <b>'wandering' or floating kidney</b>. It typically lies just right of the midline at the level of L3-L5 and is the kidney that can be readily palpated per rectum in the cow.</p>
+        <p><b>Left kidney:</b> It remains retroperitoneal but is displaced to the right of the median plane by the rumen, so its position is less fixed than that of the right kidney. It is commonly palpable per rectum in the cow; exact vertebral position varies with rumen fill and body size.</p>
         <p><b>Internal Structure:</b> Ox kidney is <b>multipyramidal</b> — many renal pyramids, each with its own papilla draining into a calyx. There is <b>NO renal pelvis</b> in ox; instead the calyces directly converge to form the ureter.</p>
         <p><b>Ureter:</b> Long muscular tube descending from the renal hilus along the dorsal abdominal wall (retroperitoneal), crosses the pelvic brim, and enters the dorsal bladder wall obliquely at the <b>trigone</b> — this oblique entry acts as a one-way valve preventing reflux during bladder distension.</p>`,
         comparative: [
@@ -532,12 +491,12 @@ atlasData["Abdomen"]["Splanchnology"].push(
         • Innervation: genitofemoral, ilioinguinal, perineal nerves.`,
         eliteDesc: `<h3>The Bovine Udder</h3>
         <p>The udder of the cow is a single mass formed by <b>4 fused mammae</b>, each anatomically and functionally <b>independent</b>: milk produced in one quarter cannot pass to another. The 4 quarters are arranged as 2 fore-quarters and 2 hind-quarters; the hind quarters are typically larger and produce ~60% of the milk.</p>
-        <p><b>Internal Architecture of one quarter:</b> Alveoli → small ducts → <b>lactiferous (gland) sinus</b> → <b>teat sinus</b> → <b>streak canal (papillary duct)</b> → exterior. The streak canal is closed by the <b>Sphincter of Fürstenberg</b> — a smooth muscle ring whose tightness determines milking ease and resistance to ascending mastitis.</p>
+        <p><b>Internal Architecture of one quarter:</b> Alveoli → small ducts → <b>lactiferous (gland) sinus</b> → <b>teat sinus</b> → <b>streak canal (papillary duct)</b> → exterior. A smooth-muscle teat sphincter surrounds the streak canal. <b>Fürstenberg's rosette</b> is the mucosal fold complex at the proximal end of the teat canal, not the sphincter itself.</p>
         <p><b>Suspensory Apparatus:</b><br>
         • <b>Median suspensory ligament</b> (paired): elastic (yellow elastic tissue), in the midline — allows the udder to expand and recoil with milk volume.<br>
         • <b>Lateral suspensory ligaments:</b> fibrous (collagen), from sub-pelvic tendon — provide rigid lateral support.<br>
         Failure of these ligaments → <b>broken/pendulous udder</b> in old cows.</p>
-        <p><b>Vasculature:</b> The principal artery is the <b>external pudendal artery</b>, which enters the udder through the <b>inguinal canal</b>. Venous drainage is partly via the same route (deep) and partly via the <b>cranial superficial epigastric vein = 'milk vein'</b> — the prominent S-shaped vein on the ventral abdomen of the dairy cow, used for IV injection in some cases.</p>
+        <p><b>Vasculature:</b> The principal artery is the <b>external pudendal artery</b>, which reaches the udder through the inguinal canal. Venous drainage includes external pudendal and subcutaneous abdominal pathways. The prominent subcutaneous abdominal <b>'milk vein'</b> should not be taught as a routine IV-access site; the jugular vein is the standard large-animal venous-access site.</p>
         <p><b>Lymphatics:</b> Drain to the <b>supramammary (mammary) lymph nodes</b> located dorsocaudal to the gland — these are routinely palpated in cases of mastitis.</p>`,
         comparative: [
             { species: "Cow", note: "4 quarters, 4 teats, 1 streak canal each. Functionally independent." },
@@ -581,12 +540,12 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
         • <b>Pelvic cavity</b> = bony funnel from pelvic inlet (sacral promontory + ilium + pubis) to pelvic outlet.<br>
         • <b>Roof</b>: sacrum + first few coccygeal vertebrae.<br>
         • <b>Floor</b>: pubis + ischium (pelvic symphysis).<br>
-        • <b>Side walls</b>: shafts of ilium + ischium + sacrosciatic ligament.<br>
+        • <b>Side walls</b>: pelvic surfaces of the ilium and ischium together with the sacrosciatic ligament and associated soft tissues.<br>
         • <b>Pelvic inlet (anterior aperture):</b> sacral promontory above, pectineal line of pubis below — measured for pelvimetry / dystocia prediction.<br>
         • Peritoneum forms pouches: <b>pararectal, rectovaginal/rectogenital, vesicogenital, pubovesical fossae</b>.<br>
         • Most of the pelvic viscera (rectum, bladder, urethra, accessory glands) become <b>retroperitoneal</b> caudally.`,
         eliteDesc: `<h3>The Pelvic Cavity</h3>
-        <p>The pelvic cavity is the funnel-shaped space inside the bony pelvis. Its <b>inlet (anterior aperture)</b> is bounded by the sacral promontory (dorsally), the shafts of ilium (laterally), and the pectineal line of pubis (ventrally) — through this opening the fetus must pass during parturition, and its diameters (conjugate, transverse, oblique) are routinely measured for pelvimetry in heifers.</p>
+        <p>The pelvic cavity is the space within the bony pelvis. Its <b>inlet (cranial pelvic aperture)</b> is circumscribed by the pelvic brim: the sacral promontory dorsally, the arcuate/iliopectineal lines laterally and the cranial border of the pubis ventrally. Its conjugate, transverse and oblique diameters are relevant to pelvimetry.</p>
         <p>The <b>outlet (posterior aperture)</b> is bounded by the first coccygeal vertebra (dorsally), the sacrosciatic ligaments (laterally), and the ischial arch (ventrally).</p>
         <p><b>Peritoneal Reflections:</b> The peritoneum entering the pelvic cavity from the abdomen forms several pouches:<br>
         • <b>Pararectal fossae</b> — beside the rectum.<br>
@@ -629,7 +588,7 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
         desc: `<b>High-Yield Points:</b><br>
         • <b>Bladder</b> lies on the floor of the pelvic cavity (when empty) and extends into the abdomen when full.<br>
         • Parts: apex (cranial), body, neck (caudal); <b>trigone</b> = triangular area where 2 ureters enter and urethra exits.<br>
-        • Held by 3 ligaments: <b>median + 2 lateral umbilical ligaments</b> (vestiges of fetal urachus & umbilical arteries).<br>
+        • Held by a <b>median vesical ligament</b> containing the urachal remnant and paired <b>lateral vesical ligaments</b> containing the round ligaments/remnants of the umbilical arteries.<br>
         • <b>Cystotomy site</b> (cattle): cranial midline of bladder via paramedian/ventral midline approach.<br>
         • <b>Urethra (Pelvic part)</b>:<br>
           – <b>Female:</b> short (~10 cm), opens at vestibule. Suburethral diverticulum in cow — catches catheter.<br>
@@ -640,22 +599,22 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
         <p><b>Ligaments:</b><br>
         • <b>Median ligament</b> (vestige of urachus) attaches bladder apex to ventral abdominal wall.<br>
         • <b>Lateral ligaments (× 2)</b> contain the round ligaments of the bladder (remnants of umbilical arteries).</p>
-        <p><b>Female Urethra:</b> Short tube (~10 cm in cow) running from bladder neck to the floor of the vestibule, where it opens at the <b>external urethral orifice</b>. Just caudal to this opening is the <b>suburethral diverticulum</b> — a blind pouch unique to cow that catches a urinary catheter (must lift the catheter dorsally to enter the urethra).</p>
+        <p><b>Female Urethra:</b> A short tube running from the bladder neck to the vestibular floor. A <b>suburethral diverticulum</b> lies immediately caudal to the external urethral opening in female ruminants and is also described in the sow; its size and catheterization importance vary by species.</p>
         <p><b>Male Urethra:</b> Much longer, divided into:<br>
         • <b>Pelvic part:</b> from bladder neck through the pelvic cavity, surrounded by accessory glands and the urethralis muscle. Contains the <b>colliculus seminalis</b> where deferent ducts and vesicular gland ducts open.<br>
         • <b>Penile part:</b> exits over the ischial arch and runs through the penis to the external urethral orifice. In bull, ram, boar — bears a <b>sigmoid flexure</b> for retraction of penis.</p>`,
         comparative: [
             { species: "Cow", note: "Has suburethral diverticulum in vestibule — must elevate catheter tip to enter urethra." },
             { species: "Mare", note: "Urethra opens directly without diverticulum — easy catheterization." },
-            { species: "Steer/Wether", note: "Male urethra long with sigmoid flexure → prone to obstruction by uroliths. Sites of lodging: sigmoid flexure, ischial arch, distal urethral process." },
+            { species: "Steer/Wether", note: "The long narrow male urethra predisposes to obstruction. The sigmoid flexure is important in cattle and small ruminants; the distal urethral process is a classic obstruction site specifically in rams and wethers." },
             { species: "Dog", note: "Os penis with urethral groove — uroliths get lodged at the caudal end of os penis." }
         ],
-        clinical: "<b>Cystotomy:</b> Surgical opening of bladder for cystic calculi — paramedian/ventral midline approach in male cattle. <b>Catheterization (cow):</b> Lift the catheter over the suburethral diverticulum; rectal palpation can guide. <b>Obstructive Urolithiasis (Water Belly):</b> In castrated male ruminants, struvite stones lodge at sigmoid flexure or urethral process → ruptured bladder = 'water belly'. <b>Urethrotomy:</b> Surgical incision through perineum/scrotum to relieve obstruction. <b>Patent Urachus:</b> Foal/calf — urine leaks from umbilicus."
+        clinical: "<b>Cystotomy:</b> Surgical access to the bladder is selected according to species, sex and lesion. <b>Catheterization (cow):</b> Direct the catheter dorsally past the suburethral diverticulum. <b>Obstructive Urolithiasis:</b> Calculus composition varies with diet and production system. Obstruction sites include the sigmoid flexure and, in small ruminants, the urethral process; rupture can cause uroperitoneum or subcutaneous urine accumulation. <b>Patent Urachus:</b> Foal/calf — urine may leak from the umbilicus."
     },
     {
         title: "Male Reproductive — Pelvic & External Genitalia",
         desc: `<b>High-Yield Points:</b><br>
-        • <b>Testis</b> in scrotum (extra-pelvic) — spermatogenesis at 4°C below body temp. Held by spermatic cord.<br>
+        • <b>Testis</b> lies in the scrotum, where counter-current heat exchange, scrotal skin and muscles maintain a species- and environment-dependent temperature below core body temperature.<br>
         • <b>Epididymis</b> (head, body, tail) — sperm maturation/storage.<br>
         • <b>Ductus (Vas) Deferens</b> ascends in spermatic cord → through inguinal canal → to pelvic urethra at colliculus seminalis.<br>
         • <b>Accessory sex glands</b> (in pelvis, surrounding pelvic urethra):<br>
@@ -663,9 +622,9 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
           – <b>Prostate</b> — body + disseminate part.<br>
           – <b>Bulbourethral (Cowper's)</b> — paired, near ischial arch.<br>
         • <b>Penis (Bull):</b> <b>Fibroelastic</b> with permanent <b>sigmoid flexure</b> (caudal to scrotum). Erection by straightening of flexure (limited blood swell).<br>
-        • <b>Spermatic cord</b>: vas deferens, testicular artery (pampiniform plexus → counter-current heat exchange), vein, lymphatics, nerves, cremaster muscle.`,
+        • <b>Spermatic cord</b>: ductus deferens, testicular artery, pampiniform venous plexus, lymphatics and autonomic nerves. The coiled artery and surrounding venous plexus provide counter-current heat exchange; the cremaster and vaginal tunics are coverings/associated structures rather than vessels of the plexus.`,
         eliteDesc: `<h3>Male Reproductive System</h3>
-        <p><b>Testes:</b> Paired oval glands in the scrotum, the position keeps them ~4°C below core body temperature — required for spermatogenesis. The <b>tunica albuginea</b> covers each testis; <b>mediastinum testis</b> runs through the centre and gives rise to the <b>rete testis</b> connecting seminiferous tubules to efferent ductules.</p>
+        <p><b>Testes:</b> Paired gonads in the scrotum. Several thermoregulatory mechanisms maintain a temperature below core temperature, with the difference varying by species and conditions. The <b>tunica albuginea</b> forms septa and the mediastinum; seminiferous tubules drain through straight tubules into the <b>rete testis</b>, then efferent ductules.</p>
         <p><b>Epididymis:</b> Closely applied to one side of testis. Three parts: head (caput), body (corpus), tail (cauda). Sperm undergo maturation here; the cauda is the main storage site.</p>
         <p><b>Ductus (Vas) Deferens:</b> Continues from cauda epididymis, ascends inside the <b>spermatic cord</b>, traverses the <b>inguinal canal</b>, and runs caudally over the bladder to open with the duct of vesicular gland into the pelvic urethra at the <b>colliculus seminalis</b>. The terminal dilation is the <b>ampulla</b> of the ductus deferens.</p>
         <p><b>Spermatic Cord</b> contents (mnemonic 'PVTNL + cremaster + ductus'): <b>P</b>ampiniform plexus (counter-current heat exchanger, central role in thermoregulation), <b>V</b>asa (testicular artery, deferential artery), <b>T</b>esticular nerves, <b>N</b>erves of cremaster, <b>L</b>ymphatics. The cord is enclosed by tunica vaginalis (parietal + visceral layers) — the route of indirect inguinal hernia.</p>
@@ -674,7 +633,7 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
         • <b>Prostate</b> — body + disseminate part embedded in the urethralis muscle.<br>
         • <b>Bulbourethral (Cowper's) glands</b> — paired, at ischial arch; pre-ejaculate cleanser.</p>
         <p><b>Penis:</b> The bull, ram, boar penis is <b>fibroelastic</b> — small cavernous space, mostly dense collagen + elastic tissue. It has a permanent <b>sigmoid flexure</b> caudal to the scrotum that straightens during erection (the penis lengthens but does not greatly thicken). The <b>retractor penis muscle</b> pulls the penis back into the prepuce. The horse and dog have a <b>musculocavernous</b> penis (large blood-engorged erection); the dog also has an <b>os penis</b>.</p>
-        <p><b>Inguinal Canal:</b> Oblique passage through the abdominal wall, with a <b>deep (internal) inguinal ring</b> (in the transverse fascia) and a <b>superficial (external) inguinal ring</b> (slit in the aponeurosis of external oblique). Transmits the spermatic cord (male) or round ligament of uterus (female), external pudendal artery to udder (cow), and is the site of inguinal/scrotal hernia.</p>
+        <p><b>Inguinal Canal:</b> Oblique passage through the caudoventral abdominal wall. The deep ring is bounded principally by the caudal border of internal abdominal oblique and the inguinal ligament; the superficial ring is a slit in the external abdominal-oblique aponeurosis. Its contents vary by sex and species and include the spermatic cord in males, the vaginal process/round ligament in females, the external pudendal vessels and the genitofemoral nerve.</p>
         <p><b>Pre-pubic Tendon:</b> Strong fibrous attachment of the rectus abdominis and pectineus to the cranial border of the pubis. Important in heavy pregnant mares — rupture leads to ventral abdominal swelling and inability to foal.</p>`,
         comparative: [
             { species: "Bull", note: "Fibroelastic penis with sigmoid flexure. Vesicular glands very large and lobulated. Scrotum pendulous." },
@@ -688,30 +647,30 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
     {
         title: "Female Reproductive — Pelvic Genitalia",
         desc: `<b>High-Yield Points:</b><br>
-        • <b>Ovary</b> (abdominal in mare/bitch, pelvic in cow/sow) — gametogenesis + steroid production.<br>
-        • <b>Uterine tube (oviduct)</b>: infundibulum (with fimbriae) → ampulla (fertilization site) → isthmus.<br>
-        • <b>Uterus (Cow)</b> = <b>BICORNUATE</b> — short body + 2 long horns. Has <b>cotyledons</b> (caruncles + cotyledon = placentome).<br>
+        • <b>Ovary</b>: near the pelvic inlet in the cow, sublumbar in the mare and abdominal in the sow and bitch; produces oocytes and steroid hormones.<br>
+        • <b>Uterine tube (oviduct)</b>: infundibulum (with fimbriae) → ampulla → isthmus; fertilization usually occurs near the ampullary-isthmic junction.<br>
+        • <b>Uterus (Cow)</b> = <b>bicornuate</b> — short body + 2 long horns. The maternal endometrium has <b>caruncles</b>; fetal chorionic cotyledons attach to them to form placentomes.<br>
         • <b>Cervix</b> (cow) — thick, fibromuscular, with <b>3-4 transverse rings (annular folds)</b> — clinically vital landmark for AI ('cervix is the rifle barrel').<br>
         • <b>Vagina</b> + <b>Vestibule</b> (separated by external urethral orifice + suburethral diverticulum) → <b>Vulva</b> with two labia.<br>
-        • <b>Broad ligament (mesometrium)</b>: peritoneal fold suspending uterus + ovary; contains uterine vessels.<br>
+        • <b>Broad ligament</b>: mesometrium, mesovarium and mesosalpinx; suspends the reproductive tract and conveys vessels, nerves and lymphatics.<br>
         • Blood: <b>uterine artery</b> (palpable per rectum in late pregnancy = 'fremitus' / pregnancy thrill).`,
         eliteDesc: `<h3>Female Reproductive Tract</h3>
-        <p><b>Ovary:</b> Almond-shaped gonad. In cow & sow it lies in the pelvic cavity at first oestrus and migrates somewhat cranially; in mare & bitch it sits in the sublumbar abdominal region. Surface in cow is smooth with bulging follicles and a corpus luteum (CL); the mare ovary has a single <b>ovulation fossa</b> through which all ovulations occur.</p>
-        <p><b>Uterine Tube (Oviduct / Fallopian Tube):</b> Three parts — <b>infundibulum</b> (funnel with fimbriae, catches the ovulated oocyte), <b>ampulla</b> (site of fertilization), <b>isthmus</b> (narrow part joining the uterus at the uterotubal junction). Lined by ciliated and secretory epithelium.</p>
+        <p><b>Ovary:</b> Paired gonad whose topography varies by species. In the cow it is commonly near the pelvic inlet; in the sow it is abdominal near the caudal kidneys, in the mare sublumbar and in the bitch caudal to the kidneys. The bovine surface is irregular when follicles and corpora lutea project; the mare ovary has a single <b>ovulation fossa</b>.</p>
+        <p><b>Uterine Tube (Oviduct):</b> Three parts — <b>infundibulum</b>, <b>ampulla</b> and <b>isthmus</b>. Fertilization generally occurs near the ampullary-isthmic junction. The mucosa contains ciliated and secretory epithelial cells.</p>
         <p><b>Uterus (Cow):</b> A <b>bicornuate</b> uterus with a short body (~3 cm) and two long curving horns (~30 cm each). The horns curl ventrally like a ram's horn. The endometrium of the cow bears <b>~80-120 caruncles</b> — non-glandular knob-like elevations where, during pregnancy, the fetal cotyledons attach to form <b>placentomes</b> (cotyledonary placentation, characteristic of ruminants).</p>
         <p><b>Cervix (Cow):</b> Thick, hard, fibromuscular tube ~10 cm long. The lumen is interrupted by <b>3-4 transverse cervical rings (annular folds)</b> — the trans-cervical insertion of an AI gun feels like 'threading a rifle barrel'. Outside oestrus, it is firmly closed and forms a thick mucus plug (especially during pregnancy).</p>
         <p><b>Vagina:</b> Distensible muscular tube from cervix to external urethral orifice. The fornix lies around the cervix.</p>
         <p><b>Vestibule:</b> The part of the genital tract caudal to the external urethral orifice; floor bears the <b>suburethral diverticulum</b> (cow) and lateral walls bear the openings of the <b>major vestibular (Bartholin's) glands</b>.</p>
         <p><b>Vulva:</b> External part — two <b>labia</b> meet at dorsal & ventral commissures. The clitoris lies in the ventral commissure (homolog of male penis).</p>
         <p><b>Broad Ligament (Mesometrium + Mesosalpinx + Mesovarium):</b> Double sheet of peritoneum suspending the entire tract from the sublumbar region; carries uterine, ovarian and vaginal vessels and nerves.</p>
-        <p><b>Pregnancy Diagnosis Per Rectum (cow):</b> ~30-35 d — membrane slip; ~45 d — amniotic vesicle palpable; ~90 d — fremitus in middle uterine artery; >120 d — fetus directly palpable.</p>`,
+        <p><b>Pregnancy Diagnosis Per Rectum (cow):</b> Findings depend on gestational age, breed, examiner and uterine position. Membrane slip and the amniotic vesicle may be detected early by a trained veterinarian. Middle uterine-artery fremitus commonly becomes appreciable ipsilaterally at about four months and later contralaterally; direct fetal palpation is not continuously possible as the uterus descends.</p>`,
         comparative: [
             { species: "Cow", note: "Bicornuate, cotyledonary placenta (~80-120 caruncles). Cervix with 3-4 annular rings. Suburethral diverticulum in vestibule." },
             { species: "Mare", note: "Bipartite uterus (short horns, large body). Diffuse microcotyledonary placenta. Single ovulation fossa on ovary." },
-            { species: "Bitch", note: "Bicornuate with very long horns and tiny body. Zonary placenta (a band around the chorionic sac). Marginal hematoma → 'green sign' at parturition." },
+            { species: "Bitch", note: "Bicornuate with long horns and a short body. Zonary placenta with marginal hematomas. Green discharge reflects placental separation; before the first puppy it requires prompt assessment if delivery does not follow." },
             { species: "Sow", note: "Very long uterine horns (up to 1.5 m) for litter pregnancy. Diffuse placenta." },
             { species: "Fowl", note: "Only LEFT ovary and oviduct functional — right side regresses. Oviduct: infundibulum, magnum, isthmus, uterus (shell gland), vagina." }
         ],
-        clinical: "<b>Caesarean Section (cow):</b> Standing left flank approach (most common) — incise lateral surface of uterus over a hindlimb of fetus. <b>Ovariohysterectomy (Spay):</b> Standard sterilization in dog/cat; for cow it is rare ('flank spay'). <b>Pyometra (Bitch):</b> Closed-cervix is emergency — toxaemia. <b>Retained Placenta (Cow):</b> >12 h post-calving — common with milk fever, dystocia, twins. <b>Vaginal/Uterine Prolapse:</b> Common in late pregnancy/post-partum — caudal epidural needed for replacement. <b>AI Technique:</b> Rectovaginal — operator's hand grips cervix per rectum and threads AI gun through the cervical rings to deposit semen at the body of uterus."
+        clinical: "<b>Caesarean Section (cow):</b> Approach and uterine incision are selected according to the cow, fetus and surgeon. <b>Ovariohysterectomy:</b> Standard sterilization in dogs/cats but uncommon in cattle. <b>Pyometra (bitch):</b> Closed-cervix disease is an emergency. <b>Retained fetal membranes (cow):</b> Commonly defined as failure to expel membranes within 24 hours; routine manual removal is not recommended. <b>Prolapse:</b> Vaginal prolapse is usually prepartum, whereas uterine prolapse is an acute postpartum emergency. Caudal epidural analgesia may facilitate correction when clinically indicated. <b>AI technique:</b> Semen is deposited in the uterine body after controlled passage through the cervix."
     }
 );

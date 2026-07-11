@@ -194,3 +194,107 @@ atlasData["Embryology"] = {
         }
     ]
 };
+
+// Audited veterinary corrections (2026): applies species-aware developmental
+// terminology and replaces outdated or clinically unsafe generalizations.
+(function applyEmbryologyCorrections() {
+    const replacements = [
+        ["Mare/Cow/Bitch", "Mare/Cow"],
+        ["Single ovulation/cycle (uniparous).", "Usually single ovulation/cycle (uniparous); the bitch is polyovulatory and produces litters."],
+        ["<b>PGCs migrate</b> from yolk sac endoderm", "<b>PGCs, specified from epiblast-derived progenitors, migrate</b> from a temporary location near the yolk sac"],
+        ["Origin of <b>primordial germ cells (PGCs)</b>", "Temporary early location and migration route of <b>primordial germ cells (PGCs)</b>, which are specified from epiblast-derived progenitors"],
+        ["<b>Site:</b> <b>Ampulla of uterine tube</b> (oviduct) — within hours of ovulation.", "<b>Site:</b> Usually the ampullary-isthmic region of the uterine tube; timing and exact location vary by species, and canine oocytes mature after ovulation."],
+        ["<b>Site:</b> Ampulla of the uterine tube (oviduct), within ~12-24 hours of ovulation.", "<b>Site:</b> Usually near the ampullary-isthmic region of the uterine tube; timing is species-specific and is delayed in the bitch because primary oocytes mature after ovulation."],
+        ["<b>Pronuclei fusion</b>", "<b>Pronuclear-envelope breakdown and chromosome union on the first mitotic spindle</b>"],
+        ["Pronuclei replicate DNA + fuse", "Pronuclei replicate DNA; their envelopes break down and parental chromosomes align together"],
+        ["G1/G2 phases skipped", "cell growth is minimal and early cell-cycle phases are abbreviated, although mammalian cycles do not universally omit G1 and G2"],
+        ["forms placenta + foetal membranes", "contributes to chorion and the fetal placenta; other fetal membranes also include epiblast-derived tissues"],
+        ["At birth: ruptures (water break) → 'first water'.", "At birth the amnion usually ruptures after the chorioallantois; its fluid contributes the later water bag."],
+        ["• Amnion ruptures first ('water break').<br>• Allantois ruptures next ('second water').", "• Chorioallantois/allantochorion usually ruptures first ('first water').<br>• Amnion usually ruptures later ('second water')."],
+        ["Common in cattle (>12 hours = retained)", "In cattle, generally diagnosed when membranes remain about 24 hours after calving"],
+        ["needs hormonal/manual treatment", "routine manual removal is discouraged; treatment depends on systemic illness and veterinary assessment"],
+        ["Retained placenta common (>12 hr = abnormal)", "Retained fetal membranes are generally defined at about 24 hr postpartum"],
+        ["green discharge ('uteroverdin') is a NORMAL sign of imminent parturition", "green discharge before the first puppy may indicate placental separation and requires prompt assessment if a puppy does not immediately follow"],
+        ["the dentine + pulp + cementum + bone are mesodermal", "dentine, pulp and much craniofacial supporting tissue are neural-crest ectomesenchymal; enamel is ectodermal"],
+        ["rotates 270° counterclockwise as it returns. Failed return = umbilical hernia", "undergoes species-specific rotation as it returns. Failure of return produces omphalocele, distinct from an umbilical hernia"],
+        ["PHARYNGEAL POUCHES (5 pairs)", "PHARYNGEAL POUCHES (4 well-defined pairs; a rudimentary fifth component may join the fourth)"],
+        ["Surrounding mesenchyme + neural crest → choroid + sclera + cornea stroma + extraocular muscles", "Neural-crest mesenchyme contributes choroid, sclera and corneal stroma; extraocular muscles arise from cranial paraxial/preotic mesoderm"],
+        ["External ear</b> + tympanic membrane = ectoderm of 1st pharyngeal cleft", "External ear</b> derives chiefly from first-cleft ectoderm and arch tissues; the tympanic membrane has ectodermal, mesodermal and endodermal layers"],
+        ["Axial skeleton (vertebrae, ribs, sternum, base of skull) → from sclerotomes of somites", "Vertebrae, ribs and much of the skull base arise from sclerotomes; the sternum arises from somatic lateral plate mesoderm"],
+        ["External (cranial) parathyroid → 4th pharyngeal pouch.<br>• Internal (caudal) parathyroid → 3rd pharyngeal pouch", "External parathyroid → 3rd pharyngeal pouch.<br>• Internal parathyroid → 4th pharyngeal pouch"],
+        ["Process by which the blastocyst attaches to + invades the uterine endometrium", "Process by which the conceptus attaches to and interacts with uterine endometrium; invasion occurs only in invasive placental types"],
+        ["Attachment + invasion of the blastocyst into the endometrium", "Attachment and species-specific interaction of the conceptus with endometrium; invasion is limited to invasive placental types"],
+        ["White Heifer Disease</b> — incomplete development of female tract in white heifers (sex-linked white gene)", "White Heifer Disease</b> — a sex-limited inherited Müllerian-duct defect associated with particular white-coat lineages"],
+        ["griseofulvin, warfarin, certain anaesthetics in early pregnancy", "agents such as griseofulvin or warfarin; anaesthetic risk must be assessed by the specific agent, dose and gestational stage"],
+        ["Bitch is mono-ovulatory", "Bitch is polyovulatory and normally releases primary oocytes that complete maturation in the oviduct about 2-3 days later"],
+        ["primordial germ cells originate in yolk sac endoderm", "primordial germ cells are specified from epiblast-derived progenitors and are temporarily found near the yolk sac before migrating to the gonadal ridges"],
+        ["arrested at primary spermatocyte stage", "may show progressive germ-cell loss and impaired spermatogenesis; the histologic stage varies with age and temperature"],
+        ["Fertilization occurs in the ampulla", "Fertilization usually occurs near the ampullary-isthmic region, with timing and exact location varying by species; the bitch is distinctive because oocytes mature after ovulation"],
+        ["pronuclei fuse", "pronuclear envelopes break down and the parental chromosomes unite on the first mitotic spindle"],
+        ["Sex is determined by XX/XY chromosomes", "Sex is determined by XX/XY chromosomes in mammals and ZZ/ZW chromosomes in birds"],
+        ["Cleavage divisions lack G1 and G2 phases", "Early cleavage cycles are abbreviated, but mammalian embryos retain regulated cell-cycle phases rather than universally lacking G1 and G2"],
+        ["major embryonic genome activation occurs at the 8-cell stage in cattle", "major embryonic genome activation occurs mainly during the 8- to 16-cell transition in cattle, with transcriptional activity beginning earlier"],
+        ["trophectoderm forms all foetal membranes", "trophectoderm contributes to the chorion and fetal component of the placenta; other fetal membranes also receive epiblast-derived mesoderm or endoderm"],
+        ["cytotrophoblast and syncytiotrophoblast", "trophoblast specializations appropriate to the species and placental type"],
+        ["eCG is the maternal recognition signal in the mare", "the definitive maternal-recognition signal in the mare remains incompletely identified; conceptus mobility and suppression of endometrial prostaglandin release are essential, whereas eCG is produced later by endometrial cups"],
+        ["maternal recognition in the bitch occurs at day 16-17", "the bitch has no clearly established classical anti-luteolytic maternal-recognition signal; luteal lifespan is similar in pregnant and non-pregnant cycles"],
+        ["Gastrulation occurs within the implanted blastocyst", "Gastrulation forms the trilaminar embryonic disc; in domestic ungulates it begins before firm implantation/attachment is complete"],
+        ["mesoderm divides into four columns", "mesoderm is organized into axial notochordal mesoderm and three paired regions: paraxial, intermediate and lateral plate mesoderm"],
+        ["Manx syndrome results from failure of neural tube closure", "Manx syndrome is a caudal axial dysgenesis commonly associated with TBXT-related tail-development defects, not simply failure of neural-tube closure"],
+        ["amnion ruptures first", "the chorioallantois (allantochorion) usually ruptures first to release the first water bag; the amnion ruptures later"],
+        ["retained placenta after 12 hours in cattle", "retained fetal membranes are generally diagnosed when not expelled by about 24 hours in cattle"],
+        ["manual removal and oxytocin are indicated", "routine manual removal is discouraged because it may damage the endometrium; treatment is based on systemic illness and veterinary assessment, and routine hormonal therapy has inconsistent benefit"],
+        ["syndesmochorial placenta", "synepitheliochorial placenta (the modern term for the ruminant placental interface)"],
+        ["Green discharge before the first puppy is normal", "Green discharge before the first puppy can indicate placental separation and warrants urgent assessment if a puppy does not promptly follow"],
+        ["dentine, pulp and cementum arise from mesoderm", "dentine, pulp and most cementum-supporting ectomesenchyme arise chiefly from cranial neural crest"],
+        ["entire vagina develops from the urogenital sinus", "the vagina has mixed origins: cranial portions derive from the paramesonephric ducts and caudal portions/vestibule from the urogenital sinus, with proportions varying by species"],
+        ["palatine shelves are ectodermal processes", "palatine shelves contain neural-crest-derived ectomesenchyme covered by epithelium"],
+        ["midgut rotates 270 degrees counter-clockwise", "intestinal rotation and final colonic arrangement are species-specific; the classic 270-degree description is a human model and should not be applied unchanged to domestic mammals"],
+        ["Failure of return causes umbilical hernia", "Failure of physiologically herniated intestine to return causes omphalocele; an umbilical hernia is a distinct defect of umbilical-ring closure"],
+        ["five pairs of pharyngeal pouches", "four well-defined pairs of pharyngeal pouches; a rudimentary fifth component may be incorporated with the fourth"],
+        ["epididymis develops from mesonephric tubules", "efferent ductules develop from mesonephric tubules, whereas the epididymal duct develops from the mesonephric duct"],
+        ["foetal shunts close anatomically at birth", "fetal shunts begin functional closure around birth, while anatomical obliteration occurs later and varies by structure and species"],
+        ["extraocular muscles arise from neural crest", "extraocular muscles arise from cranial paraxial/preotic mesoderm; neural crest contributes associated connective tissues"],
+        ["tympanic membrane is ectodermal", "the tympanic membrane has ectodermal, mesodermal and endodermal contributions"],
+        ["sternum develops from somite sclerotome", "sternum develops from paired sternal bars in somatic lateral plate mesoderm"],
+        ["external parathyroid from pouch IV and internal from pouch III", "external parathyroid derives from pouch III and internal parathyroid from pouch IV in domestic mammals"],
+        ["Implantation is invasion of the endometrium", "Implantation is attachment and species-specific interaction of the conceptus with endometrium; deep invasion is not a feature of all placental types"],
+        ["sex-linked white gene causes White Heifer Disease", "White Heifer Disease is a sex-limited inherited Müllerian-duct defect associated with particular white-coat lineages, not simply a sex-linked white gene"],
+        ["Certain anaesthetics are proven teratogens", "Drug-associated developmental risk depends on agent, dose and gestational stage; avoid unsupported class-wide claims and consult current veterinary evidence"],
+        ["ultrasound at 28-30 d post-breeding to check for twins in cow/mare", "early transrectal ultrasound in the mare is commonly performed around days 14-16 (with follow-up scans); cattle pregnancy and twin diagnosis use species-appropriate later schedules"],
+        ["<7-8 cm", "&lt;7-8 cm"],
+        ["C cells originate from neural crest", "thyroid C cells arise through the ultimobranchial body, now considered primarily pharyngeal-endoderm derived; older texts attributed them to neural crest"],
+        ["blastoderm has no fluid cavity", "avian cleavage produces a flat blastoderm over a subgerminal cavity rather than a spherical mammalian blastocyst"],
+        ["Newborn primates are immunologically competent", "Primates receive substantial prenatal maternal IgG, although neonatal immunity is still developing"]
+    ];
+    const fix = value => {
+        if (typeof value !== "string") return value;
+        for (const [oldText, newText] of replacements) value = value.split(oldText).join(newText);
+        return value;
+    };
+    for (const section of Object.values(atlasData.Embryology || {})) {
+        if (!Array.isArray(section)) continue;
+        for (const item of section) {
+            for (const key of ["desc", "eliteDesc", "clinical"]) item[key] = fix(item[key]);
+            if (Array.isArray(item.comparative)) for (const row of item.comparative) {
+                row.species = fix(row.species);
+                row.note = fix(row.note);
+            }
+        }
+    }
+    const organs = atlasData.Embryology && atlasData.Embryology["Organ Development"];
+    if (Array.isArray(organs) && !organs.some(x => x.title === "Lymphatic and Reproductive Development")) {
+        organs.push({
+            title: "Lymphatic and Reproductive Development",
+            desc: "Lymphatic endothelium develops chiefly from venous endothelial progenitors and forms lymph sacs, vessels and nodes. The indifferent gonad receives primordial germ cells; SRY-driven testis differentiation in therian mammals promotes Sertoli-cell AMH and Leydig-cell androgen production, whereas ovarian development follows in its absence through a distinct gene network.",
+            eliteDesc: "Mesonephric ducts persist as male excurrent ducts; paramesonephric ducts form oviducts, uterus and the cranial vagina in females. External genitalia arise from the genital tubercle, urogenital folds and labioscrotal swellings under hormone-dependent patterning. Testicular descent uses the gubernaculum and differs markedly among species and in timing.",
+            comparative: [
+                { species: "Stallion/Boar", note: "Testes normally become scrotal before or around birth, with species-specific inguinal anatomy." },
+                { species: "Dog", note: "Testicular descent is postnatal; failure of descent is a heritable clinical concern." },
+                { species: "Bird", note: "Females are ZW and males ZZ; in most female birds only the left ovary and oviduct become fully functional." }
+            ],
+            clinical: "Cryptorchidism increases risks of infertility and testicular neoplasia. Disorders of sex development require chromosomal, gonadal, internal-duct and external-genital evaluation rather than appearance alone.",
+            imgCode: "lymphatic_reproductive_development"
+        });
+    }
+})();

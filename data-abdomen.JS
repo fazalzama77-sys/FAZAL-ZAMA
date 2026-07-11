@@ -179,3 +179,60 @@ atlasData["Abdomen"] = {
     // =====================================================
     "Splanchnology": []
 };
+
+// Audited veterinary corrections (VCI Unit 5). These are applied immediately
+// so both standard and Elite text use the corrected, species-specific wording.
+(() => {
+    const fix = (text) => {
+        if (typeof text !== 'string') return text;
+        const replacements = [
+            ["contains the spinal cord (which ends near L6 in ox) and the cauda equina", "contains the spinal cord and cauda equina; in adult cattle the spinal cord reaches approximately the first sacral vertebra (and extends farther caudally in young calves)"],
+            ["sometimes 5 in Arabians due to L5-L6 fusion with sacrum", "five lumbar vertebrae may occur in some Arabians as a numerical variation; this should not be described simply as L5-L6 fusion with the sacrum"],
+            ["13th rib</b> in ox = floating rib (asternal); its tip is free", "13th rib</b> in ox = the last of five asternal ribs and normally contributes to the costal arch; a supernumerary 14th rib, when present, may be floating"],
+            ["asternal ribs (8-13)", "asternal ribs (9-13)"],
+            ["ribs 8-13 are <b>asternal</b>", "ribs 9-13 are <b>asternal</b>"],
+            ["The 13th rib is the <b>floating rib</b> — its cartilage ends free in the lumbar musculature.", "The 13th rib is normally the last asternal rib and contributes to the costal arch; an occasional supernumerary 14th rib may end freely as a floating rib."],
+            ["arch from the sternum cranio-ventrally up to the last rib dorso-caudally", "arch from the last sternal costal cartilage cranio-ventrally toward the last asternal rib dorso-caudally"],
+            ["right paralumbar 'grid' incision (standing cow rumenotomy)", "left paralumbar incision (standard standing cow rumenotomy); the right flank is used for many intestinal, caecal and abomasal procedures"],
+            ["Right paralumbar fossa = cattle laparotomy site.", "Left paralumbar fossa is the standard rumenotomy site; right-flank approaches are used for many intestinal, caecal and abomasal procedures."],
+            ["crura — attach to L3-L4", "crura — attach to the ventral lumbar vertebral bodies, with attachment length differing between right and left crura"],
+            ["two crura (right + left) attached to ventral bodies of L3-L4 lumbar vertebrae", "two crura (right + left) attached asymmetrically to the ventral bodies of the cranial lumbar vertebrae"],
+            ["Central tendon (cupula)", "Central tendon (tendinous centre); the cupula is the cranially convex dome of the diaphragm"],
+            ["Chief muscle of inspiration (~70% of tidal volume in ox)", "Chief muscle of inspiration; its exact contribution to tidal volume varies with posture and breathing conditions"],
+            ["Psoas Minor</b> — flexes lumbar spine; inserts on shaft of ilium", "Psoas Minor</b> — flexes the lumbar spine and inserts on the psoas minor tubercle/iliopubic eminence of the ilium"],
+            ["Migration of foreign bodies from rumen through diaphragm → caudal mediastinum → sublumbar region. Palpable per rectum.", "Sublumbar abscesses may arise from local or haematogenous infection and can be palpable per rectum; a routine migration route from rumen through diaphragm and mediastinum should not be assumed."],
+            ["Compression of obturator and iliopsoas → cannot rise.", "Prolonged recumbency can injure the obturator or sciatic nerves and cause ischaemic damage to the iliopsoas and other muscles, contributing to inability to rise."],
+            ["Subluxation in cattle ('hunter's bump') — common after slipping on concrete.", "Sacroiliac injury can follow slipping or trauma in cattle; 'hunter's bump' is chiefly an equine clinical term for prominence/asymmetry of the tubera sacrale."],
+            ["Common 'hunter's bump' from slipping concrete.", "Sacroiliac injury may follow slipping; avoid using the chiefly equine term 'hunter's bump' as a routine bovine diagnosis."],
+            ["Sacroiliac Subluxation ('Hunter's Bump'):</b> Asymmetric tuber sacrale — common in cattle that have slipped or in horses that have fallen.", "Sacroiliac injury:</b> may cause pain or tuber sacrale asymmetry; the term 'hunter's bump' is used chiefly in horses."],
+            ["<b>Lumbosacral (Cranial) Epidural:</b> Anaesthesia of hindlimbs and pelvic viscera (animal must be cast).", "<b>Lumbosacral epidural:</b> a species- and procedure-specific technique requiring careful dosing and awareness that the spinal cord extends to about S1 in adult cattle. Routine bovine obstetrical caudal epidurals are usually sacrococcygeal or first intercoccygeal."],
+            ["testicular descends to scrotum forming the pampiniform plexus", "testicular artery descends to the scrotum and becomes highly convoluted; the surrounding testicular veins form the pampiniform plexus"],
+            ["Formed by union of <b>cranial mesenteric, caudal mesenteric, splenic, gastroduodenal veins</b>.", "Formation is species-dependent: mesenteric venous trunks form the portal vein, while splenic and gastroduodenal veins enter as major tributaries before the hepatic porta."],
+            ["<b>The only vein that begins AND ends in capillaries</b>", "<b>A major example of a portal vein connecting two capillary beds</b>"],
+            ["the only vein with capillaries at <i>both</i> ends ('rete mirabile' style)", "a portal vessel connecting gastrointestinal capillaries with hepatic sinusoids; it is not a rete mirabile and is not the body's only portal venous system"],
+            ["CVC drains everything caudal to the diaphragm <i>except</i> the gut.", "The CVC is the main systemic venous return from structures caudal to the diaphragm; portal blood from the gut first passes through the liver and then reaches the CVC through hepatic veins."],
+            ["CVC carries fatty hepatic blood.", "Hepatic lipidosis is triglyceride accumulation within hepatocytes; hepatic veins drain the liver into the CVC."],
+            ["Portosystemic Shunt (Dog):</b> Hepatic encephalopathy, stunted growth, copper-coloured iris.", "Portosystemic Shunt:</b> Hepatic encephalopathy and poor growth may occur in dogs or cats; a homogeneous copper-coloured iris is particularly associated with affected cats."],
+            ["Medial Iliac LN</b> (= Renal lumbar LN in older texts)", "Medial Iliac LN</b> (distinct from renal lymph nodes; terminology should follow the relevant Nomina Anatomica Veterinaria edition)"],
+            ["Johne's Disease:</b> Mesenteric LN show caseous-calcified lesions at necropsy.", "Johne's Disease:</b> typically causes thickened, corrugated ileum and enlarged mesenteric lymph nodes with granulomatous inflammation; caseous-calcified nodes suggest a different diagnosis such as tuberculosis or caseous lymphadenitis."],
+            ["Splenic Puncture (Cow):</b> Last left ICS, dorsal flank.", "Splenic sampling in cattle:</b> should be ultrasound-guided and planned from confirmed splenic topography; a blind 'last left ICS' puncture should not be taught as a routine landmark."],
+            ["It terminates at the L6-S1 level by dividing into right and left external iliac arteries (with internal iliacs and median sacral coming off as well).", "Near the lumbosacral region it gives off the paired external and internal iliac arteries and continues caudally as the median sacral artery; the exact order and level vary by species."],
+            ["<b>Terminal:</b> divides into <b>External + Internal Iliac aa.</b> at L6-S1.", "<b>Terminal region:</b> gives rise to paired external and internal iliac arteries and continues as the median sacral artery; branching order is species-specific."],
+            ["TERMINAL BRANCHES (at L6-S1)", "CAUDAL BRANCHES NEAR THE LUMBOSACRAL REGION (species-specific order)"],
+            ["Medial Iliac LN — at terminal aorta bifurcation; the largest, palpable per rectum.", "Medial iliac LN — near the origins of the iliac vessels; large and accessible to rectal examination in cattle when enlarged."],
+            ["The abdomen has hundreds of lymph nodes arranged in two functional groups", "Abdominal lymph nodes are organized into visceral and parietal lymph centres"],
+            ["Cisterna Chyli</b>: dilated lymph reservoir at the aortic hiatus", "Cisterna Chyli</b>: variable dilated lymphatic reservoir in the sublumbar region near the aortic hiatus"]
+        ];
+        return replacements.reduce((value, pair) => value.split(pair[0]).join(pair[1]), text);
+    };
+
+    Object.values(atlasData["Abdomen"]).flat().forEach((entry) => {
+        if (!entry || typeof entry !== 'object') return;
+        entry.desc = fix(entry.desc);
+        entry.eliteDesc = fix(entry.eliteDesc);
+        entry.clinical = fix(entry.clinical);
+        if (Array.isArray(entry.comparative)) {
+            entry.comparative.forEach((item) => { item.note = fix(item.note); });
+        }
+    });
+})();
