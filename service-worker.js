@@ -33,17 +33,14 @@ const APP_SHELL = [
     './srs.js',
     './glossary.js',
     './data-image-annotations.JS',
-    './data-introduction.JS',     // Unit 1 — was MISSING (offline atlas was blank for Intro)
     './data-forelimb.JS',
-    './data-head-neck.JS',
+    './data-hindlimb.JS',
     './data-thorax.JS',
     './data-abdomen.JS',
-    './data-hindlimb.JS',
+    './data-head-neck.JS',
     './data-splanchnology.JS',
-    './data-histology.JS',        // Unit 7 — was MISSING
-    './data-embryology.JS',       // Unit 8 — was MISSING
     './data-quiz.JS',
-    './data-why.js',              // FIXED: actual filename is lowercase .js (was .JS — 404'd on Cloudflare)
+    './data-why.JS',
     './images/scapula-ox-horse-dog-annotated.png',
     './manifest.json'
 ];
@@ -83,6 +80,19 @@ self.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
     }
+});
+
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    const target = event.notification.data?.url || './index.html#/quiz';
+    event.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windows) => {
+        const existing = windows[0];
+        if (existing) {
+            existing.navigate(target);
+            return existing.focus();
+        }
+        return clients.openWindow(target);
+    }));
 });
 
 // ---- FETCH: routing logic ----

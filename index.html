@@ -1044,14 +1044,19 @@
 
       <!-- Settings toggles row (compact) -->
       <div class="me-toggles">
-        <button class="me-toggle" id="me-notif-toggle" onclick="app.toggleSrsNotifications()">
+        <div class="me-toggle me-reminder-setting" id="me-notif-toggle">
+          <button class="me-toggle-main" type="button" onclick="app.toggleSrsNotifications()" aria-label="Toggle daily review reminder">
           <i class="fas fa-bell"></i>
           <span class="me-toggle-text">
             <span class="me-toggle-title">Daily Review Reminder</span>
             <span class="me-toggle-state" id="me-notif-state">Off</span>
           </span>
           <span class="me-toggle-pill" id="me-notif-pill"></span>
-        </button>
+          </button>
+          <label class="me-reminder-time-label" for="me-notif-time">Reminder time
+            <input id="me-notif-time" class="me-reminder-time" type="time" value="19:00" onchange="app.setSrsNotificationTime(this.value)">
+          </label>
+        </div>
         <button class="me-toggle" onclick="app.replayOnboarding()">
           <i class="fas fa-circle-play"></i>
           <span class="me-toggle-text">

@@ -7725,6 +7725,12 @@ body.professional-mode .streak-block.is-active .streak-num {
     font-family: var(--font-body);
 }
 .me-toggle:hover { border-color: rgba(255,213,79,0.4); background: rgba(255,213,79,0.04); }
+.me-reminder-setting { display: block; cursor: default; }
+.me-toggle-main { display: flex; align-items: center; gap: 12px; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; font-family: inherit; }
+.me-toggle-main > i:first-child { font-size: 1.1rem; color: var(--why-cyan); width: 24px; text-align: center; }
+.me-reminder-time-label { margin: 12px 0 0 36px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: .8rem; color: var(--text-mute); }
+.me-reminder-time { min-height: 44px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 9px; background: rgba(255,255,255,.06); color: var(--text-main); font: inherit; color-scheme: dark; }
+body.professional-mode .me-reminder-time { background: #fff; color: #102a43; color-scheme: light; border-color: #b8c2cc; }
 .me-toggle > i:first-child {
     font-size: 1.1rem;
     color: var(--why-cyan);

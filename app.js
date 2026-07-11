@@ -66,7 +66,7 @@ const app = {
         try { app._recordActivityToday(); } catch (e) { console.warn('activity', e); }
         try { app._showOnboardingIfFirstTime(); } catch (e) { console.warn('onboard', e); }
         try { app._setupInstallPrompt(); } catch (e) { console.warn('install', e); }
-        try { app._maybeShowSrsNotification(); } catch (e) { console.warn('notify', e); }
+        try { app._initSrsNotificationScheduler(); } catch (e) { console.warn('notify', e); }
     },
 
     // Renders and controls the interactive 3D holographic vertebra on the landing page
@@ -593,6 +593,8 @@ const app = {
     // ---------- SRS daily notification ----------
     NOTIF_PREF_KEY: 'ivri-notify-srs',     // '1' | '0'
     NOTIF_LAST_KEY: 'ivri-notify-last',    // YYYY-MM-DD
+    NOTIF_TIME_KEY: 'ivri-notify-time',    // HH:MM (local time)
+    _notifTimer: null,
     requestNotificationPermission: async () => {
         if (!('Notification' in window)) {
             if (typeof showToast === 'function') showToast('This browser does not support notifications', 'warning');
@@ -601,6 +603,8 @@ const app = {
         if (Notification.permission === 'granted') {
             localStorage.setItem(app.NOTIF_PREF_KEY, '1');
             if (typeof showToast === 'function') showToast('Daily review reminders are on', 'success', 'fa-bell');
+            app._maybeShowSrsNotification();
+            app._scheduleNextSrsNotification();
             app._refreshMeStatsLite();
             return;
         }
@@ -608,6 +612,8 @@ const app = {
         if (perm === 'granted') {
             localStorage.setItem(app.NOTIF_PREF_KEY, '1');
             if (typeof showToast === 'function') showToast('Daily review reminders are on', 'success', 'fa-bell');
+            app._maybeShowSrsNotification();
+            app._scheduleNextSrsNotification();
         } else {
             if (typeof showToast === 'function') showToast('Notifications blocked. Enable in browser settings.', 'warning');
         }
@@ -617,33 +623,72 @@ const app = {
         const cur = localStorage.getItem(app.NOTIF_PREF_KEY) === '1';
         if (cur) {
             localStorage.setItem(app.NOTIF_PREF_KEY, '0');
+            if (app._notifTimer) clearTimeout(app._notifTimer);
             if (typeof showToast === 'function') showToast('Review reminders turned off', 'info', 'fa-bell-slash');
             app._refreshMeStatsLite();
         } else {
             app.requestNotificationPermission();
         }
     },
-    _maybeShowSrsNotification: () => {
+    setSrsNotificationTime: (value) => {
+        if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(value || '')) return;
+        localStorage.setItem(app.NOTIF_TIME_KEY, value);
+        localStorage.removeItem(app.NOTIF_LAST_KEY);
+        app._maybeShowSrsNotification();
+        app._scheduleNextSrsNotification();
+        app._refreshMeStatsLite();
+        if (typeof showToast === 'function') showToast(`Reminder time set to ${app._formatReminderTime(value)}`, 'success', 'fa-clock');
+    },
+    _formatReminderTime: (value) => {
+        const [hour, minute] = (value || '19:00').split(':').map(Number);
+        return `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${hour >= 12 ? 'PM' : 'AM'}`;
+    },
+    _initSrsNotificationScheduler: () => {
+        app._maybeShowSrsNotification();
+        app._scheduleNextSrsNotification();
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                app._maybeShowSrsNotification();
+                app._scheduleNextSrsNotification();
+            }
+        });
+    },
+    _scheduleNextSrsNotification: () => {
+        if (app._notifTimer) clearTimeout(app._notifTimer);
+        if (localStorage.getItem(app.NOTIF_PREF_KEY) !== '1') return;
+        const [hour, minute] = (localStorage.getItem(app.NOTIF_TIME_KEY) || '19:00').split(':').map(Number);
+        const next = new Date();
+        next.setHours(hour, minute, 0, 0);
+        if (next <= new Date()) next.setDate(next.getDate() + 1);
+        app._notifTimer = setTimeout(() => {
+            app._maybeShowSrsNotification();
+            app._scheduleNextSrsNotification();
+        }, Math.min(next.getTime() - Date.now(), 2147483647));
+    },
+    _maybeShowSrsNotification: async () => {
         if (!('Notification' in window)) return;
         if (Notification.permission !== 'granted') return;
         if (localStorage.getItem(app.NOTIF_PREF_KEY) !== '1') return;
+        const clock = new Date();
+        const [hour, minute] = (localStorage.getItem(app.NOTIF_TIME_KEY) || '19:00').split(':').map(Number);
+        if (clock.getHours() * 60 + clock.getMinutes() < hour * 60 + minute) return;
         // Only once per day
         if (localStorage.getItem(app.NOTIF_LAST_KEY) === app._today()) return;
-        // Count due SRS items
-        if (typeof srs === 'undefined' || !srs._loadState) return;
         try {
-            const state = srs._loadState();
-            const now = Date.now();
-            const due = Object.values(state || {}).filter(item => (item.nextDue || 0) <= now).length;
-            if (due > 0) {
-                new Notification('IVRI Anatomy', {
-                    body: `You have ${due} topic${due === 1 ? '' : 's'} due for Smart Review today.`,
-                    icon: 'images/icon-192.png',
-                    badge: 'images/icon-192.png',
-                    tag: 'srs-daily'
-                });
-                localStorage.setItem(app.NOTIF_LAST_KEY, app._today());
+            let due = 0;
+            if (typeof srs !== 'undefined' && srs._loadState) {
+                const state = srs._loadState();
+                due = Object.values(state || {}).filter(item => (item.nextDue || 0) <= Date.now()).length;
             }
+            const options = {
+                body: due > 0 ? `You have ${due} topic${due === 1 ? '' : 's'} due. Practice your Smart Review questions now.` : 'Time for your daily anatomy practice questions.',
+                icon: 'images/icon-192.png', badge: 'images/icon-192.png', tag: 'srs-daily',
+                renotify: true, data: { url: './index.html#/quiz' }
+            };
+            const registration = await navigator.serviceWorker?.ready;
+            if (registration?.showNotification) await registration.showNotification('IVRI Anatomy', options);
+            else new Notification('IVRI Anatomy', options);
+            localStorage.setItem(app.NOTIF_LAST_KEY, app._today());
         } catch (e) { console.warn('srs notif', e); }
     },
 
@@ -806,6 +851,7 @@ const app = {
         'ivri-activity',
         'ivri-notify-srs',
         'ivri-notify-last',
+        'ivri-notify-time',
     ]),
 
     // Export every IVRI localStorage key into a single JSON file the user
@@ -1050,10 +1096,13 @@ const app = {
         // --- Notification toggle state ---
         const notifState = document.getElementById('me-notif-state');
         const notifPill = document.getElementById('me-notif-pill');
+        const notifTime = document.getElementById('me-notif-time');
         const on = ('Notification' in window)
             && Notification.permission === 'granted'
             && localStorage.getItem(app.NOTIF_PREF_KEY) === '1';
-        if (notifState) notifState.innerText = on ? 'On — daily reminder when topics are due' : 'Off — tap to enable browser notifications';
+        const savedNotifTime = localStorage.getItem(app.NOTIF_TIME_KEY) || '19:00';
+        if (notifTime) notifTime.value = savedNotifTime;
+        if (notifState) notifState.innerText = on ? `On — every day at ${app._formatReminderTime(savedNotifTime)}` : 'Off — tap to enable browser notifications';
         if (notifPill) notifPill.classList.toggle('on', on);
 
         // --- Nav-position picker selection state ---
