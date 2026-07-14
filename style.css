@@ -982,6 +982,9 @@ body.professional-mode .portal-card:hover .card-desc {
     padding-bottom: 60px;
     align-content: flex-start;
 }
+/* The region and system grids replace one another in-place. Prevent browser
+   scroll anchoring from keeping the old bottom-card position on mobile. */
+#atlas-selector { overflow-anchor: none; }
 /* Keep original card dimensions (icons stay big like before) */
 #atlas-selector .portal-card {
     width: 280px !important;
@@ -4225,8 +4228,10 @@ body.professional-mode .topic-btn .read-tick {
 
 body.professional-mode .content-area {
     background: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    /* Filtered ancestors make position:fixed glossary definitions panel-relative.
+       Keep this panel unfiltered so definitions stay beside the tapped word. */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border: 1px solid rgba(21, 101, 192, 0.15) !important;
     border-top: 4px solid var(--medical-purple) !important;
     box-shadow: 0 8px 30px rgba(21, 101, 192, 0.05) !important;
@@ -5933,6 +5938,48 @@ body.professional-mode .read-btn.active i { color: #1b8754; }
   margin-top: 4px;
   font-weight: normal;
 }
+
+.bookmark-group-title {
+  padding: 12px 18px 8px;
+  color: var(--why-cyan);
+  font-family: var(--font-code);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.quiz-bookmark-detail {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.quiz-bookmark-detail .qb-kicker {
+  color: var(--why-cyan);
+  font-family: var(--font-code);
+  font-size: .78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.quiz-bookmark-detail .qb-question {
+  color: var(--text-main);
+  font-size: 1.25rem;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+.quiz-bookmark-detail .qb-answer,
+.quiz-bookmark-detail .qb-explanation {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--atlas-gold);
+  border-radius: 10px;
+  margin-top: 14px;
+  line-height: 1.6;
+}
+.quiz-bookmark-detail .qb-explanation { border-left-color: var(--why-cyan); }
+body.professional-mode .bookmark-group-title { color: #1565c0; }
+body.professional-mode .quiz-bookmark-detail .qb-answer,
+body.professional-mode .quiz-bookmark-detail .qb-explanation { background: #fff; }
 
 body.professional-mode .bm-btn {
   border-color: rgba(0,0,0,0.15);

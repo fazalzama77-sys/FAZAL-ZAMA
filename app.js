@@ -840,6 +840,7 @@ const app = {
         'ivri-theme',
         'ivri-elite',
         'ivri-bookmarks',
+        'ivri-quiz-bookmarks',
         'ivri-read',
         'ivri-srs-state',
         'ivri-quiz-progress',
@@ -875,6 +876,7 @@ const app = {
         try {
             payload.stats = {
                 bookmarks: (JSON.parse(payload.data['ivri-bookmarks'] || '[]') || []).length,
+                quiz_bookmarks: (JSON.parse(payload.data['ivri-quiz-bookmarks'] || '[]') || []).length,
                 read_topics: (JSON.parse(payload.data['ivri-read'] || '[]') || []).length,
                 highlight_groups: Object.keys(JSON.parse(payload.data['ivri-highlights'] || '{}') || {}).length,
                 note_groups: Object.keys(JSON.parse(payload.data['ivri-notes'] || '{}') || {}).length,
@@ -1048,7 +1050,7 @@ const app = {
     },
 
     _renderMeStats: () => {
-        const bm = (app._loadBookmarks() || []).length;
+        const bm = (app._loadBookmarks() || []).length + (app._loadQuizBookmarks() || []).length;
         const hl = Object.values(app._loadAllHighlights() || {}).reduce((n, a) => n + a.length, 0);
         const nt = Object.values(app._loadAllNotes() || {}).reduce((n, a) => n + a.length, 0);
         const rd = (app._loadRead() || []).length;
@@ -1537,6 +1539,14 @@ const app = {
                 </div>
             `}).join('');
         }
+        // A long region list can leave the page scrolled near its end. When the
+        // system cards replace it, always begin with Osteology/the first card.
+        grid.scrollTop = 0;
+        window.scrollTo(0, 0);
+        requestAnimationFrame(() => {
+            window.scrollTo(0, 0);
+            requestAnimationFrame(() => window.scrollTo(0, 0));
+        });
     },
 
     getRegionIcon: (region) => {
@@ -1587,6 +1597,9 @@ const app = {
     },
 
     selectRegion: (region) => {
+        // Reset before replacing the long region grid; doing this first stops
+        // mobile scroll anchoring from restoring the old near-bottom position.
+        window.scrollTo(0, 0);
         app.state.region = region;
         app.setHash(`#/atlas/${encodeURIComponent(region)}`);
         app.renderAtlasSelector();
@@ -2722,6 +2735,7 @@ const app = {
 
     // ============== BOOKMARKS ==============
     BOOKMARK_KEY: 'ivri-bookmarks',
+    QUIZ_BOOKMARK_KEY: 'ivri-quiz-bookmarks',
     READ_KEY: 'ivri-read',  // Mark-as-Read storage
 
     bookmarkId: (region, system, index) => `${region}::${system}::${index}`,
@@ -2732,6 +2746,15 @@ const app = {
     },
 
     _saveBookmarks: (arr) => localStorage.setItem(app.BOOKMARK_KEY, JSON.stringify(arr)),
+
+    _loadQuizBookmarks: () => {
+        try {
+            const saved = JSON.parse(localStorage.getItem(app.QUIZ_BOOKMARK_KEY) || '[]');
+            return Array.isArray(saved) ? saved.filter(item => item && item.id) : [];
+        } catch { return []; }
+    },
+
+    _saveQuizBookmarks: (arr) => localStorage.setItem(app.QUIZ_BOOKMARK_KEY, JSON.stringify(arr)),
 
     isBookmarked: (id) => app._loadBookmarks().includes(id),
 
@@ -2853,15 +2876,17 @@ const app = {
     showBookmarks: () => {
         app._teardownHighlightPopup();
         const ids = app._loadBookmarks();
+        const quizItems = app._loadQuizBookmarks();
+        const total = ids.length + quizItems.length;
         document.getElementById('atlas-selector').style.display = 'none';
         document.getElementById('atlas-content').style.display = 'grid';
-        document.getElementById('atlas-crumb').innerHTML = `ATLAS > MY BOOKMARKS (${ids.length})`;
+        document.getElementById('atlas-crumb').innerHTML = `LIBRARY > MY BOOKMARKS (${total})`;
 
         const list = document.getElementById('topic-list');
         const panel = document.getElementById('detail-panel');
 
-        if (ids.length === 0) {
-            list.innerHTML = '<div style="padding:20px; color:var(--text-mute);">No bookmarks yet. Click the star icon on any topic to save it here.</div>';
+        if (total === 0) {
+            list.innerHTML = '<div style="padding:20px; color:var(--text-mute);">No bookmarks yet. Bookmark an atlas topic or a quiz question to save it here.</div>';
             panel.innerHTML = `<div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0.4;color:var(--text-mute);">
                 <i class="fas fa-star" style="font-size:3rem;margin-bottom:20px;"></i>
                 <div>YOUR BOOKMARK LIST IS EMPTY</div>
@@ -2869,7 +2894,7 @@ const app = {
             return;
         }
 
-        list.innerHTML = ids.map((id) => {
+        const atlasHtml = ids.map((id) => {
             const [region, system, idxStr] = id.split('::');
             const idx = parseInt(idxStr, 10);
             const item = atlasData?.[region]?.[system]?.[idx];
@@ -2880,10 +2905,68 @@ const app = {
                     </button>`;
         }).join('');
 
+        const quizHtml = quizItems.map((item) => {
+            const encodedId = encodeURIComponent(item.id);
+            const preview = String(item.question || 'Saved quiz question').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+            const shortPreview = preview.length > 72 ? `${preview.slice(0, 69)}...` : preview;
+            return `<button class="topic-btn" data-quiz-bookmark-id="${encodedId}" onclick="app.openQuizBookmark('${encodedId}')">
+                        <i class="fas fa-bookmark bm-star"></i> ${shortPreview}
+                        <span class="bm-meta">${item.region} / ${item.system} / ${String(item.mode).toUpperCase()}</span>
+                    </button>`;
+        }).join('');
+
+        list.innerHTML = `${atlasHtml ? '<div class="bookmark-group-title"><i class="fas fa-book-open"></i> Atlas topics</div>' + atlasHtml : ''}
+                          ${quizHtml ? '<div class="bookmark-group-title"><i class="fas fa-brain"></i> Quiz questions</div>' + quizHtml : ''}`;
+
         panel.innerHTML = `<div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0.5;color:var(--text-mute);">
             <i class="fas fa-bookmark" style="font-size:3rem;margin-bottom:20px;color:var(--atlas-gold);"></i>
-            <div>SELECT A BOOKMARKED TOPIC FROM THE LIST</div>
+            <div>SELECT A SAVED TOPIC OR QUIZ QUESTION</div>
           </div>`;
+    },
+
+    openQuizBookmark: (encodedId) => {
+        const id = decodeURIComponent(encodedId);
+        const item = app._loadQuizBookmarks().find(saved => saved.id === id);
+        if (!item) {
+            app.showBookmarks();
+            return;
+        }
+
+        // Prefer the current quiz bank entry, with the saved snapshot as an
+        // offline-safe fallback if the bank structure changes later.
+        const live = (typeof quizBank !== 'undefined')
+            ? quizBank?.[item.region]?.[item.system]?.[item.mode]?.[item.index]
+            : null;
+        const question = live?.q || item.question || '';
+        let answer = item.answer || '';
+        if (live) {
+            if (item.mode === 'mcq') answer = live.o?.[live.a] ?? answer;
+            else if (item.mode === 'tf') answer = live.a ? 'True' : 'False';
+            else if (item.mode === 'fib') answer = Array.isArray(live.a) ? live.a.join(' / ') : live.a;
+        }
+        const explanation = live?.e || item.explanation || '';
+        const panel = document.getElementById('detail-panel');
+        panel.innerHTML = `<div class="quiz-bookmark-detail">
+            <div class="qb-kicker"><i class="fas fa-brain"></i> ${item.region} / ${item.system} / ${String(item.mode).toUpperCase()}</div>
+            <div class="qb-question">${question}</div>
+            <div class="qb-answer"><strong>Correct answer:</strong><br>${answer}</div>
+            ${explanation ? `<div class="qb-explanation"><strong>Explanation:</strong><br>${explanation}</div>` : ''}
+            <button class="bm-btn active" style="margin-top:20px" onclick="app.removeQuizBookmark('${encodedId}')">
+                <i class="fas fa-bookmark"></i> <span>Remove quiz bookmark</span>
+            </button>
+        </div>`;
+        document.querySelectorAll('#topic-list .topic-btn').forEach(btn => btn.classList.remove('active'));
+        const active = document.querySelector(`#topic-list .topic-btn[data-quiz-bookmark-id="${encodedId}"]`);
+        if (active) active.classList.add('active');
+        panel.scrollTop = 0;
+    },
+
+    removeQuizBookmark: (encodedId) => {
+        const id = decodeURIComponent(encodedId);
+        app._saveQuizBookmarks(app._loadQuizBookmarks().filter(item => item.id !== id));
+        if (typeof showToast === 'function') showToast('Quiz bookmark removed', 'info', 'fa-bookmark');
+        app.showBookmarks();
+        app._refreshMeStatsLite();
     },
 
     openBookmark: (region, system, idx) => {

@@ -46,12 +46,77 @@ const quizApp = {
     );
   },
 
+  QUIZ_BOOKMARK_KEY: 'ivri-quiz-bookmarks',
+
+  questionBookmarkId: (question) => {
+    if (!question || question._region == null || question._system == null ||
+        question._mode == null || question._index == null) return null;
+    return `${question._region}::${question._system}::${question._mode}::${question._index}`;
+  },
+
+  loadPersistentBookmarks: () => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(quizApp.QUIZ_BOOKMARK_KEY) || '[]');
+      return Array.isArray(saved) ? saved.filter(item => item && item.id) : [];
+    } catch (e) {
+      return [];
+    }
+  },
+
+  savePersistentBookmarks: (items) => {
+    try {
+      localStorage.setItem(quizApp.QUIZ_BOOKMARK_KEY, JSON.stringify(items));
+    } catch (e) {
+      console.warn('Quiz bookmark save failed:', e);
+    }
+  },
+
+  persistentBookmarkRecord: (question) => {
+    const id = quizApp.questionBookmarkId(question);
+    if (!id) return null;
+    let answer = '';
+    if (question._mode === 'mcq') answer = question.o?.[question.a] ?? '';
+    else if (question._mode === 'tf') answer = question.a ? 'True' : 'False';
+    else if (question._mode === 'fib') answer = Array.isArray(question.a) ? question.a.join(' / ') : question.a;
+    return {
+      id,
+      region: question._region,
+      system: question._system,
+      mode: question._mode,
+      index: question._index,
+      question: question.q || '',
+      answer: answer || '',
+      explanation: question.e || '',
+      savedAt: Date.now()
+    };
+  },
+
+  setPersistentBookmark: (question, shouldSave) => {
+    const record = quizApp.persistentBookmarkRecord(question);
+    if (!record) return;
+    const items = quizApp.loadPersistentBookmarks();
+    const existing = items.findIndex(item => item.id === record.id);
+    if (shouldSave && existing === -1) items.push(record);
+    else if (shouldSave) items[existing] = { ...items[existing], ...record };
+    else if (existing !== -1) items.splice(existing, 1);
+    quizApp.savePersistentBookmarks(items);
+  },
+
+  syncSessionBookmarks: () => {
+    const savedIds = new Set(quizApp.loadPersistentBookmarks().map(item => item.id));
+    quizApp.bookmarks = new Set();
+    quizApp.questions.forEach((question, index) => {
+      if (savedIds.has(quizApp.questionBookmarkId(question))) quizApp.bookmarks.add(index);
+    });
+  },
+
   // ==================== INITIALIZATION ====================
 
   openMenu: () => {
     document.getElementById('quiz-overlay').style.display = 'flex';
     document.querySelector('.quiz-modal').classList.remove('review-mode');
     document.body.classList.add('body-modal-open');   // hides floating toggle
+    document.body.style.overflow = 'hidden';
     quizApp.showRegionView();
     quizApp.loadSavedProgress();
   },
@@ -186,7 +251,7 @@ const quizApp = {
     quizApp.wrong = 0;
     quizApp.currentIndex = 0;
     quizApp.userAnswers = new Array(quizApp.questions.length).fill(null);
-    quizApp.bookmarks.clear();
+    quizApp.syncSessionBookmarks();
     quizApp.flagged.clear();
     quizApp.startTime = Date.now();
     quizApp.quizState = 'active';
@@ -240,7 +305,7 @@ const quizApp = {
 
   showRegionView: () => {
     quizApp.hideAllViews();
-    document.getElementById('quiz-region-view').style.display = 'block';
+    document.getElementById('quiz-region-view').style.display = 'flex';
 
     const grid = document.getElementById('region-grid');
     grid.innerHTML = '';
@@ -287,6 +352,7 @@ const quizApp = {
       resumeCard.style.animation = 'pulse 2s infinite';
       grid.insertBefore(resumeCard, grid.firstChild);
     }
+    grid.scrollTop = 0;
   },
 
   selectRegion: (region) => {
@@ -300,7 +366,7 @@ const quizApp = {
 
   showSystemView: () => {
     quizApp.hideAllViews();
-    document.getElementById('quiz-system-view').style.display = 'block';
+    document.getElementById('quiz-system-view').style.display = 'flex';
 
     document.getElementById('system-breadcrumb').innerHTML =
       `<span style="color:var(--atlas-gold)">${quizApp.selectedRegion.toUpperCase()}</span> > SELECT SYSTEM`;
@@ -334,6 +400,7 @@ const quizApp = {
     combinedCard.style.borderColor = 'var(--why-cyan)';
     combinedCard.style.borderLeft = '4px solid var(--why-cyan)';
     grid.appendChild(combinedCard);
+    grid.scrollTop = 0;
   },
 
   selectSystem: (system) => {
@@ -347,7 +414,7 @@ const quizApp = {
 
   showModeView: () => {
     quizApp.hideAllViews();
-    document.getElementById('quiz-menu-view').style.display = 'block';
+    document.getElementById('quiz-menu-view').style.display = 'flex';
 
     document.getElementById('mode-breadcrumb').innerHTML =
       `<span style="color:var(--atlas-gold)">${quizApp.selectedRegion.toUpperCase()}</span> > 
@@ -369,6 +436,8 @@ const quizApp = {
       card.style.pointerEvents = count > 0 ? 'auto' : 'none';
       card.style.cursor = count > 0 ? 'pointer' : 'not-allowed';
     });
+    const grid = document.querySelector('#quiz-menu-view .quiz-menu-grid');
+    if (grid) grid.scrollTop = 0;
   },
 
   backToModes: () => {
@@ -432,6 +501,8 @@ const quizApp = {
       });
     });
 
+    quizApp.syncSessionBookmarks();
+
     quizApp.userAnswers = new Array(quizApp.questions.length).fill(null);
     quizApp.startTime = Date.now();
     quizApp.startTimer();
@@ -472,7 +543,6 @@ const quizApp = {
     quizApp.wrong = 0;
     quizApp.currentIndex = 0;
     quizApp.userAnswers = [];
-    quizApp.bookmarks.clear();
     quizApp.flagged.clear();
     quizApp.quizState = 'active';
 
@@ -484,6 +554,8 @@ const quizApp = {
       const j = Math.floor(Math.random() * (i + 1));
       [quizApp.questions[i], quizApp.questions[j]] = [quizApp.questions[j], quizApp.questions[i]];
     }
+
+    quizApp.syncSessionBookmarks();
 
     // Initialize user answers array
     quizApp.userAnswers = new Array(quizApp.questions.length).fill(null);
@@ -1039,15 +1111,19 @@ const quizApp = {
   // ==================== BOOKMARK & FLAG ====================
 
   toggleBookmark: () => {
+    const question = quizApp.questions[quizApp.currentIndex];
     if (quizApp.bookmarks.has(quizApp.currentIndex)) {
       quizApp.bookmarks.delete(quizApp.currentIndex);
+      quizApp.setPersistentBookmark(question, false);
       showToast('Bookmark removed', 'info', 'fa-bookmark');
     } else {
       quizApp.bookmarks.add(quizApp.currentIndex);
-      showToast('Bookmarked!', 'success', 'fa-bookmark');
+      quizApp.setPersistentBookmark(question, true);
+      showToast('Saved to Library bookmarks!', 'success', 'fa-bookmark');
     }
     quizApp.updateActionButtons();
     quizApp.renderQuestionGrid();
+    if (typeof app !== 'undefined' && typeof app._refreshMeStatsLite === 'function') app._refreshMeStatsLite();
   },
 
   toggleFlag: () => {
@@ -1573,7 +1649,12 @@ const quizApp = {
       quizApp.score = progress.score;
       quizApp.wrong = progress.wrong;
       quizApp.userAnswers = progress.userAnswers;
-      quizApp.bookmarks = new Set(progress.bookmarks || []);
+      // Migrate bookmarks saved in an older resumable session, then restore
+      // the permanent Library-backed state for this question pool.
+      (progress.bookmarks || []).forEach(index => {
+        if (progress.questions[index]) quizApp.setPersistentBookmark(progress.questions[index], true);
+      });
+      quizApp.syncSessionBookmarks();
       quizApp.flagged = new Set(progress.flagged || []);
       quizApp.startTime = Date.now() - (progress.elapsedTime * 1000);
       quizApp.quizState = 'active';

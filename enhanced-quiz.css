@@ -17,6 +17,11 @@
   padding: 24px 28px !important;
 }
 
+.quiz-menu-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 /* Full-screen mode when reviewing answers */
 .quiz-modal.review-mode {
   width: 100%;
@@ -1165,16 +1170,37 @@ body.professional-mode .review-back-to-top {
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 900px) {
+  #quiz-overlay {
+    width: 100vw;
+    height: 100dvh;
+    align-items: stretch;
+  }
+
   .quiz-modal {
     width: 100%;
-    height: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    min-height: 0;
     max-height: none;
     border-radius: 0;
     /* Reserve safe space at bottom so the Next/Submit/Review buttons
        never sit under the floating Pro/Student toggle on short phones.
        The toggle auto-hides while the modal is open via body.body-modal-open,
        but this padding is a defence-in-depth fallback for older browsers. */
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+    padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(12px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .quiz-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    gap: 14px;
+  }
+
+  .quiz-mode-card {
+    margin-bottom: 0;
   }
   /* Make sure inner navigation never gets clipped */
   .quiz-navigation {
