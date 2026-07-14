@@ -1193,14 +1193,76 @@ body.professional-mode .review-back-to-top {
   .quiz-menu-grid {
     display: grid;
     grid-template-columns: 1fr;
+    /* Keep every choice as a real card. Without an explicit implicit-row
+       minimum, CSS Grid squeezes the whole list into this flex pane and the
+       icon/title/count layers collapse into one another on phones. */
+    grid-auto-rows: minmax(185px, max-content);
+    align-content: start;
     flex: 1 1 auto;
     min-height: 0;
     max-height: none;
     gap: 14px;
+    padding: 4px 8px 24px 4px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   .quiz-mode-card {
+    min-height: 185px;
+    height: auto;
     margin-bottom: 0;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .quiz-mode-card .mode-icon {
+    flex: 0 0 auto;
+    font-size: 2.5rem;
+    line-height: 1;
+    margin: 0 0 12px;
+  }
+
+  .quiz-mode-card h3 {
+    width: 100%;
+    margin: 0;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .quiz-mode-card .mode-count {
+    width: 100%;
+    margin: 8px 0 0;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .quiz-mode-card .mode-desc {
+    width: 100%;
+    margin: 7px 0 0;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .quiz-view-header {
+    padding-inline: 42px;
+    margin-bottom: 14px;
+  }
+
+  .quiz-view-header h2 {
+    margin-inline: auto;
+    font-size: clamp(1.35rem, 6vw, 1.8rem);
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .quiz-close-btn {
+    top: 10px;
+    right: 10px;
   }
   /* Make sure inner navigation never gets clipped */
   .quiz-navigation {
