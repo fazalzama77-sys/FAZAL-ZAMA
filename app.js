@@ -2143,23 +2143,24 @@ const app = {
         return true;
     },
 
-    // Fixed top-of-viewport action bar that appears when user selects text in
-    // the detail panel. Pinned to the top so the native browser selection
-    // toolbar (Copy / Web search / Ask Claude / Read aloud / etc.) can't sit
-    // on top of it — those menus appear at the selection itself, never at
-    // the very top of the viewport.
+    // Selection action bar. It follows the selected text, preferring the space
+    // immediately below it and flipping above when the viewport is tight.
     attachHighlightSelectionUI: (panel, topicId) => {
         // Remove any prior popup AND its selectionchange listener so we don't
         // leak handlers when the user navigates between topics.
         const old = document.getElementById('hl-popup');
         if (old) {
             if (old._listener) document.removeEventListener('selectionchange', old._listener);
+            if (old._positionListener) {
+                window.removeEventListener('scroll', old._positionListener, true);
+                window.removeEventListener('resize', old._positionListener);
+            }
             old.remove();
         }
 
         const popup = document.createElement('div');
         popup.id = 'hl-popup';
-        popup.className = 'hl-popup hl-popup-top';
+        popup.className = 'hl-popup hl-popup-selection';
         popup.style.display = 'none';
         popup.innerHTML = `
             <span class="hl-popup-label"><i class="fas fa-highlighter"></i> Mark:</span>
@@ -2182,6 +2183,37 @@ const app = {
             popup.dataset.text = '';
         };
 
+        const positionPopup = (range) => {
+            if (!range || popup.style.display === 'none') return;
+
+            // For a multi-line selection, follow its final visible line instead
+            // of centring against the large rectangle of the complete range.
+            const rects = Array.from(range.getClientRects()).filter(r => r.width || r.height);
+            const anchor = rects[rects.length - 1] || range.getBoundingClientRect();
+            if (!anchor || (!anchor.width && !anchor.height)) return;
+
+            popup.style.visibility = 'hidden';
+            const popupWidth = popup.offsetWidth;
+            const popupHeight = popup.offsetHeight;
+            const edge = 12;
+            const gap = 12;
+
+            const minCenterX = edge + (popupWidth / 2);
+            const maxCenterX = window.innerWidth - edge - (popupWidth / 2);
+            const wantedCenterX = anchor.left + (anchor.width / 2);
+            const centerX = Math.max(minCenterX, Math.min(maxCenterX, wantedCenterX));
+
+            let top = anchor.bottom + gap;
+            if (top + popupHeight > window.innerHeight - edge) {
+                top = anchor.top - popupHeight - gap;
+            }
+            top = Math.max(edge, Math.min(window.innerHeight - popupHeight - edge, top));
+
+            popup.style.left = `${centerX}px`;
+            popup.style.top = `${top}px`;
+            popup.style.visibility = 'visible';
+        };
+
         const onSelectionChange = () => {
             const sel = window.getSelection();
             if (!sel || sel.isCollapsed) { hide(); return; }
@@ -2195,9 +2227,21 @@ const app = {
             // Stash a clone of the live Range so we can wrap it after the user
             // taps a colour button (tapping clears the selection on mobile).
             popup._range = range.cloneRange();
+            requestAnimationFrame(() => positionPopup(popup._range));
         };
         document.addEventListener('selectionchange', onSelectionChange);
         popup._listener = onSelectionChange;
+
+        // Keep the palette beside the selection while an inner panel scrolls
+        // or the phone changes orientation.
+        const repositionPopup = () => {
+            if (popup.style.display !== 'none' && popup._range) {
+                requestAnimationFrame(() => positionPopup(popup._range));
+            }
+        };
+        window.addEventListener('scroll', repositionPopup, true);
+        window.addEventListener('resize', repositionPopup);
+        popup._positionListener = repositionPopup;
 
         // Color buttons -> save + visually wrap the highlight immediately
         popup.querySelectorAll('.hl-popup-btn').forEach(btn => {
@@ -2279,6 +2323,10 @@ const app = {
         const old = document.getElementById('hl-popup');
         if (old) {
             if (old._listener) document.removeEventListener('selectionchange', old._listener);
+            if (old._positionListener) {
+                window.removeEventListener('scroll', old._positionListener, true);
+                window.removeEventListener('resize', old._positionListener);
+            }
             old.remove();
         }
     },

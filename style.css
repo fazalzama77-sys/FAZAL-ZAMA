@@ -6209,14 +6209,14 @@ body.professional-mode .hl-group-item.hl-pink   { background: #f8bbd0; color: #2
 }
 
 /* ============================================================
-   HIGHLIGHT POPUP — fixed top bar (cannot be covered by the
-   native browser selection toolbar, which appears AT the
-   selection itself, never at the very top of the viewport)
+   HIGHLIGHT POPUP — follows the selected text. JavaScript sets
+   its viewport-clamped position and flips it above the selection
+   when there is not enough room below.
    ============================================================ */
-.hl-popup.hl-popup-top {
+.hl-popup.hl-popup-selection {
     position: fixed !important;
-    top: 8px !important;
-    left: 50% !important;
+    top: 0;
+    left: 0;
     transform: translateX(-50%) !important;
     z-index: 99999;
     background: #0e1424;
@@ -6229,11 +6229,11 @@ body.professional-mode .hl-group-item.hl-pink   { background: #f8bbd0; color: #2
     gap: 6px;
     max-width: calc(100vw - 16px);
     flex-wrap: nowrap;
-    animation: hl-popup-slide-down .18s ease-out;
+    animation: hl-popup-near-selection .16s ease-out;
 }
-.hl-popup.hl-popup-top::after { display: none; }
-@keyframes hl-popup-slide-down {
-    from { opacity: 0; transform: translate(-50%, -20px); }
+.hl-popup.hl-popup-selection::after { display: none; }
+@keyframes hl-popup-near-selection {
+    from { opacity: 0; transform: translate(-50%, 4px); }
     to   { opacity: 1; transform: translate(-50%, 0); }
 }
 .hl-popup-label {
@@ -6275,7 +6275,7 @@ body.professional-mode .hl-group-item.hl-pink   { background: #f8bbd0; color: #2
 .hl-popup-action.hl-close-action:hover { background: rgba(255,255,255,0.06); color: var(--text-main); }
 
 @media (max-width: 600px) {
-    .hl-popup.hl-popup-top { padding: 5px 6px; gap: 4px; border-radius: 24px; }
+    .hl-popup.hl-popup-selection { padding: 5px 6px; gap: 4px; border-radius: 24px; }
     .hl-popup-label { display: none; }
     .hl-popup-sep   { display: none; }
     .hl-popup-btn   { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.12); padding: 0; }
