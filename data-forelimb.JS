@@ -610,3 +610,361 @@ atlasData["Forelimb"] = {
     ],
     "Splanchnology": []  // No visceral organs in the forelimb (intentionally empty per VCI Unit-2)
 };
+
+// Verified regional audit (2026-07): replace overgeneralized or inaccurate legacy fields.
+(function applyVerifiedForelimbAudit() {
+    var region = atlasData["Forelimb"];
+    function entry(section, title) {
+        return (region[section] || []).find(function (item) { return item.title === title; });
+    }
+    function replace(section, title, fields) {
+        var item = entry(section, title);
+        // Preserve the original detailed Standard and Elite text. Corrections are
+        // applied non-destructively below instead of replacing whole fields.
+        if (false && item) Object.assign(item, fields);
+    }
+
+    replace("Osteology", "Scapula", {
+        desc: "<b>Ox standard:</b> A flat triangular bone suspended from the trunk by muscles (a synsarcosis). The lateral surface is divided by the sinuous scapular spine into a smaller supraspinous and larger infraspinous fossa. The spine ends distally in a distinct acromion. The medial or costal surface bears the subscapular fossa, and the ventral angle bears the glenoid cavity, supraglenoid tubercle and coracoid process.",
+        eliteDesc: "<b>SCAPULA</b><br><br>The scapula has cranial, caudal and dorsal borders; cranial, caudal and ventral angles; and lateral and medial surfaces. The <b>lateral</b> surface bears the spine and the supra- and infraspinous fossae. The <b>medial (costal)</b> surface faces the thorax and bears the subscapular fossa and serrated areas. Large herbivores have scapular cartilage along the dorsal border. The ox has a distinct acromion. The horse lacks an acromion; its spine bears a prominent tuber spinae and subsides distally. The suprascapular nerve winds around the cranial border/neck and is vulnerable to trauma.",
+        comparative: [
+            { species: "Ox", note: "Sinuous spine, distinct acromion and extensive scapular cartilage." },
+            { species: "Horse", note: "No acromion; prominent tuber spinae and large scapular cartilage." },
+            { species: "Dog", note: "Acromion has a hamate process; the cat additionally has a suprahamate process." },
+            { species: "Pig", note: "Broad scapula with a prominent spine and acromion." }
+        ]
+    });
+
+    replace("Osteology", "Humerus", {
+        eliteDesc: "<b>HUMERUS</b><br><br>Proximally, the head articulates with the glenoid cavity. Greater and lesser tubercles border the intertubercular groove for the biceps tendon; the groove is undivided in cattle and divided by an intermediate tubercle in the horse. The deltoid tuberosity and teres-major tuberosity are important shaft landmarks. The brachialis groove (musculospiral groove) carries the radial nerve with the <b>deep brachial vessels</b>, not the main brachial artery. Distally, the humeral condyle articulates with radius and ulna and is flanked by epicondyles. The dog commonly has a supratrochlear foramen; the cat instead has a supracondylar foramen transmitting the median nerve and brachial artery. These foramina are absent in cattle and horses.",
+        clinical: "<b>Radial neuropathy:</b> The radial nerve is vulnerable where it winds around the humerus with the deep brachial vessels. Lesion signs depend on whether branches to triceps arise proximal to the injury."
+    });
+
+    replace("Osteology", "Radius & Ulna", {
+        eliteDesc: "<b>RADIUS AND ULNA</b><br><br>The radius is the principal weight-bearing bone of the antebrachium. In cattle the ulna is complete, fused to the radius and separated from it by proximal and distal interosseous spaces; its distal end forms the lateral styloid process. In the adult horse the ulna is greatly reduced and fused to the radius; its distal remnant is incorporated at the lateral styloid process. Cattle and horses cannot pronate or supinate the forearm. Pig radius and ulna remain complete. Carnivore bones remain separate and allow limited rotation, with cats generally more mobile than dogs; it is inaccurate to describe normal canine rotation as full.",
+        comparative: [
+            { species: "Ox", note: "Complete ulna fused to radius; two interosseous spaces; lateral styloid belongs to ulna." },
+            { species: "Horse", note: "Ulna reduced and fused; one principal proximal interosseous space; distal ulnar remnant forms the lateral styloid region." },
+            { species: "Dog", note: "Radius and ulna separate with limited pronation and supination." },
+            { species: "Pig", note: "Radius and ulna complete and separate." }
+        ]
+    });
+
+    replace("Osteology", "Carpus (Knee)", {
+        eliteDesc: "<b>CARPUS</b><br><br>The bovine carpus normally has six bones. In the proximal row, from medial to lateral, are radial, intermediate and ulnar carpal bones; the accessory carpal lies on the palmar aspect of the ulnar side. In the distal row C1 is absent, C2 and C3 are fused, and C4 is separate. The antebrachiocarpal joint has the greatest motion; middle carpal and carpometacarpal movement is smaller. The palmar carpal ligament and flexor retinaculum bound the carpal canal, which transmits flexor tendons and neurovascular structures in a species-specific arrangement.",
+        comparative: [
+            { species: "Ox", note: "Six bones: four proximal and two distal (C2+3 and C4)." },
+            { species: "Horse", note: "Usually seven; C1 is variably present, giving eight in some animals." },
+            { species: "Dog", note: "Seven; radial and intermediate carpals are fused as the intermedioradial carpal bone." },
+            { species: "Pig", note: "Eight carpal bones, including four separate distal numbered bones." }
+        ]
+    });
+
+    replace("Osteology", "Digits", {
+        desc: "<b>Ox standard:</b> Digits III and IV are functional and each has proximal, middle and distal phalanges, two proximal sesamoids and one distal sesamoid. Digits II and V form the dewclaws and contain variable rudimentary phalanges. Each functional digit has its own claw capsule.",
+        eliteDesc: "<b>BOVINE DIGITS AND CLAWS</b><br><br>Digits III and IV are the principal weight-bearing digits. Each contains P1, P2 and P3, paired proximal sesamoids at the metacarpophalangeal joint, and a distal sesamoid associated with the distal interphalangeal joint and deep digital flexor tendon. Digits II and V are accessory dewclaws with variable skeletal development. Each P3 is enclosed by a separate horn capsule comprising wall, sole and heel/bulb regions. The white line is the junction between wall and sole horn and is clinically important in white-line disease. <b>Laminitis</b> is inflammation and structural failure of the laminar/corial apparatus; it is not simply a lesion of the white line. In dogs the distal phalanx bears an ungual process and crest supporting the claw.",
+        clinical: "<b>Claw disease:</b> Laminitis, sole ulcer, white-line disease and interdigital phlegmon are distinct disorders and should not be used as synonyms."
+    });
+
+    replace("Myology", "Serratus Ventralis", {
+        desc: "<b>Serratus ventralis:</b> Cervical and thoracic parts attach the medial scapula to cervical transverse processes and ribs. Together with the opposite side it forms the principal muscular sling suspending the trunk between the thoracic limbs. The cervical part tends to draw the scapula cranially and the thoracic part caudally; both stabilize it during weight bearing.",
+        eliteDesc: "<b>SERRATUS VENTRALIS</b><br><br>This broad, fan-shaped muscle is a major component of the synsarcosis. Its cervical part arises from caudal cervical transverse processes and its thoracic part from cranial ribs; both insert on the serrated face of the scapula. Alternating action moves the scapula, while bilateral weight-bearing action supports the thorax. It should not be taught primarily as an inspiratory muscle. Cervical spinal nerves supply the cervical part and the long thoracic nerve supplies the thoracic part."
+    });
+
+    replace("Myology", "Coracobrachialis", {
+        desc: "<b>Origin:</b> Coracoid process of scapula.<br><b>Insertion:</b> Proximomedial humerus/crest of the lesser tubercle, varying by species.<br><b>Action:</b> Adducts and stabilizes the shoulder and can assist extension according to joint position.<br><b>Nerve:</b> Musculocutaneous nerve.",
+        eliteDesc: "<b>CORACOBRACHIALIS</b><br><br>A small medial shoulder muscle extending from the coracoid process to the proximal medial humerus. It adducts and stabilizes the shoulder and generally assists extension rather than being described simply as a shoulder flexor. It is supplied by the musculocutaneous nerve."
+    });
+
+    replace("Osteology", "Metacarpus (Cannon)", {
+        desc: "<b>Ox standard:</b> Metacarpals III and IV fuse to form the cannon bone. Dorsal and palmar longitudinal grooves mark the fusion; distally there are paired trochleae for digits III and IV. Metacarpals II and V are absent or rudimentary, with a small proximal remnant of V sometimes present.",
+        eliteDesc: "<b>METACARPUS</b><br><br>In cattle, metacarpals III and IV form one large cannon bone with two distal articular divisions. Longitudinal grooves and a metacarpal canal mark the line of fusion. A small proximal remnant of metacarpal V may occur; metacarpal II is usually absent. In the horse, metacarpal III is the cannon and II/IV are the reduced splint bones. Dogs retain five separate metacarpals, with metacarpal I supporting the dewclaw.",
+        comparative: [
+            { species: "Ox", note: "Metacarpals III and IV fused; small proximal remnant of V may be present." },
+            { species: "Horse", note: "Metacarpal III is the cannon; reduced metacarpals II and IV form the splint bones." },
+            { species: "Dog", note: "Five separate metacarpals; I supports the dewclaw." },
+            { species: "Pig", note: "Metacarpals III and IV are principal, while II and V support smaller digits." }
+        ]
+    });
+
+    replace("Myology", "Brachiocephalicus", {
+        desc: "<b>Brachiocephalicus:</b> Extends from the cleidobrachial intersection to the humerus distally and to the head/neck proximally. In cattle the cleidocephalicus has cleidomastoideus and cleido-occipitalis parts. With the limb free it advances the limb; with the limb fixed it bends the neck laterally or extends the head/neck bilaterally.",
+        eliteDesc: "<b>BRACHIOCEPHALICUS</b><br><br>The bovine muscle comprises cleidobrachialis and a cleidocephalicus divided into cleidomastoideus and cleido-occipitalis. It is separated from sternocephalicus by the jugular furrow. Action reverses with fixation: it advances the thoracic limb when the head is fixed and bends the neck laterally when the limb is fixed. The horse has a single cleidomastoideus part of cleidocephalicus.",
+        comparative: [
+            { species: "Ox", note: "Cleidocephalicus has mastoid and occipital parts." },
+            { species: "Horse", note: "Cleidocephalicus is represented by cleidomastoideus." },
+            { species: "Dog", note: "Cleidocephalicus has cleidocervicalis and cleidomastoideus parts." },
+            { species: "Pig", note: "Species-specific cleidocephalic subdivisions should be learned from porcine anatomy." }
+        ]
+    });
+
+    replace("Myology", "Rhomboideus", {
+        eliteDesc: "<b>RHOMBOIDEUS</b><br><br>Rhomboideus lies deep to trapezius and attaches the dorsal scapular border/cartilage to the nuchal and supraspinous regions. Cervical and thoracic parts elevate and stabilize the scapula against the trunk. A distinct capitis part is not recognized in cattle, whereas carnivores possess one."
+    });
+
+    replace("Myology", "Biceps Brachii", {
+        eliteDesc: "<b>BICEPS BRACHII</b><br><br>The bovine biceps arises from the supraglenoid tubercle, crosses the shoulder in the intertubercular groove and inserts chiefly on proximal radius with species-specific fascial/ligamentous extensions. It flexes the elbow and helps extend/stabilize the shoulder. A lacertus fibrosus connecting biceps to extensor carpi radialis is highly developed in the horse and less developed in cattle; its passive-support role should be stated proportionately."
+    });
+
+    replace("Myology", "Triceps Brachii", {
+        eliteDesc: "<b>TRICEPS BRACHII</b><br><br>Long, lateral, medial and accessory heads are described in ruminants; all converge on the olecranon and are supplied by the radial nerve. All extend the elbow. The long head also crosses the shoulder and can flex it. The horse lacks a distinct accessory head, while the dog possesses four heads. Proximal radial-nerve injury affecting triceps branches prevents normal elbow extension and weight bearing."
+    });
+
+    replace("Myology", "Ulnaris Lateralis", {
+        desc: "<b>Ulnaris lateralis:</b> A radial-nerve muscle arising from the lateral epicondyle and inserting on the accessory carpal bone and reduced fifth metacarpal region. Despite lying in the extensor compartment, it flexes and stabilizes the carpus.",
+        eliteDesc: "<b>ULNARIS LATERALIS</b><br><br>This muscle is homologous to extensor carpi ulnaris but functions as a carpal flexor in domestic quadrupeds because its tendon passes caudal to the carpal axis. It inserts on the accessory carpal bone and lateral proximal metacarpal structures. The interval beside flexor carpi ulnaris is a topographic landmark, but nerve-block technique must remain species-specific.",
+        clinical: "<b>Clinical relevance:</b> The interval between ulnaris lateralis and flexor carpi ulnaris helps locate the ulnar nerve. Exact block level, approach and dose must follow a current species-specific procedural reference."
+    });
+
+    replace("Myology", "Flexor Carpi Ulnaris", {
+        clinical: "<b>Clinical relevance:</b> The groove between flexor carpi ulnaris and ulnaris lateralis is an ulnar-nerve landmark. Do not substitute one fixed distance for palpation and species-specific guidance. Isolated weakness should be localized neurologically rather than attributed to angular limb deformity without evidence."
+    });
+
+    var arterial = entry("Angiology", "Arterial Tree of the Forelimb (Subclavian → Digital)");
+    if (arterial && arterial.comparative) {
+        arterial.comparative = arterial.comparative.map(function (row) {
+            return row.species === "Ox" ? { species: "Ox", note: "Median artery is dominant distally; the radial artery is comparatively small but present. Palmar common and proper digital arteries supply the claws." } : row;
+        });
+    }
+
+    replace("Myology", "Teres Minor", {
+        eliteDesc: "<b>TERES MINOR</b><br><br>Teres minor lies caudal to infraspinatus and inserts on the teres-minor tuberosity. It flexes the shoulder and assists lateral rotation/abduction according to species and limb position. It is supplied by the axillary nerve. Restricted rotation in large ungulates reflects overall joint conformation and soft-tissue restraint, not fusion of the elbow joint."
+    });
+
+    replace("Myology", "Brachialis", {
+        desc: "<b>Brachialis:</b> Arises from the caudal proximal humerus, follows the brachialis groove to the cranial distal humerus and inserts on the proximal radius and ulna. It flexes the elbow and is supplied chiefly by the musculocutaneous nerve; reported radial contribution varies by species.",
+        eliteDesc: "<b>BRACHIALIS</b><br><br>The brachialis winds around the humerus in the brachialis groove and inserts near the medial proximal forearm. Its line of pull makes it a strong elbow flexor in all positions. Musculocutaneous innervation is primary; any radial contribution must be stated as species-variable rather than a universal bovine feature."
+    });
+
+    replace("Myology", "Lateral Digital Extensor", {
+        desc: "<b>Lateral digital extensor:</b> A distinct craniolateral antebrachial muscle supplied by the radial nerve. In cattle its tendon is associated chiefly with the lateral functional digit; exact unions with other extensor tendons should be followed in bovine dissection. In the dog it is a normal distinct muscle whose tendons extend digits III-V.",
+        eliteDesc: "<b>LATERAL DIGITAL EXTENSOR</b><br><br>This muscle assists extension of the digits and flexion of the carpus. It is present as a distinct muscle in the dog and commonly sends tendons to digits III-V; it should not be described as normally absent or fused in carnivores. Bovine distal tendon branching differs from the carnivore pattern."
+    });
+
+    replace("Myology", "Extensor Carpi Obliquus", {
+        comparative: [
+            { species: "Ox", note: "Runs obliquely across the distal radius to proximal medial metacarpal structures and assists carpal extension/abduction." },
+            { species: "Horse", note: "Known as extensor carpi obliquus; inserts on medial proximal metacarpus." },
+            { species: "Dog", note: "Homologue is abductor digiti I longus; it inserts on metacarpal I and abducts digit I while acting on the carpus." }
+        ]
+    });
+
+    replace("Myology", "Distal Annular Ligaments & Interdigital", {
+        desc: "<b>Distal supporting structures:</b> Palmar and digital annular ligaments retain the flexor tendons against the joints and phalanges. Interdigital ligaments limit excessive separation of bovine digits III and IV. These are dense connective-tissue structures, not muscular remnants.",
+        eliteDesc: "<b>DISTAL RETINACULAR AND INTERDIGITAL STRUCTURES</b><br><br>Annular ligaments form fibrous tunnels that retain the digital flexor tendons. Proximal and distal interdigital ligaments stabilize the paired bovine digits while permitting controlled spreading on uneven ground. The interosseous muscle/tendon and its extensor branches belong to the suspensory apparatus; lumbrical muscles are separate structures and should not be listed as components of an annular ligament."
+    });
+
+    replace("Arthrology", "Shoulder Joint (Articulatio Humeri)", {
+        desc: "<b>Shoulder joint:</b> A synovial ball-and-socket joint between the humeral head and glenoid cavity. In cattle and horses the capsule and surrounding muscles, especially subscapularis, supraspinatus and infraspinatus, provide stability; there are no true collateral ligaments. Carnivores have capsular medial and lateral glenohumeral ligaments.",
+        eliteDesc: "<b>SHOULDER JOINT</b><br><br>Although structurally spheroidal, the large-ungulate shoulder moves chiefly in flexion and extension. The shallow glenoid cavity is deepened by a glenoid lip, and the joint is stabilized mainly by its capsule and periarticular muscles. Do not transfer canine glenohumeral ligaments to the bovine joint or call them robust collateral ligaments."
+    });
+
+    replace("Arthrology", "Elbow Joint (Articulatio Cubiti)", {
+        desc: "<b>Elbow joint:</b> A compound synovial hinge involving humeroradial and humeroulnar articulations. Medial and lateral collateral ligaments stabilize it; in cattle the fused radius and ulna limit rotation. Full extension seats the anconeal process in the olecranon fossa, but cattle and horses do not possess a special snap-lock mechanism at the elbow.",
+        eliteDesc: "<b>ELBOW JOINT</b><br><br>The humeral condyle articulates with the radial head and ulnar trochlear notch. Movement is principally flexion and extension. Collateral ligaments and the congruent bony surfaces provide stability. The anconeal process enters the olecranon fossa in extension; this normal geometry must not be described as a stay-apparatus snap lock."
+    });
+
+    replace("Arthrology", "Coffin Joint (Distal Interphalangeal - DIP)", {
+        desc: "<b>Distal interphalangeal joint:</b> A synovial joint between P2 and P3 associated with the distal sesamoid. Collateral ligaments stabilize it, while the deep digital flexor tendon passes over the flexor surface of the distal sesamoid with a bursa interposed. Detailed sesamoidean-ligament names and arrangements differ between bovine claws and the equine digit.",
+        eliteDesc: "<b>DISTAL INTERPHALANGEAL JOINT</b><br><br>Each bovine functional digit has its own distal interphalangeal articulation and distal sesamoid apparatus. P2, P3 and the distal sesamoid form a tightly supported unit inside the claw capsule. Collateral and sesamoidean ligaments, the deep digital flexor tendon and its bursa are clinically important. Equine collateral-sesamoidean and distal-sesamoidean terminology must not be copied unchanged to the bovine foot.",
+        clinical: "<b>Clinical relevance:</b> Septic distal interphalangeal arthritis, deep digital flexor injury and distal sesamoid disease require imaging and species-specific treatment. Penetrating wounds must not be given a universal drainage procedure or equine slang as if it applied identically to cattle."
+    });
+
+    replace("Arthrology", "Pastern Joint (Proximal Interphalangeal - PIP)", {
+        desc: "<b>Proximal interphalangeal joint:</b> A low-motion synovial hinge between P1 and P2 in each digit. Collateral ligaments and a palmar fibrocartilaginous plate/ligamentous complex restrict excessive motion. Structure and clinical terminology differ between the paired bovine digits and the single equine digit.",
+        eliteDesc: "<b>PROXIMAL INTERPHALANGEAL JOINT</b><br><br>The distal trochlea of P1 articulates with the proximal surface of P2. Strong collateral and palmar support makes this a relatively low-motion joint. Osteoarthritis, luxation and septic arthritis occur, but equine ringbone terminology and fixed joint-angle claims should not be applied universally to cattle."
+    });
+
+    replace("Neurology", "Radial Nerve", {
+        desc: "<b>Radial nerve:</b> The principal extensor nerve of the thoracic limb. Proximal branches supply triceps, tensor fasciae antebrachii and anconeus; distal deep branches supply carpal and digital extensors, including ulnaris lateralis, which <b>flexes</b> the carpus. The superficial branch supplies craniolateral antebrachial and dorsal-manus skin with overlap from other nerves. A proximal lesion can prevent elbow, carpal and digital extension; a lesion distal to triceps branches preserves elbow extension but causes distal knuckling.",
+        eliteDesc: "<b>RADIAL NERVE</b><br><br>The radial nerve winds around the humerus in the brachialis groove with deep brachial vessels. Lesion signs depend on level. A high lesion affecting triceps branches causes inability to extend the elbow and bear weight normally. A lower lesion spares elbow extension but weakens carpal and digital extension, producing toe dragging and knuckling. Sensory territories overlap and should not be reduced to a single fixed claw map. Ulnaris lateralis is a carpal flexor despite its extensor-compartment position.",
+        clinical: "<b>Compression injury:</b> Prolonged recumbency and humeral trauma can damage the radial nerve. Localize the lesion by testing elbow extension, distal extension and cutaneous sensation rather than using human colloquial names."
+    });
+
+    replace("Neurology", "Brachial Plexus Architecture", {
+        desc: "<b>Brachial plexus:</b> Formed chiefly by ventral branches of C6-C8 and T1, with T2 contribution in cattle. It lies medial to the shoulder in the axillary region around the axillary vessels. Cranial branches supply shoulder girdle/stabilizers; caudal branches contribute to radial, median and ulnar pathways. Root contributions overlap and should not be assigned to one muscle group by a rigid root map.",
+        eliteDesc: "<b>BOVINE BRACHIAL PLEXUS</b><br><br>Ventral branches from C6 through T2 interweave in the axillary region and form suprascapular, subscapular, axillary, musculocutaneous, radial, median, ulnar, pectoral, long-thoracic, thoracodorsal and lateral-thoracic nerves. Exact root contributions vary. The plexus is closely related to axillary vessels, so trauma or masses may affect several nerves together. The cutaneous-trunci reflex uses the lateral thoracic nerve as its efferent limb, but this does not justify assigning all T2 fibers to that muscle."
+    });
+
+    replace("Neurology", "Median Nerve", {
+        desc: "<b>Median nerve:</b> Descends with the brachial/median arterial pathway and supplies most carpal and digital flexors together with the ulnar nerve. Distally it contributes palmar sensory branches to the manus. Its relationship with the musculocutaneous nerve and axillary artery forms a loop in cattle. Motor and sensory territories overlap, so a lesion does not produce one invariant heel-bulb test.",
+        eliteDesc: "<b>MEDIAN NERVE</b><br><br>The median nerve is a major motor nerve to the caudomedial antebrachial flexor group and a major sensory pathway to the palmar manus. It travels beside the principal limb vessels and enters the distal forelimb with flexor structures. Exact root contributions and distal branching vary. Equine high four-point anesthesia targets palmar and palmar metacarpal nerves, not the median nerve itself; these procedures must not be conflated."
+    });
+
+    replace("Neurology", "Ulnar Nerve", {
+        desc: "<b>Ulnar nerve:</b> Courses caudally in the arm, passes near the medial epicondyle and supplies flexor carpi ulnaris, part of deep digital flexor and distal branches to the manus. Its deep branch supplies interosseous structures and its cutaneous branches contribute caudolateral/palmar sensation. Fetlock support is primarily passive, so ulnar paralysis should not be explained as loss of active suspensory tone.",
+        clinical: "<b>Clinical relevance:</b> Isolated ulnar injury weakens selected flexors and alters caudolateral/palmar sensation. Severe combined median-ulnar injury produces a broader deficit; do not attribute suspensory collapse to the ulnar nerve alone."
+    });
+
+    replace("Neurology", "Suprascapular Nerve", {
+        desc: "<b>Suprascapular nerve:</b> A predominantly motor nerve to supraspinatus and infraspinatus. It passes around the cranial border/neck of the scapula rather than through a bovine scapular notch. Injury causes neurogenic atrophy and reduced lateral shoulder stability.",
+        clinical: "<b>Suprascapular neuropathy:</b> Look for atrophy in the supra- and infraspinous fossae and abnormal lateral shoulder movement. Sensory preservation alone does not prove an isolated lesion because the nerve carries small articular sensory components."
+    });
+
+    replace("Neurology", "Musculocutaneous Nerve", {
+        desc: "<b>Musculocutaneous nerve:</b> Closely associated and communicating with the median nerve around the axillary artery in cattle. It supplies coracobrachialis, biceps brachii and brachialis and continues as the medial cutaneous antebrachial nerve. Injury weakens elbow flexion and reduces medial antebrachial sensation.",
+        eliteDesc: "<b>MUSCULOCUTANEOUS NERVE</b><br><br>This nerve supplies coracobrachialis, biceps brachii and brachialis and continues as the medial cutaneous antebrachial nerve. In cattle it communicates closely with the median nerve around the axillary artery. Injury weakens elbow flexion and may reduce medial antebrachial sensation, although other muscles and gravity can mask the gait deficit. Elbow flexion shortens the limb during swing; it should not be described as pulling an advanced limb backward."
+    });
+
+    replace("Neurology", "Axillary Nerve", {
+        desc: "<b>Axillary nerve:</b> Passes caudal to the shoulder joint to supply deltoid, teres major and teres minor and gives a cutaneous branch to the lateral shoulder/arm. Injury produces shoulder-flexor weakness, muscle atrophy and a small sensory deficit; weight bearing is often retained.",
+        eliteDesc: "<b>AXILLARY NERVE</b><br><br>The axillary nerve curves around the caudal aspect of the shoulder with the caudal circumflex humeral vessels. It supplies deltoid and the teres muscles and contributes articular and cutaneous branches. Human-style quadrangular-space boundaries should not be imposed unchanged on bovine anatomy. Lesions may follow proximal humeral or shoulder trauma; prognosis depends on injury severity rather than a universal rule."
+    });
+
+    replace("Neurology", "Regional Anesthesia - Nerve Blocks", {
+        clinical: "<b>Safety:</b> Select the technique from the operative site and known nerve distribution. Calculate drug, concentration and total dose for the species and animal; confirm venous or perineural placement as appropriate and monitor the patient. Do not teach a universal lidocaine ceiling, volume, needle size, tourniquet time or release method as sufficient protection from toxicity."
+    });
+
+    if (!entry("Neurology", "Other Proximal Brachial Plexus Branches")) {
+        region.Neurology.splice(1, 0, {
+            title: "Other Proximal Brachial Plexus Branches",
+            desc: "<b>Subscapular nerves:</b> Supply subscapularis.<br><b>Thoracodorsal nerve:</b> Supplies latissimus dorsi.<br><b>Long thoracic nerve:</b> Supplies thoracic serratus ventralis.<br><b>Lateral thoracic nerve:</b> Supplies cutaneous trunci and contributes to the efferent limb of the cutaneous-trunci reflex.<br><b>Pectoral nerves:</b> Supply superficial and deep pectoral muscles. Root contributions and branching vary.",
+            eliteDesc: "<b>PROXIMAL PLEXUS BRANCHES</b><br><br>Subscapular, thoracodorsal, long-thoracic, lateral-thoracic and pectoral nerves stabilize the scapula and connect the limb to the trunk. Long-thoracic injury weakens the thoracic part of serratus ventralis and may destabilize the muscular sling. Lateral-thoracic injury can abolish the ipsilateral motor response of the cutaneous-trunci reflex despite intact sensation entering elsewhere. These nerves should not be omitted from a complete brachial-plexus map.",
+            comparative: [
+                { species: "Ox", note: "Well-developed trunk-sling and cutaneous-trunci pathways reflect large body mass and skin mobility." },
+                { species: "Horse", note: "Comparable proximal branches supply the synsarcosis and cutaneous trunci." },
+                { species: "Dog", note: "Long-thoracic and lateral-thoracic nerves are important in scapular support and neurologic localization." }
+            ],
+            clinical: "<b>Localization:</b> Combine scapular position, muscle atrophy and the cutaneous-trunci reflex; one absent skin twitch does not automatically identify a spinal-cord lesion.",
+            imgCode: "proximal_brachial_branches"
+        });
+    }
+
+    if (!entry("Neurology", "Distal Palmar and Digital Nerves")) {
+        var regionalIndex = region.Neurology.findIndex(function (item) { return item.title === "Regional Anesthesia - Nerve Blocks"; });
+        region.Neurology.splice(regionalIndex < 0 ? region.Neurology.length : regionalIndex, 0, {
+            title: "Distal Palmar and Digital Nerves",
+            desc: "<b>Bovine manus:</b> Median and ulnar nerves contribute palmar branches; the superficial radial nerve contributes dorsal branches. Palmar and dorsal common digital nerves divide into axial and abaxial proper digital nerves for digits III and IV. Territories overlap around the claws.",
+            eliteDesc: "<b>DISTAL FORELIMB INNERVATION</b><br><br>At the carpus and metacarpus, median, ulnar and superficial-radial branches form communicating dorsal and palmar pathways. Each functional digit receives axial and abaxial proper-digital branches. The deep ulnar branch supplies interosseous structures. Equine palmar/palmar-metacarpal terminology and block levels differ from bovine common/proper-digital anatomy, so blocks must be named by exact nerve and level.",
+            comparative: [
+                { species: "Ox", note: "Two functional digits have axial and abaxial palmar/dorsal proper digital nerves." },
+                { species: "Horse", note: "Medial/lateral palmar nerves and palmar metacarpal nerves serve the single digit at defined levels." },
+                { species: "Dog", note: "Palmar and dorsal digital branches serve multiple digits with overlapping territories." }
+            ],
+            clinical: "<b>Blocks:</b> Palmar, palmar-metacarpal and digital techniques are not interchangeable across cattle and horses; use current species-specific landmarks and calculated dosing.",
+            imgCode: "forelimb_distal_nerves"
+        });
+    }
+
+    replace("Angiology", "Arterial Tree of the Forelimb (Subclavian → Digital)", {
+        desc: "<b>Main bovine pathway:</b> Subclavian artery continues as <b>axillary</b>, then <b>brachial</b>, and chiefly <b>median</b> artery in the antebrachium. Axillary branches include subscapular and circumflex humeral vessels. Brachial branches include deep brachial, collateral ulnar and interosseous pathways. The median artery is the major distal trunk; the radial artery is smaller but present. Palmar common and proper digital arteries supply the claws.",
+        eliteDesc: "<b>FORELIMB ARTERIAL TREE</b><br><br>The subclavian becomes axillary at the thoracic inlet/first-rib region and brachial after the cranial circumflex humeral branch. The axillary gives the subscapular artery, which supplies scapular muscles and gives thoracodorsal and circumflex scapular branches. The brachial gives deep brachial, collateral ulnar and interosseous branches before continuing mainly as the median artery. In cattle the median artery is dominant distally; radial and ulnar contributions form anastomoses. Bovine distal vessels use palmar common-digital and proper-digital terminology for the paired functional digits.",
+        clinical: "<b>Clinical relevance:</b> Know the artery-nerve relationships before surgery or regional anesthesia. Digital pulse interpretation is species- and site-specific. The jugular vein is a neck vessel and must not be labeled a forelimb vessel."
+    });
+
+    replace("Angiology", "Forelimb Lymph Nodes & Surface Veins", {
+        desc: "<b>Veins:</b> The cephalic and accessory cephalic veins drain superficial forelimb territories; a median cubital communication joins superficial and deep systems. Brachial and axillary veins accompany the arterial pathway.<br><br><b>Lymphatics:</b> Superficial tissues drain toward the superficial cervical lymph centre; deeper structures drain through axillary pathways. Palpability varies by species and condition.",
+        eliteDesc: "<b>VEINS AND LYMPHATICS</b><br><br>The cephalic vein is the principal superficial vein of the thoracic limb and is a routine access site in dogs. The accessory cephalic joins it at a species-variable level, and the median cubital vein communicates with deeper brachial veins. In cattle, superficial cervical nodes cranial to the shoulder may be palpable; axillary nodes are deep. In normal dogs the superficial cervical nodes are not consistently palpable, so enlargement should be interpreted clinically rather than assumed normal.",
+        comparative: [
+            { species: "Cattle", note: "Superficial cervical lymph nodes are important examination and meat-inspection landmarks; jugular access is preferred for routine venipuncture." },
+            { species: "Horse", note: "Cephalic and superficial thoracic veins are present, but jugular access is generally preferred." },
+            { species: "Dog", note: "Cephalic vein is a standard access site; normal superficial cervical nodes are often not palpable." }
+        ]
+    });
+
+    if (!entry("Angiology", "Axillary and Brachial Branches")) {
+        region.Angiology.splice(1, 0, {
+            title: "Axillary and Brachial Branches",
+            desc: "<b>Proximal vessel map:</b> Axillary branches supply the shoulder and scapular region; brachial branches supply the arm, elbow and forearm. Key named branches include subscapular, thoracodorsal, circumflex scapular, cranial/caudal circumflex humeral, deep brachial, collateral ulnar and interosseous arteries. Exact order and common trunks vary by species.",
+            eliteDesc: "<b>PROXIMAL FORELIMB VESSELS</b><br><br>The subscapular artery is the major axillary branch and divides into circumflex scapular and thoracodorsal pathways. Cranial and caudal circumflex humeral vessels surround the shoulder region. The deep brachial artery accompanies the radial nerve in the brachialis groove; the main brachial artery remains medial. Distally, collateral ulnar and interosseous branches supply the elbow and antebrachium. These relations explain why proximal trauma can injure vessels and nerves together.",
+            comparative: [
+                { species: "Ox", note: "Median artery is the dominant continuation; cranial interosseous supply reaches the extensor compartment through the interosseous space." },
+                { species: "Horse", note: "Common interosseous and median pathways are prominent; distal branching differs from cattle." },
+                { species: "Dog", note: "Brachial artery divides into species-specific median, radial, ulnar and interosseous branches." }
+            ],
+            clinical: "<b>Topography:</b> The radial nerve accompanies deep brachial vessels around the humerus, while the median nerve follows the main brachial/median trunk medially.",
+            imgCode: "forelimb_proximal_vessels"
+        });
+    }
+
+    if (!entry("Angiology", "Distal Forelimb Vessels")) {
+        region.Angiology.splice(2, 0, {
+            title: "Distal Forelimb Vessels",
+            desc: "<b>Cattle:</b> The median artery supplies palmar common digital arteries and then axial and abaxial proper digital arteries for digits III and IV. Dorsal and palmar networks communicate around the carpus, metacarpus and digits. Veins form paired deep channels and a rich superficial/digital network.",
+            eliteDesc: "<b>DISTAL VASCULAR PATTERN</b><br><br>At the bovine carpus and metacarpus, median, radial and interosseous contributions form dorsal and palmar anastomoses. Palmar common digital vessels divide into proper digital vessels along axial and abaxial surfaces of the two principal digits. Digital arteries supply the corium, distal phalanx and associated soft tissues. Because bovine and equine distal nomenclature differs, equine medial/lateral palmar-artery descriptions must not be copied unchanged to the cloven foot.",
+            comparative: [
+                { species: "Ox", note: "Paired functional digits receive axial and abaxial proper digital vessels." },
+                { species: "Horse", note: "Medial and lateral palmar digital arteries supply the single digit." },
+                { species: "Dog", note: "Dorsal and palmar metacarpal vessels supply multiple digits." }
+            ],
+            clinical: "<b>Clinical relevance:</b> Distal intravenous regional anesthesia uses a suitable vein under a tourniquet; it is not an intra-arterial technique.",
+            imgCode: "forelimb_distal_vessels"
+        });
+    }
+})();
+
+(function applyForelimbFinalErrata() {
+    var region = atlasData["Forelimb"];
+    var rules = [
+        [/functioning as rigid locking pivot in stay apparatus/g, "functioning as a stable compound hinge; it has no special snap-lock stay mechanism"],
+        [/Lateral collateral ligament originates eccentrically \(caudal to rotation center\) creating 'snap' mechanism—elastic recoil locks joint in full extension without muscular effort\./g, "The lateral and medial collateral ligaments stabilize the joint but do not create a bovine elbow snap-lock mechanism."],
+        [/<b>The cloven hoof bone<\/b>/g, "<b>The distal phalanx of one claw</b>"],
+        [/Lateral Styloid belongs to RADIUS/g, "Lateral styloid is the distal ulnar remnant fused to the radius"],
+        [/pure motor nerve/g, "predominantly motor nerve with small articular sensory components"],
+        [/adds 3-5 cm of attachment area/g, "increases the available muscular attachment area"],
+        [/Palpable groove ~10cm proximal to accessory carpal bone/g, "Palpable groove at a species-appropriate level proximal to the accessory carpal bone"],
+        [/Two proximal interosseous fenestrae remain for vascular passage/g, "Proximal and distal interosseous spaces remain and transmit species-specific vessels"],
+        [/Anconeal process locks into olecranon fossa during extension providing bony stability/g, "Anconeal process seats in the olecranon fossa during extension, contributing ordinary bony congruity"],
+        [/fractures complicated by lack of interosseous give/g, "fracture prognosis depends on location, displacement, soft-tissue injury and patient factors"],
+        [/\bvestigial\b/gi, "rudimentary"]
+    ];
+    function rewrite(value) {
+        if (typeof value === "string") { rules.forEach(function (r) { value = value.replace(r[0], r[1]); }); return value; }
+        if (Array.isArray(value)) return value.map(rewrite);
+        if (value && typeof value === "object") Object.keys(value).forEach(function (k) { value[k] = rewrite(value[k]); });
+        return value;
+    }
+    rewrite(region);
+})();
+
+// Phrase-level errata: retain the complete original lessons and change only
+// the inaccurate statement itself.
+(function applyForelimbPhraseErrata() {
+    var region = atlasData["Forelimb"];
+    var rules = [
+        [/Lateral \(Costal-opposing\) surface/g, "Lateral surface"],
+        [/very prominent in horse, replaces acromion/g, "very prominent in the horse; the horse lacks an acromion"],
+        [/radial nerve \+ brachial artery branches/g, "radial nerve + deep brachial vessels"],
+        [/the radial nerve \+ brachial artery branches/g, "the radial nerve + deep brachial vessels"],
+        [/in horse it belongs to radius!/g, "in the horse it is the distal ulnar remnant fused to the radius"],
+        [/Dog = SEPARATE, mobile, full pronation\/supination/g, "Dog = separate bones with limited pronation/supination; cats are generally more mobile"],
+        [/Proximal Row \(4 bones, lateral → medial\):/g, "Proximal row components (radial, intermediate and ulnar from medial to lateral; accessory lies palmar to the ulnar carpal):"],
+        [/full primitive/g, "complete eight-bone"],
+        [/weakest area, common laminitis site/g, "junction of wall and sole horn; important in white-line disease"],
+        [/P3 is 'ungual crest' = claw-shaped/g, "P3 bears an ungual process and crest that support the claw"],
+        [/rotation subtle due to fused elbow joints/g, "rotation is limited chiefly by overall shoulder conformation and surrounding soft tissues"],
+        [/Cleobrachialis/g, "Cleidobrachialis"],
+        [/Function:<\/b> Flexes shoulder; adducts limb/g, "Function:</b> Adducts and stabilizes the shoulder and assists extension according to joint position"],
+        [/true abductor of digit II/g, "abductor digiti I longus, inserting on metacarpal I and acting on digit I/carpus"],
+        [/Often fused with common extensor or absent in some breeds/g, "A distinct normal muscle whose tendons commonly extend digits III-V"],
+        [/Glenohumeral ligament present \(thickening of capsule\) provides stability/g, "Capsule and periarticular muscles provide stability; cattle and horses have no true collateral ligaments"],
+        [/True collateral ligaments present \(medial \+ lateral\)/g, "Capsular medial and lateral glenohumeral ligaments are present; they are not robust ungulate-style collateral ligaments"],
+        [/Special 'Snap-Lock' Mechanism/g, "Normal extension geometry (not a snap-lock mechanism)"],
+        [/anconeal process locks into deep olecranon fossa during extension, creating passive stability/g, "the anconeal process seats in the olecranon fossa during extension and contributes ordinary joint congruity"],
+        [/Similar snap mechanism/g, "No special elbow snap-lock mechanism"],
+        [/Ulnaris Lateralis \(carpal extensor in flexed position\)/g, "Ulnaris Lateralis (a carpal flexor despite radial innervation)"],
+        [/used for high 4-point block/g, "not the structure targeted by an equine high four-point block"],
+        [/fetlock sinking due to suspensory weakness/g, "weakness of selected flexors with altered caudolateral/palmar sensation; passive suspensory support remains ligamentous"],
+        [/Surgical decompression at scapular notch may be needed/g, "Surgical management, when indicated, follows the nerve around the cranial scapular border; cattle do not have the described scapular notch"],
+        [/'Saturday Night Paralysis' in cattle/g, "compression neuropathy in recumbent cattle"],
+        [/radial vestigial/g, "radial artery comparatively small but present"],
+        [/clinically the practical 'forelimb-region' IV/g, "a neck-region vessel and the principal large-animal IV site"],
+        [/tourniquet must be released SLOWLY to prevent lidocaine toxicity \(seizures\)\. Never exceed 4mg\/kg lidocaine total dose\./g, "tourniquet use, release, drug and total dose must follow a current species- and patient-specific protocol; slow release alone does not prevent local-anesthetic toxicity."],
+        [/If block fails, usually due to insufficient volume \(bovine tissues require MORE than equine\) or injection too proximal \(tourniquet effect blocks diffusion\)\./g, "If a block fails, reassess anatomy, placement, tourniquet function, drug choice and patient factors rather than automatically increasing volume."],
+        [/20-gauge, 1\.5-inch needle\. <b>Aspiration mandatory<\/b> to avoid intravascular injection\. Deposit 10-15mL Lidocaine\./g, "Needle, approach, drug and dose must be selected from a current bovine procedural reference and calculated for the patient."],
+        [/palpable groove ~10cm proximal to accessory carpal bone/g, "palpable species-specific groove proximal to the accessory carpal bone"],
+        [/groove between FCU \(medial\) and Ulnaris Lateralis \(lateral\) ~10cm proximal to accessory carpal bone/g, "groove between FCU and ulnaris lateralis at a species-appropriate level proximal to the accessory carpal bone"]
+    ];
+    function rewrite(value) {
+        if (typeof value === "string") {
+            rules.forEach(function (rule) { value = value.replace(rule[0], rule[1]); });
+            return value;
+        }
+        if (Array.isArray(value)) return value.map(rewrite);
+        if (value && typeof value === "object") {
+            Object.keys(value).forEach(function (key) { value[key] = rewrite(value[key]); });
+        }
+        return value;
+    }
+    rewrite(region);
+})();

@@ -351,3 +351,264 @@ atlasData["Hindlimb & Pelvis"] = {
     // =====================================================
     "Splanchnology": []
 };
+
+// Verified regional audit (2026-07): correct legacy errors and complete nerve/vessel coverage.
+(function applyVerifiedHindlimbPelvisAudit() {
+    var region = atlasData["Hindlimb & Pelvis"];
+    function entry(section, title) {
+        return (region[section] || []).find(function (item) { return item.title === title; });
+    }
+    function replace(section, title, fields) {
+        var item = entry(section, title);
+        // Preserve the original detailed Standard and Elite text. Corrections are
+        // applied non-destructively below instead of replacing whole fields.
+        if (false && item) Object.assign(item, fields);
+    }
+
+    replace("Osteology", "Sacrum & Coccygeal (Tail) Vertebrae", {
+        desc: "<b>Sacrum:</b> In cattle five sacral vertebrae normally fuse to transmit weight from the vertebral column to the pelvis. Dorsal and ventral sacral foramina transmit branches of sacral nerves; the sacral canal continues the vertebral canal.<br><br><b>Caudal vertebrae:</b> Number varies. Proximal segments retain recognizable arches and processes, while distal segments become simpler. Hemal processes/arches protect ventral caudal vessels. Routine caudal epidural access is at the sacrocaudal or first intercoccygeal space, not simply anywhere in the sacral canal.",
+        eliteDesc: "<b>SACRUM AND CAUDAL VERTEBRAE</b><br><br>The bovine sacrum is normally formed by five fused vertebrae and articulates with the ilia at auricular surfaces. The sacral canal contains meninges and cauda-equina roots; the cauda equina is a root bundle, not the caudal end of the spinal cord. The conus medullaris in adult cattle can extend to the lumbosacral/S1 region, which is relevant to neuraxial procedures. Caudal-vertebral counts and hemal-process development vary among animals.",
+        clinical: "<b>Clinical relevance:</b> Caudal epidural anesthesia is commonly approached at the sacrocaudal or first intercoccygeal space using calculated dosing. Tail blood collection targets the coccygeal vein on the ventral midline; the accompanying artery may also be entered, so vessel identity should not be assumed from location alone."
+    });
+
+    replace("Osteology", "Patella (Knee Cap)", {
+        desc: "<b>Patella:</b> The largest sesamoid bone, developed in the quadriceps tendon and articulating with the femoral trochlea. It improves quadriceps leverage and protects the cranial stifle. Cattle and horses have medial, middle and lateral patellar ligaments; carnivores have one. Parapatellar fibrocartilage is species-specific and is especially important medially in the equine locking mechanism.",
+        eliteDesc: "<b>PATELLA</b><br><br>The patella transmits quadriceps force to the tibial tuberosity through patellar ligament(s). Cattle and horses possess three patellar ligaments. The equine medial parapatellar fibrocartilage and medial patellar ligament can engage the enlarged medial trochlear ridge as part of the passive stay apparatus. Do not generalize identical medial and lateral fibrocartilage development or an equine locking mechanism to every species.",
+        comparative: [
+            { species: "Ox", note: "Three patellar ligaments; no equine-style obligatory locking mechanism." },
+            { species: "Horse", note: "Three patellar ligaments and prominent medial parapatellar fibrocartilage participate in the stay apparatus." },
+            { species: "Dog", note: "One patellar ligament; medial or lateral luxation can occur." },
+            { species: "Pig", note: "One principal patellar ligament." },
+            { species: "Fowl", note: "Chicken has a patella associated with the extensor mechanism; avian shape and articulation differ from mammals." }
+        ],
+        clinical: "<b>Upward fixation of the patella:</b> Usually managed first by diagnosis, conditioning and correction of contributing factors. Medial patellar desmotomy is reserved for selected persistent cases because complications can occur."
+    });
+
+    replace("Osteology", "Tibia & Fibula", {
+        desc: "<b>Tibia:</b> Principal weight-bearing bone of the crus, with proximal condyles and tibial tuberosity and a distal cochlea articulating with the talus.<br><br><b>Fibula in cattle:</b> Greatly reduced. A proximal fibular head is fused to the lateral tibial condyle, the shaft is absent or represented by fibrous tissue, and the distal remnant is a separate malleolar bone (os malleolare) forming the lateral malleolus.",
+        eliteDesc: "<b>TIBIA AND FIBULA</b><br><br>The tibial plateau supports the femoral condyles through the menisci; the intercondylar area anchors cruciate ligaments and menisci. The extensor groove lies lateral to the tibial tuberosity. Distally the tibial cochlea articulates with the talus. In cattle the fibula is represented by a proximal head and distal malleolar bone with no complete bony shaft. The horse retains only a proximal fibular shaft and incorporates the lateral malleolus into the tibia; dog and pig retain complete fibulae."
+    });
+
+    replace("Osteology", "Metatarsus & Digits (Cannon, Pastern, Hoof)", {
+        desc: "<b>Ox metatarsus:</b> Metatarsals III and IV fuse to form the cannon bone, which is generally longer and more angular than the metacarpal cannon. Metatarsals II and V are absent or reduced. Digits III and IV are functional; II and V form dewclaws. Each functional digit has three phalanges, paired proximal sesamoids and one distal sesamoid and is enclosed distally by its own claw capsule.",
+        eliteDesc: "<b>BOVINE METATARSUS AND DIGITS</b><br><br>Metatarsals III and IV fuse to form the hind cannon bone, which is generally longer and more angular than the metacarpal cannon. A longitudinal vascular groove/canal marks the fusion and distal paired trochleae articulate with digits III and IV. Each functional digit contains three phalanges, paired proximal sesamoids and one distal sesamoid and has its own claw capsule. Digits II and V form variable dewclaws. The two claws together form the cloven foot; P3 itself should not be called one 'cloven bone'."
+    });
+
+    replace("Osteology", "Tarsus (Hock)", {
+        desc: "<b>Ox tarsus:</b> Five bones are arranged in three rows. Proximally are talus and calcaneus. The central and fourth tarsal bones fuse as the centroquartal bone. Distally, tarsal I is separate and tarsals II+III are fused. The talus has proximal and distal trochleae; the tuber calcanei receives the common calcaneal tendon.",
+        eliteDesc: "<b>TARSUS / HOCK</b><br><br>The bovine tarsus normally contains talus, calcaneus, fused central+fourth (centroquartal), tarsal I and fused tarsals II+III. Most movement occurs at the tarsocrural joint. The calcaneal tuber is the point of the hock and receives gastrocnemius plus other contributors to the <b>common calcaneal tendon</b>. Capped hock involves a bursa over this region. Equine chestnuts are keratinized skin structures; speculative origin stories are not required for anatomy teaching.",
+        comparative: [
+            { species: "Ox", note: "Five tarsal bones; central+fourth and second+third are fused." },
+            { species: "Horse", note: "Six tarsal bones; central and fourth are separate, while second+third are fused." },
+            { species: "Dog", note: "Seven tarsal bones with separate central and numbered distal bones." },
+            { species: "Pig", note: "Seven tarsal bones with limited fusion." }
+        ]
+    });
+
+    replace("Myology", "Gluteal Muscles (Superficial, Middle, Deep, Accessory)", {
+        desc: "<b>Gluteal region:</b> In cattle superficial gluteus blends with biceps femoris as gluteobiceps. Middle gluteus is a powerful hip extensor; deep gluteus chiefly abducts and stabilizes the hip, and actions vary with limb position. The accessory gluteal part is associated with middle gluteus. Cranial gluteal nerve supplies middle/deep gluteal and tensor fasciae latae; caudal gluteal branches supply superficial components.",
+        clinical: "<b>Clinical relevance:</b> The sciatic nerve lies deep and caudal to the hip. Intramuscular injection sites in food animals must follow current product, residue and species guidance; the rump should not be taught as a universally preferred injection site."
+    });
+
+    replace("Myology", "Adductor Group (Medial Thigh)", {
+        desc: "<b>Medial thigh:</b> Gracilis, adductor, pectineus and obturator externus are major adductors supplied predominantly by the obturator nerve. Sartorius lies cranially, helps bound the femoral triangle and is supplied mainly by the femoral nerve. Pectineus may receive dual innervation. The femoral triangle is bounded by sartorius, pectineus and abdominal wall and contains femoral vessels and nerve.",
+        eliteDesc: "<b>MEDIAL THIGH AND FEMORAL TRIANGLE</b><br><br>Obturator-nerve injury weakens adduction because it affects gracilis, adductor, obturator externus and usually pectineus. Sartorius must not be grouped as an obturator-supplied adductor; it is a femoral-nerve muscle. In the femoral triangle, the neurovascular bundle is clinically important and the femoral artery is a routine pulse site in dogs and cats."
+    });
+
+    replace("Myology", "Hamstring Group (Caudal Thigh Muscles)", {
+        desc: "<b>Caudal thigh group:</b> Biceps femoris/gluteobiceps, semitendinosus and semimembranosus arise largely from sacral/ischial regions but have distinct insertions. Biceps spreads through patellar and crural fascia toward tibial and calcaneal attachments; semitendinosus inserts on tibia and contributes to the common calcaneal tendon; semimembranosus inserts on caudomedial femur and medial tibia and does not join that tendon. Actions on hip and stifle vary with limb position.",
+        eliteDesc: "<b>CAUDAL THIGH MUSCLES</b><br><br>The hamstring group is not one muscle with one insertion. Biceps femoris is broad and lateral; semitendinosus is caudal; semimembranosus is medial and deep. They extend the hip when the limb is weight bearing and have different flexor/extensor effects on the stifle according to insertion and phase of stride. Sciatic branches, predominantly from its tibial component, supply them.",
+        clinical: "<b>Clinical relevance:</b> Sciatic injury can weaken the caudal thigh and all structures distal to the stifle. Isolated muscle injury causes deficits according to the affected insertion and should not be reduced to loss of one universal 'hamstring action'."
+    });
+
+    replace("Myology", "Iliopsoas, Tensor Fasciae Latae & Hip Flexors", {
+        eliteDesc: "<b>HIP FLEXORS</b><br><br>Psoas major and iliacus unite as iliopsoas and insert on the lesser trochanter, strongly flexing the hip. Tensor fasciae latae arises near the tuber coxae and inserts through fascia lata, flexing the hip and assisting stifle extension. Psoas minor lies ventral to the lumbar vertebrae and inserts on the iliopubic eminence/psoas-minor tubercle; it flexes the lumbosacral region or pelvis rather than the hip. Origins and development vary among species."
+    });
+
+    replace("Myology", "Caudal Crural (Calf) Muscles", {
+        desc: "<b>Caudal crural group:</b> Gastrocnemius extends the tarsus through the common calcaneal tendon. Superficial and deep digital flexors flex the digits and also act on the tarsus; popliteus acts on the stifle. The common calcaneal tendon includes gastrocnemius and contributions from superficial digital flexor and, depending on species, biceps femoris, semitendinosus and gracilis. The tibial nerve supplies this compartment.",
+        comparative: [
+            { species: "Horse", note: "Superficial digital flexor forms the caudal component of the reciprocal apparatus and caps the calcaneal tuber." },
+            { species: "Dog", note: "The common calcaneal tendon has several muscular contributions and can be partially or completely disrupted." },
+            { species: "Ox", note: "Gastrocnemius and digital flexors are strong tarsal/digital actuators; common-fibular and tibial lesions produce distinct postures." }
+        ],
+        clinical: "<b>Clinical relevance:</b> Tibial-nerve injury weakens tarsal extension and digital flexion and produces a characteristic abnormal stance. Gastrocnemius or common-calcaneal-tendon disruption causes a dropped/plantigrade hock; causes vary with species and age and should not be assigned universally to the periparturient dairy cow."
+    });
+
+    replace("Myology", "Cranial Crural (Front of Leg) Muscles", {
+        desc: "<b>Craniolateral crural group:</b> Tibialis cranialis flexes the tarsus. Long digital extensor (with bovine medial/lateral heads) and lateral digital extensor extend the digits and assist tarsal flexion. Fibularis longus is present in cattle and acts on the tarsus. Fibularis tertius is muscular in cattle but entirely tendinous in the horse, where it forms the cranial component of the reciprocal apparatus. Common fibular nerve branches supply the group.",
+        eliteDesc: "<b>CRANIOLATERAL CRURAL MUSCLES</b><br><br>Tibialis cranialis, long and lateral digital extensors, fibularis longus and fibularis tertius have species-specific arrangements. The bovine long digital extensor has two heads and the bovine fibularis longus is a distinct muscle. Only the equine fibularis tertius is a fully tendinous component of the reciprocal apparatus; this architecture must not be transferred to cattle or dogs."
+    });
+
+    replace("Arthrology", "Sacroiliac Joint", {
+        comparative: [
+            { species: "Horse", note: "A strong, low-motion joint; asymmetric tubera sacrale may reflect conformation or prior injury and do not prove subluxation." },
+            { species: "Cattle", note: "Sacroiliac and sacrosciatic soft tissues become more compliant near parturition; the adult pelvic symphysis does not reopen." }
+        ]
+    });
+
+    replace("Arthrology", "Hip (Coxofemoral) Joint", {
+        desc: "<b>Hip joint:</b> A synovial ball-and-socket joint between femoral head and acetabulum. The joint capsule, acetabular labrum and ligament of the femoral head stabilize it. The horse additionally has an accessory ligament from the prepubic tendon through the acetabular notch to the femoral head, markedly limiting abduction.",
+        eliteDesc: "<b>COXOFEMORAL JOINT</b><br><br>The hip permits flexion, extension, abduction, adduction and rotation, although sagittal motion predominates in large ungulates. The acetabular labrum deepens the socket and the transverse acetabular ligament bridges the notch. The ligament of the femoral head is present in domestic mammals; the equine accessory ligament provides additional stability and limits abduction. It is inaccurate to claim that a horse cannot kick laterally at all.",
+        comparative: [
+            { species: "Horse", note: "Accessory ligament strongly limits abduction and makes luxation uncommon, but lateral kicking remains possible." },
+            { species: "Dog", note: "No accessory ligament; hip dysplasia and traumatic luxation are clinically important." },
+            { species: "Cattle", note: "No equine accessory ligament; coxofemoral luxation can occur." }
+        ]
+    });
+
+    replace("Neurology", "Lumbosacral Plexus (overview)", {
+        desc: "<b>Lumbosacral plexus:</b> Formed by ventral branches of caudal lumbar and cranial sacral nerves, with exact roots varying by species. Major branches include femoral, obturator, cranial and caudal gluteal, sciatic, caudal cutaneous femoral, pudendal and pelvic nerves. The sciatic divides into tibial and common fibular nerves; the pudendal nerve serves somatic perineal/external-genital structures, while pelvic nerves carry parasympathetic fibers to pelvic viscera.",
+        eliteDesc: "<b>LUMBOSACRAL PLEXUS</b><br><br>In cattle the principal contributions commonly involve L4-L6 and S1-S2, with more caudal sacral contributions to pelvic and pudendal pathways. Femoral nerve supplies quadriceps; obturator supplies major adductors; cranial/caudal gluteal nerves supply gluteal groups; sciatic supplies caudal thigh and, through tibial/common fibular branches, most of the limb distal to the stifle. Pudendal and pelvic nerves must not be conflated: pudendal is chiefly somatic, whereas pelvic nerves are parasympathetic."
+    });
+
+    replace("Neurology", "Femoral & Obturator Nerves", {
+        desc: "<b>Femoral nerve:</b> Traverses iliopsoas and enters the medial thigh to supply quadriceps and sartorius; its saphenous branch supplies medial crural/hock skin. Injury prevents effective stifle extension and weight bearing.<br><br><b>Obturator nerve:</b> Crosses the pelvic floor and exits through the obturator canal/foramen to supply major adductors. Dystocia can compress it against pelvic bone, causing hindlimb splaying. Pectineus innervation may be mixed.",
+        eliteDesc: "<b>FEMORAL AND OBTURATOR NERVES</b><br><br>The femoral nerve supplies iliopsoas branches, sartorius and quadriceps and continues as the sensory saphenous nerve. The obturator nerve supplies obturator externus, gracilis, adductor and usually pectineus. Obstetric injury may affect obturator alone or multiple lumbosacral nerves; 'downer cow' is a clinical syndrome with many possible causes and is not synonymous with obturator paralysis.",
+        clinical: "<b>Clinical relevance:</b> Femoral injury causes stifle collapse; obturator injury causes inadequate adduction and splaying. Supportive care and prognosis depend on whether additional nerves, muscles or systemic disease are involved."
+    });
+
+    replace("Neurology", "Sciatic Nerve & its Branches: Tibial + Peroneal", {
+        desc: "<b>Sciatic nerve:</b> Leaves the pelvis and supplies caudal thigh before dividing at a species-variable level into tibial and common fibular nerves.<br><b>Tibial nerve:</b> Supplies caudal crural muscles and continues as medial/lateral plantar nerves; injury weakens tarsal extension and digital flexion.<br><b>Common fibular nerve:</b> Divides into superficial/deep branches to craniolateral crural muscles; injury produces tarsal overextension, distal flexion and dorsal knuckling. Diagnostic blocks use exact species-specific nerve and level names.",
+        eliteDesc: "<b>SCIATIC, TIBIAL AND COMMON FIBULAR NERVES</b><br><br>The tibial nerve continues near the hock into medial and lateral plantar nerves; the lateral plantar nerve gives a deep branch to plantar metatarsal nerves. The common fibular nerve divides into superficial and deep branches and contributes dorsal metatarsal/digital sensation. Equine high four-point anesthesia targets medial/lateral plantar and plantar metatarsal nerves in the proximal metatarsus; it is not a tibial block at the hock. Bovine and equine block landmarks are not interchangeable.",
+        clinical: "<b>Clinical relevance:</b> Localize injury from joint posture, motor loss and cutaneous sensation. Tibial, common-fibular and plantar blocks are advanced procedures requiring current species-specific landmarks, calculated dosing and asepsis; fixed one-line needle sites are unsafe."
+    });
+
+    replace("Neurology", "Pudendal (Pudic) Nerve & Epidural Anaesthesia", {
+        comparative: [
+            { species: "Bull", note: "Pudendal blockade may facilitate selected penile examinations or procedures, but approach and effectiveness are technique-dependent." },
+            { species: "Mare", note: "Caudal epidural analgesia can support selected obstetric/perineal procedures using calculated agent and spread." },
+            { species: "Dog", note: "Lumbosacral epidural anesthesia is performed with weight-based dosing and monitoring by trained clinicians." }
+        ],
+        clinical: "<b>Clinical applications:</b> Pudendal block, caudal or cranial epidural anesthesia, patellar desmotomy, urethrotomy, castration and vasectomy each require separate species-specific anatomy and procedural training. Do not define cranial epidural merely as a larger caudal dose or publish one universal interspace/volume. In cattle, urethral obstruction commonly occurs at the sigmoid-flexure/distal urethral region, but surgical approach depends on case and species."
+    });
+
+    if (!entry("Neurology", "Gluteal, Cutaneous and Pelvic Nerves")) {
+        region.Neurology.splice(1, 0, {
+            title: "Gluteal, Cutaneous and Pelvic Nerves",
+            desc: "<b>Cranial gluteal nerve:</b> Supplies middle/deep gluteal muscles and tensor fasciae latae.<br><b>Caudal gluteal nerve:</b> Supplies superficial gluteal/gluteobiceps components according to species.<br><b>Caudal cutaneous femoral nerve:</b> Sensory to caudal thigh/perineal-adjacent skin.<br><b>Pelvic nerves:</b> Parasympathetic supply to distal colon, rectum, bladder and genital organs; distinct from the somatic pudendal nerve.",
+            eliteDesc: "<b>GLUTEAL AND PELVIC NERVES</b><br><br>Gluteal nerves pass through the greater sciatic region to their muscle groups and are important in hip stability and propulsion. Caudal cutaneous femoral and cluneal branches map the rump/caudal-thigh skin. Pelvic splanchnic nerves carry parasympathetic fibers to pelvic plexuses, whereas hypogastric nerves carry sympathetic fibers and pudendal nerves provide somatic perineal motor and sensory supply. This autonomic-somatic distinction is essential for bladder, rectal and genital function.",
+            comparative: [
+                { species: "Cattle", note: "Obstetric trauma can affect several lumbosacral branches, not only the obturator nerve." },
+                { species: "Horse", note: "Gluteal and sciatic-region topography is important for injections and pelvic trauma." },
+                { species: "Dog", note: "Pelvic fractures and surgical approaches can injure gluteal, sciatic or autonomic pathways." }
+            ],
+            clinical: "<b>Localization:</b> Combine gait, muscle atrophy, perineal reflexes, tail tone and bladder function to distinguish somatic from autonomic injury.",
+            imgCode: "pelvic_nerves"
+        });
+    }
+
+    if (!entry("Neurology", "Distal Dorsal and Plantar Nerves")) {
+        region.Neurology.splice(region.Neurology.length - 1, 0, {
+            title: "Distal Dorsal and Plantar Nerves",
+            desc: "<b>Plantar side:</b> Tibial nerve divides into medial and lateral plantar nerves. Their common/proper digital branches supply the plantar foot; a deep branch contributes plantar metatarsal nerves.<br><b>Dorsal side:</b> Superficial and deep fibular branches contribute dorsal metatarsal and digital nerves. Branching differs between the single equine digit and paired bovine digits.",
+            eliteDesc: "<b>DISTAL HINDLIMB INNERVATION</b><br><br>Near the hock the tibial nerve divides into plantar nerves, while the common fibular system supplies dorsal territories. In cattle, dorsal and plantar common-digital nerves divide into axial and abaxial proper-digital branches for digits III and IV. In horses, medial/lateral plantar nerves and plantar metatarsal nerves are targeted at defined levels in diagnostic analgesia. Always name the nerve and level rather than using 'plantar block' without qualification.",
+            comparative: [
+                { species: "Ox", note: "Paired digits require axial and abaxial digital-nerve terminology." },
+                { species: "Horse", note: "Single functional digit has medial/lateral plantar digital nerves and plantar metatarsal branches." },
+                { species: "Dog", note: "Dorsal and plantar metatarsal/digital branches serve multiple digits." }
+            ],
+            clinical: "<b>Blocks:</b> Use species-appropriate anatomy, calculated dose and sterile technique. A high four-point block is an equine metatarsal-level block, not a generic tibial block.",
+            imgCode: "distal_hindlimb_nerves"
+        });
+    }
+
+    replace("Angiology", "Major Arteries of Hindlimb", {
+        desc: "<b>Main pathway:</b> External iliac becomes femoral after entering the thigh; femoral becomes popliteal caudal to the stifle, then divides into cranial and caudal tibial pathways. Cranial tibial continues as dorsal pedal and dorsal metatarsal arteries; perforating and plantar anastomoses supply the foot. Internal iliac branches supply gluteal, perineal and pelvic-visceral regions. Distal hindlimb terminology is <b>plantar</b>, not palmar.",
+        eliteDesc: "<b>HINDLIMB ARTERIES</b><br><br>The external iliac gives deep femoral and associated proximal branches and continues as femoral. Important femoral branches include saphenous and caudal femoral arteries. Popliteal divides into cranial and caudal tibial arteries. Cranial tibial passes to the dorsal tarsus as dorsal pedal and continues into dorsal metatarsal pathways; perforating branches connect with plantar arches and digital arteries. Exact dominance and branching differ between cattle and horses. Internal iliac, caudal gluteal/internal pudendal and related branches supply pelvis and perineum.",
+        clinical: "<b>Clinical relevance:</b> Femoral pulse is readily assessed in dogs/cats; coccygeal and facial pulse sites are more practical in cattle. Intravenous regional anesthesia uses a vein, not a distal artery."
+    });
+
+    replace("Angiology", "Major Veins of Hindlimb (Saphenous & Recurrent Tarsal)", {
+        desc: "<b>Deep system:</b> Tibial and popliteal veins drain to femoral and external iliac veins.<br><b>Superficial system:</b> Medial and lateral saphenous veins drain the limb in species-specific patterns. In the dog the lateral saphenous/recurrent-tarsal region is a common venous access site; it should not be described as a 'cephalic-like' tributary. In cattle a prominent cranial tributary of the lateral saphenous crosses the hock region.",
+        eliteDesc: "<b>HINDLIMB VEINS</b><br><br>Deep veins accompany arteries. Superficial medial and lateral saphenous systems communicate with deep veins and differ in prominence by species. The canine recurrent tarsal/saphenous vein is clinically accessible on the lateral distal limb. In cattle, a cranial tributary of the lateral saphenous is prominent around the hock; joint approaches must avoid superficial vessels. The subcutaneous abdominal ('milk') vein drains the ventral abdominal wall/udder region and is not a routine hindlimb vein or preferred emergency catheter site.",
+        clinical: "<b>Venous access:</b> Canine lateral saphenous/recurrent tarsal access and bovine distal-limb IV regional anesthesia use trained restraint, asepsis and appropriate vessels. Cattle and horses generally use the jugular for routine systemic access."
+    });
+
+    replace("Angiology", "Lymph Nodes of Hindlimb & Pelvis", {
+        desc: "<b>Subiliac node:</b> Readily palpable in cattle and drains superficial flank/thigh regions.<br><b>Popliteal node:</b> Drains distal limb; routinely palpable in dogs/cats but deep and not normally palpable in cattle.<br><b>Superficial inguinal nodes:</b> Drain scrotal or mammary and adjacent superficial tissues. The testes themselves drain to lumbar (aortic) nodes.<br><b>Deep inguinal, iliac and sacral nodes:</b> Drain deep hindlimb and pelvic territories.",
+        eliteDesc: "<b>HINDLIMB AND PELVIC LYMPHATICS</b><br><br>Lymphatic drainage follows superficial and deep vascular pathways. Subiliac nodes are major bovine surface landmarks. Popliteal nodes are useful palpation sites in carnivores but not normally in cattle. Scrotal nodes drain scrotal coverings, while testicular lymph follows gonadal vessels to lumbar nodes. Mammary drainage varies by gland and species; node enlargement supports localization but does not identify a specific disease."
+    });
+
+    if (!entry("Angiology", "Pelvic and Gluteal Arterial Supply")) {
+        region.Angiology.splice(1, 0, {
+            title: "Pelvic and Gluteal Arterial Supply",
+            desc: "<b>Internal iliac system:</b> Supplies pelvic walls, pelvic viscera, gluteal region, perineum and external genital structures through species-variable caudal gluteal, internal pudendal, umbilical and urogenital branches. External pudendal vessels instead arise through the deep-femoral/pudendoepigastric pathway and pass through the inguinal region.",
+            eliteDesc: "<b>PELVIC ARTERIES</b><br><br>In cattle the internal iliac commonly continues through a caudal gluteal/internal pudendal pattern. Urogenital branches supply bladder, rectum and reproductive organs; internal pudendal supplies perineal and genital structures. Cranial gluteal supply has a species-specific origin. External pudendal vessels arise from the deep femoral/pudendoepigastric system and accompany the inguinal canal, so they must not be merged with internal-pudendal supply.",
+            comparative: [
+                { species: "Cattle", note: "Long common caudal gluteal/internal pudendal pattern is characteristic." },
+                { species: "Horse", note: "Obturator and genital arterial contributions differ from cattle." },
+                { species: "Dog", note: "Internal iliac branching differs and should be learned from canine-specific maps." }
+            ],
+            clinical: "<b>Application:</b> Pelvic surgery, castration and perineal procedures require identification of internal versus external pudendal pathways.",
+            imgCode: "pelvic_arteries"
+        });
+    }
+
+    if (!entry("Angiology", "Distal Hindlimb Arteries and Digital Supply")) {
+        region.Angiology.splice(2, 0, {
+            title: "Distal Hindlimb Arteries and Digital Supply",
+            desc: "<b>Distal pathway:</b> Cranial tibial becomes dorsal pedal at the tarsus and continues into dorsal metatarsal arteries. Perforating tarsal/metatarsal branches join plantar arches. In cattle, common digital arteries divide into axial and abaxial proper digital arteries for digits III and IV.",
+            eliteDesc: "<b>DISTAL HINDLIMB VASCULATURE</b><br><br>Dorsal pedal and dorsal metatarsal vessels communicate with medial/lateral plantar and plantar-metatarsal systems through perforating branches. Bovine terminal vessels serve two principal digits, while the equine pattern supplies a single digit through medial and lateral plantar digital arteries and an intraosseous terminal arch. Use bovine axial/abaxial terminology rather than copying the equine map.",
+            comparative: [
+                { species: "Ox", note: "Two functional digits receive axial and abaxial proper digital arteries." },
+                { species: "Horse", note: "Dorsal metatarsal and plantar systems supply the single digit and terminal arch." },
+                { species: "Dog", note: "Dorsal and plantar metatarsal branches supply multiple digits." }
+            ],
+            clinical: "<b>Clinical relevance:</b> Digital perfusion and pulse findings must be interpreted with species-specific anatomy and the lesion site.",
+            imgCode: "hindlimb_distal_arteries"
+        });
+    }
+})();
+
+// Phrase-level errata: preserve the complete original lessons while correcting
+// only the specific inaccurate claim.
+(function applyHindlimbPelvisPhraseErrata() {
+    var region = atlasData["Hindlimb & Pelvis"];
+    var rules = [
+        [/Sacral canal<\/b> continues spinal canal — site for CAUDAL EPIDURAL/g, "Sacral canal</b> continues the vertebral canal; routine bovine caudal epidural access is at the sacrocaudal or first intercoccygeal space"],
+        [/The injection blocks the last sacral and all coccygeal nerves/g, "A correctly selected caudal epidural desensitizes caudal sacral/coccygeal territories according to its segmental spread"],
+        [/Higher dose at L6-S1 — paralyses the hindlimbs \(animal must be cast\)/g, "More cranial epidural spread can weaken the hindlimbs; approach and dose require patient-specific calculation and monitoring"],
+        [/Common in puppies\/calves after road accidents/g, "Can occur after trauma or physeal injury, with age- and species-specific patterns"],
+        [/Parapatellar fibrocartilages<\/b> on medial and lateral sides/g, "Parapatellar fibrocartilage</b> is species-specific and especially developed medially in the horse"],
+        [/Patella small or absent/g, "Patella present with avian-specific morphology"],
+        [/'Achilles tendon'/g, "common calcaneal tendon"],
+        [/Achilles tendon/g, "common calcaneal tendon"],
+        [/considered vestige of carpal\/tarsal pad/g, "a keratinized skin structure whose speculative origin is not required for anatomical description"],
+        [/P3<\/b> is the cloven hoof bone/g, "Each P3</b> lies within one of the two claws; together the claws form the cloven hoof"],
+        [/P3 is the cloven hoof bone/g, "each P3 lies within one claw of the cloven foot"],
+        [/main extensors of the hip/g, "muscles with species- and position-dependent actions on the hip"],
+        [/Middle gluteus is preferred for intramuscular injection \(large muscle mass\)/g, "Intramuscular injection sites must follow current species, product and food-animal guidance; the gluteal region is not universally preferred"],
+        [/Common origin:<\/b> Mostly from <b>tuber ischiadicum<\/b> \(in ox, biceps also from sacrum → 'gluteobiceps'\)\.<br><br><b>Insertion:<\/b> Patella \+ tibial crest \+ calcaneus \(via crural fascia\)\.<br><br><b>Function:<\/b> Extend the hip; flex the stifle; extend the hock — essentially PROPEL the body forward/g, "Origins are chiefly ischial/sacral, but insertions differ: biceps spreads to patellar/crural fascia, tibia and calcaneal structures; semitendinosus reaches tibia and the common calcaneal tendon; semimembranosus reaches caudomedial femur and medial tibia. Actions on hip and stifle depend on limb position"],
+        [/From bodies of last thoracic \+ first lumbar vertebrae, inserting on the body of ilium/g, "From ventral lumbar vertebral bodies, inserting on the iliopubic eminence/psoas-minor tubercle"],
+        [/In butchery, the psoas major \+ minor \+ iliacus together make the 'tenderloin\/fillet' — the most tender meat \(because it never bears weight, it stays soft\)/g, "Psoas and iliacus occupy the sublumbar region and have clinically important relations to lumbar nerves and retroperitoneal structures"],
+        [/tibialis cranialis flexes the tarsus; long and lateral digital extensors extend digits and assist tarsal flexion;/g, "tibialis cranialis flexes the tarsus; bovine long digital extensor has medial and lateral heads, while long and lateral digital extensors extend the digits and assist tarsal flexion; fibularis longus is also present in cattle;"],
+        [/Common in dairy cattle around calving/g, "Occurs with species- and age-specific trauma or musculotendinous injury"],
+        [/Subluxation common in racehorses & jumpers — asymmetric tuber sacrale \('hunter's bump'\)/g, "Asymmetric tubera sacrale ('hunter's bump') may reflect conformation or prior sacroiliac-region injury and do not by themselves prove subluxation"],
+        [/that's why horses can't kick sideways like dogs/g, "therefore equine hip abduction is markedly limited, although lateral kicking remains possible"],
+        [/This is why a horse cannot abduct its hindlimb much \(cannot 'kick sideways' like a dog can\)/g, "This markedly limits equine abduction, but does not make lateral kicking impossible"],
+        [/Tibial and Peroneal nerve blocks are part of the diagnostic anaesthesia for hindlimb lameness/g, "Tibial, common-fibular and distal plantar blocks are distinct techniques performed at defined species-specific levels"],
+        [/Medial hock, above calcaneus \(anterior to common calcaneal tendon\)/g, "a species-specific medial crural/hock landmark selected from a current procedural reference"],
+        [/Lateral leg, just below head of fibula/g, "a species-specific lateral proximal-crural landmark selected from a current procedural reference"],
+        [/Plantar surface of fetlock \(medial \+ lateral plantar nerves\)/g, "the exact medial/lateral plantar or plantar-metatarsal nerves at the intended level"],
+        [/Pudic Block:<\/b> Per-rectal at lesser sciatic notch — extrudes penis in bull/g, "Pudendal block:</b> An advanced bovine technique whose approach and effectiveness require current species-specific guidance"],
+        [/Caudal Epidural:<\/b> S5-Cy1 small dose — cow stands; for obstetric work/g, "Caudal epidural:</b> Usually sacrocaudal or first intercoccygeal, with drug and spread calculated to preserve standing when intended"],
+        [/Cranial Epidural:<\/b> S5-Cy1 large dose OR L6-S1 — cow recumbent; for major surgery/g, "Cranial epidural:</b> Greater cranial spread can produce hindlimb motor blockade and requires a separate patient-specific plan"],
+        [/Lateral Saphenous Vein<\/b> = <b>RECURRENT TARSAL VEIN<\/b> in dog/g, "Lateral saphenous/recurrent-tarsal venous region</b> in the dog"],
+        [/Cephalic-like Tributaries<\/b> in dog → drain into femoral vein/g, "Superficial saphenous tributaries</b> communicate with the deep femoral system"],
+        [/Palpable in dogs and large animals/g, "Routinely palpable in dogs and cats but deep and not normally palpable in cattle"],
+        [/scrotal LN<\/b> \(drain scrotum & testis\)/g, "scrotal lymph nodes</b> drain scrotal coverings; the testes drain to lumbar (aortic) nodes"],
+        [/Very important in mastitis and udder cancer!/g, "clinically important in mammary inflammation and neoplasia, though enlargement is not disease-specific"],
+        [/the testes drain to lumbar \(aortic\) lymph nodes, not scrotal nodes/g, "the testes drain to lumbar (aortic) lymph nodes, not scrotal nodes"]
+    ];
+    function rewrite(value) {
+        if (typeof value === "string") {
+            rules.forEach(function (rule) { value = value.replace(rule[0], rule[1]); });
+            return value;
+        }
+        if (Array.isArray(value)) return value.map(rewrite);
+        if (value && typeof value === "object") Object.keys(value).forEach(function (key) { value[key] = rewrite(value[key]); });
+        return value;
+    }
+    rewrite(region);
+})();

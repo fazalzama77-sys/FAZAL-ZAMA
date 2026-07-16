@@ -23,7 +23,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p>The <b>salivary glands</b> of ruminants are enormous — the parotid alone can weigh 400 g — because ruminants require vast quantities of alkaline saliva (up to 150 L/day in cattle) to buffer the fermentation acids in the rumen.</p>`,
         comparative: [
             { species: "Ox", note: "Dental pad (pulvinus dentalis) occupies the upper incisor and canine region. Large torus linguae. Parotid gland is extensive. Soft palate is relatively short." },
-            { species: "Horse", note: "Has upper incisors. Very long, fleshy soft palate — obligate nasal breather. Cannot vomit due to strong cardiac sphincter." },
+            { species: "Horse", note: "Has upper incisors. The long soft palate makes the horse an obligate nasal breather. Vomiting is extremely difficult because of the powerful cardia/lower oesophageal sphincter, acute angle of oesophageal entry and associated stomach anatomy." },
             { species: "Dog", note: "Has both upper and lower incisors. Soft palate is short. Vomiting reflex is well developed." }
         ],
         clinical: "<b>Pharyngeal Paralysis:</b> Can lead to dysphagia and aspiration pneumonia. <b>Actinobacillosis (Wooden Tongue):</b> Actinobacillus lignieresii causes granulomatous glossitis in cattle — tongue becomes hard and swollen. <b>Calf Diphtheria:</b> Fusobacterium necrophorum causes necrotic stomatitis/pharyngitis in calves."
@@ -70,7 +70,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
             { species: "Dog", note: "42 teeth, brachydont. Carnassial teeth = upper P4 + lower M1 (shearing pair)." },
             { species: "Pig", note: "44 teeth. Tusks = canines (continuous growth in boar). 'Needle teeth' in piglets often clipped." }
         ],
-        clinical: "<b>Floating (Horse):</b> Filing sharp enamel points off cheek teeth — routine equine dental care. <b>Wolf Tooth Removal (Horse):</b> Standard before bitting. <b>Dental Tartar / Periodontal Disease (Dog):</b> Common in small breeds — leads to systemic illness. <b>Age Verification:</b> Required for many sales/insurance — 'mouthing' in cattle/horse."
+        clinical: "<b>Floating (Horse):</b> Reduction of clinically significant sharp enamel points may be part of an examination-based dental plan. <b>Wolf Teeth (Horse):</b> Removal is considered when a tooth is displaced, painful or interfering with the bit; it is not automatically required in every horse. <b>Dental Tartar / Periodontal Disease (Dog):</b> Common in small breeds and may affect health and welfare. <b>Age Estimation:</b> Dentition provides an approximate estimate whose accuracy decreases with age."
     },
     {
         title: "Hard & Soft Palate, Tongue, Pharynx",
@@ -167,16 +167,16 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         6. Taste (dissolves food → reaches taste buds).</p>`,
         comparative: [
             { species: "Ox", note: "Parotid huge — ~400 g; major rumen buffer source." },
-            { species: "Horse", note: "Parotid largest of single horse glands; produces saliva only when chewing (NOT continuously like cattle)." },
+            { species: "Horse", note: "The parotid is the largest major salivary gland. Salivary flow rises markedly during mastication; 'only when chewing' is too absolute." },
             { species: "Dog", note: "Mandibular and sublingual most prominent on examination. Sialocele common — Wharton or sublingual duct rupture." },
             { species: "Cat", note: "Smaller glands; cat saliva contains Fel d 1 (allergen for humans)." }
         ],
-        clinical: "<b>Parotid Fistula:</b> Wound on Stenson's duct → constant leakage of saliva onto cheek; treat by duct ligation. <b>Sialocele/Ranula (Dog):</b> Mucus accumulation under tongue from ruptured sublingual or mandibular duct. <b>Salivary Calculi:</b> Stones in duct → swelling, pain. <b>Sialography:</b> Contrast study of duct system."
+        clinical: "<b>Parotid Fistula:</b> Injury to the parotid duct may cause salivary leakage; treatment depends on site and chronicity and may include primary repair, diversion or selected duct ligation under veterinary care. <b>Sialocele/Ranula (Dog):</b> Saliva accumulation commonly associated with sublingual or mandibular gland/duct injury. <b>Salivary Calculi:</b> Duct obstruction may cause swelling and pain. <b>Sialography:</b> Contrast study of the duct system."
     },
     {
         title: "Larynx, Trachea & Oesophagus",
         desc: `<b>Larynx</b> = voice box; controls airflow + protects airway during swallowing.<br>
-        <b>Cartilages (Ox, 5):</b> Thyroid, Cricoid, Arytenoid (paired), Epiglottis. (Horse adds corniculate + cuneiform).<br>
+        <b>Laryngeal cartilages:</b> Four types are recognized — unpaired epiglottic, thyroid and cricoid cartilages plus paired arytenoid cartilages (five individual pieces). Corniculate and cuneiform structures are processes associated with the arytenoid and epiglottic cartilages, not two additional primary cartilages.<br>
         <b>Vocal folds</b> stretched between thyroid + arytenoid cartilages.<br>
         <b>Innervation:</b> Recurrent laryngeal nerve (CN X) — except cricothyroideus = cranial laryngeal.<br>
         <br>
@@ -199,7 +199,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         <p><b>Innervation:</b><br>
         • <b>Cranial laryngeal nerve</b> (CN X) — sensory + motor to cricothyroideus.<br>
         • <b>Recurrent laryngeal nerve</b> (CN X) — motor to all OTHER intrinsic laryngeal muscles + sensory below vocal folds.<br>
-        Damage to recurrent laryngeal → <b>laryngeal hemiplegia ('Roaring')</b> — most common on LEFT (longer nerve loops around aorta).</p>
+        Damage or degeneration of the recurrent/caudal laryngeal innervation can cause <b>laryngeal hemiplegia ('roaring')</b>. Equine recurrent laryngeal neuropathy is predominantly left-sided and multifactorial; the longer left recurrent course is an anatomical association, not a complete causal explanation.</p>
         <p><b>II. TRACHEA:</b><br>
         Tube carrying air from larynx to bronchi. Walls = ~50 incomplete cartilage C-rings (open dorsally, closed by tracheal muscle), connected by annular ligaments.<br>
         • Lined by ciliated pseudostratified columnar epithelium with goblet cells (mucociliary clearance).<br>
@@ -216,7 +216,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
             { species: "Horse", note: "Long soft palate seals oropharynx → obligate nasal breather. Recurrent laryngeal neuropathy → 'roaring'. Oesophagus muscle becomes smooth in distal third." },
             { species: "Dog", note: "Skeletal muscle throughout; allows voluntary control (regurgitation reflex). Megaesophagus = idiopathic dilatation common in young dogs." }
         ],
-        clinical: "<b>Tracheotomy (Cattle):</b> Emergency airway between 3rd-5th rings. <b>Roaring (Horse):</b> Laryngoplasty ('tieback' of left arytenoid). <b>Choke (Ox/Horse):</b> Pass stomach tube + lubricate; surgical oesophagotomy if not relieved. <b>Megaoesophagus (Dog):</b> Aspiration pneumonia + regurgitation."
+        clinical: "<b>Tracheotomy (Cattle):</b> An emergency airway may be created through an appropriate cervical interannular space by a veterinarian. <b>Roaring (Horse):</b> Treatment options include prosthetic laryngoplasty in selected cases. <b>Choke (Ox/Horse):</b> Requires prompt veterinary assessment; sedation, careful lavage or tube manipulation and surgery are selected according to species, obstruction and complication risk rather than by blindly forcing a tube. <b>Megaoesophagus (Dog):</b> Causes regurgitation and risk of aspiration pneumonia."
     },
     {
         title: "Endocrine of Head & Neck: Thyroid & Parathyroid",
@@ -248,7 +248,7 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         comparative: [
             { species: "Ox", note: "Thyroid lobes elongated. Iodine-deficient pastures cause endemic goiter in calves." },
             { species: "Horse", note: "Thyroid easily palpable in some horses. Equine thyroid neoplasia common in geriatric." },
-            { species: "Dog", note: "Hypothyroidism = #1 endocrinopathy in dogs (Golden Retriever, Doberman). Hyperthyroidism extremely rare in dog (common in cat)." },
+            { species: "Dog", note: "Hypothyroidism is a common canine endocrine disorder. Naturally occurring hyperthyroidism is uncommon in dogs and much more characteristic of older cats." },
             { species: "Cat", note: "<b>Hyperthyroidism</b> from thyroid adenoma — most common feline endocrine disease in old cats." }
         ],
         clinical: "<b>Goiter (Iodine deficiency):</b> Compensatory thyroid enlargement; congenital in calves born to deficient cows. <b>Hypothyroidism (Dog):</b> Lethargy, weight gain, alopecia, 'tragic facial expression'. <b>Hyperthyroidism (Cat):</b> Weight loss despite polyphagia, tachycardia, hyperactivity. <b>Hypoparathyroidism:</b> Tetany (low Ca²⁺), seizures."
@@ -306,9 +306,9 @@ atlasData["Head & Neck"]["Splanchnology"].push(
         • Innervation: <b>CN VIII (Vestibulocochlear)</b> — cochlear branch (hearing), vestibular branch (balance).</p>`,
         comparative: [
             { species: "Cattle", note: "Tapetum present (golden-yellow). Eyes lateral → wide field of view (~330°)." },
-            { species: "Horse", note: "Largest eye of any land mammal. 'Visual streak' on retina. Two blind spots — directly in front and directly behind." },
+            { species: "Horse", note: "The horse has one of the largest eyes among domestic mammals, a retinal visual streak and small blind areas directly rostral and caudal to the body." },
             { species: "Dog/Cat", note: "Tapetum highly developed (yellow-green). Cone-rich area centralis but no human-like fovea." },
-            { species: "Fowl", note: "Pecten oculi — vascular structure projecting into vitreous (avascular retina). Highest visual acuity in raptors (4× human)." }
+            { species: "Fowl", note: "Pecten oculi — a vascular structure projecting into the vitreous and supporting the avascular retina. Visual specializations vary greatly among birds; raptor acuity should not be used as a value for domestic fowl." }
         ],
         clinical: "<b>Conjunctivitis & Keratitis</b> (cornea inflammation) — common with foreign bodies, IBR (cattle). <b>Cataract</b> (lens opacity) — common in old dogs, diabetic dogs. <b>Glaucoma</b> — increased intraocular pressure → blindness. <b>Otitis externa</b> — common in floppy-eared dogs. <b>Vestibular disease</b> — head tilt, nystagmus."
     }
@@ -323,19 +323,19 @@ atlasData["Abdomen"]["Splanchnology"].push(
     {
         title: "Digestive System: The Ruminant Stomach",
         desc: `<b>Overview:</b><br>
-        • Four-compartment stomach: <b>Reticulum, Rumen, Omasum, Abomasum</b> (in topographic order).<br>
+        • Four-compartment stomach: <b>rumen, reticulum, omasum and abomasum</b>. Rumen and reticulum form the functional ruminoreticulum; this list should not be labelled a simple topographic order.<br>
         • Rumen is the largest (up to 150L in adult cow) — acts as a fermentation vat.<br>
         • Reticulum has a honeycomb mucosal pattern — also called the 'hardware stomach'.<br>
         • Omasum (many-plies / psalterium) filters particles; Abomasum is the true glandular stomach.`,
         eliteDesc: `<h3>The Complex Gastric Apparatus of Ruminants</h3>
         <p>Ruminants are characterized by a massive composite stomach that dominates the left and ventral abdominal cavity. The first three compartments (<b>proventriculi</b>) are non-glandular and lined with stratified squamous epithelium, while the <b>abomasum</b> is glandular and represents the homolog of the simple stomach.</p>
-        <p><b>Reticulum:</b> The most cranial compartment, pressed against the diaphragm (3rd-8th ribs on right, to 6th-7th on left). Its mucosa has a honeycomb (reticular) pattern. The reticuloruminal fold separates it from the rumen but allows passage of digesta.</p>
+        <p><b>Reticulum:</b> The most cranial compartment, pressed against the diaphragm mainly left of the median plane and under cover of approximately the 6th-8th ribs. Its mucosa has a honeycomb pattern. The ruminoreticular fold partly separates it from the rumen, with which it communicates widely.</p>
         <p><b>Rumen:</b> Occupies the entire left side of the abdominal cavity, from diaphragm to pelvis. Divided by muscular pillars (coronary, longitudinal, accessory) into ventral and dorsal sacs. Site of primary fermentation by microflora generating VFAs. Gas accumulation causes bloat.</p>
         <p><b>Omasum:</b> On the right side, spherical with leaf-like folds (laminae omasi) that trap and squeeze digesta. The omasal canal connects to the abomasum via the omasoabomasal orifice.</p>
         <p><b>Abomasum:</b> The 'true' stomach — glandular, secretes HCl and pepsin. Located on the ventral abdominal floor, right of midline. Can undergo displacement (LDA/RDA) in high-producing dairy cows.</p>`,
         comparative: [
             { species: "Ox", note: "Four-compartment stomach. Adult rumen capacity and saliva production vary with body size and diet. The reticular/oesophageal groove reflex directs suckled milk toward the abomasum in the calf." },
-            { species: "Horse", note: "Simple single-compartment stomach (monogastric). Small capacity (~15L). Pyloric sphincter is strong — unable to vomit. Cecum and colon are massive (hindgut fermentation)." },
+            { species: "Horse", note: "Simple single-compartment stomach of relatively small capacity (approximately 8-15 L depending on body size and source). Vomiting is extremely difficult because of the powerful cardia/lower oesophageal sphincter, acute oesophageal entry angle and associated anatomy—not because of the pyloric sphincter. The cecum and ascending colon support hindgut fermentation." },
             { species: "Pig", note: "Monogastric with a well-developed diverticulum gastri. Gastric ulcers common near pars oesophagea." },
             { species: "Dog", note: "Simple stomach. Prone to gastric dilatation-volvulus (GDV) — stomach rotates on its axis, trapping gas. Emergency." }
         ],
@@ -370,8 +370,8 @@ atlasData["Abdomen"]["Splanchnology"].push(
         desc: `<b>High-Yield Points:</b><br>
         • Parts: <b>Cecum → Ascending colon (with spiral loop) → Transverse → Descending colon → Rectum</b>.<br>
         • <b>Cecum</b> in ox: blind sac, ~75 cm long, lies in upper right flank; apex points caudally.<br>
-        • <b>Spiral colon</b> = unique disc-shaped coil with centripetal & centrifugal turns — diagnostic of ruminants at necropsy.<br>
-        • Site for <b>Caecal Biopsy</b> and <b>cecocentesis</b> in cattle = right paralumbar fossa.<br>
+        • <b>Spiral colon</b> = a characteristic flat, disc-shaped coil in cattle and small ruminants with centripetal and centrifugal turns. It is a useful identifying feature but not an isolated diagnostic test.<br>
+        • The bovine cecum occupies the right abdomen and may be approached surgically from the right flank when clinically indicated; cecocentesis or biopsy must not be presented as a routine landmark procedure without a current clinical protocol.<br>
         • Functions: water absorption, microbial fermentation (cecum), faecal pellet formation.<br>
         • Rectum is covered later under pelvic viscera.`,
         eliteDesc: `<h3>Bovine Large Intestine</h3>
@@ -387,20 +387,20 @@ atlasData["Abdomen"]["Splanchnology"].push(
             { species: "Dog", note: "Small comma-shaped cecum. Simple short colon (no spiral). No taenia/haustra." },
             { species: "Pig", note: "Spiral colon also present, but spiral coils are conical (cone-shaped) rather than flat as in ox." }
         ],
-        clinical: "<b>Cecal Dilatation/Volvulus (cattle):</b> Right-sided ping high in flank; treated by right flank cecotomy. <b>Caecal Biopsy:</b> Right paralumbar fossa approach. <b>Equine Colic:</b> The pelvic flexure of the large colon is the most common site of impaction. <b>Megacolon (cats/dogs):</b> Chronic constipation → dilated atonic colon."
+        clinical: "<b>Cecal Dilatation/Volvulus (cattle):</b> May produce a right-sided ping; treatment depends on displacement, viability and severity and can require right-flank surgery. <b>Equine Colic:</b> The pelvic flexure is a common site of large-colon impaction. <b>Megacolon (cats/dogs):</b> Chronic constipation can produce a dilated, poorly motile colon."
     },
     {
         title: "Digestive Accessory: Liver",
         desc: `<b>High-Yield Points:</b><br>
         • Largest gland in body. Lies almost entirely on the <b>RIGHT side</b> in ox (pushed by rumen).<br>
         • Bovine liver is <b>poorly externally lobated</b>: right, left, quadrate and caudate lobes are recognized, but fissures are shallow.<br>
-        • <b>Caudate lobe</b> bears prominent <b>renal impression</b> (from right kidney) — diagnostic of ruminants.<br>
+        • The <b>caudate lobe/process</b> bears a <b>renal impression</b> from the right kidney. This is not unique or diagnostic of ruminants because a renal impression is also present on the carnivore liver.<br>
         • <b>Gall bladder PRESENT</b> in ox, sheep, dog (ABSENT in horse).<br>
         • <b>Porta hepatis</b>: entry of portal vein, hepatic artery; exit of bile duct.<br>
         • <b>Liver biopsy site (cow):</b> Right 11th intercostal space, on a line from the tuber coxae.`,
         eliteDesc: `<h3>Bovine Liver</h3>
         <p>The liver in cattle is the largest visceral gland (~5 kg in adult cow). It is displaced almost entirely to the right side of the abdomen because of the massive rumen. It lies obliquely against the diaphragm from the 7th rib (cranially) to the last rib (caudally) on the right side.</p>
-        <p><b>Lobation:</b> Unlike the dog (well-lobed) the bovine liver is grossly undivided, with only shallow fissures separating the <b>left, right, quadrate</b> (between gall bladder and round ligament) and <b>caudate</b> lobes. The caudate lobe bears a deep <b>renal impression</b> from the right kidney — a key feature of bovine liver.</p>
+        <p><b>Lobation:</b> Compared with the deeply fissured canine liver, the bovine liver has shallow external divisions into <b>left, right, quadrate</b> and <b>caudate</b> lobes. The caudate region has a renal impression from the right kidney, but the presence of a renal impression is not uniquely bovine.</p>
         <p><b>Surfaces:</b> Diaphragmatic (parietal) and visceral. The visceral surface bears the <b>porta hepatis</b> — the entry/exit point for portal vein, hepatic artery, hepatic duct, lymphatics and nerves.</p>
         <p><b>Bile pathway:</b> Hepatic ducts → cystic duct → <b>gall bladder</b> (storage) → bile duct → opens at major duodenal papilla. The horse lacks a gall bladder (continuous bile flow).</p>
         <p><b>Liver Biopsy:</b> In adult cow, biopsy needle is inserted in the <b>right 11th intercostal space</b>, at the intersection with a horizontal line from the tuber coxae, directed cranio-medially toward the opposite elbow.</p>`,
@@ -416,13 +416,13 @@ atlasData["Abdomen"]["Splanchnology"].push(
         title: "Digestive Accessory: Pancreas",
         desc: `<b>High-Yield Points:</b><br>
         • Mixed exocrine + endocrine gland.<br>
-        • In ox: lies in <b>right side</b>, related to dorsal surface of liver and right kidney; partly within the lesser omentum.<br>
+        • In the ox, the pancreas lies dorsally: its left lobe extends along the liver toward the rumen, while its right lobe lies chiefly within the mesoduodenum beside the descending duodenum.<br>
         • Two lobes (right + left) joined by a body — wraps around the portal vein.<br>
         • <b>Ducts:</b> Cattle and pigs usually drain through the <b>accessory pancreatic duct</b>; sheep and goats usually through the pancreatic duct; horses commonly have both ducts, and dogs commonly have both with individual variation.<br>
         • Endocrine = <b>Islets of Langerhans</b> → insulin (β cells), glucagon (α cells).`,
         eliteDesc: `<h3>Pancreas</h3>
         <p>The pancreas is a soft, lobulated, pale yellow-pink gland with both exocrine and endocrine roles. The <b>exocrine portion</b> (>98% by mass) secretes pancreatic juice (trypsin, chymotrypsin, lipase, amylase). The <b>endocrine portion</b> consists of microscopic islets (Islets of Langerhans) producing insulin, glucagon, somatostatin, and pancreatic polypeptide.</p>
-        <p><b>Topography in Ox:</b> The pancreas lies on the right side of the abdomen, in the lesser omentum, attached to the dorsal surface of the liver and the right kidney. It is roughly L-shaped — a right lobe extending caudally, and a left lobe extending toward the spleen.</p>
+        <p><b>Topography in Ox:</b> The pancreas is an irregular, dorsally placed organ. The body is near the portal region; the left lobe extends along the liver toward the rumen, and the right lobe runs caudally in the mesoduodenum beside the descending duodenum. It should not be described as wholly right-sided or simply attached to the liver and right kidney in the lesser omentum.</p>
         <p><b>Ducts:</b><br>
         • <b>Pancreatic duct:</b> Opens at the major duodenal papilla, often near the bile duct.<br>
         • <b>Accessory pancreatic duct:</b> Opens separately at the minor duodenal papilla. Presence and dominance of the two ducts are species-dependent.</p>`,
@@ -461,14 +461,14 @@ atlasData["Abdomen"]["Splanchnology"].push(
         desc: `<b>High-Yield Points:</b><br>
         • Two retroperitoneal organs in sublumbar region.<br>
         • <b>Cattle kidney = externally lobulated</b>; sheep and goat kidneys are externally smooth.<br>
-        • Right kidney: more cranial, fixed, contacts caudate lobe of liver. Left kidney: more caudal, MOBILE — pushed across midline by rumen ('floating' or wandering left kidney).<br>
+        • Right kidney: cranial and fixed against the dorsal abdominal wall, contacting the liver. Left kidney: displaced to the right by the rumen and relatively pendulous/less fixed; 'floating kidney' is only a descriptive clinical shorthand.<br>
         • Functional unit = <b>nephron</b>. No single renal pelvis in ox — calyces drain directly into ureter.<br>
         • Ureter passes caudally over psoas muscles → opens into bladder at trigone.<br>
         • Palpable per rectum in cow (left kidney especially).`,
         eliteDesc: `<h3>Ruminant Urinary System</h3>
         <p><b>Bovine Kidneys:</b> In cattle, fetal lobation persists externally, producing approximately 15-20 visible lobes separated by grooves. This is characteristic of cattle among the principal domestic ruminants; sheep and goat kidneys are externally smooth.</p>
         <p><b>Right kidney:</b> Lies under the last rib and first 2-3 lumbar transverse processes; relatively fixed; bears a clear impression on the caudate lobe of the liver.</p>
-        <p><b>Left kidney:</b> It remains retroperitoneal but is displaced to the right of the median plane by the rumen, so its position is less fixed than that of the right kidney. It is commonly palpable per rectum in the cow; exact vertebral position varies with rumen fill and body size.</p>
+        <p><b>Left kidney:</b> The rumen displaces it to the right of the median plane. Unlike the firmly retroperitoneal right kidney, it is pendulous and enclosed in a peritoneal fold except at its attachment, so its position varies with rumen fill and body size. It is commonly palpable per rectum in the adult cow.</p>
         <p><b>Internal Structure:</b> Ox kidney is <b>multipyramidal</b> — many renal pyramids, each with its own papilla draining into a calyx. There is <b>NO renal pelvis</b> in ox; instead the calyces directly converge to form the ureter.</p>
         <p><b>Ureter:</b> Long muscular tube descending from the renal hilus along the dorsal abdominal wall (retroperitoneal), crosses the pelvic brim, and enters the dorsal bladder wall obliquely at the <b>trigone</b> — this oblique entry acts as a one-way valve preventing reflux during bladder distension.</p>`,
         comparative: [
@@ -478,7 +478,7 @@ atlasData["Abdomen"]["Splanchnology"].push(
             { species: "Pig", note: "Bean-shaped, smooth surface but multipyramidal internally (compromise type)." },
             { species: "Fowl", note: "Three lobes (cranial, middle, caudal); lodged in renal fossa of synsacrum. Drain via ureter to cloaca — no urinary bladder." }
         ],
-        clinical: "<b>Pyelonephritis:</b> Ascending bacterial infection (Corynebacterium renale in cattle) — pus and blood in urine. <b>Urolithiasis (Water Belly):</b> Stones (especially struvite) lodge in male urethra — emergency in steers/wethers. <b>Renal palpation per rectum:</b> Routine part of pre-purchase exam in cattle and horses. <b>Hydronephrosis:</b> Dilation due to ureteral obstruction."
+        clinical: "<b>Pyelonephritis:</b> Ascending bacterial infection; Corynebacterium renale group organisms are important in cattle. <b>Urolithiasis (water belly):</b> Urolith composition varies with species, diet and production system; obstruction is an emergency in steers and wethers. <b>Rectal palpation:</b> The bovine left kidney and portions of the equine urinary tract may be assessed when indicated, but renal palpation is not a universal pre-purchase step and the equine right kidney is generally beyond reach. <b>Hydronephrosis:</b> Dilation of the renal pelvis/calyceal system associated with impaired urine outflow."
     },
     {
         title: "Mammary Gland (Udder)",
@@ -521,8 +521,8 @@ atlasData["Abdomen"]["Splanchnology"].push(
         • <b>Zona glomerulosa</b> (outer) → aldosterone (regulates Na+/K+, blood pressure).<br>
         • <b>Zona fasciculata</b> (middle, thickest) → cortisol (glucocorticoid; stress response).<br>
         • <b>Zona reticularis</b> (inner) → adrenal androgens.</p>
-        <p><b>Medulla</b> (neuroectodermal — a modified sympathetic ganglion) — chromaffin cells secrete catecholamines (adrenaline 80%, noradrenaline 20%) → 'fight or flight' response.</p>
-        <p><b>Vasculature:</b> Multiple small arteries from the aorta and renal artery (cranial, middle, caudal adrenal arteries). One central vein drains directly to caudal vena cava (right) or renal vein (left).</p>`,
+        <p><b>Medulla</b> (neural-crest derived and functionally comparable to a modified sympathetic ganglion) — chromaffin cells secrete epinephrine/adrenaline and norepinephrine/noradrenaline. Their relative proportions vary by species and physiological state; a fixed 80:20 ratio is not a universal veterinary rule.</p>
+        <p><b>Vasculature:</b> The glands receive multiple arterial branches from adjacent major vessels. Venous drainage is asymmetric and species-dependent; the right adrenal vein commonly has a short connection to the caudal vena cava, while left-sided drainage commonly joins the renal or adjacent venous system.</p>`,
         comparative: [
             { species: "Ox", note: "Right gland heart-shaped, left bean-shaped. Cortex pale yellow; medulla reddish-brown." },
             { species: "Horse", note: "Larger and more elongated. Strong cortisol response to stress (laminitis link)." },
@@ -591,7 +591,7 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
         • Held by a <b>median vesical ligament</b> containing the urachal remnant and paired <b>lateral vesical ligaments</b> containing the round ligaments/remnants of the umbilical arteries.<br>
         • <b>Cystotomy site</b> (cattle): cranial midline of bladder via paramedian/ventral midline approach.<br>
         • <b>Urethra (Pelvic part)</b>:<br>
-          – <b>Female:</b> short (~10 cm), opens at vestibule. Suburethral diverticulum in cow — catches catheter.<br>
+          – <b>Female cow:</b> the urethra is short (approximately 10 cm) and opens on the floor of the vestibule. The nearby suburethral diverticulum can misdirect a catheter; length and configuration differ in other species.<br>
           – <b>Male:</b> long, in two parts — pelvic urethra (intra-pelvic) + penile urethra. <b>Sigmoid flexure</b> in ruminants/pig.`,
         eliteDesc: `<h3>Urinary Bladder & Pelvic Urethra</h3>
         <p><b>Urinary Bladder:</b> A muscular reservoir lying on the pelvic floor, dorsal to the pubis, ventral to the rectum (male) or to the uterus/vagina (female). It has three parts: apex, body, and neck. Internally, the <b>trigone</b> is a smooth triangular area bounded by the two ureteric openings (dorsally) and the urethral opening (caudally).</p>
@@ -632,7 +632,7 @@ atlasData["Hindlimb & Pelvis"]["Splanchnology"].push(
         • <b>Vesicular glands</b> — lobulated, paired; produce most of the ejaculate volume.<br>
         • <b>Prostate</b> — body + disseminate part embedded in the urethralis muscle.<br>
         • <b>Bulbourethral (Cowper's) glands</b> — paired, at ischial arch; pre-ejaculate cleanser.</p>
-        <p><b>Penis:</b> The bull, ram, boar penis is <b>fibroelastic</b> — small cavernous space, mostly dense collagen + elastic tissue. It has a permanent <b>sigmoid flexure</b> caudal to the scrotum that straightens during erection (the penis lengthens but does not greatly thicken). The <b>retractor penis muscle</b> pulls the penis back into the prepuce. The horse and dog have a <b>musculocavernous</b> penis (large blood-engorged erection); the dog also has an <b>os penis</b>.</p>
+        <p><b>Penis:</b> The bull, ram and boar have a predominantly <b>fibroelastic</b> penis whose sigmoid flexure straightens during erection, producing elongation with relatively little increase in diameter. In ruminants the flexure is postscrotal; in the boar it is prescrotal/approximately at the level of the testes. The <b>retractor penis muscle</b> restores the flexure after erection. The horse and dog have a <b>musculocavernous</b> penis, and the dog also has an <b>os penis</b>.</p>
         <p><b>Inguinal Canal:</b> Oblique passage through the caudoventral abdominal wall. The deep ring is bounded principally by the caudal border of internal abdominal oblique and the inguinal ligament; the superficial ring is a slit in the external abdominal-oblique aponeurosis. Its contents vary by sex and species and include the spermatic cord in males, the vaginal process/round ligament in females, the external pudendal vessels and the genitofemoral nerve.</p>
         <p><b>Pre-pubic Tendon:</b> Strong fibrous attachment of the rectus abdominis and pectineus to the cranial border of the pubis. Important in heavy pregnant mares — rupture leads to ventral abdominal swelling and inability to foal.</p>`,
         comparative: [

@@ -301,3 +301,123 @@ atlasData["Histology"] = {
         });
     }
 })();
+
+// Course-outline completion: organ-level nervous-system histology.
+(function addVerifiedCentralNervousSystemHistology() {
+    const tissues = atlasData.Histology && atlasData.Histology["Basic Tissues"];
+    if (!Array.isArray(tissues) || tissues.some(item => item.title === "Central Nervous System Organs")) return;
+    tissues.push({
+        title: "Central Nervous System Organs",
+        desc: "<b>CEREBRUM:</b> Outer gray-matter cortex containing neuronal cell bodies, neuropil and glia surrounds a white-matter core of myelinated axons. The neocortex is conventionally organized into six layers, although their prominence varies by region and species.<br><br><b>CEREBELLUM:</b> Cortex has three layers: outer molecular layer, a single row of Purkinje-cell bodies, and an inner densely cellular granular layer. White matter forms the medulla and branches into the folia.<br><br><b>SPINAL CORD:</b> Central H-shaped gray matter surrounds the ependyma-lined central canal; dorsal horns are principally sensory and ventral horns contain somatic motor neurons. White matter is peripheral and organized into funiculi.",
+        eliteDesc: "<b>MENINGES:</b> Dura mater is dense connective tissue; arachnoid forms the boundary of the CSF-filled subarachnoid space; pia closely follows the CNS surface and carries vessels.<br><br><b>CEREBRAL CORTEX:</b> Neocortical layers are molecular, external granular, external pyramidal, internal granular, internal pyramidal and multiform. Pyramidal neurons are projection neurons; astrocytes, oligodendrocytes and microglia occupy the neuropil.<br><br><b>CEREBELLAR CIRCUIT:</b> Purkinje cells provide the sole output of the cerebellar cortex. Granule-cell axons form parallel fibers in the molecular layer; climbing and mossy fibers are major afferent systems.<br><br><b>SPINAL CORD:</b> The intermediolateral autonomic region is prominent in species-dependent thoracolumbar segments. Ascending and descending tracts occupy defined white-matter funiculi. Brain and spinal-cord capillaries possess endothelial tight junctions that form the blood-brain barrier, supported by pericytes, basement membrane and astrocytic end-feet.",
+        comparative: [
+            { species: "Domestic mammals", note: "Cortical thickness, gyrification, tract proportions and prominence of individual nuclei vary by species and breed; use species-appropriate sections for identification." },
+            { species: "Bird", note: "Avian pallial organization is nuclear rather than a mammalian six-layered neocortex, while cerebellar cortical layering remains molecular, Purkinje and granular." }
+        ],
+        clinical: "Selective neuronal necrosis, demyelination, gliosis and Wallerian degeneration have distinct microscopic patterns. Purkinje-cell loss is important in several inherited and toxic cerebellar disorders; spinal-cord lesion interpretation requires level, gray/white-matter distribution and tract involvement.",
+        imgCode: "central_nervous_system_histology"
+    });
+})();
+
+// Verified veterinary-content normalization (2026-07): corrects residual
+// statements that older exact-string replacements could leave active.
+(function applyVerifiedHistologyAudit() {
+    const replacements = [
+        ["<1 kDa", "&lt;1 kDa"],
+        ["<0.1 mm", "&lt;0.1 mm"],
+        ["<1%", "&lt;1%"],
+        ["<1 mm", "&lt;1 mm"],
+        ["non-keratinized in ruminants and horse", "commonly keratinized in ruminants and horse and generally non-keratinized in carnivores and pig"],
+        ["Non-keratinized stratified squamous", "Stratified squamous; commonly keratinized in horse and ruminants and generally non-keratinized in carnivores and pig"],
+        ["Simple squamous</b> — flat cells; lining vessels (endothelium), body cavities (mesothelium), alveoli, Bowman's capsule, ducts.", "Simple squamous</b> — flat cells specialized for diffusion or a low-friction lining; found in vascular endothelium, mesothelium, pulmonary alveoli and the parietal layer of Bowman's capsule. Most glandular ducts are cuboidal or columnar rather than simple squamous."],
+        ["Macrophages</b> — from blood monocytes", "Macrophages</b> — heterogeneous resident phagocytes; recruited monocytes contribute to many populations, while several tissue-resident populations have distinct embryonic origins"],
+        ["Macrophages</b> — phagocytic; from blood monocytes", "Macrophages</b> — heterogeneous resident phagocytes; recruited monocytes contribute to many populations, while several tissue-resident populations have distinct embryonic origins"],
+        ["Perichondrium</b> supplies cartilage by diffusion.", "Perichondrium</b> supplies many cartilages by diffusion; articular cartilage and fibrocartilage lack perichondrium and receive nutrients from adjacent fluid or tissues."],
+        ["fibrocartilage nucleus pulposus extrudes", "the fibrocartilaginous annulus fibrosus fails and gelatinous nucleus-pulposus material extrudes"],
+        ["Fibrocartilage nucleus pulposus extrudes through annulus fibrosus.", "The fibrocartilaginous annulus fibrosus fails and gelatinous nucleus-pulposus material extrudes."],
+        ["All muscle tissue is mesodermal.", "Most muscle is mesodermal; important exceptions are the neuroectoderm-derived sphincter and dilator muscles of the iris."],
+        ["All muscle tissue is mesodermal in origin", "Most muscle tissue is mesodermal in origin; the sphincter and dilator muscles of the iris are neuroectodermal exceptions"],
+        ["Type IIb/x", "Type IIX (terminology and expression vary by species; adult horse muscle is described with IIX rather than a canonical IIB category)"],
+        ["very high Type IIb", "a high proportion of fast Type IIX fibers in sprint-trained individuals"],
+        ["very high in Type IIb fibres", "often rich in fast Type IIX fibers in sprint-trained individuals"],
+        ["abnormal glycogen in Type IIa fibres", "abnormal glycogen/polysaccharide accumulation that is not restricted to Type IIa fibers"],
+        ["Cannot regenerate — damage replaced by scar", "Regenerative capacity is extremely limited; clinically important injury is predominantly repaired by fibrosis"],
+        ["Cannot regenerate after MI → fibrous scar.", "Regenerative capacity after myocardial infarction is extremely limited, so repair is predominantly by fibrous scar."],
+        ["Glial cells outnumber neurons ~10:1", "Across the whole mammalian brain, total glial and neuronal numbers are broadly comparable, with marked regional and species variation"],
+        ["Glia (~10× more than neurons)", "Glia (number relative to neurons varies greatly by region and species)"],
+        ["Astrocytes (BBB)", "Astrocytes (support and regulate the BBB; the physical seal is formed by capillary endothelial tight junctions)"],
+        ["reticular formation wired for early standing", "neural circuits and myelination mature in a species-specific precocial pattern that supports early standing"],
+        ["Specific 'Brain stem reticular formation' wired for early standing.", "Species-specific precocial neural and musculoskeletal maturation supports standing soon after birth; avoid assigning this complex behavior to one named formation."],
+        ["Brain ~10% weight of spinal cord vs cattle 5%", "Brain-to-spinal-cord proportions vary with breed, age and measurement method; avoid unsupported fixed percentages"],
+        ["Brain ~10% spinal cord vs cattle ~5% — higher cognitive proportion.", "Brain-to-spinal-cord proportions vary with breed, age and measurement method; avoid unsupported percentages and cognitive rankings."],
+        ["RBCs</b> — biconcave discs, no nucleus (mammals); 5-7 million/µL; lifespan ~120 days", "RBCs</b> — anucleate biconcave cells in mammals; count, size and lifespan are strongly species-dependent and must be reported with species-specific reference intervals"],
+        ["Carry O₂ via haemoglobin; ~5-7 million/μL.<br>• Lifespan ~120 days; broken down in spleen.", "Carry O₂ via haemoglobin. Counts and lifespans vary widely among domestic species and must be interpreted with species-specific laboratory intervals."],
+        ["Platelets</b> — 150,000-450,000/µL", "Platelets</b> — concentration is species- and laboratory-dependent; use the relevant veterinary reference interval"],
+        ["clotting; ~150,000-450,000/μL", "clotting; concentration is species- and laboratory-dependent and should be reported using the relevant veterinary reference interval"],
+        ["Dog/Cat RBC ~7 µm", "Dog RBCs average about 7 µm, whereas feline RBCs are smaller (approximately 5.5–6 µm)"],
+        ["Cow RBC lifespan 110-130 days", "Bovine RBC lifespan is commonly reported around 150–160 days, with source and physiologic variation"],
+        ["Lymphocytes 20-50% in dog", "Canine leukocytes should be interpreted with laboratory-specific absolute reference intervals rather than a universal lymphocyte percentage"],
+        ["J system most important", "B system is the most complex major bovine blood-group system; J is a soluble-antigen system with particular clinical relevance"],
+        ["Haematopoietic Stem Cell (HSC)</b> — pluripotent", "Haematopoietic Stem Cell (HSC)</b> — multipotent"],
+        ["<b>Pluripotent Haematopoietic Stem Cell (HSC)</b>", "<b>Multipotent Haematopoietic Stem Cell (HSC)</b>"],
+        ["huge multinucleate cell", "huge cell with one highly polyploid, multilobulated nucleus"],
+        ["distal third skeletal", "distal third smooth"],
+        ["Crypts contain Paneth cells", "Crypts contain stem and secretory cells; Paneth-cell presence and abundance vary among domestic species"],
+        ["Sinusoids lined by Kupffer cells", "Sinusoids are lined by specialized fenestrated endothelial cells; Kupffer cells are resident macrophages positioned on the luminal surface"],
+        ["Alpha cells (20%, peripheral)", "Alpha cells (proportion and distribution vary by species)"],
+        ["Beta cells (70%, central)", "Beta cells (usually the major endocrine population, but their distribution varies by species)"],
+        ["Serous demilunes</b> cap mucous acini", "Classical serous demilunes are largely fixation artifacts; in vivo serous and mucous cells have a different three-dimensional arrangement"],
+        ["Parotid the only major active gland", "All major salivary glands contribute; the parotid is particularly active during mastication"],
+        ["Salivary parotid the only major active gland.", "All major salivary glands contribute; the parotid is particularly active during mastication."],
+        ["Parotid is the only major salivary gland active in the horse", "All major salivary glands contribute in the horse; the parotid is especially active during mastication"],
+        ["islets very abundant — historic source of insulin", "islet abundance and organization are species-dependent; historical use of porcine insulin should not be presented as a direct anatomical consequence of islet abundance"],
+        ["Horse/Dog/Cat/Pig — unipyramidal", "Horse, dog and cat — unipyramidal/unipapillary; pig — smooth externally but multipyramidal and multipapillate internally"],
+        ["<b>Horse, Dog, Cat, Pig</b> — unipyramidal, smooth, with renal pelvis.", "<b>Horse, dog and cat</b> — unipyramidal/unipapillary. <b>Pig</b> — smooth externally but multipyramidal/multipapillate internally."],
+        ["Pig: smooth, unipyramidal", "Pig: smooth externally but multipyramidal/multipapillate internally"],
+        ["<b>Nephron</b>: renal corpuscle → PCT → Loop of Henle → DCT → collecting duct.", "<b>Urine-forming system:</b> the nephron proper comprises the renal corpuscle and renal tubule through the distal segment; it empties through a connecting segment into the collecting-duct system. Some teaching texts use 'uriniferous tubule' for the combined nephron and collecting system."],
+        ["Entire conducting zone lined by respiratory epithelium", "The conducting epithelium changes by level: vestibular, respiratory and olfactory regions differ, and bronchioles transition to simple ciliated columnar/cuboidal cells with club cells"],
+        ["most efficient respiratory system of all vertebrates", "a highly effective system using rigid parabronchial lungs, unidirectional airflow and cross-current exchange"],
+        ["<b>cross-current gas exchange</b> = most efficient in vertebrates.", "<b>Cross-current gas exchange</b> supports highly effective avian gas exchange without requiring an unsupported universal ranking."],
+        ["T-cells undergo positive + negative selection here", "T cells undergo positive selection mainly in the cortex; negative selection occurs chiefly in the medulla and corticomedullary region"],
+        ["Bilobed organ in cranial mediastinum; large in young animals", "Lobed organ whose cervical and mediastinal extent varies markedly among domestic species and with age; it is large in young animals"],
+        ["Covered by stratified squamous epithelium with <b>crypts</b> that increase surface contact with antigens.", "Tonsillar epithelium and crypt development vary by site: oropharyngeal tonsils are generally stratified squamous, whereas the pharyngeal tonsil has respiratory epithelium."],
+        ["stores ~12 L RBCs", "can store and mobilize a substantial volume of blood; any numerical estimate must specify whether it refers to whole blood or packed erythrocytes and cite the population studied"],
+        ["pathognomonic for ruminants", "characteristic of several ruminant species but not a pathognomonic disease sign"],
+        ["Pathognomonic for ruminants.", "Characteristic of several ruminant species, but not a pathognomonic disease sign."],
+        ["secrete <b>catecholamines</b> (~80% adrenaline + 20% noradrenaline)", "secrete <b>catecholamines</b>; adrenaline:noradrenaline proportions vary by species and physiologic state"],
+        ["Central vein drains directly to caudal vena cava (right) or renal vein (left).", "Adrenal venous drainage is species-specific and should not be generalized from a human right-versus-left pattern."],
+        ["Placenta (eCG, hCG, progesterone).", "Placenta/endometrial cups produce species- and stage-specific hormones: hCG is primate-derived, eCG is equine, and placental progesterone production varies among domestic species."],
+        ["Cryptorchidism:</b> Testis fails to descend → infertile + tumour-prone.", "Cryptorchidism:</b> An undescended testis has impaired spermatogenesis and increased neoplasia risk; bilateral cryptorchids are infertile, while unilateral animals may remain fertile."],
+        ["cyclic changes (proliferative under oestrogen, secretory under progesterone)", "estrous-cycle changes under estrogen and progesterone; human menstrual 'proliferative/secretory phase' terminology should not be applied unchanged across domestic species"],
+        ["mucosa with crypts/branched glands secreting mucus", "mucosal folds, crypts and glandular development vary by species; mucus production and a pregnancy plug are functional features"],
+        ["cornification ~90% = optimum mating window", "a high proportion of cornified superficial cells supports estrus staging, but precise breeding time should be refined with serial progesterone with or without LH testing and clinical context"],
+        ["cornea (5 layers — epithelium + Bowman's + stroma + Descemet's + endothelium)", "cornea conventionally described without a distinct Bowman's layer in dog, cat and horse (epithelium + stroma + Descemet's membrane + endothelium); ruminant descriptions require species/source qualification"],
+        ["<b>Cornea (5 layers, anterior to posterior):</b>", "<b>Cornea (species-qualified layers, anterior to posterior):</b>"],
+        ["  1. Anterior Epithelium — stratified squamous non-keratinised.<br>  2. Bowman's Membrane — basement membrane + thin layer.<br>  3. Substantia Propria (Stroma)", "  1. Anterior epithelium — stratified squamous non-keratinized.<br>  2. Substantia propria (stroma)"],
+        ["  4. Descemet's Membrane", "  3. Descemet's membrane"],
+        ["  5. Posterior Endothelium", "  4. Posterior endothelium"],
+        ["Area centralis (visual streak in horse/cattle)", "Area centralis and visual streak are distinct retinal specializations; the visual streak is prominent in horse and cattle"],
+        ["Vitreous body — gel filling the posterior chamber", "Vitreous body — gel filling the vitreous chamber behind the lens"],
+        ["Hair cells with otoliths (calcium carbonate crystals) on top.", "Hair-cell stereocilia project into an otolithic membrane containing calcium-carbonate otoconia."],
+        ["Stratum lucidum</b> — only in thick skin (hairless areas like nose, lips, footpads)", "Stratum lucidum</b> — present in appropriately thick specialized skin, especially footpads; occurrence at nasal and labial sites is species- and region-dependent"],
+        ["<b>Eccrine sweat glands</b> — present in equine skin (true sweat-cooling); footpads of dog/cat.", "<b>Epitrichial (apocrine) sweat glands</b> — abundant in equine skin and responsible for thermoregulatory sweating; eccrine/atrichial glands are largely restricted to specialized sites such as carnivore footpads."],
+        ["Strong eccrine (true) sweat glands all over body — uniquely effective at evaporative cooling.", "Abundant epitrichial (apocrine) sweat glands support effective evaporative cooling; eccrine/atrichial glands are not distributed over the equine body as the principal sweat gland."],
+        ["5-12 million/µL among common domestic mammals", "species-specific counts that range beyond 12 million/µL in some domestic species, including goats"]
+    ];
+
+    const fix = value => {
+        if (typeof value !== "string") return value;
+        for (const [oldText, newText] of replacements) value = value.split(oldText).join(newText);
+        return value;
+    };
+    for (const section of Object.values(atlasData.Histology || {})) {
+        if (!Array.isArray(section)) continue;
+        for (const item of section) {
+            for (const key of ["desc", "eliteDesc", "clinical"]) item[key] = fix(item[key]);
+            if (Array.isArray(item.comparative)) for (const row of item.comparative) {
+                row.species = fix(row.species);
+                row.note = fix(row.note);
+            }
+        }
+    }
+})();
