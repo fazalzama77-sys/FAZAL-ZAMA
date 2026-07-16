@@ -166,14 +166,23 @@ quizBank = {
 - **Strip Greek mythology references** — "atlas vertebra carries the skull" instead of "named after the Greek titan".
 - **Files use mixed-case extensions** (`data-forelimb.JS` not `.js`). Match my existing pattern when creating new ones.
 
+### CRITICAL: preserve anatomy lesson depth during audits
+
+- **Never replace a complete `desc`, `eliteDesc`, `clinical`, or `comparative` field with a shorter audit summary.** An accuracy audit must correct the inaccurate sentence or phrase while preserving all unrelated teaching detail.
+- **Never append a runtime whole-field audit layer** using patterns such as `Object.assign(item, fields)` or a helper that replaces complete lesson objects. Make targeted edits to the original field, or use narrowly scoped phrase-level corrections when direct editing is impractical.
+- Adding genuinely missing Neurology or Angiology topics is allowed, but additions must not overwrite or condense existing topics.
+- Before completing any content audit, compare every pre-existing topic field before and after the change. Investigate every unexpected negative character-length change and confirm that it represents only removal of inaccurate wording.
+- Load the data files together in the same order used by `index.html`; a standalone syntax check is not enough because `data-splanchnology.JS` pushes entries into previously created regions.
+
+**Incident record (2026-07-16):** A broad runtime replacement layer was mistakenly added to `data-forelimb.JS`, `data-head-neck.JS`, and `data-hindlimb.JS`. It substituted shorter summaries for detailed Standard/Elite content. The entire disabled replacement helper and all inert replacement calls were subsequently removed. The original detailed lessons, targeted phrase-level corrections, and genuinely new Neurology/Angiology entries remain active. There is currently no `false && item`, `Object.assign(item, fields)`, or audit `replace(...)` mechanism in these three files.
+
 ---
 
 ## ⚙️ KEY ARCHITECTURE FACTS
 
 - **Single-page app:** `index.html` is a section-switcher. Each section is a `<section class="view-section">`. Navigation by `view-section.active` class + hash routing (`#/atlas/Forelimb/Osteology/2`).
 - **Image loading is already click-to-load:** Atlas modals only fetch images when user clicks a structure. WHY cards render text-only; image loads when user opens the modal. No lazy-loading library needed.
-- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (per-day action map), `ivri-notify-srs`, `ivri-notify-last`, `ivri-nav-pos`, `ivri-streak-shield`, `ivri-best-streak`, `ivri-last-milestone`.
-- **Activity log shape (v3):** `{ 'YYYY-MM-DD': { open: n, read: n, quiz: n, hl: n, note: n } }`. Legacy `true` values still count as active for back-compat. `app._hasActivity(entry)` is the safe check; `app._recordActivityToday(kind)` is the logger.
+- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (streak map), `ivri-notify-srs`, `ivri-notify-last`.
 - **PWA:** Service worker caches everything; app installs to Android home screen via `manifest.json`.
 - **State globals:** `atlasData` (regional), `anatomyData` (WHY), `quizBank` (questions), `srs.*` (SRS engine), `quizApp.*` (quiz state).
 
