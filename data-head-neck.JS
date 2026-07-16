@@ -726,185 +726,35 @@ atlasData["Head & Neck"] = {
     "Splanchnology": []
 };
 
-// Verified regional audit (2026-07): species-qualified replacements and syllabus gaps.
+// Verified regional additions (2026-07): complete syllabus gaps without replacing existing lessons.
 (function applyVerifiedHeadNeckAudit() {
     var region = atlasData["Head & Neck"];
     function entry(section, title) {
         return (region[section] || []).find(function (item) { return item.title === title; });
     }
-    function replace(section, title, fields) {
-        var item = entry(section, title);
-        // Preserve the original detailed Standard and Elite text. Corrections are
-        // applied non-destructively below instead of replacing whole fields.
-        if (false && item) Object.assign(item, fields);
-    }
 
-    replace("Osteology", "Introduction: Bovine Cranial Architecture", {
-        desc: "<b>Bovine skull:</b> The neurocranium encloses the brain and the viscerocranium forms the face. In adult cattle the frontal bones dominate the dorsal and caudal skull and contain an extensive, compartmented frontal-sinus system. Sutures and developmental components fuse with age, so a fixed count of visibly separate adult bones is misleading.",
-        eliteDesc: "<b>BOVINE CRANIAL ARCHITECTURE</b><br><br>The bovine skull combines a relatively short braincase with a long facial skeleton adapted for prehension and grinding. Extensive frontal and other paranasal sinuses reduce bone mass and create clinically important compartments, including the cornual diverticulum in horned adults. Pneumatization, horn status and fusion change with age. Sinuses may distribute impact, but they should not be presented as a proven dedicated head-butting shock absorber."
-    });
 
-    replace("Osteology", "Occipital Bone (Os occipitale)", {
-        desc: "<b>Occipital bone:</b> Forms the caudal skull around the foramen magnum. Paired occipital condyles articulate with the atlas. Basilar, lateral and squamous parts fuse with age; the spheno-occipital synchondrosis closes during maturation at a variable age. Paracondylar processes provide muscle attachment, and the hypoglossal canal transmits CN XII.",
-        eliteDesc: "<b>OCCIPITAL BONE</b><br><br>The basilar part forms the caudal cranial floor and joins the basisphenoid rostrally. Lateral parts bear the paired condyles, hypoglossal canals and paracondylar processes. The squamous part occupies the nuchal surface because the bovine frontal bone extends far caudally. Closure ages and the number of hypoglossal-canal openings vary, so they are useful comparative observations but not absolute maturity tests."
-    });
 
-    replace("Osteology", "Ethmoid Bone (Os ethmoidale)", {
-        desc: "<b>Ethmoid bone:</b> Separates the nasal and cranial cavities. It includes a cribriform plate for olfactory nerve filaments, a perpendicular plate contributing to the nasal septum, a crista galli and paired ethmoidal labyrinths. Ethmoturbinate number and arrangement vary by species and individual; fixed counts should not be memorized as universal.",
-        clinical: "<b>Clinical relevance:</b> Damage at the cribriform plate can affect olfaction and create communication between nasal and cranial compartments. Avian nasal anatomy must be described independently and not inferred from relative reliance on vision or smell."
-    });
 
-    replace("Osteology", "Frontal Bone (Os frontale)", {
-        desc: "<b>Frontal bone in cattle:</b> Forms most of the cranial roof and extends caudally to the nuchal region. In horned animals its cornual process contains a diverticulum of the frontal sinus. The supraorbital groove leads to one or more foramina. In cattle these principally transmit a supraorbital vein; this opening is not functionally identical to the equine supraorbital foramen carrying the supraorbital nerve and vessels.",
-        eliteDesc: "<b>FRONTAL BONE</b><br><br>The paired frontal bones form the expansive dorsal skull, contribute to the complete bony orbit and are extensively pneumatized. The cornual process supports the horn and becomes continuous with the cornual diverticulum as the animal matures. The temporal line guides the cornual nerve toward the horn. Bovine supraorbital foramina are venous channels and must not automatically be assigned the equine supraorbital nerve.",
-        comparative: [
-            { species: "Ox", note: "Frontal bone extends to the nuchal region; cornual process and cornual diverticulum develop in horned animals; supraorbital opening is principally venous." },
-            { species: "Horse", note: "Frontal bone contributes to the cranial roof and complete orbit; supraorbital foramen carries the supraorbital neurovascular bundle." },
-            { species: "Dog", note: "Orbit is completed laterally by an orbital ligament; frontal sinus development varies markedly with skull conformation." },
-            { species: "Pig", note: "Frontal bone and sinus are extensive; orbital morphology differs from ruminants and horses." }
-        ]
-    });
 
-    replace("Osteology", "Lacrimal & Zygomatic Bones", {
-        desc: "<b>Lacrimal bone:</b> Contributes to the rostral/medial orbit and bears the lacrimal sac region. Cattle have a prominent, thin-walled lacrimal bulla related to the paranasal sinus system.<br><br><b>Zygomatic bone:</b> Forms the ventral orbital margin and rostral zygomatic arch and joins the frontal process to complete the bovine bony orbit.",
-        eliteDesc: "<b>LACRIMAL AND ZYGOMATIC BONES</b><br><br>The bovine lacrimal bone has facial and orbital parts and a fragile lacrimal bulla; the nasolacrimal drainage apparatus begins in the medial orbital region. The zygomatic bone meets maxilla, temporal and frontal bones, forming the ventral orbit and rostral zygomatic arch. The lacrimal bulla is a prominent bovine feature, not a structure that should be declared unique without comparative qualification.",
-        comparative: [
-            { species: "Ox", note: "Prominent lacrimal bulla; broad zygomatic bone helps complete the bony orbit." },
-            { species: "Horse", note: "No comparable lacrimal bulla; zygomatic and frontal processes complete the bony orbit." },
-            { species: "Dog", note: "Small lacrimal bone; orbital rim is completed by a ligament rather than bone." },
-            { species: "Pig", note: "Lacrimal and zygomatic morphology is porcine-specific; the orbit is not described by copying the ruminant pattern." },
-            { species: "Fowl", note: "Lacrimal and jugal elements are present in the avian orbital/zygomatic apparatus and differ fundamentally from mammalian bones." }
-        ]
-    });
 
-    replace("Osteology", "Incisive & Nasal Bones", {
-        comparative: [
-            { species: "Ox", note: "Incisive bone is edentulous and supports the dental pad; short nasal bones help form the nasoincisive notch." },
-            { species: "Horse", note: "Incisive bone bears three upper incisors per side; nasal bones are long." },
-            { species: "Dog", note: "Incisive bone bears three incisors per side; nasal shape varies with skull conformation." },
-            { species: "Pig", note: "Robust incisive/premaxillary region and long nasal bones support the snout." },
-            { species: "Fowl", note: "The premaxilla is large and forms much of the upper beak; nasal and frontal elements meet at the flexible craniofacial region rather than being simply absent or fused." }
-        ]
-    });
 
-    replace("Osteology", "Mandible & Hyoid Apparatus", {
-        desc: "<b>Mandible:</b> Paired right and left mandibles meet rostrally at a fibrous mandibular symphysis in cattle. Each has a body and ramus with coronoid, condylar and angular regions, a mandibular foramen medially and mental foramina rostrally. The diastema separates incisors from cheek teeth.<br><br><b>Hyoid apparatus:</b> A chain of species-variable bones suspends the tongue and larynx; the basihyoid bears a short lingual process in cattle.",
-        eliteDesc: "<b>MANDIBLE AND HYOID APPARATUS</b><br><br>The bovine mandibular symphysis is a fibrous union rather than a normally fused adult synostosis. The condylar process forms the temporomandibular joint and the coronoid process receives temporalis. The mandibular canal carries the inferior alveolar neurovascular bundle. The hyoid apparatus comprises tympanohyoid, stylohyoid, epihyoid, ceratohyoid, basihyoid and thyrohyoid components with species variation. Domestic fowl have an avian hyoid/branchial apparatus; the extreme skull-wrapping arrangement is a woodpecker specialization.",
-        comparative: [
-            { species: "Ox", note: "Mandibular halves remain joined by a fibrous symphysis; broad cheek-tooth region supports grinding." },
-            { species: "Horse", note: "Mandibular symphysis ossifies; long diastema and large cheek-tooth region." },
-            { species: "Dog", note: "Mandibular symphysis remains fibrous; large coronoid process supports temporalis." },
-            { species: "Pig", note: "Mandibular symphysis ossifies with maturation." },
-            { species: "Fowl", note: "Mandible articulates through the quadrate and lacks mammalian tooth-bearing organization." }
-        ],
-        clinical: "<b>Clinical relevance:</b> Mental and mandibular foramina are landmarks for regional anesthesia. Symphyseal injury and mandibular fracture require species-specific stabilization."
-    });
 
-    replace("Osteology", "Parietal & Interparietal Bones", {
-        eliteDesc: "<b>PARIETAL AND INTERPARIETAL BONES</b><br><br>In cattle, caudal expansion of the frontal bones displaces the parietals to lateral and nuchal aspects so they contribute little to the dorsal roof. Parietal, interparietal and occipital boundaries become obscure with maturation. In horses and dogs the parietals make a much larger contribution to the dorsal cranial roof. Fusion timing and the visibility of sutures vary among species and individuals."
-    });
 
-    replace("Osteology", "Palatine, Pterygoid & Vomer", {
-        comparative: [
-            { species: "Ox", note: "Palatine bone contributes to the hard palate and is pneumatized; pterygoid has a distinct hamulus; vomer is deeply grooved." },
-            { species: "Horse", note: "Palatine bone contributes to hard palate and paranasal system; pterygoid hamulus is distinct." },
-            { species: "Dog", note: "Palatine is broad and not pneumatized; pterygoid is short; vomer forms a high septal plate." },
-            { species: "Pig", note: "Palatine and pterygoid plates are robust; vomer is long." },
-            { species: "Fowl", note: "Palatine and pterygoid are slender elements of the avian palatal linkage; vomer is reduced or variably present." }
-        ]
-    });
 
-    replace("Osteology", "Nasal Turbinates (Conchae)", {
-        desc: "<b>Nasal conchae:</b> Dorsal and ventral conchae project from the lateral nasal wall and carry species-specific scrolls. Ethmoidal conchae occupy the caudal nasal cavity. Their mucosa conditions inspired air and supports olfaction. Fixed endoturbinate and ectoturbinate counts vary and should not be treated as universal.",
-        eliteDesc: "<b>NASAL CONCHAE</b><br><br>The dorsal and ventral nasal conchae divide the nasal cavity into meatuses and provide a large mucosal surface. Conchal scrolls and sinuses differ among cattle, horses, pigs and carnivores. The horse has defined dorsal and ventral conchal scrolls and conchal sinuses; it is incorrect to reduce the equine conchae to a single-scroll pattern."
-    });
 
-    replace("Osteology", "Frontal & Maxillary Sinuses", {
-        eliteDesc: "<b>BOVINE PARANASAL SINUSES</b><br><br>The frontal sinus is a complex, age-dependent system with rostral and caudal compartments and diverticula extending toward the horn, orbit and nuchal region. The cornual diverticulum communicates with the horn core in mature horned cattle. The maxillary sinus occupies maxillary and adjacent bones and communicates with related palatine/lacrimal compartments and the nasal cavity through species-specific openings. Surgical drainage or trephination must use imaging, age, horn status and current bovine landmarks; no single fixed distance from the midline is universally safe.",
-        clinical: "<b>Clinical relevance:</b> Dehorning or horn fracture can open the cornual diverticulum in mature animals. Sinusitis localization and drainage require knowledge of compartment boundaries and patient-specific imaging/landmarks."
-    });
 
-    replace("Osteology", "Cervical Vertebrae (C1-C7) — Bones of the Neck", {
-        clinical: "<b>Clinical relevance:</b> Atlantoaxial instability occurs especially in some toy dogs; caudal cervical compressive disease occurs in horses and large-breed dogs. Atlanto-occipital CSF collection and cervical procedures require imaging, restraint and species-specific landmarks. Vertebral-artery routes around the atlas vary and must not be generalized from one species."
-    });
 
-    replace("Myology", "Cutaneous & Facial Muscles (Mimetic / Expression)", {
-        desc: "<b>Facial muscles:</b> Thin muscles controlling lips, nostrils, eyelids and ears are supplied by the facial nerve (CN VII). Orbicularis oculi closes the eyelids, orbicularis oris acts on the mouth, buccinator keeps food on the occlusal surfaces, and species-specific lip, nostril and auricular muscles support prehension and expression. Facial paralysis weakens the blink and facial movement but the menace response also requires CN II, forebrain, cerebellum and CN VII.",
-        clinical: "<b>Facial paralysis:</b> May cause ear/lip droop, poor blink, drooling and exposure keratitis. Test palpebral response and facial symmetry. Routine dehorning targets cornual sensory nerves and should not be listed as a common cause of facial-nerve paralysis."
-    });
 
-    replace("Myology", "Muscles of Mastication (Chewing)", {
-        comparative: [
-            { species: "Ox/Horse", note: "Masseter and medial pterygoid are strongly developed for elevation and transverse excursion of the mandible." },
-            { species: "Dog/Cat", note: "Temporalis is proportionally large and jaw movement is predominantly vertical, though limited translation occurs." },
-            { species: "Fowl", note: "Birds lack teeth but possess specialized jaw-closing and jaw-opening muscles acting through the quadrate and beak; these muscles should not be described simply as small." }
-        ]
-    });
 
-    replace("Myology", "Muscles of the Tongue, Pharynx, Soft Palate, Hyoid & Larynx", {
-        desc: "<b>Tongue:</b> Intrinsic muscles and genioglossus, hyoglossus and styloglossus are supplied chiefly by CN XII; palatoglossus is an exception.<br><b>Pharynx:</b> Constrictors and elevators coordinate swallowing through the pharyngeal plexus, with stylopharyngeus supplied by CN IX.<br><b>Soft palate:</b> Most muscles receive vagal/pharyngeal-plexus motor fibers; <b>tensor veli palatini is supplied by V3</b>.<br><b>Larynx:</b> Recurrent laryngeal nerves supply all intrinsic laryngeal muscles except cricothyroideus, which is supplied by the external branch of the cranial laryngeal nerve. Cricoarytenoideus dorsalis is the principal abductor of the arytenoid/vocal fold.",
-        eliteDesc: "<b>TONGUE, PHARYNX, PALATE AND LARYNX</b><br><br>Swallowing requires coordinated trigeminal, glossopharyngeal, vagal and hypoglossal pathways. CN XII supplies intrinsic and most extrinsic tongue muscles. The vagus through the pharyngeal plexus supplies most palate and pharyngeal muscles, while tensor veli palatini is a mandibular-nerve exception. Laryngeal motor supply is divided between the external cranial-laryngeal branch to cricothyroideus and the recurrent laryngeal nerve to the remaining intrinsic muscles."
-    });
 
-    replace("Myology", "Neck Muscles & Boundaries of the Jugular Furrow", {
-        desc: "<b>Bovine superficial neck:</b> Brachiocephalicus contains cleidomastoideus, cleido-occipitalis and cleidobrachialis parts; sternocephalicus contains sternomandibularis and sternomastoideus. Omotransversarius, trapezius, rhomboideus and splenius contribute to movement/support.<br><br><b>Jugular furrow:</b> Bounded dorsally by brachiocephalicus and ventrally by sternocephalicus, with a species-variable muscular floor. The external jugular vein is its principal superficial content. Common carotid artery and vagosympathetic trunk lie deeper in the carotid sheath; the recurrent laryngeal nerve follows the tracheoesophageal region.",
-        eliteDesc: "<b>NECK MUSCLES AND JUGULAR FURROW</b><br><br>In cattle, cleidocephalicus has mastoid and occipital parts, while sternocephalicus has mandibular and mastoid parts. With the head fixed, brachiocephalicus advances the limb; with the limb fixed it moves the neck. Sternocephalicus flexes or laterally bends the head/neck. The external jugular runs between these muscle masses. Deep to the furrow, the carotid sheath contains common carotid and vagosympathetic structures; internal jugular association varies by species. The recurrent laryngeal nerve is adjacent to the trachea/esophagus, not a superficial furrow content.",
-        clinical: "<b>Jugular access:</b> Use species-appropriate restraint, site selection and asepsis. Accidental arterial injection is a serious complication; avoid universal claims about one safe third of the groove because depth and relationships change along the neck and among species."
-    });
 
-    replace("Arthrology", "Articulations & Special Ligaments of Head and Neck", {
-        desc: "<b>Joints:</b> The atlanto-occipital joints permit chiefly flexion and extension; atlantoaxial joints permit rotation. Cervical vertebrae also articulate through discs and synovial articular-process joints. The temporomandibular joint contains an articular disc and permits species-dependent hinge and translation.<br><br><b>Ligaments:</b> The nuchal ligament supports the head in ungulates. Ligaments associated with the dens vary by species and must not be listed as identical in all domestic mammals.",
-        comparative: [
-            { species: "Horse", note: "Well-developed funicular and lamellar nuchal ligament; poll and withers bursae are distinct clinical regions." },
-            { species: "Ox", note: "Strong nuchal ligament supports the head; poll bursitis is not the same lesion as fistulous withers." },
-            { species: "Dog", note: "Paired funicular nuchal ligament is much less extensive than in large ungulates; toy breeds may develop atlantoaxial instability." },
-            { species: "Pig", note: "Nuchal support is less elaborate than in horse and cattle." }
-        ],
-        clinical: "<b>Clinical relevance:</b> Poll evil affects tissues/bursae at the poll; fistulous withers affects the withers region. Atlanto-occipital CSF collection and TMJ treatment require trained, species-specific technique."
-    });
 
-    replace("Neurology", "Introduction: The Cranial Command Center", {
-        desc: "<b>Cranial nerves:</b> Twelve paired nerves mediate special senses, ocular movement, facial expression, mastication, swallowing, phonation, tongue movement and parasympathetic functions. In cattle the principal horn supply is the cornual nerve, commonly described as the continuation of the zygomaticotemporal branch of V2; accessory contribution, including infratrochlear supply, may occur. Goats require both lacrimal and infratrochlear cornual branches to be considered.",
-        eliteDesc: "<b>CRANIAL NERVE ORGANIZATION</b><br><br>Cranial nerves carry special sensory, somatic motor, branchial motor and autonomic fibers. The bovine cornual pathway follows the temporal line and is predominantly zygomaticotemporal/maxillary in modern descriptions, with reported accessory innervation relevant to incomplete blocks. Goat horn innervation differs and routinely includes lacrimal and infratrochlear cornual branches. Terminology should acknowledge source and species rather than calling every ruminant cornual nerve simply V1 or V2.",
-        comparative: [
-            { species: "Ox", note: "Foramen orbitorotundum present; principal cornual nerve follows the temporal line from the zygomaticotemporal pathway, with possible accessory supply." },
-            { species: "Horse", note: "Orbital fissure and foramen rotundum are separate; there is no horn or cornual block." },
-            { species: "Dog", note: "Orbital fissure, foramen rotundum and foramen ovale are separate; alar canal present." },
-            { species: "Goat", note: "Lacrimal and infratrochlear cornual branches both require consideration for horn procedures." }
-        ]
-    });
 
-    replace("Neurology", "CN I & II: The Special Senses (Olfactory & Optic)", {
-        desc: "<b>CN I:</b> Numerous olfactory filaments cross the cribriform plate from nasal olfactory mucosa to the olfactory bulb. The vomeronasal organ has separate chemosensory connections and participates in pheromonal sampling.<br><b>CN II:</b> The optic nerve is a CNS tract surrounded by meninges and passes through the optic canal to the chiasm. The pupillary light reflex uses CN II afferently and CN III efferently; menace also requires forebrain, cerebellar and CN VII function.",
-        comparative: [
-            { species: "Ox", note: "Laterally placed eyes produce a wide visual field and extensive optic-fiber decussation; exact percentages vary by method." },
-            { species: "Horse", note: "Wide monocular fields with a smaller binocular field; exact chiasmal percentages should be cited rather than memorized as absolute." },
-            { species: "Dog", note: "Greater binocular overlap than large ungulates; visual field varies with skull conformation." }
-        ]
-    });
 
-    replace("Neurology", "CN V: The Trigeminal Nerve (The Giant)", {
-        comparative: [
-            { species: "Ox", note: "V1 and V2 pass through the foramen orbitorotundum; V3 uses the foramen ovale. Principal cornual supply is associated with the zygomaticotemporal pathway, with possible accessory innervation." },
-            { species: "Horse", note: "V1 uses the orbital fissure, V2 the foramen rotundum and V3 the oval-notch/foramen-lacerum region." },
-            { species: "Dog", note: "Separate orbital fissure, foramen rotundum and foramen ovale; alar canal transmits the maxillary artery." },
-            { species: "Goat", note: "Lacrimal and infratrochlear cornual branches both contribute to horn innervation." }
-        ]
-    });
 
-    replace("Neurology", "CN IX, X, XI: The Vagal Group", {
-        desc: "<b>CN IX:</b> Sensory and taste supply to the caudal tongue/pharynx, motor to stylopharyngeus and parasympathetic pathway to parotid gland.<br><b>CN X:</b> Supplies pharynx and larynx and carries parasympathetic fibers to thoracic and abdominal viscera. The external cranial-laryngeal branch supplies cricothyroideus; recurrent laryngeal nerves supply the other intrinsic laryngeal muscles.<br><b>CN XI:</b> Supplies major neck muscles including trapezius and sternocephalicus. Exit anatomy is species-specific.",
-        clinical: "<b>Vagal indigestion:</b> A syndrome of impaired forestomach motility or outflow caused by several mechanical, inflammatory or neural disorders. Signs and treatment depend on the lesion; it must not be reduced to complete vagal transection, one fecal shape or an automatic need for rumenotomy/fistulation."
-    });
 
-    replace("Neurology", "CN XII: The Hypoglossal Nerve", {
-        desc: "<b>Hypoglossal nerve:</b> A somatic motor nerve from the medulla that exits through the hypoglossal canal and supplies intrinsic and most extrinsic tongue muscles. Unilateral injury causes ipsilateral weakness and chronic denervation atrophy; bilateral injury seriously impairs prehension and swallowing.",
-        eliteDesc: "<b>CN XII - HYPOGLOSSAL</b><br><br>CN XII supplies genioglossus, hyoglossus, styloglossus and intrinsic tongue muscles. Its canal can be divided by bony septa, but the number of openings varies. On protrusion the tongue generally deviates toward a peripheral hypoglossal lesion. Listerial rhombencephalitis can affect several cranial nerves asymmetrically; no fixed CN V-VII-XII triad is diagnostic."
-    });
 
-    replace("Neurology", "Clinical Applications: Regional Anesthesia", {
-        clinical: "<b>Safety:</b> Choose cornual, dental, auriculopalpebral or ocular techniques from the procedure and species. Auriculopalpebral block produces eyelid akinesia but not corneal analgesia. Calculate anesthetic dose from patient and drug, use current landmarks and monitoring, and do not publish a universal lidocaine range, needle path or aspiration rule as complete protection from complications."
-    });
 
     if (!entry("Neurology", "CN VIII: Vestibulocochlear Nerve")) {
         var pathologyIndex = region.Neurology.findIndex(function (item) { return item.title === "Clinical Neurology: Pathology"; });
@@ -922,21 +772,7 @@ atlasData["Head & Neck"] = {
         });
     }
 
-    replace("Angiology", "Arteries of the Head & Neck", {
-        desc: "<b>Bovine arterial plan:</b> Common carotid arteries ascend in the carotid sheaths. In adult cattle the extracranial internal carotid regresses, so the external carotid and its branches provide most extracranial head supply and contribute to cerebral inflow through the maxillary-derived rostral epidural rete. Major branches include lingual, facial, superficial temporal and maxillary arteries.",
-        eliteDesc: "<b>HEAD AND NECK ARTERIES</b><br><br>The common carotid terminates chiefly in external-carotid pathways in adult cattle. The lingual artery supplies tongue; facial artery supplies superficial face; superficial temporal supplies temporal and cornual regions; maxillary artery supplies deep face, teeth, nasal and palatal regions and the rostral epidural rete. Cattle lack an alar canal. Vertebral/basilar pathways also contribute to cerebral circulation and must not be omitted.",
-        clinical: "<b>Clinical relevance:</b> Cornual vessels can bleed substantially during horn surgery. Facial and transverse-facial pulse sites and maxillary-vessel relations are species-specific. Control hemorrhage using current surgical technique rather than absolute claims that every unligated vessel is fatal."
-    });
 
-    replace("Angiology", "Veins & Lymph Nodes of the Head & Neck", {
-        desc: "<b>Veins:</b> In cattle the external jugular is formed chiefly by maxillary and linguofacial veins and is the principal superficial venous drainage/access route. Deep vertebral and internal-jugular pathways vary by species.<br><br><b>Lymph centres:</b> Mandibular, parotid, retropharyngeal, superficial cervical and deep cervical nodes drain defined territories. Mandibular/parotid/superficial cervical nodes may be accessible, whereas medial retropharyngeal nodes are deep.",
-        eliteDesc: "<b>VEINS AND LYMPHATICS</b><br><br>The external jugular lies in the jugular furrow and drains through brachiocephalic veins to the cranial vena cava. Maxillary and linguofacial tributaries drain deep and superficial head regions. Lymph from the head passes through mandibular, parotid and retropharyngeal centres before reaching deep cervical pathways. Palpability varies: medial retropharyngeal and deep cervical nodes are not routine external palpation targets.",
-        comparative: [
-            { species: "Cattle", note: "External jugular is the standard access vein; mandibular, parotid, retropharyngeal and superficial cervical centres are important in clinical and meat inspection." },
-            { species: "Horse", note: "External jugular is dominant; the carotid lies deeper and becomes a concern with poor technique." },
-            { species: "Dog", note: "External jugular is accessible and mandibular nodes are commonly palpable; internal jugular veins are better developed than in the horse." }
-        ]
-    });
 
     if (!entry("Angiology", "Carotid Sheath and Major Branch Relations")) {
         region.Angiology.splice(1, 0, {
