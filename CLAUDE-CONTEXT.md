@@ -18,9 +18,9 @@ Hey Claude! Read this whole file before doing anything else. It tells you who I 
 
 **IVRI Anatomy** — a free interactive veterinary anatomy study website + Android app for B.V.Sc 1st-year students, aligned with the VCI Unit 1-8 syllabus.
 
-**Live URL:** `https://fazal-zama.pages.dev/` (Cloudflare Pages, deployed from GitHub repo)
+**Live URL:** `https://veterinaryanatomy.com/` (Cloudflare Pages, deployed from GitHub repo)
 **GitHub repo:** `https://github.com/fazalzama77-sys/FAZAL-ZAMA.git`
-**Local working folder:** `D:/ANATOMY APP/repo/` ← **THIS IS THE ONLY FOLDER YOU SHOULD EDIT.** This folder IS the git repo connected to GitHub.
+**Authoritative local working folder:** `F:/IVRI ANATOMY 11 JUKY/` ← **THIS IS THE ONLY SOURCE FOLDER YOU SHOULD EDIT.** The old D: repository working copy is stale and must not be used as source code.
 
 The deprecated old folder is `D:/kimi anatomy/`. **Never edit it.** If I accidentally point you there, gently steer me back to the repo folder.
 
@@ -40,7 +40,7 @@ The deprecated old folder is `D:/kimi anatomy/`. **Never edit it.** If I acciden
 ## 🗂️ FILE STRUCTURE
 
 ```
-D:/ANATOMY APP/repo/         ← THE ACTIVE FOLDER (connected to GitHub)
+F:/IVRI ANATOMY 11 JUKY/     ← THE AUTHORITATIVE SOURCE FOLDER
 ├── index.html                ← Single-page app shell
 ├── style.css                 ← Main styles (~3700 lines)
 ├── enhanced-quiz.css         ← Atlas-quiz overlay styles
@@ -142,13 +142,21 @@ quizBank = {
 
 ## 🛠️ MY WORKFLOW (HOW I PUBLISH)
 
-1. I edit images by dropping into `D:/ANATOMY APP/repo/images-raw/atlas/` or `/why/`
+1. I edit images by dropping into `F:/IVRI ANATOMY 11 JUKY/images-raw/atlas/` or `/why/`
 2. I double-click `tools/compress.bat` — auto-compresses to ~300 KB WebP
-3. Edit happens in `D:/ANATOMY APP/repo/` (you edit here)
+3. Edit happens in `F:/IVRI ANATOMY 11 JUKY/` (the authoritative source folder)
 4. I open GitHub Desktop → see changes → write commit message → Commit → Push origin
 5. Cloudflare Pages auto-rebuilds the live site within ~1 minute
 
 **I never use git command-line.** Always give me file paths I can find in Explorer, not terminal commands.
+
+### Searchable learning pages
+
+- `learn/` contains generated, crawlable HTML pages for the public anatomy lessons. These pages complement the existing single-page app; they must never replace or break the `#/...` app routes.
+- `tools/build-seo-pages.mjs` regenerates the learning pages and `sitemap.xml` from the existing anatomy data files in the real website load order.
+- `tools/validate-seo-pages.mjs` must pass before publishing. It checks generated pages, canonical URLs, structured data, sitemap coverage and internal links.
+- Never hand-edit a generated file under `learn/`. Correct the original lesson data only with the user's approval, then regenerate.
+- Before and after generation, confirm every `data-*` source file hash is unchanged unless the user explicitly requested a lesson correction.
 
 ---
 
