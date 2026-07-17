@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /annotation-editor.html
+
+Sitemap: https://veterinaryanatomy.com/sitemap.xml
