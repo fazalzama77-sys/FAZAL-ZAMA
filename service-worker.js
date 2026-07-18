@@ -14,7 +14,7 @@
 //   4. SW calls skipWaiting() → activates → page's controllerchange listener reloads.
 // =========================================================
 
-const CACHE_VERSION = 'ivri-anatomy-v29';
+const CACHE_VERSION = 'ivri-anatomy-v30';
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [
@@ -44,6 +44,11 @@ const APP_SHELL = [
     './data-embryology.JS',
     './data-quiz.JS',
     './data-why.JS',
+    './favicon.ico',
+    './favicon-48x48.png',
+    './images/apple-touch-icon.png',
+    './images/icon-192.png',
+    './images/icon-512.png',
     './images/scapula-ox-horse-dog-annotated.png',
     './manifest.json'
 ];
