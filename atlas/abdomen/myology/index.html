@@ -4,6 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <base href="/">
+  <script>
+    // Remove the legacy landing hash before the interface paints. Deeper old
+    // Atlas hashes are upgraded by app.js after the anatomy data has loaded.
+    (() => {
+      if (location.protocol === 'file:') return;
+      const simpleLegacyRoutes = {
+        landing: '/',
+        atlas: '/atlas/',
+        why: '/why/',
+        dashboard: '/dashboard/',
+        me: '/me/',
+        quiz: '/quiz/',
+        bookmarks: '/library/bookmarks/',
+        highlights: '/library/highlights/',
+        notes: '/library/notes/'
+      };
+      const upgradeSimpleLegacyRoute = () => {
+        const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+        let cleanPath = parts.length === 1 ? simpleLegacyRoutes[parts[0]] : null;
+        if (parts[0] === 'library' && parts.length <= 2) {
+          cleanPath = `/library/${parts[1] || 'bookmarks'}/`;
+        }
+        if (cleanPath) history.replaceState(null, '', cleanPath);
+      };
+      upgradeSimpleLegacyRoute();
+      window.addEventListener('hashchange', upgradeSimpleLegacyRoute);
+      window.addEventListener('pageshow', upgradeSimpleLegacyRoute);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Myology: Abdomen Veterinary Anatomy | IVRI</title>
 
@@ -102,11 +131,10 @@
   ]
 }</script>
 
-  <!-- ===== FAVICON (inline SVG — no extra file needed) ===== -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230a192f'/><text x='50%25' y='52%25' font-size='38' font-family='Inter,sans-serif' font-weight='800' fill='%23FFD700' text-anchor='middle' dominant-baseline='middle'>I</text><text x='50%25' y='52%25' font-size='38' font-family='Inter,sans-serif' font-weight='800' fill='%2300F2FF' text-anchor='middle' dominant-baseline='middle' transform='translate(8,0)'>V</text></svg>">
-  <link rel="apple-touch-icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='28' fill='%230a192f'/><text x='50%25' y='54%25' font-size='110' font-family='Inter,sans-serif' font-weight='800' fill='%23FFD700' text-anchor='middle' dominant-baseline='middle'>I</text><text x='50%25' y='54%25' font-size='110' font-family='Inter,sans-serif' font-weight='800' fill='%2300F2FF' text-anchor='middle' dominant-baseline='middle' transform='translate(22,0)'>V</text></svg>">
+  <!-- Crawlable site icon generated from the IVRI Anatomy logo. -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -311,10 +339,10 @@
     <div class="hero-split-container">
       <!-- Left Side: Text and Actions -->
       <div class="hero-left-pane">
-        <div class="hero-sys-tag"><span class="tag-line"></span> [SYS.INIT] IVRI ANATOMY ENGINE</div>
-        <h1 class="hero-title">EXPLORING ANATOMY<br>THROUGH TECHNOLOGY.</h1>
+        <div class="hero-sys-tag"><span class="tag-line"></span> [ICAR-IVRI] VETERINARY ANATOMY ATLAS</div>
+        <h1 class="hero-title">IVRI VETERINARY ANATOMY.<br>MADE INTERACTIVE.</h1>
         <p class="hero-subtitle">
-          An academic veterinary anatomy atlas developed at IVRI. We bridge classical science with modern technology to teach regional anatomy.
+          A comprehensive B.V.Sc. learning platform developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute, Bareilly&mdash;covering regional anatomy, histology, embryology, comparative anatomy, quizzes and revision.
         </p>
         <div class="hero-ctas">
           <button onclick="app.loadView('atlas')" class="hero-cta cta-primary">
