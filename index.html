@@ -19,12 +19,17 @@
         highlights: '/library/highlights/',
         notes: '/library/notes/'
       };
-      const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
-      let cleanPath = parts.length === 1 ? simpleLegacyRoutes[parts[0]] : null;
-      if (parts[0] === 'library' && parts.length <= 2) {
-        cleanPath = `/library/${parts[1] || 'bookmarks'}/`;
-      }
-      if (cleanPath) history.replaceState(null, '', cleanPath);
+      const upgradeSimpleLegacyRoute = () => {
+        const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+        let cleanPath = parts.length === 1 ? simpleLegacyRoutes[parts[0]] : null;
+        if (parts[0] === 'library' && parts.length <= 2) {
+          cleanPath = `/library/${parts[1] || 'bookmarks'}/`;
+        }
+        if (cleanPath) history.replaceState(null, '', cleanPath);
+      };
+      upgradeSimpleLegacyRoute();
+      window.addEventListener('hashchange', upgradeSimpleLegacyRoute);
+      window.addEventListener('pageshow', upgradeSimpleLegacyRoute);
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
