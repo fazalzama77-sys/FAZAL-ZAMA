@@ -194,7 +194,7 @@ function writeGenerated(relativePath, contents) {
   generatedFiles.push(normalized);
 }
 
-function writePage({ parts, title, description, kicker, crumbs, body, related = [], appHref = '/#/landing', images = [], schemaType = 'LearningResource' }) {
+function writePage({ parts, title, description, kicker, crumbs, body, related = [], appHref = '/', images = [], schemaType = 'LearningResource' }) {
   const url = routeUrl(parts);
   const href = localHref(parts);
   const metaDescription = truncateWords(description, 158);

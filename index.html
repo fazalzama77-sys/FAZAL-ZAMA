@@ -4,6 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <base href="/">
+  <script>
+    // Remove the legacy landing hash before the interface paints. Deeper old
+    // Atlas hashes are upgraded by app.js after the anatomy data has loaded.
+    (() => {
+      const simpleLegacyRoutes = {
+        landing: '/',
+        atlas: '/atlas/',
+        why: '/why/',
+        dashboard: '/dashboard/',
+        me: '/me/',
+        quiz: '/quiz/',
+        bookmarks: '/library/bookmarks/',
+        highlights: '/library/highlights/',
+        notes: '/library/notes/'
+      };
+      const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+      let cleanPath = parts.length === 1 ? simpleLegacyRoutes[parts[0]] : null;
+      if (parts[0] === 'library' && parts.length <= 2) {
+        cleanPath = `/library/${parts[1] || 'bookmarks'}/`;
+      }
+      if (cleanPath) history.replaceState(null, '', cleanPath);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veterinary Anatomy Atlas for B.V.Sc. Students | IVRI</title>
 
