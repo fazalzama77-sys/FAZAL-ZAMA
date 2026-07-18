@@ -1,0 +1,1926 @@
+{
+  "generatedAt": "2026-07-18T07:18:25.264Z",
+  "files": [
+    "atlas/index.html",
+    "atlas/introduction/index.html",
+    "atlas/introduction/general-anatomy/index.html",
+    "atlas/introduction/general-anatomy/definition-and-branches-of-anatomy/index.html",
+    "atlas/introduction/general-anatomy/anatomical-position-and-descriptive-terms/index.html",
+    "atlas/introduction/general-anatomy/anatomical-planes/index.html",
+    "atlas/introduction/general-osteology/index.html",
+    "atlas/introduction/general-osteology/properties-and-classification-of-bone/index.html",
+    "atlas/introduction/general-osteology/classification-of-skeletons-and-bones/index.html",
+    "atlas/introduction/general-arthrology/index.html",
+    "atlas/introduction/general-arthrology/classification-of-joints/index.html",
+    "atlas/introduction/general-arthrology/structure-of-a-synovial-joint-and-movements/index.html",
+    "atlas/introduction/general-myology/index.html",
+    "atlas/introduction/general-myology/classification-of-muscle-tissue/index.html",
+    "atlas/introduction/general-myology/muscle-classification-by-shape-action-and-etymology/index.html",
+    "atlas/introduction/general-myology/tendons-ligaments-aponeuroses-bursae-and-synovial-sheaths/index.html",
+    "atlas/introduction/general-angiology/index.html",
+    "atlas/introduction/general-angiology/structure-of-the-heart-and-pericardium/index.html",
+    "atlas/introduction/general-angiology/systemic-and-pulmonary-circulations/index.html",
+    "atlas/introduction/general-neurology/index.html",
+    "atlas/introduction/general-neurology/divisions-of-the-nervous-system/index.html",
+    "atlas/introduction/general-neurology/brain-spinal-cord-and-meninges/index.html",
+    "atlas/introduction/general-aesthesiology/index.html",
+    "atlas/introduction/general-aesthesiology/sense-organs-overview/index.html",
+    "atlas/introduction/general-splanchnology/index.html",
+    "atlas/introduction/general-splanchnology/body-cavities-and-their-boundaries/index.html",
+    "atlas/introduction/general-splanchnology/general-topography-of-the-visceral-systems/index.html",
+    "atlas/introduction/surface-anatomy/index.html",
+    "atlas/introduction/surface-anatomy/surface-regions-and-joint-regions/index.html",
+    "atlas/introduction/surface-anatomy/palpable-bony-prominences-lymph-nodes-and-arteries/index.html",
+    "atlas/introduction/surface-anatomy/surface-veins-for-venepuncture-and-injection-sites/index.html",
+    "atlas/introduction/surface-anatomy/bone-marrow-and-cerebrospinal-fluid-collection-sites/index.html",
+    "atlas/introduction/imaging-principles/index.html",
+    "atlas/introduction/imaging-principles/radiography-x-ray-principles-and-application/index.html",
+    "atlas/introduction/imaging-principles/ultrasonography-principles-and-application/index.html",
+    "atlas/forelimb/index.html",
+    "atlas/forelimb/osteology/index.html",
+    "atlas/forelimb/osteology/scapula/index.html",
+    "atlas/forelimb/osteology/humerus/index.html",
+    "atlas/forelimb/osteology/radius-and-ulna/index.html",
+    "atlas/forelimb/osteology/carpus-knee/index.html",
+    "atlas/forelimb/osteology/metacarpus-cannon/index.html",
+    "atlas/forelimb/osteology/digits/index.html",
+    "atlas/forelimb/myology/index.html",
+    "atlas/forelimb/myology/trapezius-muscle/index.html",
+    "atlas/forelimb/myology/omotransversarius/index.html",
+    "atlas/forelimb/myology/brachiocephalicus/index.html",
+    "atlas/forelimb/myology/rhomboideus/index.html",
+    "atlas/forelimb/myology/serratus-ventralis/index.html",
+    "atlas/forelimb/myology/latissimus-dorsi/index.html",
+    "atlas/forelimb/myology/pectoral-muscles/index.html",
+    "atlas/forelimb/myology/supraspinatus/index.html",
+    "atlas/forelimb/myology/infraspinatus/index.html",
+    "atlas/forelimb/myology/deltoideus/index.html",
+    "atlas/forelimb/myology/teres-minor/index.html",
+    "atlas/forelimb/myology/subscapularis/index.html",
+    "atlas/forelimb/myology/teres-major/index.html",
+    "atlas/forelimb/myology/coracobrachialis/index.html",
+    "atlas/forelimb/myology/biceps-brachii/index.html",
+    "atlas/forelimb/myology/brachialis/index.html",
+    "atlas/forelimb/myology/triceps-brachii/index.html",
+    "atlas/forelimb/myology/tensor-fasciae-antebrachii/index.html",
+    "atlas/forelimb/myology/anconeus/index.html",
+    "atlas/forelimb/myology/extensor-carpi-radialis/index.html",
+    "atlas/forelimb/myology/common-digital-extensor/index.html",
+    "atlas/forelimb/myology/lateral-digital-extensor/index.html",
+    "atlas/forelimb/myology/ulnaris-lateralis/index.html",
+    "atlas/forelimb/myology/extensor-carpi-obliquus/index.html",
+    "atlas/forelimb/myology/flexor-carpi-radialis/index.html",
+    "atlas/forelimb/myology/flexor-carpi-ulnaris/index.html",
+    "atlas/forelimb/myology/superficial-digital-flexor/index.html",
+    "atlas/forelimb/myology/deep-digital-flexor/index.html",
+    "atlas/forelimb/myology/interosseous-muscle-suspensory/index.html",
+    "atlas/forelimb/myology/distal-annular-ligaments-and-interdigital/index.html",
+    "atlas/forelimb/arthrology/index.html",
+    "atlas/forelimb/arthrology/shoulder-joint-articulatio-humeri/index.html",
+    "atlas/forelimb/arthrology/elbow-joint-articulatio-cubiti/index.html",
+    "atlas/forelimb/arthrology/carpus-knee-joint-articulatio-carpi/index.html",
+    "atlas/forelimb/arthrology/fetlock-joint-metacarpophalangeal/index.html",
+    "atlas/forelimb/arthrology/pastern-joint-proximal-interphalangeal-pip/index.html",
+    "atlas/forelimb/arthrology/coffin-joint-distal-interphalangeal-dip/index.html",
+    "atlas/forelimb/neurology/index.html",
+    "atlas/forelimb/neurology/brachial-plexus-architecture/index.html",
+    "atlas/forelimb/neurology/other-proximal-brachial-plexus-branches/index.html",
+    "atlas/forelimb/neurology/radial-nerve/index.html",
+    "atlas/forelimb/neurology/median-nerve/index.html",
+    "atlas/forelimb/neurology/ulnar-nerve/index.html",
+    "atlas/forelimb/neurology/suprascapular-nerve/index.html",
+    "atlas/forelimb/neurology/musculocutaneous-nerve/index.html",
+    "atlas/forelimb/neurology/axillary-nerve/index.html",
+    "atlas/forelimb/neurology/distal-palmar-and-digital-nerves/index.html",
+    "atlas/forelimb/neurology/regional-anesthesia-nerve-blocks/index.html",
+    "atlas/forelimb/angiology/index.html",
+    "atlas/forelimb/angiology/arterial-tree-of-the-forelimb-subclavian-digital/index.html",
+    "atlas/forelimb/angiology/axillary-and-brachial-branches/index.html",
+    "atlas/forelimb/angiology/distal-forelimb-vessels/index.html",
+    "atlas/forelimb/angiology/forelimb-lymph-nodes-and-surface-veins/index.html",
+    "atlas/head-neck/index.html",
+    "atlas/head-neck/osteology/index.html",
+    "atlas/head-neck/osteology/introduction-bovine-cranial-architecture/index.html",
+    "atlas/head-neck/osteology/occipital-bone-os-occipitale/index.html",
+    "atlas/head-neck/osteology/sphenoid-bone-os-sphenoidale/index.html",
+    "atlas/head-neck/osteology/ethmoid-bone-os-ethmoidale/index.html",
+    "atlas/head-neck/osteology/frontal-bone-os-frontale/index.html",
+    "atlas/head-neck/osteology/parietal-and-interparietal-bones/index.html",
+    "atlas/head-neck/osteology/temporal-bone-os-temporale/index.html",
+    "atlas/head-neck/osteology/maxilla-os-maxillare/index.html",
+    "atlas/head-neck/osteology/incisive-and-nasal-bones/index.html",
+    "atlas/head-neck/osteology/lacrimal-and-zygomatic-bones/index.html",
+    "atlas/head-neck/osteology/palatine-pterygoid-and-vomer/index.html",
+    "atlas/head-neck/osteology/mandible-and-hyoid-apparatus/index.html",
+    "atlas/head-neck/osteology/nasal-turbinates-conchae/index.html",
+    "atlas/head-neck/osteology/frontal-and-maxillary-sinuses/index.html",
+    "atlas/head-neck/osteology/pterygopalatine-and-temporal-fossae/index.html",
+    "atlas/head-neck/osteology/cervical-vertebrae-c1-c7-bones-of-the-neck/index.html",
+    "atlas/head-neck/myology/index.html",
+    "atlas/head-neck/myology/cutaneous-and-facial-muscles-mimetic-expression/index.html",
+    "atlas/head-neck/myology/muscles-of-mastication-chewing/index.html",
+    "atlas/head-neck/myology/muscles-of-the-tongue-pharynx-soft-palate-hyoid-and-larynx/index.html",
+    "atlas/head-neck/myology/neck-muscles-and-boundaries-of-the-jugular-furrow/index.html",
+    "atlas/head-neck/arthrology/index.html",
+    "atlas/head-neck/arthrology/articulations-and-special-ligaments-of-head-and-neck/index.html",
+    "atlas/head-neck/neurology/index.html",
+    "atlas/head-neck/neurology/introduction-the-cranial-command-center/index.html",
+    "atlas/head-neck/neurology/cn-i-and-ii-the-special-senses-olfactory-and-optic/index.html",
+    "atlas/head-neck/neurology/cn-iii-iv-vi-the-orbital-motor-group/index.html",
+    "atlas/head-neck/neurology/cn-v-the-trigeminal-nerve-the-giant/index.html",
+    "atlas/head-neck/neurology/cn-vii-the-facial-nerve-the-mask/index.html",
+    "atlas/head-neck/neurology/cn-ix-x-xi-the-vagal-group/index.html",
+    "atlas/head-neck/neurology/cn-xii-the-hypoglossal-nerve/index.html",
+    "atlas/head-neck/neurology/foramina-and-exit-strategies-comparative/index.html",
+    "atlas/head-neck/neurology/clinical-applications-regional-anesthesia/index.html",
+    "atlas/head-neck/neurology/cn-viii-vestibulocochlear-nerve/index.html",
+    "atlas/head-neck/neurology/clinical-neurology-pathology/index.html",
+    "atlas/head-neck/angiology/index.html",
+    "atlas/head-neck/angiology/arteries-of-the-head-and-neck/index.html",
+    "atlas/head-neck/angiology/carotid-sheath-and-major-branch-relations/index.html",
+    "atlas/head-neck/angiology/veins-and-lymph-nodes-of-the-head-and-neck/index.html",
+    "atlas/head-neck/splanchnology/index.html",
+    "atlas/head-neck/splanchnology/digestive-system-oral-cavity-and-pharynx/index.html",
+    "atlas/head-neck/splanchnology/teeth-and-age-determination-by-dentition/index.html",
+    "atlas/head-neck/splanchnology/hard-and-soft-palate-tongue-pharynx/index.html",
+    "atlas/head-neck/splanchnology/salivary-glands-parotid-mandibular-sublingual/index.html",
+    "atlas/head-neck/splanchnology/larynx-trachea-and-oesophagus/index.html",
+    "atlas/head-neck/splanchnology/endocrine-of-head-and-neck-thyroid-and-parathyroid/index.html",
+    "atlas/head-neck/splanchnology/sense-organs-of-head-eye-ear/index.html",
+    "atlas/thorax/index.html",
+    "atlas/thorax/osteology/index.html",
+    "atlas/thorax/osteology/thoracic-vertebrae/index.html",
+    "atlas/thorax/osteology/ribs-costae/index.html",
+    "atlas/thorax/osteology/sternum/index.html",
+    "atlas/thorax/myology/index.html",
+    "atlas/thorax/myology/external-intercostal-muscles/index.html",
+    "atlas/thorax/myology/internal-intercostal-muscles/index.html",
+    "atlas/thorax/myology/diaphragm/index.html",
+    "atlas/thorax/myology/other-thoracic-wall-muscles/index.html",
+    "atlas/thorax/arthrology/index.html",
+    "atlas/thorax/arthrology/intervertebral-joints-thoracic/index.html",
+    "atlas/thorax/arthrology/costovertebral-joints/index.html",
+    "atlas/thorax/arthrology/costochondral-and-sternal-joints/index.html",
+    "atlas/thorax/neurology/index.html",
+    "atlas/thorax/neurology/intercostal-nerves/index.html",
+    "atlas/thorax/neurology/vagus-nerve-in-thorax-cranial-nerve-x/index.html",
+    "atlas/thorax/neurology/recurrent-laryngeal-nerve/index.html",
+    "atlas/thorax/neurology/phrenic-nerve-and-sympathetic-trunk/index.html",
+    "atlas/thorax/angiology/index.html",
+    "atlas/thorax/angiology/heart-gross-anatomy/index.html",
+    "atlas/thorax/angiology/aorta-and-branches-in-thorax/index.html",
+    "atlas/thorax/angiology/major-veins-of-thorax/index.html",
+    "atlas/thorax/angiology/lymph-nodes-and-thoracic-duct/index.html",
+    "atlas/thorax/splanchnology/index.html",
+    "atlas/thorax/splanchnology/trachea-windpipe/index.html",
+    "atlas/thorax/splanchnology/oesophagus/index.html",
+    "atlas/thorax/splanchnology/thymus/index.html",
+    "atlas/thorax/splanchnology/lungs/index.html",
+    "atlas/thorax/splanchnology/pleura-pleural-reflections-and-mediastinum/index.html",
+    "atlas/thorax/splanchnology/auscultation-percussion-and-paracentesis-thoracis/index.html",
+    "atlas/abdomen/index.html",
+    "atlas/abdomen/osteology/index.html",
+    "atlas/abdomen/osteology/lumbar-vertebrae-ox/index.html",
+    "atlas/abdomen/osteology/last-ribs-and-costal-arch/index.html",
+    "atlas/abdomen/osteology/pelvic-inlet-and-sublumbar-bony-floor/index.html",
+    "atlas/abdomen/myology/index.html",
+    "atlas/abdomen/myology/abdominal-wall-four-layer-muscular-sheath/index.html",
+    "atlas/abdomen/myology/diaphragm-cranial-wall-of-abdomen/index.html",
+    "atlas/abdomen/myology/sublumbar-muscles/index.html",
+    "atlas/abdomen/arthrology/index.html",
+    "atlas/abdomen/arthrology/intervertebral-and-lumbosacral-joints/index.html",
+    "atlas/abdomen/neurology/index.html",
+    "atlas/abdomen/neurology/lumbar-plexus-and-abdominal-wall-nerves/index.html",
+    "atlas/abdomen/angiology/index.html",
+    "atlas/abdomen/angiology/abdominal-aorta-and-its-major-branches/index.html",
+    "atlas/abdomen/angiology/caudal-vena-cava-and-portal-vein/index.html",
+    "atlas/abdomen/angiology/abdominal-lymph-nodes/index.html",
+    "atlas/abdomen/splanchnology/index.html",
+    "atlas/abdomen/splanchnology/digestive-system-the-ruminant-stomach/index.html",
+    "atlas/abdomen/splanchnology/digestive-system-small-intestine-duodenum-jejunum-ileum/index.html",
+    "atlas/abdomen/splanchnology/digestive-system-large-intestine-cecum-colon-rectum/index.html",
+    "atlas/abdomen/splanchnology/digestive-accessory-liver/index.html",
+    "atlas/abdomen/splanchnology/digestive-accessory-pancreas/index.html",
+    "atlas/abdomen/splanchnology/lymphoid-organ-spleen/index.html",
+    "atlas/abdomen/splanchnology/urinary-system-kidneys-and-ureters/index.html",
+    "atlas/abdomen/splanchnology/mammary-gland-udder/index.html",
+    "atlas/abdomen/splanchnology/endocrine-glands-of-abdomen-adrenal-glands/index.html",
+    "atlas/hindlimb-pelvis/index.html",
+    "atlas/hindlimb-pelvis/osteology/index.html",
+    "atlas/hindlimb-pelvis/osteology/os-coxae-hip-bone/index.html",
+    "atlas/hindlimb-pelvis/osteology/sacrum-and-coccygeal-tail-vertebrae/index.html",
+    "atlas/hindlimb-pelvis/osteology/femur-thigh-bone/index.html",
+    "atlas/hindlimb-pelvis/osteology/patella-knee-cap/index.html",
+    "atlas/hindlimb-pelvis/osteology/tibia-and-fibula/index.html",
+    "atlas/hindlimb-pelvis/osteology/tarsus-hock/index.html",
+    "atlas/hindlimb-pelvis/osteology/metatarsus-and-digits-cannon-pastern-hoof/index.html",
+    "atlas/hindlimb-pelvis/myology/index.html",
+    "atlas/hindlimb-pelvis/myology/gluteal-muscles-superficial-middle-deep-accessory/index.html",
+    "atlas/hindlimb-pelvis/myology/quadriceps-femoris/index.html",
+    "atlas/hindlimb-pelvis/myology/hamstring-group-caudal-thigh-muscles/index.html",
+    "atlas/hindlimb-pelvis/myology/adductor-group-medial-thigh/index.html",
+    "atlas/hindlimb-pelvis/myology/iliopsoas-tensor-fasciae-latae-and-hip-flexors/index.html",
+    "atlas/hindlimb-pelvis/myology/cranial-crural-front-of-leg-muscles/index.html",
+    "atlas/hindlimb-pelvis/myology/caudal-crural-calf-muscles/index.html",
+    "atlas/hindlimb-pelvis/arthrology/index.html",
+    "atlas/hindlimb-pelvis/arthrology/sacroiliac-joint/index.html",
+    "atlas/hindlimb-pelvis/arthrology/pelvic-symphysis-and-inguinal-canal-with-spermatic-cord-and-prepubic-tendon/index.html",
+    "atlas/hindlimb-pelvis/arthrology/hip-coxofemoral-joint/index.html",
+    "atlas/hindlimb-pelvis/arthrology/stifle-knee-joint/index.html",
+    "atlas/hindlimb-pelvis/arthrology/hock-tarsal-joint/index.html",
+    "atlas/hindlimb-pelvis/neurology/index.html",
+    "atlas/hindlimb-pelvis/neurology/lumbosacral-plexus-overview/index.html",
+    "atlas/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/index.html",
+    "atlas/hindlimb-pelvis/neurology/femoral-and-obturator-nerves/index.html",
+    "atlas/hindlimb-pelvis/neurology/sciatic-nerve-and-its-branches-tibial-peroneal/index.html",
+    "atlas/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/index.html",
+    "atlas/hindlimb-pelvis/neurology/pudendal-pudic-nerve-and-epidural-anaesthesia/index.html",
+    "atlas/hindlimb-pelvis/angiology/index.html",
+    "atlas/hindlimb-pelvis/angiology/major-arteries-of-hindlimb/index.html",
+    "atlas/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/index.html",
+    "atlas/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/index.html",
+    "atlas/hindlimb-pelvis/angiology/major-veins-of-hindlimb-saphenous-and-recurrent-tarsal/index.html",
+    "atlas/hindlimb-pelvis/angiology/lymph-nodes-of-hindlimb-and-pelvis/index.html",
+    "atlas/hindlimb-pelvis/splanchnology/index.html",
+    "atlas/hindlimb-pelvis/splanchnology/pelvic-cavity-boundaries-and-peritoneal-reflections/index.html",
+    "atlas/hindlimb-pelvis/splanchnology/digestive-rectum-and-anal-canal/index.html",
+    "atlas/hindlimb-pelvis/splanchnology/urinary-urinary-bladder-and-pelvic-urethra/index.html",
+    "atlas/hindlimb-pelvis/splanchnology/male-reproductive-pelvic-and-external-genitalia/index.html",
+    "atlas/hindlimb-pelvis/splanchnology/female-reproductive-pelvic-genitalia/index.html",
+    "atlas/histology/index.html",
+    "atlas/histology/cytology/index.html",
+    "atlas/histology/cytology/the-cell-structure-and-organelles/index.html",
+    "atlas/histology/cytology/cell-junctions/index.html",
+    "atlas/histology/cytology/microscopy-micrometry-and-routine-h-and-e/index.html",
+    "atlas/histology/basic-tissues/index.html",
+    "atlas/histology/basic-tissues/epithelial-tissue/index.html",
+    "atlas/histology/basic-tissues/connective-tissue/index.html",
+    "atlas/histology/basic-tissues/muscular-tissue/index.html",
+    "atlas/histology/basic-tissues/nervous-tissue/index.html",
+    "atlas/histology/basic-tissues/central-nervous-system-organs/index.html",
+    "atlas/histology/blood-and-bone-marrow/index.html",
+    "atlas/histology/blood-and-bone-marrow/blood-plasma-and-cellular-elements/index.html",
+    "atlas/histology/blood-and-bone-marrow/bone-marrow-and-haematopoiesis/index.html",
+    "atlas/histology/digestive-system/index.html",
+    "atlas/histology/digestive-system/git-general-4-layer-plan/index.html",
+    "atlas/histology/digestive-system/liver-pancreas-and-salivary-glands/index.html",
+    "atlas/histology/other-systems/index.html",
+    "atlas/histology/other-systems/circulatory-system-heart-arteries-veins-capillaries/index.html",
+    "atlas/histology/other-systems/urinary-system-kidney-ureter-bladder/index.html",
+    "atlas/histology/other-systems/respiratory-system-trachea-lung-alveoli/index.html",
+    "atlas/histology/other-systems/lymphoid-system-lymph-node-spleen-thymus-tonsils/index.html",
+    "atlas/histology/other-systems/endocrine-system-pituitary-thyroid-adrenal-parathyroid-pineal/index.html",
+    "atlas/histology/other-systems/reproductive-system-male-and-female-genital-histology/index.html",
+    "atlas/histology/other-systems/sense-organs-and-integument-eye-ear-skin/index.html",
+    "atlas/embryology/index.html",
+    "atlas/embryology/gametogenesis-and-fertilization/index.html",
+    "atlas/embryology/gametogenesis-and-fertilization/gametogenesis-spermatogenesis-and-oogenesis/index.html",
+    "atlas/embryology/gametogenesis-and-fertilization/fertilization-and-types-of-eggs/index.html",
+    "atlas/embryology/cleavage-blastulation-and-gastrulation/index.html",
+    "atlas/embryology/cleavage-blastulation-and-gastrulation/cleavage-and-morula-formation/index.html",
+    "atlas/embryology/cleavage-blastulation-and-gastrulation/blastulation-blastocyst-formation/index.html",
+    "atlas/embryology/cleavage-blastulation-and-gastrulation/gastrulation-and-formation-of-germ-layers/index.html",
+    "atlas/embryology/foetal-membranes-and-placenta/index.html",
+    "atlas/embryology/foetal-membranes-and-placenta/foetal-extra-embryonic-membranes/index.html",
+    "atlas/embryology/foetal-membranes-and-placenta/placenta-classification/index.html",
+    "atlas/embryology/germ-layers-and-derivatives/index.html",
+    "atlas/embryology/germ-layers-and-derivatives/derivatives-of-the-three-germ-layers/index.html",
+    "atlas/embryology/organ-development/index.html",
+    "atlas/embryology/organ-development/development-of-digestive-system-with-liver-pancreas-tongue-teeth/index.html",
+    "atlas/embryology/organ-development/development-of-respiratory-urinary-and-cardiovascular-systems/index.html",
+    "atlas/embryology/organ-development/development-of-nervous-system-sense-organs-musculoskeletal-and-endocrine/index.html",
+    "atlas/embryology/organ-development/lymphatic-and-reproductive-development/index.html",
+    "atlas/embryology/twinning-and-anomalies/index.html",
+    "atlas/embryology/twinning-and-anomalies/implantation-twinning-and-common-anomalies/index.html",
+    "why/index.html",
+    "why/forelimb/index.html",
+    "why/forelimb/clavicle/index.html",
+    "why/forelimb/acromion-process/index.html",
+    "why/forelimb/intermediate-tubercle/index.html",
+    "why/forelimb/supratrochlear-foramen/index.html",
+    "why/forelimb/radius-and-ulna-fusion/index.html",
+    "why/forelimb/pronator-teres/index.html",
+    "why/forelimb/interosseous-muscle/index.html",
+    "why/forelimb/distal-check-ligament/index.html",
+    "why/forelimb/digit-number/index.html",
+    "why/forelimb/equine-chestnut-and-ergot-vestigial-pads/index.html",
+    "why/forelimb/equine-navicular-bone/index.html",
+    "why/forelimb/equine-ungual-cartilages/index.html",
+    "why/forelimb/cattle-carpal-bone-fusion-pattern/index.html",
+    "why/forelimb/equine-stay-apparatus-vs-dog-active-stance/index.html",
+    "why/forelimb/bovine-vs-equine-hoof-growth-rate/index.html",
+    "why/hindlimb/index.html",
+    "why/hindlimb/sacrosciatic-ligament/index.html",
+    "why/hindlimb/third-trochanter/index.html",
+    "why/hindlimb/accessory-ligament/index.html",
+    "why/hindlimb/gluteobiceps-muscle/index.html",
+    "why/hindlimb/patellar-locking-mechanism/index.html",
+    "why/hindlimb/fibula-reduction/index.html",
+    "why/hindlimb/peroneus-tertius/index.html",
+    "why/hindlimb/soleus-muscle/index.html",
+    "why/hindlimb/cloven-hoof-of-ruminants/index.html",
+    "why/hindlimb/bovine-cervix-the-rifle-barrel/index.html",
+    "why/hindlimb/bovine-udder-suspensory-apparatus/index.html",
+    "why/hindlimb/equine-frog-vs-bovine-digital-cushion/index.html",
+    "why/hindlimb/bovine-penis-sigmoid-flexure/index.html",
+    "why/hindlimb/dog-os-penis-and-os-clitoris/index.html",
+    "why/hindlimb/mare-ovulation-fossa/index.html",
+    "why/hindlimb/bovine-pre-pubic-tendon/index.html",
+    "why/hindlimb/horse-vs-dog-pelvic-inclination/index.html",
+    "why/hindlimb/mare-mobile-phase-pregnancy-vs-cow/index.html",
+    "why/hindlimb/dog-anal-sacs-paranal-sinuses/index.html",
+    "why/axial/index.html",
+    "why/axial/nuchal-ligament/index.html",
+    "why/axial/omotransversarius/index.html",
+    "why/axial/gall-bladder/index.html",
+    "why/axial/bovine-lobulated-kidney/index.html",
+    "why/axial/four-compartment-ruminant-stomach/index.html",
+    "why/axial/horse-without-a-gall-bladder/index.html",
+    "why/axial/spiral-colon-of-ruminants/index.html",
+    "why/axial/tracheal-bronchus-in-pig-and-ox/index.html",
+    "why/axial/ossa-cordis-bones-in-the-heart/index.html",
+    "why/axial/guttural-pouch-a-horse-only-curiosity/index.html",
+    "why/axial/dental-pad-of-ruminants/index.html",
+    "why/axial/bovine-forestomach-keratinization/index.html",
+    "why/axial/horse-wolf-tooth/index.html",
+    "why/axial/cat-filiform-papillae-sandpaper-tongue/index.html",
+    "why/axial/pig-snout-bone-os-rostri/index.html",
+    "why/axial/bovine-frontal-sinus-expansion/index.html",
+    "why/axial/equine-stomach-margo-plicatus/index.html",
+    "why/axial/bovine-lacrimal-bulla/index.html",
+    "why/axial/cattle-horn-anatomy/index.html",
+    "why/axial/sow-vs-cow-mammary-chain/index.html",
+    "why/axial/cattle-vs-horse-diaphragm-attachment/index.html",
+    "why/axial/equine-cranial-mesenteric-artery-vulnerability/index.html",
+    "why/wildlife/index.html",
+    "why/wildlife/cheetah-spine/index.html",
+    "why/wildlife/giraffe-neck-and-rete-mirabile/index.html",
+    "why/wildlife/elephant-foot-pad/index.html",
+    "why/wildlife/kangaroo-hindlimb-tendons/index.html",
+    "why/wildlife/retractable-claws/index.html",
+    "why/wildlife/camel-foot-pad/index.html",
+    "why/wildlife/antlers-vs-horns/index.html",
+    "why/wildlife/bat-wing-skeleton/index.html",
+    "why/wildlife/whale-vestigial-pelvis/index.html",
+    "why/wildlife/ostrich-two-toed-foot/index.html",
+    "why/wildlife/snake-skull-kinesis/index.html",
+    "why/wildlife/frog-urostyle/index.html",
+    "why/wildlife/bear-plantigrade-stance/index.html",
+    "why/wildlife/hare-rabbit-tibiofibula-fusion/index.html",
+    "why/wildlife/crocodile-high-walk/index.html",
+    "why/wildlife/hippopotamus-bone-density/index.html",
+    "why/wildlife/owl-silent-flight/index.html",
+    "why/wildlife/squirrel-reversible-hindfoot/index.html",
+    "why/wildlife/bison-thoracic-hump/index.html",
+    "why/wildlife/rhinoceros-tridactyl-foot/index.html",
+    "why/wildlife/pangolin-keratin-scales/index.html",
+    "why/wildlife/anteater-tongue-60-cm-vs-dog-tongue/index.html",
+    "why/wildlife/tortoise-shell-modified-ribs-vertebrae/index.html",
+    "why/wildlife/hummingbird-ball-and-socket-shoulder/index.html",
+    "why/wildlife/naked-mole-rat-cold-blooded-mammal/index.html",
+    "why/wildlife/sea-lion-flipper-vs-dog-forelimb/index.html",
+    "why/wildlife/walrus-baculum-longest-penis-bone/index.html",
+    "why/wildlife/sloth-inverted-claws-and-slow-metabolism/index.html",
+    "why/wildlife/crocodile-4-chambered-heart/index.html",
+    "why/wildlife/cheetah-non-retractable-claws/index.html"
+  ],
+  "appFiles": [
+    "dashboard/index.html",
+    "me/index.html",
+    "quiz/index.html",
+    "library/index.html",
+    "library/bookmarks/index.html",
+    "library/highlights/index.html",
+    "library/notes/index.html"
+  ],
+  "redirects": [
+    {
+      "from": "/learn/",
+      "to": "/atlas/"
+    },
+    {
+      "from": "/learn/introduction/",
+      "to": "/atlas/introduction/"
+    },
+    {
+      "from": "/learn/introduction/general-anatomy/",
+      "to": "/atlas/introduction/general-anatomy/"
+    },
+    {
+      "from": "/learn/introduction/general-anatomy/definition-and-branches-of-anatomy/",
+      "to": "/atlas/introduction/general-anatomy/definition-and-branches-of-anatomy/"
+    },
+    {
+      "from": "/learn/introduction/general-anatomy/anatomical-position-and-descriptive-terms/",
+      "to": "/atlas/introduction/general-anatomy/anatomical-position-and-descriptive-terms/"
+    },
+    {
+      "from": "/learn/introduction/general-anatomy/anatomical-planes/",
+      "to": "/atlas/introduction/general-anatomy/anatomical-planes/"
+    },
+    {
+      "from": "/learn/introduction/general-osteology/",
+      "to": "/atlas/introduction/general-osteology/"
+    },
+    {
+      "from": "/learn/introduction/general-osteology/properties-and-classification-of-bone/",
+      "to": "/atlas/introduction/general-osteology/properties-and-classification-of-bone/"
+    },
+    {
+      "from": "/learn/introduction/general-osteology/classification-of-skeletons-and-bones/",
+      "to": "/atlas/introduction/general-osteology/classification-of-skeletons-and-bones/"
+    },
+    {
+      "from": "/learn/introduction/general-arthrology/",
+      "to": "/atlas/introduction/general-arthrology/"
+    },
+    {
+      "from": "/learn/introduction/general-arthrology/classification-of-joints/",
+      "to": "/atlas/introduction/general-arthrology/classification-of-joints/"
+    },
+    {
+      "from": "/learn/introduction/general-arthrology/structure-of-a-synovial-joint-and-movements/",
+      "to": "/atlas/introduction/general-arthrology/structure-of-a-synovial-joint-and-movements/"
+    },
+    {
+      "from": "/learn/introduction/general-myology/",
+      "to": "/atlas/introduction/general-myology/"
+    },
+    {
+      "from": "/learn/introduction/general-myology/classification-of-muscle-tissue/",
+      "to": "/atlas/introduction/general-myology/classification-of-muscle-tissue/"
+    },
+    {
+      "from": "/learn/introduction/general-myology/muscle-classification-by-shape-action-and-etymology/",
+      "to": "/atlas/introduction/general-myology/muscle-classification-by-shape-action-and-etymology/"
+    },
+    {
+      "from": "/learn/introduction/general-myology/tendons-ligaments-aponeuroses-bursae-and-synovial-sheaths/",
+      "to": "/atlas/introduction/general-myology/tendons-ligaments-aponeuroses-bursae-and-synovial-sheaths/"
+    },
+    {
+      "from": "/learn/introduction/general-angiology/",
+      "to": "/atlas/introduction/general-angiology/"
+    },
+    {
+      "from": "/learn/introduction/general-angiology/structure-of-the-heart-and-pericardium/",
+      "to": "/atlas/introduction/general-angiology/structure-of-the-heart-and-pericardium/"
+    },
+    {
+      "from": "/learn/introduction/general-angiology/systemic-and-pulmonary-circulations/",
+      "to": "/atlas/introduction/general-angiology/systemic-and-pulmonary-circulations/"
+    },
+    {
+      "from": "/learn/introduction/general-neurology/",
+      "to": "/atlas/introduction/general-neurology/"
+    },
+    {
+      "from": "/learn/introduction/general-neurology/divisions-of-the-nervous-system/",
+      "to": "/atlas/introduction/general-neurology/divisions-of-the-nervous-system/"
+    },
+    {
+      "from": "/learn/introduction/general-neurology/brain-spinal-cord-and-meninges/",
+      "to": "/atlas/introduction/general-neurology/brain-spinal-cord-and-meninges/"
+    },
+    {
+      "from": "/learn/introduction/general-aesthesiology/",
+      "to": "/atlas/introduction/general-aesthesiology/"
+    },
+    {
+      "from": "/learn/introduction/general-aesthesiology/sense-organs-overview/",
+      "to": "/atlas/introduction/general-aesthesiology/sense-organs-overview/"
+    },
+    {
+      "from": "/learn/introduction/general-splanchnology/",
+      "to": "/atlas/introduction/general-splanchnology/"
+    },
+    {
+      "from": "/learn/introduction/general-splanchnology/body-cavities-and-their-boundaries/",
+      "to": "/atlas/introduction/general-splanchnology/body-cavities-and-their-boundaries/"
+    },
+    {
+      "from": "/learn/introduction/general-splanchnology/general-topography-of-the-visceral-systems/",
+      "to": "/atlas/introduction/general-splanchnology/general-topography-of-the-visceral-systems/"
+    },
+    {
+      "from": "/learn/introduction/surface-anatomy/",
+      "to": "/atlas/introduction/surface-anatomy/"
+    },
+    {
+      "from": "/learn/introduction/surface-anatomy/surface-regions-and-joint-regions/",
+      "to": "/atlas/introduction/surface-anatomy/surface-regions-and-joint-regions/"
+    },
+    {
+      "from": "/learn/introduction/surface-anatomy/palpable-bony-prominences-lymph-nodes-and-arteries/",
+      "to": "/atlas/introduction/surface-anatomy/palpable-bony-prominences-lymph-nodes-and-arteries/"
+    },
+    {
+      "from": "/learn/introduction/surface-anatomy/surface-veins-for-venepuncture-and-injection-sites/",
+      "to": "/atlas/introduction/surface-anatomy/surface-veins-for-venepuncture-and-injection-sites/"
+    },
+    {
+      "from": "/learn/introduction/surface-anatomy/bone-marrow-and-cerebrospinal-fluid-collection-sites/",
+      "to": "/atlas/introduction/surface-anatomy/bone-marrow-and-cerebrospinal-fluid-collection-sites/"
+    },
+    {
+      "from": "/learn/introduction/imaging-principles/",
+      "to": "/atlas/introduction/imaging-principles/"
+    },
+    {
+      "from": "/learn/introduction/imaging-principles/radiography-x-ray-principles-and-application/",
+      "to": "/atlas/introduction/imaging-principles/radiography-x-ray-principles-and-application/"
+    },
+    {
+      "from": "/learn/introduction/imaging-principles/ultrasonography-principles-and-application/",
+      "to": "/atlas/introduction/imaging-principles/ultrasonography-principles-and-application/"
+    },
+    {
+      "from": "/learn/forelimb/",
+      "to": "/atlas/forelimb/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/",
+      "to": "/atlas/forelimb/osteology/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/scapula/",
+      "to": "/atlas/forelimb/osteology/scapula/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/humerus/",
+      "to": "/atlas/forelimb/osteology/humerus/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/radius-and-ulna/",
+      "to": "/atlas/forelimb/osteology/radius-and-ulna/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/carpus-knee/",
+      "to": "/atlas/forelimb/osteology/carpus-knee/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/metacarpus-cannon/",
+      "to": "/atlas/forelimb/osteology/metacarpus-cannon/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/digits/",
+      "to": "/atlas/forelimb/osteology/digits/"
+    },
+    {
+      "from": "/learn/forelimb/myology/",
+      "to": "/atlas/forelimb/myology/"
+    },
+    {
+      "from": "/learn/forelimb/myology/trapezius-muscle/",
+      "to": "/atlas/forelimb/myology/trapezius-muscle/"
+    },
+    {
+      "from": "/learn/forelimb/myology/omotransversarius/",
+      "to": "/atlas/forelimb/myology/omotransversarius/"
+    },
+    {
+      "from": "/learn/forelimb/myology/brachiocephalicus/",
+      "to": "/atlas/forelimb/myology/brachiocephalicus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/rhomboideus/",
+      "to": "/atlas/forelimb/myology/rhomboideus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/serratus-ventralis/",
+      "to": "/atlas/forelimb/myology/serratus-ventralis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/latissimus-dorsi/",
+      "to": "/atlas/forelimb/myology/latissimus-dorsi/"
+    },
+    {
+      "from": "/learn/forelimb/myology/pectoral-muscles/",
+      "to": "/atlas/forelimb/myology/pectoral-muscles/"
+    },
+    {
+      "from": "/learn/forelimb/myology/supraspinatus/",
+      "to": "/atlas/forelimb/myology/supraspinatus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/infraspinatus/",
+      "to": "/atlas/forelimb/myology/infraspinatus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/deltoideus/",
+      "to": "/atlas/forelimb/myology/deltoideus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/teres-minor/",
+      "to": "/atlas/forelimb/myology/teres-minor/"
+    },
+    {
+      "from": "/learn/forelimb/myology/subscapularis/",
+      "to": "/atlas/forelimb/myology/subscapularis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/teres-major/",
+      "to": "/atlas/forelimb/myology/teres-major/"
+    },
+    {
+      "from": "/learn/forelimb/myology/coracobrachialis/",
+      "to": "/atlas/forelimb/myology/coracobrachialis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/biceps-brachii/",
+      "to": "/atlas/forelimb/myology/biceps-brachii/"
+    },
+    {
+      "from": "/learn/forelimb/myology/brachialis/",
+      "to": "/atlas/forelimb/myology/brachialis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/triceps-brachii/",
+      "to": "/atlas/forelimb/myology/triceps-brachii/"
+    },
+    {
+      "from": "/learn/forelimb/myology/tensor-fasciae-antebrachii/",
+      "to": "/atlas/forelimb/myology/tensor-fasciae-antebrachii/"
+    },
+    {
+      "from": "/learn/forelimb/myology/anconeus/",
+      "to": "/atlas/forelimb/myology/anconeus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/extensor-carpi-radialis/",
+      "to": "/atlas/forelimb/myology/extensor-carpi-radialis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/common-digital-extensor/",
+      "to": "/atlas/forelimb/myology/common-digital-extensor/"
+    },
+    {
+      "from": "/learn/forelimb/myology/lateral-digital-extensor/",
+      "to": "/atlas/forelimb/myology/lateral-digital-extensor/"
+    },
+    {
+      "from": "/learn/forelimb/myology/ulnaris-lateralis/",
+      "to": "/atlas/forelimb/myology/ulnaris-lateralis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/extensor-carpi-obliquus/",
+      "to": "/atlas/forelimb/myology/extensor-carpi-obliquus/"
+    },
+    {
+      "from": "/learn/forelimb/myology/flexor-carpi-radialis/",
+      "to": "/atlas/forelimb/myology/flexor-carpi-radialis/"
+    },
+    {
+      "from": "/learn/forelimb/myology/flexor-carpi-ulnaris/",
+      "to": "/atlas/forelimb/myology/flexor-carpi-ulnaris/"
+    },
+    {
+      "from": "/learn/forelimb/myology/superficial-digital-flexor/",
+      "to": "/atlas/forelimb/myology/superficial-digital-flexor/"
+    },
+    {
+      "from": "/learn/forelimb/myology/deep-digital-flexor/",
+      "to": "/atlas/forelimb/myology/deep-digital-flexor/"
+    },
+    {
+      "from": "/learn/forelimb/myology/interosseous-muscle-suspensory/",
+      "to": "/atlas/forelimb/myology/interosseous-muscle-suspensory/"
+    },
+    {
+      "from": "/learn/forelimb/myology/distal-annular-ligaments-and-interdigital/",
+      "to": "/atlas/forelimb/myology/distal-annular-ligaments-and-interdigital/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/",
+      "to": "/atlas/forelimb/arthrology/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/shoulder-joint-articulatio-humeri/",
+      "to": "/atlas/forelimb/arthrology/shoulder-joint-articulatio-humeri/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/elbow-joint-articulatio-cubiti/",
+      "to": "/atlas/forelimb/arthrology/elbow-joint-articulatio-cubiti/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/carpus-knee-joint-articulatio-carpi/",
+      "to": "/atlas/forelimb/arthrology/carpus-knee-joint-articulatio-carpi/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/fetlock-joint-metacarpophalangeal/",
+      "to": "/atlas/forelimb/arthrology/fetlock-joint-metacarpophalangeal/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/pastern-joint-proximal-interphalangeal-pip/",
+      "to": "/atlas/forelimb/arthrology/pastern-joint-proximal-interphalangeal-pip/"
+    },
+    {
+      "from": "/learn/forelimb/arthrology/coffin-joint-distal-interphalangeal-dip/",
+      "to": "/atlas/forelimb/arthrology/coffin-joint-distal-interphalangeal-dip/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/",
+      "to": "/atlas/forelimb/neurology/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/brachial-plexus-architecture/",
+      "to": "/atlas/forelimb/neurology/brachial-plexus-architecture/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/other-proximal-brachial-plexus-branches/",
+      "to": "/atlas/forelimb/neurology/other-proximal-brachial-plexus-branches/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/radial-nerve/",
+      "to": "/atlas/forelimb/neurology/radial-nerve/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/median-nerve/",
+      "to": "/atlas/forelimb/neurology/median-nerve/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/ulnar-nerve/",
+      "to": "/atlas/forelimb/neurology/ulnar-nerve/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/suprascapular-nerve/",
+      "to": "/atlas/forelimb/neurology/suprascapular-nerve/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/musculocutaneous-nerve/",
+      "to": "/atlas/forelimb/neurology/musculocutaneous-nerve/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/axillary-nerve/",
+      "to": "/atlas/forelimb/neurology/axillary-nerve/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/distal-palmar-and-digital-nerves/",
+      "to": "/atlas/forelimb/neurology/distal-palmar-and-digital-nerves/"
+    },
+    {
+      "from": "/learn/forelimb/neurology/regional-anesthesia-nerve-blocks/",
+      "to": "/atlas/forelimb/neurology/regional-anesthesia-nerve-blocks/"
+    },
+    {
+      "from": "/learn/forelimb/angiology/",
+      "to": "/atlas/forelimb/angiology/"
+    },
+    {
+      "from": "/learn/forelimb/angiology/arterial-tree-of-the-forelimb-subclavian-digital/",
+      "to": "/atlas/forelimb/angiology/arterial-tree-of-the-forelimb-subclavian-digital/"
+    },
+    {
+      "from": "/learn/forelimb/angiology/axillary-and-brachial-branches/",
+      "to": "/atlas/forelimb/angiology/axillary-and-brachial-branches/"
+    },
+    {
+      "from": "/learn/forelimb/angiology/distal-forelimb-vessels/",
+      "to": "/atlas/forelimb/angiology/distal-forelimb-vessels/"
+    },
+    {
+      "from": "/learn/forelimb/angiology/forelimb-lymph-nodes-and-surface-veins/",
+      "to": "/atlas/forelimb/angiology/forelimb-lymph-nodes-and-surface-veins/"
+    },
+    {
+      "from": "/learn/head-neck/",
+      "to": "/atlas/head-neck/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/",
+      "to": "/atlas/head-neck/osteology/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/introduction-bovine-cranial-architecture/",
+      "to": "/atlas/head-neck/osteology/introduction-bovine-cranial-architecture/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/occipital-bone-os-occipitale/",
+      "to": "/atlas/head-neck/osteology/occipital-bone-os-occipitale/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/sphenoid-bone-os-sphenoidale/",
+      "to": "/atlas/head-neck/osteology/sphenoid-bone-os-sphenoidale/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/ethmoid-bone-os-ethmoidale/",
+      "to": "/atlas/head-neck/osteology/ethmoid-bone-os-ethmoidale/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/frontal-bone-os-frontale/",
+      "to": "/atlas/head-neck/osteology/frontal-bone-os-frontale/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/parietal-and-interparietal-bones/",
+      "to": "/atlas/head-neck/osteology/parietal-and-interparietal-bones/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/temporal-bone-os-temporale/",
+      "to": "/atlas/head-neck/osteology/temporal-bone-os-temporale/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/maxilla-os-maxillare/",
+      "to": "/atlas/head-neck/osteology/maxilla-os-maxillare/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/incisive-and-nasal-bones/",
+      "to": "/atlas/head-neck/osteology/incisive-and-nasal-bones/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/lacrimal-and-zygomatic-bones/",
+      "to": "/atlas/head-neck/osteology/lacrimal-and-zygomatic-bones/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/palatine-pterygoid-and-vomer/",
+      "to": "/atlas/head-neck/osteology/palatine-pterygoid-and-vomer/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/mandible-and-hyoid-apparatus/",
+      "to": "/atlas/head-neck/osteology/mandible-and-hyoid-apparatus/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/nasal-turbinates-conchae/",
+      "to": "/atlas/head-neck/osteology/nasal-turbinates-conchae/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/frontal-and-maxillary-sinuses/",
+      "to": "/atlas/head-neck/osteology/frontal-and-maxillary-sinuses/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/pterygopalatine-and-temporal-fossae/",
+      "to": "/atlas/head-neck/osteology/pterygopalatine-and-temporal-fossae/"
+    },
+    {
+      "from": "/learn/head-neck/osteology/cervical-vertebrae-c1-c7-bones-of-the-neck/",
+      "to": "/atlas/head-neck/osteology/cervical-vertebrae-c1-c7-bones-of-the-neck/"
+    },
+    {
+      "from": "/learn/head-neck/myology/",
+      "to": "/atlas/head-neck/myology/"
+    },
+    {
+      "from": "/learn/head-neck/myology/cutaneous-and-facial-muscles-mimetic-expression/",
+      "to": "/atlas/head-neck/myology/cutaneous-and-facial-muscles-mimetic-expression/"
+    },
+    {
+      "from": "/learn/head-neck/myology/muscles-of-mastication-chewing/",
+      "to": "/atlas/head-neck/myology/muscles-of-mastication-chewing/"
+    },
+    {
+      "from": "/learn/head-neck/myology/muscles-of-the-tongue-pharynx-soft-palate-hyoid-and-larynx/",
+      "to": "/atlas/head-neck/myology/muscles-of-the-tongue-pharynx-soft-palate-hyoid-and-larynx/"
+    },
+    {
+      "from": "/learn/head-neck/myology/neck-muscles-and-boundaries-of-the-jugular-furrow/",
+      "to": "/atlas/head-neck/myology/neck-muscles-and-boundaries-of-the-jugular-furrow/"
+    },
+    {
+      "from": "/learn/head-neck/arthrology/",
+      "to": "/atlas/head-neck/arthrology/"
+    },
+    {
+      "from": "/learn/head-neck/arthrology/articulations-and-special-ligaments-of-head-and-neck/",
+      "to": "/atlas/head-neck/arthrology/articulations-and-special-ligaments-of-head-and-neck/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/",
+      "to": "/atlas/head-neck/neurology/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/introduction-the-cranial-command-center/",
+      "to": "/atlas/head-neck/neurology/introduction-the-cranial-command-center/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-i-and-ii-the-special-senses-olfactory-and-optic/",
+      "to": "/atlas/head-neck/neurology/cn-i-and-ii-the-special-senses-olfactory-and-optic/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-iii-iv-vi-the-orbital-motor-group/",
+      "to": "/atlas/head-neck/neurology/cn-iii-iv-vi-the-orbital-motor-group/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-v-the-trigeminal-nerve-the-giant/",
+      "to": "/atlas/head-neck/neurology/cn-v-the-trigeminal-nerve-the-giant/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-vii-the-facial-nerve-the-mask/",
+      "to": "/atlas/head-neck/neurology/cn-vii-the-facial-nerve-the-mask/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-ix-x-xi-the-vagal-group/",
+      "to": "/atlas/head-neck/neurology/cn-ix-x-xi-the-vagal-group/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-xii-the-hypoglossal-nerve/",
+      "to": "/atlas/head-neck/neurology/cn-xii-the-hypoglossal-nerve/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/foramina-and-exit-strategies-comparative/",
+      "to": "/atlas/head-neck/neurology/foramina-and-exit-strategies-comparative/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/clinical-applications-regional-anesthesia/",
+      "to": "/atlas/head-neck/neurology/clinical-applications-regional-anesthesia/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/cn-viii-vestibulocochlear-nerve/",
+      "to": "/atlas/head-neck/neurology/cn-viii-vestibulocochlear-nerve/"
+    },
+    {
+      "from": "/learn/head-neck/neurology/clinical-neurology-pathology/",
+      "to": "/atlas/head-neck/neurology/clinical-neurology-pathology/"
+    },
+    {
+      "from": "/learn/head-neck/angiology/",
+      "to": "/atlas/head-neck/angiology/"
+    },
+    {
+      "from": "/learn/head-neck/angiology/arteries-of-the-head-and-neck/",
+      "to": "/atlas/head-neck/angiology/arteries-of-the-head-and-neck/"
+    },
+    {
+      "from": "/learn/head-neck/angiology/carotid-sheath-and-major-branch-relations/",
+      "to": "/atlas/head-neck/angiology/carotid-sheath-and-major-branch-relations/"
+    },
+    {
+      "from": "/learn/head-neck/angiology/veins-and-lymph-nodes-of-the-head-and-neck/",
+      "to": "/atlas/head-neck/angiology/veins-and-lymph-nodes-of-the-head-and-neck/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/",
+      "to": "/atlas/head-neck/splanchnology/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/digestive-system-oral-cavity-and-pharynx/",
+      "to": "/atlas/head-neck/splanchnology/digestive-system-oral-cavity-and-pharynx/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/teeth-and-age-determination-by-dentition/",
+      "to": "/atlas/head-neck/splanchnology/teeth-and-age-determination-by-dentition/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/hard-and-soft-palate-tongue-pharynx/",
+      "to": "/atlas/head-neck/splanchnology/hard-and-soft-palate-tongue-pharynx/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/salivary-glands-parotid-mandibular-sublingual/",
+      "to": "/atlas/head-neck/splanchnology/salivary-glands-parotid-mandibular-sublingual/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/larynx-trachea-and-oesophagus/",
+      "to": "/atlas/head-neck/splanchnology/larynx-trachea-and-oesophagus/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/endocrine-of-head-and-neck-thyroid-and-parathyroid/",
+      "to": "/atlas/head-neck/splanchnology/endocrine-of-head-and-neck-thyroid-and-parathyroid/"
+    },
+    {
+      "from": "/learn/head-neck/splanchnology/sense-organs-of-head-eye-ear/",
+      "to": "/atlas/head-neck/splanchnology/sense-organs-of-head-eye-ear/"
+    },
+    {
+      "from": "/learn/thorax/",
+      "to": "/atlas/thorax/"
+    },
+    {
+      "from": "/learn/thorax/osteology/",
+      "to": "/atlas/thorax/osteology/"
+    },
+    {
+      "from": "/learn/thorax/osteology/thoracic-vertebrae/",
+      "to": "/atlas/thorax/osteology/thoracic-vertebrae/"
+    },
+    {
+      "from": "/learn/thorax/osteology/ribs-costae/",
+      "to": "/atlas/thorax/osteology/ribs-costae/"
+    },
+    {
+      "from": "/learn/thorax/osteology/sternum/",
+      "to": "/atlas/thorax/osteology/sternum/"
+    },
+    {
+      "from": "/learn/thorax/myology/",
+      "to": "/atlas/thorax/myology/"
+    },
+    {
+      "from": "/learn/thorax/myology/external-intercostal-muscles/",
+      "to": "/atlas/thorax/myology/external-intercostal-muscles/"
+    },
+    {
+      "from": "/learn/thorax/myology/internal-intercostal-muscles/",
+      "to": "/atlas/thorax/myology/internal-intercostal-muscles/"
+    },
+    {
+      "from": "/learn/thorax/myology/diaphragm/",
+      "to": "/atlas/thorax/myology/diaphragm/"
+    },
+    {
+      "from": "/learn/thorax/myology/other-thoracic-wall-muscles/",
+      "to": "/atlas/thorax/myology/other-thoracic-wall-muscles/"
+    },
+    {
+      "from": "/learn/thorax/arthrology/",
+      "to": "/atlas/thorax/arthrology/"
+    },
+    {
+      "from": "/learn/thorax/arthrology/intervertebral-joints-thoracic/",
+      "to": "/atlas/thorax/arthrology/intervertebral-joints-thoracic/"
+    },
+    {
+      "from": "/learn/thorax/arthrology/costovertebral-joints/",
+      "to": "/atlas/thorax/arthrology/costovertebral-joints/"
+    },
+    {
+      "from": "/learn/thorax/arthrology/costochondral-and-sternal-joints/",
+      "to": "/atlas/thorax/arthrology/costochondral-and-sternal-joints/"
+    },
+    {
+      "from": "/learn/thorax/neurology/",
+      "to": "/atlas/thorax/neurology/"
+    },
+    {
+      "from": "/learn/thorax/neurology/intercostal-nerves/",
+      "to": "/atlas/thorax/neurology/intercostal-nerves/"
+    },
+    {
+      "from": "/learn/thorax/neurology/vagus-nerve-in-thorax-cranial-nerve-x/",
+      "to": "/atlas/thorax/neurology/vagus-nerve-in-thorax-cranial-nerve-x/"
+    },
+    {
+      "from": "/learn/thorax/neurology/recurrent-laryngeal-nerve/",
+      "to": "/atlas/thorax/neurology/recurrent-laryngeal-nerve/"
+    },
+    {
+      "from": "/learn/thorax/neurology/phrenic-nerve-and-sympathetic-trunk/",
+      "to": "/atlas/thorax/neurology/phrenic-nerve-and-sympathetic-trunk/"
+    },
+    {
+      "from": "/learn/thorax/angiology/",
+      "to": "/atlas/thorax/angiology/"
+    },
+    {
+      "from": "/learn/thorax/angiology/heart-gross-anatomy/",
+      "to": "/atlas/thorax/angiology/heart-gross-anatomy/"
+    },
+    {
+      "from": "/learn/thorax/angiology/aorta-and-branches-in-thorax/",
+      "to": "/atlas/thorax/angiology/aorta-and-branches-in-thorax/"
+    },
+    {
+      "from": "/learn/thorax/angiology/major-veins-of-thorax/",
+      "to": "/atlas/thorax/angiology/major-veins-of-thorax/"
+    },
+    {
+      "from": "/learn/thorax/angiology/lymph-nodes-and-thoracic-duct/",
+      "to": "/atlas/thorax/angiology/lymph-nodes-and-thoracic-duct/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/",
+      "to": "/atlas/thorax/splanchnology/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/trachea-windpipe/",
+      "to": "/atlas/thorax/splanchnology/trachea-windpipe/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/oesophagus/",
+      "to": "/atlas/thorax/splanchnology/oesophagus/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/thymus/",
+      "to": "/atlas/thorax/splanchnology/thymus/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/lungs/",
+      "to": "/atlas/thorax/splanchnology/lungs/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/pleura-pleural-reflections-and-mediastinum/",
+      "to": "/atlas/thorax/splanchnology/pleura-pleural-reflections-and-mediastinum/"
+    },
+    {
+      "from": "/learn/thorax/splanchnology/auscultation-percussion-and-paracentesis-thoracis/",
+      "to": "/atlas/thorax/splanchnology/auscultation-percussion-and-paracentesis-thoracis/"
+    },
+    {
+      "from": "/learn/abdomen/",
+      "to": "/atlas/abdomen/"
+    },
+    {
+      "from": "/learn/abdomen/osteology/",
+      "to": "/atlas/abdomen/osteology/"
+    },
+    {
+      "from": "/learn/abdomen/osteology/lumbar-vertebrae-ox/",
+      "to": "/atlas/abdomen/osteology/lumbar-vertebrae-ox/"
+    },
+    {
+      "from": "/learn/abdomen/osteology/last-ribs-and-costal-arch/",
+      "to": "/atlas/abdomen/osteology/last-ribs-and-costal-arch/"
+    },
+    {
+      "from": "/learn/abdomen/osteology/pelvic-inlet-and-sublumbar-bony-floor/",
+      "to": "/atlas/abdomen/osteology/pelvic-inlet-and-sublumbar-bony-floor/"
+    },
+    {
+      "from": "/learn/abdomen/myology/",
+      "to": "/atlas/abdomen/myology/"
+    },
+    {
+      "from": "/learn/abdomen/myology/abdominal-wall-four-layer-muscular-sheath/",
+      "to": "/atlas/abdomen/myology/abdominal-wall-four-layer-muscular-sheath/"
+    },
+    {
+      "from": "/learn/abdomen/myology/diaphragm-cranial-wall-of-abdomen/",
+      "to": "/atlas/abdomen/myology/diaphragm-cranial-wall-of-abdomen/"
+    },
+    {
+      "from": "/learn/abdomen/myology/sublumbar-muscles/",
+      "to": "/atlas/abdomen/myology/sublumbar-muscles/"
+    },
+    {
+      "from": "/learn/abdomen/arthrology/",
+      "to": "/atlas/abdomen/arthrology/"
+    },
+    {
+      "from": "/learn/abdomen/arthrology/intervertebral-and-lumbosacral-joints/",
+      "to": "/atlas/abdomen/arthrology/intervertebral-and-lumbosacral-joints/"
+    },
+    {
+      "from": "/learn/abdomen/neurology/",
+      "to": "/atlas/abdomen/neurology/"
+    },
+    {
+      "from": "/learn/abdomen/neurology/lumbar-plexus-and-abdominal-wall-nerves/",
+      "to": "/atlas/abdomen/neurology/lumbar-plexus-and-abdominal-wall-nerves/"
+    },
+    {
+      "from": "/learn/abdomen/angiology/",
+      "to": "/atlas/abdomen/angiology/"
+    },
+    {
+      "from": "/learn/abdomen/angiology/abdominal-aorta-and-its-major-branches/",
+      "to": "/atlas/abdomen/angiology/abdominal-aorta-and-its-major-branches/"
+    },
+    {
+      "from": "/learn/abdomen/angiology/caudal-vena-cava-and-portal-vein/",
+      "to": "/atlas/abdomen/angiology/caudal-vena-cava-and-portal-vein/"
+    },
+    {
+      "from": "/learn/abdomen/angiology/abdominal-lymph-nodes/",
+      "to": "/atlas/abdomen/angiology/abdominal-lymph-nodes/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/",
+      "to": "/atlas/abdomen/splanchnology/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/digestive-system-the-ruminant-stomach/",
+      "to": "/atlas/abdomen/splanchnology/digestive-system-the-ruminant-stomach/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/digestive-system-small-intestine-duodenum-jejunum-ileum/",
+      "to": "/atlas/abdomen/splanchnology/digestive-system-small-intestine-duodenum-jejunum-ileum/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/digestive-system-large-intestine-cecum-colon-rectum/",
+      "to": "/atlas/abdomen/splanchnology/digestive-system-large-intestine-cecum-colon-rectum/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/digestive-accessory-liver/",
+      "to": "/atlas/abdomen/splanchnology/digestive-accessory-liver/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/digestive-accessory-pancreas/",
+      "to": "/atlas/abdomen/splanchnology/digestive-accessory-pancreas/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/lymphoid-organ-spleen/",
+      "to": "/atlas/abdomen/splanchnology/lymphoid-organ-spleen/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/urinary-system-kidneys-and-ureters/",
+      "to": "/atlas/abdomen/splanchnology/urinary-system-kidneys-and-ureters/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/mammary-gland-udder/",
+      "to": "/atlas/abdomen/splanchnology/mammary-gland-udder/"
+    },
+    {
+      "from": "/learn/abdomen/splanchnology/endocrine-glands-of-abdomen-adrenal-glands/",
+      "to": "/atlas/abdomen/splanchnology/endocrine-glands-of-abdomen-adrenal-glands/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/",
+      "to": "/atlas/hindlimb-pelvis/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/",
+      "to": "/atlas/hindlimb-pelvis/osteology/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/os-coxae-hip-bone/",
+      "to": "/atlas/hindlimb-pelvis/osteology/os-coxae-hip-bone/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/sacrum-and-coccygeal-tail-vertebrae/",
+      "to": "/atlas/hindlimb-pelvis/osteology/sacrum-and-coccygeal-tail-vertebrae/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/femur-thigh-bone/",
+      "to": "/atlas/hindlimb-pelvis/osteology/femur-thigh-bone/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/patella-knee-cap/",
+      "to": "/atlas/hindlimb-pelvis/osteology/patella-knee-cap/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/tibia-and-fibula/",
+      "to": "/atlas/hindlimb-pelvis/osteology/tibia-and-fibula/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/tarsus-hock/",
+      "to": "/atlas/hindlimb-pelvis/osteology/tarsus-hock/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/osteology/metatarsus-and-digits-cannon-pastern-hoof/",
+      "to": "/atlas/hindlimb-pelvis/osteology/metatarsus-and-digits-cannon-pastern-hoof/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/",
+      "to": "/atlas/hindlimb-pelvis/myology/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/gluteal-muscles-superficial-middle-deep-accessory/",
+      "to": "/atlas/hindlimb-pelvis/myology/gluteal-muscles-superficial-middle-deep-accessory/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/quadriceps-femoris/",
+      "to": "/atlas/hindlimb-pelvis/myology/quadriceps-femoris/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/hamstring-group-caudal-thigh-muscles/",
+      "to": "/atlas/hindlimb-pelvis/myology/hamstring-group-caudal-thigh-muscles/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/adductor-group-medial-thigh/",
+      "to": "/atlas/hindlimb-pelvis/myology/adductor-group-medial-thigh/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/iliopsoas-tensor-fasciae-latae-and-hip-flexors/",
+      "to": "/atlas/hindlimb-pelvis/myology/iliopsoas-tensor-fasciae-latae-and-hip-flexors/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/cranial-crural-front-of-leg-muscles/",
+      "to": "/atlas/hindlimb-pelvis/myology/cranial-crural-front-of-leg-muscles/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/myology/caudal-crural-calf-muscles/",
+      "to": "/atlas/hindlimb-pelvis/myology/caudal-crural-calf-muscles/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/arthrology/",
+      "to": "/atlas/hindlimb-pelvis/arthrology/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/arthrology/sacroiliac-joint/",
+      "to": "/atlas/hindlimb-pelvis/arthrology/sacroiliac-joint/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/arthrology/pelvic-symphysis-and-inguinal-canal-with-spermatic-cord-and-prepubic-tendon/",
+      "to": "/atlas/hindlimb-pelvis/arthrology/pelvic-symphysis-and-inguinal-canal-with-spermatic-cord-and-prepubic-tendon/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/arthrology/hip-coxofemoral-joint/",
+      "to": "/atlas/hindlimb-pelvis/arthrology/hip-coxofemoral-joint/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/arthrology/stifle-knee-joint/",
+      "to": "/atlas/hindlimb-pelvis/arthrology/stifle-knee-joint/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/arthrology/hock-tarsal-joint/",
+      "to": "/atlas/hindlimb-pelvis/arthrology/hock-tarsal-joint/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/",
+      "to": "/atlas/hindlimb-pelvis/neurology/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/lumbosacral-plexus-overview/",
+      "to": "/atlas/hindlimb-pelvis/neurology/lumbosacral-plexus-overview/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/",
+      "to": "/atlas/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/femoral-and-obturator-nerves/",
+      "to": "/atlas/hindlimb-pelvis/neurology/femoral-and-obturator-nerves/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/sciatic-nerve-and-its-branches-tibial-peroneal/",
+      "to": "/atlas/hindlimb-pelvis/neurology/sciatic-nerve-and-its-branches-tibial-peroneal/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/",
+      "to": "/atlas/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/neurology/pudendal-pudic-nerve-and-epidural-anaesthesia/",
+      "to": "/atlas/hindlimb-pelvis/neurology/pudendal-pudic-nerve-and-epidural-anaesthesia/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/angiology/",
+      "to": "/atlas/hindlimb-pelvis/angiology/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/angiology/major-arteries-of-hindlimb/",
+      "to": "/atlas/hindlimb-pelvis/angiology/major-arteries-of-hindlimb/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/",
+      "to": "/atlas/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/",
+      "to": "/atlas/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/angiology/major-veins-of-hindlimb-saphenous-and-recurrent-tarsal/",
+      "to": "/atlas/hindlimb-pelvis/angiology/major-veins-of-hindlimb-saphenous-and-recurrent-tarsal/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/angiology/lymph-nodes-of-hindlimb-and-pelvis/",
+      "to": "/atlas/hindlimb-pelvis/angiology/lymph-nodes-of-hindlimb-and-pelvis/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/splanchnology/",
+      "to": "/atlas/hindlimb-pelvis/splanchnology/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/splanchnology/pelvic-cavity-boundaries-and-peritoneal-reflections/",
+      "to": "/atlas/hindlimb-pelvis/splanchnology/pelvic-cavity-boundaries-and-peritoneal-reflections/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/splanchnology/digestive-rectum-and-anal-canal/",
+      "to": "/atlas/hindlimb-pelvis/splanchnology/digestive-rectum-and-anal-canal/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/splanchnology/urinary-urinary-bladder-and-pelvic-urethra/",
+      "to": "/atlas/hindlimb-pelvis/splanchnology/urinary-urinary-bladder-and-pelvic-urethra/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/splanchnology/male-reproductive-pelvic-and-external-genitalia/",
+      "to": "/atlas/hindlimb-pelvis/splanchnology/male-reproductive-pelvic-and-external-genitalia/"
+    },
+    {
+      "from": "/learn/hindlimb-pelvis/splanchnology/female-reproductive-pelvic-genitalia/",
+      "to": "/atlas/hindlimb-pelvis/splanchnology/female-reproductive-pelvic-genitalia/"
+    },
+    {
+      "from": "/learn/histology/",
+      "to": "/atlas/histology/"
+    },
+    {
+      "from": "/learn/histology/cytology/",
+      "to": "/atlas/histology/cytology/"
+    },
+    {
+      "from": "/learn/histology/cytology/the-cell-structure-and-organelles/",
+      "to": "/atlas/histology/cytology/the-cell-structure-and-organelles/"
+    },
+    {
+      "from": "/learn/histology/cytology/cell-junctions/",
+      "to": "/atlas/histology/cytology/cell-junctions/"
+    },
+    {
+      "from": "/learn/histology/cytology/microscopy-micrometry-and-routine-h-and-e/",
+      "to": "/atlas/histology/cytology/microscopy-micrometry-and-routine-h-and-e/"
+    },
+    {
+      "from": "/learn/histology/basic-tissues/",
+      "to": "/atlas/histology/basic-tissues/"
+    },
+    {
+      "from": "/learn/histology/basic-tissues/epithelial-tissue/",
+      "to": "/atlas/histology/basic-tissues/epithelial-tissue/"
+    },
+    {
+      "from": "/learn/histology/basic-tissues/connective-tissue/",
+      "to": "/atlas/histology/basic-tissues/connective-tissue/"
+    },
+    {
+      "from": "/learn/histology/basic-tissues/muscular-tissue/",
+      "to": "/atlas/histology/basic-tissues/muscular-tissue/"
+    },
+    {
+      "from": "/learn/histology/basic-tissues/nervous-tissue/",
+      "to": "/atlas/histology/basic-tissues/nervous-tissue/"
+    },
+    {
+      "from": "/learn/histology/basic-tissues/central-nervous-system-organs/",
+      "to": "/atlas/histology/basic-tissues/central-nervous-system-organs/"
+    },
+    {
+      "from": "/learn/histology/blood-and-bone-marrow/",
+      "to": "/atlas/histology/blood-and-bone-marrow/"
+    },
+    {
+      "from": "/learn/histology/blood-and-bone-marrow/blood-plasma-and-cellular-elements/",
+      "to": "/atlas/histology/blood-and-bone-marrow/blood-plasma-and-cellular-elements/"
+    },
+    {
+      "from": "/learn/histology/blood-and-bone-marrow/bone-marrow-and-haematopoiesis/",
+      "to": "/atlas/histology/blood-and-bone-marrow/bone-marrow-and-haematopoiesis/"
+    },
+    {
+      "from": "/learn/histology/digestive-system/",
+      "to": "/atlas/histology/digestive-system/"
+    },
+    {
+      "from": "/learn/histology/digestive-system/git-general-4-layer-plan/",
+      "to": "/atlas/histology/digestive-system/git-general-4-layer-plan/"
+    },
+    {
+      "from": "/learn/histology/digestive-system/liver-pancreas-and-salivary-glands/",
+      "to": "/atlas/histology/digestive-system/liver-pancreas-and-salivary-glands/"
+    },
+    {
+      "from": "/learn/histology/other-systems/",
+      "to": "/atlas/histology/other-systems/"
+    },
+    {
+      "from": "/learn/histology/other-systems/circulatory-system-heart-arteries-veins-capillaries/",
+      "to": "/atlas/histology/other-systems/circulatory-system-heart-arteries-veins-capillaries/"
+    },
+    {
+      "from": "/learn/histology/other-systems/urinary-system-kidney-ureter-bladder/",
+      "to": "/atlas/histology/other-systems/urinary-system-kidney-ureter-bladder/"
+    },
+    {
+      "from": "/learn/histology/other-systems/respiratory-system-trachea-lung-alveoli/",
+      "to": "/atlas/histology/other-systems/respiratory-system-trachea-lung-alveoli/"
+    },
+    {
+      "from": "/learn/histology/other-systems/lymphoid-system-lymph-node-spleen-thymus-tonsils/",
+      "to": "/atlas/histology/other-systems/lymphoid-system-lymph-node-spleen-thymus-tonsils/"
+    },
+    {
+      "from": "/learn/histology/other-systems/endocrine-system-pituitary-thyroid-adrenal-parathyroid-pineal/",
+      "to": "/atlas/histology/other-systems/endocrine-system-pituitary-thyroid-adrenal-parathyroid-pineal/"
+    },
+    {
+      "from": "/learn/histology/other-systems/reproductive-system-male-and-female-genital-histology/",
+      "to": "/atlas/histology/other-systems/reproductive-system-male-and-female-genital-histology/"
+    },
+    {
+      "from": "/learn/histology/other-systems/sense-organs-and-integument-eye-ear-skin/",
+      "to": "/atlas/histology/other-systems/sense-organs-and-integument-eye-ear-skin/"
+    },
+    {
+      "from": "/learn/embryology/",
+      "to": "/atlas/embryology/"
+    },
+    {
+      "from": "/learn/embryology/gametogenesis-and-fertilization/",
+      "to": "/atlas/embryology/gametogenesis-and-fertilization/"
+    },
+    {
+      "from": "/learn/embryology/gametogenesis-and-fertilization/gametogenesis-spermatogenesis-and-oogenesis/",
+      "to": "/atlas/embryology/gametogenesis-and-fertilization/gametogenesis-spermatogenesis-and-oogenesis/"
+    },
+    {
+      "from": "/learn/embryology/gametogenesis-and-fertilization/fertilization-and-types-of-eggs/",
+      "to": "/atlas/embryology/gametogenesis-and-fertilization/fertilization-and-types-of-eggs/"
+    },
+    {
+      "from": "/learn/embryology/cleavage-blastulation-and-gastrulation/",
+      "to": "/atlas/embryology/cleavage-blastulation-and-gastrulation/"
+    },
+    {
+      "from": "/learn/embryology/cleavage-blastulation-and-gastrulation/cleavage-and-morula-formation/",
+      "to": "/atlas/embryology/cleavage-blastulation-and-gastrulation/cleavage-and-morula-formation/"
+    },
+    {
+      "from": "/learn/embryology/cleavage-blastulation-and-gastrulation/blastulation-blastocyst-formation/",
+      "to": "/atlas/embryology/cleavage-blastulation-and-gastrulation/blastulation-blastocyst-formation/"
+    },
+    {
+      "from": "/learn/embryology/cleavage-blastulation-and-gastrulation/gastrulation-and-formation-of-germ-layers/",
+      "to": "/atlas/embryology/cleavage-blastulation-and-gastrulation/gastrulation-and-formation-of-germ-layers/"
+    },
+    {
+      "from": "/learn/embryology/foetal-membranes-and-placenta/",
+      "to": "/atlas/embryology/foetal-membranes-and-placenta/"
+    },
+    {
+      "from": "/learn/embryology/foetal-membranes-and-placenta/foetal-extra-embryonic-membranes/",
+      "to": "/atlas/embryology/foetal-membranes-and-placenta/foetal-extra-embryonic-membranes/"
+    },
+    {
+      "from": "/learn/embryology/foetal-membranes-and-placenta/placenta-classification/",
+      "to": "/atlas/embryology/foetal-membranes-and-placenta/placenta-classification/"
+    },
+    {
+      "from": "/learn/embryology/germ-layers-and-derivatives/",
+      "to": "/atlas/embryology/germ-layers-and-derivatives/"
+    },
+    {
+      "from": "/learn/embryology/germ-layers-and-derivatives/derivatives-of-the-three-germ-layers/",
+      "to": "/atlas/embryology/germ-layers-and-derivatives/derivatives-of-the-three-germ-layers/"
+    },
+    {
+      "from": "/learn/embryology/organ-development/",
+      "to": "/atlas/embryology/organ-development/"
+    },
+    {
+      "from": "/learn/embryology/organ-development/development-of-digestive-system-with-liver-pancreas-tongue-teeth/",
+      "to": "/atlas/embryology/organ-development/development-of-digestive-system-with-liver-pancreas-tongue-teeth/"
+    },
+    {
+      "from": "/learn/embryology/organ-development/development-of-respiratory-urinary-and-cardiovascular-systems/",
+      "to": "/atlas/embryology/organ-development/development-of-respiratory-urinary-and-cardiovascular-systems/"
+    },
+    {
+      "from": "/learn/embryology/organ-development/development-of-nervous-system-sense-organs-musculoskeletal-and-endocrine/",
+      "to": "/atlas/embryology/organ-development/development-of-nervous-system-sense-organs-musculoskeletal-and-endocrine/"
+    },
+    {
+      "from": "/learn/embryology/organ-development/lymphatic-and-reproductive-development/",
+      "to": "/atlas/embryology/organ-development/lymphatic-and-reproductive-development/"
+    },
+    {
+      "from": "/learn/embryology/twinning-and-anomalies/",
+      "to": "/atlas/embryology/twinning-and-anomalies/"
+    },
+    {
+      "from": "/learn/embryology/twinning-and-anomalies/implantation-twinning-and-common-anomalies/",
+      "to": "/atlas/embryology/twinning-and-anomalies/implantation-twinning-and-common-anomalies/"
+    },
+    {
+      "from": "/learn/why/",
+      "to": "/why/"
+    },
+    {
+      "from": "/learn/why/forelimb/",
+      "to": "/why/forelimb/"
+    },
+    {
+      "from": "/learn/why/forelimb/clavicle/",
+      "to": "/why/forelimb/clavicle/"
+    },
+    {
+      "from": "/learn/why/forelimb/acromion-process/",
+      "to": "/why/forelimb/acromion-process/"
+    },
+    {
+      "from": "/learn/why/forelimb/intermediate-tubercle/",
+      "to": "/why/forelimb/intermediate-tubercle/"
+    },
+    {
+      "from": "/learn/why/forelimb/supratrochlear-foramen/",
+      "to": "/why/forelimb/supratrochlear-foramen/"
+    },
+    {
+      "from": "/learn/why/forelimb/radius-and-ulna-fusion/",
+      "to": "/why/forelimb/radius-and-ulna-fusion/"
+    },
+    {
+      "from": "/learn/why/forelimb/pronator-teres/",
+      "to": "/why/forelimb/pronator-teres/"
+    },
+    {
+      "from": "/learn/why/forelimb/interosseous-muscle/",
+      "to": "/why/forelimb/interosseous-muscle/"
+    },
+    {
+      "from": "/learn/why/forelimb/distal-check-ligament/",
+      "to": "/why/forelimb/distal-check-ligament/"
+    },
+    {
+      "from": "/learn/why/forelimb/digit-number/",
+      "to": "/why/forelimb/digit-number/"
+    },
+    {
+      "from": "/learn/why/forelimb/equine-chestnut-and-ergot-vestigial-pads/",
+      "to": "/why/forelimb/equine-chestnut-and-ergot-vestigial-pads/"
+    },
+    {
+      "from": "/learn/why/forelimb/equine-navicular-bone/",
+      "to": "/why/forelimb/equine-navicular-bone/"
+    },
+    {
+      "from": "/learn/why/forelimb/equine-ungual-cartilages/",
+      "to": "/why/forelimb/equine-ungual-cartilages/"
+    },
+    {
+      "from": "/learn/why/forelimb/cattle-carpal-bone-fusion-pattern/",
+      "to": "/why/forelimb/cattle-carpal-bone-fusion-pattern/"
+    },
+    {
+      "from": "/learn/why/forelimb/equine-stay-apparatus-vs-dog-active-stance/",
+      "to": "/why/forelimb/equine-stay-apparatus-vs-dog-active-stance/"
+    },
+    {
+      "from": "/learn/why/forelimb/bovine-vs-equine-hoof-growth-rate/",
+      "to": "/why/forelimb/bovine-vs-equine-hoof-growth-rate/"
+    },
+    {
+      "from": "/learn/why/hindlimb/",
+      "to": "/why/hindlimb/"
+    },
+    {
+      "from": "/learn/why/hindlimb/sacrosciatic-ligament/",
+      "to": "/why/hindlimb/sacrosciatic-ligament/"
+    },
+    {
+      "from": "/learn/why/hindlimb/third-trochanter/",
+      "to": "/why/hindlimb/third-trochanter/"
+    },
+    {
+      "from": "/learn/why/hindlimb/accessory-ligament/",
+      "to": "/why/hindlimb/accessory-ligament/"
+    },
+    {
+      "from": "/learn/why/hindlimb/gluteobiceps-muscle/",
+      "to": "/why/hindlimb/gluteobiceps-muscle/"
+    },
+    {
+      "from": "/learn/why/hindlimb/patellar-locking-mechanism/",
+      "to": "/why/hindlimb/patellar-locking-mechanism/"
+    },
+    {
+      "from": "/learn/why/hindlimb/fibula-reduction/",
+      "to": "/why/hindlimb/fibula-reduction/"
+    },
+    {
+      "from": "/learn/why/hindlimb/peroneus-tertius/",
+      "to": "/why/hindlimb/peroneus-tertius/"
+    },
+    {
+      "from": "/learn/why/hindlimb/soleus-muscle/",
+      "to": "/why/hindlimb/soleus-muscle/"
+    },
+    {
+      "from": "/learn/why/hindlimb/cloven-hoof-of-ruminants/",
+      "to": "/why/hindlimb/cloven-hoof-of-ruminants/"
+    },
+    {
+      "from": "/learn/why/hindlimb/bovine-cervix-the-rifle-barrel/",
+      "to": "/why/hindlimb/bovine-cervix-the-rifle-barrel/"
+    },
+    {
+      "from": "/learn/why/hindlimb/bovine-udder-suspensory-apparatus/",
+      "to": "/why/hindlimb/bovine-udder-suspensory-apparatus/"
+    },
+    {
+      "from": "/learn/why/hindlimb/equine-frog-vs-bovine-digital-cushion/",
+      "to": "/why/hindlimb/equine-frog-vs-bovine-digital-cushion/"
+    },
+    {
+      "from": "/learn/why/hindlimb/bovine-penis-sigmoid-flexure/",
+      "to": "/why/hindlimb/bovine-penis-sigmoid-flexure/"
+    },
+    {
+      "from": "/learn/why/hindlimb/dog-os-penis-and-os-clitoris/",
+      "to": "/why/hindlimb/dog-os-penis-and-os-clitoris/"
+    },
+    {
+      "from": "/learn/why/hindlimb/mare-ovulation-fossa/",
+      "to": "/why/hindlimb/mare-ovulation-fossa/"
+    },
+    {
+      "from": "/learn/why/hindlimb/bovine-pre-pubic-tendon/",
+      "to": "/why/hindlimb/bovine-pre-pubic-tendon/"
+    },
+    {
+      "from": "/learn/why/hindlimb/horse-vs-dog-pelvic-inclination/",
+      "to": "/why/hindlimb/horse-vs-dog-pelvic-inclination/"
+    },
+    {
+      "from": "/learn/why/hindlimb/mare-mobile-phase-pregnancy-vs-cow/",
+      "to": "/why/hindlimb/mare-mobile-phase-pregnancy-vs-cow/"
+    },
+    {
+      "from": "/learn/why/hindlimb/dog-anal-sacs-paranal-sinuses/",
+      "to": "/why/hindlimb/dog-anal-sacs-paranal-sinuses/"
+    },
+    {
+      "from": "/learn/why/axial/",
+      "to": "/why/axial/"
+    },
+    {
+      "from": "/learn/why/axial/nuchal-ligament/",
+      "to": "/why/axial/nuchal-ligament/"
+    },
+    {
+      "from": "/learn/why/axial/omotransversarius/",
+      "to": "/why/axial/omotransversarius/"
+    },
+    {
+      "from": "/learn/why/axial/gall-bladder/",
+      "to": "/why/axial/gall-bladder/"
+    },
+    {
+      "from": "/learn/why/axial/bovine-lobulated-kidney/",
+      "to": "/why/axial/bovine-lobulated-kidney/"
+    },
+    {
+      "from": "/learn/why/axial/four-compartment-ruminant-stomach/",
+      "to": "/why/axial/four-compartment-ruminant-stomach/"
+    },
+    {
+      "from": "/learn/why/axial/horse-without-a-gall-bladder/",
+      "to": "/why/axial/horse-without-a-gall-bladder/"
+    },
+    {
+      "from": "/learn/why/axial/spiral-colon-of-ruminants/",
+      "to": "/why/axial/spiral-colon-of-ruminants/"
+    },
+    {
+      "from": "/learn/why/axial/tracheal-bronchus-in-pig-and-ox/",
+      "to": "/why/axial/tracheal-bronchus-in-pig-and-ox/"
+    },
+    {
+      "from": "/learn/why/axial/ossa-cordis-bones-in-the-heart/",
+      "to": "/why/axial/ossa-cordis-bones-in-the-heart/"
+    },
+    {
+      "from": "/learn/why/axial/guttural-pouch-a-horse-only-curiosity/",
+      "to": "/why/axial/guttural-pouch-a-horse-only-curiosity/"
+    },
+    {
+      "from": "/learn/why/axial/dental-pad-of-ruminants/",
+      "to": "/why/axial/dental-pad-of-ruminants/"
+    },
+    {
+      "from": "/learn/why/axial/bovine-forestomach-keratinization/",
+      "to": "/why/axial/bovine-forestomach-keratinization/"
+    },
+    {
+      "from": "/learn/why/axial/horse-wolf-tooth/",
+      "to": "/why/axial/horse-wolf-tooth/"
+    },
+    {
+      "from": "/learn/why/axial/cat-filiform-papillae-sandpaper-tongue/",
+      "to": "/why/axial/cat-filiform-papillae-sandpaper-tongue/"
+    },
+    {
+      "from": "/learn/why/axial/pig-snout-bone-os-rostri/",
+      "to": "/why/axial/pig-snout-bone-os-rostri/"
+    },
+    {
+      "from": "/learn/why/axial/bovine-frontal-sinus-expansion/",
+      "to": "/why/axial/bovine-frontal-sinus-expansion/"
+    },
+    {
+      "from": "/learn/why/axial/equine-stomach-margo-plicatus/",
+      "to": "/why/axial/equine-stomach-margo-plicatus/"
+    },
+    {
+      "from": "/learn/why/axial/bovine-lacrimal-bulla/",
+      "to": "/why/axial/bovine-lacrimal-bulla/"
+    },
+    {
+      "from": "/learn/why/axial/cattle-horn-anatomy/",
+      "to": "/why/axial/cattle-horn-anatomy/"
+    },
+    {
+      "from": "/learn/why/axial/sow-vs-cow-mammary-chain/",
+      "to": "/why/axial/sow-vs-cow-mammary-chain/"
+    },
+    {
+      "from": "/learn/why/axial/cattle-vs-horse-diaphragm-attachment/",
+      "to": "/why/axial/cattle-vs-horse-diaphragm-attachment/"
+    },
+    {
+      "from": "/learn/why/axial/equine-cranial-mesenteric-artery-vulnerability/",
+      "to": "/why/axial/equine-cranial-mesenteric-artery-vulnerability/"
+    },
+    {
+      "from": "/learn/why/wildlife/",
+      "to": "/why/wildlife/"
+    },
+    {
+      "from": "/learn/why/wildlife/cheetah-spine/",
+      "to": "/why/wildlife/cheetah-spine/"
+    },
+    {
+      "from": "/learn/why/wildlife/giraffe-neck-and-rete-mirabile/",
+      "to": "/why/wildlife/giraffe-neck-and-rete-mirabile/"
+    },
+    {
+      "from": "/learn/why/wildlife/elephant-foot-pad/",
+      "to": "/why/wildlife/elephant-foot-pad/"
+    },
+    {
+      "from": "/learn/why/wildlife/kangaroo-hindlimb-tendons/",
+      "to": "/why/wildlife/kangaroo-hindlimb-tendons/"
+    },
+    {
+      "from": "/learn/why/wildlife/retractable-claws/",
+      "to": "/why/wildlife/retractable-claws/"
+    },
+    {
+      "from": "/learn/why/wildlife/camel-foot-pad/",
+      "to": "/why/wildlife/camel-foot-pad/"
+    },
+    {
+      "from": "/learn/why/wildlife/antlers-vs-horns/",
+      "to": "/why/wildlife/antlers-vs-horns/"
+    },
+    {
+      "from": "/learn/why/wildlife/bat-wing-skeleton/",
+      "to": "/why/wildlife/bat-wing-skeleton/"
+    },
+    {
+      "from": "/learn/why/wildlife/whale-vestigial-pelvis/",
+      "to": "/why/wildlife/whale-vestigial-pelvis/"
+    },
+    {
+      "from": "/learn/why/wildlife/ostrich-two-toed-foot/",
+      "to": "/why/wildlife/ostrich-two-toed-foot/"
+    },
+    {
+      "from": "/learn/why/wildlife/snake-skull-kinesis/",
+      "to": "/why/wildlife/snake-skull-kinesis/"
+    },
+    {
+      "from": "/learn/why/wildlife/frog-urostyle/",
+      "to": "/why/wildlife/frog-urostyle/"
+    },
+    {
+      "from": "/learn/why/wildlife/bear-plantigrade-stance/",
+      "to": "/why/wildlife/bear-plantigrade-stance/"
+    },
+    {
+      "from": "/learn/why/wildlife/hare-rabbit-tibiofibula-fusion/",
+      "to": "/why/wildlife/hare-rabbit-tibiofibula-fusion/"
+    },
+    {
+      "from": "/learn/why/wildlife/crocodile-high-walk/",
+      "to": "/why/wildlife/crocodile-high-walk/"
+    },
+    {
+      "from": "/learn/why/wildlife/hippopotamus-bone-density/",
+      "to": "/why/wildlife/hippopotamus-bone-density/"
+    },
+    {
+      "from": "/learn/why/wildlife/owl-silent-flight/",
+      "to": "/why/wildlife/owl-silent-flight/"
+    },
+    {
+      "from": "/learn/why/wildlife/squirrel-reversible-hindfoot/",
+      "to": "/why/wildlife/squirrel-reversible-hindfoot/"
+    },
+    {
+      "from": "/learn/why/wildlife/bison-thoracic-hump/",
+      "to": "/why/wildlife/bison-thoracic-hump/"
+    },
+    {
+      "from": "/learn/why/wildlife/rhinoceros-tridactyl-foot/",
+      "to": "/why/wildlife/rhinoceros-tridactyl-foot/"
+    },
+    {
+      "from": "/learn/why/wildlife/pangolin-keratin-scales/",
+      "to": "/why/wildlife/pangolin-keratin-scales/"
+    },
+    {
+      "from": "/learn/why/wildlife/anteater-tongue-60-cm-vs-dog-tongue/",
+      "to": "/why/wildlife/anteater-tongue-60-cm-vs-dog-tongue/"
+    },
+    {
+      "from": "/learn/why/wildlife/tortoise-shell-modified-ribs-vertebrae/",
+      "to": "/why/wildlife/tortoise-shell-modified-ribs-vertebrae/"
+    },
+    {
+      "from": "/learn/why/wildlife/hummingbird-ball-and-socket-shoulder/",
+      "to": "/why/wildlife/hummingbird-ball-and-socket-shoulder/"
+    },
+    {
+      "from": "/learn/why/wildlife/naked-mole-rat-cold-blooded-mammal/",
+      "to": "/why/wildlife/naked-mole-rat-cold-blooded-mammal/"
+    },
+    {
+      "from": "/learn/why/wildlife/sea-lion-flipper-vs-dog-forelimb/",
+      "to": "/why/wildlife/sea-lion-flipper-vs-dog-forelimb/"
+    },
+    {
+      "from": "/learn/why/wildlife/walrus-baculum-longest-penis-bone/",
+      "to": "/why/wildlife/walrus-baculum-longest-penis-bone/"
+    },
+    {
+      "from": "/learn/why/wildlife/sloth-inverted-claws-and-slow-metabolism/",
+      "to": "/why/wildlife/sloth-inverted-claws-and-slow-metabolism/"
+    },
+    {
+      "from": "/learn/why/wildlife/crocodile-4-chambered-heart/",
+      "to": "/why/wildlife/crocodile-4-chambered-heart/"
+    },
+    {
+      "from": "/learn/why/wildlife/cheetah-non-retractable-claws/",
+      "to": "/why/wildlife/cheetah-non-retractable-claws/"
+    }
+  ]
+}

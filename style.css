@@ -8062,3 +8062,9 @@ body.professional-mode .speak-btn:hover { background: rgba(25,118,210,0.15); box
     .speak-btn { width: 32px; height: 32px; margin-left: 6px; }
     .speak-btn i { font-size: .78rem; }
 }
+.portal-card,
+.topic-btn,
+#why-view .card {
+    color: inherit;
+    text-decoration: none;
+}

@@ -150,12 +150,14 @@ quizBank = {
 
 **I never use git command-line.** Always give me file paths I can find in Explorer, not terminal commands.
 
-### Searchable learning pages
+### Searchable interactive routes
 
-- `learn/` contains generated, crawlable HTML pages for the public anatomy lessons. These pages complement the existing single-page app; they must never replace or break the `#/...` app routes.
-- `tools/build-seo-pages.mjs` regenerates the learning pages and `sitemap.xml` from the existing anatomy data files in the real website load order.
-- `tools/validate-seo-pages.mjs` must pass before publishing. It checks generated pages, canonical URLs, structured data, sitemap coverage and internal links.
-- Never hand-edit a generated file under `learn/`. Correct the original lesson data only with the user's approval, then regenerate.
+- Public lesson URLs use clean paths such as `/atlas/forelimb/osteology/scapula/` and open the original interactive Atlas directly. They are the canonical URLs for people, Google and other crawlers.
+- `atlas/` and `why/` contain generated, pre-rendered copies of the original app shell. They provide crawlable lesson content before JavaScript runs, then behave as the normal interactive app.
+- The old `#/...` app links remain backward-compatible. The old physical `learn/` files are retained for safety, but Cloudflare `_redirects` permanently sends their public URLs to the matching clean interactive route.
+- `tools/build-seo-pages.mjs` delegates to `tools/build-clean-routes.mjs`, regenerating clean route pages, non-indexed app entry pages, `_redirects` and `sitemap.xml` from the existing anatomy data files in the real website load order.
+- `tools/validate-seo-pages.mjs` delegates to the clean-route validator and must pass before publishing. It checks the original app shell, pre-rendered details, canonicals, structured data, sitemap coverage, redirects and internal links.
+- Never hand-edit a generated file under `atlas/`, `why/`, `dashboard/`, `library/`, `me/` or `quiz/`. Change the shared app/template, then regenerate.
 - Before and after generation, confirm every `data-*` source file hash is unchanged unless the user explicitly requested a lesson correction.
 
 ---
@@ -188,7 +190,7 @@ quizBank = {
 
 ## ⚙️ KEY ARCHITECTURE FACTS
 
-- **Single-page app:** `index.html` is a section-switcher. Each section is a `<section class="view-section">`. Navigation by `view-section.active` class + hash routing (`#/atlas/Forelimb/Osteology/2`).
+- **Progressively rendered app:** `index.html` is a section-switcher. Each section is a `<section class="view-section">`. Public navigation uses History API clean paths (`/atlas/forelimb/osteology/scapula/`); legacy hash routes such as `#/atlas/Forelimb/Osteology/2` are converted to the matching clean path.
 - **Image loading is already click-to-load:** Atlas modals only fetch images when user clicks a structure. WHY cards render text-only; image loads when user opens the modal. No lazy-loading library needed.
 - **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (streak map), `ivri-notify-srs`, `ivri-notify-last`.
 - **PWA:** Service worker caches everything; app installs to Android home screen via `manifest.json`.
@@ -202,7 +204,7 @@ The app uses a **3-layer navigation model**. Respect these boundaries when addin
 |---|---|---|
 | **L1 — Primary destinations** | 5 stable slots: Atlas · WHY · Quiz · Library · Me | `#bottom-nav` — fixed bottom bar on mobile, reconfigures via CSS into a top-centered pill dock on desktop (≥901px). Component is the same; layout differs. |
 | **L2 — Contextual actions** | Per-screen actions (Elite toggle, Highlight/Note/Share/Read/Bookmark on a topic) | Inline in the screen's `.nav-bar` (desktop) or `.detail-header-actions` row (atlas topic). Icon-only on mobile via CSS. |
-| **L3 — Settings & meta** | Theme · Reset Cache · About · Search · Dashboard | All routed through the **Me** tab (`#me-view`). The old top-left theme toggle is hidden on mobile (`.theme-toggle-btn { display:none }` ≤900px). |
+| **L3 — Settings & meta** | Theme · Reset Cache · About · Search · Dashboard | All routed through the **Me** tab (`/me/`). The old top-left theme toggle is hidden on mobile (`.theme-toggle-btn { display:none }` ≤900px). |
 
 **Library is a unified hub** — Bookmarks + Highlights + Notes live behind the same Library route as 3 tabs. The legacy hashes (`#/bookmarks`, `#/highlights`, `#/notes`) still work — they redirect into Library with the right tab preselected.
 
@@ -210,7 +212,7 @@ The app uses a **3-layer navigation model**. Respect these boundaries when addin
 
 **Bottom-nav auto-hide on scroll** is intentional — gives more vertical reading room when students are deep in content; reappears on scroll-up.
 
-**Active-slot logic** lives in `app._refreshBottomNavActive()` — it maps URL hash + `app.state.view` to one of: `atlas | why | library | me` (Quiz never stays "active" — it opens an overlay, not a destination).
+**Active-slot logic** lives in `app._refreshBottomNavActive()` — it maps the clean URL path + `app.state.view` to one of: `atlas | why | library | me` (Quiz never stays "active" — it opens an overlay, not a destination).
 
 **When adding a new primary destination**, do NOT add a 6th bottom-nav slot — replace an existing one or nest the new thing into Library/Me. 5 slots is the proven limit (Google Material, iOS HIG).
 

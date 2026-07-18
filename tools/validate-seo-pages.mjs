@@ -2,6 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+const cleanRouteManifest = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'clean-route-generated-files.json');
+if (fs.existsSync(cleanRouteManifest)) {
+  await import('./validate-clean-routes.mjs');
+  process.exit(0);
+}
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const origin = 'https://veterinaryanatomy.com';
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'seo-generated-files.json'), 'utf8'));

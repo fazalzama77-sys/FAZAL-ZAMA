@@ -3,6 +3,12 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
+// The public search architecture now uses the original interactive app at
+// clean /atlas/... and /why/... routes. Keep this familiar command as the
+// entry point, but delegate generation to the unified clean-route builder.
+await import('./build-clean-routes.mjs');
+process.exit(0);
+
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const siteOrigin = 'https://veterinaryanatomy.com';
 const lastmod = new Date().toISOString().slice(0, 10);

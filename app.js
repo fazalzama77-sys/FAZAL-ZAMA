@@ -3,6 +3,29 @@
 // Phase 2: Elite Mode + Regional Anatomy Expansion
 // =========================================================
 
+const IVRI_REGION_SLUGS = {
+    Introduction: 'introduction',
+    Forelimb: 'forelimb',
+    'Head & Neck': 'head-neck',
+    Thorax: 'thorax',
+    Abdomen: 'abdomen',
+    'Hindlimb & Pelvis': 'hindlimb-pelvis',
+    Histology: 'histology',
+    Embryology: 'embryology'
+};
+
+function ivriSlugify(value) {
+    return String(value || '')
+        .replace(/&/g, ' and ')
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 90)
+        .replace(/-+$/g, '') || 'topic';
+}
+
 const app = {
     state: {
         view: 'landing',
@@ -34,7 +57,7 @@ const app = {
         // latest site bytes on their next natural page load.
         if ('serviceWorker' in navigator && location.protocol !== 'file:') {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js')
+                navigator.serviceWorker.register('/service-worker.js')
                     .then((registration) => {
                         registration.update().catch(() => { });
                         // Re-check for updates every 60 minutes while tab is open
@@ -46,11 +69,12 @@ const app = {
             });
         }
 
-        // ---- Hash routing ----
-        window.addEventListener('hashchange', () => app.routeFromHash());
+        // ---- Clean History API routing + backwards-compatible hash links ----
+        window.addEventListener('popstate', () => app.routeFromLocation());
+        window.addEventListener('hashchange', () => app.routeFromLocation());
         // Defer first route until DOM ready (data files loaded via script tags)
         setTimeout(() => {
-            app.routeFromHash();
+            app.routeFromLocation();
             app._initBottomNav();
             app._initEngagement();   // visit counter, install prompt, streak, onboarding
             app._initLandingCanvas();
@@ -443,6 +467,10 @@ const app = {
     ONBOARD_KEY: 'ivri-onboarded',
     _showOnboardingIfFirstTime: () => {
         if (localStorage.getItem(app.ONBOARD_KEY) === '1') return;
+        // A search visitor opening a specific clean anatomy route should see
+        // that requested lesson immediately. Keep first-run onboarding on the
+        // homepage, where it has context and cannot obstruct deep content.
+        if (location.pathname !== '/' || location.hash.startsWith('#/')) return;
         // Defer a moment so splash has cleared
         setTimeout(() => app.startOnboarding(), 800);
     },
@@ -683,7 +711,7 @@ const app = {
             const options = {
                 body: due > 0 ? `You have ${due} topic${due === 1 ? '' : 's'} due. Practice your Smart Review questions now.` : 'Time for your daily anatomy practice questions.',
                 icon: 'images/icon-192.png', badge: 'images/icon-192.png', tag: 'srs-daily',
-                renotify: true, data: { url: './index.html#/quiz' }
+                renotify: true, data: { url: '/quiz/' }
             };
             const registration = await navigator.serviceWorker?.ready;
             if (registration?.showNotification) await registration.showNotification('IVRI Anatomy', options);
@@ -1012,12 +1040,12 @@ const app = {
     _refreshBottomNavActive: () => {
         const nav = document.getElementById('bottom-nav');
         if (!nav) return;
-        const hash = (location.hash || '').replace(/^#\/?/, '').split('/')[0];
+        const route = location.pathname.split('/').filter(Boolean)[0] || '';
         let active = '';
-        if (hash === 'atlas' || hash === '' || app.state.view === 'atlas') active = 'atlas';
-        if (hash === 'why' || app.state.view === 'why') active = 'why';
-        if (hash === 'library' || hash === 'bookmarks' || hash === 'highlights' || hash === 'notes') active = 'library';
-        if (hash === 'me' || hash === 'dashboard') active = 'me';
+        if (route === 'atlas' || route === '' || app.state.view === 'atlas') active = 'atlas';
+        if (route === 'why' || app.state.view === 'why') active = 'why';
+        if (route === 'library') active = 'library';
+        if (route === 'me' || route === 'dashboard') active = 'me';
         nav.querySelectorAll('.bn-item').forEach(b => {
             b.classList.toggle('is-active', b.dataset.view === active);
         });
@@ -1202,7 +1230,7 @@ const app = {
     //   #/atlas/Forelimb/Osteology
     //   #/atlas/Forelimb/Osteology/2          (open detail at index 2)
     //   #/why  | #/dashboard | #/bookmarks
-    routeFromHash: () => {
+    _legacyRouteFromHash: () => {
         const raw = (location.hash || '').replace(/^#\/?/, '');
         if (!raw) return; // no hash → leave landing as-is
         const parts = raw.split('/').map(decodeURIComponent);
@@ -1269,7 +1297,7 @@ const app = {
         }
     },
 
-    setHash: (hash) => {
+    _legacySetHash: (hash) => {
         // Update without triggering hashchange loop
         if (location.hash !== hash) {
             history.pushState(null, '', hash);
@@ -1279,7 +1307,7 @@ const app = {
     },
 
     // Builds a descriptive <title> from current state — helps SEO + browser tabs
-    updatePageTitle: () => {
+    _legacyUpdatePageTitle: () => {
         const SITE = 'IVRI Anatomy';
         const parts = [];
         if (app.state.view === 'atlas') {
@@ -1296,6 +1324,243 @@ const app = {
             return;
         }
         document.title = (parts.length ? parts.join(' · ') + ' · ' : '') + SITE;
+    },
+
+    // ============== CLEAN URL ROUTING ==============
+    // Public routes use normal paths. Legacy #/... links are converted in-browser.
+    regionFromSlug: (slug) => Object.keys(atlasData || {}).find(region =>
+        IVRI_REGION_SLUGS[region] === String(slug || '').toLowerCase() || region === slug
+    ) || null,
+
+    systemFromSlug: (region, slug) => region && atlasData?.[region]
+        ? Object.keys(atlasData[region]).find(system => ivriSlugify(system) === String(slug || '').toLowerCase() || system === slug) || null
+        : null,
+
+    atlasPath: (region = null, system = null, topicOrIndex = null) => {
+        const parts = ['atlas'];
+        if (region) parts.push(IVRI_REGION_SLUGS[region] || ivriSlugify(region));
+        if (system) parts.push(ivriSlugify(system));
+        if (topicOrIndex !== null && topicOrIndex !== undefined && region && system) {
+            const topics = atlasData?.[region]?.[system] || [];
+            const topic = typeof topicOrIndex === 'number' ? topics[topicOrIndex] : topicOrIndex;
+            if (topic?.title) parts.push(ivriSlugify(topic.title));
+        }
+        return `/${parts.join('/')}/`;
+    },
+
+    whyPath: (itemOrCategory = null) => {
+        if (!itemOrCategory) return '/why/';
+        if (typeof itemOrCategory === 'string') return `/why/${ivriSlugify(itemOrCategory)}/`;
+        return `/why/${ivriSlugify(itemOrCategory.category || 'all')}/${ivriSlugify(itemOrCategory.title)}/`;
+    },
+
+    pathFromLegacyHash: (hash) => {
+        const raw = String(hash || '').replace(/^#\/?/, '');
+        const parts = raw.split('/').filter(Boolean).map(decodeURIComponent);
+        const view = parts[0] || 'landing';
+        if (view === 'landing') return '/';
+        if (view === 'atlas') {
+            const region = parts[1] && atlasData?.[parts[1]] ? parts[1] : null;
+            const system = region && parts[2] && atlasData[region]?.[parts[2]] ? parts[2] : null;
+            const index = system && parts[3] != null ? parseInt(parts[3], 10) : null;
+            return app.atlasPath(region, system, Number.isInteger(index) ? index : null);
+        }
+        if (view === 'bookmarks' || view === 'highlights' || view === 'notes') return `/library/${view}/`;
+        if (view === 'library') return `/library/${ivriSlugify(parts[1] || 'bookmarks')}/`;
+        if (view === 'why') return '/why/';
+        if (view === 'dashboard') return '/dashboard/';
+        if (view === 'me') return '/me/';
+        if (view === 'quiz') return '/quiz/';
+        return '/';
+    },
+
+    navigatePath: (path, { replace = false, route = false } = {}) => {
+        const normalized = path === '/' ? '/' : `/${String(path || '').replace(/^\/+|\/+$/g, '')}/`;
+        if (location.pathname !== normalized || location.hash) {
+            history[replace ? 'replaceState' : 'pushState'](null, '', normalized);
+        }
+        app.updatePageTitle();
+        if (route) app.routeFromLocation();
+    },
+
+    routeFromLocation: () => {
+        if ((location.hash || '').startsWith('#/')) {
+            app.navigatePath(app.pathFromLegacyHash(location.hash), { replace: true });
+        }
+
+        const parts = location.pathname.split('/').filter(Boolean).map(decodeURIComponent);
+        const view = parts[0] || 'landing';
+
+        if (view === 'landing') {
+            if (location.pathname !== '/') app.navigatePath('/', { replace: true });
+            if (app.state.view !== 'landing') app._loadViewInternal('landing');
+            app._hideLibraryTabs();
+            app._refreshBottomNavActive();
+            app.updatePageTitle();
+            return;
+        }
+
+        if (view === 'why') {
+            if (app.state.view !== 'why') app._loadViewInternal('why');
+            app._hideLibraryTabs();
+            const category = parts[1] || 'all';
+            const itemSlug = parts[2] || null;
+            currentFilter = category === 'all' ? 'all' : category;
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.classList.toggle('active', button.dataset.filter === currentFilter);
+            });
+            const filtered = currentFilter === 'all' ? anatomyData : anatomyData.filter(item => item.category === currentFilter);
+            renderCards(filtered);
+            const item = itemSlug ? filtered.find(entry => ivriSlugify(entry.title) === itemSlug) : null;
+            if (item) openModal(item, { updateRoute: false });
+            else closeModal({ updateRoute: false });
+            app._refreshBottomNavActive();
+            app.updatePageTitle(item || null);
+            return;
+        }
+
+        if (view === 'dashboard') {
+            if (app.state.view !== 'dashboard') app._loadViewInternal('dashboard');
+            app._hideLibraryTabs();
+            app._refreshBottomNavActive();
+            app.updatePageTitle();
+            return;
+        }
+        if (view === 'me') {
+            app._loadViewInternal('me');
+            app._hideLibraryTabs();
+            app._renderMeStats();
+            app._refreshBottomNavActive();
+            app.updatePageTitle();
+            return;
+        }
+        if (view === 'library') {
+            const sub = parts[1] || app._activeLibraryTab || 'bookmarks';
+            app.openLibrary(sub);
+            app.updatePageTitle();
+            return;
+        }
+        if (view === 'quiz') {
+            app._loadViewInternal('atlas');
+            app._hideLibraryTabs();
+            app.state.region = null;
+            app.state.system = null;
+            app.renderAtlasSelector();
+            if (typeof quizApp !== 'undefined' && quizApp.openMenu) quizApp.openMenu();
+            app._refreshBottomNavActive();
+            app.updatePageTitle();
+            return;
+        }
+        if (view === 'atlas') {
+            app._loadViewInternal('atlas');
+            app._hideLibraryTabs();
+            app._refreshBottomNavActive();
+            const region = app.regionFromSlug(parts[1]);
+            const system = app.systemFromSlug(region, parts[2]);
+            const topicSlug = parts[3] || null;
+            const topics = region && system ? atlasData[region][system] : [];
+            const index = topicSlug ? topics.findIndex(topic => ivriSlugify(topic.title) === topicSlug) : -1;
+            app.state.region = region;
+            app.state.system = system;
+
+            if (region && system) {
+                document.getElementById('atlas-selector').style.display = 'none';
+                document.getElementById('atlas-content').style.display = 'grid';
+                document.getElementById('atlas-crumb').innerHTML = `ATLAS > ${region.toUpperCase()} > ${system.toUpperCase()}`;
+                app.renderTopicList();
+                const eliteBtn = document.getElementById('elite-toggle');
+                if (eliteBtn) eliteBtn.style.display = 'flex';
+                if (index >= 0) {
+                    setTimeout(() => {
+                        const topicLink = document.querySelector(`.topic-btn[data-index="${index}"]`);
+                        if (topicLink) app.renderDetail(index, topicLink);
+                    }, 30);
+                } else {
+                    app._resetDetailPanel();
+                    app.updatePageTitle();
+                }
+            } else {
+                app.renderAtlasSelector();
+                app.updatePageTitle();
+            }
+            return;
+        }
+
+        app.navigatePath('/', { replace: true, route: true });
+    },
+
+    // Compatibility names retained for old links and internal callers.
+    routeFromHash: () => app.routeFromLocation(),
+
+    setHash: (hash) => {
+        const target = String(hash || '').startsWith('#/') ? app.pathFromLegacyHash(hash) : hash;
+        app.navigatePath(target);
+    },
+
+    updateSeoMetadata: (title, description, path = location.pathname) => {
+        document.title = title;
+        const normalizedPath = path === '/' ? '/' : `/${String(path).replace(/^\/+|\/+$/g, '')}/`;
+        const absolute = `${location.origin}${normalizedPath}`;
+        const setContent = (selector, value) => {
+            const element = document.querySelector(selector);
+            if (element) element.setAttribute('content', value);
+        };
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute('href', absolute);
+        setContent('meta[name="description"]', description);
+        setContent('meta[property="og:title"]', title);
+        setContent('meta[property="og:description"]', description);
+        setContent('meta[property="og:url"]', absolute);
+        setContent('meta[name="twitter:title"]', title);
+        setContent('meta[name="twitter:description"]', description);
+    },
+
+    updatePageTitle: (whyItem = null) => {
+        const SITE = 'IVRI Anatomy';
+        const routeRoot = location.pathname.split('/').filter(Boolean)[0] || '';
+        let title = 'Veterinary Anatomy Atlas for B.V.Sc. Students | IVRI';
+        let description = 'Free interactive veterinary anatomy atlas with regional anatomy, histology, embryology, comparative notes, quizzes and revision tools.';
+        if (routeRoot === 'library') {
+            title = `Saved Study Library | ${SITE}`;
+            description = 'Review saved veterinary anatomy bookmarks, highlights and personal notes.';
+        } else if (routeRoot === 'quiz') {
+            title = `Veterinary Anatomy Quiz | ${SITE}`;
+            description = 'Practice veterinary anatomy with interactive questions and revision tools.';
+        } else if (app.state.view === 'atlas') {
+            const subject = [app.state.system, app.state.region].filter(Boolean).join(' in ');
+            if (app.state.region) {
+                const parts = [app.state.system, app.state.region, 'Veterinary Anatomy'].filter(Boolean);
+                title = `${parts.join(' · ')} | IVRI`;
+                description = `Study ${subject} through the interactive IVRI veterinary anatomy atlas.`;
+            } else {
+                title = 'Veterinary Anatomy Atlas for B.V.Sc. Students | IVRI';
+            }
+        } else if (app.state.view === 'why') {
+            const categoryLabels = {
+                forelimb: 'Forelimb Biomechanics',
+                hindlimb: 'Hindlimb Biomechanics',
+                axial: 'Axial and Trunk Biomechanics',
+                wildlife: 'Wildlife and Comparative Anatomy'
+            };
+            const categoryLabel = categoryLabels[currentFilter];
+            title = whyItem
+                ? `${whyItem.title}: Veterinary Anatomy Explained | IVRI`
+                : categoryLabel
+                    ? `${categoryLabel} | IVRI Veterinary Anatomy`
+                    : `Veterinary Anatomy Biomechanics | ${SITE}`;
+            description = whyItem
+                ? String(whyItem.why || whyItem.clinical || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 158)
+                : categoryLabel
+                    ? `Interactive ${categoryLabel.toLowerCase()} explanations with species comparisons and clinical relevance.`
+                    : 'Functional, biomechanical and comparative veterinary anatomy explanations for B.V.Sc. students.';
+        } else if (app.state.view === 'dashboard') {
+            title = `Study Dashboard | ${SITE}`;
+            description = 'Review veterinary anatomy learning progress, quiz accuracy and spaced-repetition topics.';
+        } else if (app.state.view === 'me') {
+            title = `Profile and Settings | ${SITE}`;
+            description = 'Manage IVRI Anatomy preferences, study backups and learning settings.';
+        }
+        app.updateSeoMetadata(title, description);
     },
 
     toggleTheme: () => {
@@ -1429,7 +1694,7 @@ const app = {
             titleText = `Resume studying: ${lastStudiedTitle}`;
             subtitleText = `Pick up right where you left off.`;
             buttonText = 'Resume';
-            buttonAction = `location.hash = '${lastStudiedHash}'`;
+            buttonAction = `app.navigatePath('${lastStudiedHash}'.startsWith('#/') ? app.pathFromLegacyHash('${lastStudiedHash}') : '${lastStudiedHash}', { route: true })`;
         } else if (hasStreak) {
             cardIcon = 'fa-fire';
             titleText = `${streakObj.current}-Day Study Streak!`;
@@ -1503,12 +1768,12 @@ const app = {
                     </div>
                 ` : '';
                 return `
-                <div class="portal-card card-atlas" style="width: 280px; height: 300px;" onclick="app.selectRegion('${region}')">
+                <a class="portal-card card-atlas" href="${app.atlasPath(region)}" style="width: 280px; height: 300px;" onclick="event.preventDefault(); app.selectRegion('${region}')">
                     <i class="fas ${icon} orb-icon" style="color: var(--atlas-gold); font-size: 3rem; margin-bottom: 15px; z-index: 2;"></i>
                     <div class="card-label" style="font-size: 1.4rem; font-weight: 800; text-align: center; z-index: 2;">${region}</div>
                     <div class="card-sub" style="margin-bottom: 15px; z-index: 2;">REGIONAL ANATOMY MODULE</div>
                     ${progressHtml}
-                </div>
+                </a>
             `}).join('');
         }
         // LEVEL 2: System Selection (Osteology, Myology, etc.)
@@ -1531,12 +1796,12 @@ const app = {
                     </div>
                 ` : '';
                 return `
-                <div class="portal-card card-why" style="width: 280px; height: 300px;" onclick="app.selectSystem('${sys}')">
+                <a class="portal-card card-why" href="${app.atlasPath(app.state.region, sys)}" style="width: 280px; height: 300px;" onclick="event.preventDefault(); app.selectSystem('${sys}')">
                     <i class="fas ${sysIcon} orb-icon" style="color: var(--why-cyan); font-size: 3rem; margin-bottom: 15px; z-index: 2;"></i>
                     <div class="card-label" style="font-size: 1.4rem; font-weight: 800; text-align: center; z-index: 2;">${sys}</div>
                     <div class="card-sub" style="margin-bottom: 15px; z-index: 2;">${count} STRUCTURES</div>
                     ${progressHtml}
-                </div>
+                </a>
             `}).join('');
         }
         // A long region list can leave the page scrolled near its end. When the
@@ -1669,7 +1934,7 @@ const app = {
             const readTick = app.isRead(id) ? '<i class="fas fa-check-circle read-tick" title="Read"></i> ' : '';
             const readClass = app.isRead(id) ? ' is-read' : '';
             return `
-                <button class="topic-btn${readClass}" data-index="${index}" onclick="app.renderDetail(${index}, this)">${readTick}${star}${item.title.toUpperCase()}</button>
+                <a class="topic-btn${readClass}" href="${app.atlasPath(app.state.region, app.state.system, index)}" data-index="${index}" onclick="event.preventDefault(); app.renderDetail(${index}, this)">${readTick}${star}${item.title.toUpperCase()}</a>
             `;
         }).join('');
         // Refresh the progress badge whenever the list re-renders
@@ -1696,15 +1961,19 @@ const app = {
         const panel = document.getElementById('detail-panel');
 
         // Update URL so refresh / Back works on this exact topic
-        const lastStudiedPath = `#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(app.state.system)}/${index}`;
-        app.setHash(lastStudiedPath);
+        const cleanTopicPath = app.atlasPath(app.state.region, app.state.system, index);
+        app.navigatePath(cleanTopicPath);
         
         // Save to localStorage for the landing page "Resume Study" panel
-        localStorage.setItem('ivri-last-studied-hash', lastStudiedPath);
+        localStorage.setItem('ivri-last-studied-hash', cleanTopicPath);
         localStorage.setItem('ivri-last-studied-title', item.title);
 
         // Override page title to include the structure name for sharper bookmarks/sharing
-        document.title = `${item.title} · ${app.state.system} · ${app.state.region} · IVRI Anatomy`;
+        app.updateSeoMetadata(
+            `${item.title} · ${app.state.system} · ${app.state.region} · IVRI Anatomy`,
+            String(item.desc || item.eliteDesc || `${item.title} veterinary anatomy`).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 158),
+            cleanTopicPath
+        );
 
         // ELITE MODE LOGIC: Use eliteDesc if available and eliteMode is ON
         const useElite = app.state.eliteMode && item.eliteDesc;
@@ -1853,8 +2122,7 @@ const app = {
         const data = atlasData[app.state.region][app.state.system];
         const item = data && data[index];
         if (!item) return;
-        const baseUrl = location.origin + location.pathname;
-        const url = `${baseUrl}#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(app.state.system)}/${index}`;
+        const url = `${location.origin}${app.atlasPath(app.state.region, app.state.system, index)}`;
         const title = `${item.title} — IVRI Anatomy`;
         const text = `${item.title} (${app.state.system}, ${app.state.region}) — study with me on IVRI Anatomy 📖`;
         try {
@@ -3086,10 +3354,14 @@ function renderCards(data) {
     }
 
     data.forEach((item, index) => {
-        const card = document.createElement('div');
+        const card = document.createElement('a');
         card.className = `card ${item.category || ''}`;
+        card.href = app.whyPath(item);
         card.style.animationDelay = `${index * 0.05}s`;
-        card.onclick = () => openModal(item);
+        card.onclick = (event) => {
+            event.preventDefault();
+            openModal(item);
+        };
 
         card.innerHTML = `
             <div>
@@ -3133,7 +3405,9 @@ if (filterBtns.length > 0) {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentFilter = btn.dataset.filter;
+            app.navigatePath(currentFilter === 'all' ? '/why/' : app.whyPath(currentFilter));
             filterData();
+            app.updatePageTitle();
         });
     });
 }
@@ -3150,8 +3424,10 @@ const body = document.body;
 const aiResponseBox = document.getElementById('aiResponseBox');
 const aiResponseText = document.getElementById('aiResponseText');
 
-function openModal(item) {
+function openModal(item, { updateRoute = true } = {}) {
     currentActiveItem = item;
+    if (updateRoute) app.navigatePath(app.whyPath(item));
+    app.updatePageTitle(item);
 
     // ===== Smart image loading: skeleton until image is ready =====
     const imgEl = document.getElementById('modalImg');
@@ -3194,9 +3470,14 @@ function openModal(item) {
     body.style.overflow = 'hidden';
 }
 
-function closeModal() {
+function closeModal({ updateRoute = true } = {}) {
     modal.classList.remove('open');
     body.style.overflow = 'auto';
+    currentActiveItem = null;
+    if (updateRoute && location.pathname.startsWith('/why/')) {
+        app.navigatePath(currentFilter === 'all' ? '/why/' : app.whyPath(currentFilter));
+        app.updatePageTitle();
+    }
 }
 
 if (modal) {

@@ -14,7 +14,7 @@
 //   4. SW calls skipWaiting() → activates → page's controllerchange listener reloads.
 // =========================================================
 
-const CACHE_VERSION = 'ivri-anatomy-v24';
+const CACHE_VERSION = 'ivri-anatomy-v26';
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [
@@ -33,12 +33,15 @@ const APP_SHELL = [
     './srs.js',
     './glossary.js',
     './data-image-annotations.JS',
+    './data-introduction.JS',
     './data-forelimb.JS',
     './data-hindlimb.JS',
     './data-thorax.JS',
     './data-abdomen.JS',
     './data-head-neck.JS',
     './data-splanchnology.JS',
+    './data-histology.JS',
+    './data-embryology.JS',
     './data-quiz.JS',
     './data-why.JS',
     './images/scapula-ox-horse-dog-annotated.png',
@@ -84,7 +87,7 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
     event.notification.close();
-    const target = event.notification.data?.url || './index.html#/quiz';
+    const target = event.notification.data?.url || '/quiz/';
     event.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windows) => {
         const existing = windows[0];
         if (existing) {
