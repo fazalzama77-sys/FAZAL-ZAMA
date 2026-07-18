@@ -103,6 +103,21 @@ for (const mapping of manifest.redirects) {
 
 const rootHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (rootHtml.includes('Searchable Study Library')) error('Technical Study Library link returned to the original interface');
+if (/<base\s+href="\/">/i.test(rootHtml)) error('Root index uses a web-only base URL and will fail when opened through file://');
+for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"]+)"/gi)) {
+  const reference = match[1];
+  if (/^(?:https?:|data:|#)/i.test(reference) || reference === '/') continue;
+  if (reference.startsWith('/')) {
+    error(`Root index has a file-incompatible absolute dependency: ${reference}`);
+    continue;
+  }
+  const dependency = path.resolve(root, reference.split(/[?#]/)[0]);
+  if (!fs.existsSync(dependency)) error(`Root index dependency is missing: ${reference}`);
+}
+const appSource = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes('app._legacyRouteFromHash()')) {
+  error('Local file routing compatibility is missing from app.js');
+}
 
 if (errors.length) {
   console.error(`Clean-route validation failed with ${errors.length} error(s):`);

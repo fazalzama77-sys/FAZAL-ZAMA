@@ -1374,8 +1374,40 @@ const app = {
         return '/';
     },
 
+    // Directly opening index.html from Windows Explorer uses file:// and has
+    // no web server to resolve /atlas/... paths. Keep that local preview on
+    // the original hash router while the deployed website uses clean paths.
+    legacyHashFromPath: (pathname) => {
+        const parts = String(pathname || '/').split('/').filter(Boolean).map(decodeURIComponent);
+        const view = parts[0] || 'landing';
+        if (view === 'atlas') {
+            const region = app.regionFromSlug(parts[1]);
+            const system = app.systemFromSlug(region, parts[2]);
+            if (!region) return '#/atlas';
+            if (!system) return `#/atlas/${encodeURIComponent(region)}`;
+            const topics = atlasData?.[region]?.[system] || [];
+            const index = parts[3] ? topics.findIndex(topic => ivriSlugify(topic.title) === parts[3]) : -1;
+            return `#/atlas/${encodeURIComponent(region)}/${encodeURIComponent(system)}${index >= 0 ? `/${index}` : ''}`;
+        }
+        if (view === 'why') return '#/why';
+        if (view === 'dashboard') return '#/dashboard';
+        if (view === 'me') return '#/me';
+        if (view === 'quiz') return '#/quiz';
+        if (view === 'library') return `#/library/${encodeURIComponent(parts[1] || 'bookmarks')}`;
+        return '#/landing';
+    },
+
     navigatePath: (path, { replace = false, route = false } = {}) => {
         const normalized = path === '/' ? '/' : `/${String(path || '').replace(/^\/+|\/+$/g, '')}/`;
+        if (location.protocol === 'file:') {
+            const legacyHash = app.legacyHashFromPath(normalized);
+            if (location.hash !== legacyHash) {
+                history[replace ? 'replaceState' : 'pushState'](null, '', legacyHash);
+            }
+            app.updatePageTitle();
+            if (route) app._legacyRouteFromHash();
+            return;
+        }
         if (location.pathname !== normalized || location.hash) {
             history[replace ? 'replaceState' : 'pushState'](null, '', normalized);
         }
@@ -1384,6 +1416,10 @@ const app = {
     },
 
     routeFromLocation: () => {
+        if (location.protocol === 'file:') {
+            app._legacyRouteFromHash();
+            return;
+        }
         if ((location.hash || '').startsWith('#/')) {
             app.navigatePath(app.pathFromLegacyHash(location.hash), { replace: true });
         }

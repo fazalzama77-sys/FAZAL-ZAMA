@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <base href="/">
   <script>
     // Remove the legacy landing hash before the interface paints. Deeper old
     // Atlas hashes are upgraded by app.js after the anatomy data has loaded.
     (() => {
+      if (location.protocol === 'file:') return;
       const simpleLegacyRoutes = {
         landing: '/',
         atlas: '/atlas/',

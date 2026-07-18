@@ -184,6 +184,11 @@ function replaceMeta(html, { title, description, url, graph }) {
     .replace('</head>', `  <meta name="ivri-clean-route" content="${escapeHtml(new URL(url).pathname)}">\n</head>`);
 }
 
+function ensureRootBase(html) {
+  if (/<base\s+href="\/">/i.test(html)) return html;
+  return html.replace(/(<meta\s+charset="UTF-8">)/i, '$1\n  <base href="/">');
+}
+
 function activateView(html, view) {
   return html
     .replace('<section id="landing-view" class="view-section active">', '<section id="landing-view" class="view-section">')
@@ -312,7 +317,7 @@ function writePage({ parts, oldParts, title, description, crumbs, view, collecti
   if (!allowed.some(prefix => destination.startsWith(prefix))) throw new Error(`Unsafe generated path: ${destination}`);
   const url = absolute(parts);
   const graph = schemaGraph({ url, title, description: truncate(description), crumbs, collection });
-  let html = replaceMeta(template, { title, description, url, graph });
+  let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
   html = activateView(html, view);
   html = transform(html);
   fs.mkdirSync(path.dirname(destination), { recursive: true });
@@ -336,7 +341,7 @@ function writeAppEntry({ parts, title, description }) {
     crumbs: [homeCrumb, { name: title, path: route(parts) }],
     collection: false
   });
-  let html = replaceMeta(template, { title, description, url, graph });
+  let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
   html = html.replace(
     '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
     '<meta name="robots" content="noindex, follow">'
