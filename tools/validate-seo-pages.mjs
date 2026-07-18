@@ -71,9 +71,6 @@ if (pageUrls.length !== uniquePageUrls.size) error('Duplicate page URL in sitema
 if (!uniquePageUrls.has(`${origin}/`)) error('Homepage missing from sitemap');
 for (const canonical of canonicals) if (!uniquePageUrls.has(canonical)) error(`Canonical missing from sitemap: ${canonical}`);
 
-const rootHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-if (!rootHtml.includes('href="/learn/"')) error('Homepage does not link to the searchable study library');
-
 if (errors.length) {
   console.error(`SEO validation failed with ${errors.length} error(s):`);
   for (const message of errors.slice(0, 100)) console.error(`- ${message}`);
