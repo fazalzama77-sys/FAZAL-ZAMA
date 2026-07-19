@@ -3389,11 +3389,10 @@ function renderCards(data) {
         return;
     }
 
-    data.forEach((item, index) => {
+    data.forEach((item) => {
         const card = document.createElement('a');
         card.className = `card ${item.category || ''}`;
         card.href = app.whyPath(item);
-        card.style.animationDelay = `${index * 0.05}s`;
         card.onclick = (event) => {
             event.preventDefault();
             openModal(item);
@@ -3468,6 +3467,8 @@ function openModal(item, { updateRoute = true } = {}) {
     // ===== Smart image loading: skeleton until image is ready =====
     const imgEl = document.getElementById('modalImg');
     const imgCol = imgEl.parentElement; // .modal-image-col
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.classList.toggle('no-image', !item.img);
     if (item.img) {
         imgEl.classList.remove('img-loaded');
         imgCol.classList.add('img-loading');

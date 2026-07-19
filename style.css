@@ -2736,72 +2736,6 @@ body.professional-mode #why-view .badge::before {
     z-index: 1;
 }
 
-/* Visor Scanner dynamic laser overlay removed for professional theme */
-
-/* Technical visor HUD overlay styled at the bottom of the image column */
-#why-view .visor-hud-overlay {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(2, 12, 27, 0.75) !important;
-    border: 1px solid rgba(0, 242, 255, 0.2) !important;
-    padding: 6px 14px !important;
-    border-radius: 8px !important;
-    font-family: var(--font-code);
-    font-size: 0.7rem !important;
-    z-index: 4;
-    pointer-events: none;
-    backdrop-filter: blur(8px) translateZ(0);
-    -webkit-backdrop-filter: blur(8px) translateZ(0);
-    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.04) !important;
-}
-
-#why-view .visor-hud-status {
-    color: var(--why-cyan);
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-#why-view .visor-hud-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--why-cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--why-cyan);
-    display: inline-block;
-    animation: livePulse 1.5s infinite !important;
-}
-
-#why-view .visor-hud-coords {
-    color: var(--atlas-gold);
-    opacity: 0.8;
-}
-
-body.professional-mode #why-view .visor-hud-overlay {
-    background: rgba(255, 255, 255, 0.85) !important;
-    border: 1px solid rgba(126, 87, 194, 0.15) !important;
-    box-shadow: 0 4px 12px rgba(126, 87, 194, 0.04) !important;
-}
-
-body.professional-mode #why-view .visor-hud-status {
-    color: var(--medical-purple) !important;
-}
-
-body.professional-mode #why-view .visor-hud-dot {
-    background: var(--medical-purple) !important;
-    box-shadow: 0 0 6px var(--medical-purple) !important;
-}
-
-body.professional-mode #why-view .visor-hud-coords {
-    color: var(--medical-coral) !important;
-}
-
 #why-view .modal-image-col.img-loading::before {
     content: "";
     position: absolute;
@@ -7373,8 +7307,10 @@ body.professional-mode .about-card { background: #ffffff; border-color: #d0d7de;
 .about-list { list-style: none; padding: 0; margin: 0; }
 .about-list li { padding: 4px 0; color: var(--text-main); line-height: 1.5; }
 .about-list li b { color: var(--why-cyan); }
+.about-contributor-name { color: var(--why-cyan); }
 body.professional-mode .about-section-head { color: #1976d2; }
 body.professional-mode .about-list li b { color: #00897b; }
+body.professional-mode .about-contributor-name { color: #00897b; }
 
 /* ================================================================
    ENGAGEMENT LAYER (v3) — onboarding, install banner, streak block,
@@ -8081,6 +8017,191 @@ body.professional-mode .speak-btn:hover { background: rgba(25,118,210,0.15); box
     .speak-btn { width: 32px; height: 32px; margin-left: 6px; }
     .speak-btn i { font-size: .78rem; }
 }
+
+/* WHY motion cleanup: calm, fast interactions without scanner/game effects. */
+#why-view h1,
+#why-view .subtitle::before,
+#why-view .subtitle::after,
+#why-view .badge::before,
+#why-view .ai-btn,
+#why-view .sm-btn,
+#why-view .ai-response-box::after,
+#why-view .quiz-progress-fill,
+#why-view .modal-image-col.img-loading::before {
+    animation: none !important;
+}
+
+#why-view h1 {
+    filter: none !important;
+    text-shadow: 0 0 24px rgba(0, 242, 255, 0.14) !important;
+    will-change: auto !important;
+}
+
+#why-view .subtitle::before,
+#why-view .subtitle::after {
+    content: none !important;
+}
+
+#why-view .badge::before,
+#why-view .ai-response-box::after {
+    box-shadow: none !important;
+    opacity: 0.8 !important;
+}
+
+#why-view .controls,
+#why-view .controls:hover {
+    border-color: rgba(0, 242, 255, 0.14) !important;
+    box-shadow: 0 14px 34px rgba(2, 12, 27, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    will-change: transform !important;
+}
+
+#why-view .filter-btn,
+#why-view .ai-btn,
+#why-view .sm-btn,
+#why-view .modal-close {
+    transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease !important;
+    will-change: auto !important;
+}
+
+#why-view .filter-btn:hover,
+#why-view .ai-btn:hover,
+#why-view .sm-btn:hover,
+#why-view .modal-close:hover {
+    transform: none !important;
+}
+
+#why-view .ai-btn,
+#why-view .ai-btn:hover {
+    box-shadow: none !important;
+}
+
+#why-view .card,
+body.professional-mode #why-view .card {
+    animation: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transform: translate3d(0, 0, 0) !important;
+    transform-style: flat !important;
+    perspective: none !important;
+    will-change: auto !important;
+    transition: transform 0.2s ease, border-color 0.2s ease, border-left-color 0.2s ease, background-color 0.2s ease !important;
+}
+
+#why-view .card::before,
+body.professional-mode #why-view .card::before {
+    background: radial-gradient(circle at top right, rgba(0, 242, 255, 0.055), transparent 58%) !important;
+    opacity: 0.55 !important;
+    transition: opacity 0.2s ease !important;
+    will-change: auto !important;
+}
+
+#why-view .card::after,
+body.professional-mode #why-view .card::after {
+    content: none !important;
+    display: none !important;
+}
+
+#why-view .card:hover,
+body.professional-mode #why-view .card:hover,
+body.professional-mode #why-view .card.forelimb:hover,
+body.professional-mode #why-view .card.hindlimb:hover,
+body.professional-mode #why-view .card.axial:hover,
+body.professional-mode #why-view .card.wildlife:hover {
+    transform: translate3d(0, -3px, 0) !important;
+    background-color: rgba(14, 33, 61, 0.62) !important;
+    box-shadow: 0 14px 28px rgba(2, 12, 27, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+body.professional-mode #why-view .card:hover,
+body.professional-mode #why-view .card.forelimb:hover,
+body.professional-mode #why-view .card.hindlimb:hover,
+body.professional-mode #why-view .card.axial:hover,
+body.professional-mode #why-view .card.wildlife:hover {
+    background-color: #ffffff !important;
+    box-shadow: 0 12px 24px rgba(30, 41, 59, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+#why-view .card:hover::before,
+body.professional-mode #why-view .card:hover::before {
+    opacity: 0.72 !important;
+}
+
+#why-view .card:hover .read-more i,
+body.professional-mode #why-view .card:hover .read-more i {
+    transform: translate3d(3px, 0, 0) !important;
+}
+
+body.professional-mode #why-view .card:hover .read-more {
+    color: var(--medical-purple) !important;
+    background: rgba(126, 87, 194, 0.08) !important;
+    box-shadow: none !important;
+}
+
+#why-view .modal-image-progress {
+    display: none;
+    width: min(100%, 320px);
+    min-height: 210px;
+    padding: 28px;
+    border: 1px dashed rgba(0, 242, 255, 0.28);
+    border-radius: 14px;
+    background: rgba(0, 242, 255, 0.025);
+    color: var(--text-mute);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#why-view .modal-image-progress i {
+    font-size: 2rem;
+    color: var(--why-cyan);
+    opacity: 0.7;
+}
+
+#why-view .modal-image-progress strong {
+    font-family: var(--font-code);
+    color: var(--why-cyan);
+    font-size: 0.86rem;
+    letter-spacing: 1.5px;
+}
+
+#why-view .modal-image-progress span {
+    max-width: 240px;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+#why-view .modal-content.no-image .modal-image-progress {
+    display: flex;
+}
+
+#why-view .modal-content.no-image .modal-img {
+    display: none !important;
+}
+
+body.professional-mode #why-view .modal-image-progress {
+    border-color: rgba(126, 87, 194, 0.28);
+    background: rgba(126, 87, 194, 0.035);
+    color: #64748b;
+}
+
+body.professional-mode #why-view .modal-image-progress i,
+body.professional-mode #why-view .modal-image-progress strong {
+    color: var(--medical-purple);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #why-view .card,
+    #why-view .card:hover,
+    #why-view .modal-content,
+    #why-view .modal-overlay.open .modal-content {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+}
+
 .portal-card,
 .topic-btn,
 #why-view .card {
