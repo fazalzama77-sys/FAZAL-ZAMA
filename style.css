@@ -1781,6 +1781,24 @@ body.professional-mode .footer-logo-img {
     text-transform: uppercase;
 }
 
+.credit-contact {
+    align-self: flex-start;
+    margin-top: 5px;
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    color: var(--why-cyan);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+.credit-contact:hover,
+.credit-contact:focus-visible {
+    text-decoration: underline;
+}
+.credit-contact i {
+    margin-right: 5px;
+    opacity: 0.8;
+}
+
 .credit-foot {
     font-family: var(--font-code);
     font-size: 0.72rem;
@@ -1961,6 +1979,7 @@ body.professional-mode .credit-list li {
 }
 body.professional-mode .credit-list li b { color: #102a43; }
 body.professional-mode .credit-role { color: #607d8b; }
+body.professional-mode .credit-contact { color: #1565c0; }
 body.professional-mode .credit-foot { color: #607d8b; }
 
 /* ================= WHY SECTION STYLES ================= */
