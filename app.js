@@ -2098,30 +2098,28 @@ const app = {
             `;
         }
 
-        // Visual reference (real image if present, placeholder fallback if only imgCode exists)
-        if (item.img || item.imgCode) {
-            contentHtml += `
-                <div style="margin-top:30px; animation: detailFade 0.9s ease;">
-                    <strong style="color:var(--text-mute); font-family:var(--font-code); display:block; margin-bottom:10px;">
-                        <i class="fas fa-image"></i> VISUAL REFERENCE
-                    </strong>
-                    ${item.img ? `
-                        <figure class="img-container atlas-image-frame">
-                            <img class="atlas-reference-image" src="${item.img}" alt="${item.imgAlt || item.title + ' visual reference'}" loading="lazy">
-                            ${item.imgCaption ? `<figcaption class="atlas-image-caption">${item.imgCaption}</figcaption>` : ''}
-                        </figure>
-                    ` : `
-                        <div class="img-container">
-                            <div class="img-placeholder-text">
-                                <i class="fas fa-image" style="font-size:2rem; margin-bottom:10px;"></i>
-                                <div>Image: ${item.imgCode}</div>
-                                <div style="font-size:0.8rem; margin-top:5px;">(Integration ready)</div>
-                            </div>
+        // Visual reference: preserve real images and clearly label every missing image area.
+        contentHtml += `
+            <div style="margin-top:30px; animation: detailFade 0.9s ease;">
+                <strong style="color:var(--text-mute); font-family:var(--font-code); display:block; margin-bottom:10px;">
+                    <i class="fas fa-image"></i> VISUAL REFERENCE
+                </strong>
+                ${item.img ? `
+                    <figure class="img-container atlas-image-frame">
+                        <img class="atlas-reference-image" src="${item.img}" alt="${item.imgAlt || item.title + ' visual reference'}" loading="lazy">
+                        ${item.imgCaption ? `<figcaption class="atlas-image-caption">${item.imgCaption}</figcaption>` : ''}
+                    </figure>
+                ` : `
+                    <div class="img-container atlas-image-placeholder" role="status">
+                        <div class="img-placeholder-text">
+                            <i class="fas fa-image" aria-hidden="true"></i>
+                            <strong>HIGH-QUALITY VETERINARY IMAGES IN DEVELOPMENT</strong>
+                            <span>Carefully curated visuals to support anatomical learning will be available by September 2026.</span>
                         </div>
-                    `}
-                </div>
-            `;
-        }
+                    </div>
+                `}
+            </div>
+        `;
 
         // If Elite mode is on but no elite content exists
         if (app.state.eliteMode && !item.eliteDesc) {

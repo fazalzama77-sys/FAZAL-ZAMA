@@ -1334,6 +1334,41 @@ body.professional-mode .topic-btn.is-read {
     text-align: center;
 }
 
+.atlas-image-placeholder {
+    min-height: 300px;
+    padding: 32px;
+    background: rgba(0, 242, 255, 0.025);
+    border-color: rgba(0, 242, 255, 0.28);
+}
+
+.atlas-image-placeholder .img-placeholder-text {
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.atlas-image-placeholder .img-placeholder-text i {
+    color: var(--why-cyan);
+    font-size: 2rem;
+    opacity: 0.72;
+}
+
+.atlas-image-placeholder .img-placeholder-text strong {
+    color: var(--why-cyan);
+    font-size: 0.9rem;
+    letter-spacing: 1.2px;
+    line-height: 1.5;
+}
+
+.atlas-image-placeholder .img-placeholder-text span {
+    max-width: 460px;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
 .atlas-image-frame {
     padding: 12px;
     border-style: solid;
@@ -5354,6 +5389,17 @@ body.professional-mode .img-container {
 body.professional-mode .img-placeholder-text {
     color: var(--text-mute);
     font-weight: 500;
+}
+
+body.professional-mode .atlas-image-placeholder {
+    background: rgba(21, 101, 192, 0.035);
+    border: 1px dashed rgba(21, 101, 192, 0.28);
+    box-shadow: none;
+}
+
+body.professional-mode .atlas-image-placeholder .img-placeholder-text i,
+body.professional-mode .atlas-image-placeholder .img-placeholder-text strong {
+    color: var(--medical-purple) !important;
 }
 
 body.professional-mode .atlas-image-frame {
