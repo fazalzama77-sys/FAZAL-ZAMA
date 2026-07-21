@@ -1,5 +1,5 @@
 // =========================================================
-// IVRI ANATOMY — SERVICE WORKER (v2 — auto-update friendly)
+// IVRI ANATOMY — SERVICE WORKER (v3 — deployed-version aware)
 // Strategy:
 //   • Same-origin (our HTML/JS/CSS/data files) → NETWORK-FIRST with cache fallback.
 //     This means online users ALWAYS get the latest GitHub-deployed version.
@@ -7,14 +7,13 @@
 //   • Cross-origin (CDN fonts, icons) → STALE-WHILE-REVALIDATE.
 //     Cached copy returns instantly; fresh copy quietly updates the cache.
 //
-// Auto-update flow:
-//   1. New SW installs in the background → enters 'waiting' state.
-//   2. Page detects the waiting SW and shows an "Update available" banner.
-//   3. User clicks "Refresh now" → page posts {type:'SKIP_WAITING'} to the SW.
-//   4. SW calls skipWaiting() → activates → page's controllerchange listener reloads.
+// Update flow:
+//   1. The page checks GitHub and verifies the same bytes are live on Cloudflare.
+//   2. It shows a small refresh notice only after deployment is complete.
+//   3. Refresh loads same-origin files from the network, with offline fallback.
 // =========================================================
 
-const CACHE_VERSION = 'ivri-anatomy-v34';
+const CACHE_VERSION = 'ivri-anatomy-v35';
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [
@@ -54,9 +53,8 @@ const APP_SHELL = [
 ];
 
 // ---- INSTALL: pre-cache the app shell and activate immediately ----
-// We auto-skip waiting so a new SW activates as soon as it finishes installing.
-// No "update available" banner needed — readers transparently get the latest
-// version on their next page reload.
+// We auto-skip waiting so the fresh network-first worker is ready immediately.
+// The page itself decides when to show the deployed-version refresh notice.
 self.addEventListener('install', (event) => {
     self.skipWaiting();
     event.waitUntil(
@@ -122,9 +120,14 @@ self.addEventListener('fetch', (event) => {
 
 // Network-first: try fetch, fall back to cache, finally fall back to index.html for navigations
 function networkFirst(req) {
-    return fetch(req).then((res) => {
+    const requestUrl = new URL(req.url);
+    const isUpdateProbe = requestUrl.searchParams.has('ivri_update_check');
+    // Revalidate normal files so an HTTP max-age cannot hide a new deployment,
+    // while still allowing efficient 304 responses. Probes bypass HTTP cache.
+    const browserCacheMode = isUpdateProbe ? 'no-store' : 'no-cache';
+    return fetch(req, { cache: browserCacheMode }).then((res) => {
         // Update the cache for next time (only successful responses)
-        if (res && res.status === 200 && res.type !== 'opaque') {
+        if (!isUpdateProbe && res && res.status === 200 && res.type !== 'opaque') {
             const clone = res.clone();
             caches.open(CACHE_VERSION).then((c) => c.put(req, clone)).catch(() => {});
         }

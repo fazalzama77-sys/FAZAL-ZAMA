@@ -14,6 +14,17 @@ const IVRI_REGION_SLUGS = {
     Embryology: 'embryology'
 };
 
+// Public deployment source used only to detect whether Cloudflare has finished
+// publishing a newer GitHub commit. No account credentials are used or stored.
+const IVRI_DEPLOYMENT_MONITOR = Object.freeze({
+    apiRoot: 'https://api.github.com/repos/fazalzama77-sys/FAZAL-ZAMA',
+    branch: 'main',
+    currentCommitKey: 'ivri-deployed-commit',
+    lastCheckKey: 'ivri-deployment-last-check',
+    pollMs: 2 * 60 * 1000,
+    minCheckGapMs: 60 * 1000
+});
+
 function ivriSlugify(value) {
     return String(value || '')
         .replace(/&/g, ' and ')
@@ -33,6 +44,9 @@ const app = {
         system: null,
         eliteMode: false
     },
+    _updateRegistration: null,
+    _pendingDeploymentSha: null,
+    _updateCheckInFlight: false,
 
     init: () => {
         const savedTheme = localStorage.getItem('ivri-theme');
@@ -50,20 +64,28 @@ const app = {
         // Apply saved nav-bar position class to <body> before first paint
         app._applyNavPosition();
 
-        // ---- Service worker registration (offline / PWA, silent auto-update) ----
-        // The SW now self-activates on install (calls skipWaiting() itself) and
-        // claims existing clients on activate. So a new version takes over
-        // transparently — no banner, no surprise reloads. Visitors get the
-        // latest site bytes on their next natural page load.
+        // ---- Service worker registration + deployed-version monitoring ----
+        // An already-open SPA cannot replace its running JavaScript by itself.
+        // Check both the SW and the public deployment, then offer one safe
+        // refresh after Cloudflare is serving the new bytes.
         if ('serviceWorker' in navigator && location.protocol !== 'file:') {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' })
                     .then((registration) => {
-                        registration.update().catch(() => { });
-                        // Re-check for updates every 60 minutes while tab is open
-                        setInterval(() => {
+                        app._updateRegistration = registration;
+
+                        const checkForUpdates = () => {
                             registration.update().catch(() => { });
-                        }, 60 * 60 * 1000);
+                            app._checkForDeploymentUpdate().catch(() => { });
+                        };
+
+                        app._initDeploymentMonitor().catch(() => { });
+                        setInterval(checkForUpdates, IVRI_DEPLOYMENT_MONITOR.pollMs);
+                        window.addEventListener('focus', checkForUpdates);
+                        window.addEventListener('online', checkForUpdates);
+                        document.addEventListener('visibilitychange', () => {
+                            if (document.visibilityState === 'visible') checkForUpdates();
+                        });
                     })
                     .catch((err) => console.warn('SW registration failed:', err.message));
             });
@@ -3335,9 +3357,203 @@ const app = {
     },
 
     // ============== PWA UPDATE FLOW ==============
-    // Updates are applied silently by the service worker (it skipWaiting()s on
-    // install and clients.claim()s on activate). Readers get the latest version
-    // on their next natural page reload — no banner, no prompts.
+    // GitHub can change any data file without changing service-worker.js. A SW
+    // update check alone would therefore miss content-only deployments. These
+    // helpers compare the public Git commit with the exact bytes Cloudflare is
+    // serving, and only then invite the reader to refresh.
+    _initDeploymentMonitor: async () => {
+        await app._checkForDeploymentUpdate(true);
+    },
+
+    _fetchLatestDeploymentCommit: async () => {
+        const config = IVRI_DEPLOYMENT_MONITOR;
+        const response = await fetch(
+            `${config.apiRoot}/commits/${encodeURIComponent(config.branch)}?ivri_check=${Date.now()}`,
+            {
+                cache: 'no-store',
+                headers: { Accept: 'application/vnd.github+json' }
+            }
+        );
+        if (!response.ok) throw new Error(`GitHub update check returned ${response.status}`);
+        return response.json();
+    },
+
+    _fetchDeploymentChanges: async (fromSha, latestCommit) => {
+        if (!/^[0-9a-f]{40}$/i.test(fromSha || '')) return latestCommit.files || [];
+        const response = await fetch(
+            `${IVRI_DEPLOYMENT_MONITOR.apiRoot}/compare/${fromSha}...${latestCommit.sha}?ivri_check=${Date.now()}`,
+            {
+                cache: 'no-store',
+                headers: { Accept: 'application/vnd.github+json' }
+            }
+        );
+        if (!response.ok) return latestCommit.files || [];
+        const comparison = await response.json();
+        return comparison.files || latestCommit.files || [];
+    },
+
+    _isBrowserAsset: (filename) => {
+        if (!filename || /^(?:\.github|\.codex)\//i.test(filename)) return false;
+        if (/^(?:readme|license|claude-context)(?:\.|$)/i.test(filename)) return false;
+        return /\.(?:html?|css|js|json|xml|txt|webmanifest|ico|png|jpe?g|webp|svg|avif)$/i.test(filename);
+    },
+
+    _gitBlobSha: async (buffer) => {
+        if (!window.crypto || !window.crypto.subtle) return null;
+        const bytes = new Uint8Array(buffer);
+        const prefix = new TextEncoder().encode(`blob ${bytes.byteLength}\0`);
+        const payload = new Uint8Array(prefix.byteLength + bytes.byteLength);
+        payload.set(prefix, 0);
+        payload.set(bytes, prefix.byteLength);
+        const digest = await window.crypto.subtle.digest('SHA-1', payload);
+        return Array.from(new Uint8Array(digest))
+            .map((byte) => byte.toString(16).padStart(2, '0'))
+            .join('');
+    },
+
+    _buffersEqual: (first, second) => {
+        const a = new Uint8Array(first);
+        const b = new Uint8Array(second);
+        if (a.byteLength !== b.byteLength) return false;
+        for (let index = 0; index < a.byteLength; index += 1) {
+            if (a[index] !== b[index]) return false;
+        }
+        return true;
+    },
+
+    _liveFileMatchesCommit: async (file) => {
+        const encodedPath = file.filename
+            .split('/')
+            .map((segment) => encodeURIComponent(segment))
+            .join('/');
+        const livePath = file.filename.toLowerCase() === 'index.html' ? '/' : `/${encodedPath}`;
+        const separator = livePath.includes('?') ? '&' : '?';
+        const liveResponse = await fetch(
+            `${livePath}${separator}ivri_update_check=${Date.now()}`,
+            { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } }
+        );
+
+        if (file.status === 'removed') return liveResponse.status === 404;
+        if (!liveResponse.ok) return false;
+
+        const liveBytes = await liveResponse.arrayBuffer();
+        const liveGitSha = await app._gitBlobSha(liveBytes);
+        if (liveGitSha && file.sha) return liveGitSha === file.sha;
+
+        if (!file.raw_url) return false;
+        const rawResponse = await fetch(`${file.raw_url}?ivri_update_check=${Date.now()}`, { cache: 'no-store' });
+        if (!rawResponse.ok) return false;
+        return app._buffersEqual(liveBytes, await rawResponse.arrayBuffer());
+    },
+
+    _deploymentIsLive: async (files) => {
+        const candidates = (files || [])
+            .filter((file) => app._isBrowserAsset(file.filename))
+            .sort((a, b) => {
+                const textAsset = (file) => /\.(?:html?|css|js|json|xml|txt)$/i.test(file.filename) ? 0 : 1;
+                return textAsset(a) - textAsset(b);
+            });
+
+        // A Cloudflare Pages deployment is atomic, so one changed browser asset
+        // matching its Git blob proves that the complete commit is live.
+        for (const file of candidates.slice(0, 3)) {
+            try {
+                if (await app._liveFileMatchesCommit(file)) return true;
+            } catch (error) {
+                console.warn('Deployment-byte check failed:', error.message);
+            }
+        }
+        return candidates.length ? false : null;
+    },
+
+    _checkForDeploymentUpdate: async (force = false) => {
+        if (app._updateCheckInFlight || app._pendingDeploymentSha || !navigator.onLine) return;
+
+        const config = IVRI_DEPLOYMENT_MONITOR;
+        const now = Date.now();
+        const lastCheck = Number(localStorage.getItem(config.lastCheckKey) || 0);
+        if (!force && now - lastCheck < config.minCheckGapMs) return;
+
+        app._updateCheckInFlight = true;
+        localStorage.setItem(config.lastCheckKey, String(now));
+        try {
+            const latest = await app._fetchLatestDeploymentCommit();
+            const savedCommit = localStorage.getItem(config.currentCommitKey);
+
+            if (!savedCommit) {
+                const latestIsLive = await app._deploymentIsLive(latest.files || []);
+                const initialCommit = latestIsLive === false && latest.parents?.[0]?.sha
+                    ? latest.parents[0].sha
+                    : latest.sha;
+                localStorage.setItem(config.currentCommitKey, initialCommit);
+                return;
+            }
+
+            if (savedCommit === latest.sha) return;
+            const changedFiles = await app._fetchDeploymentChanges(savedCommit, latest);
+            const latestIsLive = await app._deploymentIsLive(changedFiles);
+
+            if (latestIsLive === true) {
+                app._showDeploymentUpdate(latest.sha);
+            } else if (latestIsLive === null) {
+                // Documentation or repository-maintenance changes do not alter
+                // the installed site, so no reader refresh is necessary.
+                localStorage.setItem(config.currentCommitKey, latest.sha);
+            }
+        } catch (error) {
+            // GitHub may be temporarily unreachable or rate-limited. The site
+            // remains fully usable and the next focus/interval retries safely.
+            console.warn('Deployment update check skipped:', error.message);
+        } finally {
+            app._updateCheckInFlight = false;
+        }
+    },
+
+    _showDeploymentUpdate: (sha) => {
+        app._pendingDeploymentSha = sha;
+        let banner = document.getElementById('app-update-banner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'app-update-banner';
+            banner.className = 'update-banner';
+            banner.setAttribute('role', 'status');
+            banner.setAttribute('aria-live', 'polite');
+            banner.innerHTML = `
+                <i class="fas fa-cloud-arrow-down" aria-hidden="true"></i>
+                <span class="update-banner-text">A newer IVRI Anatomy version is ready.</span>
+                <button type="button" class="update-btn primary" onclick="app.applyPendingUpdate()">
+                    <i class="fas fa-rotate" aria-hidden="true"></i> Refresh now
+                </button>
+                <button type="button" class="update-btn dismiss" onclick="app.dismissUpdateBanner()" aria-label="Remind me later">&times;</button>
+            `;
+            document.body.appendChild(banner);
+        }
+        requestAnimationFrame(() => banner.classList.add('show'));
+    },
+
+    dismissUpdateBanner: () => {
+        const banner = document.getElementById('app-update-banner');
+        if (banner) banner.classList.remove('show');
+    },
+
+    applyPendingUpdate: async () => {
+        const banner = document.getElementById('app-update-banner');
+        const button = banner?.querySelector('.update-btn.primary');
+        if (button) {
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Updating…';
+        }
+
+        if (app._pendingDeploymentSha) {
+            localStorage.setItem(IVRI_DEPLOYMENT_MONITOR.currentCommitKey, app._pendingDeploymentSha);
+        }
+        try {
+            await app._updateRegistration?.update();
+        } catch (error) {
+            console.warn('Service-worker refresh check skipped:', error.message);
+        }
+        window.location.reload();
+    },
 
     // Nuclear option — wipe all caches + unregister all SWs + reload
     forceClearCacheAndReload: async () => {
