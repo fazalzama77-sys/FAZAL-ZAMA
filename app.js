@@ -1073,6 +1073,20 @@ const app = {
         });
     },
 
+    // Keep the Atlas header uncluttered in the final reading workspace.
+    // Quiz Mode remains available while choosing a region/system, then the
+    // Elite control becomes the only contextual action once a system opens.
+    _refreshAtlasHeaderActions: () => {
+        const quizShortcut = document.querySelector(
+            '#atlas-view .nav-actions .nav-btn-desktop-only[onclick*="quizApp.openMenu"]'
+        );
+        if (!quizShortcut) return;
+        const finalWorkspaceOpen = app.state.view === 'atlas' && !!app.state.region && !!app.state.system;
+        quizShortcut.style.display = finalWorkspaceOpen ? 'none' : '';
+        quizShortcut.disabled = finalWorkspaceOpen;
+        quizShortcut.setAttribute('aria-hidden', finalWorkspaceOpen ? 'true' : 'false');
+    },
+
     // Wrapper called by every bottom-nav button. Centralises routing so we
     // never end up with desynced URL + view state.
     navigateTo: (view) => {
@@ -1290,6 +1304,7 @@ const app = {
             const idx = parts[3] != null ? parseInt(parts[3], 10) : null;
             app.state.region = (region && atlasData && atlasData[region]) ? region : null;
             app.state.system = (system && app.state.region && atlasData[app.state.region][system]) ? system : null;
+            app._refreshAtlasHeaderActions();
 
             if (app.state.region && app.state.system) {
                 document.getElementById('atlas-selector').style.display = 'none';
@@ -1520,6 +1535,7 @@ const app = {
             const index = topicSlug ? topics.findIndex(topic => ivriSlugify(topic.title) === topicSlug) : -1;
             app.state.region = region;
             app.state.system = system;
+            app._refreshAtlasHeaderActions();
 
             if (region && system) {
                 document.getElementById('atlas-selector').style.display = 'none';
@@ -1785,6 +1801,7 @@ const app = {
     renderAtlasSelector: () => {
         // Returning to the region/system grid means we're not in Library either
         app._hideLibraryTabs();
+        app._refreshAtlasHeaderActions();
         const grid = document.getElementById('atlas-selector');
         const breadcrumb = document.getElementById('atlas-crumb');
         const eliteBtn = document.getElementById('elite-toggle');
@@ -1930,6 +1947,7 @@ const app = {
 
     selectSystem: (system) => {
         app.state.system = system;
+        app._refreshAtlasHeaderActions();
         app.setHash(`#/atlas/${encodeURIComponent(app.state.region)}/${encodeURIComponent(system)}`);
         document.getElementById('atlas-selector').style.display = 'none';
         document.getElementById('atlas-content').style.display = 'grid';
