@@ -13,7 +13,7 @@
 //   3. Refresh loads same-origin files from the network, with offline fallback.
 // =========================================================
 
-const CACHE_VERSION = 'ivri-anatomy-v35';
+const CACHE_VERSION = 'ivri-anatomy-v36';
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [

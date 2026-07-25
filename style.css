@@ -237,8 +237,8 @@ body {
 }
 
 body.professional-mode .landing-bg-video {
-    opacity: 0.8;
-    filter: grayscale(100%) contrast(1.1) brightness(1.2);
+    opacity: 0.85;
+    filter: none;
 }
 
 /* System Tag & Monospace line */
@@ -7395,6 +7395,35 @@ body.professional-mode .about-contributor-name { color: #00897b; }
 .elite-toggle-btn:hover i { transform: rotate(-8deg) scale(1.08); }
 .elite-toggle-btn:active { transform: translateY(0) scale(.97); }
 
+/* Slow perimeter trace: makes the detailed-content control discoverable
+   without a heavy glow, layout movement, or a continuous button pulse. */
+.elite-border-trace {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: visible;
+    pointer-events: none;
+    color: #ffd54f;
+}
+.elite-border-trace rect {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7px;
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+    stroke-dasharray: 24 76;
+    animation: eliteBorderTrace 4.8s linear infinite;
+    opacity: .88;
+}
+@keyframes eliteBorderTrace {
+    0%   { stroke-dashoffset: 100; opacity: .42; }
+    20%  { opacity: .95; }
+    80%  { opacity: .95; }
+    100% { stroke-dashoffset: 0; opacity: .42; }
+}
+
 /* Active (Elite ON) state — gradient fill, glow, badge dot */
 .elite-toggle-btn.active {
     background: linear-gradient(135deg, #ffd54f 0%, #ffb300 100%) !important;
@@ -7407,6 +7436,8 @@ body.professional-mode .about-contributor-name { color: #00897b; }
     animation: eliteActivate .45s cubic-bezier(.34,1.56,.64,1);
 }
 .elite-toggle-btn.active i { color: #1a1208 !important; transform: rotate(0) scale(1); }
+.elite-toggle-btn.active .elite-border-trace { opacity: 0; }
+.elite-toggle-btn.active .elite-border-trace rect { animation: none; }
 .elite-toggle-btn.active::after {
     content: '';
     position: absolute;
@@ -7432,6 +7463,7 @@ body.professional-mode .elite-toggle-btn {
     color: #1565c0 !important;
     background: rgba(25,118,210,0.04) !important;
 }
+body.professional-mode .elite-border-trace { color: #1976d2; }
 body.professional-mode .elite-toggle-btn.active {
     background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%) !important;
     color: #ffffff !important;
@@ -7743,13 +7775,37 @@ body.professional-mode .install-msg { color: #102a43; }
 body.professional-mode .streak-block { background: #fff5e6; border-color: #ffb74d; }
 body.professional-mode .streak-block.is-active { background: #ffe0b2; border-color: #ff7043; }
 body.professional-mode .hm-cell { background: #eceff1; }
+body.professional-mode .hm-cell.hm-on {
+    background: linear-gradient(135deg, #f4511e, #ffb300) !important;
+    border: 1px solid rgba(216, 67, 21, 0.32);
+    box-shadow: 0 0 8px rgba(244, 81, 30, 0.28);
+}
+body.professional-mode .hm-cell.hm-out { background: transparent; }
 body.professional-mode .hm-cell-mini.hm-empty { background: #cfd8dc; }
+body.professional-mode .hm-cell-mini.hm-on {
+    background: linear-gradient(135deg, #f4511e, #ffb300) !important;
+}
 body.professional-mode .streak-num { color: #102a43; }
 body.professional-mode .streak-block.is-active .streak-num {
     background: linear-gradient(135deg, #d84315, #ef6c00);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+/* The quiz renderer supplies a dark-theme inline colour for explanations.
+   Override it only in Professional Mode so answer reasoning stays readable. */
+body.professional-mode .feedback-panel > div:last-child,
+body.professional-mode .feedback-panel > div:last-child * {
+    color: #334155 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .elite-border-trace rect {
+        animation: none;
+        stroke-dasharray: 100 0;
+        opacity: .55;
+    }
 }
 
 /* ---------- ME TOGGLES (notifications + replay tour) ---------- */

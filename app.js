@@ -1064,7 +1064,7 @@ const app = {
         if (!nav) return;
         const route = location.pathname.split('/').filter(Boolean)[0] || '';
         let active = '';
-        if (route === 'atlas' || route === '' || app.state.view === 'atlas') active = 'atlas';
+        if (route === 'atlas' || app.state.view === 'atlas') active = 'atlas';
         if (route === 'why' || app.state.view === 'why') active = 'why';
         if (route === 'library') active = 'library';
         if (route === 'me' || route === 'dashboard') active = 'me';
