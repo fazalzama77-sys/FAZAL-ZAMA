@@ -3700,8 +3700,13 @@ function openModal(item, { updateRoute = true } = {}) {
     const imgEl = document.getElementById('modalImg');
     const imgCol = imgEl.parentElement; // .modal-image-col
     const modalContent = modal.querySelector('.modal-content');
-    modalContent.classList.toggle('no-image', !item.img);
-    if (item.img) {
+    // WHY visuals are published only after they have been curated and stored
+    // locally. Empty fields and legacy third-party URLs remain represented by
+    // the consistent "images in development" panel.
+    const imagePath = typeof item.img === 'string' ? item.img.trim() : '';
+    const hasCuratedLocalImage = imagePath !== '' && !/^https?:\/\//i.test(imagePath);
+    modalContent.classList.toggle('no-image', !hasCuratedLocalImage);
+    if (hasCuratedLocalImage) {
         imgEl.classList.remove('img-loaded');
         imgCol.classList.add('img-loading');
         imgEl.alt = item.title;
@@ -3718,7 +3723,7 @@ function openModal(item, { updateRoute = true } = {}) {
             imgCol.classList.add('img-error');
         };
         imgCol.classList.remove('img-error');
-        imgEl.src = item.img;
+        imgEl.src = imagePath;
     } else {
         // No image at all — clear and hide loading state
         imgEl.removeAttribute('src');

@@ -8293,6 +8293,146 @@ body.professional-mode #why-view .modal-image-progress strong {
     color: var(--medical-purple);
 }
 
+/* Premium, low-cost border trace for the Bio-Engineer Analogy action. */
+#why-view #simplifyBtn {
+    isolation: isolate;
+    min-height: 38px;
+    padding: 7px 18px;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: 0 6px 18px rgba(255, 215, 0, 0.08) !important;
+    letter-spacing: 0.35px;
+}
+
+#why-view #simplifyBtn::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    inset: -90px;
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 215, 0, 0.2) 0deg,
+        rgba(255, 215, 0, 0.2) 285deg,
+        #fff3a6 320deg,
+        var(--atlas-gold) 342deg,
+        rgba(255, 215, 0, 0.2) 360deg
+    );
+    animation: whyAnalogyBorderTrace 5.5s linear infinite;
+    pointer-events: none;
+    will-change: transform;
+}
+
+#why-view #simplifyBtn::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 1px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #141a28, #101622);
+    pointer-events: none;
+}
+
+#why-view #simplifyBtn:hover,
+#why-view #simplifyBtn:focus-visible {
+    color: #fff2a3 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 22px rgba(255, 215, 0, 0.18) !important;
+}
+
+#why-view #simplifyBtn:focus-visible {
+    outline: 2px solid rgba(255, 243, 166, 0.9);
+    outline-offset: 3px;
+}
+
+body.professional-mode #why-view #simplifyBtn {
+    color: var(--medical-purple) !important;
+    box-shadow: 0 6px 18px rgba(126, 87, 194, 0.1) !important;
+}
+
+body.professional-mode #why-view #simplifyBtn::before {
+    background: conic-gradient(
+        from 0deg,
+        rgba(126, 87, 194, 0.22) 0deg,
+        rgba(126, 87, 194, 0.22) 285deg,
+        #d9c8ff 320deg,
+        var(--medical-purple) 342deg,
+        rgba(126, 87, 194, 0.22) 360deg
+    );
+}
+
+body.professional-mode #why-view #simplifyBtn::after {
+    background: linear-gradient(135deg, #ffffff, #f8f7fc);
+}
+
+body.professional-mode #why-view #simplifyBtn:hover,
+body.professional-mode #why-view #simplifyBtn:focus-visible {
+    color: #5d3aa8 !important;
+    box-shadow: 0 8px 22px rgba(126, 87, 194, 0.18) !important;
+}
+
+@keyframes whyAnalogyBorderTrace {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@media (max-width: 900px) {
+    #why-view .modal-content,
+    body.professional-mode #why-view .modal-content {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    #why-view .modal-image-col,
+    body.professional-mode #why-view .modal-image-col {
+        width: 100%;
+        height: auto;
+        min-height: 230px;
+        padding: 24px 20px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+    }
+
+    body.professional-mode #why-view .modal-image-col {
+        border-bottom-color: rgba(126, 87, 194, 0.12);
+    }
+
+    #why-view .modal-image-progress {
+        width: min(100%, 320px);
+        min-height: 190px;
+        padding: 22px;
+    }
+
+    #why-view .modal-text-col,
+    body.professional-mode #why-view .modal-text-col {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #why-view .modal-image-col,
+    body.professional-mode #why-view .modal-image-col {
+        min-height: 210px;
+        padding: 18px 16px;
+    }
+
+    #why-view .modal-image-progress {
+        min-height: 174px;
+        padding: 18px 16px;
+    }
+
+    #why-view .modal-section-header {
+        gap: 12px;
+    }
+
+    #why-view #simplifyBtn {
+        flex: 0 0 auto;
+        max-width: 132px;
+        min-height: 44px;
+        padding: 7px 12px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     #why-view .card,
     #why-view .card:hover,
@@ -8301,6 +8441,10 @@ body.professional-mode #why-view .modal-image-progress strong {
         animation: none !important;
         transition: none !important;
         transform: none !important;
+    }
+
+    #why-view #simplifyBtn::before {
+        animation: none !important;
     }
 }
 
