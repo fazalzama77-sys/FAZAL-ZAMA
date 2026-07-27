@@ -134,7 +134,7 @@ function breadcrumbSchema(crumbs) {
   };
 }
 
-function schemaGraph({ url, title, description, crumbs, collection = false }) {
+function schemaGraph({ url, title, description, crumbs, collection = false, subjects = [], teaches = [] }) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -160,14 +160,24 @@ function schemaGraph({ url, title, description, crumbs, collection = false }) {
         learningResourceType: collection ? 'Interactive anatomy collection' : 'Interactive anatomy lesson',
         about: [
           'Veterinary anatomy',
+          'Comparative veterinary anatomy',
+          'Veterinary biomechanics',
           'B.V.Sc.',
           'M.V.Sc.',
+          'DVM',
           'Veterinary Council of India MSVE syllabus'
-        ],
+        ].concat(subjects),
+        teaches: teaches.length
+          ? teaches
+          : ['Regional veterinary anatomy', 'Comparative anatomy', 'Clinical anatomy'],
         audience: {
           '@type': 'EducationalAudience',
           educationalRole: 'student',
-          audienceType: 'B.V.Sc., M.V.Sc. and veterinary medicine students'
+          audienceType: 'B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide',
+          geographicArea: {
+            '@type': 'Place',
+            name: 'Worldwide'
+          }
         },
         publisher: {
           '@type': 'CollegeOrUniversity',
@@ -322,13 +332,13 @@ const appGenerated = [];
 const sitemap = [{ loc: `${origin}/`, images: [] }];
 const redirects = [];
 
-function writePage({ parts, oldParts, title, description, crumbs, view, collection = false, transform }) {
+function writePage({ parts, oldParts, title, description, crumbs, view, collection = false, subjects = [], teaches = [], transform }) {
   const relative = path.join(...parts, 'index.html');
   const destination = path.resolve(root, relative);
   const allowed = [path.join(root, 'atlas') + path.sep, path.join(root, 'why') + path.sep];
   if (!allowed.some(prefix => destination.startsWith(prefix))) throw new Error(`Unsafe generated path: ${destination}`);
   const url = absolute(parts);
-  const graph = schemaGraph({ url, title, description: truncate(description), crumbs, collection });
+  const graph = schemaGraph({ url, title, description: truncate(description), crumbs, collection, subjects, teaches });
   let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
   html = activateView(html, view);
   html = transform(html);
@@ -369,8 +379,8 @@ const atlasCrumb = { name: 'Interactive Atlas', path: '/atlas/' };
 writePage({
   parts: ['atlas'],
   oldParts: ['learn'],
-  title: 'Veterinary Anatomy Atlas for B.V.Sc. & M.V.Sc. | IVRI',
-  description: 'Explore the free IVRI veterinary anatomy atlas for B.V.Sc. and M.V.Sc. students, aligned with the VCI/MSVE syllabus and international veterinary curricula.',
+  title: 'Veterinary Anatomy Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI',
+  description: 'Explore the free IVRI veterinary anatomy atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, aligned with VCI/MSVE and international university curricula.',
   crumbs: [homeCrumb, atlasCrumb],
   view: 'atlas',
   collection: true,
@@ -388,7 +398,7 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
     parts: ['atlas', regionSlug],
     oldParts: ['learn', regionSlug],
     title: `${region} Veterinary Anatomy | Interactive IVRI Atlas`,
-    description: `Study ${topicCount} ${region.toLowerCase()} veterinary anatomy lessons for B.V.Sc. and M.V.Sc. students, covering ${populated.map(([system]) => system).join(', ')}.`,
+    description: `Study ${topicCount} ${region.toLowerCase()} veterinary anatomy lessons for B.V.Sc., M.V.Sc., DVM and veterinary medicine students, covering ${populated.map(([system]) => system).join(', ')}.`,
     crumbs: [homeCrumb, atlasCrumb, regionCrumb],
     view: 'atlas',
     collection: true,
@@ -423,7 +433,7 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
         parts: ['atlas', regionSlug, systemSlug, topicSlug],
         oldParts: ['learn', regionSlug, systemSlug, topicSlug],
         title: `${topic.title} Veterinary Anatomy | IVRI`,
-        description: `${topic.title} veterinary anatomy for B.V.Sc. and M.V.Sc. students. ${topic.desc || topic.eliteDesc || `Study this structure in the interactive IVRI atlas.`}`,
+        description: `${topic.title} veterinary anatomy for B.V.Sc., M.V.Sc., DVM and veterinary medicine students. ${topic.desc || topic.eliteDesc || `Study this structure in the interactive IVRI atlas.`}`,
         crumbs: [homeCrumb, atlasCrumb, regionCrumb, systemCrumb, topicCrumb],
         view: 'atlas',
         transform: html => {
@@ -441,11 +451,13 @@ const whyCrumb = { name: 'The Why of Anatomy', path: '/why/' };
 writePage({
   parts: ['why'],
   oldParts: ['learn', 'why'],
-  title: 'Veterinary Anatomy Biomechanics | Interactive IVRI Atlas',
-  description: `${whyData.length} interactive veterinary anatomy explanations connecting structure, biomechanics, comparative species differences and clinical relevance.`,
+  title: 'Comparative Veterinary Anatomy & Biomechanics | IVRI',
+  description: `${whyData.length} interactive explanations of why veterinary structures are present, absent or modified across species, their biomechanical function, functional advantage and clinical relevance.`,
   crumbs: [homeCrumb, whyCrumb],
   view: 'why',
   collection: true,
+  subjects: ['Functional veterinary anatomy', 'Comparative species anatomy', 'Hidden mechanics of animal structure'],
+  teaches: ['Why anatomical structures differ among species', 'Biomechanical function', 'Species-specific functional advantage', 'Clinical relevance'],
   transform: html => replaceWhyGrid(html, whyData)
 });
 
@@ -456,10 +468,12 @@ for (const [category, label] of Object.entries(whyCategoryLabels)) {
     parts: ['why', category],
     oldParts: ['learn', 'why', category],
     title: `${label} | Interactive IVRI Veterinary Anatomy`,
-    description: `Explore ${items.length} interactive ${label.toLowerCase()} explanations with species comparisons and clinical relevance.`,
+    description: `Explore ${items.length} ${label.toLowerCase()} explanations of structural presence, absence and modification, species-specific function, biomechanical advantage and clinical relevance.`,
     crumbs: [homeCrumb, whyCrumb, categoryCrumb],
     view: 'why',
     collection: true,
+    subjects: [label, 'Comparative species anatomy', 'Functional veterinary anatomy'],
+    teaches: ['Species-specific structural differences', 'Biomechanical function', 'Clinical relevance'],
     transform: html => replaceWhyGrid(html, items)
   });
 
@@ -469,10 +483,12 @@ for (const [category, label] of Object.entries(whyCategoryLabels)) {
     writePage({
       parts: ['why', category, itemSlug],
       oldParts: ['learn', 'why', category, itemSlug],
-      title: `${item.title}: Veterinary Anatomy Explained | IVRI`,
-      description: item.why || item.clinical || `${item.title} explained in the interactive IVRI veterinary anatomy atlas.`,
+      title: `${item.title} | IVRI Biomechanics`,
+      description: `Why is ${item.title} present, absent or modified in ${item.comparison || 'different species'}? Explore its biomechanical function, species-specific advantage and clinical relevance. ${item.why || ''}`,
       crumbs: [homeCrumb, whyCrumb, categoryCrumb, itemCrumb],
       view: 'why',
+      subjects: [item.title, item.comparison || 'Comparative species anatomy', 'Veterinary biomechanics'],
+      teaches: ['Structural presence, absence or modification', 'Species-specific biomechanical function', 'Functional advantage', 'Clinical relevance'],
       transform: html => openWhyModal(replaceWhyGrid(html, items), item)
     });
   });

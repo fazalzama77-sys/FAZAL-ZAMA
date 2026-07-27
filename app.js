@@ -1604,8 +1604,8 @@ const app = {
     updatePageTitle: (whyItem = null) => {
         const SITE = 'IVRI Anatomy';
         const routeRoot = location.pathname.split('/').filter(Boolean)[0] || '';
-        let title = 'Veterinary Anatomy Atlas for B.V.Sc. & M.V.Sc. | IVRI';
-        let description = 'Free IVRI veterinary anatomy atlas for B.V.Sc. and M.V.Sc. students, covering the VCI/MSVE syllabus with regional anatomy, histology, embryology, comparative notes and quizzes.';
+        let title = 'Veterinary Anatomy Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI';
+        let description = 'Free IVRI veterinary anatomy atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, with comparative biomechanics, histology, embryology and quizzes.';
         if (routeRoot === 'library') {
             title = `Saved Study Library | ${SITE}`;
             description = 'Review saved veterinary anatomy bookmarks, highlights and personal notes.';
@@ -1619,7 +1619,7 @@ const app = {
                 title = `${parts.join(' · ')} | IVRI`;
                 description = `Study ${subject} through the interactive IVRI veterinary anatomy atlas.`;
             } else {
-                title = 'Veterinary Anatomy Atlas for B.V.Sc. & M.V.Sc. | IVRI';
+                title = 'Veterinary Anatomy Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI';
             }
         } else if (app.state.view === 'why') {
             const categoryLabels = {
@@ -1630,15 +1630,15 @@ const app = {
             };
             const categoryLabel = categoryLabels[currentFilter];
             title = whyItem
-                ? `${whyItem.title}: Veterinary Anatomy Explained | IVRI`
+                ? `${whyItem.title} | IVRI Biomechanics`
                 : categoryLabel
                     ? `${categoryLabel} | IVRI Veterinary Anatomy`
                     : `Veterinary Anatomy Biomechanics | ${SITE}`;
             description = whyItem
-                ? String(whyItem.why || whyItem.clinical || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 158)
+                ? `Why is ${whyItem.title} present, absent or modified in ${whyItem.comparison || 'different species'}? Explore its biomechanical function, species advantage and clinical relevance.`.slice(0, 158)
                 : categoryLabel
-                    ? `Interactive ${categoryLabel.toLowerCase()} explanations with species comparisons and clinical relevance.`
-                    : 'Functional, biomechanical and comparative veterinary anatomy explanations for B.V.Sc. and M.V.Sc. students.';
+                    ? `Interactive ${categoryLabel.toLowerCase()} explaining structural presence, absence and modification, species-specific function and clinical relevance.`
+                    : 'Comparative veterinary anatomy and biomechanics for university students worldwide, explaining how species-specific structures support function and clinical practice.';
         } else if (app.state.view === 'dashboard') {
             title = `Study Dashboard | ${SITE}`;
             description = 'Review veterinary anatomy learning progress, quiz accuracy and spaced-repetition topics.';
