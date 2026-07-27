@@ -1,19 +1,15 @@
 // =========================================================
-// IVRI ANATOMY — SERVICE WORKER (v3 — deployed-version aware)
+// IVRI ANATOMY — SERVICE WORKER (automatic-update + offline fallback)
 // Strategy:
-//   • Same-origin (our HTML/JS/CSS/data files) → NETWORK-FIRST with cache fallback.
-//     This means online users ALWAYS get the latest GitHub-deployed version.
-//     Cache is only used when offline.
-//   • Cross-origin (CDN fonts, icons) → STALE-WHILE-REVALIDATE.
-//     Cached copy returns instantly; fresh copy quietly updates the cache.
-//
-// Update flow:
-//   1. The page checks GitHub and verifies the same bytes are live on Cloudflare.
-//   2. It shows a small refresh notice only after deployment is complete.
-//   3. Refresh loads same-origin files from the network, with offline fallback.
+//   • Same-origin HTML/JS/CSS/data always bypass the browser HTTP cache.
+//   • Successful network responses refresh one stable offline cache.
+//   • Invalid deployment-time HTML responses never replace cached JS/CSS.
+//   • No manual cache-version bump is required for ordinary content uploads.
+//   • Cross-origin CDN assets use stale-while-revalidate.
 // =========================================================
 
-const CACHE_VERSION = 'ivri-anatomy-v38';
+const OFFLINE_CACHE = 'ivri-anatomy-offline';
+const LEGACY_CACHE_PATTERN = /^ivri-anatomy-v\d+$/;
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [
@@ -52,32 +48,35 @@ const APP_SHELL = [
     './manifest.json'
 ];
 
-// ---- INSTALL: pre-cache the app shell and activate immediately ----
-// We auto-skip waiting so the fresh network-first worker is ready immediately.
-// The page itself decides when to show the deployed-version refresh notice.
+// ---- INSTALL: refresh the offline shell and activate immediately ----
 self.addEventListener('install', (event) => {
     self.skipWaiting();
     event.waitUntil(
-        caches.open(CACHE_VERSION).then((cache) =>
-            Promise.all(
-                APP_SHELL.map((url) =>
-                    cache.add(url).catch((err) =>
-                        console.warn('[SW] skip pre-cache:', url, err.message)
-                    )
-                )
-            )
-        )
+        caches.open(OFFLINE_CACHE).then((cache) => refreshAppShell(cache))
     );
 });
 
-// ---- ACTIVATE: clean old caches & take control of all open tabs ----
+// ---- ACTIVATE: remove numbered legacy caches and control open tabs ----
 self.addEventListener('activate', (event) => {
+    let shouldMigrateLegacyClients = false;
     event.waitUntil(
-        caches.keys().then((keys) =>
-            Promise.all(
-                keys.filter((k) => k !== CACHE_VERSION).map((k) => caches.delete(k))
+        caches.keys().then((keys) => {
+            const legacyKeys = keys.filter((key) =>
+                key !== OFFLINE_CACHE && LEGACY_CACHE_PATTERN.test(key)
+            );
+            shouldMigrateLegacyClients = legacyKeys.length > 0;
+            return Promise.all(legacyKeys.map((key) => caches.delete(key)));
+        }).then(() => self.clients.claim())
+            // This one activation reload migrates pages still running the old
+            // banner-based updater. Future content-only uploads are handled by
+            // app.js without another service-worker change.
+            .then(() => shouldMigrateLegacyClients
+                ? self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+                : []
             )
-        ).then(() => self.clients.claim())
+            .then((windows) => Promise.all(
+                windows.map((client) => client.navigate(client.url).catch(() => null))
+            ))
     );
 });
 
@@ -122,23 +121,24 @@ self.addEventListener('fetch', (event) => {
 function networkFirst(req) {
     const requestUrl = new URL(req.url);
     const isUpdateProbe = requestUrl.searchParams.has('ivri_update_check');
-    // Revalidate normal files so an HTTP max-age cannot hide a new deployment,
-    // while still allowing efficient 304 responses. Probes bypass HTTP cache.
-    const browserCacheMode = isUpdateProbe ? 'no-store' : 'no-cache';
-    return fetch(req, { cache: browserCacheMode }).then((res) => {
-        // Update the cache for next time (only successful responses)
-        if (!isUpdateProbe && res && res.status === 200 && res.type !== 'opaque') {
+    return fetch(req, { cache: 'no-store' }).then((res) => {
+        // During a deployment, static hosts can briefly return index.html for
+        // a JS/CSS URL. Never execute or cache that mismatched response.
+        if (!isExpectedAssetResponse(req, res)) {
+            throw new Error(`Unexpected response for ${requestUrl.pathname}`);
+        }
+
+        if (!isUpdateProbe) {
             const clone = res.clone();
-            caches.open(CACHE_VERSION).then((c) => c.put(req, clone)).catch(() => {});
+            caches.open(OFFLINE_CACHE).then((cache) => cache.put(req, clone)).catch(() => {});
         }
         return res;
     }).catch(() =>
-        caches.match(req).then((cached) => {
+        caches.match(req).then((cached) =>
+            cached || caches.match(req, { ignoreSearch: true })
+        ).then((cached) => {
             if (cached) return cached;
-            // Final fallback for HTML navigations: serve cached index.html
-            if (req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html')) {
-                return caches.match('./index.html');
-            }
+            if (isHtmlRequest(req)) return caches.match('./index.html');
             return new Response('', { status: 504, statusText: 'Offline and not cached' });
         })
     );
@@ -146,7 +146,7 @@ function networkFirst(req) {
 
 // Stale-while-revalidate: return cache immediately, refresh in background
 function staleWhileRevalidate(req) {
-    return caches.open(CACHE_VERSION).then((cache) =>
+    return caches.open(OFFLINE_CACHE).then((cache) =>
         cache.match(req).then((cached) => {
             const networkFetch = fetch(req).then((res) => {
                 if (res && res.status === 200 && res.type !== 'opaque') {
@@ -157,4 +157,46 @@ function staleWhileRevalidate(req) {
             return cached || networkFetch;
         })
     );
+}
+
+function refreshAppShell(cache) {
+    return Promise.all(
+        APP_SHELL.map(async (url) => {
+            try {
+                const request = new Request(url, { cache: 'reload' });
+                const response = await fetch(request);
+                if (!isExpectedAssetResponse(request, response)) {
+                    throw new Error('unexpected content type');
+                }
+                await cache.put(request, response.clone());
+            } catch (error) {
+                console.warn('[SW] keeping existing offline copy:', url, error.message);
+            }
+        })
+    );
+}
+
+function isHtmlRequest(req) {
+    return req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
+}
+
+function isExpectedAssetResponse(req, res) {
+    if (!res || res.status !== 200 || res.type === 'opaque') return false;
+
+    const pathname = new URL(req.url).pathname.toLowerCase();
+    const contentType = (res.headers.get('content-type') || '').toLowerCase();
+
+    if (isHtmlRequest(req) || pathname.endsWith('.html') || pathname.endsWith('/')) {
+        return contentType.includes('text/html');
+    }
+    if (pathname.endsWith('.js')) return contentType.includes('javascript');
+    if (pathname.endsWith('.css')) return contentType.includes('text/css');
+    if (/\.(?:png|jpe?g|webp|svg|avif|ico)$/.test(pathname)) {
+        return contentType.startsWith('image/') || pathname.endsWith('.ico');
+    }
+    if (/\.(?:json|webmanifest)$/.test(pathname)) {
+        return contentType.includes('json') || contentType.includes('manifest');
+    }
+
+    return !contentType.includes('text/html');
 }

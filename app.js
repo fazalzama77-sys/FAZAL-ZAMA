@@ -47,6 +47,7 @@ const app = {
     _updateRegistration: null,
     _pendingDeploymentSha: null,
     _updateCheckInFlight: false,
+    _automaticUpdateTimer: null,
 
     init: () => {
         const savedTheme = localStorage.getItem('ivri-theme');
@@ -64,11 +65,22 @@ const app = {
         // Apply saved nav-bar position class to <body> before first paint
         app._applyNavPosition();
 
-        // ---- Service worker registration + deployed-version monitoring ----
-        // An already-open SPA cannot replace its running JavaScript by itself.
-        // Check both the SW and the public deployment, then offer one safe
-        // refresh after Cloudflare is serving the new bytes.
+        // ---- Service worker registration + automatic deployment updates ----
+        // Every normal reload is network-fresh. An already-open SPA also checks
+        // GitHub, waits until Cloudflare serves the matching bytes, and then
+        // reloads itself once without clearing bookmarks or study progress.
         if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+            let hasControlledPage = Boolean(navigator.serviceWorker.controller);
+            let reloadingForWorker = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (hasControlledPage && !reloadingForWorker) {
+                    reloadingForWorker = true;
+                    window.location.reload();
+                    return;
+                }
+                hasControlledPage = true;
+            });
+
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' })
                     .then((registration) => {
@@ -3378,7 +3390,8 @@ const app = {
     // GitHub can change any data file without changing service-worker.js. A SW
     // update check alone would therefore miss content-only deployments. These
     // helpers compare the public Git commit with the exact bytes Cloudflare is
-    // serving, and only then invite the reader to refresh.
+    // serving, then reload once automatically. No manual cache-number change
+    // is required for CSS, quiz, or lesson-data uploads.
     _initDeploymentMonitor: async () => {
         await app._checkForDeploymentUpdate(true);
     },
@@ -3528,6 +3541,7 @@ const app = {
     },
 
     _showDeploymentUpdate: (sha) => {
+        if (!sha || app._pendingDeploymentSha === sha) return;
         app._pendingDeploymentSha = sha;
         let banner = document.getElementById('app-update-banner');
         if (!banner) {
@@ -3538,42 +3552,45 @@ const app = {
             banner.setAttribute('aria-live', 'polite');
             banner.innerHTML = `
                 <i class="fas fa-cloud-arrow-down" aria-hidden="true"></i>
-                <span class="update-banner-text">A newer IVRI Anatomy version is ready.</span>
-                <button type="button" class="update-btn primary" onclick="app.applyPendingUpdate()">
-                    <i class="fas fa-rotate" aria-hidden="true"></i> Refresh now
-                </button>
-                <button type="button" class="update-btn dismiss" onclick="app.dismissUpdateBanner()" aria-label="Remind me later">&times;</button>
+                <span class="update-banner-text">New IVRI Anatomy content is ready. Updating automatically…</span>
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
             `;
             document.body.appendChild(banner);
         }
         requestAnimationFrame(() => banner.classList.add('show'));
-    },
-
-    dismissUpdateBanner: () => {
-        const banner = document.getElementById('app-update-banner');
-        if (banner) banner.classList.remove('show');
+        clearTimeout(app._automaticUpdateTimer);
+        app._automaticUpdateTimer = setTimeout(() => {
+            app.applyPendingUpdate().catch((error) => {
+                console.warn('Automatic update reload skipped:', error.message);
+            });
+        }, 1200);
     },
 
     applyPendingUpdate: async () => {
-        const banner = document.getElementById('app-update-banner');
-        const button = banner?.querySelector('.update-btn.primary');
-        if (button) {
-            button.disabled = true;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Updating…';
-        }
-
         if (app._pendingDeploymentSha) {
             localStorage.setItem(IVRI_DEPLOYMENT_MONITOR.currentCommitKey, app._pendingDeploymentSha);
         }
         try {
-            await app._updateRegistration?.update();
+            const updateCheck = app._updateRegistration?.update();
+            updateCheck?.catch((error) => {
+                console.warn('Service-worker refresh check skipped:', error.message);
+            });
         } catch (error) {
             console.warn('Service-worker refresh check skipped:', error.message);
+        }
+        try {
+            await fetch(window.location.href, {
+                cache: 'no-store',
+                headers: { 'Cache-Control': 'no-cache' }
+            });
+        } catch (error) {
+            console.warn('Page refresh warm-up skipped:', error.message);
         }
         window.location.reload();
     },
 
-    // Nuclear option — wipe all caches + unregister all SWs + reload
+    // Repair option — clear only cached app files, retain the active worker,
+    // reset deployment detection, and reload through the network-fresh path.
     forceClearCacheAndReload: async () => {
         if (!confirm('Reset cached site data and reload? Your bookmarks, quiz history, and progress are kept safe — only the cached app files will be cleared.')) return;
         try {
@@ -3581,14 +3598,23 @@ const app = {
                 const keys = await caches.keys();
                 await Promise.all(keys.map((k) => caches.delete(k)));
             }
-            if ('serviceWorker' in navigator) {
-                const regs = await navigator.serviceWorker.getRegistrations();
-                await Promise.all(regs.map((r) => r.unregister()));
-            }
+            localStorage.removeItem(IVRI_DEPLOYMENT_MONITOR.currentCommitKey);
+            localStorage.removeItem(IVRI_DEPLOYMENT_MONITOR.lastCheckKey);
+            const updateCheck = app._updateRegistration?.update();
+            updateCheck?.catch((error) => {
+                console.warn('Service-worker refresh check skipped:', error.message);
+            });
         } catch (e) {
             console.warn('Cache reset issue:', e.message);
         }
-        // Hard reload bypassing browser HTTP cache too
+        try {
+            await fetch(window.location.href, {
+                cache: 'no-store',
+                headers: { 'Cache-Control': 'no-cache' }
+            });
+        } catch (error) {
+            console.warn('Cache reset warm-up skipped:', error.message);
+        }
         window.location.reload();
     }
 };
