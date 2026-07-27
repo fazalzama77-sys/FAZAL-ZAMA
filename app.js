@@ -1604,8 +1604,8 @@ const app = {
     updatePageTitle: (whyItem = null) => {
         const SITE = 'IVRI Anatomy';
         const routeRoot = location.pathname.split('/').filter(Boolean)[0] || '';
-        let title = 'Veterinary Anatomy Atlas for B.V.Sc. Students | IVRI';
-        let description = 'Free interactive veterinary anatomy atlas with regional anatomy, histology, embryology, comparative notes, quizzes and revision tools.';
+        let title = 'Veterinary Anatomy Atlas for B.V.Sc. & M.V.Sc. | IVRI';
+        let description = 'Free IVRI veterinary anatomy atlas for B.V.Sc. and M.V.Sc. students, covering the VCI/MSVE syllabus with regional anatomy, histology, embryology, comparative notes and quizzes.';
         if (routeRoot === 'library') {
             title = `Saved Study Library | ${SITE}`;
             description = 'Review saved veterinary anatomy bookmarks, highlights and personal notes.';
@@ -1619,7 +1619,7 @@ const app = {
                 title = `${parts.join(' · ')} | IVRI`;
                 description = `Study ${subject} through the interactive IVRI veterinary anatomy atlas.`;
             } else {
-                title = 'Veterinary Anatomy Atlas for B.V.Sc. Students | IVRI';
+                title = 'Veterinary Anatomy Atlas for B.V.Sc. & M.V.Sc. | IVRI';
             }
         } else if (app.state.view === 'why') {
             const categoryLabels = {
@@ -1638,7 +1638,7 @@ const app = {
                 ? String(whyItem.why || whyItem.clinical || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 158)
                 : categoryLabel
                     ? `Interactive ${categoryLabel.toLowerCase()} explanations with species comparisons and clinical relevance.`
-                    : 'Functional, biomechanical and comparative veterinary anatomy explanations for B.V.Sc. students.';
+                    : 'Functional, biomechanical and comparative veterinary anatomy explanations for B.V.Sc. and M.V.Sc. students.';
         } else if (app.state.view === 'dashboard') {
             title = `Study Dashboard | ${SITE}`;
             description = 'Review veterinary anatomy learning progress, quiz accuracy and spaced-repetition topics.';

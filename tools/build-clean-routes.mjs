@@ -155,13 +155,25 @@ function schemaGraph({ url, title, description, crumbs, collection = false }) {
         name: title,
         description,
         inLanguage: 'en',
-        educationalLevel: 'Undergraduate',
+        dateModified: lastmod,
+        educationalLevel: ['Undergraduate', 'Postgraduate'],
         learningResourceType: collection ? 'Interactive anatomy collection' : 'Interactive anatomy lesson',
-        about: ['Veterinary anatomy', 'B.V.Sc.'],
+        about: [
+          'Veterinary anatomy',
+          'B.V.Sc.',
+          'M.V.Sc.',
+          'Veterinary Council of India MSVE syllabus'
+        ],
+        audience: {
+          '@type': 'EducationalAudience',
+          educationalRole: 'student',
+          audienceType: 'B.V.Sc., M.V.Sc. and veterinary medicine students'
+        },
         publisher: {
-          '@type': 'Organization',
-          name: 'IVRI Veterinary Anatomy Atlas',
-          url: `${origin}/`
+          '@type': 'CollegeOrUniversity',
+          name: 'ICAR-Indian Veterinary Research Institute',
+          url: 'https://www.ivri.nic.in/',
+          sameAs: 'https://www.ivri.nic.in/division/BasicSSD/VeterinaryAnatomy/default.aspx'
         }
       }
     ]
@@ -357,8 +369,8 @@ const atlasCrumb = { name: 'Interactive Atlas', path: '/atlas/' };
 writePage({
   parts: ['atlas'],
   oldParts: ['learn'],
-  title: 'Interactive Veterinary Anatomy Atlas for B.V.Sc. Students | IVRI',
-  description: 'Open the original interactive IVRI veterinary anatomy atlas with regional anatomy, histology, embryology, comparative notes and clinical relevance.',
+  title: 'Veterinary Anatomy Atlas for B.V.Sc. & M.V.Sc. | IVRI',
+  description: 'Explore the free IVRI veterinary anatomy atlas for B.V.Sc. and M.V.Sc. students, aligned with the VCI/MSVE syllabus and international veterinary curricula.',
   crumbs: [homeCrumb, atlasCrumb],
   view: 'atlas',
   collection: true,
@@ -376,7 +388,7 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
     parts: ['atlas', regionSlug],
     oldParts: ['learn', regionSlug],
     title: `${region} Veterinary Anatomy | Interactive IVRI Atlas`,
-    description: `Open ${topicCount} interactive ${region.toLowerCase()} veterinary anatomy lessons covering ${populated.map(([system]) => system).join(', ')}.`,
+    description: `Study ${topicCount} ${region.toLowerCase()} veterinary anatomy lessons for B.V.Sc. and M.V.Sc. students, covering ${populated.map(([system]) => system).join(', ')}.`,
     crumbs: [homeCrumb, atlasCrumb, regionCrumb],
     view: 'atlas',
     collection: true,
@@ -392,7 +404,7 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
       parts: ['atlas', regionSlug, systemSlug],
       oldParts: ['learn', regionSlug, systemSlug],
       title: `${system}: ${region} Veterinary Anatomy | IVRI`,
-      description: `Open the original interactive ${system.toLowerCase()} atlas for the veterinary ${region.toLowerCase()}, with ${topics.length} detailed B.V.Sc. structures.`,
+      description: `Study ${topics.length} detailed ${system.toLowerCase()} structures in the veterinary ${region.toLowerCase()}, with B.V.Sc., M.V.Sc., comparative and clinical context.`,
       crumbs: [homeCrumb, atlasCrumb, regionCrumb, systemCrumb],
       view: 'atlas',
       collection: true,
@@ -410,8 +422,8 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
       writePage({
         parts: ['atlas', regionSlug, systemSlug, topicSlug],
         oldParts: ['learn', regionSlug, systemSlug, topicSlug],
-        title: `${topic.title} · ${system} · ${region} | IVRI Anatomy`,
-        description: topic.desc || topic.eliteDesc || `${topic.title} veterinary anatomy in the interactive IVRI atlas.`,
+        title: `${topic.title} Veterinary Anatomy | IVRI`,
+        description: `${topic.title} veterinary anatomy for B.V.Sc. and M.V.Sc. students. ${topic.desc || topic.eliteDesc || `Study this structure in the interactive IVRI atlas.`}`,
         crumbs: [homeCrumb, atlasCrumb, regionCrumb, systemCrumb, topicCrumb],
         view: 'atlas',
         transform: html => {

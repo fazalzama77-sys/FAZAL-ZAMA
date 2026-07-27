@@ -1,7 +1,7 @@
 {
   "name": "IVRI Veterinary Anatomy Atlas",
   "short_name": "IVRI Anatomy",
-  "description": "World-class veterinary anatomy resource for UG B.V.Sc students — IVRI Bareilly.",
+  "description": "Free IVRI veterinary anatomy atlas for B.V.Sc. and M.V.Sc. students, aligned with the VCI/MSVE syllabus.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

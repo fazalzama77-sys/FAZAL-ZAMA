@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T12:59:56.549Z",
+  "generatedAt": "2026-07-27T17:30:47.756Z",
   "files": [
     "atlas/index.html",
     "atlas/introduction/index.html",
@@ -84,19 +84,15 @@
     "atlas/forelimb/arthrology/coffin-joint-distal-interphalangeal-dip/index.html",
     "atlas/forelimb/neurology/index.html",
     "atlas/forelimb/neurology/brachial-plexus-architecture/index.html",
-    "atlas/forelimb/neurology/other-proximal-brachial-plexus-branches/index.html",
     "atlas/forelimb/neurology/radial-nerve/index.html",
     "atlas/forelimb/neurology/median-nerve/index.html",
     "atlas/forelimb/neurology/ulnar-nerve/index.html",
     "atlas/forelimb/neurology/suprascapular-nerve/index.html",
     "atlas/forelimb/neurology/musculocutaneous-nerve/index.html",
     "atlas/forelimb/neurology/axillary-nerve/index.html",
-    "atlas/forelimb/neurology/distal-palmar-and-digital-nerves/index.html",
     "atlas/forelimb/neurology/regional-anesthesia-nerve-blocks/index.html",
     "atlas/forelimb/angiology/index.html",
     "atlas/forelimb/angiology/arterial-tree-of-the-forelimb-subclavian-digital/index.html",
-    "atlas/forelimb/angiology/axillary-and-brachial-branches/index.html",
-    "atlas/forelimb/angiology/distal-forelimb-vessels/index.html",
     "atlas/forelimb/angiology/forelimb-lymph-nodes-and-surface-veins/index.html",
     "atlas/head-neck/index.html",
     "atlas/head-neck/osteology/index.html",
@@ -133,11 +129,9 @@
     "atlas/head-neck/neurology/cn-xii-the-hypoglossal-nerve/index.html",
     "atlas/head-neck/neurology/foramina-and-exit-strategies-comparative/index.html",
     "atlas/head-neck/neurology/clinical-applications-regional-anesthesia/index.html",
-    "atlas/head-neck/neurology/cn-viii-vestibulocochlear-nerve/index.html",
     "atlas/head-neck/neurology/clinical-neurology-pathology/index.html",
     "atlas/head-neck/angiology/index.html",
     "atlas/head-neck/angiology/arteries-of-the-head-and-neck/index.html",
-    "atlas/head-neck/angiology/carotid-sheath-and-major-branch-relations/index.html",
     "atlas/head-neck/angiology/veins-and-lymph-nodes-of-the-head-and-neck/index.html",
     "atlas/head-neck/splanchnology/index.html",
     "atlas/head-neck/splanchnology/digestive-system-oral-cavity-and-pharynx/index.html",
@@ -230,15 +224,11 @@
     "atlas/hindlimb-pelvis/arthrology/hock-tarsal-joint/index.html",
     "atlas/hindlimb-pelvis/neurology/index.html",
     "atlas/hindlimb-pelvis/neurology/lumbosacral-plexus-overview/index.html",
-    "atlas/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/index.html",
     "atlas/hindlimb-pelvis/neurology/femoral-and-obturator-nerves/index.html",
     "atlas/hindlimb-pelvis/neurology/sciatic-nerve-and-its-branches-tibial-peroneal/index.html",
-    "atlas/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/index.html",
     "atlas/hindlimb-pelvis/neurology/pudendal-pudic-nerve-and-epidural-anaesthesia/index.html",
     "atlas/hindlimb-pelvis/angiology/index.html",
     "atlas/hindlimb-pelvis/angiology/major-arteries-of-hindlimb/index.html",
-    "atlas/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/index.html",
-    "atlas/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/index.html",
     "atlas/hindlimb-pelvis/angiology/major-veins-of-hindlimb-saphenous-and-recurrent-tarsal/index.html",
     "atlas/hindlimb-pelvis/angiology/lymph-nodes-of-hindlimb-and-pelvis/index.html",
     "atlas/hindlimb-pelvis/splanchnology/index.html",
@@ -727,10 +717,6 @@
       "to": "/atlas/forelimb/neurology/brachial-plexus-architecture/"
     },
     {
-      "from": "/learn/forelimb/neurology/other-proximal-brachial-plexus-branches/",
-      "to": "/atlas/forelimb/neurology/other-proximal-brachial-plexus-branches/"
-    },
-    {
       "from": "/learn/forelimb/neurology/radial-nerve/",
       "to": "/atlas/forelimb/neurology/radial-nerve/"
     },
@@ -755,10 +741,6 @@
       "to": "/atlas/forelimb/neurology/axillary-nerve/"
     },
     {
-      "from": "/learn/forelimb/neurology/distal-palmar-and-digital-nerves/",
-      "to": "/atlas/forelimb/neurology/distal-palmar-and-digital-nerves/"
-    },
-    {
       "from": "/learn/forelimb/neurology/regional-anesthesia-nerve-blocks/",
       "to": "/atlas/forelimb/neurology/regional-anesthesia-nerve-blocks/"
     },
@@ -769,14 +751,6 @@
     {
       "from": "/learn/forelimb/angiology/arterial-tree-of-the-forelimb-subclavian-digital/",
       "to": "/atlas/forelimb/angiology/arterial-tree-of-the-forelimb-subclavian-digital/"
-    },
-    {
-      "from": "/learn/forelimb/angiology/axillary-and-brachial-branches/",
-      "to": "/atlas/forelimb/angiology/axillary-and-brachial-branches/"
-    },
-    {
-      "from": "/learn/forelimb/angiology/distal-forelimb-vessels/",
-      "to": "/atlas/forelimb/angiology/distal-forelimb-vessels/"
     },
     {
       "from": "/learn/forelimb/angiology/forelimb-lymph-nodes-and-surface-veins/",
@@ -923,10 +897,6 @@
       "to": "/atlas/head-neck/neurology/clinical-applications-regional-anesthesia/"
     },
     {
-      "from": "/learn/head-neck/neurology/cn-viii-vestibulocochlear-nerve/",
-      "to": "/atlas/head-neck/neurology/cn-viii-vestibulocochlear-nerve/"
-    },
-    {
       "from": "/learn/head-neck/neurology/clinical-neurology-pathology/",
       "to": "/atlas/head-neck/neurology/clinical-neurology-pathology/"
     },
@@ -937,10 +907,6 @@
     {
       "from": "/learn/head-neck/angiology/arteries-of-the-head-and-neck/",
       "to": "/atlas/head-neck/angiology/arteries-of-the-head-and-neck/"
-    },
-    {
-      "from": "/learn/head-neck/angiology/carotid-sheath-and-major-branch-relations/",
-      "to": "/atlas/head-neck/angiology/carotid-sheath-and-major-branch-relations/"
     },
     {
       "from": "/learn/head-neck/angiology/veins-and-lymph-nodes-of-the-head-and-neck/",
@@ -1311,20 +1277,12 @@
       "to": "/atlas/hindlimb-pelvis/neurology/lumbosacral-plexus-overview/"
     },
     {
-      "from": "/learn/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/",
-      "to": "/atlas/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/"
-    },
-    {
       "from": "/learn/hindlimb-pelvis/neurology/femoral-and-obturator-nerves/",
       "to": "/atlas/hindlimb-pelvis/neurology/femoral-and-obturator-nerves/"
     },
     {
       "from": "/learn/hindlimb-pelvis/neurology/sciatic-nerve-and-its-branches-tibial-peroneal/",
       "to": "/atlas/hindlimb-pelvis/neurology/sciatic-nerve-and-its-branches-tibial-peroneal/"
-    },
-    {
-      "from": "/learn/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/",
-      "to": "/atlas/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/"
     },
     {
       "from": "/learn/hindlimb-pelvis/neurology/pudendal-pudic-nerve-and-epidural-anaesthesia/",
@@ -1337,14 +1295,6 @@
     {
       "from": "/learn/hindlimb-pelvis/angiology/major-arteries-of-hindlimb/",
       "to": "/atlas/hindlimb-pelvis/angiology/major-arteries-of-hindlimb/"
-    },
-    {
-      "from": "/learn/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/",
-      "to": "/atlas/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/"
-    },
-    {
-      "from": "/learn/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/",
-      "to": "/atlas/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/"
     },
     {
       "from": "/learn/hindlimb-pelvis/angiology/major-veins-of-hindlimb-saphenous-and-recurrent-tarsal/",
