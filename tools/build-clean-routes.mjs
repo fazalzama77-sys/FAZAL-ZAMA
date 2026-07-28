@@ -114,6 +114,12 @@ function route(parts) {
   return `/${parts.filter(Boolean).join('/')}/`;
 }
 
+function curatedLocalImage(value) {
+  const imagePath = String(value ?? '').trim().replace(/^\/+/, '');
+  if (!imagePath || !/^images\/why\//i.test(imagePath)) return '';
+  return fs.existsSync(path.join(root, imagePath)) ? imagePath : '';
+}
+
 function absolute(parts) {
   return `${origin}${route(parts)}`;
 }
@@ -323,7 +329,13 @@ function openWhyModal(html, item) {
   output = output.replace(/<div class="modal-comparison-tag" id="modalComparison">[\s\S]*?<\/div>/, `<div class="modal-comparison-tag" id="modalComparison">Comparison: ${escapeHtml(item.comparison || '')}</div>`);
   output = output.replace(/<p class="modal-desc" id="modalWhy">[\s\S]*?<\/p>/, `<div class="modal-desc" id="modalWhy">${safeRichHtml(item.why || '')}</div>`);
   output = output.replace(/<div class="modal-clinical" id="modalClinical">[\s\S]*?<\/div>/, `<div class="modal-clinical" id="modalClinical">${safeRichHtml(item.clinical || '')}</div>`);
-  if (item.img) output = output.replace('<img src="" alt="Anatomy Diagram" id="modalImg"', `<img src="/${escapeHtml(String(item.img).replace(/^\/+/, ''))}" alt="${escapeHtml(item.title)}" id="modalImg"`);
+  const imagePath = curatedLocalImage(item.img);
+  if (imagePath) {
+    output = output.replace(
+      '<img src="" alt="Anatomy Diagram" id="modalImg"',
+      `<img src="/${escapeHtml(imagePath)}" alt="${escapeHtml(item.title)}" id="modalImg"`
+    );
+  }
   return output;
 }
 

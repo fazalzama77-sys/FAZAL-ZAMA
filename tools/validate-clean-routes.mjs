@@ -59,6 +59,7 @@ for (const relative of manifest.files) {
   }
   if (relative.split('/').length >= 4 && relative.startsWith('why/')) {
     if (!/class="modal-overlay open" id="modalOverlay"/i.test(html)) error(`WHY topic modal is not pre-rendered: ${relative}`);
+    if (/src=["']\/https?:\/\//i.test(html)) error(`Root-prefixed external asset path in WHY topic: ${relative}`);
   }
 
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
@@ -117,6 +118,14 @@ for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"
 const appSource = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes('app._legacyRouteFromHash()')) {
   error('Local file routing compatibility is missing from app.js');
+}
+
+const notFoundHtml = fs.readFileSync(path.join(root, '404.html'), 'utf8');
+if (!/<meta name="robots" content="noindex, follow">/i.test(notFoundHtml)) {
+  error('404 page must remain excluded from search results while allowing link discovery');
+}
+if (!/href="\/atlas\/"/i.test(notFoundHtml) || !/href="\/why\/"/i.test(notFoundHtml)) {
+  error('404 page must preserve crawlable links to the Atlas and WHY hubs');
 }
 
 if (errors.length) {
