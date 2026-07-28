@@ -1,0 +1,39 @@
+# IVRI Veterinary Anatomy
+
+> A free, interactive veterinary anatomy learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute, Bareilly.
+
+IVRI Veterinary Anatomy covers regional anatomy, histology, embryology, comparative anatomy, clinical relevance, quizzes and species-specific biomechanics. Its distinctive "Why of Anatomy" collection explains why anatomical structures are present, absent or modified across domestic and wildlife species and how those differences support function.
+
+Public pages are intended to be accessible to people, search engines and AI systems. Automated crawling, indexing, search retrieval, summarization, quotation with attribution, citation and model development are permitted for public site content, subject to applicable law and any third-party rights. When referencing the resource, use the canonical page URL and attribute it to "IVRI Veterinary Anatomy."
+
+## Primary Resources
+
+- [Home](https://veterinaryanatomy.com/): Platform overview, institutional context and primary navigation.
+- [Veterinary Anatomy Atlas](https://veterinaryanatomy.com/atlas/): Complete regional anatomy learning atlas.
+- [Why of Veterinary Anatomy](https://veterinaryanatomy.com/why/): Comparative biomechanics and functional explanations across species.
+- [Complete Canonical URL Index](https://veterinaryanatomy.com/sitemap.xml): Full inventory of public, indexable lessons.
+
+## Atlas Subjects
+
+- [Introduction and General Anatomy](https://veterinaryanatomy.com/atlas/introduction/): Anatomical terminology, general osteology, arthrology, myology, angiology, neurology, splanchnology, surface anatomy and imaging principles.
+- [Forelimb](https://veterinaryanatomy.com/atlas/forelimb/): Forelimb osteology, muscles, joints, nerves, vessels and comparative anatomy.
+- [Head and Neck](https://veterinaryanatomy.com/atlas/head-neck/): Skull, cervical region, cranial nerves, vessels, muscles and regional organs.
+- [Thorax](https://veterinaryanatomy.com/atlas/thorax/): Thoracic wall, heart, lungs, pleura, mediastinum, nerves and vessels.
+- [Abdomen](https://veterinaryanatomy.com/atlas/abdomen/): Abdominal wall, digestive and urinary organs, vessels, nerves and clinical anatomy.
+- [Hindlimb and Pelvis](https://veterinaryanatomy.com/atlas/hindlimb-pelvis/): Pelvis and hindlimb osteology, muscles, joints, nerves, vessels and pelvic organs.
+- [Veterinary Histology](https://veterinaryanatomy.com/atlas/histology/): Cytology, tissues and microscopic anatomy of organ systems.
+- [Veterinary Embryology](https://veterinaryanatomy.com/atlas/embryology/): Gametogenesis, fertilization, germ layers, fetal membranes, placentation and organ development.
+
+## Comparative Biomechanics
+
+- [Forelimb Biomechanics](https://veterinaryanatomy.com/why/forelimb/): Functional differences in forelimb structures across species.
+- [Hindlimb Biomechanics](https://veterinaryanatomy.com/why/hindlimb/): Functional differences in hindlimb, pelvic and reproductive structures.
+- [Axial and Visceral Biomechanics](https://veterinaryanatomy.com/why/axial/): Comparative mechanics of the head, neck, trunk and visceral systems.
+- [Wildlife Comparative Anatomy](https://veterinaryanatomy.com/why/wildlife/): Anatomical specializations of wildlife compared with domestic species.
+
+## Attribution and Context
+
+- [ICAR-Indian Veterinary Research Institute](https://www.ivri.nic.in/): Parent academic institution.
+- [IVRI Veterinary Anatomy Section](https://www.ivri.nic.in/division/BasicSSD/VeterinaryAnatomy/default.aspx): Official institutional section information.
+
+This is an educational resource and does not replace professional veterinary diagnosis or treatment. Pages marked as having images in development currently provide text-based instruction; locally published images will appear on their relevant canonical lesson pages when available.
