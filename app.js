@@ -51,10 +51,16 @@ const app = {
 
     init: () => {
         const savedTheme = localStorage.getItem('ivri-theme');
-        if (savedTheme === 'professional') {
+        const useAcademicAppearance = savedTheme !== 'neon';
+        if (useAcademicAppearance) {
             document.body.classList.add('professional-mode');
-            const btnText = document.getElementById('theme-text');
-            if (btnText) btnText.innerText = 'Student Mode';
+        }
+        const btnText = document.getElementById('theme-text');
+        const themeToggle = document.getElementById('theme-toggle');
+        if (btnText) btnText.innerText = useAcademicAppearance ? 'Luminous' : 'Academic';
+        if (themeToggle) {
+            themeToggle.title = useAcademicAppearance ? 'Switch to Luminous' : 'Switch to Academic';
+            themeToggle.setAttribute('aria-label', themeToggle.title);
         }
 
         const savedElite = localStorage.getItem('ivri-elite');
@@ -1138,7 +1144,7 @@ const app = {
         const themeDesc = document.getElementById('me-theme-desc');
         if (themeDesc) {
             const isPro = document.body.classList.contains('professional-mode');
-            themeDesc.innerText = isPro ? 'Currently: Professional (medical) — tap to switch' : 'Currently: Student (neon) — tap to switch';
+            themeDesc.innerText = isPro ? 'Currently: Academic — tap to switch' : 'Currently: Luminous — tap to switch';
         }
         // --- Streak block ---
         const streak = app._computeStreak();
@@ -1655,10 +1661,17 @@ const app = {
         localStorage.setItem('ivri-theme', isPro ? 'professional' : 'neon');
 
         const btnText = document.getElementById('theme-text');
-        if (btnText) {
-            btnText.innerText = isPro ? 'Student Mode' : 'Professional Mode';
+        const themeToggle = document.getElementById('theme-toggle');
+        if (btnText) btnText.innerText = isPro ? 'Luminous' : 'Academic';
+        if (themeToggle) {
+            themeToggle.title = isPro ? 'Switch to Luminous' : 'Switch to Academic';
+            themeToggle.setAttribute('aria-label', themeToggle.title);
         }
-        showToast(isPro ? 'Professional mode on' : 'Student mode on', 'info', 'fa-palette');
+        const themeDesc = document.getElementById('me-theme-desc');
+        if (themeDesc) {
+            themeDesc.innerText = isPro ? 'Currently: Academic — tap to switch' : 'Currently: Luminous — tap to switch';
+        }
+        showToast(isPro ? 'Academic appearance on' : 'Luminous appearance on', 'info', 'fa-palette');
     },
 
     toggleElite: () => {
