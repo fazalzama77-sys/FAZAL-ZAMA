@@ -237,8 +237,8 @@ body {
 }
 
 body.professional-mode .landing-bg-video {
-    opacity: 0.85;
-    filter: none;
+    opacity: 0.94;
+    filter: contrast(1.04);
 }
 
 /* System Tag & Monospace line */
@@ -654,8 +654,8 @@ body.professional-mode .hero-right-pane {
     background: #f1f5f9;
 }
 body.professional-mode .hero-right-pane::before {
-    background: linear-gradient(to right, #ffffff 0%, transparent 15%, transparent 85%, #f8fafc 100%),
-                linear-gradient(to bottom, transparent 80%, #f8fafc 100%);
+    background: linear-gradient(to right, #ffffff 0%, transparent 7.5%, transparent 92.5%, #f8fafc 100%),
+                linear-gradient(to bottom, transparent 90%, #f8fafc 100%);
 }
 body.professional-mode .hero-title {
     color: #1a202c;
@@ -8453,4 +8453,126 @@ body.professional-mode #why-view #simplifyBtn:focus-visible {
 #why-view .card {
     color: inherit;
     text-decoration: none;
+}
+
+/* ============================================================
+   ACADEMIC APPEARANCE — POLISHED INTERACTION REFINEMENTS
+   Keep Luminous styling intact while removing neon-like bloom
+   from the light, institution-focused appearance.
+   ============================================================ */
+
+/* Landing cards: quiet elevation, crisp accents, no coloured halo. */
+body.professional-mode #landing-view .portal-card {
+    transition:
+        transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.24s ease,
+        border-color 0.24s ease,
+        border-left-width 0.24s ease,
+        background-color 0.24s ease !important;
+}
+
+body.professional-mode #landing-view .portal-card:hover {
+    transform: translate3d(0, -3px, 0) scale(1.008) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    border-color: rgba(15, 23, 42, 0.13) !important;
+    border-left-color: var(--color) !important;
+    border-left-width: 6px !important;
+    box-shadow:
+        0 12px 26px rgba(15, 23, 42, 0.08),
+        0 2px 6px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.professional-mode #landing-view .portal-card:hover .orb-icon {
+    transform: translate3d(0, -2px, 0) scale(1.025) !important;
+    text-shadow: 0 0 14px var(--glow) !important;
+}
+
+body.professional-mode #landing-view .portal-card:hover .card-label {
+    text-shadow: none !important;
+}
+
+/* The dashboard mark was already strong; reduce its glare by 10%. */
+body.professional-mode #landing-view .card-dashboard {
+    --glow: rgba(189, 147, 249, 0.54);
+}
+
+body.professional-mode #landing-view .card-dashboard .orb-icon,
+body.professional-mode #landing-view .card-dashboard:hover .orb-icon {
+    text-shadow: 0 0 18px var(--glow) !important;
+}
+
+/* Academic streak: cool institutional palette instead of neon orange. */
+body.professional-mode .streak-block,
+body.professional-mode .streak-block.is-active {
+    background: linear-gradient(145deg, #ffffff 0%, #f4f8fc 100%);
+    border-color: #c9d8e8;
+    box-shadow: 0 8px 24px rgba(15, 42, 67, 0.06);
+}
+
+body.professional-mode .streak-block.is-active {
+    border-color: #8fb7dc;
+}
+
+body.professional-mode .streak-flame {
+    background: linear-gradient(145deg, #1565c0, #00897b);
+    color: #ffffff;
+    box-shadow: 0 5px 14px rgba(21, 101, 192, 0.16);
+}
+
+body.professional-mode .streak-block.is-active .streak-flame {
+    animation: none;
+}
+
+body.professional-mode .streak-block.is-active .streak-num {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: #1565c0;
+}
+
+body.professional-mode .hm-cell {
+    background: #e7edf3;
+    border: 1px solid #d8e2ec;
+}
+
+body.professional-mode .hm-cell.hm-on {
+    background: linear-gradient(145deg, #1976d2, #00897b) !important;
+    border-color: rgba(15, 89, 141, 0.26);
+    box-shadow: none;
+}
+
+body.professional-mode .hm-cell:hover {
+    transform: scale(1.12);
+}
+
+body.professional-mode .hm-cell-mini.hm-empty {
+    background: #d8e2ec;
+}
+
+body.professional-mode .hm-cell-mini.hm-on {
+    background: linear-gradient(145deg, #1976d2, #00897b) !important;
+}
+
+/* Academic onboarding: a clear institutional action, not a neon CTA. */
+body.professional-mode .onboard-card {
+    box-shadow: 0 24px 60px rgba(15, 42, 67, 0.18);
+}
+
+body.professional-mode .onboard-dot.on {
+    background: #1976d2;
+    box-shadow: none;
+}
+
+body.professional-mode .onboard-btn.primary {
+    background: #1565c0;
+    color: #ffffff;
+    border-color: #1565c0;
+    box-shadow: 0 6px 16px rgba(21, 101, 192, 0.20);
+}
+
+body.professional-mode .onboard-btn.primary:hover {
+    background: #0d57a8;
+    border-color: #0d57a8;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(21, 101, 192, 0.24);
 }
