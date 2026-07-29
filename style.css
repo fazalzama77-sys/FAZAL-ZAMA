@@ -8576,3 +8576,269 @@ body.professional-mode .onboard-btn.primary:hover {
     transform: translateY(-1px);
     box-shadow: 0 8px 20px rgba(21, 101, 192, 0.24);
 }
+
+/* =========================================================
+   ACADEMIC APPEARANCE — MOBILE WHY, SEARCH, CREDITS & QUIZ
+   These refinements intentionally do not affect Luminous.
+   ========================================================= */
+
+/* Keep the Academic WHY introduction compact and readable on phones. */
+@media (max-width: 700px) {
+    body.professional-mode #why-view header {
+        padding: 64px 0 32px;
+    }
+
+    body.professional-mode #why-view header .container {
+        padding-inline: 18px;
+    }
+
+    body.professional-mode #why-view h1 {
+        width: min(100%, 520px);
+        max-width: 520px;
+        margin: 0 auto 18px;
+        font-size: clamp(2.2rem, 10.5vw, 3rem) !important;
+        line-height: 1.06;
+        letter-spacing: -1.4px;
+        text-wrap: balance;
+    }
+
+    body.professional-mode #why-view .subtitle {
+        display: block;
+        max-width: 92%;
+        margin: 0 auto 18px;
+        font-size: 0.78rem;
+        line-height: 1.5;
+        letter-spacing: 2.3px;
+        text-wrap: balance;
+    }
+
+    body.professional-mode #why-view header p {
+        max-width: 34rem !important;
+        margin-inline: auto !important;
+        padding-inline: 4px;
+        font-size: 0.96rem;
+        line-height: 1.58;
+        text-wrap: pretty;
+    }
+}
+
+@media (max-width: 400px) {
+    body.professional-mode #why-view h1 {
+        font-size: clamp(2.05rem, 10.3vw, 2.6rem) !important;
+        letter-spacing: -1px;
+    }
+}
+
+/* Give both credit panels equally clear, restrained hover affordances. */
+body.professional-mode .credit-col:hover {
+    border-color: #1976d2 !important;
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 26px rgba(15, 42, 67, 0.10),
+        0 0 0 2px rgba(25, 118, 210, 0.12) !important;
+}
+
+body.professional-mode .credit-col:nth-child(2):hover {
+    border-color: #00897b !important;
+    box-shadow:
+        0 10px 26px rgba(15, 42, 67, 0.10),
+        0 0 0 2px rgba(0, 137, 123, 0.12) !important;
+}
+
+/* Academic global search: white reading surface with accessible contrast. */
+body.professional-mode .search-overlay {
+    background: rgba(15, 23, 42, 0.66);
+    backdrop-filter: blur(14px);
+}
+
+body.professional-mode .search-input {
+    background: #ffffff;
+    border-color: #9fb4c7;
+    color: #102a43;
+    box-shadow: 0 12px 30px rgba(15, 42, 67, 0.14);
+}
+
+body.professional-mode .search-input::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+body.professional-mode .search-input:focus {
+    border-color: #00897b;
+    box-shadow:
+        0 0 0 4px rgba(0, 137, 123, 0.14),
+        0 14px 34px rgba(15, 42, 67, 0.16);
+}
+
+body.professional-mode .search-input-wrapper .search-icon {
+    color: #00897b;
+}
+
+body.professional-mode .search-kbd,
+body.professional-mode .search-empty kbd {
+    background: #edf3f8;
+    border-color: #cbd8e5;
+    color: #475569;
+}
+
+body.professional-mode .search-results {
+    background: #ffffff;
+    border-color: #cbd8e5;
+    box-shadow: 0 18px 44px rgba(15, 42, 67, 0.18);
+    scrollbar-color: #7a9bb8 #edf3f8;
+}
+
+body.professional-mode .search-results::-webkit-scrollbar-thumb {
+    background: #7a9bb8;
+}
+
+body.professional-mode .search-empty,
+body.professional-mode .search-result-count {
+    color: #526579;
+}
+
+body.professional-mode .search-result-count {
+    border-bottom-color: #dbe5ee;
+}
+
+body.professional-mode .search-group-title {
+    color: #1565c0;
+}
+
+body.professional-mode .search-result-card {
+    background: #f8fafc;
+    border-color: #dbe5ee;
+}
+
+body.professional-mode .search-result-card:hover {
+    background: #ffffff;
+    border-color: #00897b;
+    transform: translateX(2px);
+    box-shadow: 0 7px 18px rgba(15, 42, 67, 0.09);
+}
+
+body.professional-mode .search-result-title {
+    color: #102a43;
+}
+
+body.professional-mode .search-result-desc {
+    color: #526579;
+}
+
+body.professional-mode .search-result-title mark {
+    background: #d9f3ee;
+    color: #00695c;
+}
+
+body.professional-mode .search-result-desc mark {
+    background: #e8f1fb;
+    color: #0d47a1;
+}
+
+body.professional-mode .region-badge {
+    background: #e8f1fb;
+    border-color: #b8cfe7;
+    color: #155ea8;
+}
+
+body.professional-mode .system-badge {
+    background: #e4f4f1;
+    border-color: #aad8cf;
+    color: #00796b;
+}
+
+body.professional-mode .mode-badge {
+    background: #f0ecf7;
+    border-color: #d1c4e9;
+    color: #5e4a8a;
+}
+
+/* Academic main quiz: calm medical blue/teal with restrained status colors. */
+body.professional-mode #quiz-overlay {
+    background: rgba(228, 237, 245, 0.94);
+    backdrop-filter: blur(12px);
+}
+
+body.professional-mode #quiz-overlay .quiz-modal {
+    background: #ffffff;
+    border: 1px solid #c9d8e8;
+    border-top: 4px solid #1565c0;
+    box-shadow: 0 24px 60px rgba(15, 42, 67, 0.16);
+}
+
+body.professional-mode #quiz-overlay .quiz-active-header {
+    border-bottom-color: #dbe5ee;
+}
+
+body.professional-mode #quiz-overlay .progress-container {
+    background: #e7eef5;
+}
+
+body.professional-mode #quiz-overlay .progress-bar {
+    background: linear-gradient(90deg, #1565c0, #00897b);
+    box-shadow: none;
+}
+
+body.professional-mode #quiz-overlay .quiz-question-text {
+    color: #172b3a;
+}
+
+body.professional-mode #quiz-overlay .quiz-option {
+    background: #f8fafc;
+    border-color: #d5e1eb;
+    color: #334155;
+}
+
+body.professional-mode #quiz-overlay .quiz-option:hover {
+    background: #f0f6fb;
+    border-color: #5f91bf;
+    color: #172b3a;
+    transform: translateX(2px);
+}
+
+body.professional-mode #quiz-overlay .quiz-option.correct {
+    background: #effaf6;
+    border-color: #3b9b7a;
+    color: #185c49;
+    opacity: 1;
+}
+
+body.professional-mode #quiz-overlay .quiz-option.wrong {
+    background: #fff5f5;
+    border-color: #d97777;
+    color: #8b3434;
+    opacity: 1;
+}
+
+body.professional-mode #quiz-overlay .quiz-option.selected {
+    background: #eef5fc;
+    border-color: #3978b5;
+    color: #174d7a;
+    box-shadow: 0 0 0 2px rgba(57, 120, 181, 0.12);
+}
+
+body.professional-mode #quiz-overlay .feedback-panel {
+    background: #f7f9fb;
+    border: 1px solid #d7e1ea;
+    border-left: 4px solid #d97745;
+    border-top-color: #d7e1ea;
+    color: #334155;
+    box-shadow: 0 8px 20px rgba(15, 42, 67, 0.07);
+}
+
+body.professional-mode #quiz-overlay .feedback-panel > div:last-child {
+    color: #334155 !important;
+}
+
+body.professional-mode #quiz-overlay .quiz-mode-card {
+    background: #f8fafc;
+    border-color: #d5e1eb;
+    box-shadow: none;
+}
+
+body.professional-mode #quiz-overlay .quiz-mode-card:hover {
+    background: #ffffff;
+    border-color: #3978b5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 42, 67, 0.09);
+}

@@ -57,7 +57,7 @@ const app = {
         }
         const btnText = document.getElementById('theme-text');
         const themeToggle = document.getElementById('theme-toggle');
-        if (btnText) btnText.innerText = useAcademicAppearance ? 'Luminous' : 'Academic';
+        if (btnText) btnText.innerText = useAcademicAppearance ? 'Academic' : 'Luminous';
         if (themeToggle) {
             themeToggle.title = useAcademicAppearance ? 'Switch to Luminous' : 'Switch to Academic';
             themeToggle.setAttribute('aria-label', themeToggle.title);
@@ -1662,7 +1662,7 @@ const app = {
 
         const btnText = document.getElementById('theme-text');
         const themeToggle = document.getElementById('theme-toggle');
-        if (btnText) btnText.innerText = isPro ? 'Luminous' : 'Academic';
+        if (btnText) btnText.innerText = isPro ? 'Academic' : 'Luminous';
         if (themeToggle) {
             themeToggle.title = isPro ? 'Switch to Luminous' : 'Switch to Academic';
             themeToggle.setAttribute('aria-label', themeToggle.title);

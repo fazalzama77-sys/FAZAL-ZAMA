@@ -1777,3 +1777,151 @@ body.professional-mode .exam-config-card .modal-close:hover {
   color: var(--medical-coral, #ff7043) !important;
   transform: rotate(90deg) scale(1.08);
 }
+
+/* =========================================================
+   ACADEMIC QUIZ REFINEMENT
+   A calmer medical-blue review system with accessible contrast.
+   ========================================================= */
+body.professional-mode #quiz-review-view,
+body.professional-mode #quiz-analysis-view {
+  color: #263b4d;
+}
+
+body.professional-mode .review-header,
+body.professional-mode .analysis-header {
+  border-color: #dbe5ee;
+}
+
+body.professional-mode .review-header h2,
+body.professional-mode .analysis-header h2 {
+  color: #0f4f78;
+}
+
+body.professional-mode .review-jump-nav,
+body.professional-mode .review-stats-bar,
+body.professional-mode .analysis-stats-grid,
+body.professional-mode .breakdown-item {
+  background: #f8fafc;
+  border-color: #d5e1eb;
+  box-shadow: none;
+}
+
+body.professional-mode .review-jump-btn {
+  background: #ffffff;
+  border-color: #d5e1eb;
+  color: #526579;
+}
+
+body.professional-mode .review-jump-btn:hover {
+  background: #eef5fb;
+  border-color: #6e9bc4;
+  color: #174d7a;
+  transform: translateY(-1px);
+}
+
+body.professional-mode .review-card {
+  background: #ffffff;
+  border-color: #d5e1eb;
+  box-shadow: 0 5px 16px rgba(15, 42, 67, 0.06);
+}
+
+body.professional-mode .review-card:hover {
+  border-color: #6e9bc4;
+  box-shadow: 0 9px 24px rgba(15, 42, 67, 0.10);
+  transform: translateY(-1px);
+}
+
+body.professional-mode .review-card.correct {
+  border-left-color: #3b9b7a;
+  background: linear-gradient(90deg, #f2faf7 0%, #ffffff 18%);
+}
+
+body.professional-mode .review-card.incorrect {
+  border-left-color: #cf6666;
+  background: linear-gradient(90deg, #fff6f6 0%, #ffffff 18%);
+}
+
+body.professional-mode .review-card.unanswered {
+  border-left-color: #78909c;
+  background: linear-gradient(90deg, #f5f7f9 0%, #ffffff 18%);
+}
+
+body.professional-mode .review-question {
+  background: #f4f7fa;
+  border-left-color: #3978b5;
+  color: #172b3a;
+}
+
+body.professional-mode .review-answers-section > div[style] {
+  background: #ffffff !important;
+  border-color: #d5e1eb !important;
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+body.professional-mode .review-answers-section > div[style*="rgba(0,255,157"] {
+  background: #effaf6 !important;
+  border-color: #8bc7b2 !important;
+}
+
+body.professional-mode .review-answers-section > div[style*="rgba(255,107,107"] {
+  background: #fff5f5 !important;
+  border-color: #e1a3a3 !important;
+}
+
+body.professional-mode .review-answers-section [style*="#00ff9d"] {
+  color: #247a5b !important;
+}
+
+body.professional-mode .review-answers-section [style*="#ff6b6b"] {
+  color: #b64f4f !important;
+}
+
+body.professional-mode .review-explanation {
+  background: #f4f8fc;
+  border-color: #cbdceb;
+  color: #334155;
+}
+
+body.professional-mode .review-explanation strong {
+  color: #155ea8;
+}
+
+body.professional-mode .analysis-recommendation {
+  background: #f5f8fb;
+  border-color: #d5e1eb;
+  color: #334155;
+}
+
+body.professional-mode .question-grid-panel {
+  background: #f8fafc;
+  border-left-color: #c9d8e8;
+  box-shadow: -12px 0 30px rgba(15, 42, 67, 0.10);
+}
+
+body.professional-mode .question-grid-btn.incorrect,
+body.professional-mode .review-jump-btn.incorrect-dot {
+  background: #fff3f3;
+  border-color: #d78a8a;
+  color: #9d4141;
+}
+
+body.professional-mode .question-grid-btn.correct,
+body.professional-mode .review-jump-btn.correct-dot {
+  background: #edf8f4;
+  border-color: #72b69d;
+  color: #226b53;
+}
+
+body.professional-mode .quiz-submit-btn {
+  background: #e9f7f4;
+  border-color: #65ad9f;
+  color: #00695c;
+  box-shadow: none;
+}
+
+body.professional-mode .quiz-submit-btn:hover {
+  background: #dff2ee;
+  border-color: #00897b;
+  transform: translateY(-1px);
+}
