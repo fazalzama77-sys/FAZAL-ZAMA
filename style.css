@@ -8842,3 +8842,104 @@ body.professional-mode #quiz-overlay .quiz-mode-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(15, 42, 67, 0.09);
 }
+
+/* =========================================================
+   ACADEMIC APPEARANCE — HEADER AND ONBOARDING POLISH
+   ========================================================= */
+
+/* A crisp institutional search control that stays visible over hero media. */
+body.professional-mode .search-toggle-btn {
+    background: rgba(255, 255, 255, 0.96);
+    color: #155ea8;
+    border: 1px solid #b9cde0;
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 7px 20px rgba(15, 42, 67, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.72);
+}
+
+body.professional-mode .search-toggle-btn:hover {
+    background: #ffffff;
+    color: #00796b;
+    border-color: #72b7aa;
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 24px rgba(15, 42, 67, 0.16),
+        0 0 0 3px rgba(0, 137, 123, 0.10);
+}
+
+body.professional-mode .search-toggle-btn:focus-visible {
+    outline: 3px solid rgba(21, 101, 192, 0.24);
+    outline-offset: 3px;
+}
+
+/* Academic onboarding uses a bright, controlled multi-colour learning palette. */
+body.professional-mode .onboard-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    background: var(--onboard-icon-bg);
+    border: 1px solid var(--onboard-icon-border);
+    color: var(--onboard-icon-color) !important;
+    filter: none;
+    box-shadow: 0 8px 22px var(--onboard-icon-shadow);
+}
+
+body.professional-mode .onboard-icon[data-slide="0"] {
+    --onboard-icon-color: #2f80ed;
+    --onboard-icon-bg: #edf5ff;
+    --onboard-icon-border: #c9dfff;
+    --onboard-icon-shadow: rgba(47, 128, 237, 0.24);
+}
+
+body.professional-mode .onboard-icon[data-slide="1"] {
+    --onboard-icon-color: #7569e8;
+    --onboard-icon-bg: #f1efff;
+    --onboard-icon-border: #d8d3ff;
+    --onboard-icon-shadow: rgba(117, 105, 232, 0.23);
+}
+
+body.professional-mode .onboard-icon[data-slide="2"] {
+    --onboard-icon-color: #0f9f8f;
+    --onboard-icon-bg: #eafaf7;
+    --onboard-icon-border: #bceae3;
+    --onboard-icon-shadow: rgba(15, 159, 143, 0.22);
+}
+
+body.professional-mode .onboard-icon[data-slide="3"] {
+    --onboard-icon-color: #e18432;
+    --onboard-icon-bg: #fff4e8;
+    --onboard-icon-border: #f6d7b5;
+    --onboard-icon-shadow: rgba(225, 132, 50, 0.22);
+}
+
+body.professional-mode .onboard-icon[data-slide="4"] {
+    --onboard-icon-color: #a25dd4;
+    --onboard-icon-bg: #f8effd;
+    --onboard-icon-border: #e5c9f4;
+    --onboard-icon-shadow: rgba(162, 93, 212, 0.22);
+}
+
+/* Strengthen the institutional eyebrow without adding neon glow. */
+body.professional-mode .hero-sys-tag {
+    color: #5b3bb4;
+    font-weight: 800;
+}
+
+body.professional-mode .hero-sys-tag::after {
+    background-color: #5b3bb4;
+}
+
+body.professional-mode .tag-line {
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(91, 59, 180, 0.38),
+        #5b3bb4 50%,
+        rgba(91, 59, 180, 0.38)
+    );
+    background-size: 200% 100%;
+}

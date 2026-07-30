@@ -563,7 +563,7 @@ const app = {
         const card = modal.querySelector('.onboard-card');
         card.innerHTML = `
             <button class="onboard-skip" onclick="app.closeOnboarding(true)">Skip</button>
-            <div class="onboard-icon" style="color:${s.accent};"><i class="fas ${s.icon}"></i></div>
+            <div class="onboard-icon" data-slide="${i}" style="color:${s.accent};"><i class="fas ${s.icon}"></i></div>
             <h2 class="onboard-title">${s.title}</h2>
             <p class="onboard-body">${s.body}</p>
             <div class="onboard-dots">
