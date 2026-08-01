@@ -297,14 +297,21 @@ body.professional-mode .landing-bg-video {
     -webkit-text-fill-color: initial;
 }
 
-.hero-subtitle {
+.hero-credit {
     font-family: var(--font-ui);
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.4;
     color: var(--text-mute);
-    max-width: 580px;
     text-align: left;
-    margin: 0 0 32px 0;
+    margin: 0 0 28px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    letter-spacing: 0.15px;
+}
+
+.hero-credit i {
+    color: #bd93f9;
 }
 
 .hero-ctas {
@@ -325,6 +332,7 @@ body.professional-mode .landing-bg-video {
     display: flex;
     align-items: center;
     gap: 8px;
+    text-decoration: none;
 }
 .cta-primary {
     background: linear-gradient(135deg, var(--atlas-gold) 0%, #ffb300 100%);
@@ -672,8 +680,11 @@ body.professional-mode .tag-line {
     background: linear-gradient(90deg, rgba(126, 87, 194, 0.2), #7e57c2, rgba(126, 87, 194, 0.2));
     background-size: 200% 100%;
 }
-body.professional-mode .hero-subtitle {
+body.professional-mode .hero-credit {
     color: #455a64;
+}
+body.professional-mode .hero-credit i {
+    color: #5b3bb4;
 }
 body.professional-mode .cta-primary {
     background: linear-gradient(135deg, var(--atlas-gold) 0%, #0d47a1 100%);
@@ -759,13 +770,12 @@ body.professional-mode .portal-card:hover .card-desc {
         text-align: center;
         width: 100%;
     }
-    .hero-subtitle {
-        font-size: 0.92rem;
-        line-height: 1.55;
+    .hero-credit {
+        font-size: 0.82rem;
+        line-height: 1.4;
         text-align: center;
-        max-width: 480px;
-        margin: 0 auto 20px auto;
-        width: 100%;
+        margin: 0 auto 22px auto;
+        justify-content: center;
     }
 
     /* ── CTA Buttons — Side by side, centered, compact ── */
@@ -895,8 +905,8 @@ body.professional-mode .portal-card:hover .card-desc {
     .hero-title {
         font-size: 1.7rem;
     }
-    .hero-subtitle {
-        font-size: 0.85rem;
+    .hero-credit {
+        font-size: 0.78rem;
     }
     .hero-cta {
         padding: 10px 12px;
@@ -910,7 +920,7 @@ body.professional-mode .portal-card:hover .card-desc {
 /* Staggered entrance for landing — each element slides in 80ms after the previous */
 #landing-view.active .hero-sys-tag { animation: sysTagInit 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
 #landing-view.active .hero-title   { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .12s both; }
-#landing-view.active .hero-subtitle { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .18s both; }
+#landing-view.active .hero-credit   { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .18s both; }
 #landing-view.active .hero-ctas     { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .24s both; }
 #landing-view.active .hero-stats-strip { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .30s both; }
 #landing-view.active .portal-grid  { animation: heroEnter .65s cubic-bezier(.4,0,.2,1)  .36s both; }
@@ -958,7 +968,7 @@ body.professional-mode .portal-card:hover .card-desc {
 @media (prefers-reduced-motion: reduce) {
     #landing-view.active .hero-sys-tag,
     #landing-view.active .hero-title,
-    #landing-view.active .hero-subtitle,
+    #landing-view.active .hero-credit,
     #landing-view.active .hero-ctas,
     #landing-view.active .hero-stats-strip,
     #landing-view.active .portal-grid,
@@ -1941,6 +1951,10 @@ body.professional-mode .footer-logo-img {
 .footer-tools {
     margin-top: 28px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 .footer-tool-btn {
     background: transparent;
@@ -5391,6 +5405,53 @@ body.professional-mode .img-placeholder-text {
     font-weight: 500;
 }
 
+/* Crawlable subject directory: visible to students and search engines. */
+.footer-resource-nav {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+}
+.footer-resource-heading {
+    margin-bottom: 14px;
+    color: var(--atlas-gold);
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+.footer-resource-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 18px;
+}
+.footer-resource-links a {
+    color: var(--text-mute);
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.84rem;
+    line-height: 1.4;
+    text-decoration: none;
+}
+.footer-resource-links a:hover,
+.footer-resource-links a:focus-visible {
+    color: var(--why-cyan);
+    text-decoration: underline;
+}
+
+body.professional-mode .footer-resource-nav {
+    background: rgba(21, 101, 192, 0.035);
+}
+body.professional-mode .footer-resource-heading {
+    color: #1565c0;
+}
+body.professional-mode .footer-resource-links a:hover,
+body.professional-mode .footer-resource-links a:focus-visible {
+    color: #1565c0;
+}
+
 body.professional-mode .atlas-image-placeholder {
     background: rgba(21, 101, 192, 0.035);
     border: 1px dashed rgba(21, 101, 192, 0.28);
@@ -8377,7 +8438,7 @@ body.professional-mode #why-view #simplifyBtn:focus-visible {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     #why-view .modal-content,
     body.professional-mode #why-view .modal-content {
         grid-template-columns: minmax(0, 1fr) !important;

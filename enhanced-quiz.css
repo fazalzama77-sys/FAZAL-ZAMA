@@ -1169,7 +1169,7 @@ body.professional-mode .review-back-to-top {
 }
 
 /* ==================== RESPONSIVE ==================== */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   #quiz-overlay {
     width: 100vw;
     height: 100dvh;
@@ -1924,4 +1924,42 @@ body.professional-mode .quiz-submit-btn:hover {
   background: #dff2ee;
   border-color: #00897b;
   transform: translateY(-1px);
+}
+
+/* Touch and wide-phone quiz state: visually and interactively owns the viewport. */
+body #quiz-overlay.quiz-immersive {
+  inset: 0;
+  width: 100dvw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+body #quiz-overlay.quiz-immersive .quiz-modal {
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(12px, env(safe-area-inset-bottom, 0px)) !important;
+  border-radius: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  box-shadow: none;
+}
+
+body.quiz-immersive-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+body.quiz-immersive-open #quiz-overlay,
+body.quiz-immersive-open #quiz-overlay * {
+  touch-action: manipulation;
 }

@@ -1117,6 +1117,12 @@ const app = {
     },
 
     openQuiz: () => {
+        if (typeof quizApp !== 'undefined' && quizApp.isCompactDevice?.() && location.pathname !== '/quiz/') {
+            quizApp._immersiveReturnUrl = `${location.pathname}${location.search}${location.hash}`;
+            quizApp._immersiveHistoryEntry = true;
+            app.navigatePath('/quiz/', { route: true });
+            return;
+        }
         if (typeof quizApp !== 'undefined' && quizApp.openMenu) {
             quizApp.openMenu();
         }

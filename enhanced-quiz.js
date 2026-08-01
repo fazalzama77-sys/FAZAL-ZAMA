@@ -20,6 +20,77 @@ const quizApp = {
   endTime: null,
   timerInterval: null,
   quizState: 'menu', // menu, active, paused, completed, reviewing
+  _immersiveReturnUrl: null,
+  _immersiveHistoryEntry: false,
+  _immersiveBackgroundStates: [],
+  _immersiveTrigger: null,
+
+  isCompactDevice: () => window.matchMedia('(max-width: 1100px), (hover: none) and (pointer: coarse)').matches,
+
+  enterImmersive: ({ pushRoute = false } = {}) => {
+    const overlay = document.getElementById('quiz-overlay');
+    if (!overlay) return false;
+
+    const compact = quizApp.isCompactDevice();
+    overlay.classList.toggle('quiz-immersive', compact);
+    overlay.setAttribute('aria-hidden', 'false');
+
+    if (!compact) return false;
+
+    const activeView = document.querySelector('.view-section.active')
+      || (typeof app !== 'undefined' ? document.getElementById(`${app.state.view}-view`) : null);
+    quizApp._immersiveTrigger = document.activeElement;
+    quizApp._immersiveBackgroundStates = [
+      activeView,
+      document.getElementById('bottom-nav')
+    ].filter(Boolean).map(element => ({
+      element,
+      inert: element.inert,
+      hadInertAttribute: element.hasAttribute('inert'),
+      ariaHidden: element.getAttribute('aria-hidden')
+    }));
+
+    quizApp._immersiveBackgroundStates.forEach(({ element }) => {
+      element.inert = true;
+      element.setAttribute('inert', '');
+      element.setAttribute('aria-hidden', 'true');
+    });
+    document.body.classList.add('quiz-immersive-open');
+
+    if (pushRoute && location.pathname !== '/quiz/') {
+      quizApp._immersiveReturnUrl = `${location.pathname}${location.search}${location.hash}`;
+      history.pushState({ ivriQuizOverlay: true }, '', '/quiz/');
+      quizApp._immersiveHistoryEntry = true;
+    }
+
+    requestAnimationFrame(() => document.querySelector('#quiz-overlay .quiz-close-btn')?.focus());
+    return true;
+  },
+
+  exitImmersive: ({ navigateBack = true } = {}) => {
+    const overlay = document.getElementById('quiz-overlay');
+    if (overlay) {
+      overlay.classList.remove('quiz-immersive');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    document.body.classList.remove('quiz-immersive-open');
+
+    quizApp._immersiveBackgroundStates.forEach(({ element, inert, hadInertAttribute, ariaHidden }) => {
+      element.inert = inert;
+      if (!hadInertAttribute) element.removeAttribute('inert');
+      if (ariaHidden === null) element.removeAttribute('aria-hidden');
+      else element.setAttribute('aria-hidden', ariaHidden);
+    });
+    quizApp._immersiveBackgroundStates = [];
+
+    const shouldGoBack = navigateBack && quizApp._immersiveHistoryEntry && location.pathname === '/quiz/';
+    quizApp._immersiveHistoryEntry = false;
+    quizApp._immersiveReturnUrl = null;
+
+    if (shouldGoBack) history.back();
+    else if (quizApp._immersiveTrigger?.isConnected) quizApp._immersiveTrigger.focus();
+    quizApp._immersiveTrigger = null;
+  },
 
   // Configuration
   regions: ["Forelimb", "Hindlimb & Pelvis", "Head & Neck", "Thorax", "Abdomen"],
@@ -113,7 +184,9 @@ const quizApp = {
   // ==================== INITIALIZATION ====================
 
   openMenu: () => {
-    document.getElementById('quiz-overlay').style.display = 'flex';
+    const overlay = document.getElementById('quiz-overlay');
+    overlay.style.display = 'flex';
+    quizApp.enterImmersive();
     document.querySelector('.quiz-modal').classList.remove('review-mode');
     document.body.classList.add('body-modal-open');   // hides floating toggle
     document.body.style.overflow = 'hidden';
@@ -134,6 +207,7 @@ const quizApp = {
       document.getElementById('quiz-overlay').style.display = 'none';
       document.body.classList.remove('body-modal-open');
       document.body.style.overflow = '';
+      quizApp.exitImmersive();
       // If this was a Smart Review session, refresh the dashboard panel
       // so the user immediately sees their updated box counts + due counters.
       if (quizApp._isSmartReview && typeof dashboard !== 'undefined' && typeof dashboard.renderSrsPanel === 'function') {
@@ -512,6 +586,7 @@ const quizApp = {
     const modal = document.querySelector('.quiz-modal');
     modal.classList.remove('review-mode');
     overlay.style.display = 'flex';
+    quizApp.enterImmersive({ pushRoute: true });
     quizApp.hideAllViews();
     document.getElementById('quiz-active-view').style.display = 'flex';
     quizApp.updateLegend();
@@ -1783,6 +1858,22 @@ const quizApp = {
     return "fa-book-medical";
   }
 };
+
+// Treat the browser Back action as the mobile quiz's close control.
+window.addEventListener('popstate', () => {
+  requestAnimationFrame(() => {
+    const overlay = document.getElementById('quiz-overlay');
+    if (!overlay || overlay.style.display !== 'flex' || !overlay.classList.contains('quiz-immersive')) return;
+    if (location.pathname === '/quiz/') return;
+
+    quizApp.cleanup();
+    overlay.style.display = 'none';
+    document.body.classList.remove('body-modal-open');
+    document.body.style.overflow = '';
+    quizApp.exitImmersive({ navigateBack: false });
+    quizApp._isSmartReview = false;
+  });
+});
 
 // =========================================================
 // KEYBOARD NAVIGATION
