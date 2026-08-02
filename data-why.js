@@ -1189,7 +1189,7 @@ anatomyData = [
         title: "Sow vs Cow Mammary Chain",
         category: "axial",
         comparison: "Sow vs. Cow",
-        why: "Sows have <b>multiple paired mammary glands</b> (6-8 pairs) arranged in a row from thorax to inguinal region — adapted for litter pregnancies. Each teat has 2 streak canals. Cow has 4 quarters with 4 teats — adapted for one (occasionally two) calves. Bitch similar to sow (5 pairs); mare has 2 teats only (single foal).",
+        why: "Sows have <b>multiple paired mammary glands</b> (6-8 pairs) arranged in a row from thorax to inguinal region — designed for litter pregnancies. Each teat has 2 streak canals. Cow has 4 quarters with 4 teats — designed for one (occasionally two) calves. Bitch similar to sow (5 pairs); mare has 2 teats only (single foal).",
         clinical: "<b>'Teat order' in piglets:</b> Newborn piglets establish a hierarchy by claiming a specific teat — best teats (cranial = more milk) go to dominant piglets. Failure to suckle from a personal teat → starvation. <b>Bovine mastitis:</b> Easier to manage per-quarter due to functional independence.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Pig_snout.jpg/640px-Pig_snout.jpg",
         analogy: "Cow udder = single 4-tap kitchen tank. Sow udder = a long row of 16 mini-taps along the belly, one per piglet.",
