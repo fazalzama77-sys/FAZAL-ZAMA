@@ -8878,6 +8878,350 @@ body.professional-mode #quiz-overlay .quiz-option.selected {
     box-shadow: 0 0 0 2px rgba(57, 120, 181, 0.12);
 }
 
+/* =========================================================
+   LOCAL VISUAL REFINEMENT — FOOTER, CREDITS, ATLAS & QUIZ
+   ========================================================= */
+
+/* Present the subject directory as a deliberate navigation panel, not a text dump. */
+.footer-resource-nav {
+    max-width: 960px;
+    margin-top: 24px;
+    padding: 22px;
+    border: 1px solid rgba(49, 168, 219, 0.38);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(9, 42, 72, 0.92), rgba(5, 25, 48, 0.96));
+    box-shadow: 0 14px 32px rgba(0, 8, 24, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.footer-resource-heading {
+    margin-bottom: 16px;
+    color: #7dd8ff;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+}
+
+.footer-resource-links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.footer-resource-links a {
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 9px 12px;
+    border: 1px solid rgba(125, 216, 255, 0.16);
+    border-radius: 9px;
+    background: rgba(125, 216, 255, 0.055);
+    color: #c5dced;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: left;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.footer-resource-links a:hover,
+.footer-resource-links a:focus-visible {
+    color: #ffffff;
+    border-color: #42bfe9;
+    background: rgba(48, 174, 221, 0.16);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.footer-tools {
+    margin-top: 18px;
+}
+
+.footer-tool-btn {
+    min-height: 42px;
+    padding: 9px 16px;
+    border-color: rgba(125, 216, 255, 0.28);
+    border-radius: 9px;
+    background: rgba(125, 216, 255, 0.06);
+    color: #b7d5e8;
+    font-weight: 700;
+}
+
+/* Restore a restrained, compact credit block on large screens. */
+.footer-credits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 960px;
+}
+
+.credit-col {
+    padding: 20px 22px;
+}
+
+.credit-heading {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+}
+
+.credit-list li {
+    padding: 8px 0;
+}
+
+/* Academic: quiet institutional blue with strong reading contrast. */
+body.professional-mode .footer-resource-nav {
+    background: linear-gradient(145deg, #f7fbff, #edf5fc);
+    border-color: #b8d4ec;
+    box-shadow: 0 10px 26px rgba(15, 78, 129, 0.08);
+}
+
+body.professional-mode .footer-resource-heading {
+    color: #0d5fa9;
+}
+
+body.professional-mode .footer-resource-links a {
+    background: #ffffff;
+    border-color: #c9dced;
+    color: #315b78;
+}
+
+body.professional-mode .footer-resource-links a:hover,
+body.professional-mode .footer-resource-links a:focus-visible {
+    background: #e7f2fc;
+    border-color: #2879bc;
+    color: #0b4f87;
+}
+
+body.professional-mode .footer-tool-btn {
+    background: #ffffff;
+    border-color: #b9cee0;
+    color: #315b78;
+    box-shadow: 0 3px 10px rgba(15, 78, 129, 0.05);
+}
+
+/* Luminous: one coherent navy/cyan footer system from credits through tools. */
+body:not(.professional-mode) .footer {
+    background: #03101f;
+    border-top-color: rgba(69, 94, 121, 0.34);
+}
+
+body:not(.professional-mode) .footer-logo-space {
+    min-height: 110px;
+    margin-bottom: 28px;
+}
+
+body:not(.professional-mode) .footer-logo-img {
+    max-height: 110px;
+    padding: 12px 20px;
+    border: none;
+    background: #ffffff;
+    box-shadow: none;
+    filter: none;
+}
+
+body:not(.professional-mode) .footer-credits {
+    max-width: 1116px;
+    gap: 32px;
+}
+
+body:not(.professional-mode) .credit-col {
+    padding: 30px 34px;
+    background: #091523;
+    border-color: #243447;
+    border-radius: 14px;
+    box-shadow: none;
+}
+
+body:not(.professional-mode) .credit-col:hover,
+body:not(.professional-mode) .credit-col:nth-child(2):hover {
+    box-shadow: none;
+}
+
+body:not(.professional-mode) .credit-col:hover {
+    border-color: #ffe34d;
+}
+
+body:not(.professional-mode) .credit-col:nth-child(2):hover {
+    border-color: #42f1fa;
+}
+
+body:not(.professional-mode) .credit-heading {
+    color: #ffd600;
+    border-bottom-color: rgba(115, 137, 162, 0.22);
+}
+
+body:not(.professional-mode) .credit-col:nth-child(2) .credit-heading {
+    color: #00e6f2;
+}
+
+body:not(.professional-mode) .credit-list li {
+    padding: 13px 0;
+    border-bottom-color: rgba(115, 137, 162, 0.14);
+}
+
+body:not(.professional-mode) .credit-contact {
+    color: #00dce8;
+}
+
+body:not(.professional-mode) .credit-foot,
+body:not(.professional-mode) .credit-role {
+    color: #8390aa;
+    opacity: 1;
+}
+
+body:not(.professional-mode) .footer-resource-nav {
+    max-width: 1116px;
+    margin-top: 32px;
+    padding: 26px 30px;
+    background: #091523;
+    border-color: #243447;
+    border-radius: 14px;
+    box-shadow: none;
+}
+
+body:not(.professional-mode) .footer-resource-heading {
+    margin-bottom: 22px;
+    color: #ffd600;
+}
+
+body:not(.professional-mode) .footer-resource-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 28px;
+}
+
+body:not(.professional-mode) .footer-resource-links a {
+    display: inline;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: #8f9bb5;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+body:not(.professional-mode) .footer-resource-links a:hover,
+body:not(.professional-mode) .footer-resource-links a:focus-visible {
+    color: #00dce8;
+    background: transparent;
+    border-color: transparent;
+    transform: none;
+    text-decoration: underline;
+}
+
+body:not(.professional-mode) .footer-tool-btn {
+    background: transparent;
+    border-color: #243447;
+    color: #8390aa;
+}
+
+/* Make the missing-image state readable and intentional in both appearances. */
+#why-view .modal-image-col {
+    background: linear-gradient(145deg, #0b2742, #071a2f) !important;
+}
+
+#why-view .modal-image-progress {
+    width: min(100%, 440px);
+    min-height: 230px;
+    border-style: solid;
+    border-color: rgba(103, 207, 246, 0.42);
+    background: rgba(8, 38, 66, 0.92);
+    color: #c2d8e7;
+    box-shadow: 0 18px 40px rgba(0, 8, 24, 0.25);
+}
+
+#why-view .modal-image-progress i,
+#why-view .modal-image-progress strong {
+    color: #75dcff;
+    opacity: 1;
+}
+
+#why-view .modal-image-progress span {
+    max-width: 360px;
+    color: #b7cedf;
+}
+
+body.professional-mode #why-view .modal-image-col {
+    background: linear-gradient(145deg, #f8fbff, #eaf3fb) !important;
+}
+
+body.professional-mode #why-view .modal-image-progress {
+    border-color: #8db9dc;
+    background: #ffffff;
+    color: #334e68;
+    box-shadow: 0 14px 32px rgba(15, 78, 129, 0.12);
+}
+
+body.professional-mode #why-view .modal-image-progress i,
+body.professional-mode #why-view .modal-image-progress strong {
+    color: #1565c0;
+}
+
+body.professional-mode #why-view .modal-image-progress span {
+    color: #526d82;
+}
+
+/* Stronger answer-state hierarchy in the active quiz. */
+#quiz-overlay .quiz-option {
+    border-width: 2px;
+    border-radius: 11px;
+}
+
+#quiz-overlay .quiz-option.correct {
+    border-color: #35d89a;
+    background: rgba(31, 179, 123, 0.18);
+    color: #eafff7;
+    opacity: 1;
+    box-shadow: inset 4px 0 0 #35d89a;
+}
+
+#quiz-overlay .quiz-option.wrong {
+    border-color: #ff7b7b;
+    background: rgba(224, 73, 73, 0.18);
+    color: #fff1f1;
+    opacity: 1;
+    box-shadow: inset 4px 0 0 #ff7b7b;
+}
+
+body.professional-mode #quiz-overlay .quiz-option.correct {
+    background: #e8f7f0 !important;
+    border-color: #288464 !important;
+    color: #124f3b !important;
+    box-shadow: inset 4px 0 0 #288464 !important;
+}
+
+body.professional-mode #quiz-overlay .quiz-option.wrong {
+    background: #fff0f0 !important;
+    border-color: #bd5555 !important;
+    color: #7d2929 !important;
+    box-shadow: inset 4px 0 0 #bd5555 !important;
+}
+
+@media (max-width: 900px) {
+    .footer-credits {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-resource-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-resource-nav {
+        padding: 16px;
+    }
+
+    .footer-resource-links {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-resource-links a {
+        min-height: 40px;
+    }
+}
+
 body.professional-mode #quiz-overlay .feedback-panel {
     background: #f7f9fb;
     border: 1px solid #d7e1ea;

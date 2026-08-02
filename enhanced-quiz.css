@@ -1926,6 +1926,102 @@ body.professional-mode .quiz-submit-btn:hover {
   transform: translateY(-1px);
 }
 
+/* Review summary: high-contrast semantic states for both themes. */
+.review-stats-bar {
+  gap: 10px;
+  padding: 12px;
+}
+
+.review-stat-item {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  font-weight: 700;
+}
+
+.review-stat-item.correct { color: #39e6a4; }
+.review-stat-item.incorrect { color: #ff8585; }
+.review-stat-item.unanswered { color: #b8c3d8; }
+
+.review-jump-nav {
+  gap: 8px;
+  padding: 14px;
+}
+
+.review-jump-btn {
+  border-width: 2px;
+  background: rgba(255, 255, 255, 0.065);
+  color: #c4cfdf;
+  opacity: 1;
+}
+
+.review-jump-btn.unanswered-dot {
+  border-color: #65758d;
+  color: #b7c2d3;
+  opacity: 1;
+}
+
+.review-jump-btn.correct-dot {
+  background: rgba(31, 179, 123, 0.13);
+  border-color: #39d99d;
+  color: #62efb9;
+}
+
+.review-jump-btn.incorrect-dot {
+  background: rgba(224, 73, 73, 0.14);
+  border-color: #ff7b7b;
+  color: #ff9b9b;
+}
+
+body.professional-mode .review-stat-item {
+  background: #ffffff;
+}
+
+body.professional-mode .review-stat-item.correct {
+  color: #176b50;
+  border-color: #6db89e;
+  background: #edf8f4;
+}
+
+body.professional-mode .review-stat-item.incorrect {
+  color: #963d3d;
+  border-color: #d49292;
+  background: #fff2f2;
+}
+
+body.professional-mode .review-stat-item.unanswered {
+  color: #516579;
+  border-color: #aebdca;
+  background: #f2f5f8;
+}
+
+body.professional-mode .review-jump-btn {
+  border-color: #b8c9d8;
+  color: #40566b;
+  opacity: 1;
+}
+
+body.professional-mode .review-jump-btn.unanswered-dot {
+  background: #f4f7fa;
+  border-color: #aebdca;
+  color: #526579;
+  opacity: 1;
+}
+
+body.professional-mode .review-jump-btn.correct-dot {
+  background: #eaf7f2;
+  border-color: #5ca98e;
+  color: #185f49;
+}
+
+body.professional-mode .review-jump-btn.incorrect-dot {
+  background: #fff0f0;
+  border-color: #cc7373;
+  color: #8f3232;
+}
+
 /* Touch and wide-phone quiz state: visually and interactively owns the viewport. */
 body #quiz-overlay.quiz-immersive {
   inset: 0;

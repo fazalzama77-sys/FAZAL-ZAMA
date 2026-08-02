@@ -633,6 +633,49 @@
 .srs-due-pill.weak-due strong { color: #ffffff; }
 .srs-due-pill.weak-due i { color: #ff7a00; }
 
+/* Academic SRS badges: status must remain readable on a light dashboard. */
+body.professional-mode .srs-due-pill {
+    background: #f3f7fb;
+    border-color: #b9cad9;
+    color: #405d73;
+}
+
+body.professional-mode .srs-due-pill strong {
+    color: #183b56;
+}
+
+body.professional-mode .srs-due-pill.has-due {
+    background: #fff0f2;
+    border-color: #c84b63;
+    color: #92233a;
+    animation: none;
+    box-shadow: 0 3px 10px rgba(146, 35, 58, 0.10);
+}
+
+body.professional-mode .srs-due-pill.has-due strong {
+    color: #7f1830;
+}
+
+body.professional-mode .srs-due-pill.has-due i {
+    color: #b42343;
+}
+
+body.professional-mode .srs-due-pill.weak-due {
+    background: #fff5e8;
+    border-color: #c66a16;
+    color: #91470b;
+    animation: none;
+    box-shadow: 0 3px 10px rgba(145, 71, 11, 0.10);
+}
+
+body.professional-mode .srs-due-pill.weak-due strong {
+    color: #7c3605;
+}
+
+body.professional-mode .srs-due-pill.weak-due i {
+    color: #b84f00;
+}
+
 /* Tip note at bottom of the panel */
 .srs-tip {
     margin-top: 12px;

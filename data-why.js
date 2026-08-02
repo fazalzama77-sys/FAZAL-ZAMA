@@ -13,7 +13,7 @@ anatomyData = [
         title: "Clavicle",
         category: "forelimb",
         comparison: "Tiger vs. Horse/Ox",
-        why: "The Tiger possesses a rudimentary clavicle to stabilize the shoulder for grappling and climbing (scansorial) while allowing some flexibility. The Horse and Ox completely lack a bony clavicle, relying on the 'Synsarcosis' (muscular sling). This absence removes the bony connection to the trunk, allowing the scapula to glide craniocaudally to increase stride length.",
+        why: "The Tiger possesses a small clavicle that helps stabilize the shoulder during grappling and climbing (scansorial activity) while allowing some flexibility. The Horse and Ox completely lack a bony clavicle and rely on the 'Synsarcosis' (muscular sling). This absence removes the bony connection to the trunk, allowing the scapula to glide craniocaudally and increase stride length.",
         clinical: "In cats, the clavicle is often mistaken for a bone sequestrum or esophageal foreign body on radiographs. In horses, it is completely non-existent.",
         img: "",
         analogy: "Think of the Tiger's clavicle like a strut bar in a rally car—it keeps the wheels aligned for rough handling. The Horse lacks the strut bar to let the suspension (scapula) travel freely back and forth, turning the whole front end into a shock absorber.",
@@ -125,7 +125,7 @@ anatomyData = [
         title: "Distal Check Ligament",
         category: "forelimb",
         comparison: "Horse vs. Ox",
-        why: "A robust safety cable in the Horse connecting the carpus to the Deep Digital Flexor Tendon. It protects the muscle belly from tearing under the massive load of a single digit and assists in the Stay Apparatus. It is rudimentary or absent in the Ox, which splits the load over two digits.",
+        why: "A robust safety cable in the Horse connecting the carpus to the Deep Digital Flexor Tendon. It protects the muscle belly from tearing under the massive load of a single digit and assists in the Stay Apparatus. In the Ox, it is small or absent because the load is distributed over two digits.",
         clinical: "'Check Ligament Desmotomy' is a surgical procedure performed in horses to treat club foot (flexural deformity); this is not performed in cattle.",
         img: "",
         analogy: "Think of a tow truck cable. The Check Ligament is a secondary safety chain attached to the main cable. If the load gets too heavy, the safety chain takes the strain so the winch motor (muscle) doesn't burn out.",
@@ -234,13 +234,13 @@ anatomyData = [
     },
     {
         id: 15,
-        title: "Fibula Reduction",
+        title: "Bovine Fibula Configuration",
         category: "hindlimb",
         comparison: "Ox vs. Dog",
-        why: "In the Dog, the fibula is a complete bone for stability and muscle attachment. In the Ox, the shaft is absent to save weight, but the distal end persists as the 'Malleolar Bone'. This separate bone acts as a pulley block for the hock.",
+        why: "In the Dog, the complete fibula provides muscle attachment and stabilizes the lateral side of the crus and hock. In the Ox, the tibia forms the main weight-bearing shaft, so a separate fibular shaft is not required for support. The distal fibular component is present as the 'Malleolar Bone'. It forms the lateral malleolus, articulates at the hock and helps stabilize the lateral side of the joint without adding a second full-length bone to the crus.",
         clinical: "The os malleolare in cattle can be mistaken for a chip fracture on radiographs if the vet is not familiar with ruminant anatomy.",
         img: "",
-        analogy: "The Dog uses a full second beam (fibula) alongside the main one (tibia). The Ox design omits the middle of the beam as useless weight, keeping only the end-cap (malleolar bone) to hold the joint together.",
+        analogy: "The Dog has a second supporting rail beside the tibia. In the Ox, the tibia carries the main load, while a smaller end-block, the malleolar bone, remains where lateral support is most useful at the hock.",
         quiz: {
             question: "What is the 'os malleolare' in the Ox?",
             options: ["A sesamoid bone", "The separate distal end of the fibula", "A fractured piece", "A bone in the ear"],
@@ -269,12 +269,12 @@ anatomyData = [
         title: "Soleus Muscle",
         category: "hindlimb",
         comparison: "Horse vs. Cat",
-        why: "Rudimentary or absent in the Horse. The horse relies on the gastrocnemius and the mechanical stay apparatus for stance. In the Cat, the Soleus is an active postural muscle aiding in jumping and stealthy movement.",
+        why: "The soleus is very small or absent in the Horse. The horse relies on the gastrocnemius and the mechanical stay apparatus for stance. In the Cat, the soleus is an active postural muscle that assists jumping and controlled movement.",
         clinical: "In surgical dissection of the equine crus, this muscle is negligible or hard to identify, unlike in small animals where it is prominent.",
         img: "",
         analogy: "The Soleus is a fine-tuning stabilizer, like the traction control system on a sports car (Cat). The Horse is a freight train; it relies on heavy springs and momentum, so the design excludes the traction control system entirely.",
         quiz: {
-            question: "Why is the soleus muscle rudimentary in the horse?",
+            question: "Why is the soleus muscle very small or absent in the horse?",
             options: ["It is not needed for the horse's locomotion", "The horse relies on mechanical stay mechanisms", "The horse has no calcaneus", "Fused with the deep flexor"],
             correctIndex: 1,
             explanation: "The horse supports its weight using the passive stay apparatus, rendering the slow-twitch postural function of the soleus unnecessary."
@@ -449,31 +449,31 @@ anatomyData = [
         title: "Bat Wing Skeleton",
         category: "wildlife",
         comparison: "Bat vs. Dog",
-        why: "The Bat's forelimb is radically modified for flight: digits II–V are massively elongated to support a thin double-layered skin membrane (patagium) that forms the wing. The thumb (digit I) remains short with a claw. The dog forelimb retains the standard 5 short digits for ground locomotion.",
+        why: "The Bat's forelimb has a specialized structure for flight. Digits II–V are greatly elongated and support a thin double-layered skin membrane (patagium) that forms the wing. The thumb (digit I) is short and bears a claw. The dog forelimb has five shorter digits suited to ground locomotion.",
         clinical: "Wing-membrane tears in bats compromise thermoregulation and flight; healing is poor. Canine paw injuries are routine to repair.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Pteropus_giganteus_-Kolkata%2C_West_Bengal%2C_India-8.jpg/640px-Pteropus_giganteus_-Kolkata%2C_West_Bengal%2C_India-8.jpg",
-        analogy: "The Dog's forelimb is a normal hand. The Bat took the same hand, stretched the fingers to umbrella-spoke length, and pulled a kite skin between them. Same parts — radically different function.",
+        analogy: "The bat wing works like an umbrella. Its elongated digits form the supporting spokes, and the patagium forms the flexible covering that catches the air. The short clawed thumb remains free for gripping.",
         quiz: {
-            question: "Which structures of the bat forelimb are most modified for flight?",
+            question: "Which structures of the bat forelimb are most specialized for flight?",
             options: ["The radius and ulna only", "The carpal bones", "Digits II to V (greatly elongated)", "The clavicle"],
             correctIndex: 2,
-            explanation: "Digits II–V are stretched to many times their original length to support the patagium (wing membrane). The thumb stays short and clawed."
+            explanation: "Digits II–V are greatly elongated and support the patagium (wing membrane), while the thumb remains short and clawed."
         }
     },
     {
         id: 29,
-        title: "Whale Vestigial Pelvis",
+        title: "Cetacean Pelvic Bones",
         category: "wildlife",
         comparison: "Whale/Dolphin vs. Dog",
-        why: "Cetaceans (whales, dolphins) have lost their hindlimbs entirely and retain only a pair of small 'floating' pelvic bones suspended in muscle, with NO connection to the vertebral column. They serve only as anchor points for reproductive musculature. The dog pelvis, in contrast, is the fixed weight-bearing platform of the hindlimb.",
-        clinical: "Vestigial pelvic bones can be felt on dissection of stranded cetaceans. These bones serve as anchor points for reproductive musculature and are a notable example of structural variation across species.",
+        why: "Cetaceans (whales and dolphins) possess a pair of small pelvic bones suspended in muscle, with NO connection to the vertebral column. Swimming propulsion is produced mainly by the trunk and tail flukes, so these pelvic bones do not transmit body weight or propulsive force to hindlimbs. Their important present function is to anchor muscles that support and control the reproductive organs. The dog pelvis, in contrast, articulates with the vertebral column and transfers weight and locomotor forces to the hindlimbs.",
+        clinical: "These small pelvic bones can be identified during dissection of stranded cetaceans. They provide attachment for reproductive musculature and demonstrate a distinctive pelvic arrangement in cetaceans.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Bottlenose_Dolphin_KSC04pd0178.jpg/640px-Bottlenose_Dolphin_KSC04pd0178.jpg",
-        analogy: "The Dog's pelvis is the chassis of a car. The Whale kept the chassis bolts but threw away the wheels, axle and frame — leaving just two stubs floating uselessly inside the body.",
+        analogy: "The dog's pelvis is a load-bearing chassis connected to the spine and hindlimbs. Cetacean pelvic bones are more like two internal anchor plates. They do not carry locomotor load, but they provide firm attachment for reproductive musculature.",
         quiz: {
             question: "What is the role of the cetacean pelvic bone?",
-            options: ["It supports the tail flukes", "It is fused to the spine for stability", "It floats free in muscle and anchors reproductive muscles only", "It supports vestigial limbs that emerge in old age"],
+            options: ["It supports the tail flukes", "It is fused to the spine for stability", "It lies within muscle and anchors reproductive muscles", "It forms a weight-bearing connection with the vertebral column"],
             correctIndex: 2,
-            explanation: "The whale pelvis is non-articulated — completely free-floating in soft tissue — and serves only as muscle attachment for reproductive structures."
+            explanation: "Cetacean pelvic bones do not articulate with the vertebral column and do not bear locomotor weight. They act as attachment points for muscles associated with the reproductive organs."
         }
     },
     {
@@ -481,10 +481,10 @@ anatomyData = [
         title: "Ostrich Two-Toed Foot",
         category: "wildlife",
         comparison: "Ostrich vs. Fowl",
-        why: "The Ostrich is the ONLY living bird with just 2 toes (digits III and IV) — digit III bears most of the weight on a thick keratin pad, like a hoof. Reduced toe number means lower distal limb mass, lower swing inertia, and top running speeds of 70 km/h. Common fowl retain 4 toes for perching and grasping.",
+        why: "The Ostrich is the ONLY living bird with just 2 toes (digits III and IV). Digit III bears most of the weight on a thick keratin pad, like a hoof. Having two toes keeps distal limb mass and swing inertia low, supporting running speeds of up to 70 km/h. Common fowl have 4 toes suited to perching and grasping.",
         clinical: "Ostriches in captivity are prone to nail and footpad injuries because all weight passes through one digit. A nail crack is a major welfare concern.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ostrich_Ngorongoro_05.jpg/640px-Ostrich_Ngorongoro_05.jpg",
-        analogy: "Fowl have a typical four-prong garden fork foot — good grip on a perch. The Ostrich shaved that down to a hoof-like 2-prong claw foot — useless for perching, but sprints across the savanna like a feathered horse.",
+        analogy: "A fowl foot works like a four-pronged gripping tool for holding a perch. The ostrich foot works more like a lightweight two-point running shoe. Digit III carries most of the load, while digit IV assists balance during rapid running.",
         quiz: {
             question: "How many toes does an ostrich have on each foot?",
             options: ["1", "2", "3", "4"],
@@ -657,7 +657,7 @@ anatomyData = [
         title: "Cloven Hoof of Ruminants",
         category: "hindlimb",
         comparison: "Ox vs. Horse",
-        why: "The Ox walks on TWO functional digits (III + IV) — the cloven hoof — with two non-weight-bearing dewclaws (II + V). The Horse has reduced to ONE digit (III) for maximum running speed. The cloven design distributes weight on uneven ground (mountains, swamps) and provides traction; each claw can flex independently around obstacles.",
+        why: "The Ox walks on TWO functional digits (III + IV), which form the cloven hoof, and has two non-weight-bearing dewclaws (II + V). In the Horse, digit III is the single functional weight-bearing digit and supports efficient high-speed locomotion. The cloven design distributes weight on uneven ground such as mountains and swamps and provides traction. Each claw can flex independently around obstacles.",
         clinical: "Foot rot, sole ulcers, and white-line disease almost always affect ONE claw — the lateral digit IV in hindlimb (which carries more weight) and the medial digit III in forelimb. Diagnosis requires identifying which claw is affected because treatment differs.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Cow_hoof.jpg/640px-Cow_hoof.jpg",
         analogy: "The horse foot is a single high-performance racing tyre — fast on hard ground but unstable on rough terrain. The ox foot is dual tyres on a forklift — slower but stable on uneven, soft surfaces with built-in independent suspension.",
@@ -673,7 +673,7 @@ anatomyData = [
         title: "Four-Compartment Ruminant Stomach",
         category: "axial",
         comparison: "Ox vs. Horse/Dog",
-        why: "The Ox has FOUR stomach compartments (Reticulum, Rumen, Omasum, Abomasum) — three non-glandular fermentation chambers + one true glandular stomach. The Horse and Dog are monogastric. The ruminant design is a forequrt-fermentation strategy: microbes break down cellulose BEFORE it reaches the true stomach, so the cow can extract energy from grass that no other organ system can digest.",
+        why: "The Ox has FOUR stomach compartments: Reticulum, Rumen, Omasum and Abomasum. The first three are non-glandular fermentation chambers, while the abomasum is the true glandular stomach. The Horse and Dog are monogastric. In cattle, microbial fermentation occurs in the foregut before feed reaches the abomasum, allowing cellulose-rich forage to be converted into volatile fatty acids that the animal can absorb and use for energy.",
         clinical: "LDA (Left Displaced Abomasum), bloat, and traumatic reticulopericarditis ('hardware disease') are pathognomonic of the ruminant 4-compartment design. The horse, lacking these chambers, is instead vulnerable to hindgut (cecum/colon) torsions and impactions.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Stomach_colors.png/640px-Stomach_colors.png",
         analogy: "The horse stomach is a small kitchen blender — it grinds and passes food quickly. The cow stomach is a multi-stage industrial brewery — each tank does a different job, fermenting cellulose into volatile fatty acids the calf-engine actually runs on.",
@@ -681,7 +681,7 @@ anatomyData = [
             question: "Which compartment of the ruminant stomach is the TRUE glandular stomach?",
             options: ["Rumen", "Reticulum", "Omasum", "Abomasum"],
             correctIndex: 3,
-            explanation: "The abomasum is the only glandular compartment — it secretes HCl and pepsin, the homolog of the simple monogastric stomach."
+            explanation: "The abomasum is the only glandular compartment. It secretes HCl and pepsin and performs the digestive role of the simple stomach in monogastric animals."
         }
     },
     {
@@ -817,7 +817,7 @@ anatomyData = [
         title: "Rhinoceros Tridactyl Foot",
         category: "wildlife",
         comparison: "Rhinoceros vs. Horse",
-        why: "Despite its 2-tonne weight, the Rhinoceros walks on THREE toes per foot (digits II, III, IV) — the standard perissodactyl configuration. The Horse, classified in the same order (Perissodactyla), has a SINGLE toe (digit III) optimized for high-speed running. The rhino retains three toes for stability under massive load on soft ground.",
+        why: "Despite its 2-tonne weight, the Rhinoceros walks on THREE toes per foot (digits II, III and IV), which is the typical tridactyl perissodactyl arrangement. The Horse, classified in the same order (Perissodactyla), bears weight on a SINGLE digit (digit III) suited to high-speed running. The rhino's three toes provide stability under a massive load on soft ground.",
         clinical: "Rhino foot disease (cracked nails, abscesses) typically affects the central digit III — the largest weight-bearer — but the lateral toes can compensate temporarily, unlike a horse where catastrophic lameness follows.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Rhinoceros-Wilhelma-2.jpg/640px-Rhinoceros-Wilhelma-2.jpg",
         analogy: "The Horse is a sports car on a single high-performance tyre — fast but fragile. The Rhino is a forklift on a triple-tyre cluster — slow, stable, and built to carry the load without sinking.",
@@ -825,7 +825,7 @@ anatomyData = [
             question: "How many functional toes does a rhinoceros have on each foot?",
             options: ["1 (like the horse)", "2 (cloven, like the ox)", "3 (digits II, III, IV)", "5"],
             correctIndex: 2,
-            explanation: "Rhinos have the standard perissodactyl 3-toe foot. The Horse — same order — has a single digit. The Rhino's 3 toes spread the enormous weight."
+            explanation: "Rhinos have a three-toed perissodactyl foot, while the horse bears weight on a single digit. The rhino's three toes spread its enormous weight over a broader area and improve stability on soft ground."
         }
     },
 
@@ -853,15 +853,15 @@ anatomyData = [
         title: "Bovine Forestomach Keratinization",
         category: "axial",
         comparison: "Ox vs. Horse/Dog",
-        why: "The rumen, reticulum, and omasum of cattle are lined by STRATIFIED SQUAMOUS KERATINIZED epithelium — the same tough tissue as your skin. The horse and dog stomach have only GLANDULAR epithelium throughout. Cattle have this skin-like lining so the rough, abrasive forage and microbial environment doesn't shred the stomach wall.",
+        why: "The rumen, reticulum and omasum of cattle are lined by STRATIFIED SQUAMOUS KERATINIZED epithelium, a tough lining suited to abrasive forage and the microbial fermentation environment. The dog's stomach is glandular throughout. The horse has both a non-glandular squamous region and a glandular region, but it does not possess the three keratinized fore-stomach fermentation chambers of cattle. In cattle, the durable lining protects the fore-stomach wall while papillae in the rumen help absorb volatile fatty acids produced by microbes.",
         clinical: "<b>Parakeratosis (cow):</b> Excessive keratinisation of rumen papillae from high-grain diets → reduced VFA absorption, poor weight gain. <b>Equine gastric ulcers (EGUS):</b> Horse has a small non-glandular region only at the cardia (margo plicatus) — ulcers form there from acid splash during exercise.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Stomach_colors.png/640px-Stomach_colors.png",
-        analogy: "Cattle's rumen is leather-lined like a workman's glove — designed to handle rough material. Horse stomach is silk-lined — meant for soft chewed paste only.",
+        analogy: "The bovine fore-stomachs are like durable fermentation tanks with a tough internal lining. The horse has a smaller glandular stomach with a separate squamous region, while most fermentation occurs farther back in the caecum and colon.",
         quiz: {
             question: "Which compartment of the bovine stomach is lined by GLANDULAR (NOT keratinised) epithelium?",
             options: ["Rumen", "Reticulum", "Omasum", "Abomasum"],
             correctIndex: 3,
-            explanation: "Only the abomasum is glandular — it's the 'true stomach' homolog. The other three are non-glandular fermentation chambers with skin-like lining."
+            explanation: "Only the abomasum is glandular and performs the digestive role of the simple stomach. The other three are non-glandular fermentation chambers with a skin-like lining."
         }
     },
     {
@@ -869,15 +869,15 @@ anatomyData = [
         title: "Horse Wolf Tooth",
         category: "axial",
         comparison: "Horse vs. Other species",
-        why: "Many horses have a small vestigial 1st premolar (PM1) called the <b>WOLF TOOTH</b> sitting just in front of the cheek-teeth. It serves no chewing function but interferes with the bit. NO other domestic species has this — it is a non-functional remnant of the original 4-premolar Equidae dentition pattern.",
+        why: "Many horses develop a small 1st premolar (PM1) called the <b>WOLF TOOTH</b>, located just in front of the cheek teeth. Its presence depends on whether the PM1 tooth germ develops and erupts in that individual; an unerupted tooth is called a 'blind wolf tooth'. Because it is small and lies in front of the main grinding cheek-tooth row, it contributes little or nothing to mastication. Its position is clinically important because contact with the bit or surrounding soft tissue may cause discomfort.",
         clinical: "<b>Wolf tooth extraction</b> is one of the most common equine dental procedures, done before bitting young horses. Failure to remove → headshaking, bit resistance, training problems. Some horses also have 'blind wolf teeth' (unerupted), diagnosed on radiograph.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
-        analogy: "Like a vestigial appendix — non-functional but occasionally needs surgical removal.",
+        analogy: "It is like a small tooth beside the edge of a mouthpiece. It is not part of the main grinding row, but its position can create a pressure point when a bit is used.",
         quiz: {
             question: "Which tooth is referred to as the 'wolf tooth' in horses?",
-            options: ["Canine", "Vestigial 1st premolar (PM1)", "1st molar", "Incisor I3"],
+            options: ["Canine", "Small, variably present 1st premolar (PM1)", "1st molar", "Incisor I3"],
             correctIndex: 1,
-            explanation: "The wolf tooth is the small, often-vestigial first premolar (PM1). It's routinely extracted before bitting because it sits exactly where the bit rests."
+            explanation: "The wolf tooth is a small, variably present first premolar (PM1). It may be extracted before bitting because it lies close to where the bit rests."
         }
     },
     {
@@ -914,18 +914,18 @@ anatomyData = [
     },
     {
         id: 57,
-        title: "Equine Chestnut & Ergot — Vestigial Pads",
+        title: "Equine Chestnut & Ergot: Keratinized Limb Structures",
         category: "forelimb",
         comparison: "Horse vs. Other ungulates",
-        why: "Horses have two small horny patches on each leg: the <b>CHESTNUT</b> (medial side, above the carpus on forelimb or below the hock on hindlimb) and the <b>ERGOT</b> (caudal aspect of fetlock). These are small vestigial horny remnants of the carpal/metacarpal pad region. In the modern single-digit horse foot, they persist as these non-functional patches.",
+        why: "Horses have two types of localized keratinized skin structures on their limbs: the <b>CHESTNUT</b> (on the medial side, above the carpus in the forelimb or below the hock in the hindlimb) and the <b>ERGOT</b> (on the caudal aspect of the fetlock). Their dense keratin makes them firm, durable patches that can tolerate surface friction, but they do not bear weight or make a major contribution to locomotion. A specific essential physiological function has not been conclusively established. Their shapes vary between horses, so chestnut patterns are useful for identification.",
         clinical: "Chestnut patterns are unique to each horse — used like fingerprints for identification (chestnut + ergot pictures on passports). Not generally affected by disease but can crack and need trimming.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Horse_anatomy.jpg/640px-Horse_anatomy.jpg",
-        analogy: "Like the appendix or wisdom teeth in humans — leftover hardware from when the body was used differently.",
+        analogy: "They are like small, naturally occurring identification patches on the limbs. They do not bear weight, but their shapes can differ between individual horses.",
         quiz: {
             question: "What are chestnuts and ergots on a horse's limbs?",
-            options: ["Tumour growths", "Vestigial horny patches in the carpal/metacarpal pad region", "Calcified ligaments", "Modern bony growths"],
+            options: ["Tumour growths", "Localized keratinized cutaneous structures", "Calcified ligaments", "Bony growths"],
             correctIndex: 1,
-            explanation: "Both are vestigial — small non-functional horny patches persisting in the metacarpal/metatarsal pad region of the modern horse limb."
+            explanation: "Both are localized keratinized cutaneous structures. Their firm keratin tolerates surface friction, but they do not bear weight and have no established major locomotor function. Their individual patterns can assist identification."
         }
     },
     {
@@ -949,7 +949,7 @@ anatomyData = [
         title: "Dog Os Penis & Os Clitoris",
         category: "hindlimb",
         comparison: "Dog vs. Ox/Horse",
-        why: "Dogs have a literal BONE inside the penis — the <b>OS PENIS (baculum)</b> — with a ventral groove that contains the urethra. Bitches have a smaller homolog, the <b>OS CLITORIS</b>. No domestic ungulate has these bones. Function: maintains penile rigidity during the prolonged 'tie' that's characteristic of canine mating.",
+        why: "Dogs have a literal BONE inside the penis, the <b>OS PENIS (baculum)</b>, with a ventral groove that contains the urethra. Bitches may have a smaller corresponding bone called the <b>OS CLITORIS</b>. No domestic ungulate has these bones. The os penis helps maintain penile rigidity during the prolonged 'tie' characteristic of canine mating.",
         clinical: "<b>Urethral obstruction in dogs:</b> Bladder stones (urolithiasis) most commonly lodge at the caudal end of the os penis, where the urethra makes an abrupt bend. Surgical retrieval requires careful work around the bone. <b>Fractures of os penis</b> occur from blunt trauma.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dog_skeleton.jpg/640px-Dog_skeleton.jpg",
         analogy: "While most mammals rely on hydraulics (blood pressure) for erection, the dog also has a structural scaffold built in — like having both inflatable AND solid support in the same column.",
@@ -1013,7 +1013,7 @@ anatomyData = [
         title: "Equine Stomach 'Margo Plicatus'",
         category: "axial",
         comparison: "Horse vs. Other monogastrics",
-        why: "Inside the horse stomach is a sharp horizontal line called the <b>MARGO PLICATUS</b> — the boundary between the non-glandular (squamous, white) cardiac region and the glandular (pink) fundic region. Other monogastrics (dog, cat, pig) have a much smaller squamous zone or none. The horse's large squamous region is the equivalent of the ruminant forestomachs — a holdover of its hindgut-fermenter design.",
+        why: "Inside the horse stomach is a sharp raised line called the <b>MARGO PLICATUS</b>. It separates two regions with different jobs. The upper squamous region has a tough stratified epithelial lining that accommodates ingesta but does not secrete acid, mucus or bicarbonate. The lower glandular region produces gastric secretions and has mucosal protection against acid. Other monogastrics such as the dog, cat and pig have a much smaller squamous zone or none. This division explains why acid exposure damages the unprotected squamous region, especially along the margo plicatus.",
         clinical: "<b>Equine Gastric Ulcer Syndrome (EGUS):</b> Ulcers form along the margo plicatus on the squamous side, where unprotected stratified epithelium meets acidic glandular contents during exercise (acid splash). Common in racehorses; treated with omeprazole.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Stomach_colors.png/640px-Stomach_colors.png",
         analogy: "Horse stomach is a 2-coloured container: upper half is bare metal (squamous, no acid protection), lower half is enamel-coated (glandular, acid-resistant). The 'margo plicatus' is the paint line.",
@@ -1030,7 +1030,7 @@ anatomyData = [
         category: "hindlimb",
         comparison: "Cow/Mare vs. Bitch",
         why: "The <b>PRE-PUBIC TENDON</b> is a thick fibrous band attaching the rectus abdominis and pectineus muscles to the cranial edge of the pubis. It anchors the abdominal wall to the pelvis. In late-pregnant mares and cows, the weight of the gravid uterus + foetus + fluid can RUPTURE this tendon. Bitch pregnancies don't generate enough weight to threaten it.",
-        clinical: "<b>Pre-pubic Tendon Rupture (mare):</b> Late-gestation emergency. The mare's belly suddenly drops; she can't push during foaling. Caesarean section + euthanasia decision often required. <b>Pre-pubic tendon hernia:</b> Partial rupture → ventral abdominal hernia.",
+        clinical: "<b>Pre-pubic Tendon Rupture (mare):</b> This is a late-gestation emergency. The mare's abdomen suddenly drops and she may be unable to push during foaling. Urgent veterinary assessment is required, and a Caesarean section may be necessary. If suffering cannot be relieved and the prognosis is hopeless, any end-of-life decision requires qualified veterinary judgment, humane treatment and appropriate ethical guidance. <b>Pre-pubic tendon hernia:</b> Partial rupture may cause a ventral abdominal hernia.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cow_reproductive_tract.jpg/640px-Cow_reproductive_tract.jpg",
         analogy: "Imagine the abdominal wall as a hammock and the pre-pubic tendon as the rope holding one end. In a heavily pregnant mare, that rope can snap under load.",
         quiz: {
@@ -1093,10 +1093,10 @@ anatomyData = [
         title: "Cattle Carpal Bone Fusion Pattern",
         category: "forelimb",
         comparison: "Ox vs. Horse vs. Dog",
-        why: "Number of carpal bones differs by species: <b>Ox = 6</b> (C2+C3 fused, C1 absent), <b>Horse = 7-8</b>, <b>Dog = 7</b> (radial+intermediate fused into 'intermedioradial'), <b>Pig = 8</b> (full complete pattern). Fusion reduces friction surfaces + adds strength for weight-bearing — characteristic of cursorial (running) species.",
+        why: "The number and arrangement of carpal bones differ by species: <b>Ox = 6</b> (C2+C3 fused, C1 absent), <b>Horse = 7-8</b>, <b>Dog = 7</b> (radial+intermediate fused into the intermedioradial bone), and <b>Pig = 8</b> (a complete pattern). Fewer separate movement surfaces and greater fusion make the carpus more rigid and stable for weight-bearing. More separate bones permit greater adjustment and rotational movement of the paw or foot.",
         clinical: "<b>Slab fracture of C3 (horse):</b> Common race-horse injury from repetitive concussion on the carpus. Radiographic identification is essential. <b>Carpal hygroma (cow):</b> Bursitis over precarpal area — chronic 'kneeling' on hard concrete causes a precarpal subcutaneous bursa.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Dog_skeleton.jpg/640px-Dog_skeleton.jpg",
-        analogy: "Single-digit and cloven-foot runners (horse, ox, sheep) have fewer carpal bones — fusion + loss reduce friction surfaces. Dog and pig retain more — they need rotational paw use.",
+        analogy: "Single-digit and cloven-foot runners such as the horse, ox and sheep have fewer or more extensively fused carpal bones. This arrangement provides a rigid weight-bearing column with fewer movement surfaces. Dogs and pigs have a different carpal arrangement that permits greater rotational use of the paw or foot.",
         quiz: {
             question: "How many carpal bones does the ox have?",
             options: ["4", "6", "7", "8"],
@@ -1142,7 +1142,7 @@ anatomyData = [
         category: "hindlimb",
         comparison: "Mare vs. Cow",
         why: "The mare conceptus is unique: it floats free in the uterus for ~16 days, MIGRATING between both uterine horns continuously. This mechanical 'tour' is how the mare's body recognises pregnancy → suppresses PGF2α → maintains the CL. Cow conceptus fixes much earlier (~day 17) in one horn and uses chemical signaling (interferon-tau) instead.",
-        clinical: "<b>Mare twin pregnancy:</b> 60-70% of twin embryos can be 'crushed' manually per rectum during the mobile phase (day 14-16) by an experienced vet — singletons survive better. <b>'Maternal recognition window' in mare</b> is mechanical, not chemical — disturbing the uterus before day 17 risks losing the pregnancy.",
+        clinical: "<b>Mare twin pregnancy:</b> Twin pregnancies carry a high risk of losing both conceptuses and of serious complications for the mare. During the mobile phase (approximately days 14-16), an experienced veterinarian may perform selective reduction of one conceptus so the other has a better chance of survival. This procedure requires professional assessment of timing, necessity and animal welfare. <b>Maternal recognition window in the mare:</b> Recognition depends on mechanical movement of the conceptus rather than interferon-tau signaling. Disturbing the uterus before day 17 may endanger the pregnancy.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cow_reproductive_tract.jpg/640px-Cow_reproductive_tract.jpg",
         analogy: "Mare embryo is a tourist with a map — wanders the uterus to register pregnancy. Cow embryo plants a flag in one spot + uses chemistry (interferon-tau) to make the announcement.",
         quiz: {
@@ -1270,16 +1270,16 @@ anatomyData = [
     },
     {
         id: 79,
-        title: "Tortoise Shell = Modified Ribs + Vertebrae",
+        title: "Tortoise Shell: Ribs, Vertebrae & Dermal Bones",
         category: "wildlife",
         comparison: "Tortoise vs. Mammals",
-        why: "The tortoise shell isn't just a shell glued on — it's the animal's SKELETON turned inside out. The dorsal carapace = fused thoracic vertebrae + ribs + dermal bones. The ventral plastron = fused sternum + clavicles + abdominal ribs. The internal organs are literally INSIDE the bony case. No domestic species has anything remotely like this.",
+        why: "The tortoise shell is an integral part of the skeleton, not a separate covering. The dorsal carapace includes fused thoracic vertebrae, broadened ribs and dermal bones. The ventral plastron contains dermal bones associated with the ventral body wall. Together they form a rigid protective case around the internal organs. Because the ribs are incorporated into the shell, tortoises cannot expand the chest wall like mammals and must use specialized muscles to ventilate the lungs.",
         clinical: "Shell fractures in tortoises require special veterinary repair (cable ties, epoxy, fiberglass) — they're fractures of the spinal column + ribs. Heal slowly. Respiratory disease is hard to diagnose because chest wall doesn't move conventionally.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tortoise_shell.jpg/640px-Tortoise_shell.jpg",
-        analogy: "Imagine if your ribs grew sideways, fused into a single dome over your back, and your sternum became a flat bony floor under your belly. That's a tortoise.",
+        analogy: "The carapace acts like a protective roof built into the vertebral column and ribs, while the plastron forms a protective floor. The organs lie safely between these two skeletal shields.",
         quiz: {
             question: "The carapace (top shell) of a tortoise is anatomically:",
-            options: ["A thick layer of skin", "Fused vertebrae + ribs + dermal bones", "Modified scales only", "Calcified cartilage"],
+            options: ["A thick layer of skin", "Fused vertebrae + ribs + dermal bones", "Scales only", "Calcified cartilage"],
             correctIndex: 1,
             explanation: "Carapace = vertebrae + ribs + dermal ossifications fused together. Plastron = sternum + clavicles + abdominal ribs. The shell IS the skeleton."
         }
@@ -1321,15 +1321,15 @@ anatomyData = [
         title: "Sea Lion Flipper vs Dog Forelimb",
         category: "wildlife",
         comparison: "Sea Lion vs. Dog",
-        why: "The sea lion FLIPPER is a fully transformed dog forelimb: the humerus + radius + ulna shortened and broadened; the carpals, metacarpals, and phalanges elongated into paddle-like rays; soft webbing between digits. The same bones, same nerve plexus, same blood supply — just reshaped for water propulsion. A perfect example of homologous structure.",
+        why: "The sea lion flipper and the dog forelimb contain the same major named bones: the humerus, radius, ulna, carpals, metacarpals and phalanges. In the sea lion, these components have species-specific proportions suited to aquatic propulsion. The proximal bones are relatively short and broad, the digital bones are elongated, and soft webbing spans the digits. The corresponding nerves and blood vessels follow the same general anatomical plan.",
         clinical: "Sea lion flipper diseases (cellulitis, fractures) treated based on dog anatomy knowledge — orthopaedic surgeons can identify each bone clearly. Stranded sea lions often need fluid therapy via venepuncture of the flipper using same techniques as dog cephalic vein.",
         img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sea_lion.jpg/640px-Sea_lion.jpg",
-        analogy: "Imagine taking your dog's front leg, shortening the upper bones, elongating the finger bones, and sealing the spaces with webbing. That's a sea lion flipper.",
+        analogy: "Compare two tools built from the same named components but arranged in different proportions. The dog's forelimb is suited to weight-bearing on land, while the sea lion's broad, webbed flipper is suited to propulsion in water.",
         quiz: {
             question: "Compared to a dog forelimb, the sea lion flipper has:",
             options: ["Completely different bone structure", "Same bones but elongated phalanges + webbed soft tissue", "No bones (just cartilage)", "Extra bones for paddling"],
             correctIndex: 1,
-            explanation: "Same skeletal plan, modified proportions — humerus/radius/ulna shortened, phalanges elongated, interdigital webbing. Classic homologous structure."
+            explanation: "Both limbs contain the same major named bones, but their proportions differ. In the sea lion, the proximal bones are relatively short and broad, the phalanges are elongated, and webbing spans the digits."
         }
     },
     {
