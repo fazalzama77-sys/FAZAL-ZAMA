@@ -9,7 +9,6 @@ Hey Claude! Read this whole file before doing anything else. It tells you who I 
 - **Name:** Fazal Zama
 - **Role:** B.V.Sc & A.H. UG student at IVRI Bareilly (1st year, Roll No. B0-350-2025)
 - **Background:** Veterinary science — **NOT a coder**. I don't speak code natively. Explain things in plain English with concrete file paths + simple steps.
-- **Religion:** Muslim. I prefer content that's Islamically compliant — no explicit evolution language (use "designed/built", "vestigial" is OK), no Greek mythology references, no alcohol-related analogies, no idol/statue imagery.
 - **Tools I use:** Windows PC, GitHub Desktop (not command-line git), File Explorer. I do NOT use a terminal. Always give me GUI-based instructions or one-click scripts.
 
 ---
@@ -177,8 +176,10 @@ quizBank = {
 - **Don't introduce dependencies** without asking. No npm, no bundlers, no build step.
 - **GPU-friendly animations only** — `transform` + `opacity`, avoid `box-shadow` / `filter` in `@keyframes`.
 - **Always reset state flags in cleanup paths** — I've been burned twice by leftover `examMode = true` flags.
-- **Avoid evolution language** — say "is built / is designed" not "evolved"; "vestigial" is fine; never "phylogenetic leftover" or "ancestor species".
-- **Strip Greek mythology references** — "atlas vertebra carries the skull" instead of "named after the Greek titan".
+- **Mandatory boundary for AI-generated content:** Do not introduce Darwinian theory, evolutionary-origin explanations, ancestry narratives, phylogenetic speculation, or statements that a structure "evolved from" an ancestral species. Keep explanations focused on established embryological development, present anatomy, biomechanics, current function, species comparison and clinical relevance. The established descriptive anatomical term "vestigial" is acceptable when appropriate, but do not attach an evolutionary or ancestral narrative to it.
+- **Religious and mythological neutrality:** Do not introduce mythological gods, deities, worship-related stories, or mythology-based explanations. Do not generate decorative images of idols, statues, deities or worship figures. When a conventional anatomical name has a mythological origin, explain the anatomy itself without repeating the mythology; for example, write "the atlas vertebra supports the skull" rather than discussing the Greek titan.
+- **Analogy boundary:** Do not use alcohol, intoxication or alcoholic drinks as analogies, mnemonics or decorative examples. Use direct anatomical, biomechanical or clinical explanations instead.
+- These boundaries apply to all new text, quizzes, analogies, captions, image prompts and AI-generated revisions. Never weaken or remove accurate anatomy, established embryology, biomechanics, comparative content or clinical relevance to satisfy the wording boundary; rewrite only the unnecessary origin narrative, mythology or analogy.
 - **Files use mixed-case extensions** (`data-forelimb.JS` not `.js`). Match my existing pattern when creating new ones.
 
 ### CRITICAL: preserve anatomy lesson depth during audits
@@ -320,7 +321,7 @@ Treat these as guardrails when proposing UI changes:
 - ✅ Exam Mode (customisable duration/count/format/feedback)
 - ✅ Image compressor script (Python + .bat one-click)
 - ✅ IVRI logo placed in homepage footer
-- ✅ Islamic-compliance pass done (no evolution/mythology language)
+- ✅ AI content-boundary review completed (no Darwinian-origin narratives, mythology-based explanations or alcohol-related analogies)
 - ✅ Mobile responsive: nav-bar icons, glossary tooltip top-anchored, atlas selector 2-col grid
 - ✅ Splash screen + landing animations smoothed (GPU-only)
 - ✅ Professional mode polished (medical theme)
