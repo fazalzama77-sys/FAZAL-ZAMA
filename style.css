@@ -9348,3 +9348,164 @@ body.professional-mode .tag-line {
     );
     background-size: 200% 100%;
 }
+
+/* =========================================================
+   MOBILE RESOURCE ROWS + HIGH-CONTRAST VISUAL PLACEHOLDER
+   ========================================================= */
+
+/* Keep the existing laptop layout exactly as a flat set of links. */
+.footer-resource-group,
+.footer-resource-group-links {
+    display: contents;
+}
+
+.footer-resource-group-label {
+    display: none;
+}
+
+/* Luminous: rich blue rather than black, with crisp cyan and soft-white text. */
+.atlas-image-placeholder {
+    background: linear-gradient(145deg, #0b2945 0%, #071c32 100%) !important;
+    border: 1px solid #2f8fbe !important;
+    box-shadow: 0 14px 30px rgba(0, 10, 28, 0.24) !important;
+}
+
+.atlas-image-placeholder::before {
+    border-color: rgba(91, 192, 232, 0.28) !important;
+}
+
+.atlas-image-placeholder .img-placeholder-text {
+    color: #d8eaf4 !important;
+}
+
+.atlas-image-placeholder .img-placeholder-text i,
+.atlas-image-placeholder .img-placeholder-text strong {
+    color: #61d8ff !important;
+    opacity: 1 !important;
+}
+
+.atlas-image-placeholder .img-placeholder-text span {
+    color: #c5dce9 !important;
+    opacity: 1 !important;
+}
+
+/* Academic: an airy clinical-blue panel with dark, highly legible copy. */
+body.professional-mode .atlas-image-placeholder {
+    background: linear-gradient(145deg, #fbfdff 0%, #eaf4fb 100%) !important;
+    border: 1px solid #8db9d8 !important;
+    box-shadow: 0 12px 26px rgba(15, 78, 129, 0.12) !important;
+}
+
+body.professional-mode .atlas-image-placeholder::before {
+    border-color: #c5d9e8 !important;
+}
+
+body.professional-mode .atlas-image-placeholder .img-placeholder-text {
+    color: #334e68 !important;
+}
+
+body.professional-mode .atlas-image-placeholder .img-placeholder-text i,
+body.professional-mode .atlas-image-placeholder .img-placeholder-text strong {
+    color: #1565c0 !important;
+    opacity: 1 !important;
+}
+
+body.professional-mode .atlas-image-placeholder .img-placeholder-text span {
+    color: #526d82 !important;
+    opacity: 1 !important;
+}
+
+@media (max-width: 560px) {
+    /* The footer is a flex child of the landing card rail; allow it to shrink
+       to the active mobile viewport instead of inheriting row content width. */
+    #landing-view .footer {
+        flex: 0 0 calc(100vw - 40px);
+        width: calc(100vw - 40px);
+        max-width: calc(100vw - 40px);
+        min-width: 0;
+    }
+
+    #landing-view .footer-credits,
+    #landing-view .footer-resource-nav,
+    #landing-view .footer-tools,
+    .footer-resource-links,
+    .footer-resource-group,
+    .footer-resource-group-links {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Two compact horizontal lanes replace the long single-column directory. */
+    .footer-resource-links {
+        display: block !important;
+    }
+
+    .footer-resource-group {
+        display: block;
+    }
+
+    .footer-resource-group + .footer-resource-group {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(100, 141, 171, 0.24);
+    }
+
+    .footer-resource-group-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 2px 9px;
+        color: #1169bd;
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .footer-resource-group-links {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        padding: 1px 2px 8px;
+    }
+
+    .footer-resource-group-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .footer-resource-group-links a,
+    body:not(.professional-mode) .footer-resource-group-links a {
+        display: flex;
+        align-items: center;
+        flex: 0 0 clamp(168px, 70vw, 224px);
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #263d53;
+        border-radius: 10px;
+        background: #0b1c2e;
+        color: #c2cfdd;
+        line-height: 1.28;
+        text-align: left;
+        scroll-snap-align: start;
+    }
+
+    body:not(.professional-mode) .footer-resource-group-label {
+        color: #ffe34d;
+    }
+
+    body:not(.professional-mode) .footer-resource-group-links a:hover {
+        border-color: #42f1fa;
+        color: #effcff;
+    }
+
+    body.professional-mode .footer-resource-group-links a {
+        background: #ffffff;
+        border-color: #c8dbea;
+        color: #315b78;
+        box-shadow: 0 3px 9px rgba(23, 75, 112, 0.06);
+    }
+}
