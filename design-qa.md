@@ -100,4 +100,14 @@ Browser-rendered implementation evidence:
 - P2: none remaining.
 - P3: the Scientific Staff card is naturally taller than the developer card because it contains four people; widths are intentionally equal while content-driven heights remain independent.
 
+## Latest mobile directory and visual-reference pass
+
+- Source references: `D:\Temp\codex-clipboard-4810f17c-f4f6-487d-bac0-01e1241a8163.png` and `D:\Temp\codex-clipboard-1c3c1740-943e-4f54-9cd9-86693e846c1f.png`.
+- Mobile 390 x 844: the footer now contains two labeled horizontal lanes, Atlas (9 links) and Why (5 links), with swipe overflow contained inside each lane.
+- Ratio correction: the footer is 350 px, the directory panel is 310 px, and the document is 379 px inside a 390 px viewport; there is no page-level horizontal overflow.
+- Desktop 1440 x 900: grouping wrappers resolve to `display: contents`, labels remain hidden, and the existing 1116 px Luminous directory layout is unchanged.
+- Academic visual panel: light blue-white gradient, `rgb(141, 185, 216)` border, blue heading, and dark slate supporting text.
+- Luminous visual panel: deep blue gradient, `rgb(47, 143, 190)` border, cyan heading, and high-contrast blue-grey supporting text.
+- Clean-route validation passed for 372 interactive pages, 7 app entries, 373 sitemap URLs, and 14,130 internal links.
+
 final result: passed
