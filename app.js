@@ -921,6 +921,9 @@ const app = {
         'ivri-notify-srs',
         'ivri-notify-last',
         'ivri-notify-time',
+        'ivri-elite-guide-seen',
+        'ivri-topic-guide-seen',
+        'ivri-event-announcements-seen',
     ]),
 
     // Export every IVRI localStorage key into a single JSON file the user

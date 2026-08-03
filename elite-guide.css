@@ -1,0 +1,142 @@
+/* One-time Elite View guide. All selectors are deliberately namespaced. */
+.elite-guide {
+    position: fixed;
+    z-index: 100020;
+    width: min(360px, calc(100vw - 24px));
+    padding: 22px;
+    color: #eef5ff;
+    background: linear-gradient(145deg, #101a2d 0%, #0c1424 100%);
+    border: 1px solid rgba(255, 213, 79, 0.52);
+    border-radius: 16px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 213, 79, 0.06);
+    opacity: 0;
+    transform: translateY(-6px) scale(.985);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.elite-guide.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+.elite-guide::before {
+    content: '';
+    position: absolute;
+    right: 34px;
+    width: 14px;
+    height: 14px;
+    background: #101a2d;
+    border-left: 1px solid rgba(255, 213, 79, 0.52);
+    border-top: 1px solid rgba(255, 213, 79, 0.52);
+    transform: rotate(45deg);
+}
+.elite-guide[data-pointer="above"]::before { top: -8px; }
+.elite-guide[data-pointer="below"]::before { bottom: -8px; transform: rotate(225deg); }
+.elite-guide-kicker {
+    color: #ffd54f;
+    font: 700 .72rem/1.2 var(--font-code, monospace);
+    letter-spacing: .11em;
+    margin: 0 30px 10px 0;
+}
+.elite-guide h2 { margin: 0 0 8px; color: #fff; font-size: 1.22rem; line-height: 1.25; }
+.elite-guide p { margin: 0; color: #aebbd0; font-size: .91rem; line-height: 1.55; }
+.elite-guide p strong { color: #fff; }
+.elite-guide-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    color: #aebbd0;
+    background: rgba(255, 255, 255, .055);
+    cursor: pointer;
+}
+.elite-guide-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
+.elite-guide-actions button {
+    min-height: 40px;
+    padding: 8px 13px;
+    border-radius: 9px;
+    font: 700 .76rem/1.2 var(--font-code, monospace);
+    cursor: pointer;
+}
+.elite-guide-secondary { color: #c7d2e3; background: transparent; border: 1px solid #3b4960; }
+.elite-guide-primary { color: #182033; background: #ffd54f; border: 1px solid #ffd54f; }
+.elite-guide-actions button:focus-visible, .elite-guide-close:focus-visible { outline: 3px solid #4cc9f0; outline-offset: 2px; }
+
+body.professional-mode .elite-guide {
+    color: #17324d;
+    background: #fff;
+    border-color: #d4a817;
+    box-shadow: 0 18px 48px rgba(21, 68, 111, .18), 0 0 0 1px rgba(212, 168, 23, .08);
+}
+body.professional-mode .elite-guide::before { background: #fff; border-color: #d4a817; }
+body.professional-mode .elite-guide-kicker { color: #806100; }
+body.professional-mode .elite-guide h2, body.professional-mode .elite-guide p strong { color: #102a43; }
+body.professional-mode .elite-guide p { color: #52687b; }
+body.professional-mode .elite-guide-close { color: #52687b; background: #edf4fa; }
+body.professional-mode .elite-guide-secondary { color: #31536f; border-color: #b8cce0; }
+body.professional-mode .elite-guide-primary { color: #fff; background: #1565c0; border-color: #1565c0; }
+
+@media (max-width: 600px) {
+    .elite-guide { padding: 19px; }
+    .elite-guide::before { display: none; }
+    .elite-guide-actions { flex-direction: column-reverse; }
+    .elite-guide-actions button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .elite-guide { transition: none; }
+}
+
+/* One-time topic-selection guide; intentionally parallels Elite styling. */
+.topic-guide {
+    position: fixed;
+    z-index: 100019;
+    width: min(350px, calc(100vw - 24px));
+    padding: 21px;
+    color: #eef5ff;
+    background: linear-gradient(145deg, #101a2d 0%, #0c1424 100%);
+    border: 1px solid rgba(0, 229, 255, .42);
+    border-radius: 16px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, .46), 0 0 0 1px rgba(0, 229, 255, .05);
+    opacity: 0;
+    transform: translateY(-6px) scale(.985);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+.topic-guide.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+.topic-guide::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: -8px;
+    width: 14px;
+    height: 14px;
+    background: #101a2d;
+    border-left: 1px solid rgba(0, 229, 255, .42);
+    border-bottom: 1px solid rgba(0, 229, 255, .42);
+    transform: rotate(45deg);
+}
+.topic-guide[data-pointer="above"]::before { display: none; }
+.topic-guide-kicker { color: #66e9f5; font: 700 .72rem/1.2 var(--font-code, monospace); letter-spacing: .11em; margin: 0 30px 10px 0; }
+.topic-guide h2 { margin: 0 0 8px; color: #fff; font-size: 1.19rem; line-height: 1.3; }
+.topic-guide p { margin: 0; color: #aebbd0; font-size: .9rem; line-height: 1.55; }
+.topic-guide-close { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border: 0; border-radius: 50%; color: #aebbd0; background: rgba(255, 255, 255, .055); cursor: pointer; }
+.topic-guide-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
+.topic-guide-actions button { min-height: 40px; padding: 8px 13px; border-radius: 9px; font: 700 .76rem/1.2 var(--font-code, monospace); cursor: pointer; }
+.topic-guide-secondary { color: #c7d2e3; background: transparent; border: 1px solid #3b4960; }
+.topic-guide-primary { color: #062530; background: #66e9f5; border: 1px solid #66e9f5; }
+.topic-guide-actions button:focus-visible, .topic-guide-close:focus-visible { outline: 3px solid #ffd54f; outline-offset: 2px; }
+body.professional-mode .topic-guide { color: #17324d; background: #fff; border-color: #198f9a; box-shadow: 0 18px 48px rgba(21, 68, 111, .18); }
+body.professional-mode .topic-guide::before { background: #fff; border-color: #198f9a; }
+body.professional-mode .topic-guide-kicker { color: #087f8c; }
+body.professional-mode .topic-guide h2 { color: #102a43; }
+body.professional-mode .topic-guide p { color: #52687b; }
+body.professional-mode .topic-guide-close { color: #52687b; background: #edf4fa; }
+body.professional-mode .topic-guide-secondary { color: #31536f; border-color: #b8cce0; }
+body.professional-mode .topic-guide-primary { color: #fff; background: #087f8c; border-color: #087f8c; }
+@media (max-width: 600px) {
+    .topic-guide { padding: 19px; }
+    .topic-guide::before { display: none; }
+    .topic-guide-actions { flex-direction: column-reverse; }
+    .topic-guide-actions button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .topic-guide { transition: none; }
+}
