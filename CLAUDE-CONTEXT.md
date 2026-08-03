@@ -45,12 +45,17 @@ F:/IVRI ANATOMY 11 JUKY/     ← THE AUTHORITATIVE SOURCE FOLDER
 ├── style.css                 ← Main styles (~3700 lines)
 ├── enhanced-quiz.css         ← Atlas-quiz overlay styles
 ├── dashboard.css             ← Dashboard panel styles
+├── elite-guide.css           ← One-time Elite View coach-mark styles
+├── events.css                ← Department events section styles (developer-owned)
 ├── app.js                    ← Atlas + WHY + routing + bookmarks/read/share
 ├── enhanced-quiz.js          ← Atlas Quiz engine (MCQ/TF/FIB/Exam/SmartReview)
 ├── dashboard.js              ← Performance + SRS panel
 ├── srs.js                    ← Leitner-box spaced-repetition engine
 ├── glossary.js               ← Hover-tooltip term dictionary
 ├── search.js                 ← Global search overlay
+├── elite-guide.js            ← One-time contextual Elite View reminder
+├── events-data.js            ← SAFE STAFF-EDITABLE event and YouTube details
+├── events.js                 ← Fail-contained events renderer (developer-owned)
 ├── service-worker.js         ← PWA offline cache
 ├── manifest.json             ← PWA manifest
 │
@@ -192,7 +197,7 @@ quizBank = {
 
 - **Progressively rendered app:** `index.html` is a section-switcher. Each section is a `<section class="view-section">`. Public navigation uses History API clean paths (`/atlas/forelimb/osteology/scapula/`); legacy hash routes such as `#/atlas/Forelimb/Osteology/2` are converted to the matching clean path.
 - **Image loading is already click-to-load:** Atlas modals only fetch images when user clicks a structure. WHY cards render text-only; image loads when user opens the modal. No lazy-loading library needed.
-- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (streak map), `ivri-notify-srs`, `ivri-notify-last`.
+- **localStorage keys:** `ivri-theme`, `ivri-elite`, `ivri-bookmarks`, `ivri-read`, `ivri-srs-state`, `ivri-quiz-progress`, `ivri-highlights`, `ivri-notes`, `ivri-visits`, `ivri-onboarded`, `ivri-install-dismissed`, `ivri-activity` (streak map), `ivri-notify-srs`, `ivri-notify-last`, `ivri-elite-guide-seen`, `ivri-topic-guide-seen`, `ivri-event-announcements-seen`.
 - **PWA:** Service worker caches everything; app installs to Android home screen via `manifest.json`.
 - **State globals:** `atlasData` (regional), `anatomyData` (WHY), `quizBank` (questions), `srs.*` (SRS engine), `quizApp.*` (quiz state).
 
@@ -259,6 +264,25 @@ Boot sequence (in `app._initEngagement`):
 **Audio pronunciation** uses the browser's `speechSynthesis` API — free, no API key, works offline. The speak-button next to an Atlas topic title now reads the **full content** (title + description + comparative + clinical) of the active topic via `app.speakCurrentTopic()`, with a play/stop toggle. Double-click any glossary term still triggers `app.speak()` for a one-shot pronunciation.
 
 **Backup & Restore** lives in `app.exportBackup()` / `app.importBackupFromFile()` — exports every IVRI localStorage key into a single JSON file (~10–200 KB), validates the file shape on import, asks confirmation if local data exists, then reloads to re-render. The keys covered are listed in `app._backupKeys()` — **add any new `ivri-*` key there** or backups will silently miss it.
+
+### Department-safe events and YouTube workflow
+
+- Department staff should edit **only `events-data.js`** for seminars, guest lectures, webinars and official YouTube links.
+- `sectionEnabled: true` displays the section. Change it to `false` to hide the complete section without deleting any event information.
+- If the section is enabled but there are no published events, visitors see a professional **No upcoming events right now** status instead of sample content.
+- Keep `published: false` while drafting. Localhost and `file://` show unpublished events with a **DRAFT PREVIEW** badge; the public website hides them. Change it to `published: true` only after checking the title, date, speaker and links.
+- `youtubeUrl`, `registrationUrl` and `youtubeChannelUrl` must be full `https://` links. Leave any unavailable link as an empty string.
+- Never ask non-coding staff to edit `events.js` or `events.css`. Those files safely render and style the data. Invalid or missing event data hides only the events area; it does not stop Atlas, quizzes, navigation or lesson data.
+- `featured: true` plus `showPopup: true` creates a one-time popup for that published event. The browser remembers dismissed event IDs in `ivri-event-announcements-seen`.
+- The events section is inserted after the homepage statistics strip and is omitted completely when there is no published event and no channel link.
+
+### One-time Elite View lesson guide
+
+- `elite-guide.js` and `elite-guide.css` show a small contextual reminder the first time a visitor opens an Atlas topic in Standard view.
+- It explains that Elite View contains the detailed UG-level lesson and can open Elite View directly. Dismissal is remembered in `ivri-elite-guide-seen`, so it does not repeatedly interrupt readers.
+- For local retesting only, remove the `ivri-elite-guide-seen` key in browser site storage or test on a fresh localhost port/origin.
+- Keep this guide isolated from `app.js`; a guide failure must never affect lesson rendering.
+- The same isolated module shows a one-time **Select a topic from the left** orientation guide when a visitor first reaches a populated Atlas system without opening a topic. Its key is `ivri-topic-guide-seen`. The optional **Open first topic** action starts reading immediately, after which the Elite guide can appear.
 
 ### 📸 Image folder structure (nested)
 

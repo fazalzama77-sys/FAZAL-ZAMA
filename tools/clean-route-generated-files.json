@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-01T09:14:43.971Z",
+  "generatedAt": "2026-08-03T18:33:24.759Z",
   "files": [
     "atlas/index.html",
     "atlas/introduction/index.html",
@@ -293,7 +293,7 @@
     "why/forelimb/interosseous-muscle/index.html",
     "why/forelimb/distal-check-ligament/index.html",
     "why/forelimb/digit-number/index.html",
-    "why/forelimb/equine-chestnut-and-ergot-vestigial-pads/index.html",
+    "why/forelimb/equine-chestnut-and-ergot-keratinized-limb-structures/index.html",
     "why/forelimb/equine-navicular-bone/index.html",
     "why/forelimb/equine-ungual-cartilages/index.html",
     "why/forelimb/cattle-carpal-bone-fusion-pattern/index.html",
@@ -305,7 +305,7 @@
     "why/hindlimb/accessory-ligament/index.html",
     "why/hindlimb/gluteobiceps-muscle/index.html",
     "why/hindlimb/patellar-locking-mechanism/index.html",
-    "why/hindlimb/fibula-reduction/index.html",
+    "why/hindlimb/bovine-fibula-configuration/index.html",
     "why/hindlimb/peroneus-tertius/index.html",
     "why/hindlimb/soleus-muscle/index.html",
     "why/hindlimb/cloven-hoof-of-ruminants/index.html",
@@ -351,7 +351,7 @@
     "why/wildlife/camel-foot-pad/index.html",
     "why/wildlife/antlers-vs-horns/index.html",
     "why/wildlife/bat-wing-skeleton/index.html",
-    "why/wildlife/whale-vestigial-pelvis/index.html",
+    "why/wildlife/cetacean-pelvic-bones/index.html",
     "why/wildlife/ostrich-two-toed-foot/index.html",
     "why/wildlife/snake-skull-kinesis/index.html",
     "why/wildlife/frog-urostyle/index.html",
@@ -365,7 +365,7 @@
     "why/wildlife/rhinoceros-tridactyl-foot/index.html",
     "why/wildlife/pangolin-keratin-scales/index.html",
     "why/wildlife/anteater-tongue-60-cm-vs-dog-tongue/index.html",
-    "why/wildlife/tortoise-shell-modified-ribs-vertebrae/index.html",
+    "why/wildlife/tortoise-shell-ribs-vertebrae-and-dermal-bones/index.html",
     "why/wildlife/hummingbird-ball-and-socket-shoulder/index.html",
     "why/wildlife/naked-mole-rat-cold-blooded-mammal/index.html",
     "why/wildlife/sea-lion-flipper-vs-dog-forelimb/index.html",
@@ -1553,8 +1553,8 @@
       "to": "/why/forelimb/digit-number/"
     },
     {
-      "from": "/learn/why/forelimb/equine-chestnut-and-ergot-vestigial-pads/",
-      "to": "/why/forelimb/equine-chestnut-and-ergot-vestigial-pads/"
+      "from": "/learn/why/forelimb/equine-chestnut-and-ergot-keratinized-limb-structures/",
+      "to": "/why/forelimb/equine-chestnut-and-ergot-keratinized-limb-structures/"
     },
     {
       "from": "/learn/why/forelimb/equine-navicular-bone/",
@@ -1601,8 +1601,8 @@
       "to": "/why/hindlimb/patellar-locking-mechanism/"
     },
     {
-      "from": "/learn/why/hindlimb/fibula-reduction/",
-      "to": "/why/hindlimb/fibula-reduction/"
+      "from": "/learn/why/hindlimb/bovine-fibula-configuration/",
+      "to": "/why/hindlimb/bovine-fibula-configuration/"
     },
     {
       "from": "/learn/why/hindlimb/peroneus-tertius/",
@@ -1785,8 +1785,8 @@
       "to": "/why/wildlife/bat-wing-skeleton/"
     },
     {
-      "from": "/learn/why/wildlife/whale-vestigial-pelvis/",
-      "to": "/why/wildlife/whale-vestigial-pelvis/"
+      "from": "/learn/why/wildlife/cetacean-pelvic-bones/",
+      "to": "/why/wildlife/cetacean-pelvic-bones/"
     },
     {
       "from": "/learn/why/wildlife/ostrich-two-toed-foot/",
@@ -1841,8 +1841,8 @@
       "to": "/why/wildlife/anteater-tongue-60-cm-vs-dog-tongue/"
     },
     {
-      "from": "/learn/why/wildlife/tortoise-shell-modified-ribs-vertebrae/",
-      "to": "/why/wildlife/tortoise-shell-modified-ribs-vertebrae/"
+      "from": "/learn/why/wildlife/tortoise-shell-ribs-vertebrae-and-dermal-bones/",
+      "to": "/why/wildlife/tortoise-shell-ribs-vertebrae-and-dermal-bones/"
     },
     {
       "from": "/learn/why/wildlife/hummingbird-ball-and-socket-shoulder/",

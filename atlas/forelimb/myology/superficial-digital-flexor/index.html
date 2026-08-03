@@ -122,7 +122,7 @@
       "name": "Superficial Digital Flexor Veterinary Anatomy | IVRI",
       "description": "Superficial Digital Flexor veterinary anatomy for B.V.Sc., M.V.Sc., DVM and veterinary medicine students. Type: Intrinsic, Flexor Group Origin: Medial…",
       "inLanguage": "en",
-      "dateModified": "2026-08-01",
+      "dateModified": "2026-08-03",
       "educationalLevel": [
         "Undergraduate",
         "Postgraduate"
@@ -176,9 +176,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- CSS - Link to external stylesheet -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="enhanced-quiz.css">
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="style.css?v=20260803-mobile-footer">
+  <link rel="stylesheet" href="enhanced-quiz.css?v=20260803-mobile-footer">
+  <link rel="stylesheet" href="dashboard.css?v=20260803-mobile-footer">
+  <link rel="stylesheet" href="elite-guide.css?v=20260803">
+  <link rel="stylesheet" href="events.css?v=20260803">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0a0a14">
 
@@ -524,20 +526,30 @@
       <nav class="footer-resource-nav" aria-label="Veterinary anatomy subjects">
         <div class="footer-resource-heading">BROWSE VETERINARY ANATOMY</div>
         <div class="footer-resource-links">
-          <a href="/atlas/">Veterinary Anatomy Atlas</a>
-          <a href="/atlas/introduction/">Introduction</a>
-          <a href="/atlas/forelimb/">Forelimb</a>
-          <a href="/atlas/head-neck/">Head &amp; Neck</a>
-          <a href="/atlas/thorax/">Thorax</a>
-          <a href="/atlas/abdomen/">Abdomen</a>
-          <a href="/atlas/hindlimb-pelvis/">Hindlimb &amp; Pelvis</a>
-          <a href="/atlas/histology/">Veterinary Histology</a>
-          <a href="/atlas/embryology/">Veterinary Embryology</a>
-          <a href="/why/">Why of Veterinary Anatomy</a>
-          <a href="/why/forelimb/">Forelimb Biomechanics</a>
-          <a href="/why/hindlimb/">Hindlimb Biomechanics</a>
-          <a href="/why/axial/">Axial &amp; Visceral Biomechanics</a>
-          <a href="/why/wildlife/">Wildlife Comparative Anatomy</a>
+          <div class="footer-resource-group footer-atlas-group">
+            <div class="footer-resource-group-label"><i class="fas fa-book-open" aria-hidden="true"></i> Atlas</div>
+            <div class="footer-resource-group-links">
+              <a href="/atlas/">Veterinary Anatomy Atlas</a>
+              <a href="/atlas/introduction/">Introduction</a>
+              <a href="/atlas/forelimb/">Forelimb</a>
+              <a href="/atlas/head-neck/">Head &amp; Neck</a>
+              <a href="/atlas/thorax/">Thorax</a>
+              <a href="/atlas/abdomen/">Abdomen</a>
+              <a href="/atlas/hindlimb-pelvis/">Hindlimb &amp; Pelvis</a>
+              <a href="/atlas/histology/">Veterinary Histology</a>
+              <a href="/atlas/embryology/">Veterinary Embryology</a>
+            </div>
+          </div>
+          <div class="footer-resource-group footer-why-group">
+            <div class="footer-resource-group-label"><i class="fas fa-lightbulb" aria-hidden="true"></i> Why</div>
+            <div class="footer-resource-group-links">
+              <a href="/why/">Why of Veterinary Anatomy</a>
+              <a href="/why/forelimb/">Forelimb Biomechanics</a>
+              <a href="/why/hindlimb/">Hindlimb Biomechanics</a>
+              <a href="/why/axial/">Axial &amp; Visceral Biomechanics</a>
+              <a href="/why/wildlife/">Wildlife Comparative Anatomy</a>
+            </div>
+          </div>
         </div>
       </nav>
 
@@ -1479,6 +1491,10 @@
   <script src="enhanced-quiz.js"></script>
   <script src="search.js"></script>
   <script src="dashboard.js"></script>
+  <!-- Department-safe announcements: edit events-data.js only. -->
+  <script src="events-data.js?v=20260803"></script>
+  <script src="events.js?v=20260803"></script>
+  <script src="elite-guide.js?v=20260803"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <!-- Toast & shared utilities -->
