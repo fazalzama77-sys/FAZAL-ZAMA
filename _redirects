@@ -1,4 +1,7 @@
 # Generated legacy learning-page redirects. Keep old indexed URLs working.
+/Index.html / 301
+/INDEX.HTML / 301
+/index.HTML / 301
 /landing/ / 301
 /landing / 301
 /learn/ /atlas/ 301

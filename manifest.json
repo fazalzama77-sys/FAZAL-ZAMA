@@ -2,8 +2,9 @@
   "name": "IVRI Veterinary Anatomy Atlas",
   "short_name": "IVRI Anatomy",
   "description": "Free IVRI veterinary anatomy atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, with comparative biomechanics and clinical learning tools.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0a0a14",
@@ -11,13 +12,13 @@
   "lang": "en",
   "icons": [
     {
-      "src": "images/icon-192.png",
+      "src": "/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "images/icon-512.png",
+      "src": "/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"

@@ -528,6 +528,11 @@ ${sitemap.map(record => `  <url>
 
 const redirectLines = [
   '# Generated legacy learning-page redirects. Keep old indexed URLs working.',
+  // Older Android/desktop PWA shortcuts may retain a case-sensitive start URL.
+  // Keep those installed copies launchable while the canonical manifest uses `/`.
+  '/Index.html / 301',
+  '/INDEX.HTML / 301',
+  '/index.HTML / 301',
   '/landing/ / 301',
   '/landing / 301',
   ...redirects.flatMap(({ from, to }) => {
