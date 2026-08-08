@@ -92,8 +92,25 @@ const app = {
                     .then((registration) => {
                         app._updateRegistration = registration;
 
+                        // An installed PWA may keep a newly downloaded worker
+                        // in "waiting" while the old worker still controls the
+                        // app. Explicitly promote it; controllerchange below
+                        // then performs one safe reload onto the complete cache.
+                        const activateWaitingWorker = () => {
+                            registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+                        };
+                        activateWaitingWorker();
+                        registration.addEventListener('updatefound', () => {
+                            const installingWorker = registration.installing;
+                            installingWorker?.addEventListener('statechange', () => {
+                                if (installingWorker.state === 'installed') activateWaitingWorker();
+                            });
+                        });
+
                         const checkForUpdates = () => {
-                            registration.update().catch(() => { });
+                            registration.update()
+                                .then(activateWaitingWorker)
+                                .catch(() => { });
                             app._checkForDeploymentUpdate().catch(() => { });
                         };
 

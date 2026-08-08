@@ -8,7 +8,7 @@
 //   • Cross-origin CDN assets use stale-while-revalidate.
 // =========================================================
 
-const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v2';
+const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v3';
 const OWN_CACHE_PATTERN = /^(?:ivri-anatomy-(?:offline|v\d+)|veterinary-anatomy-studio-offline-v\d+)$/;
 
 // App shell — files needed for the site to work offline.
@@ -55,9 +55,12 @@ const APP_SHELL = [
 
 // ---- INSTALL: build the complete new offline shell before activation ----
 self.addEventListener('install', (event) => {
-    self.skipWaiting();
     event.waitUntil(
-        caches.open(OFFLINE_CACHE).then((cache) => refreshAppShell(cache))
+        caches.open(OFFLINE_CACHE)
+            .then((cache) => refreshAppShell(cache))
+            // Await skipWaiting inside the install lifetime so an existing
+            // installed PWA cannot remain controlled by the superseded worker.
+            .then(() => self.skipWaiting())
     );
 });
 
