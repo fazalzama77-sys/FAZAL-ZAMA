@@ -56,7 +56,7 @@
   <meta property="og:image:height" content="512">
   <meta property="og:image:alt" content="IVRI Veterinary Anatomy Atlas logo">
   <meta property="og:url" content="https://veterinaryanatomy.com/why/axial/nuchal-ligament/">
-  <meta property="og:site_name" content="IVRI Anatomy">
+  <meta property="og:site_name" content="IVRI Veterinary Anatomy">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
@@ -160,9 +160,9 @@
 }</script>
 
   <!-- Crawlable site icon generated from the IVRI Anatomy logo. -->
-  <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,12 +174,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- CSS - Link to external stylesheet -->
-  <link rel="stylesheet" href="style.css?v=20260803-mobile-footer">
-  <link rel="stylesheet" href="enhanced-quiz.css?v=20260803-mobile-footer">
-  <link rel="stylesheet" href="dashboard.css?v=20260803-mobile-footer">
-  <link rel="stylesheet" href="elite-guide.css?v=20260803">
-  <link rel="stylesheet" href="events.css?v=20260803">
-  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="/style.css?v=20260803-mobile-footer">
+  <link rel="stylesheet" href="/enhanced-quiz.css?v=20260803-mobile-footer">
+  <link rel="stylesheet" href="/dashboard.css?v=20260803-mobile-footer">
+  <link rel="stylesheet" href="/elite-guide.css?v=20260803">
+  <link rel="stylesheet" href="/events.css?v=20260803">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#0a0a14">
 
   <!-- ===== INSTANT SPLASH (GPU-accelerated, 60fps, snappy fade) ===== -->
@@ -252,7 +252,7 @@
   <div id="ivri-splash" aria-hidden="true">
     <div style="position:relative; display:flex; align-items:center; justify-content:center;">
       <div class="ivri-glow"></div>
-      <div class="ivri-logo"><img src="images/icon-512.png" alt=""></div>
+      <div class="ivri-logo"><img src="/images/icon-512.png" alt=""></div>
     </div>
     <div class="ivri-ring"></div>
     <div class="ivri-tag">IVRI Anatomy</div>
@@ -370,8 +370,9 @@
       <!-- Left Side: Text and Actions -->
       <div class="hero-left-pane">
         <div class="hero-sys-tag"><span class="tag-line"></span> [ICAR-IVRI] VETERINARY ANATOMY ATLAS</div>
-        <h1 class="hero-title">VETERINARY ANATOMY.<br>FROM STRUCTURE TO FUNCTION.</h1>
+        <div class="hero-title" aria-hidden="true">VETERINARY ANATOMY<br>NOTES &amp; ATLAS.</div>
         <p class="hero-credit"><i class="fas fa-building-columns" aria-hidden="true"></i> Developed at ICAR–IVRI, Bareilly</p>
+        <p class="hero-credit">Free B.V.Sc., M.V.Sc. and DVM veterinary anatomy notes&mdash;from structure to function.</p>
         <div class="hero-ctas">
           <a href="/atlas/" onclick="app.loadView('atlas'); return false;" class="hero-cta cta-primary">
             <i class="fas fa-book-open"></i> Explore Atlas
@@ -385,7 +386,7 @@
       <!-- Right Side: Video Background Pane -->
       <div class="hero-right-pane">
         <video id="landing-bg-video" class="landing-bg-video" autoplay loop muted playsinline aria-hidden="true">
-          <source src="pomelli_creative_video_9_16_0607 (1).mp4" type="video/mp4">
+          <source src="/pomelli_creative_video_9_16_0607%20(1).mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -454,7 +455,7 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-logo-space">
-        <img src="images/ivri-logo.png" alt="IVRI — Indian Veterinary Research Institute"
+        <img src="/images/ivri-logo.png" alt="IVRI — Indian Veterinary Research Institute"
              class="footer-logo-img"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
         <span class="footer-logo-fallback" style="display:none;">
@@ -639,7 +640,7 @@
       <header>
         <div class="container">
           <div class="subtitle">Comparative Veterinary Biomechanics</div>
-          <h1>The Why of Veterinary Anatomy</h1>
+          <h1>Nuchal Ligament</h1>
           <p style="color: var(--text-mute); max-width: 600px; margin: 0 auto;">
             Explore the hidden mechanics of why structures are present, absent or modified across domestic and wildlife species&mdash;and how each anatomical design supports movement, function and clinical practice.
           </p>
@@ -1458,7 +1459,7 @@
       </div>
 
       <footer class="me-footer">
-        <img src="images/ivri-logo.png" alt="IVRI"
+        <img src="/images/ivri-logo.png" alt="IVRI"
              onerror="this.style.display='none'"
              style="height:42px; opacity:.7; margin-bottom:8px;">
         <div>Your Anatomy Companion</div>
@@ -1557,33 +1558,33 @@
   <!-- Load JavaScript files - data first, then app logic -->
   <!-- Regional Data -->
   <!-- Regional anatomy modules loaded in VCI syllabus order -->
-  <script src="data-introduction.JS"></script>      <!-- Unit 1 -->
-  <script src="data-forelimb.JS"></script>          <!-- Unit 2 -->
-  <script src="data-head-neck.JS"></script>         <!-- Unit 3 -->
-  <script src="data-thorax.JS"></script>            <!-- Unit 4 -->
-  <script src="data-abdomen.JS"></script>           <!-- Unit 5 -->
-  <script src="data-hindlimb.JS"></script>          <!-- Unit 6 -->
-  <script src="data-splanchnology.JS"></script>     <!-- Splanchnology pushes into above regions -->
-  <script src="data-histology.JS"></script>         <!-- Unit 7 -->
-  <script src="data-embryology.JS"></script>        <!-- Unit 8 -->
+  <script src="/data-introduction.JS"></script>      <!-- Unit 1 -->
+  <script src="/data-forelimb.JS"></script>          <!-- Unit 2 -->
+  <script src="/data-head-neck.JS"></script>         <!-- Unit 3 -->
+  <script src="/data-thorax.JS"></script>            <!-- Unit 4 -->
+  <script src="/data-abdomen.JS"></script>           <!-- Unit 5 -->
+  <script src="/data-hindlimb.JS"></script>          <!-- Unit 6 -->
+  <script src="/data-splanchnology.JS"></script>     <!-- Splanchnology pushes into above regions -->
+  <script src="/data-histology.JS"></script>         <!-- Unit 7 -->
+  <script src="/data-embryology.JS"></script>        <!-- Unit 8 -->
 
   <!-- Quiz & Why Sections -->
-  <script src="data-quiz.JS"></script>
-  <script src="data-why.js?v=20260720"></script>
+  <script src="/data-quiz.JS"></script>
+  <script src="/data-why.js?v=20260720"></script>
 
   <!-- Study Tools (load BEFORE app.js so they're available) -->
-  <script src="glossary.js"></script>
-  <script src="srs.js"></script>
+  <script src="/glossary.js"></script>
+  <script src="/srs.js"></script>
 
   <!-- App Logic -->
-  <script src="app.js"></script>
-  <script src="enhanced-quiz.js"></script>
-  <script src="search.js"></script>
-  <script src="dashboard.js"></script>
+  <script src="/app.js"></script>
+  <script src="/enhanced-quiz.js"></script>
+  <script src="/search.js"></script>
+  <script src="/dashboard.js"></script>
   <!-- Department-safe announcements: edit events-data.js only. -->
-  <script src="events-data.js?v=20260803"></script>
-  <script src="events.js?v=20260803"></script>
-  <script src="elite-guide.js?v=20260803"></script>
+  <script src="/events-data.js?v=20260803"></script>
+  <script src="/events.js?v=20260803"></script>
+  <script src="/elite-guide.js?v=20260803"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <!-- Toast & shared utilities -->

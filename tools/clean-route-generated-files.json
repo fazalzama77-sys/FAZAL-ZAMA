@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T18:33:24.759Z",
+  "generatedAt": "2026-08-08T08:27:19.399Z",
   "files": [
     "atlas/index.html",
     "atlas/introduction/index.html",
@@ -1871,6 +1871,62 @@
     {
       "from": "/learn/why/wildlife/cheetah-non-retractable-claws/",
       "to": "/why/wildlife/cheetah-non-retractable-claws/"
+    },
+    {
+      "from": "/atlas/forelimb/angiology/axillary-and-brachial-branches/",
+      "to": "/atlas/forelimb/angiology/"
+    },
+    {
+      "from": "/atlas/forelimb/angiology/distal-forelimb-vessels/",
+      "to": "/atlas/forelimb/angiology/"
+    },
+    {
+      "from": "/atlas/forelimb/neurology/distal-palmar-and-digital-nerves/",
+      "to": "/atlas/forelimb/neurology/"
+    },
+    {
+      "from": "/atlas/forelimb/neurology/other-proximal-brachial-plexus-branches/",
+      "to": "/atlas/forelimb/neurology/"
+    },
+    {
+      "from": "/atlas/head-neck/angiology/carotid-sheath-and-major-branch-relations/",
+      "to": "/atlas/head-neck/angiology/"
+    },
+    {
+      "from": "/atlas/head-neck/neurology/cn-viii-vestibulocochlear-nerve/",
+      "to": "/atlas/head-neck/neurology/"
+    },
+    {
+      "from": "/atlas/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/",
+      "to": "/atlas/hindlimb-pelvis/angiology/"
+    },
+    {
+      "from": "/atlas/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/",
+      "to": "/atlas/hindlimb-pelvis/angiology/"
+    },
+    {
+      "from": "/atlas/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/",
+      "to": "/atlas/hindlimb-pelvis/neurology/"
+    },
+    {
+      "from": "/atlas/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/",
+      "to": "/atlas/hindlimb-pelvis/neurology/"
+    },
+    {
+      "from": "/why/forelimb/equine-chestnut-and-ergot-vestigial-pads/",
+      "to": "/why/forelimb/equine-chestnut-and-ergot-keratinized-limb-structures/"
+    },
+    {
+      "from": "/why/hindlimb/fibula-reduction/",
+      "to": "/why/hindlimb/bovine-fibula-configuration/"
+    },
+    {
+      "from": "/why/wildlife/tortoise-shell-modified-ribs-vertebrae/",
+      "to": "/why/wildlife/tortoise-shell-ribs-vertebrae-and-dermal-bones/"
+    },
+    {
+      "from": "/why/wildlife/whale-vestigial-pelvis/",
+      "to": "/why/wildlife/cetacean-pelvic-bones/"
     }
   ]
 }

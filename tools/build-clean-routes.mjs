@@ -217,6 +217,44 @@ function ensureRootBase(html) {
   return html.replace(/(<meta\s+charset="UTF-8">)/i, '$1\n  <base href="/">');
 }
 
+function rootAbsoluteAssetUrls(html) {
+  const normalize = reference => {
+    if (!reference || /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i.test(reference)) return reference;
+    return `/${reference.replace(/^\.\//, '').replaceAll(' ', '%20')}`;
+  };
+  return html
+    .replace(/(<(?:script|img|source|video|audio|iframe)\b[^>]*\s(?:src|poster)=")([^"]*)(")/gi,
+      (match, before, reference, after) => `${before}${normalize(reference)}${after}`)
+    .replace(/(<link\b[^>]*\shref=")([^"]*)(")/gi,
+      (match, before, reference, after) => `${before}${normalize(reference)}${after}`);
+}
+
+function routeHeading(title) {
+  return title.split(' | ')[0];
+}
+
+function demoteInactiveLandingHeading(html) {
+  return html.replace(
+    /<h1 class="hero-title">([\s\S]*?)<\/h1>/i,
+    '<div class="hero-title" aria-hidden="true">$1</div>'
+  );
+}
+
+function addAtlasCollectionHeading(html, title, description) {
+  const heading = routeHeading(title);
+  return html.replace(
+    '      <!-- SELECTOR GRID (Region/System) -->',
+    `      <header style="text-align:center;margin:24px auto 8px;max-width:900px;">\n        <h1 style="color:var(--atlas-gold);margin-bottom:10px;">${escapeHtml(heading)}</h1>\n        <p style="color:var(--text-mute);line-height:1.7;">${escapeHtml(truncate(description, 220))}</p>\n      </header>\n\n      <!-- SELECTOR GRID (Region/System) -->`
+  );
+}
+
+function setWhyRouteHeading(html, title) {
+  return html.replace(
+    /<h2>The Why of Veterinary Anatomy<\/h2>/i,
+    `<h1>${escapeHtml(routeHeading(title))}</h1>`
+  );
+}
+
 function activateView(html, view) {
   return html
     .replace('<section id="landing-view" class="view-section active">', '<section id="landing-view" class="view-section">')
@@ -298,7 +336,7 @@ function renderTopicDetail(region, system, topic) {
     </div>` : '';
   return `
     <div class="detail-header">
-      <div><div class="h-title">${escapeHtml(topic.title)}</div><span class="h-sub">/// STANDARD MORPHOLOGY // ${escapeHtml(system.toUpperCase())}</span></div>
+      <div><h1 class="h-title">${escapeHtml(topic.title)} Veterinary Anatomy</h1><span class="h-sub">/// STANDARD MORPHOLOGY // ${escapeHtml(system.toUpperCase())}</span></div>
     </div>
     <div class="feature-box" style="background:rgba(255,255,255,0.03);padding:20px;border-radius:8px;margin-bottom:20px;">
       <strong style="color:var(--atlas-gold);display:block;margin-bottom:10px;font-family:var(--font-code);">📝 STANDARD DESCRIPTION:</strong>
@@ -353,11 +391,18 @@ function writePage({ parts, oldParts, title, description, crumbs, view, collecti
   const graph = schemaGraph({ url, title, description: truncate(description), crumbs, collection, subjects, teaches });
   let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
   html = activateView(html, view);
+  html = demoteInactiveLandingHeading(html);
+  if (view === 'atlas' && collection) html = addAtlasCollectionHeading(html, title, description);
+  if (view === 'why') html = setWhyRouteHeading(html, title);
   html = transform(html);
+  html = rootAbsoluteAssetUrls(html);
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.writeFileSync(destination, html.replace(/[ \t]+$/gm, ''), 'utf8');
   generated.push(relative.replaceAll('\\', '/'));
-  const imageMatches = [...html.matchAll(/<img[^>]+src="(\/images\/[^"?#]+)"/g)].map(match => `${origin}${match[1]}`);
+  const imageMatches = [...html.matchAll(/<img[^>]+src="(\/images\/[^"?#]+)"/g)]
+    .map(match => match[1])
+    .filter(imagePath => !/^\/images\/(?:icon-|apple-touch-icon|ivri-logo)/i.test(imagePath))
+    .map(imagePath => `${origin}${imagePath}`);
   sitemap.push({ loc: url, images: [...new Set(imageMatches)] });
   if (oldParts) redirects.push({ from: route(oldParts), to: route(parts) });
 }
@@ -376,6 +421,7 @@ function writeAppEntry({ parts, title, description }) {
     collection: false
   });
   let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
+  html = rootAbsoluteAssetUrls(html);
   html = html.replace(
     '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
     '<meta name="robots" content="noindex, follow">'
@@ -391,8 +437,8 @@ const atlasCrumb = { name: 'Interactive Atlas', path: '/atlas/' };
 writePage({
   parts: ['atlas'],
   oldParts: ['learn'],
-  title: 'Veterinary Anatomy Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI',
-  description: 'Explore the free IVRI veterinary anatomy atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, aligned with VCI/MSVE and international university curricula.',
+  title: 'Veterinary Anatomy Notes & Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI',
+  description: 'Explore free IVRI veterinary anatomy notes and the interactive atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students, aligned with VCI/MSVE and international curricula.',
   crumbs: [homeCrumb, atlasCrumb],
   view: 'atlas',
   collection: true,
@@ -515,6 +561,35 @@ for (const [category, label] of Object.entries(whyCategoryLabels)) {
   { parts: ['library', 'highlights'], title: 'Highlights | IVRI Anatomy', description: 'Saved veterinary anatomy study highlights.' },
   { parts: ['library', 'notes'], title: 'Notes | IVRI Anatomy', description: 'Saved veterinary anatomy study notes.' }
 ].forEach(writeAppEntry);
+
+// Retire generated pages whose source records were removed or renamed. Keeping
+// these files would leave orphan 200 pages outside the canonical manifest and
+// sitemap. Redirecting preserves old links and consolidates search signals.
+const staleRedirects = [
+  ['/atlas/forelimb/angiology/axillary-and-brachial-branches/', '/atlas/forelimb/angiology/'],
+  ['/atlas/forelimb/angiology/distal-forelimb-vessels/', '/atlas/forelimb/angiology/'],
+  ['/atlas/forelimb/neurology/distal-palmar-and-digital-nerves/', '/atlas/forelimb/neurology/'],
+  ['/atlas/forelimb/neurology/other-proximal-brachial-plexus-branches/', '/atlas/forelimb/neurology/'],
+  ['/atlas/head-neck/angiology/carotid-sheath-and-major-branch-relations/', '/atlas/head-neck/angiology/'],
+  ['/atlas/head-neck/neurology/cn-viii-vestibulocochlear-nerve/', '/atlas/head-neck/neurology/'],
+  ['/atlas/hindlimb-pelvis/angiology/distal-hindlimb-arteries-and-digital-supply/', '/atlas/hindlimb-pelvis/angiology/'],
+  ['/atlas/hindlimb-pelvis/angiology/pelvic-and-gluteal-arterial-supply/', '/atlas/hindlimb-pelvis/angiology/'],
+  ['/atlas/hindlimb-pelvis/neurology/distal-dorsal-and-plantar-nerves/', '/atlas/hindlimb-pelvis/neurology/'],
+  ['/atlas/hindlimb-pelvis/neurology/gluteal-cutaneous-and-pelvic-nerves/', '/atlas/hindlimb-pelvis/neurology/'],
+  ['/why/forelimb/equine-chestnut-and-ergot-vestigial-pads/', '/why/forelimb/equine-chestnut-and-ergot-keratinized-limb-structures/'],
+  ['/why/hindlimb/fibula-reduction/', '/why/hindlimb/bovine-fibula-configuration/'],
+  ['/why/wildlife/tortoise-shell-modified-ribs-vertebrae/', '/why/wildlife/tortoise-shell-ribs-vertebrae-and-dermal-bones/'],
+  ['/why/wildlife/whale-vestigial-pelvis/', '/why/wildlife/cetacean-pelvic-bones/']
+].map(([from, to]) => ({ from, to }));
+
+for (const mapping of staleRedirects) {
+  const relative = mapping.from.replace(/^\//, '').replace(/\/$/, '/index.html');
+  const staleFile = path.resolve(root, relative);
+  const allowed = [path.join(root, 'atlas') + path.sep, path.join(root, 'why') + path.sep];
+  if (!allowed.some(prefix => staleFile.startsWith(prefix))) throw new Error(`Unsafe stale route path: ${staleFile}`);
+  if (fs.existsSync(staleFile)) fs.unlinkSync(staleFile);
+  redirects.push(mapping);
+}
 
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">

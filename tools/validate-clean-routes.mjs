@@ -35,7 +35,22 @@ for (const relative of manifest.files) {
   if (!/<meta name="description" content="[^"]{50,}/i.test(html)) error(`Weak description: ${relative}`);
   if (!/<meta name="robots" content="index, follow/i.test(html)) error(`Missing index directive: ${relative}`);
   if (!/<meta name="ivri-clean-route" content="[^"]+">/i.test(html)) error(`Missing clean-route marker: ${relative}`);
-  if (!/id="bottom-nav"/i.test(html) || !/src="app\.js"/i.test(html)) error(`Original interactive app shell missing: ${relative}`);
+  if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original interactive app shell missing: ${relative}`);
+
+  const primaryHeadings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+  if (primaryHeadings.length !== 1) error(`Expected one page-specific H1 in ${relative}, found ${primaryHeadings.length}`);
+
+  for (const match of html.matchAll(/<(?:script|img|source|video|audio|iframe)\b[^>]*\s(?:src|poster)="([^"]*)"/gi)) {
+    const reference = match[1];
+    if (/\s/.test(reference)) error(`Unencoded whitespace in asset URL in ${relative}: ${reference}`);
+    if (!reference || /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i.test(reference)) continue;
+    error(`Nested-route asset risk in ${relative}: ${reference}`);
+  }
+  for (const match of html.matchAll(/<link\b[^>]*\shref="([^"]*)"/gi)) {
+    const reference = match[1];
+    if (!reference || /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i.test(reference)) continue;
+    error(`Nested-route link asset risk in ${relative}: ${reference}`);
+  }
 
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/i)?.[1];
   if (!canonical) error(`Missing canonical: ${relative}`);
@@ -55,7 +70,7 @@ for (const relative of manifest.files) {
   }
 
   if (relative.split('/').length >= 5 && relative.startsWith('atlas/')) {
-    if (!/id="detail-panel">[\s\S]*?class="h-title">/i.test(html)) error(`Atlas topic is not pre-rendered in original panel: ${relative}`);
+    if (!/id="detail-panel">[\s\S]*?<h1 class="h-title">/i.test(html)) error(`Atlas topic is not pre-rendered with a primary heading: ${relative}`);
   }
   if (relative.split('/').length >= 4 && relative.startsWith('why/')) {
     if (!/class="modal-overlay open" id="modalOverlay"/i.test(html)) error(`WHY topic modal is not pre-rendered: ${relative}`);
@@ -80,7 +95,7 @@ for (const relative of manifest.appFiles || []) {
   const html = fs.readFileSync(file, 'utf8');
   if (!/^<!doctype html>/i.test(html)) error(`Missing app-entry doctype: ${relative}`);
   if (!/<meta name="robots" content="noindex, follow">/i.test(html)) error(`App entry must be excluded from search: ${relative}`);
-  if (!/id="bottom-nav"/i.test(html) || !/src="app\.js"/i.test(html)) error(`Original app shell missing from app entry: ${relative}`);
+  if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original app shell missing from app entry: ${relative}`);
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/i)?.[1];
   const expected = `/${relative.replace(/index\.html$/, '').replaceAll('\\', '/')}`;
   if (!canonical || new URL(canonical).pathname !== expected) error(`App-entry canonical mismatch in ${relative}`);
