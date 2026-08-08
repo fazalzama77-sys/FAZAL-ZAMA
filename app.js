@@ -25,6 +25,10 @@ const IVRI_DEPLOYMENT_MONITOR = Object.freeze({
     minCheckGapMs: 60 * 1000
 });
 
+// Version the registration URL because the hosting layer may cache the plain
+// service-worker.js asset for several hours. Bump only when worker logic changes.
+const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260808-pwa-v3';
+
 function ivriSlugify(value) {
     return String(value || '')
         .replace(/&/g, ' and ')
@@ -88,7 +92,7 @@ const app = {
             });
 
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' })
+                navigator.serviceWorker.register(IVRI_SERVICE_WORKER_URL, { updateViaCache: 'none' })
                     .then((registration) => {
                         app._updateRegistration = registration;
 
