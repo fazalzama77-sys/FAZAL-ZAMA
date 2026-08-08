@@ -15,7 +15,7 @@ Hey Claude! Read this whole file before doing anything else. It tells you who I 
 
 ## 🎯 WHAT WE'RE BUILDING
 
-**IVRI Anatomy** — a free interactive veterinary anatomy study website + Android app for B.V.Sc 1st-year students, aligned with the VCI Unit 1-8 syllabus.
+**Veterinary Anatomy Studio** — the official ICAR-IVRI interactive veterinary anatomy learning website + Android app for B.V.Sc. students, aligned with the VCI Unit 1-8 syllabus.
 
 **Live URL:** `https://veterinaryanatomy.com/` (Cloudflare Pages, deployed from GitHub repo)
 **GitHub repo:** `https://github.com/fazalzama77-sys/FAZAL-ZAMA.git`

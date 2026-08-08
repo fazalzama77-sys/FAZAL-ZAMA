@@ -1,7 +1,7 @@
 {
-  "name": "IVRI Veterinary Anatomy Atlas",
-  "short_name": "IVRI Anatomy",
-  "description": "Free IVRI veterinary anatomy atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, with comparative biomechanics and clinical learning tools.",
+  "name": "Veterinary Anatomy Studio",
+  "short_name": "Anatomy Studio",
+  "description": "Official ICAR-IVRI veterinary anatomy learning platform with VCI-aligned notes, comparative biomechanics, quizzes, evaluation and clinical learning tools.",
   "id": "/",
   "start_url": "/",
   "scope": "/",

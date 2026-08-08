@@ -59,7 +59,7 @@
         }) : [];
         return {
             enabled: source.sectionEnabled !== false,
-            title: safeText(source.sectionTitle, 'IVRI Anatomy Events'),
+            title: safeText(source.sectionTitle, 'Veterinary Anatomy Studio Events'),
             subtitle: safeText(source.sectionSubtitle),
             emptyMessage: safeText(source.emptyMessage, 'No upcoming events right now.'),
             youtubeUrl: safeUrl(source.youtubeChannelUrl),
@@ -147,7 +147,7 @@
         close.type = 'button';
         close.setAttribute('aria-label', 'Close event announcement');
         close.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-        dialog.append(close, make('div', 'ivri-event-dialog-kicker', safeText(event.category, 'Upcoming IVRI Anatomy Event')));
+        dialog.append(close, make('div', 'ivri-event-dialog-kicker', safeText(event.category, 'Upcoming Veterinary Anatomy Studio Event')));
         const title = make('h2', '', safeText(event.title));
         title.id = 'ivri-event-dialog-title';
         dialog.append(title, make('p', 'ivri-event-dialog-date', formatDate(event.date)));

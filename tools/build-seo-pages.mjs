@@ -198,7 +198,7 @@ function writePage({ parts, title, description, kicker, crumbs, body, related = 
   const url = routeUrl(parts);
   const href = localHref(parts);
   const metaDescription = truncateWords(description, 158);
-  const documentTitle = title.length > 62 ? `${truncateWords(title, 43)} | IVRI Anatomy` : title;
+  const documentTitle = title.length > 62 ? `${truncateWords(title, 43)} | Anatomy Studio` : title;
   const graph = [
     {
       '@type': 'WebPage',
@@ -222,7 +222,7 @@ function writePage({ parts, title, description, kicker, crumbs, body, related = 
       about: ['Veterinary anatomy', kicker].filter(Boolean),
       publisher: {
         '@type': 'Organization',
-        name: 'IVRI Veterinary Anatomy Atlas',
+        name: 'Veterinary Anatomy Studio',
         url: `${siteOrigin}/`
       }
     }
@@ -238,7 +238,7 @@ function writePage({ parts, title, description, kicker, crumbs, body, related = 
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="${escapeHtml(url)}">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="IVRI Veterinary Anatomy Atlas">
+  <meta property="og:site_name" content="Veterinary Anatomy Studio">
   <meta property="og:title" content="${escapeHtml(documentTitle)}">
   <meta property="og:description" content="${escapeHtml(metaDescription)}">
   <meta property="og:url" content="${escapeHtml(url)}">
@@ -255,7 +255,7 @@ function writePage({ parts, title, description, kicker, crumbs, body, related = 
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="/"><img src="/images/icon-192.png" alt="" width="42" height="42"><span>IVRI Veterinary Anatomy</span></a>
+    <a class="brand" href="/"><img src="/images/icon-192.png" alt="" width="42" height="42"><span>Veterinary Anatomy Studio</span></a>
     <nav aria-label="Main navigation"><a href="/learn/">Study Library</a><a class="app-link" href="${escapeHtml(appHref)}">Open Interactive Atlas</a></nav>
   </header>
   <main id="main-content" class="page-shell">
@@ -336,7 +336,7 @@ for (const [region, systems] of regionEntries) {
     description: `Study ${region.toLowerCase()} veterinary anatomy through ${regionCounts.get(region)} detailed B.V.Sc. lessons covering ${populatedSystems.map(([system]) => system).join(', ')}.`,
     kicker: `${regionCounts.get(region)} detailed lessons`,
     crumbs: [homeCrumb, learnCrumb, regionCrumb],
-    body: `<section class="content-section"><h2>${escapeHtml(region)} subjects</h2><p>The lessons below preserve the complete teaching detail from the interactive IVRI Veterinary Anatomy Atlas.</p>${renderCards(systemCards)}</section>`,
+    body: `<section class="content-section"><h2>${escapeHtml(region)} subjects</h2><p>The lessons below preserve the complete teaching detail from the Interactive Anatomy Atlas inside Veterinary Anatomy Studio.</p>${renderCards(systemCards)}</section>`,
     related: libraryCards.filter(card => card.title !== region).slice(0, 6),
     appHref: appHashFor(region),
     schemaType: 'CollectionPage'
@@ -421,7 +421,7 @@ for (const group of whyGroups) {
 
   writePage({
     parts: ['learn', 'why', group.category],
-    title: `${group.label} | IVRI Veterinary Anatomy`,
+    title: `${group.label} | Veterinary Anatomy Studio`,
     description: `Explore ${group.topics.length} veterinary anatomy explanations covering ${group.label.toLowerCase()}, functional design, species comparison and clinical relevance.`,
     kicker: 'Functional and comparative anatomy',
     crumbs: [homeCrumb, learnCrumb, whyCrumb, categoryCrumb],

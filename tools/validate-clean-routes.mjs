@@ -34,6 +34,7 @@ for (const relative of manifest.files) {
   if (!/<base href="\/">/i.test(html)) error(`Missing root base URL: ${relative}`);
   if (!/<meta name="description" content="[^"]{50,}/i.test(html)) error(`Weak description: ${relative}`);
   if (!/<meta name="robots" content="index, follow/i.test(html)) error(`Missing index directive: ${relative}`);
+  if (!/<meta property="og:site_name" content="Veterinary Anatomy Studio">/i.test(html)) error(`Outdated site name: ${relative}`);
   if (!/<meta name="ivri-clean-route" content="[^"]+">/i.test(html)) error(`Missing clean-route marker: ${relative}`);
   if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original interactive app shell missing: ${relative}`);
 
@@ -118,6 +119,17 @@ for (const mapping of manifest.redirects) {
 }
 
 const rootHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+if (!/<title>Veterinary Anatomy Studio \| Notes, Quizzes &amp; Learning<\/title>/i.test(rootHtml)) {
+  error('Homepage title does not use the approved Veterinary Anatomy Studio brand');
+}
+if (!/<meta property="og:site_name" content="Veterinary Anatomy Studio">/i.test(rootHtml)) {
+  error('Homepage Open Graph site name is outdated');
+}
+if (!/"@type": "WebSite"[\s\S]*?"name": "Veterinary Anatomy Studio"/i.test(rootHtml)) {
+  error('Homepage WebSite structured-data name is outdated');
+}
+const pwaManifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
+if (pwaManifest.name !== 'Veterinary Anatomy Studio') error('PWA manifest name is outdated');
 if (rootHtml.includes('Searchable Study Library')) error('Technical Study Library link returned to the original interface');
 if (/<base\s+href="\/">/i.test(rootHtml)) error('Root index uses a web-only base URL and will fail when opened through file://');
 for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"]+)"/gi)) {
@@ -133,6 +145,9 @@ for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"
 const appSource = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes('app._legacyRouteFromHash()')) {
   error('Local file routing compatibility is missing from app.js');
+}
+if (!appSource.includes("new Set(['Veterinary Anatomy Studio', 'IVRI Anatomy'])")) {
+  error('Legacy IVRI Anatomy backups are no longer import-compatible');
 }
 
 const notFoundHtml = fs.readFileSync(path.join(root, '404.html'), 'utf8');

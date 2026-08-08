@@ -437,8 +437,8 @@ const atlasCrumb = { name: 'Interactive Atlas', path: '/atlas/' };
 writePage({
   parts: ['atlas'],
   oldParts: ['learn'],
-  title: 'Veterinary Anatomy Notes & Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI',
-  description: 'Explore free IVRI veterinary anatomy notes and the interactive atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students, aligned with VCI/MSVE and international curricula.',
+  title: 'Interactive Veterinary Anatomy Atlas | Veterinary Anatomy Studio',
+  description: 'Explore the interactive atlas inside Veterinary Anatomy Studio, the official ICAR-IVRI learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students.',
   crumbs: [homeCrumb, atlasCrumb],
   view: 'atlas',
   collection: true,
@@ -525,7 +525,7 @@ for (const [category, label] of Object.entries(whyCategoryLabels)) {
   writePage({
     parts: ['why', category],
     oldParts: ['learn', 'why', category],
-    title: `${label} | Interactive IVRI Veterinary Anatomy`,
+    title: `${label} | Veterinary Anatomy Studio`,
     description: `Explore ${items.length} ${label.toLowerCase()} explanations of structural presence, absence and modification, species-specific function, biomechanical advantage and clinical relevance.`,
     crumbs: [homeCrumb, whyCrumb, categoryCrumb],
     view: 'why',
@@ -553,13 +553,13 @@ for (const [category, label] of Object.entries(whyCategoryLabels)) {
 }
 
 [
-  { parts: ['dashboard'], title: 'Study Dashboard | IVRI Anatomy', description: 'Personal veterinary anatomy study progress dashboard.' },
-  { parts: ['me'], title: 'Student Profile | IVRI Anatomy', description: 'Personal IVRI Anatomy student profile and study statistics.' },
-  { parts: ['quiz'], title: 'Veterinary Anatomy Quiz | IVRI Anatomy', description: 'Interactive veterinary anatomy quiz and revision tools.' },
-  { parts: ['library'], title: 'Personal Study Library | IVRI Anatomy', description: 'Personal veterinary anatomy bookmarks, notes and highlights.' },
-  { parts: ['library', 'bookmarks'], title: 'Bookmarks | IVRI Anatomy', description: 'Saved veterinary anatomy study bookmarks.' },
-  { parts: ['library', 'highlights'], title: 'Highlights | IVRI Anatomy', description: 'Saved veterinary anatomy study highlights.' },
-  { parts: ['library', 'notes'], title: 'Notes | IVRI Anatomy', description: 'Saved veterinary anatomy study notes.' }
+  { parts: ['dashboard'], title: 'Study Dashboard | Veterinary Anatomy Studio', description: 'Personal veterinary anatomy study progress dashboard.' },
+  { parts: ['me'], title: 'Student Profile | Veterinary Anatomy Studio', description: 'Personal Veterinary Anatomy Studio profile and study statistics.' },
+  { parts: ['quiz'], title: 'Veterinary Anatomy Quiz | Veterinary Anatomy Studio', description: 'Interactive veterinary anatomy quiz and revision tools.' },
+  { parts: ['library'], title: 'Personal Study Library | Veterinary Anatomy Studio', description: 'Personal veterinary anatomy bookmarks, notes and highlights.' },
+  { parts: ['library', 'bookmarks'], title: 'Bookmarks | Veterinary Anatomy Studio', description: 'Saved veterinary anatomy study bookmarks.' },
+  { parts: ['library', 'highlights'], title: 'Highlights | Veterinary Anatomy Studio', description: 'Saved veterinary anatomy study highlights.' },
+  { parts: ['library', 'notes'], title: 'Notes | Veterinary Anatomy Studio', description: 'Saved veterinary anatomy study notes.' }
 ].forEach(writeAppEntry);
 
 // Retire generated pages whose source records were removed or renamed. Keeping

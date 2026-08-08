@@ -530,7 +530,7 @@ const app = {
     _onboardSlides: [
         {
             icon: 'fa-book-open', accent: '#ffd54f',
-            title: 'Welcome to IVRI Anatomy',
+            title: 'Welcome to Veterinary Anatomy Studio',
             body: 'Your B.V.Sc study companion — built for first-year students. Atlas, quizzes, and your own notes. Works even offline.'
         },
         {
@@ -605,7 +605,7 @@ const app = {
         });
         window.addEventListener('appinstalled', () => {
             app._hideInstallBanner();
-            if (typeof showToast === 'function') showToast('IVRI Anatomy installed!', 'success', 'fa-check-circle');
+            if (typeof showToast === 'function') showToast('Veterinary Anatomy Studio installed!', 'success', 'fa-check-circle');
         });
         // iOS Safari never fires beforeinstallprompt — show a friendly fallback
         // banner with "Add to Home Screen" instructions after 2 visits.
@@ -624,7 +624,7 @@ const app = {
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         if (isIOS) {
             b.querySelector('.install-msg').innerHTML =
-                'Install IVRI Anatomy: tap <i class="fas fa-arrow-up-from-bracket"></i> Share, then <b>Add to Home Screen</b>.';
+                'Install Veterinary Anatomy Studio: tap <i class="fas fa-arrow-up-from-bracket"></i> Share, then <b>Add to Home Screen</b>.';
             b.querySelector('.install-btn').style.display = 'none';
         }
         b.style.display = 'flex';
@@ -754,8 +754,8 @@ const app = {
                 renotify: true, data: { url: '/quiz/' }
             };
             const registration = await navigator.serviceWorker?.ready;
-            if (registration?.showNotification) await registration.showNotification('IVRI Anatomy', options);
-            else new Notification('IVRI Anatomy', options);
+            if (registration?.showNotification) await registration.showNotification('Veterinary Anatomy Studio', options);
+            else new Notification('Veterinary Anatomy Studio', options);
             localStorage.setItem(app.NOTIF_LAST_KEY, app._today());
         } catch (e) { console.warn('srs notif', e); }
     },
@@ -931,7 +931,7 @@ const app = {
     // and human-readable — a safe long-term archive.
     exportBackup: () => {
         const payload = {
-            app: 'IVRI Anatomy',
+            app: 'Veterinary Anatomy Studio',
             version: 1,
             exported_at: new Date().toISOString(),
             user_agent: navigator.userAgent,
@@ -960,7 +960,7 @@ const app = {
         const a = document.createElement('a');
         const today = app._today();
         a.href = url;
-        a.download = `ivri-anatomy-backup-${today}.json`;
+        a.download = `veterinary-anatomy-studio-backup-${today}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -995,8 +995,9 @@ const app = {
                 fileInput.value = '';
                 return;
             }
-            if (!payload || payload.app !== 'IVRI Anatomy' || !payload.data) {
-                if (typeof showToast === 'function') showToast('Not a valid IVRI Anatomy backup', 'warning', 'fa-exclamation-circle');
+            const compatibleAppNames = new Set(['Veterinary Anatomy Studio', 'IVRI Anatomy']);
+            if (!payload || !compatibleAppNames.has(payload.app) || !payload.data) {
+                if (typeof showToast === 'function') showToast('Not a valid Veterinary Anatomy Studio backup', 'warning', 'fa-exclamation-circle');
                 fileInput.value = '';
                 return;
             }
@@ -1372,7 +1373,7 @@ const app = {
 
     // Builds a descriptive <title> from current state — helps SEO + browser tabs
     _legacyUpdatePageTitle: () => {
-        const SITE = 'IVRI Anatomy';
+        const SITE = 'Veterinary Anatomy Studio';
         const parts = [];
         if (app.state.view === 'atlas') {
             if (app.state.region) parts.push(app.state.region);
@@ -1617,10 +1618,10 @@ const app = {
     },
 
     updatePageTitle: (whyItem = null) => {
-        const SITE = 'IVRI Anatomy';
+        const SITE = 'Veterinary Anatomy Studio';
         const routeRoot = location.pathname.split('/').filter(Boolean)[0] || '';
-        let title = 'Veterinary Anatomy Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI';
-        let description = 'Free IVRI veterinary anatomy atlas for B.V.Sc., M.V.Sc., DVM and veterinary medicine students worldwide, with comparative biomechanics, histology, embryology and quizzes.';
+        let title = 'Veterinary Anatomy Studio | Notes, Quizzes & Learning';
+        let description = 'Official ICAR-IVRI veterinary anatomy learning platform with VCI-aligned notes, comparative biomechanics, histology, embryology, quizzes and evaluation.';
         if (routeRoot === 'library') {
             title = `Saved Study Library | ${SITE}`;
             description = 'Review saved veterinary anatomy bookmarks, highlights and personal notes.';
@@ -1632,9 +1633,9 @@ const app = {
             if (app.state.region) {
                 const parts = [app.state.system, app.state.region, 'Veterinary Anatomy'].filter(Boolean);
                 title = `${parts.join(' · ')} | IVRI`;
-                description = `Study ${subject} through the interactive IVRI veterinary anatomy atlas.`;
+                description = `Study ${subject} through the Interactive Anatomy Atlas inside Veterinary Anatomy Studio.`;
             } else {
-                title = 'Veterinary Anatomy Atlas for B.V.Sc., M.V.Sc. & DVM | IVRI';
+                title = 'Veterinary Anatomy Studio | Notes, Quizzes & Learning';
             }
         } else if (app.state.view === 'why') {
             const categoryLabels = {
@@ -1659,7 +1660,7 @@ const app = {
             description = 'Review veterinary anatomy learning progress, quiz accuracy and spaced-repetition topics.';
         } else if (app.state.view === 'me') {
             title = `Profile and Settings | ${SITE}`;
-            description = 'Manage IVRI Anatomy preferences, study backups and learning settings.';
+            description = 'Manage Veterinary Anatomy Studio preferences, study backups and learning settings.';
         }
         app.updateSeoMetadata(title, description);
     },
@@ -2080,7 +2081,7 @@ const app = {
 
         // Override page title to include the structure name for sharper bookmarks/sharing
         app.updateSeoMetadata(
-            `${item.title} · ${app.state.system} · ${app.state.region} · IVRI Anatomy`,
+            `${item.title} · ${app.state.system} · ${app.state.region} · Veterinary Anatomy Studio`,
             String(item.desc || item.eliteDesc || `${item.title} veterinary anatomy`).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 158),
             cleanTopicPath
         );
@@ -2231,8 +2232,8 @@ const app = {
         const item = data && data[index];
         if (!item) return;
         const url = `${location.origin}${app.atlasPath(app.state.region, app.state.system, index)}`;
-        const title = `${item.title} — IVRI Anatomy`;
-        const text = `${item.title} (${app.state.system}, ${app.state.region}) — study with me on IVRI Anatomy 📖`;
+        const title = `${item.title} — Veterinary Anatomy Studio`;
+        const text = `${item.title} (${app.state.system}, ${app.state.region}) — study with me on Veterinary Anatomy Studio 📖`;
         try {
             if (navigator.share) {
                 await navigator.share({ title, text, url });
@@ -2811,7 +2812,7 @@ const app = {
     exportHighlights: () => {
         const all = app._loadAllHighlights();
         const lines = [];
-        lines.push('IVRI Anatomy - My Highlights');
+        lines.push('Veterinary Anatomy Studio - My Highlights');
         lines.push('Exported ' + new Date().toLocaleString());
         lines.push('');
         Object.keys(all).sort().forEach(tid => {
@@ -3574,7 +3575,7 @@ const app = {
             banner.setAttribute('aria-live', 'polite');
             banner.innerHTML = `
                 <i class="fas fa-cloud-arrow-down" aria-hidden="true"></i>
-                <span class="update-banner-text">New IVRI Anatomy content is ready. Updating automatically…</span>
+                <span class="update-banner-text">New Veterinary Anatomy Studio content is ready. Updating automatically…</span>
                 <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
             `;
             document.body.appendChild(banner);

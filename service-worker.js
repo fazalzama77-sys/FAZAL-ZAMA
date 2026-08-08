@@ -1,5 +1,5 @@
 // =========================================================
-// IVRI ANATOMY — SERVICE WORKER (automatic-update + offline fallback)
+// VETERINARY ANATOMY STUDIO — SERVICE WORKER (automatic-update + offline fallback)
 // Strategy:
 //   • Same-origin HTML/JS/CSS/data always bypass the browser HTTP cache.
 //   • Successful network responses refresh one stable offline cache.

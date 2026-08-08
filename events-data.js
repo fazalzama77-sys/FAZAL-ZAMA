@@ -1,6 +1,6 @@
 /*
  * ================================================================
- * IVRI ANATOMY — DEPARTMENT EVENTS DATA
+ * VETERINARY ANATOMY STUDIO — DEPARTMENT EVENTS DATA
  * ================================================================
  * THIS IS THE ONLY EVENTS FILE THAT DEPARTMENT STAFF SHOULD EDIT.
  *
@@ -17,11 +17,11 @@
 window.IVRI_EVENTS_CONFIG = {
     // STAFF TOGGLE: true = show the section; false = hide it completely.
     sectionEnabled: true,
-    sectionTitle: 'IVRI Anatomy Events',
+    sectionTitle: 'Veterinary Anatomy Studio Events',
     sectionSubtitle: 'Upcoming academic programmes, expert lectures and official video updates.',
     emptyMessage: 'No upcoming events right now.',
 
-    // Add the official IVRI Anatomy YouTube channel link when it is available.
+    // Add the official Veterinary Anatomy Studio YouTube channel link when it is available.
     youtubeChannelUrl: '',
     youtubeChannelLabel: 'Visit our YouTube channel',
 
