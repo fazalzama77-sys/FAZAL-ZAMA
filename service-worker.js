@@ -2,14 +2,14 @@
 // VETERINARY ANATOMY STUDIO — SERVICE WORKER (automatic-update + offline fallback)
 // Strategy:
 //   • Same-origin HTML/JS/CSS/data always bypass the browser HTTP cache.
-//   • Successful network responses refresh one stable offline cache.
+//   • A versioned app shell is populated completely before activation.
 //   • Invalid deployment-time HTML responses never replace cached JS/CSS.
-//   • No manual cache-version bump is required for ordinary content uploads.
+//   • Same-origin cache keys ignore query strings to prevent duplicate entries.
 //   • Cross-origin CDN assets use stale-while-revalidate.
 // =========================================================
 
-const OFFLINE_CACHE = 'ivri-anatomy-offline';
-const LEGACY_CACHE_PATTERN = /^ivri-anatomy-v\d+$/;
+const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v2';
+const OWN_CACHE_PATTERN = /^(?:ivri-anatomy-(?:offline|v\d+)|veterinary-anatomy-studio-offline-v\d+)$/;
 
 // App shell — files needed for the site to work offline.
 const APP_SHELL = [
@@ -53,7 +53,7 @@ const APP_SHELL = [
     './manifest.json'
 ];
 
-// ---- INSTALL: refresh the offline shell and activate immediately ----
+// ---- INSTALL: build the complete new offline shell before activation ----
 self.addEventListener('install', (event) => {
     self.skipWaiting();
     event.waitUntil(
@@ -61,27 +61,15 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// ---- ACTIVATE: remove numbered legacy caches and control open tabs ----
+// ---- ACTIVATE: remove superseded app caches and control open tabs ----
 self.addEventListener('activate', (event) => {
-    let shouldMigrateLegacyClients = false;
     event.waitUntil(
         caches.keys().then((keys) => {
-            const legacyKeys = keys.filter((key) =>
-                key !== OFFLINE_CACHE && LEGACY_CACHE_PATTERN.test(key)
+            const supersededKeys = keys.filter((key) =>
+                key !== OFFLINE_CACHE && OWN_CACHE_PATTERN.test(key)
             );
-            shouldMigrateLegacyClients = legacyKeys.length > 0;
-            return Promise.all(legacyKeys.map((key) => caches.delete(key)));
+            return Promise.all(supersededKeys.map((key) => caches.delete(key)));
         }).then(() => self.clients.claim())
-            // This one activation reload migrates pages still running the old
-            // banner-based updater. Future content-only uploads are handled by
-            // app.js without another service-worker change.
-            .then(() => shouldMigrateLegacyClients
-                ? self.clients.matchAll({ type: 'window', includeUncontrolled: true })
-                : []
-            )
-            .then((windows) => Promise.all(
-                windows.map((client) => client.navigate(client.url).catch(() => null))
-            ))
     );
 });
 
@@ -114,8 +102,15 @@ self.addEventListener('fetch', (event) => {
     const isSameOrigin = url.origin === self.location.origin;
 
     if (isSameOrigin) {
+        // Cloudflare internals are not application assets and must not occupy
+        // offline storage.
+        if (url.pathname.startsWith('/cdn-cgi/')) return;
         // ============== NETWORK-FIRST for our own files ==============
         event.respondWith(networkFirst(req));
+    } else if (url.hostname === 'api.github.com' || url.searchParams.has('ivri_check')) {
+        // Deployment checks are timestamped and useless offline. Caching them
+        // creates an unbounded list of one-use responses.
+        event.respondWith(fetch(req));
     } else {
         // ============== STALE-WHILE-REVALIDATE for CDN assets ==============
         event.respondWith(staleWhileRevalidate(req));
@@ -126,6 +121,7 @@ self.addEventListener('fetch', (event) => {
 function networkFirst(req) {
     const requestUrl = new URL(req.url);
     const isUpdateProbe = requestUrl.searchParams.has('ivri_update_check');
+    const cacheKey = cacheKeyFor(req);
     return fetch(req, { cache: 'no-store' }).then((res) => {
         // During a deployment, static hosts can briefly return index.html for
         // a JS/CSS URL. Never execute or cache that mismatched response.
@@ -135,15 +131,13 @@ function networkFirst(req) {
 
         if (!isUpdateProbe) {
             const clone = res.clone();
-            caches.open(OFFLINE_CACHE).then((cache) => cache.put(req, clone)).catch(() => {});
+            caches.open(OFFLINE_CACHE).then((cache) => cache.put(cacheKey, clone)).catch(() => {});
         }
         return res;
     }).catch(() =>
-        caches.match(req).then((cached) =>
-            cached || caches.match(req, { ignoreSearch: true })
-        ).then((cached) => {
+        caches.match(cacheKey).then((cached) => {
             if (cached) return cached;
-            if (isHtmlRequest(req)) return caches.match('./index.html');
+            if (isHtmlRequest(req)) return caches.match(cacheKeyFor(new Request('./index.html')));
             return new Response('', { status: 504, statusText: 'Offline and not cached' });
         })
     );
@@ -167,18 +161,21 @@ function staleWhileRevalidate(req) {
 function refreshAppShell(cache) {
     return Promise.all(
         APP_SHELL.map(async (url) => {
-            try {
-                const request = new Request(url, { cache: 'reload' });
-                const response = await fetch(request);
-                if (!isExpectedAssetResponse(request, response)) {
-                    throw new Error('unexpected content type');
-                }
-                await cache.put(request, response.clone());
-            } catch (error) {
-                console.warn('[SW] keeping existing offline copy:', url, error.message);
+            const request = new Request(url, { cache: 'reload' });
+            const response = await fetch(request);
+            if (!isExpectedAssetResponse(request, response)) {
+                throw new Error(`Could not cache required offline asset: ${url}`);
             }
+            await cache.put(cacheKeyFor(request), response.clone());
         })
     );
+}
+
+function cacheKeyFor(req) {
+    const url = new URL(req.url);
+    url.search = '';
+    url.hash = '';
+    return new Request(url.href, { method: 'GET' });
 }
 
 function isHtmlRequest(req) {
