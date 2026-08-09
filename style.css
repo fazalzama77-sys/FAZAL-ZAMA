@@ -9018,8 +9018,8 @@ body.professional-mode .footer-tool-btn {
 
 /* Luminous: one coherent navy/cyan footer system from credits through tools. */
 body:not(.professional-mode) .footer {
-    background: #03101f;
-    border-top-color: rgba(69, 94, 121, 0.34);
+    background: linear-gradient(180deg, #070710 0%, #05050c 52%, #080810 100%);
+    border-top-color: rgba(255, 255, 255, 0.09);
 }
 
 body:not(.professional-mode) .footer-logo-space {
@@ -9043,7 +9043,7 @@ body:not(.professional-mode) .footer-credits {
 
 body:not(.professional-mode) .credit-col {
     padding: 30px 34px;
-    background: linear-gradient(145deg, #0b1b2b 0%, #071522 56%, #091827 100%);
+    background: linear-gradient(145deg, #0d0e17 0%, #080910 56%, #0b0c14 100%);
     border-color: rgba(255, 214, 0, 0.34);
     border-radius: 16px;
     box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.035);
@@ -9090,10 +9090,10 @@ body:not(.professional-mode) .footer-resource-nav {
     max-width: 1116px;
     margin-top: 32px;
     padding: 26px 30px;
-    background: #091523;
-    border-color: #243447;
+    background: rgba(7, 7, 15, 0.72);
+    border-color: rgba(255, 255, 255, 0.12);
     border-radius: 14px;
-    box-shadow: none;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
 }
 
 body:not(.professional-mode) .footer-resource-heading {
@@ -9464,9 +9464,9 @@ body:not(.professional-mode) .footer-resource-links {
 
 body:not(.professional-mode) .footer-resource-group {
     padding: 18px;
-    border: 1px solid #26394c;
+    border: 1px solid rgba(255, 255, 255, 0.11);
     border-radius: 12px;
-    background: #0b1b2b;
+    background: rgba(255, 255, 255, 0.025);
 }
 
 body:not(.professional-mode) .footer-resource-group-links {
@@ -9487,10 +9487,10 @@ body:not(.professional-mode) .footer-resource-group-links a {
     align-items: center;
     min-height: 40px;
     padding: 9px 11px;
-    border: 1px solid rgba(125, 216, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 8px;
-    background: rgba(125, 216, 255, 0.035);
-    color: #aebfd0;
+    background: rgba(255, 255, 255, 0.028);
+    color: #b8bdc9;
     font-size: 0.78rem;
     text-align: left;
 }

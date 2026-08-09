@@ -22,6 +22,8 @@
 - Initial issue: the source team card used a loud multicolour top stripe, and the resource links appeared as one flat directory.
 - Fix: removed the stripe, introduced a short centered heading accent, and created separate Atlas and WHY navigation panels with theme-specific styling.
 - Post-fix evidence: the luminous and academic screenshots show clear hierarchy and restrained visual treatment; side-by-side comparison images show the requested structural improvement.
+- Follow-up issue: the first luminous resource panels leaned too blue against the website's predominantly black background.
+- Follow-up fix: replaced blue panel fills and borders with translucent near-black and neutral-white surfaces while retaining cyan and gold only as semantic accents.
 
 ## Follow-up Polish
 
