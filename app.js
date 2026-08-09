@@ -636,7 +636,7 @@ const app = {
             card.type = 'button';
             card.className = 'me-card pwa-install-card';
             card.innerHTML = `
-                <i class="fas fa-laptop-arrow-down me-card-icon" style="color:#19a974;"></i>
+                <i class="fas fa-download me-card-icon" style="color:#19a974;" aria-hidden="true"></i>
                 <div class="me-card-title" id="pwa-install-title">Install Desktop App</div>
                 <div class="me-card-desc" id="pwa-install-desc">Install once, then open notes and quizzes without internet.</div>
             `;
