@@ -242,10 +242,15 @@ function demoteInactiveLandingHeading(html) {
 
 function addAtlasCollectionHeading(html, title, description) {
   const heading = routeHeading(title);
+  const replacement = `<header id="atlas-collection-intro" style="text-align:center;margin:24px auto 8px;max-width:900px;">\n        <h1 style="color:var(--atlas-gold);margin-bottom:10px;">${escapeHtml(heading)}</h1>\n        <p style="color:var(--text-mute);line-height:1.7;">${escapeHtml(truncate(description, 220))}</p>\n      </header>`;
   return html.replace(
-    '      <!-- SELECTOR GRID (Region/System) -->',
-    `      <header style="text-align:center;margin:24px auto 8px;max-width:900px;">\n        <h1 style="color:var(--atlas-gold);margin-bottom:10px;">${escapeHtml(heading)}</h1>\n        <p style="color:var(--text-mute);line-height:1.7;">${escapeHtml(truncate(description, 220))}</p>\n      </header>\n\n      <!-- SELECTOR GRID (Region/System) -->`
+    /<header id="atlas-collection-intro"[\s\S]*?<\/header>/i,
+    replacement
   );
+}
+
+function removeAtlasCollectionHeading(html) {
+  return html.replace(/\s*<header id="atlas-collection-intro"[\s\S]*?<\/header>\s*/i, '\n\n      ');
 }
 
 function setWhyRouteHeading(html, title) {
@@ -393,6 +398,7 @@ function writePage({ parts, oldParts, title, description, crumbs, view, collecti
   html = activateView(html, view);
   html = demoteInactiveLandingHeading(html);
   if (view === 'atlas' && collection) html = addAtlasCollectionHeading(html, title, description);
+  else html = removeAtlasCollectionHeading(html);
   if (view === 'why') html = setWhyRouteHeading(html, title);
   html = transform(html);
   html = rootAbsoluteAssetUrls(html);

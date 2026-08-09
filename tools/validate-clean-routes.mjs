@@ -41,6 +41,9 @@ for (const relative of manifest.files) {
 
   const primaryHeadings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
   if (primaryHeadings.length !== 1) error(`Expected one page-specific H1 in ${relative}, found ${primaryHeadings.length}`);
+  if (relative.startsWith('atlas/') && relative.split('/').length <= 4 && !/id="atlas-collection-intro"/i.test(html)) {
+    error(`Atlas selection page is missing its introduction: ${relative}`);
+  }
 
   for (const match of html.matchAll(/<(?:script|img|source|video|audio|iframe)\b[^>]*\s(?:src|poster)="([^"]*)"/gi)) {
     const reference = match[1];
@@ -72,6 +75,7 @@ for (const relative of manifest.files) {
   }
 
   if (relative.split('/').length >= 5 && relative.startsWith('atlas/')) {
+    if (/id="atlas-collection-intro"/i.test(html)) error(`Atlas introduction leaked into final content: ${relative}`);
     if (!/id="detail-panel">[\s\S]*?<h1 class="h-title">/i.test(html)) error(`Atlas topic is not pre-rendered with a primary heading: ${relative}`);
   }
   if (relative.split('/').length >= 4 && relative.startsWith('why/')) {
@@ -121,6 +125,9 @@ for (const mapping of manifest.redirects) {
 }
 
 const rootHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+if (!/id="atlas-collection-intro"[\s\S]*?<h1[^>]*>Interactive Veterinary Anatomy Atlas<\/h1>[\s\S]*?official ICAR-IVRI learning platform/i.test(rootHtml)) {
+  error('Shared Atlas introduction is missing from the app shell');
+}
 if (!/<title>Veterinary Anatomy Studio \| Notes, Quizzes &amp; Learning<\/title>/i.test(rootHtml)) {
   error('Homepage title does not use the approved Veterinary Anatomy Studio brand');
 }
@@ -179,6 +186,9 @@ if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v6")
   || serviceWorkerSource.includes('cdnjs.cloudflare.com/ajax/libs/font-awesome')
   || !serviceWorkerSource.includes('OPTIONAL_DESKTOP_ASSETS')) {
   error('Desktop PWA offline shell is incomplete or uses the wrong cache version');
+}
+if (!appSource.includes("atlasIntro.style.display = app.state.system ? 'none' : ''")) {
+  error('Atlas introduction visibility is not limited to selection screens');
 }
 const fontAwesomeAssets = [
   'vendor/fontawesome/css/all.min.css',

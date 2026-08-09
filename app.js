@@ -2009,6 +2009,24 @@ const app = {
         const breadcrumb = document.getElementById('atlas-crumb');
         const eliteBtn = document.getElementById('elite-toggle');
 
+        // Generated deep routes omit the generic Atlas introduction so they
+        // retain one page-specific H1. Recreate it when users navigate back to
+        // the Atlas landing screen inside the app or installed PWA.
+        let atlasIntro = document.getElementById('atlas-collection-intro');
+        if (!atlasIntro && !app.state.system) {
+            atlasIntro = document.createElement('header');
+            atlasIntro.id = 'atlas-collection-intro';
+            atlasIntro.style.cssText = 'text-align:center;margin:24px auto 8px;max-width:900px;';
+            atlasIntro.innerHTML = `
+                <h1 style="color:var(--atlas-gold);margin-bottom:10px;">Interactive Veterinary Anatomy Atlas</h1>
+                <p style="color:var(--text-mute);line-height:1.7;">Explore the interactive atlas inside Veterinary Anatomy Studio, the official ICAR-IVRI learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students.</p>
+            `;
+            grid.before(atlasIntro);
+        }
+        // Keep the introduction through region and system selection, then
+        // remove it from the focused content workspace.
+        if (atlasIntro) atlasIntro.style.display = app.state.system ? 'none' : '';
+
         if (eliteBtn) {
             if (app.state.system) {
                 eliteBtn.style.display = 'flex';
