@@ -7688,9 +7688,23 @@ body.professional-mode .onboard-body b { color: #1565c0; }
     transform: translate(-50%, -8px);
     transition: opacity .2s ease, transform .2s ease;
 }
-.pwa-status.show { opacity: 1; transform: translate(-50%, 0); }
+.pwa-status.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
 .pwa-status b { color: #13795b; font-family: var(--font-code); letter-spacing: .3px; }
-.pwa-status > span:last-child { color: #5f7280; }
+.pwa-status-detail { color: #5f7280; }
+.pwa-status-close {
+    width: 22px;
+    height: 22px;
+    margin: -5px -6px -5px 2px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #6f7f89;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.pwa-status-close:hover,
+.pwa-status-close:focus-visible { background: rgba(32, 64, 82, 0.09); color: #204052; outline: none; }
 .pwa-status-dot {
     width: 8px;
     height: 8px;
@@ -7779,7 +7793,7 @@ body.professional-mode .onboard-body b { color: #1565c0; }
         transform: translateY(-8px);
     }
     .pwa-status.show { transform: translateY(0); }
-    .pwa-status > span:last-child { display: none; }
+    .pwa-status-detail { display: none; }
     .install-banner { padding: 12px; }
     .install-msg { font-size: .8rem; }
     .install-btn { padding: 7px 12px; font-size: .72rem; }

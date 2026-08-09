@@ -27,7 +27,7 @@ const IVRI_DEPLOYMENT_MONITOR = Object.freeze({
 
 // Version the registration URL because the hosting layer may cache the plain
 // service-worker.js asset for several hours. Bump only when worker logic changes.
-const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260809-desktop-pwa-v4';
+const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260809-desktop-pwa-v5';
 
 function ivriSlugify(value) {
     return String(value || '')
@@ -616,6 +616,7 @@ const app = {
     },
 
     // ---------- Desktop PWA readiness + persistent install access ----------
+    PWA_STATUS_DISMISS_KEY: 'ivri-pwa-status-dismissed',
     _isStandalonePwa: () => window.matchMedia('(display-mode: standalone)').matches
         || window.navigator.standalone === true,
     _initDesktopPwaExperience: () => {
@@ -667,16 +668,23 @@ const app = {
         const controlled = Boolean(navigator.serviceWorker?.controller);
 
         if (status) {
-            status.className = `pwa-status show ${offline ? 'is-offline' : controlled ? 'is-ready' : 'is-preparing'}`;
+            const dismissed = localStorage.getItem(app.PWA_STATUS_DISMISS_KEY) === '1';
+            const showStatus = offline || !controlled || !dismissed;
+            status.className = `pwa-status ${showStatus ? 'show' : ''} ${offline ? 'is-offline' : controlled ? 'is-ready' : 'is-preparing'}`;
             status.innerHTML = offline
-                ? '<span class="pwa-status-dot"></span><b>Offline mode</b><span>Lessons &amp; quizzes available</span>'
+                ? '<span class="pwa-status-dot"></span><b>Offline mode</b><span class="pwa-status-detail">Lessons &amp; quizzes available</span>'
                 : controlled
-                    ? '<span class="pwa-status-dot"></span><b>Offline ready</b><span>Desktop cache active</span>'
-                    : '<span class="pwa-status-dot"></span><b>Preparing offline</b><span>Keep this page open briefly</span>';
+                    ? '<span class="pwa-status-dot"></span><b>Offline ready</b><span class="pwa-status-detail">Desktop cache active</span>'
+                    : '<span class="pwa-status-dot"></span><b>Preparing offline</b><span class="pwa-status-detail">Keep this page open briefly</span>';
+            status.insertAdjacentHTML('beforeend', '<button class="pwa-status-close" type="button" aria-label="Hide offline status">&times;</button>');
+            status.querySelector('.pwa-status-close')?.addEventListener('click', () => {
+                localStorage.setItem(app.PWA_STATUS_DISMISS_KEY, '1');
+                status.classList.remove('show');
+            });
 
             clearTimeout(app._pwaStatusTimer);
-            if (!offline && window.innerWidth < 901) {
-                app._pwaStatusTimer = setTimeout(() => status.classList.remove('show'), 5000);
+            if (!offline && controlled && showStatus) {
+                app._pwaStatusTimer = setTimeout(() => status.classList.remove('show'), window.innerWidth < 901 ? 5000 : 8000);
             }
         }
 

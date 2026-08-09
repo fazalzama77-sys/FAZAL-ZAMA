@@ -8,7 +8,7 @@
 //   • Cross-origin CDN assets use stale-while-revalidate.
 // =========================================================
 
-const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v4';
+const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v5';
 const OWN_CACHE_PATTERN = /^(?:ivri-anatomy-(?:offline|v\d+)|veterinary-anatomy-studio-offline-v\d+)$/;
 
 // App shell — files needed for the site to work offline.
@@ -46,12 +46,7 @@ const APP_SHELL = [
     './data-why.js?v=20260720',
     './favicon.ico',
     './favicon-48x48.png',
-    './images/apple-touch-icon.png',
     './images/icon-192.png',
-    './images/icon-512.png',
-    './images/ivri-logo.png',
-    './images/scapula-ox-horse-dog-annotated.png',
-    './pomelli_creative_video_9_16_0607 (1).mp4',
     './manifest.json'
 ];
 
@@ -151,7 +146,10 @@ function networkFirst(req) {
             throw new Error(`Unexpected response for ${requestUrl.pathname}`);
         }
 
-        if (!isUpdateProbe) {
+        // Keep offline storage focused on lessons, quizzes and application
+        // code. Large media remains network-only and never consumes the PWA
+        // cache merely because a learner viewed it once.
+        if (!isUpdateProbe && !isNonessentialMediaRequest(req)) {
             const clone = res.clone();
             caches.open(OFFLINE_CACHE).then((cache) => cache.put(cacheKey, clone)).catch(() => {});
         }
@@ -163,6 +161,11 @@ function networkFirst(req) {
             return new Response('', { status: 504, statusText: 'Offline and not cached' });
         })
     );
+}
+
+function isNonessentialMediaRequest(req) {
+    const pathname = new URL(req.url).pathname.toLowerCase();
+    return /\.(?:png|jpe?g|webp|svg|avif|gif|mp4|webm|mov|mp3|wav|ogg|m4a)$/.test(pathname);
 }
 
 // Stale-while-revalidate: return cache immediately, refresh in background

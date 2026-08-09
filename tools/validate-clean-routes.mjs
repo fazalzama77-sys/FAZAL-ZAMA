@@ -157,14 +157,17 @@ if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes(
 if (!appSource.includes("new Set(['Veterinary Anatomy Studio', 'IVRI Anatomy'])")) {
   error('Legacy IVRI Anatomy backups are no longer import-compatible');
 }
-if (!appSource.includes('/service-worker.js?v=20260809-desktop-pwa-v4')
-  || !appSource.includes('_initDesktopPwaExperience')) {
+if (!appSource.includes('/service-worker.js?v=20260809-desktop-pwa-v5')
+  || !appSource.includes('_initDesktopPwaExperience')
+  || !appSource.includes('PWA_STATUS_DISMISS_KEY')
+  || !appSource.includes('pwa-status-close')) {
   error('Desktop PWA readiness or versioned worker registration is missing');
 }
 const serviceWorkerSource = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');
-if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v4")
-  || !serviceWorkerSource.includes("./images/ivri-logo.png")
-  || !serviceWorkerSource.includes("./pomelli_creative_video_9_16_0607 (1).mp4")
+if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v5")
+  || serviceWorkerSource.includes("./images/ivri-logo.png")
+  || serviceWorkerSource.includes("./pomelli_creative_video_9_16_0607 (1).mp4")
+  || !serviceWorkerSource.includes('isNonessentialMediaRequest')
   || !serviceWorkerSource.includes('OPTIONAL_DESKTOP_ASSETS')) {
   error('Desktop PWA offline shell is incomplete or uses the wrong cache version');
 }
