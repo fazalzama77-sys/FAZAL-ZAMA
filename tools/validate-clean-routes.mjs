@@ -130,6 +130,14 @@ if (!/"@type": "WebSite"[\s\S]*?"name": "Veterinary Anatomy Studio"/i.test(rootH
 }
 const pwaManifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
 if (pwaManifest.name !== 'Veterinary Anatomy Studio') error('PWA manifest name is outdated');
+if (pwaManifest.launch_handler?.client_mode !== 'navigate-existing') {
+  error('Desktop PWA launch handler must reuse the existing app window');
+}
+const expectedPwaShortcuts = ['/atlas/', '/why/', '/quiz/', '/dashboard/'];
+const actualPwaShortcuts = (pwaManifest.shortcuts || []).map((shortcut) => shortcut.url);
+for (const shortcut of expectedPwaShortcuts) {
+  if (!actualPwaShortcuts.includes(shortcut)) error(`Desktop PWA shortcut is missing: ${shortcut}`);
+}
 if (rootHtml.includes('Searchable Study Library')) error('Technical Study Library link returned to the original interface');
 if (/<base\s+href="\/">/i.test(rootHtml)) error('Root index uses a web-only base URL and will fail when opened through file://');
 for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"]+)"/gi)) {
@@ -148,6 +156,17 @@ if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes(
 }
 if (!appSource.includes("new Set(['Veterinary Anatomy Studio', 'IVRI Anatomy'])")) {
   error('Legacy IVRI Anatomy backups are no longer import-compatible');
+}
+if (!appSource.includes('/service-worker.js?v=20260809-desktop-pwa-v4')
+  || !appSource.includes('_initDesktopPwaExperience')) {
+  error('Desktop PWA readiness or versioned worker registration is missing');
+}
+const serviceWorkerSource = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');
+if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v4")
+  || !serviceWorkerSource.includes("./images/ivri-logo.png")
+  || !serviceWorkerSource.includes("./pomelli_creative_video_9_16_0607 (1).mp4")
+  || !serviceWorkerSource.includes('OPTIONAL_DESKTOP_ASSETS')) {
+  error('Desktop PWA offline shell is incomplete or uses the wrong cache version');
 }
 
 const notFoundHtml = fs.readFileSync(path.join(root, '404.html'), 'utf8');

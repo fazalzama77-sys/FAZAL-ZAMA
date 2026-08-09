@@ -7670,6 +7670,47 @@ body.professional-mode .onboard-body b { color: #1565c0; }
 @keyframes onboardIconPop { 0% { opacity: 0; transform: scale(.5) rotate(-15deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
 
 /* ---------- INSTALL-AS-APP banner ---------- */
+.pwa-status {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    right: auto;
+    z-index: 9200;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border: 1px solid rgba(25, 169, 116, 0.28);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #204052;
+    box-shadow: 0 8px 24px rgba(15, 35, 50, 0.12);
+    backdrop-filter: blur(12px);
+    font-size: .72rem;
+    line-height: 1;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -8px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+.pwa-status.show { opacity: 1; transform: translate(-50%, 0); }
+.pwa-status b { color: #13795b; font-family: var(--font-code); letter-spacing: .3px; }
+.pwa-status > span:last-child { color: #5f7280; }
+.pwa-status-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background: #19a974;
+    box-shadow: 0 0 0 4px rgba(25, 169, 116, 0.12);
+}
+.pwa-status.is-preparing .pwa-status-dot { background: #e8a317; box-shadow: 0 0 0 4px rgba(232, 163, 23, 0.14); }
+.pwa-status.is-preparing b { color: #9a6700; }
+.pwa-status.is-offline { border-color: rgba(25, 118, 210, 0.28); }
+.pwa-status.is-offline .pwa-status-dot { background: #1976d2; box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.12); }
+.pwa-status.is-offline b { color: #1565c0; }
+.pwa-install-card.is-installed { border-color: rgba(25, 169, 116, 0.35); }
+
 .install-banner {
     position: fixed;
     left: 12px; right: 12px;
@@ -7735,6 +7776,15 @@ body.professional-mode .onboard-body b { color: #1565c0; }
 }
 .install-close:hover { color: var(--text-main); background: rgba(255,255,255,0.06); }
 @media (max-width: 480px) {
+    .pwa-status {
+        top: 12px;
+        left: auto;
+        right: 62px;
+        max-width: calc(100vw - 76px);
+        transform: translateY(-8px);
+    }
+    .pwa-status.show { transform: translateY(0); }
+    .pwa-status > span:last-child { display: none; }
     .install-banner { padding: 12px; }
     .install-msg { font-size: .8rem; }
     .install-btn { padding: 7px 12px; font-size: .72rem; }

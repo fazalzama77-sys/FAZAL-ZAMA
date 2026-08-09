@@ -6,10 +6,48 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "orientation": "any",
   "background_color": "#0a0a14",
   "theme_color": "#0a0a14",
   "lang": "en",
+  "categories": [
+    "education",
+    "medical",
+    "productivity"
+  ],
+  "shortcuts": [
+    {
+      "name": "Interactive Anatomy Atlas",
+      "short_name": "Atlas",
+      "description": "Open regional veterinary anatomy lessons.",
+      "url": "/atlas/",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "The WHY of Anatomy",
+      "short_name": "WHY",
+      "description": "Explore comparative biomechanics and functional anatomy.",
+      "url": "/why/",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Practice Quiz",
+      "short_name": "Quiz",
+      "description": "Open veterinary anatomy practice and exam modes.",
+      "url": "/quiz/",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Performance Dashboard",
+      "short_name": "Dashboard",
+      "description": "Review quiz performance and topic strengths.",
+      "url": "/dashboard/",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ],
   "icons": [
     {
       "src": "/images/icon-192.png",

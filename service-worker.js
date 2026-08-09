@@ -8,7 +8,7 @@
 //   • Cross-origin CDN assets use stale-while-revalidate.
 // =========================================================
 
-const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v3';
+const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v4';
 const OWN_CACHE_PATTERN = /^(?:ivri-anatomy-(?:offline|v\d+)|veterinary-anatomy-studio-offline-v\d+)$/;
 
 // App shell — files needed for the site to work offline.
@@ -49,15 +49,32 @@ const APP_SHELL = [
     './images/apple-touch-icon.png',
     './images/icon-192.png',
     './images/icon-512.png',
+    './images/ivri-logo.png',
     './images/scapula-ox-horse-dog-annotated.png',
+    './pomelli_creative_video_9_16_0607 (1).mp4',
     './manifest.json'
+];
+
+// Desktop presentation dependencies are helpful but must never prevent the
+// core offline application from installing when a third-party CDN is down.
+const OPTIONAL_DESKTOP_ASSETS = [
+    'https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2',
+    'https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',
+    'https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2'
 ];
 
 // ---- INSTALL: build the complete new offline shell before activation ----
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(OFFLINE_CACHE)
-            .then((cache) => refreshAppShell(cache))
+            .then(async (cache) => {
+                await refreshAppShell(cache);
+                await cacheOptionalDesktopAssets(cache);
+            })
             // Await skipWaiting inside the install lifetime so an existing
             // installed PWA cannot remain controlled by the superseded worker.
             .then(() => self.skipWaiting())
@@ -110,7 +127,9 @@ self.addEventListener('fetch', (event) => {
         if (url.pathname.startsWith('/cdn-cgi/')) return;
         // ============== NETWORK-FIRST for our own files ==============
         event.respondWith(networkFirst(req));
-    } else if (url.hostname === 'api.github.com' || url.searchParams.has('ivri_check')) {
+    } else if (url.hostname === 'api.github.com'
+        || url.hostname === 'static.cloudflareinsights.com'
+        || url.searchParams.has('ivri_check')) {
         // Deployment checks are timestamped and useless offline. Caching them
         // creates an unbounded list of one-use responses.
         event.respondWith(fetch(req));
@@ -170,6 +189,17 @@ function refreshAppShell(cache) {
                 throw new Error(`Could not cache required offline asset: ${url}`);
             }
             await cache.put(cacheKeyFor(request), response.clone());
+        })
+    );
+}
+
+function cacheOptionalDesktopAssets(cache) {
+    return Promise.allSettled(
+        OPTIONAL_DESKTOP_ASSETS.map(async (url) => {
+            const request = new Request(url, { cache: 'reload', mode: 'no-cors' });
+            const response = await fetch(request);
+            if (!response || (response.type !== 'opaque' && response.status !== 200)) return;
+            await cache.put(request, response.clone());
         })
     );
 }

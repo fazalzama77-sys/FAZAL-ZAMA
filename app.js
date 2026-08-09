@@ -27,7 +27,7 @@ const IVRI_DEPLOYMENT_MONITOR = Object.freeze({
 
 // Version the registration URL because the hosting layer may cache the plain
 // service-worker.js asset for several hours. Bump only when worker logic changes.
-const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260808-pwa-v3';
+const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260809-desktop-pwa-v4';
 
 function ivriSlugify(value) {
     return String(value || '')
@@ -52,6 +52,7 @@ const app = {
     _pendingDeploymentSha: null,
     _updateCheckInFlight: false,
     _automaticUpdateTimer: null,
+    _pwaStatusTimer: null,
 
     init: () => {
         const savedTheme = localStorage.getItem('ivri-theme');
@@ -151,6 +152,7 @@ const app = {
         try { app._recordActivityToday(); } catch (e) { console.warn('activity', e); }
         try { app._showOnboardingIfFirstTime(); } catch (e) { console.warn('onboard', e); }
         try { app._setupInstallPrompt(); } catch (e) { console.warn('install', e); }
+        try { app._initDesktopPwaExperience(); } catch (e) { console.warn('pwa experience', e); }
         try { app._initSrsNotificationScheduler(); } catch (e) { console.warn('notify', e); }
     },
 
@@ -613,6 +615,85 @@ const app = {
         app.startOnboarding();
     },
 
+    // ---------- Desktop PWA readiness + persistent install access ----------
+    _isStandalonePwa: () => window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true,
+    _initDesktopPwaExperience: () => {
+        if (!document.getElementById('pwa-status')) {
+            const status = document.createElement('div');
+            status.id = 'pwa-status';
+            status.className = 'pwa-status';
+            status.setAttribute('role', 'status');
+            status.setAttribute('aria-live', 'polite');
+            document.body.appendChild(status);
+        }
+
+        const meGrid = document.querySelector('#me-view .me-grid');
+        if (meGrid && !document.getElementById('pwa-install-card')) {
+            const card = document.createElement('button');
+            card.id = 'pwa-install-card';
+            card.type = 'button';
+            card.className = 'me-card pwa-install-card';
+            card.innerHTML = `
+                <i class="fas fa-laptop-arrow-down me-card-icon" style="color:#19a974;"></i>
+                <div class="me-card-title" id="pwa-install-title">Install Desktop App</div>
+                <div class="me-card-desc" id="pwa-install-desc">Install once, then open notes and quizzes without internet.</div>
+            `;
+            card.addEventListener('click', () => {
+                if (app._isStandalonePwa()) {
+                    if (typeof showToast === 'function') {
+                        showToast('Offline app is installed and ready', 'success', 'fa-circle-check');
+                    }
+                    return;
+                }
+                app.triggerInstall();
+            });
+            const resetCard = meGrid.querySelector('.me-card-danger');
+            meGrid.insertBefore(card, resetCard || null);
+        }
+
+        window.addEventListener('online', app._refreshPwaExperience);
+        window.addEventListener('offline', app._refreshPwaExperience);
+        navigator.serviceWorker?.addEventListener('controllerchange', app._refreshPwaExperience);
+        navigator.serviceWorker?.ready
+            .then(app._refreshPwaExperience)
+            .catch(() => app._refreshPwaExperience());
+        app._refreshPwaExperience();
+    },
+    _refreshPwaExperience: () => {
+        const status = document.getElementById('pwa-status');
+        const offline = !navigator.onLine;
+        const standalone = app._isStandalonePwa();
+        const controlled = Boolean(navigator.serviceWorker?.controller);
+
+        if (status) {
+            status.className = `pwa-status show ${offline ? 'is-offline' : controlled ? 'is-ready' : 'is-preparing'}`;
+            status.innerHTML = offline
+                ? '<span class="pwa-status-dot"></span><b>Offline mode</b><span>Lessons &amp; quizzes available</span>'
+                : controlled
+                    ? '<span class="pwa-status-dot"></span><b>Offline ready</b><span>Desktop cache active</span>'
+                    : '<span class="pwa-status-dot"></span><b>Preparing offline</b><span>Keep this page open briefly</span>';
+
+            clearTimeout(app._pwaStatusTimer);
+            if (!offline && window.innerWidth < 901) {
+                app._pwaStatusTimer = setTimeout(() => status.classList.remove('show'), 5000);
+            }
+        }
+
+        const title = document.getElementById('pwa-install-title');
+        const desc = document.getElementById('pwa-install-desc');
+        const card = document.getElementById('pwa-install-card');
+        if (title && desc && card) {
+            card.classList.toggle('is-installed', standalone);
+            title.textContent = standalone ? 'Offline App Installed' : 'Install Desktop App';
+            desc.textContent = standalone
+                ? 'This app is ready for offline lessons, quizzes and saved study tools.'
+                : controlled
+                    ? 'Offline files are ready. Install for a focused desktop app window.'
+                    : 'Install once, then open notes and quizzes without internet.';
+        }
+    },
+
     // ---------- Install-as-app prompt ----------
     INSTALL_DISMISS_KEY: 'ivri-install-dismissed',
     _deferredInstallPrompt: null,
@@ -620,12 +701,15 @@ const app = {
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             app._deferredInstallPrompt = e;
+            app._refreshPwaExperience();
             if (localStorage.getItem(app.INSTALL_DISMISS_KEY) === '1') return;
-            if (app._visitCount() < 2) return;
-            setTimeout(() => app._showInstallBanner(), 1500);
+            const desktop = window.matchMedia('(min-width: 901px) and (pointer: fine)').matches;
+            if (!desktop && app._visitCount() < 2) return;
+            setTimeout(() => app._showInstallBanner(), desktop ? 900 : 1500);
         });
         window.addEventListener('appinstalled', () => {
             app._hideInstallBanner();
+            app._refreshPwaExperience();
             if (typeof showToast === 'function') showToast('Veterinary Anatomy Studio installed!', 'success', 'fa-check-circle');
         });
         // iOS Safari never fires beforeinstallprompt — show a friendly fallback
@@ -658,6 +742,12 @@ const app = {
         setTimeout(() => { b.style.display = 'none'; }, 300);
     },
     triggerInstall: async () => {
+        if (app._isStandalonePwa()) {
+            if (typeof showToast === 'function') {
+                showToast('Offline app is already installed and ready', 'success', 'fa-circle-check');
+            }
+            return;
+        }
         if (!app._deferredInstallPrompt) {
             // No native prompt available — guide manually
             if (typeof showToast === 'function')
