@@ -1772,12 +1772,7 @@ body.professional-mode .footer-logo-img {
     transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 .credit-col::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    height: 3px;
-    background: linear-gradient(90deg, var(--atlas-gold), var(--why-cyan), var(--atlas-gold));
-    opacity: 0.8;
+    content: none;
 }
 .credit-col:hover {
     border-color: var(--atlas-gold);
@@ -9378,14 +9373,164 @@ body.professional-mode .tag-line {
    MOBILE RESOURCE ROWS + HIGH-CONTRAST VISUAL PLACEHOLDER
    ========================================================= */
 
-/* Keep the existing laptop layout exactly as a flat set of links. */
+/* Give Atlas and WHY their own clear navigation groups on every screen. */
 .footer-resource-group,
 .footer-resource-group-links {
-    display: contents;
+    min-width: 0;
 }
 
 .footer-resource-group-label {
-    display: none;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+    font-family: var(--font-code);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   PROFESSIONAL TEAM + TWO-PART RESOURCE DIRECTORY
+   ========================================================= */
+.credit-col {
+    border-color: rgba(109, 151, 185, 0.28);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.credit-heading {
+    position: relative;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 18px 13px;
+    border-bottom: 1px solid rgba(125, 216, 255, 0.18);
+}
+
+.credit-heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    width: 46px;
+    height: 2px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.78;
+}
+
+.footer-resource-links {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(260px, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+.footer-resource-group {
+    padding: 18px;
+    border: 1px solid rgba(125, 216, 255, 0.14);
+    border-radius: 12px;
+    background: rgba(125, 216, 255, 0.035);
+}
+
+.footer-resource-group-links {
+    display: grid;
+    gap: 8px;
+}
+
+.footer-atlas-group .footer-resource-group-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.footer-why-group .footer-resource-group-links {
+    grid-template-columns: 1fr;
+}
+
+.footer-resource-group-label {
+    color: #8fdfff;
+}
+
+.footer-why-group .footer-resource-group-label {
+    color: #ffe06b;
+}
+
+body:not(.professional-mode) .footer-resource-links {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(260px, 1fr);
+    gap: 18px;
+}
+
+body:not(.professional-mode) .footer-resource-group {
+    padding: 18px;
+    border: 1px solid #26394c;
+    border-radius: 12px;
+    background: #0b1b2b;
+}
+
+body:not(.professional-mode) .footer-resource-group-links {
+    display: grid;
+    gap: 8px;
+}
+
+body:not(.professional-mode) .footer-atlas-group .footer-resource-group-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body:not(.professional-mode) .footer-why-group .footer-resource-group-links {
+    grid-template-columns: 1fr;
+}
+
+body:not(.professional-mode) .footer-resource-group-links a {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 9px 11px;
+    border: 1px solid rgba(125, 216, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(125, 216, 255, 0.035);
+    color: #aebfd0;
+    font-size: 0.78rem;
+    text-align: left;
+}
+
+body:not(.professional-mode) .footer-resource-group-links a:hover,
+body:not(.professional-mode) .footer-resource-group-links a:focus-visible {
+    border-color: rgba(66, 241, 250, 0.52);
+    background: rgba(66, 241, 250, 0.08);
+    color: #f2fdff;
+    text-decoration: none;
+}
+
+body.professional-mode .credit-col {
+    border-color: #c4d8e8;
+    box-shadow: 0 16px 38px rgba(15, 78, 129, 0.09);
+}
+
+body.professional-mode .credit-heading {
+    border-bottom-color: #d8e6f1;
+}
+
+body.professional-mode .footer-resource-group {
+    border-color: #cbddec;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 6px 16px rgba(15, 78, 129, 0.045);
+}
+
+body.professional-mode .footer-resource-group-label {
+    color: #1565a9;
+}
+
+body.professional-mode .footer-why-group .footer-resource-group-label {
+    color: #786018;
+}
+
+@media (max-width: 760px) {
+    .footer-resource-links,
+    body:not(.professional-mode) .footer-resource-links {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Luminous: rich blue rather than black, with crisp cyan and soft-white text. */
