@@ -165,6 +165,7 @@ if (!appSource.includes('/service-worker.js?v=20260809-desktop-pwa-v6')
   || !appSource.includes('pwa-status-close')
   || !appSource.includes('fas fa-download me-card-icon')
   || !appSource.includes('_initDesktopBackButton')
+  || !appSource.includes('hasNativeBack')
   || !appSource.includes('_setPwaStatusVisible')) {
   error('Desktop PWA readiness or versioned worker registration is missing');
 }

@@ -732,9 +732,14 @@ const app = {
         const button = document.getElementById('desktop-back-button');
         if (!button) return;
         const atHome = location.pathname === '/' && !location.hash.startsWith('#/');
-        button.classList.toggle('show', !atHome);
-        button.tabIndex = atHome ? -1 : 0;
-        button.setAttribute('aria-hidden', atHome ? 'true' : 'false');
+        const routeRoot = location.pathname.split('/').filter(Boolean)[0] || '';
+        const viewsWithNativeBack = new Set(['atlas', 'why', 'dashboard']);
+        const hasNativeBack = viewsWithNativeBack.has(routeRoot)
+            || viewsWithNativeBack.has(app.state.view);
+        const shouldShow = !atHome && !hasNativeBack;
+        button.classList.toggle('show', shouldShow);
+        button.tabIndex = shouldShow ? 0 : -1;
+        button.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
     },
     goBack: () => {
         if (history.length > 1) {
@@ -1911,6 +1916,7 @@ const app = {
         if (viewName === 'me') app._renderMeStats();
         // Whenever the view switches, refresh the bottom-nav active indicator
         app._refreshBottomNavActive();
+        app._refreshDesktopBackButton();
     },
 
     // Renders a dynamic and personalized "Welcome back" card on the landing page if study history is present
