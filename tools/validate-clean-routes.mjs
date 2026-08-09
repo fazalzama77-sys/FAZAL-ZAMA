@@ -37,6 +37,7 @@ for (const relative of manifest.files) {
   if (!/<meta property="og:site_name" content="Veterinary Anatomy Studio">/i.test(html)) error(`Outdated site name: ${relative}`);
   if (!/<meta name="ivri-clean-route" content="[^"]+">/i.test(html)) error(`Missing clean-route marker: ${relative}`);
   if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original interactive app shell missing: ${relative}`);
+  if (!/href="\/vendor\/fontawesome\/css\/all\.min\.css"/i.test(html)) error(`Local offline icon stylesheet missing: ${relative}`);
 
   const primaryHeadings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
   if (primaryHeadings.length !== 1) error(`Expected one page-specific H1 in ${relative}, found ${primaryHeadings.length}`);
@@ -97,6 +98,7 @@ for (const relative of manifest.appFiles || []) {
   if (!/^<!doctype html>/i.test(html)) error(`Missing app-entry doctype: ${relative}`);
   if (!/<meta name="robots" content="noindex, follow">/i.test(html)) error(`App entry must be excluded from search: ${relative}`);
   if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original app shell missing from app entry: ${relative}`);
+  if (!/href="\/vendor\/fontawesome\/css\/all\.min\.css"/i.test(html)) error(`Local offline icon stylesheet missing from app entry: ${relative}`);
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/i)?.[1];
   const expected = `/${relative.replace(/index\.html$/, '').replaceAll('\\', '/')}`;
   if (!canonical || new URL(canonical).pathname !== expected) error(`App-entry canonical mismatch in ${relative}`);
@@ -157,20 +159,68 @@ if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes(
 if (!appSource.includes("new Set(['Veterinary Anatomy Studio', 'IVRI Anatomy'])")) {
   error('Legacy IVRI Anatomy backups are no longer import-compatible');
 }
-if (!appSource.includes('/service-worker.js?v=20260809-desktop-pwa-v5')
+if (!appSource.includes('/service-worker.js?v=20260809-desktop-pwa-v6')
   || !appSource.includes('_initDesktopPwaExperience')
   || !appSource.includes('PWA_STATUS_DISMISS_KEY')
   || !appSource.includes('pwa-status-close')
-  || !appSource.includes('fas fa-download me-card-icon')) {
+  || !appSource.includes('fas fa-download me-card-icon')
+  || !appSource.includes('_initDesktopBackButton')
+  || !appSource.includes('_setPwaStatusVisible')) {
   error('Desktop PWA readiness or versioned worker registration is missing');
 }
 const serviceWorkerSource = fs.readFileSync(path.join(root, 'service-worker.js'), 'utf8');
-if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v5")
+if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v6")
   || serviceWorkerSource.includes("./images/ivri-logo.png")
   || serviceWorkerSource.includes("./pomelli_creative_video_9_16_0607 (1).mp4")
   || !serviceWorkerSource.includes('isNonessentialMediaRequest')
+  || !serviceWorkerSource.includes("./annotation-editor'")
+  || !serviceWorkerSource.includes('./vendor/fontawesome/css/all.min.css')
+  || serviceWorkerSource.includes('cdnjs.cloudflare.com/ajax/libs/font-awesome')
   || !serviceWorkerSource.includes('OPTIONAL_DESKTOP_ASSETS')) {
   error('Desktop PWA offline shell is incomplete or uses the wrong cache version');
+}
+const fontAwesomeAssets = [
+  'vendor/fontawesome/css/all.min.css',
+  'vendor/fontawesome/webfonts/fa-brands-400.ttf',
+  'vendor/fontawesome/webfonts/fa-brands-400.woff2',
+  'vendor/fontawesome/webfonts/fa-regular-400.ttf',
+  'vendor/fontawesome/webfonts/fa-regular-400.woff2',
+  'vendor/fontawesome/webfonts/fa-solid-900.ttf',
+  'vendor/fontawesome/webfonts/fa-solid-900.woff2',
+  'vendor/fontawesome/webfonts/fa-v4compatibility.ttf',
+  'vendor/fontawesome/webfonts/fa-v4compatibility.woff2'
+];
+for (const asset of fontAwesomeAssets) {
+  if (!fs.existsSync(path.join(root, asset))) error(`Local offline icon asset is missing: ${asset}`);
+  if (!serviceWorkerSource.includes(`./${asset}`)) error(`Offline shell does not require icon asset: ${asset}`);
+}
+if (!rootHtml.includes('href="vendor/fontawesome/css/all.min.css"')) {
+  error('Root app does not use the file-compatible local icon stylesheet');
+}
+const annotationEditorHtml = fs.readFileSync(path.join(root, 'annotation-editor.html'), 'utf8');
+if (!annotationEditorHtml.includes('href="vendor/fontawesome/css/all.min.css"')) {
+  error('Annotation editor does not use the local icon stylesheet');
+}
+const fontAwesomeCss = fs.readFileSync(path.join(root, 'vendor/fontawesome/css/all.min.css'), 'utf8');
+const iconUtilityClasses = new Set([
+  'fa-fw', 'fa-spin', 'fa-pulse', 'fa-beat', 'fa-bounce', 'fa-fade', 'fa-flip', 'fa-shake', 'fa-beat-fade',
+  'fa-xs', 'fa-sm', 'fa-lg', 'fa-xl', 'fa-2xl', 'fa-1x', 'fa-2x', 'fa-3x', 'fa-4x', 'fa-5x',
+  'fa-6x', 'fa-7x', 'fa-8x', 'fa-9x', 'fa-10x', 'fa-ul', 'fa-li', 'fa-border', 'fa-pull-left',
+  'fa-pull-right', 'fa-rotate-90', 'fa-rotate-180', 'fa-rotate-270', 'fa-flip-horizontal',
+  'fa-flip-vertical', 'fa-flip-both', 'fa-stack', 'fa-stack-1x', 'fa-stack-2x', 'fa-inverse'
+]);
+const iconSourcePaths = [
+  'index.html', 'annotation-editor.html', 'app.js', 'annotation-editor.js', 'dashboard.js', 'enhanced-quiz.js',
+  'elite-guide.js', 'events.js', 'search.js', 'srs.js', 'glossary.js', 'tools/build-clean-routes.mjs'
+];
+const usedIconClasses = new Set(iconSourcePaths.flatMap((relative) =>
+  [...fs.readFileSync(path.join(root, relative), 'utf8').matchAll(/\bfa-[a-z0-9-]+\b/g)].map((match) => match[0])
+));
+for (const iconClass of usedIconClasses) {
+  if (iconUtilityClasses.has(iconClass)) continue;
+  if (!fontAwesomeCss.includes(`.${iconClass}:before`) && !fontAwesomeCss.includes(`.${iconClass}::before`)) {
+    error(`Unsupported Font Awesome icon class: ${iconClass}`);
+  }
 }
 
 const notFoundHtml = fs.readFileSync(path.join(root, '404.html'), 'utf8');

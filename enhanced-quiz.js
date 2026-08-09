@@ -1844,7 +1844,7 @@ const quizApp = {
       "Arthrology": "fa-link",
       "Neurology": "fa-brain",
       "Angiology": "fa-heartbeat",
-      "Splanchnology": "fa-stomach",
+      "Splanchnology": "fa-notes-medical",
       "Clinical Anatomy": "fa-stethoscope"
     };
     if (icons[system]) return icons[system];
@@ -1853,7 +1853,7 @@ const quizApp = {
     if (system.includes("Arthrology")) return "fa-link";
     if (system.includes("Neurology")) return "fa-brain";
     if (system.includes("Angiology")) return "fa-heartbeat";
-    if (system.includes("Splanchnology")) return "fa-stomach";
+    if (system.includes("Splanchnology")) return "fa-notes-medical";
     if (system.includes("Clinical")) return "fa-stethoscope";
     return "fa-book-medical";
   }

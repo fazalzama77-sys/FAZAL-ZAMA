@@ -8,7 +8,7 @@
 //   • Cross-origin CDN assets use stale-while-revalidate.
 // =========================================================
 
-const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v5';
+const OFFLINE_CACHE = 'veterinary-anatomy-studio-offline-v6';
 const OWN_CACHE_PATTERN = /^(?:ivri-anatomy-(?:offline|v\d+)|veterinary-anatomy-studio-offline-v\d+)$/;
 
 // App shell — files needed for the site to work offline.
@@ -21,7 +21,7 @@ const APP_SHELL = [
     './elite-guide.css',
     './events.css',
     './annotation-editor.css',
-    './annotation-editor.html',
+    './annotation-editor',
     './app.js',
     './annotation-editor.js',
     './dashboard.js',
@@ -47,6 +47,15 @@ const APP_SHELL = [
     './favicon.ico',
     './favicon-48x48.png',
     './images/icon-192.png',
+    './vendor/fontawesome/css/all.min.css',
+    './vendor/fontawesome/webfonts/fa-brands-400.ttf',
+    './vendor/fontawesome/webfonts/fa-brands-400.woff2',
+    './vendor/fontawesome/webfonts/fa-regular-400.ttf',
+    './vendor/fontawesome/webfonts/fa-regular-400.woff2',
+    './vendor/fontawesome/webfonts/fa-solid-900.ttf',
+    './vendor/fontawesome/webfonts/fa-solid-900.woff2',
+    './vendor/fontawesome/webfonts/fa-v4compatibility.ttf',
+    './vendor/fontawesome/webfonts/fa-v4compatibility.woff2',
     './manifest.json'
 ];
 
@@ -54,10 +63,6 @@ const APP_SHELL = [
 // core offline application from installing when a third-party CDN is down.
 const OPTIONAL_DESKTOP_ASSETS = [
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-regular-400.woff2',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2',
     'https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',
     'https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2'
 ];

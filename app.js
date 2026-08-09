@@ -27,7 +27,7 @@ const IVRI_DEPLOYMENT_MONITOR = Object.freeze({
 
 // Version the registration URL because the hosting layer may cache the plain
 // service-worker.js asset for several hours. Bump only when worker logic changes.
-const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260809-desktop-pwa-v5';
+const IVRI_SERVICE_WORKER_URL = '/service-worker.js?v=20260809-desktop-pwa-v6';
 
 function ivriSlugify(value) {
     return String(value || '')
@@ -139,6 +139,7 @@ const app = {
             app.routeFromLocation();
             app._initBottomNav();
             app._initEngagement();   // visit counter, install prompt, streak, onboarding
+            app._initDesktopBackButton();
             app._initLandingCanvas();
         }, 0);
     },
@@ -617,6 +618,13 @@ const app = {
 
     // ---------- Desktop PWA readiness + persistent install access ----------
     PWA_STATUS_DISMISS_KEY: 'ivri-pwa-status-dismissed',
+    _setPwaStatusVisible: (status, visible) => {
+        if (!status) return;
+        status.classList.toggle('show', visible);
+        status.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        const close = status.querySelector('.pwa-status-close');
+        if (close) close.tabIndex = visible ? 0 : -1;
+    },
     _isStandalonePwa: () => window.matchMedia('(display-mode: standalone)').matches
         || window.navigator.standalone === true,
     _initDesktopPwaExperience: () => {
@@ -679,12 +687,13 @@ const app = {
             status.insertAdjacentHTML('beforeend', '<button class="pwa-status-close" type="button" aria-label="Hide offline status">&times;</button>');
             status.querySelector('.pwa-status-close')?.addEventListener('click', () => {
                 localStorage.setItem(app.PWA_STATUS_DISMISS_KEY, '1');
-                status.classList.remove('show');
+                app._setPwaStatusVisible(status, false);
             });
+            app._setPwaStatusVisible(status, showStatus);
 
             clearTimeout(app._pwaStatusTimer);
             if (!offline && controlled && showStatus) {
-                app._pwaStatusTimer = setTimeout(() => status.classList.remove('show'), window.innerWidth < 901 ? 5000 : 8000);
+                app._pwaStatusTimer = setTimeout(() => app._setPwaStatusVisible(status, false), window.innerWidth < 901 ? 5000 : 8000);
             }
         }
 
@@ -700,6 +709,39 @@ const app = {
                     ? 'Offline files are ready. Install for a focused desktop app window.'
                     : 'Install once, then open notes and quizzes without internet.';
         }
+    },
+
+    // ---------- Desktop browser-style back control ----------
+    _initDesktopBackButton: () => {
+        if (!document.getElementById('desktop-back-button')) {
+            const button = document.createElement('button');
+            button.id = 'desktop-back-button';
+            button.type = 'button';
+            button.className = 'desktop-back-button';
+            button.setAttribute('aria-label', 'Go back');
+            button.title = 'Back';
+            button.innerHTML = '<i class="fas fa-arrow-left" aria-hidden="true"></i><span>Back</span>';
+            button.addEventListener('click', app.goBack);
+            document.body.appendChild(button);
+        }
+        window.addEventListener('popstate', app._refreshDesktopBackButton);
+        window.addEventListener('hashchange', app._refreshDesktopBackButton);
+        app._refreshDesktopBackButton();
+    },
+    _refreshDesktopBackButton: () => {
+        const button = document.getElementById('desktop-back-button');
+        if (!button) return;
+        const atHome = location.pathname === '/' && !location.hash.startsWith('#/');
+        button.classList.toggle('show', !atHome);
+        button.tabIndex = atHome ? -1 : 0;
+        button.setAttribute('aria-hidden', atHome ? 'true' : 'false');
+    },
+    goBack: () => {
+        if (history.length > 1) {
+            history.back();
+            return;
+        }
+        app.navigatePath('/', { route: true });
     },
 
     // ---------- Install-as-app prompt ----------
@@ -1597,6 +1639,7 @@ const app = {
         }
         app.updatePageTitle();
         if (route) app.routeFromLocation();
+        app._refreshDesktopBackButton();
     },
 
     routeFromLocation: () => {
