@@ -142,6 +142,9 @@ if (!/<title>Veterinary Anatomy Notes, Atlas &amp; Quizzes \| ICAR-IVRI<\/title>
 if (!/Structured veterinary anatomy notes for B\.V\.Sc\., M\.V\.Sc\. and DVM students/i.test(rootHtml)) {
   error('Homepage hero is missing its veterinary anatomy study description');
 }
+if (!/id="veterinary-anatomy-notes-heading"[^>]*>Veterinary Anatomy Notes for B\.V\.Sc\., DVM and Veterinary Students<\/h2>/i.test(rootHtml)) {
+  error('Homepage footer is missing its concise veterinary anatomy notes introduction');
+}
 if (!/class="footer-resource-nav"[\s\S]*?href="\/atlas\/forelimb\/"[\s\S]*?href="\/atlas\/embryology\/"/i.test(rootHtml)) {
   error('Homepage footer is missing crawlable veterinary anatomy links');
 }
