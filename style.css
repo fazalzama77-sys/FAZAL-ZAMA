@@ -8500,8 +8500,9 @@ body.professional-mode #why-view .modal-image-progress strong {
     color: var(--medical-purple);
 }
 
-/* Clear premium action for revealing the engineering analogy. */
+/* Clear premium action with a restrained revolving border highlight. */
 #why-view #simplifyBtn {
+    isolation: isolate;
     min-height: 44px;
     padding: 10px 16px;
     display: inline-flex;
@@ -8510,8 +8511,8 @@ body.professional-mode #why-view .modal-image-progress strong {
     gap: 9px;
     white-space: nowrap;
     color: #ffe47a !important;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.13), rgba(0, 242, 255, 0.07)) !important;
-    border: 1px solid rgba(255, 221, 87, 0.58) !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
     border-radius: 12px;
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
     font-size: 0.75rem;
@@ -8521,11 +8522,30 @@ body.professional-mode #why-view .modal-image-progress strong {
 }
 
 #why-view #simplifyBtn::before {
-    content: none;
+    content: "";
+    position: absolute;
+    z-index: -2;
+    inset: -82px;
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 216, 77, 0.22) 0deg 285deg,
+        #fff4b0 315deg,
+        #ffd84d 340deg,
+        rgba(255, 216, 77, 0.22) 360deg
+    );
+    animation: whyAnalogyBorderTrace 4.6s linear infinite;
+    pointer-events: none;
 }
 
 #why-view #simplifyBtn::after {
-    content: none;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 1px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #192130, #111927);
+    transition: background 0.18s ease;
+    pointer-events: none;
 }
 
 #why-view #simplifyBtn > i:first-child {
@@ -8542,10 +8562,15 @@ body.professional-mode #why-view .modal-image-progress strong {
 #why-view #simplifyBtn:hover,
 #why-view #simplifyBtn:focus-visible {
     color: #ffffff !important;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(0, 242, 255, 0.12)) !important;
-    border-color: #ffe16a !important;
+    background: transparent !important;
+    border-color: transparent !important;
     box-shadow: 0 10px 26px rgba(255, 215, 0, 0.17), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
     transform: translateY(-2px) !important;
+}
+
+#why-view #simplifyBtn:hover::after,
+#why-view #simplifyBtn:focus-visible::after {
+    background: linear-gradient(135deg, #242536, #122434);
 }
 
 #why-view #simplifyBtn:hover .simplify-btn-arrow,
@@ -8561,9 +8586,23 @@ body.professional-mode #why-view .modal-image-progress strong {
 
 body.professional-mode #why-view #simplifyBtn {
     color: #6842b8 !important;
-    background: linear-gradient(135deg, #f7f2ff, #eef7ff) !important;
-    border-color: rgba(104, 66, 184, 0.38) !important;
+    background: transparent !important;
+    border-color: transparent !important;
     box-shadow: 0 7px 20px rgba(75, 52, 128, 0.1), inset 0 1px 0 #ffffff !important;
+}
+
+body.professional-mode #why-view #simplifyBtn::before {
+    background: conic-gradient(
+        from 0deg,
+        rgba(126, 87, 194, 0.22) 0deg 285deg,
+        #d9c8ff 315deg,
+        #7a4fca 340deg,
+        rgba(126, 87, 194, 0.22) 360deg
+    );
+}
+
+body.professional-mode #why-view #simplifyBtn::after {
+    background: linear-gradient(135deg, #fbf9ff, #f1f7ff);
 }
 
 body.professional-mode #why-view #simplifyBtn > i:first-child {
@@ -8573,9 +8612,20 @@ body.professional-mode #why-view #simplifyBtn > i:first-child {
 body.professional-mode #why-view #simplifyBtn:hover,
 body.professional-mode #why-view #simplifyBtn:focus-visible {
     color: #4c2c94 !important;
-    background: linear-gradient(135deg, #efe5ff, #e5f3ff) !important;
-    border-color: #7a4fca !important;
+    background: transparent !important;
+    border-color: transparent !important;
     box-shadow: 0 10px 26px rgba(104, 66, 184, 0.18), inset 0 1px 0 #ffffff !important;
+}
+
+body.professional-mode #why-view #simplifyBtn:hover::after,
+body.professional-mode #why-view #simplifyBtn:focus-visible::after {
+    background: linear-gradient(135deg, #f3ebff, #e8f4ff);
+}
+
+@keyframes whyAnalogyBorderTrace {
+    to {
+        transform: rotate(1turn);
+    }
 }
 
 @media (max-width: 1100px) {

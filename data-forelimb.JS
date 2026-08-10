@@ -622,6 +622,5 @@ atlasData["Forelimb"] = {
             clinical: "<b>Bovine Lymphosarcoma:</b> Persistent enlargement of prescapular LN is a key clinical sign.<br><b>Jugular Thrombophlebitis:</b> Common after repeated rough venepuncture — leads to abscess and reduced venous return.<br><b>'Milk Vein' Bleeding:</b> Severe haematomas occur if not properly compressed — avoid unless absolutely necessary.",
             imgCode: "forelimb_lymph"
         }
-    ],
-    "Splanchnology": []  // No visceral organs in the forelimb (intentionally empty per VCI Unit-2)
+    ]
 };
