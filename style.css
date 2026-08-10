@@ -8500,51 +8500,58 @@ body.professional-mode #why-view .modal-image-progress strong {
     color: var(--medical-purple);
 }
 
-/* Premium, low-cost border trace for the Bio-Engineer Analogy action. */
+/* Clear premium action for revealing the engineering analogy. */
 #why-view #simplifyBtn {
-    isolation: isolate;
-    min-height: 38px;
-    padding: 7px 18px;
-    background: transparent !important;
-    border-color: transparent !important;
-    box-shadow: 0 6px 18px rgba(255, 215, 0, 0.08) !important;
-    letter-spacing: 0.35px;
+    min-height: 44px;
+    padding: 10px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    white-space: nowrap;
+    color: #ffe47a !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.13), rgba(0, 242, 255, 0.07)) !important;
+    border: 1px solid rgba(255, 221, 87, 0.58) !important;
+    border-radius: 12px;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.45px;
+    line-height: 1.2;
 }
 
 #why-view #simplifyBtn::before {
-    content: "";
-    position: absolute;
-    z-index: -2;
-    inset: -90px;
-    background: conic-gradient(
-        from 0deg,
-        rgba(255, 215, 0, 0.2) 0deg,
-        rgba(255, 215, 0, 0.2) 285deg,
-        #fff3a6 320deg,
-        var(--atlas-gold) 342deg,
-        rgba(255, 215, 0, 0.2) 360deg
-    );
-    animation: whyAnalogyBorderTrace 5.5s linear infinite;
-    pointer-events: none;
-    will-change: transform;
+    content: none;
 }
 
 #why-view #simplifyBtn::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: 1px;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #141a28, #101622);
-    pointer-events: none;
+    content: none;
+}
+
+#why-view #simplifyBtn > i:first-child {
+    color: #ffd84d;
+    font-size: 0.82rem;
+}
+
+#why-view #simplifyBtn .simplify-btn-arrow {
+    font-size: 0.68rem;
+    opacity: 0.72;
+    transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
 #why-view #simplifyBtn:hover,
 #why-view #simplifyBtn:focus-visible {
-    color: #fff2a3 !important;
-    background: transparent !important;
-    border-color: transparent !important;
-    box-shadow: 0 8px 22px rgba(255, 215, 0, 0.18) !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(0, 242, 255, 0.12)) !important;
+    border-color: #ffe16a !important;
+    box-shadow: 0 10px 26px rgba(255, 215, 0, 0.17), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    transform: translateY(-2px) !important;
+}
+
+#why-view #simplifyBtn:hover .simplify-btn-arrow,
+#why-view #simplifyBtn:focus-visible .simplify-btn-arrow {
+    opacity: 1;
+    transform: translateX(3px);
 }
 
 #why-view #simplifyBtn:focus-visible {
@@ -8553,35 +8560,22 @@ body.professional-mode #why-view .modal-image-progress strong {
 }
 
 body.professional-mode #why-view #simplifyBtn {
-    color: var(--medical-purple) !important;
-    box-shadow: 0 6px 18px rgba(126, 87, 194, 0.1) !important;
+    color: #6842b8 !important;
+    background: linear-gradient(135deg, #f7f2ff, #eef7ff) !important;
+    border-color: rgba(104, 66, 184, 0.38) !important;
+    box-shadow: 0 7px 20px rgba(75, 52, 128, 0.1), inset 0 1px 0 #ffffff !important;
 }
 
-body.professional-mode #why-view #simplifyBtn::before {
-    background: conic-gradient(
-        from 0deg,
-        rgba(126, 87, 194, 0.22) 0deg,
-        rgba(126, 87, 194, 0.22) 285deg,
-        #d9c8ff 320deg,
-        var(--medical-purple) 342deg,
-        rgba(126, 87, 194, 0.22) 360deg
-    );
-}
-
-body.professional-mode #why-view #simplifyBtn::after {
-    background: linear-gradient(135deg, #ffffff, #f8f7fc);
+body.professional-mode #why-view #simplifyBtn > i:first-child {
+    color: #8b5de0;
 }
 
 body.professional-mode #why-view #simplifyBtn:hover,
 body.professional-mode #why-view #simplifyBtn:focus-visible {
-    color: #5d3aa8 !important;
-    box-shadow: 0 8px 22px rgba(126, 87, 194, 0.18) !important;
-}
-
-@keyframes whyAnalogyBorderTrace {
-    to {
-        transform: rotate(1turn);
-    }
+    color: #4c2c94 !important;
+    background: linear-gradient(135deg, #efe5ff, #e5f3ff) !important;
+    border-color: #7a4fca !important;
+    box-shadow: 0 10px 26px rgba(104, 66, 184, 0.18), inset 0 1px 0 #ffffff !important;
 }
 
 @media (max-width: 1100px) {
@@ -8629,14 +8623,16 @@ body.professional-mode #why-view #simplifyBtn:focus-visible {
     }
 
     #why-view .modal-section-header {
+        flex-wrap: wrap;
         gap: 12px;
     }
 
     #why-view #simplifyBtn {
-        flex: 0 0 auto;
-        max-width: 132px;
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: none;
         min-height: 44px;
-        padding: 7px 12px;
+        padding: 10px 14px;
     }
 }
 

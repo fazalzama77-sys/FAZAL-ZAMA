@@ -2089,9 +2089,11 @@ const app = {
         else if (!app.state.system) {
             breadcrumb.innerHTML = `ATLAS > ${app.state.region.toUpperCase()} > SELECT SYSTEM`;
             const systems = atlasData[app.state.region];
-            grid.innerHTML = Object.keys(systems).map(sys => {
+            grid.innerHTML = Object.entries(systems)
+                .filter(([, topics]) => Array.isArray(topics) && topics.length > 0)
+                .map(([sys, topics]) => {
                 const sysIcon = app.getSystemIcon(sys);
-                const count = systems[sys].length;
+                const count = topics.length;
                 const stats = app.getReadStats(app.state.region, sys);
                 const progressHtml = stats.total > 0 ? `
                     <div class="card-progress-container">

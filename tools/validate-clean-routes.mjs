@@ -177,6 +177,12 @@ for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"
   if (!fs.existsSync(dependency)) error(`Root index dependency is missing: ${reference}`);
 }
 const appSource = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+if (!appSource.includes('.filter(([, topics]) => Array.isArray(topics) && topics.length > 0)')) {
+  error('Atlas system selector must hide empty system cards');
+}
+if (!/id="simplifyBtn"[\s\S]*?fa-wand-magic-sparkles[\s\S]*?Bio-Engineer Analogy[\s\S]*?simplify-btn-arrow/i.test(rootHtml)) {
+  error('Bio-Engineer Analogy action is missing its enhanced button treatment');
+}
 if ((appSource.match(/Veterinary Anatomy Notes, Atlas & Quizzes \| ICAR-IVRI/g) || []).length < 3
   || appSource.includes('Veterinary Anatomy Studio | Notes, Quizzes & Learning')) {
   error('Runtime metadata can overwrite the optimized homepage title');
