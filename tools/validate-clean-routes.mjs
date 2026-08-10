@@ -36,7 +36,7 @@ for (const relative of manifest.files) {
   if (!/<meta name="robots" content="index, follow/i.test(html)) error(`Missing index directive: ${relative}`);
   if (!/<meta property="og:site_name" content="Veterinary Anatomy Studio">/i.test(html)) error(`Outdated site name: ${relative}`);
   if (!/<meta name="ivri-clean-route" content="[^"]+">/i.test(html)) error(`Missing clean-route marker: ${relative}`);
-  if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original interactive app shell missing: ${relative}`);
+  if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js(?:\?[^\"]+)?"/i.test(html)) error(`Original interactive app shell missing: ${relative}`);
   if (!/href="\/vendor\/fontawesome\/css\/all\.min\.css"/i.test(html)) error(`Local offline icon stylesheet missing: ${relative}`);
 
   const primaryHeadings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
@@ -70,7 +70,12 @@ for (const relative of manifest.files) {
   const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1];
   if (!jsonLd) error(`Missing structured data: ${relative}`);
   else {
-    try { JSON.parse(jsonLd); }
+    try {
+      const structuredData = JSON.parse(jsonLd);
+      if (!JSON.stringify(structuredData).includes('Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute')) {
+        error(`Academic creator missing from structured data: ${relative}`);
+      }
+    }
     catch (parseError) { error(`Invalid structured data in ${relative}: ${parseError.message}`); }
   }
 
@@ -101,7 +106,7 @@ for (const relative of manifest.appFiles || []) {
   const html = fs.readFileSync(file, 'utf8');
   if (!/^<!doctype html>/i.test(html)) error(`Missing app-entry doctype: ${relative}`);
   if (!/<meta name="robots" content="noindex, follow">/i.test(html)) error(`App entry must be excluded from search: ${relative}`);
-  if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js"/i.test(html)) error(`Original app shell missing from app entry: ${relative}`);
+  if (!/id="bottom-nav"/i.test(html) || !/src="\/app\.js(?:\?[^\"]+)?"/i.test(html)) error(`Original app shell missing from app entry: ${relative}`);
   if (!/href="\/vendor\/fontawesome\/css\/all\.min\.css"/i.test(html)) error(`Local offline icon stylesheet missing from app entry: ${relative}`);
   const canonical = html.match(/<link rel="canonical" href="([^"]+)">/i)?.[1];
   const expected = `/${relative.replace(/index\.html$/, '').replaceAll('\\', '/')}`;
@@ -119,6 +124,9 @@ for (const canonical of canonicals) if (!uniquePages.has(canonical)) error(`Cano
 
 const redirectsText = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
 if (!redirectsText.includes('/landing/ / 301')) error('Missing legacy /landing/ redirect');
+if (!redirectsText.includes('/atlas/forelimb/splanchnology/ /atlas/forelimb/ 301')) {
+  error('Missing Search Console 404 repair for obsolete Forelimb splanchnology route');
+}
 for (const mapping of manifest.redirects) {
   const expected = `${mapping.from} ${mapping.to} 301`;
   if (!redirectsText.includes(expected)) error(`Missing permanent redirect: ${expected}`);
@@ -128,8 +136,14 @@ const rootHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (!/id="atlas-collection-intro"[\s\S]*?<h1[^>]*>Interactive Veterinary Anatomy Atlas<\/h1>[\s\S]*?official ICAR-IVRI learning platform/i.test(rootHtml)) {
   error('Shared Atlas introduction is missing from the app shell');
 }
-if (!/<title>Veterinary Anatomy Studio \| Notes, Quizzes &amp; Learning<\/title>/i.test(rootHtml)) {
-  error('Homepage title does not use the approved Veterinary Anatomy Studio brand');
+if (!/<title>Veterinary Anatomy Notes, Atlas &amp; Quizzes \| ICAR-IVRI<\/title>/i.test(rootHtml)) {
+  error('Homepage title does not target veterinary anatomy study intent');
+}
+if (!/id="veterinary-anatomy-notes-heading"[^>]*>Veterinary Anatomy Notes for B\.V\.Sc\., DVM and Veterinary Students<\/h2>/i.test(rootHtml)) {
+  error('Homepage veterinary anatomy notes overview is missing');
+}
+if (!/class="seo-study-links"[\s\S]*?href="\/atlas\/forelimb\/"[\s\S]*?href="\/atlas\/embryology\/"/i.test(rootHtml)) {
+  error('Homepage subject overview is missing crawlable veterinary anatomy links');
 }
 if (!/<meta property="og:site_name" content="Veterinary Anatomy Studio">/i.test(rootHtml)) {
   error('Homepage Open Graph site name is outdated');
@@ -160,6 +174,10 @@ for (const match of rootHtml.matchAll(/<(?:script|link)\b[^>]+(?:src|href)="([^"
   if (!fs.existsSync(dependency)) error(`Root index dependency is missing: ${reference}`);
 }
 const appSource = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+if ((appSource.match(/Veterinary Anatomy Notes, Atlas & Quizzes \| ICAR-IVRI/g) || []).length < 3
+  || appSource.includes('Veterinary Anatomy Studio | Notes, Quizzes & Learning')) {
+  error('Runtime metadata can overwrite the optimized homepage title');
+}
 if (!appSource.includes("location.protocol === 'file:'") || !appSource.includes('app._legacyRouteFromHash()')) {
   error('Local file routing compatibility is missing from app.js');
 }
@@ -187,8 +205,10 @@ if (!serviceWorkerSource.includes("veterinary-anatomy-studio-offline-v6")
   || !serviceWorkerSource.includes('OPTIONAL_DESKTOP_ASSETS')) {
   error('Desktop PWA offline shell is incomplete or uses the wrong cache version');
 }
-if (!appSource.includes("atlasIntro.style.display = app.state.system ? 'none' : ''")) {
-  error('Atlas introduction visibility is not limited to selection screens');
+if (!appSource.includes('if (atlasIntro) atlasIntro.remove()')
+  || !appSource.includes('<h1 class="h-title">')
+  || !appSource.includes('Educational resource developed at the Veterinary Anatomy Section')) {
+  error('Rendered Atlas lessons do not preserve a sole visible H1 and academic source');
 }
 const fontAwesomeAssets = [
   'vendor/fontawesome/css/all.min.css',

@@ -666,6 +666,113 @@ body.professional-mode .hero-right-pane::before {
     background: linear-gradient(to right, #ffffff 0%, transparent 7.5%, transparent 92.5%, #f8fafc 100%),
                 linear-gradient(to bottom, transparent 90%, #f8fafc 100%);
 }
+
+/* Search-visible study overview: concise academic context plus crawlable subject hubs. */
+.seo-study-guide {
+    width: min(1180px, calc(100% - 40px));
+    margin: 34px auto 10px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
+    gap: 28px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.seo-study-guide-kicker {
+    color: var(--why-cyan);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.seo-study-guide h2 {
+    margin: 10px 0 14px;
+    color: var(--text-main);
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+    line-height: 1.25;
+}
+
+.seo-study-guide p {
+    margin: 0 0 10px;
+    color: var(--text-mute);
+    line-height: 1.7;
+}
+
+.seo-study-guide p a,
+.seo-study-links a {
+    color: var(--why-cyan);
+    text-decoration: none;
+}
+
+.seo-study-guide p a:hover,
+.seo-study-guide p a:focus-visible,
+.seo-study-links a:hover,
+.seo-study-links a:focus-visible {
+    text-decoration: underline;
+}
+
+.seo-study-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: center;
+    gap: 10px;
+}
+
+.seo-study-links a {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.35;
+}
+
+.academic-source-note {
+    margin: 12px auto 18px;
+    color: var(--text-mute);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+.academic-source-note i {
+    margin-right: 6px;
+    color: var(--why-cyan);
+}
+
+body.professional-mode .seo-study-guide {
+    background: rgba(21, 101, 192, 0.035);
+}
+
+body.professional-mode .seo-study-guide-kicker,
+body.professional-mode .seo-study-guide p a,
+body.professional-mode .seo-study-links a,
+body.professional-mode .academic-source-note i {
+    color: #1565c0;
+}
+
+@media (max-width: 760px) {
+    .seo-study-guide {
+        width: calc(100% - 24px);
+        margin-top: 24px;
+        padding: 22px 18px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .seo-study-links {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 430px) {
+    .seo-study-links {
+        grid-template-columns: 1fr;
+    }
+}
 body.professional-mode .hero-title {
     color: #1a202c;
     background: none;

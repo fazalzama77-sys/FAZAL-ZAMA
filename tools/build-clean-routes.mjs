@@ -190,6 +190,15 @@ function schemaGraph({ url, title, description, crumbs, collection = false, subj
           name: 'ICAR-Indian Veterinary Research Institute',
           url: 'https://www.ivri.nic.in/',
           sameAs: 'https://www.ivri.nic.in/division/BasicSSD/VeterinaryAnatomy/default.aspx'
+        },
+        creator: {
+          '@type': 'Organization',
+          name: 'Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute',
+          url: 'https://www.ivri.nic.in/division/BasicSSD/VeterinaryAnatomy/default.aspx',
+          parentOrganization: {
+            '@type': 'CollegeOrUniversity',
+            name: 'ICAR-Indian Veterinary Research Institute'
+          }
         }
       }
     ]
@@ -242,7 +251,7 @@ function demoteInactiveLandingHeading(html) {
 
 function addAtlasCollectionHeading(html, title, description) {
   const heading = routeHeading(title);
-  const replacement = `<header id="atlas-collection-intro" style="text-align:center;margin:24px auto 8px;max-width:900px;">\n        <h1 style="color:var(--atlas-gold);margin-bottom:10px;">${escapeHtml(heading)}</h1>\n        <p style="color:var(--text-mute);line-height:1.7;">${escapeHtml(truncate(description, 220))}</p>\n      </header>`;
+  const replacement = `<header id="atlas-collection-intro" style="text-align:center;margin:24px auto 8px;max-width:900px;">\n        <h1 style="color:var(--atlas-gold);margin-bottom:10px;">${escapeHtml(heading)}</h1>\n        <p style="color:var(--text-mute);line-height:1.7;">${escapeHtml(truncate(description, 220))}</p>\n        <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Educational resource developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>\n      </header>`;
   return html.replace(
     /<header id="atlas-collection-intro"[\s\S]*?<\/header>/i,
     replacement
@@ -256,7 +265,7 @@ function removeAtlasCollectionHeading(html) {
 function setWhyRouteHeading(html, title) {
   return html.replace(
     /<h2>The Why of Veterinary Anatomy<\/h2>/i,
-    `<h1>${escapeHtml(routeHeading(title))}</h1>`
+    `<h1>${escapeHtml(routeHeading(title))}</h1>\n          <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>`
   );
 }
 
@@ -343,6 +352,7 @@ function renderTopicDetail(region, system, topic) {
     <div class="detail-header">
       <div><h1 class="h-title">${escapeHtml(topic.title)} Veterinary Anatomy</h1><span class="h-sub">/// STANDARD MORPHOLOGY // ${escapeHtml(system.toUpperCase())}</span></div>
     </div>
+    <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Educational resource developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>
     <div class="feature-box" style="background:rgba(255,255,255,0.03);padding:20px;border-radius:8px;margin-bottom:20px;">
       <strong style="color:var(--atlas-gold);display:block;margin-bottom:10px;font-family:var(--font-code);">📝 STANDARD DESCRIPTION:</strong>
       <div style="line-height:1.8;color:var(--text-main);">${safeRichHtml(description)}</div>
@@ -572,6 +582,7 @@ for (const [category, label] of Object.entries(whyCategoryLabels)) {
 // these files would leave orphan 200 pages outside the canonical manifest and
 // sitemap. Redirecting preserves old links and consolidates search signals.
 const staleRedirects = [
+  ['/atlas/forelimb/splanchnology/', '/atlas/forelimb/'],
   ['/atlas/forelimb/angiology/axillary-and-brachial-branches/', '/atlas/forelimb/angiology/'],
   ['/atlas/forelimb/angiology/distal-forelimb-vessels/', '/atlas/forelimb/angiology/'],
   ['/atlas/forelimb/neurology/distal-palmar-and-digital-nerves/', '/atlas/forelimb/neurology/'],

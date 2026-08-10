@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T12:45:18.247Z",
+  "generatedAt": "2026-08-10T02:02:37.607Z",
   "files": [
     "atlas/index.html",
     "atlas/introduction/index.html",
@@ -1871,6 +1871,10 @@
     {
       "from": "/learn/why/wildlife/cheetah-non-retractable-claws/",
       "to": "/why/wildlife/cheetah-non-retractable-claws/"
+    },
+    {
+      "from": "/atlas/forelimb/splanchnology/",
+      "to": "/atlas/forelimb/"
     },
     {
       "from": "/atlas/forelimb/angiology/axillary-and-brachial-branches/",

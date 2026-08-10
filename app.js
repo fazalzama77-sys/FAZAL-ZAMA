@@ -1279,22 +1279,25 @@ const app = {
         const grid = document.getElementById('atlas-selector');
         if (!grid) return;
         let atlasIntro = document.getElementById('atlas-collection-intro');
-        if (!atlasIntro && !app.state.system) {
+        // The collection introduction belongs only on region/system selection
+        // screens. Remove it completely from a lesson DOM so the lesson keeps
+        // the sole visible H1 seen by students and rendered search crawlers.
+        if (app.state.system) {
+            if (atlasIntro) atlasIntro.remove();
+            return;
+        }
+        if (!atlasIntro) {
             atlasIntro = document.createElement('header');
             atlasIntro.id = 'atlas-collection-intro';
             atlasIntro.style.cssText = 'text-align:center;margin:24px auto 8px;max-width:900px;';
             grid.before(atlasIntro);
         }
         if (!atlasIntro) return;
-        if (!app.state.system) {
-            atlasIntro.innerHTML = `
-                <h1 style="color:var(--atlas-gold);margin-bottom:10px;">Interactive Veterinary Anatomy Atlas</h1>
-                <p style="color:var(--text-mute);line-height:1.7;">Explore the interactive atlas inside Veterinary Anatomy Studio, the official ICAR-IVRI learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students.</p>
-            `;
-        }
-        // Keep the introduction through region and system selection, then
-        // remove it from the focused content workspace.
-        atlasIntro.style.display = app.state.system ? 'none' : '';
+        atlasIntro.innerHTML = `
+            <h1 style="color:var(--atlas-gold);margin-bottom:10px;">Interactive Veterinary Anatomy Atlas</h1>
+            <p style="color:var(--text-mute);line-height:1.7;">Explore the interactive atlas inside Veterinary Anatomy Studio, the official ICAR-IVRI learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students.</p>
+            <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Educational resource developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>
+        `;
     },
 
     // Wrapper called by every bottom-nav button. Centralises routing so we
@@ -1574,7 +1577,7 @@ const app = {
             parts.push('Dashboard');
         } else if (app.state.view === 'landing') {
             // Default site title
-            document.title = `${SITE} | Exploring Anatomy through Technology`;
+            document.title = 'Veterinary Anatomy Notes, Atlas & Quizzes | ICAR-IVRI';
             return;
         }
         document.title = (parts.length ? parts.join(' · ') + ' · ' : '') + SITE;
@@ -1811,8 +1814,8 @@ const app = {
     updatePageTitle: (whyItem = null) => {
         const SITE = 'Veterinary Anatomy Studio';
         const routeRoot = location.pathname.split('/').filter(Boolean)[0] || '';
-        let title = 'Veterinary Anatomy Studio | Notes, Quizzes & Learning';
-        let description = 'Official ICAR-IVRI veterinary anatomy learning platform with VCI-aligned notes, comparative biomechanics, histology, embryology, quizzes and evaluation.';
+        let title = 'Veterinary Anatomy Notes, Atlas & Quizzes | ICAR-IVRI';
+        let description = 'Study VCI-aligned veterinary anatomy notes for B.V.Sc., M.V.Sc. and DVM students, with regional anatomy, histology, embryology, quizzes and evaluation.';
         if (routeRoot === 'library') {
             title = `Saved Study Library | ${SITE}`;
             description = 'Review saved veterinary anatomy bookmarks, highlights and personal notes.';
@@ -1826,7 +1829,7 @@ const app = {
                 title = `${parts.join(' · ')} | IVRI`;
                 description = `Study ${subject} through the Interactive Anatomy Atlas inside Veterinary Anatomy Studio.`;
             } else {
-                title = 'Veterinary Anatomy Studio | Notes, Quizzes & Learning';
+                title = 'Veterinary Anatomy Notes, Atlas & Quizzes | ICAR-IVRI';
             }
         } else if (app.state.view === 'why') {
             const categoryLabels = {
@@ -2278,8 +2281,8 @@ const app = {
 
         // Override page title to include the structure name for sharper bookmarks/sharing
         app.updateSeoMetadata(
-            `${item.title} · ${app.state.system} · ${app.state.region} · Veterinary Anatomy Studio`,
-            String(item.desc || item.eliteDesc || `${item.title} veterinary anatomy`).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 158),
+            `${item.title} Veterinary Anatomy | IVRI`,
+            `Study ${item.title} in ${app.state.region} veterinary anatomy. ${String(item.desc || item.eliteDesc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}`.slice(0, 158),
             cleanTopicPath
         );
 
@@ -2315,13 +2318,13 @@ const app = {
         let contentHtml = `
             <div class="detail-header">
                 <div>
-                    <div class="h-title">
+                    <h1 class="h-title">
                         ${item.title}
                         <button class="speak-btn" onclick="app.speakCurrentTopic(this)" title="Read this topic aloud" aria-label="Read this topic aloud">
                             <i class="fas fa-volume-high"></i>
                         </button>
                         ${modeBadge}
-                    </div>
+                    </h1>
                     <span class="h-sub">/// ${modeLabel} // ${app.state.system.toUpperCase()}</span>
                 </div>
                 <div class="detail-header-actions">
@@ -2332,6 +2335,8 @@ const app = {
                     ${bmBtn}
                 </div>
             </div>
+
+            <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Educational resource developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>
 
             <div class="feature-box" style="animation: detailFade 0.5s ease; background:rgba(255,255,255,0.03); padding:20px; border-radius:8px; margin-bottom:20px;">
                 <strong style="color:var(--atlas-gold); display:block; margin-bottom:10px; font-family:var(--font-code);">
