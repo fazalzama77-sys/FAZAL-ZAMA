@@ -139,11 +139,11 @@ if (!/id="atlas-collection-intro"[\s\S]*?<h1[^>]*>Interactive Veterinary Anatomy
 if (!/<title>Veterinary Anatomy Notes, Atlas &amp; Quizzes \| ICAR-IVRI<\/title>/i.test(rootHtml)) {
   error('Homepage title does not target veterinary anatomy study intent');
 }
-if (!/id="veterinary-anatomy-notes-heading"[^>]*>Veterinary Anatomy Notes for B\.V\.Sc\., DVM and Veterinary Students<\/h2>/i.test(rootHtml)) {
-  error('Homepage veterinary anatomy notes overview is missing');
+if (!/Structured veterinary anatomy notes for B\.V\.Sc\., M\.V\.Sc\. and DVM students/i.test(rootHtml)) {
+  error('Homepage hero is missing its veterinary anatomy study description');
 }
-if (!/class="seo-study-links"[\s\S]*?href="\/atlas\/forelimb\/"[\s\S]*?href="\/atlas\/embryology\/"/i.test(rootHtml)) {
-  error('Homepage subject overview is missing crawlable veterinary anatomy links');
+if (!/class="footer-resource-nav"[\s\S]*?href="\/atlas\/forelimb\/"[\s\S]*?href="\/atlas\/embryology\/"/i.test(rootHtml)) {
+  error('Homepage footer is missing crawlable veterinary anatomy links');
 }
 if (!/<meta property="og:site_name" content="Veterinary Anatomy Studio">/i.test(rootHtml)) {
   error('Homepage Open Graph site name is outdated');
