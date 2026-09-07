@@ -1,0 +1,3 @@
+# Atlas image folder
+# Compressed atlas images go here (output of compress.py).
+# Reference them from data files like:  img: "images/atlas/scapula-ox.webp"

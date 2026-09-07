@@ -2378,16 +2378,48 @@ const app = {
         }
 
         // Visual reference: preserve real images and clearly label every missing image area.
+        // Accepts a multi-view gallery (item.images) and still honours the original single
+        // image field (item.img) so every existing topic keeps rendering unchanged.
+        const galleryViews = Array.isArray(item.images)
+            ? item.images.filter(v => v && v.src)
+            : (item.img ? [{ src: item.img, caption: item.imgCaption, alt: item.imgAlt }] : []);
+        const escAttr = (value) => String(value == null ? '' : value)
+            .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        // Group views by species so two species are never shown as one undifferentiated block.
+        const viewGroups = [];
+        galleryViews.forEach(view => {
+            const species = view.species || '';
+            let group = viewGroups.find(g => g.species === species);
+            if (!group) { group = { species: species, views: [] }; viewGroups.push(group); }
+            group.views.push(view);
+        });
+        const galleryHtml = viewGroups.map(group => `
+            <div class="atlas-gallery-group">
+                ${group.species ? `<h4 class="atlas-gallery-species">${group.species}</h4>` : ''}
+                <div class="atlas-gallery-grid">
+                    ${group.views.map(view => `
+                        <figure class="img-container atlas-image-frame atlas-gallery-item">
+                            <img class="atlas-reference-image" src="${escAttr(view.src)}" alt="${escAttr(view.alt || view.caption || item.title + ' visual reference')}" loading="lazy">
+                            ${(view.view || view.caption) ? `
+                                <figcaption class="atlas-image-caption">
+                                    ${view.view ? `<span class="atlas-view-badge">${view.view}</span>` : ''}
+                                    ${view.caption ? `<span class="atlas-caption-text">${view.caption}</span>` : ''}
+                                </figcaption>
+                            ` : ''}
+                        </figure>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+
         contentHtml += `
             <div style="margin-top:30px; animation: detailFade 0.9s ease;">
                 <strong style="color:var(--text-mute); font-family:var(--font-code); display:block; margin-bottom:10px;">
                     <i class="fas fa-image"></i> VISUAL REFERENCE
                 </strong>
-                ${item.img ? `
-                    <figure class="img-container atlas-image-frame">
-                        <img class="atlas-reference-image" src="${item.img}" alt="${item.imgAlt || item.title + ' visual reference'}" loading="lazy">
-                        ${item.imgCaption ? `<figcaption class="atlas-image-caption">${item.imgCaption}</figcaption>` : ''}
-                    </figure>
+                ${galleryViews.length ? `
+                    <div class="atlas-gallery">${galleryHtml}</div>
                 ` : `
                     <div class="img-container atlas-image-placeholder" role="status">
                         <div class="img-placeholder-text">

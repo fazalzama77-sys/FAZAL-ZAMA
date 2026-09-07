@@ -184,9 +184,9 @@ const forelimbSource = fs.readFileSync(path.join(root, 'data-forelimb.JS'), 'utf
 if (/['"]Splanchnology['"]\s*:\s*\[\s*\]/i.test(forelimbSource)) {
   error('Forelimb data must not advertise an empty Splanchnology system');
 }
-if (!/href="style\.css\?v=20260810-analogy-ring-v2"/i.test(rootHtml)
-  || !/src="data-forelimb\.JS\?v=20260810-empty-system-v2"/i.test(rootHtml)
-  || !/src="app\.js\?v=20260810-empty-systems-v2"/i.test(rootHtml)) {
+if (!/href="style\.css\?v=20260907-forelimb-osteology-images-v1"/i.test(rootHtml)
+  || !/src="data-forelimb\.JS\?v=20260907-forelimb-osteology-images-v1"/i.test(rootHtml)
+  || !/src="app\.js\?v=20260907-forelimb-osteology-images-v1"/i.test(rootHtml)) {
   error('Forelimb and analogy UI assets are not versioned for existing browser and PWA caches');
 }
 if (!/id="simplifyBtn"[\s\S]*?fa-wand-magic-sparkles[\s\S]*?Bio-Engineer Analogy[\s\S]*?simplify-btn-arrow/i.test(rootHtml)) {

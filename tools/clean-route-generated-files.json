@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-10T02:48:26.776Z",
+  "generatedAt": "2026-09-07T05:08:04.650Z",
   "files": [
     "atlas/index.html",
     "atlas/introduction/index.html",
@@ -44,6 +44,7 @@
     "atlas/forelimb/osteology/carpus-knee/index.html",
     "atlas/forelimb/osteology/metacarpus-cannon/index.html",
     "atlas/forelimb/osteology/digits/index.html",
+    "atlas/forelimb/osteology/forelimb-of-fowl-wing/index.html",
     "atlas/forelimb/myology/index.html",
     "atlas/forelimb/myology/trapezius-muscle/index.html",
     "atlas/forelimb/myology/omotransversarius/index.html",
@@ -555,6 +556,10 @@
     {
       "from": "/learn/forelimb/osteology/digits/",
       "to": "/atlas/forelimb/osteology/digits/"
+    },
+    {
+      "from": "/learn/forelimb/osteology/forelimb-of-fowl-wing/",
+      "to": "/atlas/forelimb/osteology/forelimb-of-fowl-wing/"
     },
     {
       "from": "/learn/forelimb/myology/",

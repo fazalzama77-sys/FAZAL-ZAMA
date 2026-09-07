@@ -22,6 +22,17 @@ atlasData["Forelimb"] = {
             ],
             clinical: "<b>Sweeney Shoulder (Horse):</b> Atrophy of supra/infraspinatus muscles due to suprascapular nerve damage as it crosses the neck of the scapula.",
             imgCode: "scapula",
+            images: [
+                { src: "images/atlas/forelimb/osteology/scapula-ox-lateral.webp", species: "Ox", view: "Lateral view", caption: "Scapula of Ox — Lateral view" },
+                { src: "images/atlas/forelimb/osteology/scapula-ox-medial.webp", species: "Ox", view: "Medial view", caption: "Scapula of Ox — Medial view" },
+                { src: "images/atlas/forelimb/osteology/scapula-ox-glenoid-angle.webp", species: "Ox", view: "Glenoid angle", caption: "Scapula of Ox — Glenoid angle (distal extremity)" },
+                { src: "images/atlas/forelimb/osteology/scapula-horse-lateral.webp", species: "Horse", view: "Lateral view", caption: "Scapula of Horse — Lateral view" },
+                { src: "images/atlas/forelimb/osteology/scapula-horse-medial.webp", species: "Horse", view: "Medial view", caption: "Scapula of Horse — Medial view" },
+                { src: "images/atlas/forelimb/osteology/scapula-dog-lateral.webp", species: "Dog", view: "Lateral view", caption: "Scapula of Dog — Lateral view" },
+                { src: "images/atlas/forelimb/osteology/scapula-dog-medial.webp", species: "Dog", view: "Medial view", caption: "Scapula of Dog — Medial view" },
+                { src: "images/atlas/forelimb/osteology/scapula-pig-lateral.webp", species: "Pig", view: "Lateral view", caption: "Scapula of Pig — Lateral view" },
+                { src: "images/scapula-ox-horse-dog-annotated.png", species: "Comparative", view: "Ox, Horse &amp; Dog", caption: "Comparative scapula — ox, horse and dog landmarks" }
+            ],
             img: "images/scapula-ox-horse-dog-annotated.png",
             imgAlt: "Annotated comparative scapula image showing ox, horse, and dog landmarks",
             imgCaption: "Comparative scapula landmarks: ox, horse, and dog."
@@ -37,7 +48,18 @@ atlasData["Forelimb"] = {
                 { species: "Fowl", note: "Pneumatic bone (air-filled). Pectoral crest replaces deltoid tuberosity." }
             ],
             clinical: "<b>Radial Nerve Paralysis:</b> Vulnerable in the musculospiral groove. Causes dropped elbow and inability to extend the carpus.",
-            imgCode: "humerus"
+            imgCode: "humerus",
+            images: [
+                { src: "images/atlas/forelimb/osteology/humerus-ox-cranial.webp", species: "Ox", view: "Cranial view", caption: "Humerus of Ox — Cranial view" },
+                { src: "images/atlas/forelimb/osteology/humerus-ox-caudal.webp", species: "Ox", view: "Caudal view", caption: "Humerus of Ox — Caudal view" },
+                { src: "images/atlas/forelimb/osteology/humerus-ox-lateral.webp", species: "Ox", view: "Lateral view", caption: "Humerus of Ox — Lateral view" },
+                { src: "images/atlas/forelimb/osteology/humerus-ox-medial.webp", species: "Ox", view: "Medial view", caption: "Humerus of Ox — Medial view" },
+                { src: "images/atlas/forelimb/osteology/humerus-ox-proximal-extremity.webp", species: "Ox", view: "Proximal extremity", caption: "Humerus of Ox — Proximal extremity" },
+                { src: "images/atlas/forelimb/osteology/humerus-ox-distal-extremity.webp", species: "Ox", view: "Distal extremity", caption: "Humerus of Ox — Distal extremity" },
+                { src: "images/atlas/forelimb/osteology/humerus-horse-cranial.webp", species: "Horse", view: "Cranial view", caption: "Humerus of Horse — Cranial view" },
+                { src: "images/atlas/forelimb/osteology/humerus-horse-proximal-extremity.webp", species: "Horse", view: "Proximal extremity", caption: "Humerus of Horse — Proximal extremity" },
+                { src: "images/atlas/forelimb/osteology/humerus-dog-caudal.webp", species: "Dog", view: "Caudal view", caption: "Humerus of Dog — Caudal view" }
+            ]
         },
         {
             title: "Radius & Ulna",
@@ -49,7 +71,12 @@ atlasData["Forelimb"] = {
                 { species: "Fowl", note: "Ulna is larger than Radius. 'Quill Knobs' present on Ulna for feather attachment." }
             ],
             clinical: "<b>Fractures:</b> In horses, ulnar fractures usually involve the olecranon (dropped elbow) as the distal ulna is fused.",
-            imgCode: "radius_ulna"
+            imgCode: "radius_ulna",
+            images: [
+                { src: "images/atlas/forelimb/osteology/radius-ulna-ox-caudolateral.webp", species: "Ox", view: "Caudolateral view", caption: "Radius &amp; Ulna of Ox — Caudolateral view" },
+                { src: "images/atlas/forelimb/osteology/radius-ulna-ox-craniolateral.webp", species: "Ox", view: "Craniolateral view", caption: "Radius &amp; Ulna of Ox — Craniolateral view" },
+                { src: "images/atlas/forelimb/osteology/radius-ulna-dog.webp", species: "Dog", view: "Craniolateral view", caption: "Radius &amp; Ulna of Dog" }
+            ]
         },
         {
             title: "Carpus (Knee)",
@@ -61,7 +88,11 @@ atlasData["Forelimb"] = {
                 { species: "Pig", note: "8 Bones (Complete pattern retained)." }
             ],
             clinical: "<b>Slab Fractures (Horse):</b> Common in C3 due to race fatigue.",
-            imgCode: "carpus"
+            imgCode: "carpus",
+            images: [
+                { src: "images/atlas/forelimb/osteology/carpals-ox.webp", species: "Ox", view: "Individual carpal bones", caption: "Carpals of Ox" },
+                { src: "images/atlas/forelimb/osteology/carpals-horse.webp", species: "Horse", view: "Individual carpal bones", caption: "Carpals of Horse" }
+            ]
         },
         {
             title: "Metacarpus (Cannon)",
@@ -73,7 +104,14 @@ atlasData["Forelimb"] = {
                 { species: "Fowl", note: "Carpometacarpus (Fused carpus + metacarpus)." }
             ],
             clinical: "<b>Splints (Horse):</b> Inflammation of the interosseous ligament between Cannon and Splint bones.",
-            imgCode: "metacarpus"
+            imgCode: "metacarpus",
+            images: [
+                { src: "images/atlas/forelimb/osteology/metacarpal-ox-dorsal.webp", species: "Ox", view: "Dorsal view", caption: "Large metacarpal of Ox — Dorsal view" },
+                { src: "images/atlas/forelimb/osteology/metacarpal-ox-palmar.webp", species: "Ox", view: "Palmar view", caption: "Large metacarpal of Ox — Palmar view" },
+                { src: "images/atlas/forelimb/osteology/metacarpal-horse-dorsal.webp", species: "Horse", view: "Dorsal view", caption: "Large metacarpal of Horse — Dorsal view" },
+                { src: "images/atlas/forelimb/osteology/metacarpal-horse-palmar.webp", species: "Horse", view: "Palmar view", caption: "Large metacarpal of Horse — Palmar view" },
+                { src: "images/atlas/forelimb/osteology/metacarpal-dog-dorsal.webp", species: "Dog", view: "Dorsal view", caption: "Metacarpal of Dog — Dorsal view" }
+            ]
         },
         {
             title: "Digits",
@@ -84,7 +122,32 @@ atlasData["Forelimb"] = {
                 { species: "Dog", note: "Digits II-V functional. P3 is Ungual Crest (Claw)." },
                 { species: "Pig", note: "4 Digits. III & IV main, II & V also functional on soft ground." }
             ],
-            clinical: "<b>Laminitis:</b> Separation of P3 from hoof wall. In cattle, mostly 'Coriosis' or sole ulcers."
+            clinical: "<b>Laminitis:</b> Separation of P3 from hoof wall. In cattle, mostly 'Coriosis' or sole ulcers.",
+            images: [
+                { src: "images/atlas/forelimb/osteology/phalanges-ox-dorsal.webp", species: "Ox", view: "Dorsal view", caption: "Phalanges of Ox — Dorsal view" },
+                { src: "images/atlas/forelimb/osteology/phalanges-ox-palmar.webp", species: "Ox", view: "Palmar view", caption: "Phalanges of Ox — Palmar view" },
+                { src: "images/atlas/forelimb/osteology/phalanges-sesamoids-ox.webp", species: "Ox", view: "Phalanges &amp; sesamoids", caption: "Phalanges and sesamoid bones of Ox" },
+                { src: "images/atlas/forelimb/osteology/phalanges-horse-dorsal.webp", species: "Horse", view: "Dorsal view", caption: "Phalanges of Horse — Dorsal view" },
+                { src: "images/atlas/forelimb/osteology/phalanges-horse-palmar.webp", species: "Horse", view: "Palmar view", caption: "Phalanges of Horse — Palmar view" },
+                { src: "images/atlas/forelimb/osteology/phalanges-sesamoids-horse.webp", species: "Horse", view: "Phalanges &amp; sesamoids", caption: "Phalanges and sesamoid bones of Horse" }
+            ]
+        },
+        {
+            title: "Forelimb of Fowl (Wing)",
+            desc: "<b>Avian Wing (Fowl):</b><br>- Pectoral girdle = Scapula + Coracoid + Clavicle.<br>- Clavicles fuse ventrally to form the <b>Furcula</b> (wishbone).<br>- Humerus is <b>pneumatic</b> (air-filled).<br>- Distal carpals + metacarpals fuse into a single <b>Carpometacarpus</b>.",
+            eliteDesc: "<b>FORELIMB OF THE FOWL — THE WING</b><br><br>The wing keeps the same basic segments as the mammalian forelimb (girdle, brachium, antebrachium, manus), but the bones of the girdle and the manus are reduced in number and fused for rigidity.<br><br><b>PECTORAL (SHOULDER) GIRDLE — THREE BONES:</b><br>• <b>Scapula:</b> long, narrow and sabre-like; lies almost horizontally along the dorsal thorax, parallel to the vertebral column.<br>• <b>Coracoid:</b> short, stout and the strongest bone of the girdle; forms a rigid strut from the shoulder to the sternum.<br>• <b>Clavicles:</b> the two clavicles fuse at the midline to form the <b>furcula</b> ('wishbone'). Its ventral median projection is the <b>hypocleidium</b>.<br><br><b>TRIOSSEAL CANAL:</b><br>Where the scapula, coracoid and clavicle meet, a foramen called the <b>triosseal canal</b> is formed. The tendon of the supracoracoideus muscle passes through it and turns over the shoulder to insert on the dorsal humerus, so this ventral muscle raises (elevates) the wing.<br><br><b>SHOULDER JOINT:</b><br>The <b>glenoid cavity</b> is formed jointly by the scapula and the coracoid.<br><br><b>BRACHIUM — HUMERUS:</b><br>• A <b>pneumatic</b> bone: a pneumatic foramen in the pneumatic fossa on the proximal caudal aspect admits a diverticulum of the clavicular air sac.<br>• Proximal end carries the head and prominent deltoid and ventral tubercles for the powerful flight muscles.<br><br><b>ANTEBRACHIUM — RADIUS &amp; ULNA:</b><br>• <b>Radius:</b> the slender, straighter of the two, lying cranially.<br>• <b>Ulna:</b> stouter and bowed (caudal). Its caudal border bears small papillae (quill knobs) for the secondary flight feathers.<br>• The two bones remain separate, allowing the wing to fold and extend.<br><br><b>MANUS — CARPUS, CARPOMETACARPUS AND DIGITS:</b><br>• Only <b>two free carpal bones</b> remain — the <b>radiale</b> and the <b>ulnare</b>.<br>• The distal carpals fuse with the metacarpals to form the single <b>carpometacarpus</b>.<br>• Three reduced digits are present: the <b>alular</b> digit (carries the alula or 'bastard wing'), the <b>major</b> digit and the <b>minor</b> digit.<br><br><b>STERNUM (associated):</b><br>The sternum bears a deep median <b>keel (carina)</b> that greatly enlarges the area of attachment for the pectoralis and supracoracoideus muscles.<br><br><b>UG MEMORY:</b> 'Girdle = 3 (scapula, coracoid, clavicle/furcula); Carpals free = 2 (radiale, ulnare); Digits = 3 (alular, major, minor).'",
+            comparative: [
+                { species: "Ox / Horse / Dog", note: "Girdle is reduced to the scapula alone (clavicle absent or vestigial); the limb is slung to the trunk by muscle. No coracoid strut and no furcula." },
+                { species: "Fowl", note: "Girdle has three bones. The coracoid braces the shoulder against the sternum and the fused clavicles (furcula) act as a spring between the shoulders during wing beats." },
+                { species: "Fowl", note: "Carpus has only two free bones (radiale, ulnare) and the manus is fused into a carpometacarpus, whereas the ox has six and the horse seven or eight carpal bones." }
+            ],
+            clinical: "<b>Intraosseous fluid therapy:</b> Use the distal ulna or the proximal tibiotarsus. <b>Never</b> use the humerus or femur — they are pneumatic and communicate with the air sacs, so injected fluid would enter the respiratory system.<br><b>Wing fractures:</b> The radius and ulna are commonly fractured; because the ulna carries the secondary feathers, callus or malunion here affects flight.<br><b>Furcula and keel:</b> The keel is used for body-condition scoring in poultry; a prominent keel indicates loss of pectoral muscle mass.",
+            imgCode: "fowl_forelimb",
+            images: [
+                { src: "images/atlas/forelimb/osteology/fowl-forelimb-articulated.webp", species: "Fowl", view: "Articulated shoulder girdle", caption: "Forelimb of Fowl — Shoulder girdle in situ" },
+                { src: "images/atlas/forelimb/osteology/fowl-shoulder-girdle.webp", species: "Fowl", view: "Shoulder girdle bones", caption: "Forelimb of Fowl — Scapula, coracoid and clavicle" },
+                { src: "images/atlas/forelimb/osteology/fowl-wing-bones.webp", species: "Fowl", view: "Wing bones", caption: "Forelimb of Fowl — Humerus, radius, ulna, carpometacarpus, phalanx" }
+            ]
         }
     ],
     

@@ -3,3 +3,6 @@
 *.bak
 tools/image-map-report.html
 __server_*.log
+
+# Unprocessed image drop-zone (originals stay local; see tools/IMAGE-WORKFLOW.md)
+images-raw/

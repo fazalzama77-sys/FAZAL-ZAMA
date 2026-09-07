@@ -1422,6 +1422,73 @@ body.professional-mode .topic-btn.is-read {
     line-height: 1.5;
 }
 
+/* ---- Multi-view visual reference gallery (Atlas topic) ----
+   Groups plates by species so no two species or bones read as one block. */
+.atlas-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.atlas-gallery-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.atlas-gallery-species {
+    margin: 0;
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--atlas-gold);
+    border-left: 3px solid var(--atlas-gold);
+    padding-left: 10px;
+}
+
+.atlas-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.atlas-gallery-item {
+    margin: 0;
+}
+
+.atlas-gallery-item .atlas-reference-image {
+    max-height: 58vh;
+}
+
+.atlas-view-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--glass);
+    color: var(--text-main);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.atlas-caption-text {
+    display: block;
+    margin-top: 7px;
+}
+
+@media (max-width: 600px) {
+    .atlas-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+body.professional-mode .atlas-gallery-species {
+    color: var(--text-main);
+    border-left-color: currentColor;
+}
+
 .credits-box {
     font-size: 0.8rem;
     color: var(--text-mute);
