@@ -120,6 +120,55 @@ function curatedLocalImage(value) {
   return fs.existsSync(path.join(root, imagePath)) ? imagePath : '';
 }
 
+function curatedAtlasImage(value) {
+  const imagePath = String(value ?? '').trim().replace(/^\/+/, '');
+  if (!imagePath || !/^images\//i.test(imagePath)) return '';
+  return fs.existsSync(path.join(root, imagePath)) ? imagePath : '';
+}
+
+// Pre-render the same multi-view gallery that app.js renders at runtime, so the
+// labelled plates are present in the served HTML for Google Images and are picked
+// up by the existing image-sitemap harvester in writePage().
+function renderTopicGallery(topic) {
+  const views = Array.isArray(topic.images)
+    ? topic.images
+    : (topic.img ? [{ src: topic.img, caption: topic.imgCaption, alt: topic.imgAlt }] : []);
+  const usable = views
+    .map(view => ({ ...view, path: curatedAtlasImage(view && view.src) }))
+    .filter(view => view.path);
+  if (!usable.length) return '';
+  const groups = [];
+  for (const view of usable) {
+    const species = view.species || '';
+    let group = groups.find(entry => entry.species === species);
+    if (!group) { group = { species, views: [] }; groups.push(group); }
+    group.views.push(view);
+  }
+  return `
+    <div style="margin-top:30px;">
+      <strong style="color:var(--text-mute);font-family:var(--font-code);display:block;margin-bottom:10px;">
+        <i class="fas fa-image"></i> VISUAL REFERENCE
+      </strong>
+      <div class="atlas-gallery">${groups.map(group => `
+        <div class="atlas-gallery-group">
+          ${group.species ? `<h4 class="atlas-gallery-species">${escapeHtml(group.species)}</h4>` : ''}
+          <div class="atlas-gallery-grid">${group.views.map(view => `
+            <figure class="img-container atlas-image-frame atlas-gallery-item">
+              <img class="atlas-reference-image" src="/${view.path}" alt="${escapeHtml(view.alt || view.caption || `${topic.title} visual reference`)}" loading="lazy">
+              ${(view.view || view.caption) ? `<figcaption class="atlas-image-caption">${view.view ? `<span class="atlas-view-badge">${escapeHtml(view.view)}</span>` : ''}${view.caption ? `<span class="atlas-caption-text">${safeRichHtml(view.caption)}</span>` : ''}</figcaption>` : ''}
+            </figure>`).join('')}</div>
+        </div>`).join('')}</div>
+    </div>`;
+}
+
+function topicImageUrls(topic) {
+  const views = Array.isArray(topic.images) ? topic.images : (topic.img ? [{ src: topic.img }] : []);
+  return [...new Set(views
+    .map(view => curatedAtlasImage(view && view.src))
+    .filter(Boolean)
+    .map(imagePath => `${origin}/${imagePath}`))];
+}
+
 function absolute(parts) {
   return `${origin}${route(parts)}`;
 }
@@ -140,7 +189,7 @@ function breadcrumbSchema(crumbs) {
   };
 }
 
-function schemaGraph({ url, title, description, crumbs, collection = false, subjects = [], teaches = [] }) {
+function schemaGraph({ url, title, description, crumbs, collection = false, subjects = [], teaches = [], images = [] }) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -151,6 +200,7 @@ function schemaGraph({ url, title, description, crumbs, collection = false, subj
         name: title,
         description,
         inLanguage: 'en',
+        ...(images.length ? { image: images } : {}),
         isPartOf: { '@id': `${origin}/#website` }
       },
       breadcrumbSchema(crumbs),
@@ -161,6 +211,7 @@ function schemaGraph({ url, title, description, crumbs, collection = false, subj
         name: title,
         description,
         inLanguage: 'en',
+        ...(images.length ? { image: images, thumbnailUrl: images[0] } : {}),
         dateModified: lastmod,
         educationalLevel: ['Undergraduate', 'Postgraduate'],
         learningResourceType: collection ? 'Interactive anatomy collection' : 'Interactive anatomy lesson',
@@ -357,7 +408,7 @@ function renderTopicDetail(region, system, topic) {
       <strong style="color:var(--atlas-gold);display:block;margin-bottom:10px;font-family:var(--font-code);">📝 STANDARD DESCRIPTION:</strong>
       <div style="line-height:1.8;color:var(--text-main);">${safeRichHtml(description)}</div>
     </div>
-    ${elite}${renderComparative(topic.comparative)}${clinical}`;
+    ${elite}${renderComparative(topic.comparative)}${clinical}${renderTopicGallery(topic)}`;
 }
 
 function replaceWhyGrid(html, items) {
@@ -397,13 +448,13 @@ const appGenerated = [];
 const sitemap = [{ loc: `${origin}/`, images: [] }];
 const redirects = [];
 
-function writePage({ parts, oldParts, title, description, crumbs, view, collection = false, subjects = [], teaches = [], transform }) {
+function writePage({ parts, oldParts, title, description, crumbs, view, collection = false, subjects = [], teaches = [], images = [], transform }) {
   const relative = path.join(...parts, 'index.html');
   const destination = path.resolve(root, relative);
   const allowed = [path.join(root, 'atlas') + path.sep, path.join(root, 'why') + path.sep];
   if (!allowed.some(prefix => destination.startsWith(prefix))) throw new Error(`Unsafe generated path: ${destination}`);
   const url = absolute(parts);
-  const graph = schemaGraph({ url, title, description: truncate(description), crumbs, collection, subjects, teaches });
+  const graph = schemaGraph({ url, title, description: truncate(description), crumbs, collection, subjects, teaches, images });
   let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
   html = activateView(html, view);
   html = demoteInactiveLandingHeading(html);
@@ -510,6 +561,7 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
         description: `${topic.title} veterinary anatomy for B.V.Sc., M.V.Sc., DVM and veterinary medicine students. ${topic.desc || topic.eliteDesc || `Study this structure in the interactive IVRI atlas.`}`,
         crumbs: [homeCrumb, atlasCrumb, regionCrumb, systemCrumb, topicCrumb],
         view: 'atlas',
+        images: topicImageUrls(topic),
         transform: html => {
           html = replaceAtlasSelector(html, '', true);
           html = setAtlasWorkspaceVisible(html);

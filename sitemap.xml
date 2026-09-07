@@ -155,30 +155,67 @@
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/scapula/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-ox-lateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-ox-medial.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-ox-glenoid-angle.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-horse-lateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-horse-medial.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-dog-lateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-dog-medial.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/scapula-pig-lateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/scapula-ox-horse-dog-annotated.png</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/humerus/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-ox-cranial.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-ox-caudal.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-ox-lateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-ox-medial.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-ox-proximal-extremity.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-ox-distal-extremity.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-horse-cranial.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-horse-proximal-extremity.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/humerus-dog-caudal.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/radius-and-ulna/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/radius-ulna-ox-caudolateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/radius-ulna-ox-craniolateral.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/radius-ulna-dog.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/carpus-knee/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/carpals-ox.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/carpals-horse.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/metacarpus-cannon/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/metacarpal-ox-dorsal.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/metacarpal-ox-palmar.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/metacarpal-horse-dorsal.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/metacarpal-horse-palmar.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/metacarpal-dog-dorsal.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/digits/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/phalanges-ox-dorsal.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/phalanges-ox-palmar.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/phalanges-sesamoids-ox.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/phalanges-horse-dorsal.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/phalanges-horse-palmar.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/phalanges-sesamoids-horse.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/osteology/forelimb-of-fowl-wing/</loc>
     <lastmod>2026-09-07</lastmod>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/fowl-forelimb-articulated.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/fowl-shoulder-girdle.webp</image:loc></image:image>
+    <image:image><image:loc>https://veterinaryanatomy.com/images/atlas/forelimb/osteology/fowl-wing-bones.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://veterinaryanatomy.com/atlas/forelimb/myology/</loc>
