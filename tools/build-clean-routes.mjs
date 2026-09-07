@@ -326,10 +326,13 @@ function activateView(html, view) {
     .replace(`<section id="${view}-view" class="view-section">`, `<section id="${view}-view" class="view-section active">`);
 }
 
-function replaceAtlasSelector(html, content, hidden = false) {
+// `after` is emitted as a SIBLING following #atlas-selector. Nothing may be placed
+// inside that container: app.js rewrites its innerHTML on hydration, which would
+// erase the content for real visitors while leaving it visible to crawlers.
+function replaceAtlasSelector(html, content, hidden = false, after = '') {
   return html.replace(
     /<div id="atlas-selector" class="portal-grid" style="gap: 30px;">\s*<!-- Injected by JavaScript -->\s*<\/div>/,
-    `<div id="atlas-selector" class="portal-grid" style="gap: 30px;${hidden ? ' display:none;' : ''}">${content}</div>`
+    `<div id="atlas-selector" class="portal-grid" style="gap: 30px;${hidden ? ' display:none;' : ''}">${content}</div>${after}`
   );
 }
 
@@ -349,6 +352,48 @@ function replaceDetailPanel(html, content) {
 
 function setAtlasWorkspaceVisible(html) {
   return html.replace('<div id="atlas-content" class="workspace" style="display:none;">', '<div id="atlas-content" class="workspace" style="display:grid;">');
+}
+
+
+// A real syllabus index for the /atlas/ landing page: every unit, the systems it
+// covers and how many lessons each holds, all derived from the live data files.
+// This exists to help a student find their unit, not merely to carry keywords.
+function renderSyllabusHub() {
+  const rows = Object.entries(atlasData)
+    .filter(([name]) => regionSlugs[name])
+    .map(([region, systems]) => {
+      const populated = Object.entries(systems).filter(([, topics]) => Array.isArray(topics) && topics.length);
+      const count = populated.reduce((sum, [, topics]) => sum + topics.length, 0);
+      return { region, populated, count };
+    })
+    .filter(row => row.count);
+  const totalLessons = rows.reduce((sum, row) => sum + row.count, 0);
+  return `
+    <section id="syllabus-hub" style="max-width:1100px;margin:40px auto 10px;padding:0 16px;">
+      <h2 style="color:var(--atlas-gold);font-family:var(--font-code);">// B.V.Sc. VETERINARY ANATOMY NOTES — SYLLABUS INDEX</h2>
+      <p style="color:var(--text-mute);line-height:1.7;">
+        ${totalLessons} veterinary anatomy lessons arranged by region and by system, aligned to the
+        Veterinary Council of India B.V.Sc. &amp; A.H. anatomy syllabus. Every lesson carries a standard
+        description, a detailed Elite View, comparative species notes and clinical relevance. Prepared by the
+        Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.
+      </p>
+      <table class="comp-table" style="width:100%;border-collapse:collapse;margin-top:18px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="padding:12px;text-align:left;color:var(--atlas-gold);font-family:var(--font-code);">Region / Module</th>
+            <th style="padding:12px;text-align:left;color:var(--atlas-gold);font-family:var(--font-code);">Systems covered</th>
+            <th style="padding:12px;text-align:right;color:var(--atlas-gold);font-family:var(--font-code);">Lessons</th>
+          </tr>
+        </thead>
+        <tbody>${rows.map(row => `
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px;"><a href="/atlas/${regionSlugs[row.region]}/" style="color:var(--why-cyan);font-weight:700;">${escapeHtml(row.region)} anatomy notes</a></td>
+            <td style="padding:12px;line-height:1.8;">${row.populated.map(([system]) => `<a href="/atlas/${regionSlugs[row.region]}/${slugify(system)}/" style="color:var(--text-main);">${escapeHtml(system)}</a>`).join(' &middot; ')}</td>
+            <td style="padding:12px;text-align:right;">${row.count}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </section>`;
 }
 
 function renderRegionCards() {
@@ -504,12 +549,12 @@ const atlasCrumb = { name: 'Interactive Atlas', path: '/atlas/' };
 writePage({
   parts: ['atlas'],
   oldParts: ['learn'],
-  title: 'Interactive Veterinary Anatomy Atlas | Veterinary Anatomy Studio',
-  description: 'Explore the interactive atlas inside Veterinary Anatomy Studio, the official ICAR-IVRI learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students.',
+  title: 'B.V.Sc. Veterinary Anatomy Notes — VCI Syllabus | ICAR-IVRI',
+  description: 'Free VCI-syllabus veterinary anatomy notes for B.V.Sc. first-year students: osteology, myology, arthrology, neurology, angiology, splanchnology, histology and embryology, with labelled specimen images and quizzes from the ICAR-IVRI Anatomy Section.',
   crumbs: [homeCrumb, atlasCrumb],
   view: 'atlas',
   collection: true,
-  transform: html => replaceAtlasSelector(html, renderRegionCards())
+  transform: html => replaceAtlasSelector(html, renderRegionCards(), false, renderSyllabusHub())
 });
 
 for (const [region, systems] of Object.entries(atlasData).filter(([name]) => regionSlugs[name])) {
@@ -522,8 +567,8 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
   writePage({
     parts: ['atlas', regionSlug],
     oldParts: ['learn', regionSlug],
-    title: `${region} Veterinary Anatomy | Interactive IVRI Atlas`,
-    description: `Study ${topicCount} ${region.toLowerCase()} veterinary anatomy lessons for B.V.Sc., M.V.Sc., DVM and veterinary medicine students, covering ${populated.map(([system]) => system).join(', ')}.`,
+    title: `${region} Anatomy Notes for B.V.Sc. Students | ICAR-IVRI`,
+    description: `${topicCount} ${region.toLowerCase()} veterinary anatomy notes for B.V.Sc., M.V.Sc. and DVM students, covering ${populated.map(([system]) => system.toLowerCase()).join(', ')}, with labelled images and clinical relevance.`,
     crumbs: [homeCrumb, atlasCrumb, regionCrumb],
     view: 'atlas',
     collection: true,
@@ -538,8 +583,8 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
     writePage({
       parts: ['atlas', regionSlug, systemSlug],
       oldParts: ['learn', regionSlug, systemSlug],
-      title: `${system}: ${region} Veterinary Anatomy | IVRI`,
-      description: `Study ${topics.length} detailed ${system.toLowerCase()} structures in the veterinary ${region.toLowerCase()}, with B.V.Sc., M.V.Sc., comparative and clinical context.`,
+      title: `${region} ${system} Notes — B.V.Sc. Anatomy | ICAR-IVRI`,
+      description: `${topics.length} ${system.toLowerCase()} notes for the veterinary ${region.toLowerCase()}, written for B.V.Sc., M.V.Sc. and DVM students, with labelled specimen images, comparative species tables and clinical relevance.`,
       crumbs: [homeCrumb, atlasCrumb, regionCrumb, systemCrumb],
       view: 'atlas',
       collection: true,
@@ -557,8 +602,8 @@ for (const [region, systems] of Object.entries(atlasData).filter(([name]) => reg
       writePage({
         parts: ['atlas', regionSlug, systemSlug, topicSlug],
         oldParts: ['learn', regionSlug, systemSlug, topicSlug],
-        title: `${topic.title} Veterinary Anatomy | IVRI`,
-        description: `${topic.title} veterinary anatomy for B.V.Sc., M.V.Sc., DVM and veterinary medicine students. ${topic.desc || topic.eliteDesc || `Study this structure in the interactive IVRI atlas.`}`,
+        title: `${topic.title} — Veterinary Anatomy Notes | ICAR-IVRI`,
+        description: `${topic.title} notes for B.V.Sc., M.V.Sc. and DVM students — ${system.toLowerCase()} of the ${region.toLowerCase()}, with comparative species detail and clinical relevance. ${topic.desc || topic.eliteDesc || `Study this structure in the interactive ICAR-IVRI atlas.`}`,
         crumbs: [homeCrumb, atlasCrumb, regionCrumb, systemCrumb, topicCrumb],
         view: 'atlas',
         images: topicImageUrls(topic),

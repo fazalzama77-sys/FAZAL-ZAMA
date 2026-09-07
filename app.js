@@ -1293,9 +1293,18 @@ const app = {
             grid.before(atlasIntro);
         }
         if (!atlasIntro) return;
+        // Mirror the heading and copy of the matching generated page. Using one
+        // hardcoded heading here gave the atlas landing and all eight region pages
+        // the same runtime H1, which a rendering crawler sees as duplicated.
+        const introHeading = app.state.region
+            ? `${app.state.region} Anatomy Notes for B.V.Sc. Students`
+            : `B.V.Sc. Veterinary Anatomy Notes — VCI Syllabus`;
+        const introCopy = app.state.region
+            ? `Veterinary anatomy notes for the ${String(app.state.region).toLowerCase()}, written for B.V.Sc., M.V.Sc. and DVM students, with labelled images, comparative species tables and clinical relevance.`
+            : 'Free VCI-syllabus veterinary anatomy notes for B.V.Sc. students: osteology, myology, arthrology, neurology, angiology, splanchnology, histology and embryology, with labelled specimen images and quizzes from the ICAR-IVRI Anatomy Section.';
         atlasIntro.innerHTML = `
-            <h1 style="color:var(--atlas-gold);margin-bottom:10px;">Interactive Veterinary Anatomy Atlas</h1>
-            <p style="color:var(--text-mute);line-height:1.7;">Explore the interactive atlas inside Veterinary Anatomy Studio, the official ICAR-IVRI learning platform for B.V.Sc., M.V.Sc., DVM and veterinary medicine students.</p>
+            <h1 style="color:var(--atlas-gold);margin-bottom:10px;">${introHeading}</h1>
+            <p style="color:var(--text-mute);line-height:1.7;">${introCopy}</p>
             <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Educational resource developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>
         `;
     },
@@ -1825,8 +1834,9 @@ const app = {
         } else if (app.state.view === 'atlas') {
             const subject = [app.state.system, app.state.region].filter(Boolean).join(' in ');
             if (app.state.region) {
-                const parts = [app.state.system, app.state.region, 'Veterinary Anatomy'].filter(Boolean);
-                title = `${parts.join(' · ')} | IVRI`;
+                title = app.state.system
+                    ? `${app.state.region} ${app.state.system} Notes — B.V.Sc. Anatomy | ICAR-IVRI`
+                    : `${app.state.region} Anatomy Notes for B.V.Sc. Students | ICAR-IVRI`;
                 description = `Study ${subject} through the Interactive Anatomy Atlas inside Veterinary Anatomy Studio.`;
             } else {
                 title = 'Veterinary Anatomy Notes, Atlas & Quizzes | ICAR-IVRI';
@@ -2058,6 +2068,11 @@ const app = {
 
         grid.style.display = 'grid';
         document.getElementById('atlas-content').style.display = 'none';
+        // The pre-rendered B.V.Sc. syllabus index belongs only on the atlas landing
+        // screen. Keep it visible there so visitors and crawlers see the same page,
+        // and hide it once a region is chosen.
+        const syllabusHub = document.getElementById('syllabus-hub');
+        if (syllabusHub) syllabusHub.style.display = app.state.region ? 'none' : '';
 
         // LEVEL 1: Region Selection (Forelimb, Hindlimb, etc.)
         if (!app.state.region) {
@@ -2283,8 +2298,8 @@ const app = {
 
         // Override page title to include the structure name for sharper bookmarks/sharing
         app.updateSeoMetadata(
-            `${item.title} Veterinary Anatomy | IVRI`,
-            `Study ${item.title} in ${app.state.region} veterinary anatomy. ${String(item.desc || item.eliteDesc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}`.slice(0, 158),
+            `${item.title} — Veterinary Anatomy Notes | ICAR-IVRI`,
+            `${item.title} notes for B.V.Sc., M.V.Sc. and DVM students — ${String(app.state.system || '').toLowerCase()} of the ${String(app.state.region || '').toLowerCase()}, with comparative species detail and clinical relevance. ${String(item.desc || item.eliteDesc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}`.slice(0, 158),
             cleanTopicPath
         );
 
