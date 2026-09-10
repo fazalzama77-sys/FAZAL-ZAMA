@@ -116,7 +116,7 @@
       "name": "Equine Stomach 'Margo Plicatus' | IVRI Biomechanics",
       "description": "Why is Equine Stomach 'Margo Plicatus' present, absent or modified in Horse vs. Other monogastrics? Explore its biomechanical function, species-specific…",
       "inLanguage": "en",
-      "dateModified": "2026-09-07",
+      "dateModified": "2026-09-10",
       "educationalLevel": [
         "Undergraduate",
         "Postgraduate"
@@ -196,7 +196,9 @@
     html, body { background: #0a0a14; }
     #ivri-splash {
       position: fixed; inset: 0; z-index: 99999;
-      background: radial-gradient(circle at 50% 45%, #142036 0%, #0a0a14 60%);
+      /* Built from the logo's own royal blue (#003EC2): lit behind the logo,
+         settling to midnight blue at the edges. */
+      background: radial-gradient(circle at 50% 42%, #1C4FC7 0%, #0D2F86 28%, #071B4F 58%, #040C26 100%);
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 28px;
       /* Faster, more cinematic fade-out */
@@ -211,26 +213,29 @@
       will-change: transform;
       animation: ivri-pulse 1.4s ease-in-out infinite;
     }
+    #ivri-splash .ivri-logo picture { display: block; width: 100%; height: 100%; }
     #ivri-splash .ivri-logo img {
       width: 100%; height: 100%; display: block;
+      border-radius: 18%;  /* the logo has a white field; soften it against the dark splash */
+      box-shadow: 0 18px 44px rgba(2, 12, 48, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.35);  /* static - never animated */
     }
     /* Static glow behind logo — NOT animated, no per-frame cost */
     #ivri-splash .ivri-glow {
       position: absolute;
       width: 220px; height: 220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,242,255,0.35) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 70%);
       pointer-events: none;
     }
     #ivri-splash .ivri-ring {
       width: 44px; height: 44px; border-radius: 50%;
-      border: 2.5px solid rgba(0,242,255,0.15);
-      border-top-color: #00f2ff;
+      border: 2.5px solid rgba(255,255,255,0.20);
+      border-top-color: #ffffff;
       will-change: transform;
       animation: ivri-spin .85s linear infinite;
     }
     #ivri-splash .ivri-tag {
-      color: #7fa1c4; font-family: Inter, system-ui, sans-serif;
+      color: #E4ECFF; font-family: Inter, system-ui, sans-serif;
       font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
       font-weight: 500;
       max-width: calc(100vw - 32px); text-align: center; line-height: 1.5;
@@ -245,7 +250,7 @@
     @keyframes ivri-spin { to { transform: rotate(360deg); } }
     @keyframes ivri-tag-in {
       from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: .75; transform: translateY(0); }
+      to   { opacity: .85; transform: translateY(0); }
     }
     /* Respect reduced-motion preference */
     @media (prefers-reduced-motion: reduce) {
@@ -262,7 +267,7 @@
   <div id="ivri-splash" aria-hidden="true">
     <div style="position:relative; display:flex; align-items:center; justify-content:center;">
       <div class="ivri-glow"></div>
-      <div class="ivri-logo"><img src="/images/icon-512.png" alt=""></div>
+      <div class="ivri-logo"><picture><source srcset="images/splash-logo.webp" type="image/webp"><img src="/images/splash-logo.png" alt="" width="144" height="144" decoding="async" fetchpriority="high"></picture></div>
     </div>
     <div class="ivri-ring"></div>
     <div class="ivri-tag">Veterinary Anatomy Studio</div>
