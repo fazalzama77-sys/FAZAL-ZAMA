@@ -2440,7 +2440,7 @@ const app = {
                         <div class="img-placeholder-text">
                             <i class="fas fa-image" aria-hidden="true"></i>
                             <strong>HIGH-QUALITY VETERINARY IMAGES IN DEVELOPMENT</strong>
-                            <span>Carefully curated visuals to support anatomical learning will be available by September 2026.</span>
+                            <span>Carefully curated visuals to support anatomical learning are under development and will be added soon.</span>
                         </div>
                     </div>
                 `}
