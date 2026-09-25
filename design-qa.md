@@ -14,7 +14,7 @@
 - Spacing and layout: the team card retains its compact centered rhythm; Atlas and WHY now occupy distinct, balanced panels without horizontal overflow at the tested desktop width.
 - Colors: the previous saturated multicolour top stripe is removed. The replacement uses a restrained heading underline and low-contrast institutional borders.
 - Image quality: no raster or brand assets were changed; the existing IVRI logo remains intact.
-- Copy: About Platform displays `Technical Coordinator` and `B.V.Sc & A.H. (UG)`. Team names, roles, and email addresses remain unchanged.
+- Copy: About Platform displays `Technical Coordinator` and `B.V.Sc. & A.H. Student (Second Year)`. Team names, roles, and email addresses remain unchanged.
 - Interaction: appearance switching, About Platform opening, and footer links were present and usable. Browser console contained no warnings or errors.
 
 ## Comparison History
