@@ -513,7 +513,7 @@ function writePage({ parts, oldParts, title, description, crumbs, view, collecti
   generated.push(relative.replaceAll('\\', '/'));
   const imageMatches = [...html.matchAll(/<img[^>]+src="(\/images\/[^"?#]+)"/g)]
     .map(match => match[1])
-    .filter(imagePath => !/^\/images\/(?:icon-|apple-touch-icon|ivri-logo)/i.test(imagePath))
+    .filter(imagePath => !/^\/images\/(?:icon-|apple-touch-icon|ivri-logo|splash-logo)/i.test(imagePath))
     .map(imagePath => `${origin}${imagePath}`);
   sitemap.push({ loc: url, images: [...new Set(imageMatches)] });
   if (oldParts) redirects.push({ from: route(oldParts), to: route(parts) });
