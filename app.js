@@ -1279,10 +1279,14 @@ const app = {
         const grid = document.getElementById('atlas-selector');
         if (!grid) return;
         let atlasIntro = document.getElementById('atlas-collection-intro');
+        // The Library borrows the Atlas screen, so it needs its own heading;
+        // otherwise it inherited the Atlas syllabus H1 and description.
+        const libraryTabs = document.getElementById('library-tabs');
+        const inLibrary = !!(libraryTabs && libraryTabs.classList.contains('is-open'));
         // The collection introduction belongs only on region/system selection
         // screens. Remove it completely from a lesson DOM so the lesson keeps
         // the sole visible H1 seen by students and rendered search crawlers.
-        if (app.state.system) {
+        if (app.state.system && !inLibrary) {
             if (atlasIntro) atlasIntro.remove();
             return;
         }
@@ -1296,10 +1300,14 @@ const app = {
         // Mirror the heading and copy of the matching generated page. Using one
         // hardcoded heading here gave the atlas landing and all eight region pages
         // the same runtime H1, which a rendering crawler sees as duplicated.
-        const introHeading = app.state.region
+        const introHeading = inLibrary
+            ? 'My Study Library'
+            : app.state.region
             ? `${app.state.region} Anatomy Notes for B.V.Sc. Students`
             : `B.V.Sc. Veterinary Anatomy Notes — VCI Syllabus`;
-        const introCopy = app.state.region
+        const introCopy = inLibrary
+            ? 'Your bookmarked topics, highlighted passages and personal notes, gathered in one place for revision. They are saved on this device.'
+            : app.state.region
             ? `Veterinary anatomy notes for the ${String(app.state.region).toLowerCase()}, written for B.V.Sc., M.V.Sc. and DVM students, with labelled images, comparative species tables and clinical relevance.`
             : 'Free VCI-syllabus veterinary anatomy notes for B.V.Sc. students: osteology, myology, arthrology, neurology, angiology, splanchnology, histology and embryology, with labelled specimen images and quizzes from the ICAR-IVRI Anatomy Section.';
         atlasIntro.innerHTML = `
@@ -1439,6 +1447,7 @@ const app = {
                 b.classList.toggle('is-active', b.dataset.tab === t);
             });
         }
+        app._refreshAtlasIntroduction();
 
         // Dispatch to the existing renderer for the chosen tab
         if (t === 'bookmarks') {

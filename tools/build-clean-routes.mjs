@@ -519,6 +519,18 @@ function writePage({ parts, oldParts, title, description, crumbs, view, collecti
   if (oldParts) redirects.push({ from: route(oldParts), to: route(parts) });
 }
 
+// Must match the Library heading produced by app._refreshAtlasIntroduction().
+function addLibraryHeading(html) {
+  const replacement = `<header id="atlas-collection-intro" style="text-align:center;margin:24px auto 8px;max-width:900px;">
+        <h1 style="color:var(--atlas-gold);margin-bottom:10px;">My Study Library</h1>
+        <p style="color:var(--text-mute);line-height:1.7;">Your bookmarked topics, highlighted passages and personal notes, gathered in one place for revision. They are saved on this device.</p>
+        <p class="academic-source-note"><i class="fas fa-building-columns" aria-hidden="true"></i>Educational resource developed at the Veterinary Anatomy Section, ICAR-Indian Veterinary Research Institute (ICAR-IVRI), Bareilly.</p>
+      </header>`;
+  const updated = html.replace(/<header id="atlas-collection-intro"[\s\S]*?<\/header>/i, replacement);
+  if (updated === html) throw new Error('Library heading: atlas-collection-intro header not found in template');
+  return updated;
+}
+
 function writeAppEntry({ parts, title, description }) {
   const relative = path.join(...parts, 'index.html');
   const destination = path.resolve(root, relative);
@@ -534,6 +546,9 @@ function writeAppEntry({ parts, title, description }) {
   });
   let html = ensureRootBase(replaceMeta(template, { title, description, url, graph }));
   html = rootAbsoluteAssetUrls(html);
+  // The Library is hosted inside the Atlas screen; give it its own heading so
+  // it does not show the Atlas introduction before app.js takes over.
+  if (parts[0] === 'library') html = addLibraryHeading(html);
   html = html.replace(
     '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
     '<meta name="robots" content="noindex, follow">'
