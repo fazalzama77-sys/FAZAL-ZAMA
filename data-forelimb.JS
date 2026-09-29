@@ -30,12 +30,8 @@ atlasData["Forelimb"] = {
                 { src: "images/atlas/forelimb/osteology/scapula-horse-medial.webp", species: "Horse", view: "Medial view", caption: "Scapula of Horse — Medial view" },
                 { src: "images/atlas/forelimb/osteology/scapula-dog-lateral.webp", species: "Dog", view: "Lateral view", caption: "Scapula of Dog — Lateral view" },
                 { src: "images/atlas/forelimb/osteology/scapula-dog-medial.webp", species: "Dog", view: "Medial view", caption: "Scapula of Dog — Medial view" },
-                { src: "images/atlas/forelimb/osteology/scapula-pig-lateral.webp", species: "Pig", view: "Lateral view", caption: "Scapula of Pig — Lateral view" },
-                { src: "images/scapula-ox-horse-dog-annotated.png", species: "Comparative", view: "Ox, Horse &amp; Dog", caption: "Comparative scapula — ox, horse and dog landmarks" }
-            ],
-            img: "images/scapula-ox-horse-dog-annotated.png",
-            imgAlt: "Annotated comparative scapula image showing ox, horse, and dog landmarks",
-            imgCaption: "Comparative scapula landmarks: ox, horse, and dog."
+                { src: "images/atlas/forelimb/osteology/scapula-pig-lateral.webp", species: "Pig", view: "Lateral view", caption: "Scapula of Pig — Lateral view" }
+            ]
         },
         {
             title: "Humerus",

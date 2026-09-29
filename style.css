@@ -7336,7 +7336,7 @@ body.professional-mode .bn-item-primary .bn-label { color: #1976d2; }
 .library-tabs {
     display: none;
     position: relative;
-    gap: 4px;
+    gap: 0;  /* keeps every tab exactly one third wide, matching .lib-tab-indicator */
     padding: 6px;
     margin: 0 0 14px 0;
     background: rgba(255,255,255,0.04);
@@ -7346,7 +7346,8 @@ body.professional-mode .bn-item-primary .bn-label { color: #1976d2; }
 }
 .library-tabs.is-open { display: flex; }
 .lib-tab {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     background: transparent;
     border: 0;
     color: var(--text-mute);
@@ -7380,8 +7381,15 @@ body.professional-mode .bn-item-primary .bn-label { color: #1976d2; }
 .library-tabs[data-active="1"] .lib-tab-indicator { transform: translateX(100%); }
 .library-tabs[data-active="2"] .lib-tab-indicator { transform: translateX(200%); }
 @media (max-width: 600px) {
-    .lib-tab span { font-size: .7rem; }
-    .lib-tab i { font-size: 1rem; }
+    .lib-tab { padding: 10px 4px; gap: 6px; letter-spacing: .3px; }
+    .lib-tab span { font-size: .7rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .lib-tab i { font-size: 1rem; flex-shrink: 0; }
+}
+@media (max-width: 360px) {
+    /* Stack the icon above the label so the label gets the tab's full width. */
+    .lib-tab { flex-direction: column; gap: 3px; padding: 7px 2px; letter-spacing: 0; }
+    .lib-tab span { font-size: .66rem; }
+    .lib-tab i { font-size: .95rem; }
 }
 body.professional-mode .library-tabs {
     background: #f5f7fa; border-color: #d0d7de;
